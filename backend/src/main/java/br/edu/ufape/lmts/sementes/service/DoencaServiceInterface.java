@@ -1,0 +1,18 @@
+package br.edu.ufape.lmts.sementes.service;
+
+import java.util.List;
+
+import br.edu.ufape.lmts.sementes.model.Doenca;
+
+public interface DoencaServiceInterface {
+	Doenca saveDoenca(Doenca o);
+	Doenca findDoencaById(long id);
+	Doenca updateDoenca(Doenca u);
+	void deleteDoenca(Doenca u);
+	void deleteDoenca(long id);
+	List<Doenca> getAllDoenca();
+    
+    
+
+    
+}
