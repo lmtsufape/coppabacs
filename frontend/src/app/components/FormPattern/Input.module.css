@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.form_control{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+    font-family: 'Inter', sans-serif;
+}
+
+.form_control label{
+    margin-bottom: 0.4rem;
+    font-weight: bold;
+}
+
+.form_control input{
+    padding: 0.3rem;
+    border-radius: 6px;
+    border: 2px solid #B1B1B1;
+    opacity: 55%;
+    height: 1.6rem;
+}

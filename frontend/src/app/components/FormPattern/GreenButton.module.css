@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.btn{
+    font-family: 'Inter', sans-serif;
+    width: 9rem;
+    height: 3rem;
+    background-color: #1A5537;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+}
