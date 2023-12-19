@@ -17,9 +17,9 @@ import lombok.Setter;
 public  class TecnicoRequest extends UsuarioRequest {
 
 
-	public Tecnico convertToEntity() {
+	public Gerente convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
-		Tecnico obj = modelMapper.map(this, Tecnico.class);
+		Gerente obj = modelMapper.map(this, Gerente.class);
 		return obj;
 	}
 

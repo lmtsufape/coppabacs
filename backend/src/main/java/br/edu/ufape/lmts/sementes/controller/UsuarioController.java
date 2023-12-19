@@ -1,7 +1,12 @@
 package br.edu.ufape.lmts.sementes.controller;
 
+import java.sql.SQLOutput;
 import java.util.List;
 
+import com.sun.source.util.SourcePositions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
@@ -15,8 +20,10 @@ import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.controller.dto.request.UsuarioRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.UsuarioResponse;
 
+import javax.print.attribute.standard.Media;
 
-@CrossOrigin (origins = "http://localhost:8081/" )
+
+@CrossOrigin (origins = "http://localhost:8081" )
 @RestController
 @RequestMapping("/api/v1/")
 public class UsuarioController {

@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.edu.ufape.lmts.sementes.repository.TecnicoRepository;
-import br.edu.ufape.lmts.sementes.model.Tecnico;
+import br.edu.ufape.lmts.sementes.model.Gerente;
 
 @Service
 public class TecnicoService implements TecnicoServiceInterface {
@@ -12,29 +12,29 @@ public class TecnicoService implements TecnicoServiceInterface {
 	private TecnicoRepository repository;
 
 
-	public Tecnico saveTecnico(Tecnico newInstance) {
+	public Gerente saveTecnico(Gerente newInstance) {
 		return repository.save(newInstance);
 	}
 
-	public Tecnico updateTecnico(Tecnico transientObject) {
+	public Gerente updateTecnico(Gerente transientObject) {
 		return repository.save(transientObject);
 	}
 
-	public Tecnico findTecnicoById(long id) {
+	public Gerente findTecnicoById(long id) {
 		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Tecnico with id = " + id));
 	}
 
-	public List<Tecnico> getAllTecnico(){
+	public List<Gerente> getAllTecnico(){
 		return repository.findAll();
 	}
 
-	public void deleteTecnico(Tecnico persistentObject){
+	public void deleteTecnico(Gerente persistentObject){
 		this.deleteTecnico(persistentObject.getId());
 		
 	}
 	
 	public void deleteTecnico(long id){
-		Tecnico obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Tecnico with id = " + id));
+		Gerente obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Tecnico with id = " + id));
 		repository.delete(obj);
 	}	
 	

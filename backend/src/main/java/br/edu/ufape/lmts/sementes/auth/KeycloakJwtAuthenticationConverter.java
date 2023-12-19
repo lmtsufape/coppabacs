@@ -25,11 +25,9 @@ import java.util.stream.Stream;
 @Component
 //public class KeycloakJwtAuthenticationConverter{
 public class KeycloakJwtAuthenticationConverter implements Converter<Jwt, AbstractAuthenticationToken> {
-
     private final JwtGrantedAuthoritiesConverter defaultGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
     @Autowired
     private ObjectMapper objectMapper;
-
     @Override
     public AbstractAuthenticationToken convert(Jwt jwt) {
         Collection<GrantedAuthority> authorities = Stream

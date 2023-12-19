@@ -10,7 +10,7 @@ import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 
-import br.edu.ufape.lmts.sementes.model.Admin;
+import br.edu.ufape.lmts.sementes.model.Coppabacs;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.controller.dto.request.AdminRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.AdminResponse;
@@ -51,11 +51,11 @@ public class AdminController {
 	public AdminResponse updateAdmin(@PathVariable Long id, @Valid @RequestBody AdminRequest obj) {
 		try {
 			//Admin o = obj.convertToEntity();
-			Admin oldObject = facade.findAdminById(id);
+			Coppabacs oldObject = facade.findAdminById(id);
 
-			TypeMap<AdminRequest, Admin> typeMapper = modelMapper
-													.typeMap(AdminRequest.class, Admin.class)
-													.addMappings(mapper -> mapper.skip(Admin::setId));			
+			TypeMap<AdminRequest, Coppabacs> typeMapper = modelMapper
+													.typeMap(AdminRequest.class, Coppabacs.class)
+													.addMappings(mapper -> mapper.skip(Coppabacs::setId));			
 			
 			
 			typeMapper.map(obj, oldObject);	

@@ -45,7 +45,7 @@ public  class BancoSementes  {
     	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "tecnico_id")
 	@ToString.Exclude
-	private Tecnico tecnico; 
+	private Gerente gerente; 
 	@OneToMany
 	@JoinColumn(name = "bancoSementes_id")
 	@ToString.Exclude

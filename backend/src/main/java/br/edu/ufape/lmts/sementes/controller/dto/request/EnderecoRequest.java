@@ -27,7 +27,4 @@ public  class EnderecoRequest  {
 		Endereco obj = modelMapper.map(this, Endereco.class);
 		return obj;
 	}
-
-
-
 }

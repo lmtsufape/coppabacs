@@ -16,7 +16,7 @@ public  class AdminResponse extends UsuarioResponse {
 
 
 
-	public AdminResponse(Admin obj) {
+	public AdminResponse(Coppabacs obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		modelMapper.map(obj, this);	
 	}

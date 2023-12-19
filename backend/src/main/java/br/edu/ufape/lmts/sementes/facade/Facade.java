@@ -362,23 +362,23 @@ public class Facade {
 	@Autowired
 	private TecnicoService  tecnicoService;
 		
-	public Tecnico saveTecnico(Tecnico newInstance) {
+	public Gerente saveTecnico(Gerente newInstance) {
 		return tecnicoService.saveTecnico(newInstance);
 	}
 
-	public Tecnico updateTecnico(Tecnico transientObject) {
+	public Gerente updateTecnico(Gerente transientObject) {
 		return tecnicoService.updateTecnico(transientObject);
 	}
 
-	public Tecnico findTecnicoById(long id) {
+	public Gerente findTecnicoById(long id) {
 		return tecnicoService.findTecnicoById(id);
 	}
 
-	public List<Tecnico> getAllTecnico() {
+	public List<Gerente> getAllTecnico() {
 		return tecnicoService.getAllTecnico();
 	}
 
-	public void deleteTecnico(Tecnico persistentObject) {
+	public void deleteTecnico(Gerente persistentObject) {
 		tecnicoService.deleteTecnico(persistentObject);
 	}
 
@@ -739,23 +739,23 @@ public class Facade {
 	@Autowired
 	private AdminService  adminService;
 		
-	public Admin saveAdmin(Admin newInstance) {
+	public Coppabacs saveAdmin(Coppabacs newInstance) {
 		return adminService.saveAdmin(newInstance);
 	}
 
-	public Admin updateAdmin(Admin transientObject) {
+	public Coppabacs updateAdmin(Coppabacs transientObject) {
 		return adminService.updateAdmin(transientObject);
 	}
 
-	public Admin findAdminById(long id) {
+	public Coppabacs findAdminById(long id) {
 		return adminService.findAdminById(id);
 	}
 
-	public List<Admin> getAllAdmin() {
+	public List<Coppabacs> getAllAdmin() {
 		return adminService.getAllAdmin();
 	}
 
-	public void deleteAdmin(Admin persistentObject) {
+	public void deleteAdmin(Coppabacs persistentObject) {
 		adminService.deleteAdmin(persistentObject);
 	}
 

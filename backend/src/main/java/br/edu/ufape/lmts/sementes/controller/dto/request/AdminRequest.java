@@ -17,9 +17,9 @@ import lombok.Setter;
 public  class AdminRequest extends UsuarioRequest {
 
 
-	public Admin convertToEntity() {
+	public Coppabacs convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
-		Admin obj = modelMapper.map(this, Admin.class);
+		Coppabacs obj = modelMapper.map(this, Coppabacs.class);
 		return obj;
 	}
 

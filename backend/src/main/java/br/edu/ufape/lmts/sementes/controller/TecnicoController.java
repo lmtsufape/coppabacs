@@ -10,7 +10,7 @@ import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 
-import br.edu.ufape.lmts.sementes.model.Tecnico;
+import br.edu.ufape.lmts.sementes.model.Gerente;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.controller.dto.request.TecnicoRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.TecnicoResponse;
@@ -51,11 +51,11 @@ public class TecnicoController {
 	public TecnicoResponse updateTecnico(@PathVariable Long id, @Valid @RequestBody TecnicoRequest obj) {
 		try {
 			//Tecnico o = obj.convertToEntity();
-			Tecnico oldObject = facade.findTecnicoById(id);
+			Gerente oldObject = facade.findTecnicoById(id);
 
-			TypeMap<TecnicoRequest, Tecnico> typeMapper = modelMapper
-													.typeMap(TecnicoRequest.class, Tecnico.class)
-													.addMappings(mapper -> mapper.skip(Tecnico::setId));			
+			TypeMap<TecnicoRequest, Gerente> typeMapper = modelMapper
+													.typeMap(TecnicoRequest.class, Gerente.class)
+													.addMappings(mapper -> mapper.skip(Gerente::setId));			
 			
 			
 			typeMapper.map(obj, oldObject);	

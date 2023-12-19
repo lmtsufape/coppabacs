@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import br.edu.ufape.lmts.sementes.model.Tecnico;
+import br.edu.ufape.lmts.sementes.model.Gerente;
 
 @Repository
-public interface TecnicoRepository extends JpaRepository<Tecnico, Long> {
+public interface TecnicoRepository extends JpaRepository<Gerente, Long> {
 
 	
 

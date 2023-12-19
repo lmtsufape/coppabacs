@@ -16,7 +16,7 @@ public  class TecnicoResponse extends UsuarioResponse {
 
 
 
-	public TecnicoResponse(Tecnico obj) {
+	public TecnicoResponse(Gerente obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		modelMapper.map(obj, this);	
 	}

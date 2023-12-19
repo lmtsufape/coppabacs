@@ -30,9 +30,19 @@ public  class AgricultorRequest extends UsuarioRequest {
 	public Agricultor convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		Agricultor obj = modelMapper.map(this, Agricultor.class);
+		System.out.println("dentro do agricultor request:");
+		System.out.println(obj.toString());
 		return obj;
 	}
 
 
+	@Override
+	public String toString() {
+		return "AgricultorRequest [numeroDap=" + numeroDap + ", classificacaoPronaf=" + classificacaoPronaf
+				+ ", rendaFamiliar=" + rendaFamiliar + ", numeroPessoas=" + numeroPessoas + ", areaPropriedade="
+				+ areaPropriedade + ", bancoSementes=" + bancoSementes + ", atividadeRural=" + atividadeRural
+				+ ", infraestruturaHidrica=" + infraestruturaHidrica + ", usoOcupacaoTerra=" + usoOcupacaoTerra
+				+ ", infraestruturaComunidade=" + infraestruturaComunidade + "agricultor=" + super.toString() +"]";
+	}
 
 }
