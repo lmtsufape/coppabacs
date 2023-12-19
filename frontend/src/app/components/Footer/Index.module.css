@@ -1,0 +1,102 @@
+.logos{
+    display: flex;
+    align-items: center;
+    margin-top: -1.0%;
+    margin-left: -1.0%;
+    margin-right: -1.0%;
+    padding: 1.0% 1.8%;
+    background-color: #245501;
+    height: 6.0rem;
+
+}
+
+.logoSementes{
+    position: relative;
+    width: 12%;
+    height: 3.5rem;
+    margin-left: 4%;
+    max-width: 60%;
+    min-width: 15%;
+}
+
+.logoUfape{
+    position: relative;
+    width: 7%;
+    height: 7rem;
+    margin-left: 15%;
+    max-width: 60%;
+    min-width: 10%;
+}
+
+.logoLmts{
+    position: relative;
+    width: 20%;
+    height: 5rem;
+    margin-right: 25%;
+    max-width: 60%;
+    min-width: 10%;
+
+}
+
+.logoEmail{
+    position: relative;
+    width: 4%;
+    height: 2rem;
+    margin-right: 0.8%;
+    max-width: 60%;
+    min-width: 3%;
+}
+
+.logoInstagram{
+    position: relative;
+    width: 4%;
+    height: 2rem;
+    margin-right: 0.8%;
+    max-width: 60%;
+    min-width: 3%;
+}
+
+.logoFacebook{
+    position: relative;
+    width: 4%;
+    height: 2rem;
+    margin-right: 4%;
+    max-width: 60%;
+    min-width: 3%;
+}
+/*
+.backgroundfooter{
+    background-color: #245501;
+    Height: 100.78px;
+    margin-top: 15px;
+    /*Top: 926.22px
+}
+.footercontainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 10%;
+    min-width: 10%;
+}
+.logoSemente{
+    flex: 0;
+    margin-left: 50px;
+    margin-top: 1px;
+    min-height: 10%;
+    min-width: 10%;
+}
+.logosufapelmts{
+    flex: 1;
+    text-align: center;
+    margin-top: 1px;
+    gap: 0;
+    justify-content: center;
+}
+.redessociais{
+    display: flex;
+    gap: 3px;
+    margin-top: 1px;
+    margin-right: 50px;
+    min-height: 10%;
+    min-width: 10%;
+*/
