@@ -1,7 +1,8 @@
+"use client"
 import React, { useState } from "react";
-import Input from "../FormPattern/Input";
-import GreenButton from "../FormPattern/GreenButton";
-import styles from "./Index.module.css";
+import Input from "@/components/FormPattern/Forms/Input/input";
+import GreenButton from "@/components/FormPattern//Buttons/GreenButton";
+import styles from "@/components/NewFarmerForm/Index.module.css";
 
 
 export default function NewFarmerForm(){

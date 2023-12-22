@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import Input from "../FormPattern/Input";
-import GreenButton from "../FormPattern/GreenButton";
+import Input from "@/components/FormPattern/Forms/Input/input";
+import Select from "@/components/FormPattern/Forms/Select/select";
+import GreenButton from "@/components/FormPattern/Buttons/GreenButton";
 import styles from "./Index.module.css";
 
 export default function SocialDataFarmer(){
@@ -13,6 +14,14 @@ export default function SocialDataFarmer(){
         infraestruturaComunidade: '',
         
     });
+
+    const infraHidrica = [
+        { value: 'opcao1', label: 'Água Tratada' },
+        { value: 'opcao2', label: 'Açude' },
+        { value: 'opcao3', label: 'Poço' },
+        { value: 'opcao4', label: 'Rio/Riacho' },
+        { value: 'opcao5', label: 'Outro' },
+  ];
 
     function handleSocialOnChange(event){
         const {name, value} = event.target;
@@ -66,8 +75,13 @@ export default function SocialDataFarmer(){
                         onChange={handleSocialOnChange}/>
                     </div>
                 </div>
-                <div>
-                    <h1>Inserir um option para a Infraestrutura Hidrica</h1>
+                <div className={styles.biggerFormSize}>
+                    <Select
+                        name="infraestruturaHidrica"
+                        text="Infraestrutura Hídrica"
+                        options={infraHidrica}
+                        onChange={handleSocialOnChange}
+                        value={socialData.infraestruturaHidrica}/>
                 </div>
                 <div>
                     <h1>Inserir um option para a Infraestrutura Hidrica</h1>
