@@ -1,4 +1,4 @@
-import styles from './Input.module.css';
+import styles from "@/components/FormPattern/Forms/forms.module.css"
 
 
 export default function Input({ type, text, name, placeholder, onChange, value}){

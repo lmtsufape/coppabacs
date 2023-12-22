@@ -17,5 +17,26 @@
     border-radius: 6px;
     border: 2px solid #B1B1B1;
     opacity: 55%;
+    height: 2.0em;
+}
+
+.form_control select{
+    padding: 0.3rem;
+    border-radius: 6px;
+    border: 2px solid #B1B1B1;
+    opacity: 55%;
+    height: 3em;
+    background-color: white;
+    font-family: 'Inter', sans-serif;
+
+}
+
+.form_control option{
+    padding: 0.3rem;
+    border-radius: 6px;
+    border: 2px solid #B1B1B1;
+    opacity: 55%;
     height: 1.6rem;
+    background-color: white;
+    font-family: 'Inter', sans-serif;
 }
