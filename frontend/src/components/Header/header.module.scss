@@ -1,0 +1,47 @@
+.header{
+  padding: 1em 4em;
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 1px solid rgba(0, 0, 0, 0.3);
+
+  &__logo{
+      width: 120px;
+  }
+
+  &__button_mural, &__button_home{
+      color: #245501;
+      font-weight: bold;
+      font-size: 1em;
+
+      border: none;
+      padding: 14px 34px;
+  }
+
+  &__button_mural{
+      background-color: #FFFF;
+      margin-right: 0.8em;
+
+      &:hover{
+        background-color: #245501;
+        border-radius: 0.5em;
+        color: #FFFF;
+        transition: all .4s;
+      }
+
+  }
+
+  &__button_home{
+      background-color: #FFFF;
+
+      &:hover{
+        background-color: #245501;
+        border-radius: 0.5em;
+        color: #FFFF;
+        transition: all .4s;
+      }
+
+  }
+}

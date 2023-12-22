@@ -1,0 +1,30 @@
+.header{
+  padding: 1em 4em;
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 1px solid rgba(0, 0, 0, 0.3);
+
+  &__logo{
+      width: 120px;
+  }
+
+  &__button_perfil{
+    border: 0;
+    background-color: #FFFF;
+  }
+
+  &__button_sistem{
+      background-color: #FFFF;
+
+      &:hover{
+        background-color: #245501;
+        border-radius: 5em;
+        color: #FFFF;
+        transition: all .4s;
+      }
+
+  }
+}
