@@ -10,12 +10,12 @@ export default function bancoSementesPage(){
       listName="Bancos de sementes"
       buttonName="Cadastrar novo banco de sementes"
       table1="Nome"
-      table2="Responsável 1"
-      table3="Responsável 2"
-      table4="Ação"
+      table2="Responsável"
+      table3="Contato"
+      table4="Ações"
       content1="Banco Teste"
       content2="Testinho"
-      content3="Testão"
+      content3="99999999"
       />
       <Footer />
 

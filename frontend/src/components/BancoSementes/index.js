@@ -62,7 +62,7 @@ export default function BancoSementes({ fundacao, responsavel1, responsavel2, co
                   <h1>Associados</h1>
                 </button>  
                 <button className={style.body__title_div_button_last}>
-                  <span>
+                  <span className={style.body__svg}>
                     <Image src="/assets/iconTransations.svg" alt="Transições" width={24} height={24}/>
                   </span>
                   <h1>Transições</h1>
