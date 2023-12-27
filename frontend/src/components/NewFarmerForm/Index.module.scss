@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.boxForm{
+    display: block;
+    width: 80%;
+    max-width: 1500px;
+    min-width: none;
+    height: auto;
+    background-color: white;
+    padding: 30px;
+    margin: auto;
+    font-family: 'Inter', sans-serif;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    box-shadow: -4px 5px 12px 0px #00000026;
+    border: 0.5px solid #B1B1B1;
+    margin-top: 2em;
+    margin-bottom: 5em;
+
+    Button{
+        display: block;
+        justify-content: flex-end;
+        margin-top: 50px;
+        margin-bottom: 0rem;
+        gap: 3%;
+
+    }
+    &__buttonForm{
+        display: flex;
+        justify-content: right;
+    }
+    
+    @media screen and (max-width: 600px) {
+       
+        .threeSidedForm{
+            flex-direction: column;
+            &__smallerFormSize{
+                width: 90%;
+                margin-right: 1em;
+                margin-left: 1em;
+            }
+        }
+        .twoSidedForm{
+            flex-direction: column;
+            &__smallerFormSize{
+                width: 90%;
+                margin-right: 1em;
+                margin-left: 1em;
+            }
+            &__largerFormSize{
+                width: 90%;
+                margin-right: 1em;
+                margin-left: 1em;
+            }
+        }
+        .biggerFormSize{
+            flex-direction: column;
+            width: 90%;
+        }
+        .largerFormSize{
+            flex-direction: column;
+            width: 90%;
+        }
+    }
+}
+
+
+.threeSidedForm{
+    display: flex;
+    flex-direction: row;
+
+
+    &__smallerFormSize{
+        width: 50%;
+        margin-right: 1em;
+        margin-left: 1em;
+        min-width: 25%;
+    }
+
+}
+.twoSidedForm{
+    display: flex;
+    flex-direction: row;
+
+
+    &__smallerFormSize{
+        width: 23.3em;
+        margin-right: 1em;
+        margin-left: 1em;
+    }
+    &__largerFormSize{
+        width: 70%;
+        margin-right: 1em;
+        margin-left: 1em;
+        
+    }
+}
+
+.biggerFormSize{
+    width: 97.3%;
+    margin-left: 1em;
+    margin-right: 1em;
+    min-width: 50%;
+}
+.largerFormSize{
+    width: 50%;
+    margin-right: 1em;
+    margin-left: 1em;
+
+    
+}
+
+

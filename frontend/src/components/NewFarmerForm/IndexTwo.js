@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Input from "@/components/FormPattern/Forms/Input/input";
 import Select from "@/components/FormPattern/Forms/Select/select";
 import GreenButton from "@/components/FormPattern/Buttons/GreenButton";
-import styles from "./Index.module.css";
+import styles from "./Index.module.scss";
 
 export default function SocialDataFarmer(){
     const [socialData, setSocialData] = useState({
@@ -36,7 +36,7 @@ export default function SocialDataFarmer(){
         <div className={styles.boxForm}>
             <form onSubmit={handleSubmit}>
                 <div className={styles.twoSidedForm}>
-                <div className={styles.smallerFormSize}>
+                <div className={styles.twoSidedForm__largerFormSize}>
                     <Input
                         type="text"
                         text="Renda Familiar"
@@ -45,7 +45,7 @@ export default function SocialDataFarmer(){
                         value={socialData.renda}
                         onChange={handleSocialOnChange}/>
                     </div>
-                    <div className={styles.smallerFormSize}>
+                    <div className={styles.twoSidedForm__largerFormSize}>
                     <Input
                         type="text"
                         text="Número de Pessoas na Família"
@@ -86,7 +86,7 @@ export default function SocialDataFarmer(){
                 <div>
                     <h1>Inserir um option para a Infraestrutura Hidrica</h1>
                 </div>
-                <div className={styles.buttonForm}>
+                <div className={styles.boxForm__buttonForm}>
                     <GreenButton
                         text="Continuar"/>
                 </div>

@@ -8,12 +8,12 @@
 }
 
 .form_control label{
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.4em;
     font-weight: bold;
 }
 
 .form_control input{
-    padding: 0.3rem;
+    padding: 0.3em;
     border-radius: 6px;
     border: 2px solid #B1B1B1;
     opacity: 55%;
@@ -21,7 +21,7 @@
 }
 
 .form_control select{
-    padding: 0.3rem;
+    padding: 0.3em;
     border-radius: 6px;
     border: 2px solid #B1B1B1;
     opacity: 55%;

@@ -1,8 +1,8 @@
 "use client"
 import React, { useState } from "react";
 import Input from "@/components/FormPattern/Forms/Input/input";
-import GreenButton from "@/components/FormPattern//Buttons/GreenButton";
-import styles from "@/components/NewFarmerForm/Index.module.css";
+import GreenButton from "@/components/FormPattern/Buttons/GreenButton";
+import styles from "@/components/NewFarmerForm/Index.module.scss";
 
 
 export default function NewFarmerForm(){
@@ -44,7 +44,7 @@ export default function NewFarmerForm(){
         <div className={styles.boxForm}>
             <form onSubmit={handleSubmit}>
                 <div className={styles.twoSidedForm}>
-                    <div className={styles.largerFormSize}>
+                    <div className={styles.twoSidedForm__largerFormSize}>
                     <Input
                         type="text"
                         text="Banco Comunitário de Sementes"
@@ -53,7 +53,7 @@ export default function NewFarmerForm(){
                         value={bankData.banco}
                         onChange={handleBankOnChange}/>
                     </div>
-                    <div className={styles.smallerFormSize}>
+                    <div className={styles.twoSidedForm__smallerFormSize}>
                     <Input
                         type="text"
                         text="Município"
@@ -74,7 +74,7 @@ export default function NewFarmerForm(){
                         onChange={handleFarmerOnChange}/>
                 </div>
                 <div className={styles.threeSidedForm}>
-                    <div className={styles.smallerFormSize}>
+                    <div className={styles.threeSidedForm__smallerFormSize}>
                         <Input
                             type="text"
                             text="Data de Nascimento"
@@ -83,7 +83,7 @@ export default function NewFarmerForm(){
                             value={farmerData.dataNascimento}
                             onChange={handleFarmerOnChange}/>
                     </div>
-                    <div className={styles.smallerFormSize}>
+                    <div className={styles.threeSidedForm__smallerFormSize}>
                     <Input
                             type="text"
                             text="CPF"
@@ -92,7 +92,7 @@ export default function NewFarmerForm(){
                             value={farmerData.cpf}
                             onChange={handleFarmerOnChange}/>
                     </div>
-                    <div className={styles.smallerFormSize}>
+                    <div className={styles.threeSidedForm__smallerFormSize}>
                     <Input
                             type="text"
                             text="RG"
@@ -103,7 +103,7 @@ export default function NewFarmerForm(){
                     </div>
                 </div>
                 <div className={styles.threeSidedForm}>
-                    <div className={styles.smallerFormSize}>
+                    <div className={styles.threeSidedForm__smallerFormSize}>
                         <Input
                             type="text"
                             text="UF"
@@ -112,7 +112,7 @@ export default function NewFarmerForm(){
                             value={farmerData.ufRg}
                             onChange={handleFarmerOnChange}/>
                     </div>
-                    <div className={styles.smallerFormSize}>
+                    <div className={styles.threeSidedForm__smallerFormSize}>
                     <Input
                             type="text"
                             text="Título de Eleitor"
@@ -121,7 +121,7 @@ export default function NewFarmerForm(){
                             value={farmerData.tituloEleitor}
                             onChange={handleFarmerOnChange}/>
                     </div>
-                    <div className={styles.smallerFormSize}>
+                    <div className={styles.threeSidedForm__smallerFormSize}>
                         <Input
                             type="text"
                             text="NIS"
@@ -131,7 +131,7 @@ export default function NewFarmerForm(){
                             onChange={handleFarmerOnChange}/>
                     </div>
                 </div>
-                <div className={styles.smallerFormSize}>
+                <div className={styles.largerFormSize}>
                     <Input
                             type="text"
                             text="Escolaridade"
@@ -150,7 +150,7 @@ export default function NewFarmerForm(){
                             onChange={handleFarmerOnChange}/>
                 </div>
                 <div className={styles.threeSidedForm}>
-                    <div className={styles.smallerFormSize}>
+                    <div className={styles.threeSidedForm__smallerFormSize}>
                     <Input
                             type="text"
                             text="Município"
@@ -159,7 +159,7 @@ export default function NewFarmerForm(){
                             value={farmerData.municipio}
                             onChange={handleFarmerOnChange}/>
                     </div>
-                    <div className={styles.smallerFormSize}>
+                    <div className={styles.threeSidedForm__smallerFormSize}>
                     <Input
                             type="text"
                             text="UF"
@@ -168,7 +168,7 @@ export default function NewFarmerForm(){
                             value={farmerData.uf}
                             onChange={handleFarmerOnChange}/>
                     </div>
-                    <div className={styles.smallerFormSize}>
+                    <div className={styles.threeSidedForm__smallerFormSize}>
                     <Input
                             type="text"
                             text="Comunidade"
@@ -179,7 +179,7 @@ export default function NewFarmerForm(){
                     </div>
                 </div>
                 <div className={styles.twoSidedForm}>
-                    <div className={styles.smallerFormSize}>
+                    <div className={styles.twoSidedForm__smallerFormSize}>
                     <Input
                             type="text"
                             text="Número do DAP"
@@ -188,7 +188,7 @@ export default function NewFarmerForm(){
                             value={farmerData.dap}
                             onChange={handleFarmerOnChange}/>
                     </div>
-                    <div className={styles.smallerFormSize}>
+                    <div className={styles.twoSidedForm__smallerFormSize}>
                     <Input
                             type="text"
                             text="Classificação no PRONAF"
@@ -198,7 +198,7 @@ export default function NewFarmerForm(){
                             onChange={handleFarmerOnChange}/>
                     </div>
                 </div>
-                <div className={styles.buttonForm}>
+                <div className={styles.boxForm__buttonForm}>
                     <GreenButton
                         text="Continuar"/>
                 </div>
