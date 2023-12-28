@@ -3,7 +3,6 @@ package br.edu.ufape.lmts.sementes.model;
 import java.time.LocalDate;
 import java.util.List;
 
-import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import jakarta.persistence.Entity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,13 +18,12 @@ import lombok.ToString;
 @ToString
 public class Coppabacs extends Usuario {
 
-	public Coppabacs(long id, String nome, String email, String senha, Endereco endereco, String rg, String cpf,
+	public Coppabacs(Long id, String nome, String email, String senha, Endereco endereco, String rg, String cpf,
 			LocalDate dataNascimento, String contato, String imagem, String nomePai, String nomeMae, String nis,
-			String tituloEleitor, String sexo, Conjuge conjuge, List<Postavel> postavel) {
+			String tituloEleitor, String sexo, Conjuge conjuge, List<Postavel> postavel, List<Role> roles) {
 		super(id, nome, email, senha, endereco, rg, cpf, dataNascimento, contato, imagem, nomePai, nomeMae, nis, tituloEleitor,
-				sexo, conjuge, postavel);
-		
-		super.addTipo(TipoUsuario.ADMIN);
+				sexo, conjuge, postavel, roles);
 	}
+
 	
-}
+} 

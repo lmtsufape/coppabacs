@@ -5,8 +5,73 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.ufape.lmts.sementes.model.*;
-import br.edu.ufape.lmts.sementes.service.*;
+import br.edu.ufape.lmts.sementes.exceptions.EmailExistsException;
+import br.edu.ufape.lmts.sementes.model.Agricultor;
+import br.edu.ufape.lmts.sementes.model.AtividadeRural;
+import br.edu.ufape.lmts.sementes.model.BancoSementes;
+import br.edu.ufape.lmts.sementes.model.CaracteristicasAgronomicas;
+import br.edu.ufape.lmts.sementes.model.Conjuge;
+import br.edu.ufape.lmts.sementes.model.Coppabacs;
+import br.edu.ufape.lmts.sementes.model.Cor;
+import br.edu.ufape.lmts.sementes.model.Cultura;
+import br.edu.ufape.lmts.sementes.model.DoacaoUsuario;
+import br.edu.ufape.lmts.sementes.model.Doenca;
+import br.edu.ufape.lmts.sementes.model.Empalhamento;
+import br.edu.ufape.lmts.sementes.model.Endereco;
+import br.edu.ufape.lmts.sementes.model.Evento;
+import br.edu.ufape.lmts.sementes.model.Finalidade;
+import br.edu.ufape.lmts.sementes.model.Gerente;
+import br.edu.ufape.lmts.sementes.model.InfraestruturaComunidade;
+import br.edu.ufape.lmts.sementes.model.Item;
+import br.edu.ufape.lmts.sementes.model.ObjetosBancoSementes;
+import br.edu.ufape.lmts.sementes.model.Postavel;
+import br.edu.ufape.lmts.sementes.model.Praga;
+import br.edu.ufape.lmts.sementes.model.ProducaoSementes;
+import br.edu.ufape.lmts.sementes.model.Publicacao;
+import br.edu.ufape.lmts.sementes.model.RegioesAdaptacaoCultivo;
+import br.edu.ufape.lmts.sementes.model.RetiradaUsuario;
+import br.edu.ufape.lmts.sementes.model.SementePraga;
+import br.edu.ufape.lmts.sementes.model.Sementes;
+import br.edu.ufape.lmts.sementes.model.TabelaBancoSementes;
+import br.edu.ufape.lmts.sementes.model.ToleranciaAdversidades;
+import br.edu.ufape.lmts.sementes.model.TransacaoGenerica;
+import br.edu.ufape.lmts.sementes.model.UsoOcupacaoTerra;
+import br.edu.ufape.lmts.sementes.model.Usuario;
+import br.edu.ufape.lmts.sementes.model.infraestruturaHidrica;
+import br.edu.ufape.lmts.sementes.model.sementeDoenca;
+import br.edu.ufape.lmts.sementes.service.AdminService;
+import br.edu.ufape.lmts.sementes.service.AgricultorService;
+import br.edu.ufape.lmts.sementes.service.AtividadeRuralService;
+import br.edu.ufape.lmts.sementes.service.BancoSementesService;
+import br.edu.ufape.lmts.sementes.service.CaracteristicasAgronomicasService;
+import br.edu.ufape.lmts.sementes.service.ConjugeService;
+import br.edu.ufape.lmts.sementes.service.CorService;
+import br.edu.ufape.lmts.sementes.service.CulturaService;
+import br.edu.ufape.lmts.sementes.service.DoacaoUsuarioService;
+import br.edu.ufape.lmts.sementes.service.DoencaService;
+import br.edu.ufape.lmts.sementes.service.EmpalhamentoService;
+import br.edu.ufape.lmts.sementes.service.EnderecoService;
+import br.edu.ufape.lmts.sementes.service.EventoService;
+import br.edu.ufape.lmts.sementes.service.FinalidadeService;
+import br.edu.ufape.lmts.sementes.service.GerenteService;
+import br.edu.ufape.lmts.sementes.service.InfraestruturaComunidadeService;
+import br.edu.ufape.lmts.sementes.service.ItemService;
+import br.edu.ufape.lmts.sementes.service.ObjetosBancoSementesService;
+import br.edu.ufape.lmts.sementes.service.PostavelService;
+import br.edu.ufape.lmts.sementes.service.PragaService;
+import br.edu.ufape.lmts.sementes.service.ProducaoSementesService;
+import br.edu.ufape.lmts.sementes.service.PublicacaoService;
+import br.edu.ufape.lmts.sementes.service.RegioesAdaptacaoCultivoService;
+import br.edu.ufape.lmts.sementes.service.RetiradaUsuarioService;
+import br.edu.ufape.lmts.sementes.service.SementePragaService;
+import br.edu.ufape.lmts.sementes.service.SementesService;
+import br.edu.ufape.lmts.sementes.service.TabelaBancoSementesService;
+import br.edu.ufape.lmts.sementes.service.ToleranciaAdversidadesService;
+import br.edu.ufape.lmts.sementes.service.TransacaoGenericaService;
+import br.edu.ufape.lmts.sementes.service.UsoOcupacaoTerraService;
+import br.edu.ufape.lmts.sementes.service.UsuarioService;
+import br.edu.ufape.lmts.sementes.service.infraestruturaHidricaService;
+import br.edu.ufape.lmts.sementes.service.sementeDoencaService;
 
 @Service
 public class Facade {
@@ -72,8 +137,17 @@ public class Facade {
 	@Autowired
 	private UsuarioService  usuarioService;
 		
-	public Usuario saveUsuario(Usuario newInstance) {
-		return usuarioService.saveUsuario(newInstance);
+	public Usuario saveUsuario(Usuario newInstance) throws EmailExistsException{
+		try {
+			return usuarioService.saveUsuario(newInstance);
+			
+		} catch (EmailExistsException e) {
+			throw e;
+			
+		} catch (Exception e) {
+	        throw new RuntimeException("Erro ao salvar o usuário", e);
+		}
+		
 	}
 
 	public Usuario updateUsuario(Usuario transientObject) {
@@ -358,34 +432,33 @@ public class Facade {
 	}
 	
 
-	//Tecnico--------------------------------------------------------------
+	//Gerente--------------------------------------------------------------
 	@Autowired
-	private TecnicoService  tecnicoService;
+	private GerenteService  gerenteService;
 		
-	public Gerente saveTecnico(Gerente newInstance) {
-		return tecnicoService.saveTecnico(newInstance);
+	public Gerente saveGerente(Gerente newInstance) {
+		return gerenteService.saveGerente(newInstance);
 	}
 
-	public Gerente updateTecnico(Gerente transientObject) {
-		return tecnicoService.updateTecnico(transientObject);
+	public Gerente updateGerente(Gerente transientObject) {
+		return gerenteService.updateGerente(transientObject);
 	}
 
-	public Gerente findTecnicoById(long id) {
-		return tecnicoService.findTecnicoById(id);
+	public Gerente findGerenteById(long id) {
+		return gerenteService.findGerenteById(id);
 	}
 
-	public List<Gerente> getAllTecnico() {
-		return tecnicoService.getAllTecnico();
+	public List<Gerente> getAllGerente() {
+		return gerenteService.getAllGerente();
 	}
 
-	public void deleteTecnico(Gerente persistentObject) {
-		tecnicoService.deleteTecnico(persistentObject);
+	public void deleteGerente(Gerente persistentObject) {
+		gerenteService.deleteGerente(persistentObject);
 	}
 
-	public void deleteTecnico(long id) {
-		tecnicoService.deleteTecnico(id);
+	public void deleteGerente(long id) {
+		gerenteService.deleteGerente(id);
 	}
-	
 
 	//ObjetosBancoSementes--------------------------------------------------------------
 	@Autowired
@@ -792,6 +865,9 @@ public class Facade {
 		agricultorService.deleteAgricultor(id);
 	}
 	
+	public void validateAgricultor(long id) {
+		agricultorService.validateAgricultor(id);
+	}
 
 	//ProducaoSementes--------------------------------------------------------------
 	@Autowired

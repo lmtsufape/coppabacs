@@ -1,10 +1,12 @@
 package br.edu.ufape.lmts.sementes.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import br.edu.ufape.lmts.sementes.repository.EnderecoRepository;
+
 import br.edu.ufape.lmts.sementes.model.Endereco;
+import br.edu.ufape.lmts.sementes.repository.EnderecoRepository;
 
 @Service
 public class EnderecoService implements EnderecoServiceInterface {

@@ -45,7 +45,6 @@ public class AgricultorController {
 	@PostMapping(value = "agricultor", consumes = MediaType.APPLICATION_JSON_VALUE,
 	        produces = MediaType.APPLICATION_JSON_VALUE)
 	public AgricultorResponse createAgricultor(@Valid @RequestBody AgricultorRequest newObj) {
-		System.out.println("\nagricultor controller " + newObj);
 		return new AgricultorResponse(facade.saveAgricultor(newObj.convertToEntity()));
 	}
 	

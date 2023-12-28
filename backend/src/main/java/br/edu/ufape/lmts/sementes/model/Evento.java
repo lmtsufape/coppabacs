@@ -1,9 +1,8 @@
 package br.edu.ufape.lmts.sementes.model;
 
 import java.time.LocalDateTime;
-import java.util.*;
-import java.math.*;
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

@@ -1,20 +1,16 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
-import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
-import br.edu.ufape.lmts.sementes.model.*;
-
-import java.util.*;
-import java.math.*;
-
 import org.modelmapper.ModelMapper;
-import jakarta.validation.constraints.*;
+
+import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
+import br.edu.ufape.lmts.sementes.model.Gerente;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 @Getter @Setter @NoArgsConstructor 
-public  class TecnicoRequest extends UsuarioRequest {
+public  class GerenteRequest extends UsuarioRequest {
 
 
 	public Gerente convertToEntity() {

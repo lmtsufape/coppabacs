@@ -1,13 +1,11 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
-import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
-import br.edu.ufape.lmts.sementes.model.*;
-
-import java.util.*;
-import java.math.*;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
-import jakarta.validation.constraints.*;
+
+import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
+import br.edu.ufape.lmts.sementes.model.Agricultor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,19 +28,8 @@ public  class AgricultorRequest extends UsuarioRequest {
 	public Agricultor convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		Agricultor obj = modelMapper.map(this, Agricultor.class);
-		System.out.println("dentro do agricultor request:");
-		System.out.println(obj.toString());
 		return obj;
 	}
 
-
-	@Override
-	public String toString() {
-		return "AgricultorRequest [numeroDap=" + numeroDap + ", classificacaoPronaf=" + classificacaoPronaf
-				+ ", rendaFamiliar=" + rendaFamiliar + ", numeroPessoas=" + numeroPessoas + ", areaPropriedade="
-				+ areaPropriedade + ", bancoSementes=" + bancoSementes + ", atividadeRural=" + atividadeRural
-				+ ", infraestruturaHidrica=" + infraestruturaHidrica + ", usoOcupacaoTerra=" + usoOcupacaoTerra
-				+ ", infraestruturaComunidade=" + infraestruturaComunidade + "agricultor=" + super.toString() +"]";
-	}
 
 }

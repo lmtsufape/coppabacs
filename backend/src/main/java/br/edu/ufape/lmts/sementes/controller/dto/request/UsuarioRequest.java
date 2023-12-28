@@ -1,18 +1,17 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
-import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
-import br.edu.ufape.lmts.sementes.model.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.time.LocalDate;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import java.time.LocalDate;
-import java.util.*;
+import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
+import br.edu.ufape.lmts.sementes.model.Usuario;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Getter @Setter @NoArgsConstructor @JsonPropertyOrder
@@ -34,14 +33,13 @@ public  class UsuarioRequest  {
 	private String sexo;
 	private ConjugeRequest conjuge;
 	private List<PostavelRequest> postavel;
+	private List<RoleRequest> roles;
 
 	public Usuario convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 
 		Usuario obj = modelMapper.map(this, Usuario.class);
 
-		System.out.println("convert to entity:");
-		obj.toString();
 		return obj;
 	}
 

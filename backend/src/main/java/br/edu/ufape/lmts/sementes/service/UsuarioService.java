@@ -1,19 +1,40 @@
 package br.edu.ufape.lmts.sementes.service;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import br.edu.ufape.lmts.sementes.repository.UsuarioRepository;
+
+import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
+import br.edu.ufape.lmts.sementes.exceptions.EmailExistsException;
+import br.edu.ufape.lmts.sementes.model.Role;
 import br.edu.ufape.lmts.sementes.model.Usuario;
+import br.edu.ufape.lmts.sementes.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService implements UsuarioServiceInterface {
 	@Autowired
 	private UsuarioRepository repository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 
-	public Usuario saveUsuario(Usuario newInstance) {
-		return repository.save(newInstance);
+	public Usuario saveUsuario(Usuario usuario) throws EmailExistsException {
+		
+		if(emailExists(usuario.getEmail())) {
+			throw new EmailExistsException( "Esse email já existe: " + usuario.getEmail());
+		}
+				
+		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+		
+		addRoleToUser(usuario, TipoUsuario.USUARIO);
+		
+		System.out.println("dentro de usuario " + usuario);
+		
+		return repository.save(usuario);
 	}
 
 	public Usuario updateUsuario(Usuario transientObject) {
@@ -38,6 +59,14 @@ public class UsuarioService implements UsuarioServiceInterface {
 		repository.delete(obj);
 	}	
 	
+	public boolean emailExists(String email) {
+		return repository.existsByEmail(email);
+	}
 	
-	
+	public void addRoleToUser(Usuario usuario, TipoUsuario tipoUsuario) {
+	    if (usuario.getRoles() == null) {
+	        usuario.setRoles(new ArrayList<>());
+	    }
+	    usuario.getRoles().add(new Role(tipoUsuario));
+	}
 }

@@ -1,16 +1,14 @@
 package br.edu.ufape.lmts.sementes.controller.dto.response;
 
 import java.time.LocalDate;
-import java.util.*;
-import java.math.*;
-import br.edu.ufape.lmts.sementes.model.*;
-import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
-import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
+import br.edu.ufape.lmts.sementes.model.Usuario;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -36,7 +34,6 @@ public  class UsuarioResponse  {
 	private String sexo;
 	private ConjugeResponse conjuge; 
 	private List<PostavelResponse> postavel;
-	private Set<TipoUsuario> tipo;
 
 	public UsuarioResponse(Usuario obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

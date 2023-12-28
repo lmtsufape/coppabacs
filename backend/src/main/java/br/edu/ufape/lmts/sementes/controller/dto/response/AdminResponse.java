@@ -1,10 +1,6 @@
 package br.edu.ufape.lmts.sementes.controller.dto.response;
 
-import java.util.*;
-import java.math.*;
-import br.edu.ufape.lmts.sementes.model.*;
-import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
-import org.modelmapper.ModelMapper;
+import br.edu.ufape.lmts.sementes.model.Usuario;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,11 +10,16 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor
 public  class AdminResponse extends UsuarioResponse {
 
-
-
-	public AdminResponse(Coppabacs obj) {
-		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
-		modelMapper.map(obj, this);	
+	public AdminResponse(Usuario obj) {
+		super(obj);
+		// TODO Auto-generated constructor stub
 	}
+
+
+
+//	public AdminResponse(Admin obj) {
+//		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
+//		modelMapper.map(obj, this);	
+//	}
 
 }
