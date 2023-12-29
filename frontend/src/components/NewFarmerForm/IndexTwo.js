@@ -3,6 +3,8 @@ import Input from "@/components/FormPattern/Forms/Input/input";
 import Select from "@/components/FormPattern/Forms/Select/select";
 import GreenButton from "@/components/FormPattern/Buttons/GreenButton";
 import styles from "./Index.module.scss";
+import Checkbox from "@/components/FormPattern/Forms/Checkbox/checkbox";
+import { checkIsOnDemandRevalidate } from "next/dist/server/api-utils";
 
 export default function SocialDataFarmer(){
     const [socialData, setSocialData] = useState({
@@ -11,7 +13,8 @@ export default function SocialDataFarmer(){
         usoOcupacao: '',
         areaPropriedade: '',
         infraestruturaHidrica: '',
-        infraestruturaComunidade: '',
+        infraestruturaComunidade: [],
+        outraInfraComunidade: '',
         
     });
 
@@ -26,6 +29,22 @@ export default function SocialDataFarmer(){
     function handleSocialOnChange(event){
         const {name, value} = event.target;
         setSocialData({ ...socialData, [name]: value });
+    }
+
+    function handleInfraComunidade(infraComunidade){
+        setSocialData((prevData) => {
+            const updatedinfraComunidade = prevData.infraestruturaComunidade.includes(infraComunidade)
+            ? prevData.infraestruturaComunidade.filter((a) => a !== infraComunidade)
+            : [...prevData.infraestruturaComunidade, infraComunidade];
+
+            const updatedOutraInfraComunidade = 
+                updatedinfraComunidade.includes('outro') ? prevData.outraInfraComunidade: '';
+            return {...prevData, infraestruturaComunidade: updatedinfraComunidade, outraInfraComunidade: updatedOutraInfraComunidade};
+        });
+    }
+
+    function handleOutraInfraComunidade(event){
+        setSocialData({ ...socialData, outraInfraComunidade:event.target.value});
     }
 
     async function handleSubmit(event){
@@ -84,7 +103,14 @@ export default function SocialDataFarmer(){
                         value={socialData.infraestruturaHidrica}/>
                 </div>
                 <div>
-                    <h1>Inserir um option para a Infraestrutura Hidrica</h1>
+                    <Checkbox
+                        type="checkbox"
+                        text="Igreja"
+                        name="igreja"
+                        value="igreja"
+                        checked={socialData.infraestruturaComunidade.includes('igreja')}
+                        onChange={handleInfraComunidade}
+                        />
                 </div>
                 <div className={styles.boxForm__buttonForm}>
                     <GreenButton

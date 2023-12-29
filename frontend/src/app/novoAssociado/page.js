@@ -1,5 +1,5 @@
 import React from "react";
-import NewFarmerForm from "@/components/NewFarmerForm/IndexOne";
+import NewFarmerForm from "@/components/NewFarmerForm/indexOne";
 import Footer from "@/components/Home/Footer";
 import Header from "@/components/Home/Header";
 
