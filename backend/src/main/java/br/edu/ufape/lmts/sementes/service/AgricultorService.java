@@ -5,15 +5,21 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.lmts.sementes.exceptions.EmailExistsException;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.repository.AgricultorRepository;
+import br.edu.ufape.lmts.sementes.repository.UsuarioRepository;
 
 @Service
 public class AgricultorService implements AgricultorServiceInterface {
 	@Autowired
 	private AgricultorRepository repository;
 	
-	public Agricultor saveAgricultor(Agricultor agricultor) {
+	@Autowired UsuarioService usuario;
+	
+	public Agricultor saveAgricultor(Agricultor agricultor) throws EmailExistsException {
+		
+		usuario.saveUsuario(agricultor);
 		
 		return repository.save(agricultor);
 	}

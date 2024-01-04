@@ -841,7 +841,7 @@ public class Facade {
 	@Autowired
 	private AgricultorService  agricultorService;
 		
-	public Agricultor saveAgricultor(Agricultor newInstance) {
+	public Agricultor saveAgricultor(Agricultor newInstance) throws EmailExistsException {
 		return agricultorService.saveAgricultor(newInstance);
 	}
 

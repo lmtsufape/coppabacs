@@ -3,6 +3,7 @@ package br.edu.ufape.lmts.sementes.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,9 +67,9 @@ public abstract class Usuario implements UserDetails, Serializable {
 	private List<Postavel> postavel;
 	@ManyToMany
 	@JoinTable(name = "USUARIO_PERFIS",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "perfil_id"))
-	private List<Role> roles;
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+	private Collection<Role> roles;
 	
 	
 
@@ -97,8 +98,11 @@ public abstract class Usuario implements UserDetails, Serializable {
 
 	public Usuario() {}
 	
-	public void addPerfil(Role role) {
-		roles.add(role);
+	public void addRole(Role role) {
+		if (roles == null) {
+            roles = new HashSet<>();
+        }
+        roles.add(role);
 	}
 	
 	public void addPostavel(Postavel post) {
@@ -362,7 +366,7 @@ public abstract class Usuario implements UserDetails, Serializable {
 	}
 
 
-	public List<Role> getRoles() {
+	public Collection<Role> getRoles() {
 		return roles;
 	}
 

@@ -20,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.AgricultorRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.AgricultorResponse;
+import br.edu.ufape.lmts.sementes.exceptions.EmailExistsException;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
 import jakarta.validation.Valid;
@@ -44,7 +45,7 @@ public class AgricultorController {
 	
 	@PostMapping(value = "agricultor", consumes = MediaType.APPLICATION_JSON_VALUE,
 	        produces = MediaType.APPLICATION_JSON_VALUE)
-	public AgricultorResponse createAgricultor(@Valid @RequestBody AgricultorRequest newObj) {
+	public AgricultorResponse createAgricultor(@Valid @RequestBody AgricultorRequest newObj) throws EmailExistsException {
 		return new AgricultorResponse(facade.saveAgricultor(newObj.convertToEntity()));
 	}
 	
