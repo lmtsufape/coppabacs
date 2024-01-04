@@ -15,7 +15,7 @@ export default function SocialDataFarmer() {
         areaPropriedade: '',
         infraestruturaHidrica: '',
         infraestruturaComunidade: [],
-        outraInfraComunidade: [],
+        outraInfraComunidade: '',
 
     });
 
