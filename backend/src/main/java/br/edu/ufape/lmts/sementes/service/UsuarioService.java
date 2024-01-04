@@ -1,19 +1,53 @@
 package br.edu.ufape.lmts.sementes.service;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import br.edu.ufape.lmts.sementes.repository.UsuarioRepository;
+
+import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
+import br.edu.ufape.lmts.sementes.exceptions.EmailExistsException;
+import br.edu.ufape.lmts.sementes.model.Role;
 import br.edu.ufape.lmts.sementes.model.Usuario;
+import br.edu.ufape.lmts.sementes.repository.UsuarioRepository;
+import br.edu.ufape.lmts.sementes.repository.roleRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class UsuarioService implements UsuarioServiceInterface {
 	@Autowired
 	private UsuarioRepository repository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private roleRepository role;
 
-
-	public Usuario saveUsuario(Usuario newInstance) {
-		return repository.save(newInstance);
+	@Transactional
+	public Usuario saveUsuario(Usuario usuario) throws EmailExistsException {
+		
+		if(emailExists(usuario.getEmail())) {
+			throw new EmailExistsException( "Esse email já existe: " + usuario.getEmail());
+		}
+				
+        Role usuarioRole = null;
+		try {
+			usuarioRole = role.findByRole(TipoUsuario.USUARIO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        System.out.println(usuarioRole);
+		
+		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+		
+		usuario.addRole(usuarioRole);
+		
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\ndentro de usuario ");
+		
+		return repository.save(usuario);
 	}
 
 	public Usuario updateUsuario(Usuario transientObject) {
@@ -38,6 +72,14 @@ public class UsuarioService implements UsuarioServiceInterface {
 		repository.delete(obj);
 	}	
 	
+	public boolean emailExists(String email) {
+		return repository.existsByEmail(email);
+	}
 	
-	
+	public void addRoleToUser(Usuario usuario, TipoUsuario tipoUsuario) {
+	    if (usuario.getRoles() == null) {
+	        usuario.setRoles(new ArrayList<>());
+	    }
+	    usuario.getRoles().add(new Role(tipoUsuario));
+	}
 }

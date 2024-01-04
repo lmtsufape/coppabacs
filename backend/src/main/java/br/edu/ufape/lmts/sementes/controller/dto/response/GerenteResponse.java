@@ -1,10 +1,9 @@
 package br.edu.ufape.lmts.sementes.controller.dto.response;
 
-import java.util.*;
-import java.math.*;
-import br.edu.ufape.lmts.sementes.model.*;
-import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
 import org.modelmapper.ModelMapper;
+
+import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
+import br.edu.ufape.lmts.sementes.model.Gerente;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,11 +11,10 @@ import lombok.Setter;
 
 
 @Getter @Setter @NoArgsConstructor
-public  class TecnicoResponse extends UsuarioResponse {
+public  class GerenteResponse extends UsuarioResponse {
 
-
-
-	public TecnicoResponse(Tecnico obj) {
+	public GerenteResponse(Gerente obj) {
+		super(obj);
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		modelMapper.map(obj, this);	
 	}

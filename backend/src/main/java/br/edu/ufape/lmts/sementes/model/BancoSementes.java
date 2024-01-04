@@ -1,8 +1,19 @@
 package br.edu.ufape.lmts.sementes.model;
 
-import java.util.*;
-import java.math.*;
-import jakarta.persistence.*;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -45,7 +56,7 @@ public  class BancoSementes  {
     	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "tecnico_id")
 	@ToString.Exclude
-	private Tecnico tecnico; 
+	private Gerente gerente; 
 	@OneToMany
 	@JoinColumn(name = "bancoSementes_id")
 	@ToString.Exclude

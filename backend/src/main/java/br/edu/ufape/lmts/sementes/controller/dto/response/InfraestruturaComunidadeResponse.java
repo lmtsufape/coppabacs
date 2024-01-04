@@ -1,10 +1,9 @@
 package br.edu.ufape.lmts.sementes.controller.dto.response;
 
-import java.util.*;
-import java.math.*;
-import br.edu.ufape.lmts.sementes.model.*;
-import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
 import org.modelmapper.ModelMapper;
+
+import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
+import br.edu.ufape.lmts.sementes.model.InfraestruturaComunidade;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

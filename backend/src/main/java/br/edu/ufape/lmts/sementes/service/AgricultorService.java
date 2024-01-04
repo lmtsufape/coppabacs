@@ -1,19 +1,27 @@
 package br.edu.ufape.lmts.sementes.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import br.edu.ufape.lmts.sementes.repository.AgricultorRepository;
+
+import br.edu.ufape.lmts.sementes.exceptions.EmailExistsException;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
+import br.edu.ufape.lmts.sementes.repository.AgricultorRepository;
+import br.edu.ufape.lmts.sementes.repository.UsuarioRepository;
 
 @Service
 public class AgricultorService implements AgricultorServiceInterface {
 	@Autowired
 	private AgricultorRepository repository;
-
-
-	public Agricultor saveAgricultor(Agricultor newInstance) {
-		return repository.save(newInstance);
+	
+	@Autowired UsuarioService usuario;
+	
+	public Agricultor saveAgricultor(Agricultor agricultor) throws EmailExistsException {
+		
+		usuario.saveUsuario(agricultor);
+		
+		return repository.save(agricultor);
 	}
 
 	public Agricultor updateAgricultor(Agricultor transientObject) {
@@ -36,8 +44,11 @@ public class AgricultorService implements AgricultorServiceInterface {
 	public void deleteAgricultor(long id){
 		Agricultor obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Agricultor with id = " + id));
 		repository.delete(obj);
-	}	
-	
-	
-	
+	}
+
+	public void validateAgricultor(long id) {
+		
+		Agricultor obj = this.repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Agricultor with id = " + id));
+		
+	}			
 }
