@@ -33,17 +33,17 @@ public class UsuarioService implements UsuarioServiceInterface {
 			throw new EmailExistsException( "Esse email já existe: " + usuario.getEmail());
 		}
 				
-        Role usuarioRole = null;
-		try {
-			usuarioRole = role.findByRole(TipoUsuario.USUARIO);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        var usuarioRole = TipoUsuario.ROLE_USUARIO;
+//		try {
+//			usuarioRole = role.findByRole(TipoUsuario.ROLE_AGRICULTOR);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+        usuario.addRole(TipoUsuario.ROLE_USUARIO);
         System.out.println(usuarioRole);
 		
 		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 		
-		usuario.addRole(usuarioRole);
 		
 		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\ndentro de usuario ");
 		
@@ -76,10 +76,10 @@ public class UsuarioService implements UsuarioServiceInterface {
 		return repository.existsByEmail(email);
 	}
 	
-	public void addRoleToUser(Usuario usuario, TipoUsuario tipoUsuario) {
-	    if (usuario.getRoles() == null) {
-	        usuario.setRoles(new ArrayList<>());
-	    }
-	    usuario.getRoles().add(new Role(tipoUsuario));
-	}
+//	public void addRoleToUser(Usuario usuario, TipoUsuario tipoUsuario) {
+//	    if (usuario.getRoles() == null) {
+//	        usuario.setRoles(new ArrayList<>());
+//	    }
+//	    usuario.getRoles().add(new Role(tipoUsuario));
+//	}
 }

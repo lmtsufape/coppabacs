@@ -9,5 +9,5 @@ import br.edu.ufape.lmts.sementes.model.Role;
 @Repository
 public interface roleRepository extends JpaRepository<Role, Long> {
 
-	Role findByRole(TipoUsuario tipo);
+	Role findByRole(TipoUsuario roleAgricultor);
 }

@@ -5,22 +5,28 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.EqualsAndHashCode;
@@ -65,14 +71,17 @@ public abstract class Usuario implements UserDetails, Serializable {
 	@JoinColumn(name = "usuario_id")
 	@ToString.Exclude
 	private List<Postavel> postavel;
-	@ManyToMany
-	@JoinTable(name = "USUARIO_PERFIS",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-	private Collection<Role> roles;
+//	@ManyToMany
+//	@JoinTable(name = "USUARIO_ROLES",
+//            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+//	private Collection<Role> roles;
+	@ElementCollection(targetClass = TipoUsuario.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "usuario_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private Set<TipoUsuario> roles;
 	
-	
-
 	public Usuario(Long id, String nome, String email, String senha, Endereco endereco, String rg, String cpf,
 			LocalDate dataNascimento, String contato, String imagem, String nomePai, String nomeMae, String nis,
 			String tituloEleitor, String sexo, Conjuge conjuge, List<Postavel> postavel, List<Role> roles) {
@@ -93,12 +102,12 @@ public abstract class Usuario implements UserDetails, Serializable {
 		this.sexo = sexo;
 		this.conjuge = conjuge;
 		this.postavel = postavel;
-		this.roles = roles;
+		//this.roles = roles;
 	}
 
 	public Usuario() {}
 	
-	public void addRole(Role role) {
+	public void addRole(TipoUsuario role) {
 		if (roles == null) {
             roles = new HashSet<>();
         }
@@ -109,37 +118,28 @@ public abstract class Usuario implements UserDetails, Serializable {
 		postavel.add(post);
 	}
 
-
-	public List<String> getAuthoritiesForUser(Usuario usuario) {
-	    return usuario.getRoles().stream()
-	                  .map(Role::getAuthority)
-	                  .collect(Collectors.toList());
-	}
 	
 	@Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         
 		return this.roles.stream()
-				.map(role -> new SimpleGrantedAuthority(role.getAuthority()))
+				.map(role -> new SimpleGrantedAuthority(role.getRole()))
 				.collect(Collectors.toList());
     }
 
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
 		return this.senha;
 	}
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
 		return this.email;
 	}
 
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -366,14 +366,14 @@ public abstract class Usuario implements UserDetails, Serializable {
 	}
 
 
-	public Collection<Role> getRoles() {
-		return roles;
-	}
-
-
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
+//	public Collection<Role> getRoles() {
+//		return roles;
+//	}
+//
+//
+//	public void setRoles(List<Role> roles) {
+//		this.roles = roles;
+//	}
 
 
 	public static long getSerialversionuid() {

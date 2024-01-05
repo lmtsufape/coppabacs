@@ -21,7 +21,7 @@ import lombok.Setter;
 @Getter @Setter
 public class Role implements GrantedAuthority, Serializable {
 
-	private static final long serialVersionUID = 7701295483799594016L;
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,8 +31,8 @@ public class Role implements GrantedAuthority, Serializable {
 	@Enumerated(EnumType.STRING)
 	private TipoUsuario role;
 	
-	@ManyToMany(mappedBy  = "roles")
-	private Collection<Usuario> users;
+//	@ManyToMany(mappedBy  = "roles")
+//	private Collection<Usuario> users;
 	
 	public Role(UsuarioService tipoUsuario) {}
 	
@@ -40,7 +40,7 @@ public class Role implements GrantedAuthority, Serializable {
 		super();
 		this.id = id;
 		this.role = role;
-		this.users = users;
+		//this.users = users;
 	}
 	
 	public String getAuthority() {
@@ -53,7 +53,6 @@ public class Role implements GrantedAuthority, Serializable {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return super.toString();
 	}
 
