@@ -2,6 +2,7 @@ package br.edu.ufape.lmts.sementes.controller.dto.request;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import org.modelmapper.ModelMapper;
 
@@ -33,7 +34,6 @@ public  class UsuarioRequest  {
 	private String sexo;
 	private ConjugeRequest conjuge;
 	private List<PostavelRequest> postavel;
-	private List<RoleRequest> roles;
 
 	public Usuario convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

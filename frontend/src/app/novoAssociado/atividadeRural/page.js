@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import NewFarmerFormSocialData from "@/components/NewFarmerForm/indexTwo";
+import NewFarmerRuralActivity from "@/components/NewFarmerForm/indexThree";
 import Footer from "@/components/Home/Footer";
 import Header from "@/components/Home/Header"
 
@@ -10,9 +10,8 @@ export default function NewRegisterFarmerSocialData() {
         <div>
             <Header />
             <div>
-                <NewFarmerFormSocialData />
+                <NewFarmerRuralActivity />
             </div>
-
             <Footer />
         </div>
     );

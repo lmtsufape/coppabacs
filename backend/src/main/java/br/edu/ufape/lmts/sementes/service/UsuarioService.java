@@ -1,6 +1,5 @@
 package br.edu.ufape.lmts.sementes.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +8,8 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.exceptions.EmailExistsException;
-import br.edu.ufape.lmts.sementes.model.Role;
 import br.edu.ufape.lmts.sementes.model.Usuario;
 import br.edu.ufape.lmts.sementes.repository.UsuarioRepository;
-import br.edu.ufape.lmts.sementes.repository.roleRepository;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -22,9 +19,6 @@ public class UsuarioService implements UsuarioServiceInterface {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
-	@Autowired
-	private roleRepository role;
 
 	@Transactional
 	public Usuario saveUsuario(Usuario usuario) throws EmailExistsException {
@@ -32,20 +26,8 @@ public class UsuarioService implements UsuarioServiceInterface {
 		if(emailExists(usuario.getEmail())) {
 			throw new EmailExistsException( "Esse email já existe: " + usuario.getEmail());
 		}
-				
-        var usuarioRole = TipoUsuario.ROLE_USUARIO;
-//		try {
-//			usuarioRole = role.findByRole(TipoUsuario.ROLE_AGRICULTOR);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-        usuario.addRole(TipoUsuario.ROLE_USUARIO);
-        System.out.println(usuarioRole);
 		
 		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
-		
-		
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\ndentro de usuario ");
 		
 		return repository.save(usuario);
 	}
@@ -76,10 +58,8 @@ public class UsuarioService implements UsuarioServiceInterface {
 		return repository.existsByEmail(email);
 	}
 	
-//	public void addRoleToUser(Usuario usuario, TipoUsuario tipoUsuario) {
-//	    if (usuario.getRoles() == null) {
-//	        usuario.setRoles(new ArrayList<>());
-//	    }
-//	    usuario.getRoles().add(new Role(tipoUsuario));
-//	}
+	public void addRoleToUser(Usuario usuario, TipoUsuario tipoUsuario) {
+	    usuario.addTipo(tipoUsuario);
+	    updateUsuario(usuario);
+	}
 }

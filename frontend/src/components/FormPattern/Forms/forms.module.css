@@ -18,6 +18,7 @@
     border: 2px solid #B1B1B1;
     opacity: 55%;
     height: 2.0em;
+    color: black;
 }
 
 .form_control select{
@@ -40,3 +41,20 @@
     background-color: white;
     font-family: 'Inter', sans-serif;
 }
+
+.labelStandard{
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 0.4em;
+    font-weight: bold;
+    
+}
+
+.checkbox input{
+    height: 1em;
+    width: 1em;
+    border-radius: 1px;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 0.9em;
+    
+}
+

@@ -2,15 +2,9 @@ package br.edu.ufape.lmts.sementes.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import jakarta.persistence.CascadeType;
@@ -32,24 +26,23 @@ import jakarta.persistence.OneToOne;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public abstract class Usuario implements UserDetails, Serializable {
-	
+public abstract class Usuario implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
 	private Long id;
 	private String nome;
+	@Column(unique = true)
 	private String email;
 	private String senha;
-	@OneToOne(cascade = CascadeType.ALL,
-			orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
 	private Endereco endereco;
 	private String rg;
@@ -62,29 +55,21 @@ public abstract class Usuario implements UserDetails, Serializable {
 	private String nis;
 	private String tituloEleitor;
 	private String sexo;
-	@OneToOne(cascade = CascadeType.ALL,
-		orphanRemoval = true		
-	)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
-	private Conjuge conjuge; 
+	private Conjuge conjuge;
 	@OneToMany
 	@JoinColumn(name = "usuario_id")
 	@ToString.Exclude
 	private List<Postavel> postavel;
-//	@ManyToMany
-//	@JoinTable(name = "USUARIO_ROLES",
-//            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-//	private Collection<Role> roles;
-	@ElementCollection(targetClass = TipoUsuario.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "usuario_roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private Set<TipoUsuario> roles;
-	
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "roles")
+	@Enumerated(EnumType.STRING)
+	private Set<TipoUsuario> roles;
+
 	public Usuario(Long id, String nome, String email, String senha, Endereco endereco, String rg, String cpf,
 			LocalDate dataNascimento, String contato, String imagem, String nomePai, String nomeMae, String nis,
-			String tituloEleitor, String sexo, Conjuge conjuge, List<Postavel> postavel, List<Role> roles) {
+			String tituloEleitor, String sexo, Conjuge conjuge, List<Postavel> postavel) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -102,282 +87,191 @@ public abstract class Usuario implements UserDetails, Serializable {
 		this.sexo = sexo;
 		this.conjuge = conjuge;
 		this.postavel = postavel;
-		//this.roles = roles;
+		this.roles = new HashSet<>();
+		this.roles.add(TipoUsuario.ROLE_USUARIO);
 	}
 
-	public Usuario() {}
-	
-	public void addRole(TipoUsuario role) {
-		if (roles == null) {
-            roles = new HashSet<>();
-        }
-        roles.add(role);
+	public Usuario() {
 	}
-	
+
+	public void addTipo(TipoUsuario role) {
+		roles = new HashSet<>();
+		roles.add(role);
+	}
+
 	public void addPostavel(Postavel post) {
 		postavel.add(post);
 	}
 
-	
-	@Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        
-		return this.roles.stream()
-				.map(role -> new SimpleGrantedAuthority(role.getRole()))
-				.collect(Collectors.toList());
-    }
-
-	@Override
-	public String getPassword() {
-		return this.senha;
+	public List<String> getAuthoritiesForUser(Usuario usuario) {
+		return roles.stream().map(x -> x.getRole()).toList();
 	}
-
-	@Override
-	public String getUsername() {
-		return this.email;
-	}
-
-
-	@Override
-	public boolean isAccountNonExpired() {
-		return false;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 
 	public long getId() {
 		return id;
 	}
 
-
 	public void setId(long id) {
 		this.id = id;
 	}
-
 
 	public String getNome() {
 		return nome;
 	}
 
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	@Override
-	public int hashCode() {
-		// TODO Auto-generated method stub
-		return super.hashCode();
-	}
-
-
-	@Override
-	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return super.equals(obj);
-	}
-
-
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return super.clone();
-	}
-
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
-	}
-
-
-	@Override
-	protected void finalize() throws Throwable {
-		// TODO Auto-generated method stub
-		super.finalize();
-	}
-
 
 	public String getEmail() {
 		return email;
 	}
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	public String getSenha() {
 		return senha;
 	}
 
-
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
 
 	public Endereco getEndereco() {
 		return endereco;
 	}
 
-
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-
 
 	public String getRg() {
 		return rg;
 	}
 
-
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
-
 
 	public String getCpf() {
 		return cpf;
 	}
 
-
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
 
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-
 
 	public String getContato() {
 		return contato;
 	}
 
-
 	public void setContato(String contato) {
 		this.contato = contato;
 	}
-
 
 	public String getImagem() {
 		return imagem;
 	}
 
-
 	public void setImagem(String imagem) {
 		this.imagem = imagem;
 	}
-
 
 	public String getNomePai() {
 		return nomePai;
 	}
 
-
 	public void setNomePai(String nomePai) {
 		this.nomePai = nomePai;
 	}
-
 
 	public String getNomeMae() {
 		return nomeMae;
 	}
 
-
 	public void setNomeMae(String nomeMae) {
 		this.nomeMae = nomeMae;
 	}
-
 
 	public String getNis() {
 		return nis;
 	}
 
-
 	public void setNis(String nis) {
 		this.nis = nis;
 	}
-
 
 	public String getTituloEleitor() {
 		return tituloEleitor;
 	}
 
-
 	public void setTituloEleitor(String tituloEleitor) {
 		this.tituloEleitor = tituloEleitor;
 	}
-
 
 	public String getSexo() {
 		return sexo;
 	}
 
-
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-
 
 	public Conjuge getConjuge() {
 		return conjuge;
 	}
 
-
 	public void setConjuge(Conjuge conjuge) {
 		this.conjuge = conjuge;
 	}
-
 
 	public List<Postavel> getPostavel() {
 		return postavel;
 	}
 
-
 	public void setPostavel(List<Postavel> postavel) {
 		this.postavel = postavel;
 	}
 
+	public Set<TipoUsuario> getRoles() {
+		return roles;
+	}
 
-//	public Collection<Role> getRoles() {
-//		return roles;
-//	}
-//
-//
-//	public void setRoles(List<Role> roles) {
-//		this.roles = roles;
-//	}
-
+	public void setRoles(Set<TipoUsuario> roles) {
+		this.roles = roles;
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
+
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 }

@@ -15,11 +15,7 @@ public class AgricultorService implements AgricultorServiceInterface {
 	@Autowired
 	private AgricultorRepository repository;
 	
-	@Autowired UsuarioService usuario;
-	
 	public Agricultor saveAgricultor(Agricultor agricultor) throws EmailExistsException {
-		
-		usuario.saveUsuario(agricultor);
 		
 		return repository.save(agricultor);
 	}
