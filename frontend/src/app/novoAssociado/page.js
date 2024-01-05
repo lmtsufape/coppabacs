@@ -3,14 +3,14 @@ import NewFarmerForm from "@/components/NewFarmerForm/indexOne";
 import Footer from "@/components/Home/Footer";
 import Header from "@/components/Home/Header";
 
-export default function NewRegisterFarmer(){
-    return(
+export default function NewRegisterFarmer() {
+    return (
         <div>
-            <Header/>
+            <Header />
             <div>
-            <NewFarmerForm/>
+                <NewFarmerForm />
             </div>
-            <Footer/>
+            <Footer />
         </div>
     );
 }
