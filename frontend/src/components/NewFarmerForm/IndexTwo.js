@@ -13,23 +13,32 @@ export default function SocialDataFarmer() {
         pessoasFamilia: '',
         usoOcupacao: '',
         areaPropriedade: '',
-        infraestruturaHidrica: '',
+        infraestruturaHidrica: [],
+        outraInfraHidrica: '',
         infraestruturaComunidade: [],
         outraInfraComunidade: '',
 
     });
 
-    const infraHidrica = [
-        { value: 'opcao1', label: 'Água Tratada' },
-        { value: 'opcao2', label: 'Açude' },
-        { value: 'opcao3', label: 'Poço' },
-        { value: 'opcao4', label: 'Rio/Riacho' },
-        { value: 'opcao5', label: 'Outro' },
-    ];
+
 
     function handleSocialOnChange(event) {
         const { name, value } = event.target;
         setSocialData({ ...socialData, [name]: value });
+    }
+
+    function handleInfraHidrica(infraHidrica) {
+        setSocialData((prevData) => {
+            const updatedInfraHidrica = prevData.infraestruturaHidrica.includes(infraHidrica)
+                ? prevData.infraestruturaHidrica.filter((a) => a !== infraHidrica)
+                : [...prevData.infraestruturaHidrica, infraHidrica];
+
+            const updatedOutraInfraHidrica =
+                updatedInfraHidrica.includes('outros')
+                ? prevData.outraInfraComunidade : '';
+            
+            return { ...prevData, infraestruturaHidrica: updatedInfraHidrica, outraInfraHidrica: updatedOutraInfraHidrica};
+        });
     }
 
     function handleInfraComunidade(infraComunidade) {
@@ -39,16 +48,22 @@ export default function SocialDataFarmer() {
                 : [...prevData.infraestruturaComunidade, infraComunidade];
 
             const updatedOutraInfraComunidade =
-                updatedinfraComunidade.includes('outro') ? prevData.outraInfraComunidade : '';
+                updatedinfraComunidade.includes('outros') ? prevData.outraInfraComunidade : '';
             return { ...prevData, infraestruturaComunidade: updatedinfraComunidade, outraInfraComunidade: updatedOutraInfraComunidade };
         });
+    }
+    
+    function handleOutraInfraHidrica(event) {
+        setSocialData({ ...socialData, outraInfraHidrica: event.target.value});
     }
 
     function handleOutraInfraComunidade(event) {
         setSocialData({ ...socialData, outraInfraComunidade: event.target.value });
     }
-    
-    function adicionarInfraestrutura() {
+
+
+    //Só vai precisar utilizar caso precise utilizar um botão inserir e atualizar infraComunidade, caso não precise, é bom apagar
+    /*function adicionarInfraestrutura() {
         const novaInfraestrutura = socialData.outraInfraComunidade.trim();
       
         if (novaInfraestrutura !== '' && !socialData.infraestruturaComunidade.includes(novaInfraestrutura)) {
@@ -58,8 +73,8 @@ export default function SocialDataFarmer() {
             outraInfraComunidade: '',
           }));
         }
-      }
-      
+      }*/
+
     async function handleSubmit(event) {
         event.preventDefault();
     }
@@ -107,13 +122,77 @@ export default function SocialDataFarmer() {
                             onChange={handleSocialOnChange} />
                     </div>
                 </div>
-                <div className={styles.biggerFormSize}>
-                    <Select
-                        name="infraestruturaHidrica"
-                        text="Infraestrutura Hídrica"
-                        options={infraHidrica}
-                        onChange={handleSocialOnChange}
-                        value={socialData.infraestruturaHidrica} />
+                <div className={styles.checkbox}>
+                    <div className={styles.checkbox__label}>
+                        <Label
+                            text="Infraestrutura Hídrica"/>
+                    </div>
+                    <div className={styles.checkbox__checkSet}>
+                        <div className={styles.checkbox__fiveChecks}>
+                            <div className={styles.checkbox__checkSolo}>
+                                <Checkbox
+                                    type="checkbox"
+                                    text="Água Tratada"
+                                    name="aguaTratada"
+                                    value="aguaTratada"
+                                    checked={socialData.infraestruturaHidrica.includes('aguaTratada')}
+                                    onChange={() => handleInfraHidrica('aguaTratada')}/>
+
+                            </div>
+                            <div className={styles.checkbox__checkSolo}>
+                                <Checkbox
+                                    type="checkbox"
+                                    text="Açude"
+                                    name="acude"
+                                    value="acude"
+                                    checked={socialData.infraestruturaHidrica.includes('acude')}
+                                    onChange={() => handleInfraHidrica('acude')}/>
+
+                            </div>
+                            <div className={styles.checkbox__checkSolo}>
+                                <Checkbox
+                                    type="checkbox"
+                                    text="Poço"
+                                    name="poco"
+                                    value="poco"
+                                    checked={socialData.infraestruturaHidrica.includes('poco')}
+                                    onChange={() => handleInfraHidrica('poco')}/>
+
+                            </div>
+                            <div className={styles.checkbox__checkSolo}>
+                                <Checkbox
+                                    type="checkbox"
+                                    text="Rio/Riacho"
+                                    name="rioRiacho"
+                                    value="rioRiacho"
+                                    checked={socialData.infraestruturaHidrica.includes('rioRiacho')}
+                                    onChange={() => handleInfraHidrica('rioRiacho')}/>
+
+                            </div>
+                            <div className={styles.checkbox__checkSolo}>
+                                <Checkbox
+                                    type="checkbox"
+                                    text="Outros"
+                                    name="outros"
+                                    value="outros"
+                                    checked={socialData.infraestruturaHidrica.includes('outros')}
+                                    onChange={() => handleInfraHidrica('outros')}/>
+
+                            </div>
+                        </div>
+                    </div>
+                    {socialData.infraestruturaHidrica.includes('outros') && (
+                        <div className={styles.biggerFormSize}>
+                            <Input
+                                type="text"
+                                text="Outra Infraestrutura Hídrica"
+                                name="outraInfraHidrica"
+                                placeholder="Insira outra infraestrutura hídrica"
+                                value={socialData.outraInfraHidrica}
+                                onChange={handleOutraInfraHidrica}/>
+
+                        </div>
+                    )}
                 </div>
                 <div className={styles.checkbox}>
                     <div className={styles.checkbox__label}>
@@ -123,7 +202,7 @@ export default function SocialDataFarmer() {
                     <div className={styles.checkbox__checkSet}>
                         <div className={styles.checkbox__fiveChecks}>
                             <div className={styles.checkbox__checkSolo}>
-                            
+
                                 <Checkbox
                                     type="checkbox"
                                     text="Igreja"
@@ -218,17 +297,17 @@ export default function SocialDataFarmer() {
                         </div>
                     </div>
                     {socialData.infraestruturaComunidade.includes('outros') && (
-  <div className={styles.biggerFormSize}>
-    <Input
-      type="text"
-      text="Outra Infraestrutura da Comunidade"
-      name="outraInfraComunidade"
-      placeholder="Insira outra infraestrutura da comunidade"
-      value={socialData.outraInfraComunidade}
-      onChange={handleOutraInfraComunidade}
-    />
-  </div>
-)}
+                        <div className={styles.biggerFormSize}>
+                            <Input
+                                type="text"
+                                text="Outra Infraestrutura da Comunidade"
+                                name="outraInfraComunidade"
+                                placeholder="Insira outra infraestrutura da comunidade"
+                                value={socialData.outraInfraComunidade}
+                                onChange={handleOutraInfraComunidade}
+                            />
+                        </div>
+                    )}
 
                 </div>
                 <div className={styles.boxForm__buttonForm}>
