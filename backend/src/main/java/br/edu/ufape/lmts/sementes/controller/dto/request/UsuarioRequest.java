@@ -1,27 +1,29 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
-import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
-import br.edu.ufape.lmts.sementes.model.*;
-
-import java.util.*;
-import java.math.*;
+import java.time.LocalDate;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
-import jakarta.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
+import br.edu.ufape.lmts.sementes.model.Usuario;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@Getter @Setter @NoArgsConstructor 
+@Getter @Setter @NoArgsConstructor @JsonPropertyOrder
 public  class UsuarioRequest  {
+
 	private String nome;
 	private String email;
 	private String senha;
-	private String endereco;
+	private EnderecoRequest endereco;
 	private String rg;
 	private String cpf;
-	private Date dataNascimento;
+	private LocalDate dataNascimento;
 	private String contato;
 	private String imagem;
 	private String nomePai;
@@ -29,17 +31,26 @@ public  class UsuarioRequest  {
 	private String nis;
 	private String tituloEleitor;
 	private String sexo;
-	private ConjugeRequest conjuge; 
+	private ConjugeRequest conjuge;
 	private List<PostavelRequest> postavel;
-//	private List<AdminRequest> admin;
-
+	private List<RoleRequest> roles;
 
 	public Usuario convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
+
 		Usuario obj = modelMapper.map(this, Usuario.class);
+
 		return obj;
 	}
 
-
-
+	@Override
+	public String toString() {
+		return "UsuarioRequest [nome=" + nome + ", email=" + email + ", senha=" + senha + ", endereco=" + endereco
+				+ ", rg=" + rg + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + ", contato=" + contato
+				+ ", imagem=" + imagem + ", nomePai=" + nomePai + ", nomeMae=" + nomeMae + ", nis=" + nis
+				+ ", tituloEleitor=" + tituloEleitor + ", sexo=" + sexo + ", conjuge=" + conjuge + ", postavel="
+				+ postavel + "]";
+	}
+	
+	
 }

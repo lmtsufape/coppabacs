@@ -1,13 +1,9 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
-import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
-import br.edu.ufape.lmts.sementes.model.*;
-
-import java.util.*;
-import java.math.*;
-
 import org.modelmapper.ModelMapper;
-import jakarta.validation.constraints.*;
+
+import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
+import br.edu.ufape.lmts.sementes.model.Endereco;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,7 +23,4 @@ public  class EnderecoRequest  {
 		Endereco obj = modelMapper.map(this, Endereco.class);
 		return obj;
 	}
-
-
-
 }

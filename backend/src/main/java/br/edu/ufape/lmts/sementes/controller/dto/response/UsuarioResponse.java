@@ -1,26 +1,30 @@
 package br.edu.ufape.lmts.sementes.controller.dto.response;
 
-import java.util.*;
-import java.math.*;
-import br.edu.ufape.lmts.sementes.model.*;
-import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
+import java.time.LocalDate;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
+
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
+import br.edu.ufape.lmts.sementes.model.Usuario;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor @JsonPropertyOrder
 public  class UsuarioResponse  {
 	private Long id;
 	private String nome;
 	private String email;
 	private String senha;
-	private String endereco;
+	private EnderecoResponse endereco;
 	private String rg;
 	private String cpf;
-	private Date dataNascimento;
+	private LocalDate dataNascimento;
 	private String contato;
 	private String imagem;
 	private String nomePai;
