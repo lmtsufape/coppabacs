@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.ufape.lmts.sementes.auth.AuthUser;
+import br.edu.ufape.lmts.sementes.auth.TokenService;
 import br.edu.ufape.lmts.sementes.controller.dto.request.AuthRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.response.LoginResponseDTO;
+import br.edu.ufape.lmts.sementes.model.Usuario;
 import jakarta.validation.Valid;
 
 @RestController
@@ -20,15 +24,21 @@ public class AuthController {
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;
+	@Autowired
+	private TokenService tokenService;
 	
 	@PostMapping("login")
-	public ResponseEntity login(@Valid @RequestBody AuthRequest data) {
+	public ResponseEntity login(@RequestBody AuthRequest data) {
 		
+		System.out.println(data);
 		var userNamePassword = new UsernamePasswordAuthenticationToken(data.getEmail(), data.getSenha());
-		
+		System.out.println("userNamePassword " + userNamePassword);
 		var auth = this.authenticationManager.authenticate(userNamePassword);
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + auth);
+		var token = tokenService.generateToken((Usuario) auth.getPrincipal());
+		System.out.println("aaa gerei o token");
 		
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok(new LoginResponseDTO(token));
 		
 	}
 }

@@ -62,9 +62,10 @@ public abstract class Usuario implements Serializable {
 	@JoinColumn(name = "usuario_id")
 	@ToString.Exclude
 	private List<Postavel> postavel;
-	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "roles")
+	@ElementCollection(targetClass = TipoUsuario.class, fetch = FetchType.EAGER)
+	@CollectionTable(name = "usuario_roles", joinColumns = @JoinColumn(name = "user_id"))
 	@Enumerated(EnumType.STRING)
+	@Column(name = "role")
 	private Set<TipoUsuario> roles;
 
 	public Usuario(Long id, String nome, String email, String senha, Endereco endereco, String rg, String cpf,
@@ -87,15 +88,17 @@ public abstract class Usuario implements Serializable {
 		this.sexo = sexo;
 		this.conjuge = conjuge;
 		this.postavel = postavel;
-		this.roles = new HashSet<>();
-		this.roles.add(TipoUsuario.ROLE_USUARIO);
+		this.addRole(TipoUsuario.ROLE_USUARIO);
 	}
 
 	public Usuario() {
+		this.addRole(TipoUsuario.ROLE_USUARIO);
 	}
 
-	public void addTipo(TipoUsuario role) {
-		roles = new HashSet<>();
+	public void addRole(TipoUsuario role) {
+		if(this.roles == null) {
+			roles = new HashSet<>();
+		}
 		roles.add(role);
 	}
 
@@ -274,5 +277,4 @@ public abstract class Usuario implements Serializable {
 	public String toString() {
 		return super.toString();
 	}
-
 }

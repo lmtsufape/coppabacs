@@ -16,20 +16,19 @@ import jakarta.transaction.Transactional;
 public class UsuarioService implements UsuarioServiceInterface {
 	@Autowired
 	private UsuarioRepository repository;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	@Transactional
 	public Usuario saveUsuario(Usuario usuario) throws EmailExistsException {
-		
+
 		if(emailExists(usuario.getEmail())) {
 			throw new EmailExistsException( "Esse email já existe: " + usuario.getEmail());
 		}
-		
+
 		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\ndentro de usuario ");
-		
+
 		return repository.save(usuario);
 	}
 
@@ -47,20 +46,20 @@ public class UsuarioService implements UsuarioServiceInterface {
 
 	public void deleteUsuario(Usuario persistentObject){
 		this.deleteUsuario(persistentObject.getId());
-		
+
 	}
-	
+
 	public void deleteUsuario(long id){
 		Usuario obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Usuario with id = " + id));
 		repository.delete(obj);
-	}	
-	
+	}
+
 	public boolean emailExists(String email) {
 		return repository.existsByEmail(email);
 	}
-	
+
 	public void addRoleToUser(Usuario usuario, TipoUsuario tipoUsuario) {
-	    usuario.addTipo(tipoUsuario);
+	    usuario.addRole(tipoUsuario);
 	    updateUsuario(usuario);
 	}
 }
