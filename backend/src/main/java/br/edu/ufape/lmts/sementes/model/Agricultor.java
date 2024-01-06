@@ -47,21 +47,21 @@ public  class Agricultor extends Usuario {
 	@JoinColumn(name = "agricultor_id")
 	@ToString.Exclude
 	private List<InfraestruturaComunidade> infraestruturaComunidade;
-	
+
 
 	public Agricultor(Long id, String nome, String email, String senha, Endereco endereco, String rg, String cpf,
 			LocalDate dataNascimento, String contato, String imagem, String nomePai, String nomeMae, String nis,
 			String tituloEleitor, String sexo, Conjuge conjuge, List<Postavel> postavel) {
 		super(id, nome, email, senha, endereco, rg, cpf, dataNascimento, contato, imagem, nomePai, nomeMae, nis, tituloEleitor,
 				sexo, conjuge, postavel);
-		super.addTipo(TipoUsuario.ROLE_AGRICULTOR);
+		super.addRole(TipoUsuario.ROLE_AGRICULTOR);
 	}
 
 
 	public Agricultor() {
 		super();
 	}
-	
+
 }
 
 

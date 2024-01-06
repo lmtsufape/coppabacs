@@ -14,9 +14,12 @@ import br.edu.ufape.lmts.sementes.repository.UsuarioRepository;
 public class AgricultorService implements AgricultorServiceInterface {
 	@Autowired
 	private AgricultorRepository repository;
+	@Autowired
+	private UsuarioService usuario;
 	
 	public Agricultor saveAgricultor(Agricultor agricultor) throws EmailExistsException {
 		
+		usuario.saveUsuario(agricultor);
 		return repository.save(agricultor);
 	}
 
