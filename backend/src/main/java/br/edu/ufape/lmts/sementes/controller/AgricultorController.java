@@ -34,7 +34,7 @@ public class AgricultorController {
 	private Facade facade;
 	@Autowired
 	private ModelMapper modelMapper;
-	
+
 	@GetMapping("agricultor")
 	public List<AgricultorResponse> getAllAgricultor() {
 		return facade.getAllAgricultor()
@@ -42,14 +42,13 @@ public class AgricultorController {
 			.map(AgricultorResponse::new)
 			.toList();
 	}
-	
+
 	@PostMapping(value = "agricultor", consumes = MediaType.APPLICATION_JSON_VALUE,
 	        produces = MediaType.APPLICATION_JSON_VALUE)
 	public AgricultorResponse createAgricultor(@Valid @RequestBody AgricultorRequest newObj) throws EmailExistsException {
-		System.out.println(newObj);
 		return new AgricultorResponse(facade.saveAgricultor(newObj.convertToEntity()));
 	}
-	
+
 	@GetMapping("agricultor/{id}")
 	public AgricultorResponse getAgricultorById(@PathVariable Long id) {
 		try {
@@ -58,7 +57,7 @@ public class AgricultorController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Agricultor " + id + " not found.");
 		}
 	}
-	
+
 	@PatchMapping("agricultor/{id}")
 	public AgricultorResponse updateAgricultor(@PathVariable Long id, @Valid @RequestBody AgricultorRequest obj) {
 		try {
@@ -67,17 +66,17 @@ public class AgricultorController {
 
 			TypeMap<AgricultorRequest, Agricultor> typeMapper = modelMapper
 													.typeMap(AgricultorRequest.class, Agricultor.class)
-													.addMappings(mapper -> mapper.skip(Agricultor::setId));			
-			
-			
-			typeMapper.map(obj, oldObject);	
+													.addMappings(mapper -> mapper.skip(Agricultor::setId));
+
+
+			typeMapper.map(obj, oldObject);
 			return new AgricultorResponse(facade.updateAgricultor(oldObject));
 		} catch (RuntimeException ex) {
 			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
 		}
-		
+
 	}
-	
+
 	@DeleteMapping("agricultor/{id}")
 	public String deleteAgricultor(@PathVariable Long id) {
 		try {
@@ -86,8 +85,8 @@ public class AgricultorController {
 		} catch (RuntimeException ex) {
 			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
 		}
-		
+
 	}
-	
+
 
 }
