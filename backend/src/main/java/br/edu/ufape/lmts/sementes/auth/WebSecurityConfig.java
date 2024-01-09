@@ -22,6 +22,9 @@ public class WebSecurityConfig {
 	@Autowired
 	SecurityFilter securityFilter;
 	
+	@Autowired
+	private UserDetailsServiceImpl userDetailsService;
+	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		
@@ -50,6 +53,6 @@ public class WebSecurityConfig {
 	
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-		return authenticationConfiguration.getAuthenticationManager();
-	}
+        return authenticationConfiguration.getAuthenticationManager();
+    }
 }

@@ -35,56 +35,6 @@ services:
   #   volumes:
   #     - pg-data:/var/lib/postgresql/data
 
-  keycloak:
-    image: quay.io/keycloak/keycloak
-    ports:
-      - "8080:8080"
-    networks:
-      - coppabacs-networks
-    environment:
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
-      DB_VENDOR: POSTGRES
-      DB_ADDR: keycloak-db
-      DB_PORT: 5432
-      DB_DATABASE: keycloak
-      DB_USER: postgres
-      DB_SCHEMA: public
-      DB_PASSWORD: password
-    command: start-dev
-    depends_on:
-      - keycloak-db
-
-  keycloak-db:
-    image: postgres:16.0
-    restart: always
-    environment:
-      POSTGRES_DB: keycloak
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      TZ: America/Sao_Paulo
-    ports:
-      - "5435:5432"
-    expose:
-      - "5432"
-    networks:
-      - coppabacs-networks
-    volumes:
-      - keycloak-pg-data:/var/lib/postgresql/data
-
-  # frontend:
-  #   image: react-image
-  #   build: frontend/.
-  #   volumes:
-  #     - ./front-coppabacs/src:/app/src
-  #   ports:
-  #     - 3000:3000
-  #   networks:
-  #     - coppabacs-networks
-  #   depends_on:
-  #     - backend
-
-
 volumes:
   pg-data:
     driver: local

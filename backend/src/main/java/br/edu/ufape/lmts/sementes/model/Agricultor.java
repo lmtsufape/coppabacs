@@ -54,7 +54,7 @@ public  class Agricultor extends Usuario {
 			String tituloEleitor, String sexo, Conjuge conjuge, List<Postavel> postavel) {
 		super(id, nome, email, senha, endereco, rg, cpf, dataNascimento, contato, imagem, nomePai, nomeMae, nis, tituloEleitor,
 				sexo, conjuge, postavel);
-		super.addRole(TipoUsuario.ROLE_AGRICULTOR);
+		super.addRole(TipoUsuario.AGRICULTOR);
 	}
 
 

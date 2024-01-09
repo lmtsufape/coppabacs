@@ -1,13 +1,12 @@
 package br.edu.ufape.lmts.sementes.enums;
 
 public enum TipoUsuario {
-	ROLE_ADMIN("admin"),
-	ROLE_AGRICULTOR("agricultor"),
-	ROLE_COPPABACS("coppabacs"),
-	ROLE_GERENTE("gerente"),
-	ROLE_USUARIO("usuario");
+	ADMIN("ROLE_ADMIN"),
+    AGRICULTOR("ROLE_AGRICULTOR"),
+    COPPABACS("ROLE_COPPABACS"),
+    GERENTE("ROLE_GERENTE"),
+    USUARIO("ROLE_USUARIO");
 
-	
 	private String role;
 	
 	TipoUsuario(String role) {
@@ -17,4 +16,4 @@ public enum TipoUsuario {
 	public String getRole() {
 		return role;
 	}
-}
+}	

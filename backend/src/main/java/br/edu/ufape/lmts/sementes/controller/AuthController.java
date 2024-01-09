@@ -14,31 +14,23 @@ import br.edu.ufape.lmts.sementes.auth.AuthUser;
 import br.edu.ufape.lmts.sementes.auth.TokenService;
 import br.edu.ufape.lmts.sementes.controller.dto.request.AuthRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.LoginResponseDTO;
-import br.edu.ufape.lmts.sementes.model.Usuario;
-import jakarta.validation.Valid;
 
 @RestController
 @CrossOrigin (origins = "http://localhost:8081/" )
 @RequestMapping("/api/v1/")
 public class AuthController {
-	
+
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	@Autowired
 	private TokenService tokenService;
-	
+
 	@PostMapping("login")
-	public ResponseEntity login(@RequestBody AuthRequest data) {
-		
-		System.out.println(data);
+	public ResponseEntity<LoginResponseDTO> login(@RequestBody AuthRequest data) {
 		var userNamePassword = new UsernamePasswordAuthenticationToken(data.getEmail(), data.getSenha());
-		System.out.println("userNamePassword " + userNamePassword);
 		var auth = this.authenticationManager.authenticate(userNamePassword);
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + auth);
-		var token = tokenService.generateToken((Usuario) auth.getPrincipal());
-		System.out.println("aaa gerei o token");
-		
-		return ResponseEntity.ok(new LoginResponseDTO(token));
-		
+		var token = tokenService.generateToken((AuthUser) auth.getPrincipal());
+
+		return ResponseEntity.ok(new LoginResponseDTO(data.getEmail(), token));
 	}
 }
