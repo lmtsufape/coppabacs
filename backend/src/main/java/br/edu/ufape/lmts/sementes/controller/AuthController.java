@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.edu.ufape.lmts.sementes.auth.AuthUser;
 import br.edu.ufape.lmts.sementes.auth.TokenService;
 import br.edu.ufape.lmts.sementes.controller.dto.request.AuthRequest;
-import br.edu.ufape.lmts.sementes.controller.dto.response.LoginResponseDTO;
 
 @RestController
 @CrossOrigin (origins = "http://localhost:8081/" )
@@ -26,11 +26,10 @@ public class AuthController {
 	private TokenService tokenService;
 
 	@PostMapping("login")
-	public ResponseEntity<LoginResponseDTO> login(@RequestBody AuthRequest data) {
+	public ResponseEntity<Void> login(@RequestBody AuthRequest data) {
 		var userNamePassword = new UsernamePasswordAuthenticationToken(data.getEmail(), data.getSenha());
-		var auth = this.authenticationManager.authenticate(userNamePassword);
-		var token = tokenService.generateToken((AuthUser) auth.getPrincipal());
-
-		return ResponseEntity.ok(new LoginResponseDTO(data.getEmail(), token));
+		Authentication auth = this.authenticationManager.authenticate(userNamePassword);
+		String token = tokenService.generateToken((AuthUser) auth.getPrincipal());
+		return ResponseEntity.ok().header("Authorization", "Bearer " + token).header("access-control-expose-headers", "Authorization").build();
 	}
 }

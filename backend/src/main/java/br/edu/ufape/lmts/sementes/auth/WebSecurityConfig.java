@@ -22,9 +22,6 @@ public class WebSecurityConfig {
 	@Autowired
 	SecurityFilter securityFilter;
 	
-	@Autowired
-	private UserDetailsServiceImpl userDetailsService;
-	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		
