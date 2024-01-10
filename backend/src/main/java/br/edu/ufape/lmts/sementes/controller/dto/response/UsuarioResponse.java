@@ -1,10 +1,11 @@
 package br.edu.ufape.lmts.sementes.controller.dto.response;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
@@ -20,11 +21,11 @@ public  class UsuarioResponse  {
 	private Long id;
 	private String nome;
 	private String email;
-	private String senha;
 	private EnderecoResponse endereco;
 	private String rg;
 	private String cpf;
-	private LocalDate dataNascimento;
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private Date dataNascimento;
 	private String contato;
 	private String imagem;
 	private String nomePai;

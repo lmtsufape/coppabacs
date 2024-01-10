@@ -1,10 +1,12 @@
 package br.edu.ufape.lmts.sementes.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import jakarta.persistence.CascadeType;
@@ -46,14 +48,15 @@ public abstract class Usuario implements Serializable {
 	private String senha;
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
-	@Column(nullable = false)
 	private Endereco endereco;
 	@Column(nullable = false, unique = true)
 	private String rg;
 	@Column(nullable = false, unique = true)
 	private String cpf;
 	@Column(nullable = false)
-	private LocalDate dataNascimento;
+    //@DateTimeFormat(pattern = "dd-MM-yyyy", iso = DateTimeFormat.ISO.DATE)
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private Date dataNascimento;
 	@Column(nullable = false, unique = true)
 	private String contato;
 	private String imagem;
@@ -80,7 +83,7 @@ public abstract class Usuario implements Serializable {
 	private Set<TipoUsuario> roles;
 
 	public Usuario(Long id, String nome, String email, String senha, Endereco endereco, String rg, String cpf,
-			LocalDate dataNascimento, String contato, String imagem, String nomePai, String nomeMae, String nis,
+			Date dataNascimento, String contato, String imagem, String nomePai, String nomeMae, String nis,
 			String tituloEleitor, String sexo, Conjuge conjuge, List<Postavel> postavel) {
 		this.id = id;
 		this.nome = nome;
@@ -177,11 +180,11 @@ public abstract class Usuario implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public LocalDate getDataNascimento() {
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(LocalDate dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
