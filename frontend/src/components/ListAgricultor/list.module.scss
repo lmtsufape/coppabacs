@@ -1,0 +1,39 @@
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5em 2em 2em 2em;
+
+  
+  h1{
+    font-size: 1.25em;
+    font-weight: bold;
+  }
+  
+  button{
+    gap: 1em;
+
+    display: flex;
+    align-items: center;
+
+    padding: 1em;
+
+    font-weight: bold;
+    color: #1A5537;
+    background-color: #fff;
+
+    border-radius: 0.8em;
+
+    text-decoration: none;
+  }
+  button>span{
+    font-size: 1.5em;
+  }
+  
+
+  button:hover{
+    background-color: #1A5537;
+    color: #fff;
+    transition: 0.2s;
+  }
+}

@@ -8,9 +8,17 @@ export default function bancoSementesPage(){
       <Header />
       <BancoSementes 
         fundacao="12/12/12"
-        responsavel1="Testinho"
-        responsavel2="Testtão"
+        responsavel="Testinho"
         contato="87999999999"
+        table1=""
+        table2="Nome"
+        table3="Quantidade"
+        table4="Ações"
+        content1="Img"
+        content2="Sementes 1"
+        content3="1000"
+
+        
         />
       <Footer />/
 

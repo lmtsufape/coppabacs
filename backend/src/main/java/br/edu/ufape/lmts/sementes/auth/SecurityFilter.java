@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import br.edu.ufape.lmts.sementes.repository.UsuarioRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,7 +29,6 @@ public class SecurityFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 
 		var token = this.recoverToken(request);
-		//se vier o token vamos valiar e passar
 		if(token != null) {
 			var login = tokenService.validateToken(token);
 			UserDetails usuario = userDetailService.loadUserByUsername(login);
