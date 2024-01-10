@@ -1,11 +1,11 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import org.modelmapper.ModelMapper;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
@@ -17,14 +17,15 @@ import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor @JsonPropertyOrder
 public  class UsuarioRequest  {
-
+	
 	private String nome;
 	private String email;
 	private String senha;
 	private EnderecoRequest endereco;
 	private String rg;
 	private String cpf;
-	private LocalDate dataNascimento;
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private Date dataNascimento;
 	private String contato;
 	private String imagem;
 	private String nomePai;
