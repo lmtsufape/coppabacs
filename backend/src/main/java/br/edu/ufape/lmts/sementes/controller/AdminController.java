@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.AdminRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.AdminResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Coppabacs;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class AdminController {
 	
 	@GetMapping("admin/{id}")
 	public AdminResponse getAdminById(@PathVariable Long id) {
-		try {
-			return new AdminResponse(facade.findAdminById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Admin " + id + " not found.");
-		}
+		return new AdminResponse(facade.findAdminById(id));
 	}
 	
 	@PatchMapping("admin/{id}")
@@ -68,8 +65,11 @@ public class AdminController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new AdminResponse(facade.updateAdmin(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class AdminController {
 		try {
 			facade.deleteAdmin(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.TransacaoGenerica;
 import br.edu.ufape.lmts.sementes.repository.TransacaoGenericaRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class TransacaoGenericaService implements TransacaoGenericaServiceInterface {
@@ -23,7 +24,7 @@ public class TransacaoGenericaService implements TransacaoGenericaServiceInterfa
 	}
 
 	public TransacaoGenerica findTransacaoGenericaById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist TransacaoGenerica with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist TransacaoGenerica with id = " + id));
 	}
 
 	public List<TransacaoGenerica> getAllTransacaoGenerica(){
@@ -36,7 +37,7 @@ public class TransacaoGenericaService implements TransacaoGenericaServiceInterfa
 	}
 	
 	public void deleteTransacaoGenerica(long id){
-		TransacaoGenerica obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist TransacaoGenerica with id = " + id));
+		TransacaoGenerica obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist TransacaoGenerica with id = " + id));
 		repository.delete(obj);
 	}	
 	

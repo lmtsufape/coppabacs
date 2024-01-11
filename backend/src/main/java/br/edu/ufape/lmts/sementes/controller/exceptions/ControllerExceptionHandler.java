@@ -6,24 +6,36 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
 	
-	@ExceptionHandler(RuntimeException.class)
+	@ExceptionHandler({RuntimeException.class})
 	public ResponseEntity<StandardError> RuntimeException(RuntimeException e,
 			HttpServletRequest request) {
-		StandardError err = new StandardError(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+		int httpStatus = HttpStatus.INTERNAL_SERVER_ERROR.value();
+		StandardError err = new StandardError(httpStatus,
 				"Erro inesperado", e.getMessage(), request.getRequestURI());
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err);
+		return ResponseEntity.status(httpStatus).body(err);
+	}
+	
+	@ExceptionHandler({ObjectNotFoundException.class})
+	public ResponseEntity<StandardError> ObjectNotFoundException(RuntimeException e,
+			HttpServletRequest request) {
+		int httpStatus = HttpStatus.NOT_FOUND.value();
+		StandardError err = new StandardError(httpStatus,
+				"Não Encontrado", e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(httpStatus).body(err);
 	}
 	
 	@ExceptionHandler(EmailExistsException.class)
 	public ResponseEntity<StandardError> EmailExistsException(EmailExistsException e,
 			HttpServletRequest request) {
-		StandardError err = new StandardError(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-				"Erro inesperado", e.getMessage(), request.getRequestURI());
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err);
+		int httpStatus = HttpStatus.BAD_REQUEST.value();
+		StandardError err = new StandardError(httpStatus,
+				"Email já cadastrado", e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(httpStatus).body(err);
 	}
 }

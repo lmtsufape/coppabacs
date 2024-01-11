@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.ProducaoSementesRequest
 import br.edu.ufape.lmts.sementes.controller.dto.response.ProducaoSementesResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.ProducaoSementes;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class ProducaoSementesController {
 	
 	@GetMapping("producaoSementes/{id}")
 	public ProducaoSementesResponse getProducaoSementesById(@PathVariable Long id) {
-		try {
-			return new ProducaoSementesResponse(facade.findProducaoSementesById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ProducaoSementes " + id + " not found.");
-		}
+		return new ProducaoSementesResponse(facade.findProducaoSementesById(id));
 	}
 	
 	@PatchMapping("producaoSementes/{id}")
@@ -68,8 +65,11 @@ public class ProducaoSementesController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new ProducaoSementesResponse(facade.updateProducaoSementes(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class ProducaoSementesController {
 		try {
 			facade.deleteProducaoSementes(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

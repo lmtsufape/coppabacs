@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.InfraestruturaComunidad
 import br.edu.ufape.lmts.sementes.controller.dto.response.InfraestruturaComunidadeResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.InfraestruturaComunidade;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class InfraestruturaComunidadeController {
 	
 	@GetMapping("infraestruturaComunidade/{id}")
 	public InfraestruturaComunidadeResponse getInfraestruturaComunidadeById(@PathVariable Long id) {
-		try {
-			return new InfraestruturaComunidadeResponse(facade.findInfraestruturaComunidadeById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "InfraestruturaComunidade " + id + " not found.");
-		}
+		return new InfraestruturaComunidadeResponse(facade.findInfraestruturaComunidadeById(id));
 	}
 	
 	@PatchMapping("infraestruturaComunidade/{id}")
@@ -68,8 +65,11 @@ public class InfraestruturaComunidadeController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new InfraestruturaComunidadeResponse(facade.updateInfraestruturaComunidade(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class InfraestruturaComunidadeController {
 		try {
 			facade.deleteInfraestruturaComunidade(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

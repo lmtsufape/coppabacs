@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.DoacaoUsuario;
 import br.edu.ufape.lmts.sementes.repository.DoacaoUsuarioRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class DoacaoUsuarioService implements DoacaoUsuarioServiceInterface {
@@ -23,7 +24,7 @@ public class DoacaoUsuarioService implements DoacaoUsuarioServiceInterface {
 	}
 
 	public DoacaoUsuario findDoacaoUsuarioById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist DoacaoUsuario with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist DoacaoUsuario with id = " + id));
 	}
 
 	public List<DoacaoUsuario> getAllDoacaoUsuario(){
@@ -36,7 +37,7 @@ public class DoacaoUsuarioService implements DoacaoUsuarioServiceInterface {
 	}
 	
 	public void deleteDoacaoUsuario(long id){
-		DoacaoUsuario obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist DoacaoUsuario with id = " + id));
+		DoacaoUsuario obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist DoacaoUsuario with id = " + id));
 		repository.delete(obj);
 	}	
 	

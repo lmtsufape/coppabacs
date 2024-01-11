@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.ObjetosBancoSementesReq
 import br.edu.ufape.lmts.sementes.controller.dto.response.ObjetosBancoSementesResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.ObjetosBancoSementes;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class ObjetosBancoSementesController {
 	
 	@GetMapping("objetosBancoSementes/{id}")
 	public ObjetosBancoSementesResponse getObjetosBancoSementesById(@PathVariable Long id) {
-		try {
-			return new ObjetosBancoSementesResponse(facade.findObjetosBancoSementesById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ObjetosBancoSementes " + id + " not found.");
-		}
+		return new ObjetosBancoSementesResponse(facade.findObjetosBancoSementesById(id));
 	}
 	
 	@PatchMapping("objetosBancoSementes/{id}")
@@ -68,8 +65,11 @@ public class ObjetosBancoSementesController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new ObjetosBancoSementesResponse(facade.updateObjetosBancoSementes(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class ObjetosBancoSementesController {
 		try {
 			facade.deleteObjetosBancoSementes(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

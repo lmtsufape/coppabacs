@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.Gerente;
 import br.edu.ufape.lmts.sementes.repository.GerenteRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class GerenteService implements GerenteServiceInterface {
@@ -23,7 +24,7 @@ public class GerenteService implements GerenteServiceInterface {
 	}
 
 	public Gerente findGerenteById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Gerente with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Gerente with id = " + id));
 	}
 
 	public List<Gerente> getAllGerente(){
@@ -36,7 +37,7 @@ public class GerenteService implements GerenteServiceInterface {
 	}
 	
 	public void deleteGerente(long id){
-		Gerente obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Gerente with id = " + id));
+		Gerente obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Gerente with id = " + id));
 		repository.delete(obj);
 	}
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.infraestruturaHidrica;
 import br.edu.ufape.lmts.sementes.repository.infraestruturaHidricaRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class infraestruturaHidricaService implements infraestruturaHidricaServiceInterface {
@@ -23,7 +24,7 @@ public class infraestruturaHidricaService implements infraestruturaHidricaServic
 	}
 
 	public infraestruturaHidrica findinfraestruturaHidricaById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist infraestruturaHidrica with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist infraestruturaHidrica with id = " + id));
 	}
 
 	public List<infraestruturaHidrica> getAllinfraestruturaHidrica(){
@@ -36,7 +37,7 @@ public class infraestruturaHidricaService implements infraestruturaHidricaServic
 	}
 	
 	public void deleteinfraestruturaHidrica(long id){
-		infraestruturaHidrica obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist infraestruturaHidrica with id = " + id));
+		infraestruturaHidrica obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist infraestruturaHidrica with id = " + id));
 		repository.delete(obj);
 	}	
 	

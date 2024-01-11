@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.Publicacao;
 import br.edu.ufape.lmts.sementes.repository.PublicacaoRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class PublicacaoService implements PublicacaoServiceInterface {
@@ -23,7 +24,7 @@ public class PublicacaoService implements PublicacaoServiceInterface {
 	}
 
 	public Publicacao findPublicacaoById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Publicacao with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Publicacao with id = " + id));
 	}
 
 	public List<Publicacao> getAllPublicacao(){
@@ -36,7 +37,7 @@ public class PublicacaoService implements PublicacaoServiceInterface {
 	}
 	
 	public void deletePublicacao(long id){
-		Publicacao obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Publicacao with id = " + id));
+		Publicacao obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Publicacao with id = " + id));
 		repository.delete(obj);
 	}	
 	

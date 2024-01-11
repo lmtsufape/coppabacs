@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.Coppabacs;
 import br.edu.ufape.lmts.sementes.repository.AdminRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class AdminService implements AdminServiceInterface {
@@ -23,7 +25,7 @@ public class AdminService implements AdminServiceInterface {
 	}
 
 	public Coppabacs findAdminById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Admin with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Admin with id = " + id));
 	}
 
 	public List<Coppabacs> getAllAdmin(){
@@ -36,7 +38,7 @@ public class AdminService implements AdminServiceInterface {
 	}
 	
 	public void deleteAdmin(long id){
-		Coppabacs obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Admin with id = " + id));
+		Coppabacs obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Admin with id = " + id));
 		repository.delete(obj);
 	}	
 	

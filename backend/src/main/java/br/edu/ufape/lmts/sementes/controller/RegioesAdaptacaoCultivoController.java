@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.RegioesAdaptacaoCultivo
 import br.edu.ufape.lmts.sementes.controller.dto.response.RegioesAdaptacaoCultivoResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.RegioesAdaptacaoCultivo;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class RegioesAdaptacaoCultivoController {
 	
 	@GetMapping("regioesAdaptacaoCultivo/{id}")
 	public RegioesAdaptacaoCultivoResponse getRegioesAdaptacaoCultivoById(@PathVariable Long id) {
-		try {
-			return new RegioesAdaptacaoCultivoResponse(facade.findRegioesAdaptacaoCultivoById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "RegioesAdaptacaoCultivo " + id + " not found.");
-		}
+		return new RegioesAdaptacaoCultivoResponse(facade.findRegioesAdaptacaoCultivoById(id));
 	}
 	
 	@PatchMapping("regioesAdaptacaoCultivo/{id}")
@@ -68,8 +65,11 @@ public class RegioesAdaptacaoCultivoController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new RegioesAdaptacaoCultivoResponse(facade.updateRegioesAdaptacaoCultivo(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class RegioesAdaptacaoCultivoController {
 		try {
 			facade.deleteRegioesAdaptacaoCultivo(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

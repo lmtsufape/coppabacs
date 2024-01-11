@@ -22,6 +22,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.response.UsuarioResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Usuario;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -49,11 +50,7 @@ public class UsuarioController {
 	
 	@GetMapping("usuario/{id}")
 	public UsuarioResponse getUsuarioById(@PathVariable Long id) {
-		try {
-			return new UsuarioResponse(facade.findUsuarioById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario " + id + " not found.");
-		}
+		return new UsuarioResponse(facade.findUsuarioById(id));
 	}
 	
 	@PatchMapping("usuario/{id}")
@@ -69,8 +66,11 @@ public class UsuarioController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new UsuarioResponse(facade.updateUsuario(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -80,8 +80,11 @@ public class UsuarioController {
 		try {
 			facade.deleteUsuario(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
