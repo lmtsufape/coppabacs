@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.ufape.lmts.sementes.exceptions.EmailExistsException;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.model.AtividadeRural;
 import br.edu.ufape.lmts.sementes.model.BancoSementes;
@@ -72,6 +71,7 @@ import br.edu.ufape.lmts.sementes.service.UsoOcupacaoTerraService;
 import br.edu.ufape.lmts.sementes.service.UsuarioService;
 import br.edu.ufape.lmts.sementes.service.infraestruturaHidricaService;
 import br.edu.ufape.lmts.sementes.service.sementeDoencaService;
+import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 
 @Service
 public class Facade {

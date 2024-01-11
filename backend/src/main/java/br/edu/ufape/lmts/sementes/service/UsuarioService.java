@@ -7,9 +7,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
-import br.edu.ufape.lmts.sementes.exceptions.EmailExistsException;
 import br.edu.ufape.lmts.sementes.model.Usuario;
 import br.edu.ufape.lmts.sementes.repository.UsuarioRepository;
+import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import jakarta.transaction.Transactional;
 
 @Service

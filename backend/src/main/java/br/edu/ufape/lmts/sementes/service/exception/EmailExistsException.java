@@ -1,4 +1,4 @@
-package br.edu.ufape.lmts.sementes.exceptions;
+package br.edu.ufape.lmts.sementes.service.exception;
 
 public class EmailExistsException extends Exception {
 	
