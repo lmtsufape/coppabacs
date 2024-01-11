@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.lmts.sementes.model.Admin;
 import br.edu.ufape.lmts.sementes.model.Coppabacs;
 import br.edu.ufape.lmts.sementes.repository.AdminRepository;
 
@@ -14,30 +15,36 @@ public class AdminService implements AdminServiceInterface {
 	private AdminRepository repository;
 
 
-	public Coppabacs saveAdmin(Coppabacs newInstance) {
+	public Admin saveAdmin(Admin newInstance) {
 		return repository.save(newInstance);
 	}
 
-	public Coppabacs updateAdmin(Coppabacs transientObject) {
+	public Admin updateAdmin(Admin transientObject) {
 		return repository.save(transientObject);
 	}
 
-	public Coppabacs findAdminById(long id) {
+	public Admin findAdminById(Long id) {
 		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Admin with id = " + id));
 	}
 
-	public List<Coppabacs> getAllAdmin(){
+	public List<Admin> getAllAdmin(){
 		return repository.findAll();
 	}
 
-	public void deleteAdmin(Coppabacs persistentObject){
+	public void deleteAdmin(Admin persistentObject){
 		this.deleteAdmin(persistentObject.getId());
 		
 	}
 	
-	public void deleteAdmin(long id){
-		Coppabacs obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Admin with id = " + id));
+	public void deleteAdmin(Long id){
+		Admin obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Admin with id = " + id));
 		repository.delete(obj);
+	}
+
+	@Override
+	public void deleteAdmin(long id) {
+		// TODO Auto-generated method stub
+		
 	}	
 	
 	

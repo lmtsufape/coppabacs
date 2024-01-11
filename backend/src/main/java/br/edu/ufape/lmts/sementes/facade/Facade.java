@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.exceptions.EmailExistsException;
+import br.edu.ufape.lmts.sementes.model.Admin;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.model.AtividadeRural;
 import br.edu.ufape.lmts.sementes.model.BancoSementes;
@@ -812,27 +813,27 @@ public class Facade {
 	@Autowired
 	private AdminService  adminService;
 		
-	public Coppabacs saveAdmin(Coppabacs newInstance) {
+	public Admin saveAdmin(Admin newInstance) {
 		return adminService.saveAdmin(newInstance);
 	}
 
-	public Coppabacs updateAdmin(Coppabacs transientObject) {
-		return adminService.updateAdmin(transientObject);
+	public Admin updateAdmin(Admin oldObject) {
+		return adminService.updateAdmin(oldObject);
 	}
 
-	public Coppabacs findAdminById(long id) {
+	public Admin findAdminById(Long id) {
 		return adminService.findAdminById(id);
 	}
 
-	public List<Coppabacs> getAllAdmin() {
+	public List<Admin> getAllAdmin() {
 		return adminService.getAllAdmin();
 	}
 
-	public void deleteAdmin(Coppabacs persistentObject) {
+	public void deleteAdmin(Admin persistentObject) {
 		adminService.deleteAdmin(persistentObject);
 	}
 
-	public void deleteAdmin(long id) {
+	public void deleteAdmin(Long id) {
 		adminService.deleteAdmin(id);
 	}
 	
