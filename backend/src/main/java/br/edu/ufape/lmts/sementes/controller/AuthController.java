@@ -30,8 +30,6 @@ public class AuthController {
 
 	@PostMapping("login")
 	public ResponseEntity<Void> login(@RequestBody AuthRequest data) {
-		String a = passwordEncoder.encode("AdminPassword");
-		System.out.println(a);
 		var userNamePassword = new UsernamePasswordAuthenticationToken(data.getEmail(), data.getSenha());
 		Authentication auth = this.authenticationManager.authenticate(userNamePassword);
 		String token = tokenService.generateToken((AuthUser) auth.getPrincipal());
