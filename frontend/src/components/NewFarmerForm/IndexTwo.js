@@ -182,7 +182,7 @@ export default function SocialDataFarmer() {
                         </div>
                     </div>
                     {socialData.infraestruturaHidrica.includes('outros') && (
-                        <div className={styles.biggerFormSize}>
+                        <div className={styles.otherForm}>
                             <Input
                                 type="text"
                                 text="Outra Infraestrutura Hídrica"
@@ -297,7 +297,7 @@ export default function SocialDataFarmer() {
                         </div>
                     </div>
                     {socialData.infraestruturaComunidade.includes('outros') && (
-                        <div className={styles.biggerFormSize}>
+                        <div className={styles.otherForm}>
                             <Input
                                 type="text"
                                 text="Outra Infraestrutura da Comunidade"
