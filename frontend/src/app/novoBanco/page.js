@@ -1,29 +1,26 @@
-"use client"
 import React from "react";
-import NewFarmerRuralActivity from "@/components/NewFarmerForm/indexThree";
+import NewFarmerForm from "@/components/NewBankForm/indexOne";
 import Footer from "@/components/Home/Footer";
-import Header from "@/components/Home/Header"
-import styles from "@/app/novoAssociado/index.module.scss"
+import Header from "@/components/Home/Header";
+import styles from "@/app/novoBanco/index.module.scss"
 
-
-export default function NewRegisterFarmerSocialData() {
+export default function NewBank() {
     return (
         <div>
             <div>
-            <Header />
+                <Header />
             </div>
             <div>
                 <h1 className={styles.title}>
-                    Atividade Rural
+                    Adicionar um novo Banco
                 </h1>
             </div>
             <div>
-                <NewFarmerRuralActivity />
+                <NewFarmerForm />
             </div>
             <div>
                 <Footer />
             </div>
-            
         </div>
     );
 }
