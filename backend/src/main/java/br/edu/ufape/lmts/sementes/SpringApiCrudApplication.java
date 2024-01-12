@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true, jsr250Enabled = true, securedEnabled = true)
 public class SpringApiCrudApplication {
-
 	public static void main(String[] args) {
 		ConfigurableApplicationContext appCtx = SpringApplication.run(SpringApiCrudApplication.class, args);
 	}
