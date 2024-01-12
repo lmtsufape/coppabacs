@@ -10,6 +10,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
 import br.edu.ufape.lmts.sementes.model.Usuario;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,20 +23,33 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor @JsonPropertyOrder
 public  class UsuarioRequest  {
 	
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private String nome;
+	@Email(message = "Email inválido")
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private String email;
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private String senha;
+	@Valid
+	@NotNull(message = "Preenchimento obrigatório")
 	private EnderecoRequest endereco;
+	@NotBlank(message = "Preenchimento obrigatório")
 	private String rg;
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private String cpf;
 	@JsonFormat(pattern = "dd-MM-yyyy")
 	private Date dataNascimento;
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private String contato;
 	private String imagem;
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private String nomePai;
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private String nomeMae;
 	private String nis;
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private String tituloEleitor;
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private String sexo;
 	private ConjugeRequest conjuge;
 	private List<PostavelRequest> postavel;

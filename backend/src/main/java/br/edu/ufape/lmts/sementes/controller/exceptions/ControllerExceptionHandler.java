@@ -2,6 +2,8 @@ package br.edu.ufape.lmts.sementes.controller.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -36,6 +38,17 @@ public class ControllerExceptionHandler {
 		int httpStatus = HttpStatus.BAD_REQUEST.value();
 		StandardError err = new StandardError(httpStatus,
 				"Email já cadastrado", e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(httpStatus).body(err);
+	}
+	
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<StandardError> validation(MethodArgumentNotValidException e, HttpServletRequest request) {
+		int httpStatus = HttpStatus.UNPROCESSABLE_ENTITY.value();
+		ValidationError err = new ValidationError(httpStatus,
+				"Erro de validação", "Campos não preenchidos corretamente", request.getRequestURI());
+		for (FieldError x : e.getBindingResult().getFieldErrors()) {
+			err.addError(x.getField(), x.getDefaultMessage());
+		}
 		return ResponseEntity.status(httpStatus).body(err);
 	}
 }
