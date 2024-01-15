@@ -9,6 +9,7 @@ import br.edu.ufape.lmts.sementes.exceptions.EmailExistsException;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.repository.AgricultorRepository;
 import br.edu.ufape.lmts.sementes.repository.UsuarioRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class AgricultorService implements AgricultorServiceInterface {
@@ -35,11 +36,13 @@ public class AgricultorService implements AgricultorServiceInterface {
 		return repository.findAll();
 	}
 
+	@Transactional
 	public void deleteAgricultor(Agricultor persistentObject){
 		this.deleteAgricultor(persistentObject.getId());
 		
 	}
 	
+	@Transactional
 	public void deleteAgricultor(long id){
 		Agricultor obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Agricultor with id = " + id));
 		repository.delete(obj);
