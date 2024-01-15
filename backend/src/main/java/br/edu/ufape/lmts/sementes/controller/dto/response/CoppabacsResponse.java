@@ -15,7 +15,7 @@ public class CoppabacsResponse extends UsuarioResponse {
 	
 	public CoppabacsResponse(Coppabacs obj) {
 		super(obj);
-		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMAPPER");
+		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		modelMapper.map(obj, this);
 	}
 	

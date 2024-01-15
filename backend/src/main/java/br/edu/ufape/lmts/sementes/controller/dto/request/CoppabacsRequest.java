@@ -12,7 +12,7 @@ import lombok.Setter;
 public class CoppabacsRequest extends UsuarioRequest {
 	
 	public Coppabacs convertToEntity() {
-		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMspper");
+		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		Coppabacs obj = modelMapper.map(this,  Coppabacs.class);
 		return obj;
 	}

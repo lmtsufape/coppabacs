@@ -54,8 +54,8 @@ public class CoppabacsController {
 		}
 	}
 	
-	@PatchMapping("coppabacs/{id")
-	public CoppabacsResponse updateAgricultor(@PathVariable long id, @Valid @RequestBody CoppabacsRequest obj) {
+	@PatchMapping("coppabacs/{id}")
+	public CoppabacsResponse updateCoppabacs(@PathVariable long id, @Valid @RequestBody CoppabacsRequest obj) {
 		try {
 			Coppabacs oldObject = facade.findCoppabacsById(id);
 			
