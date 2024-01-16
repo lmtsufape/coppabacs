@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Input from "@/components/FormPattern/Forms/Input/input";
 import Select from "@/components/FormPattern/Forms/Select/select";
-import GreenButton from "@/components/FormPattern/Buttons/GreenButton";
+import GreenButton from "@/components/FormPattern/Buttons/GreenButton/greenButton";
+import WhiteButton from "@/components/FormPattern/Buttons/WhiteButton/whiteButton"
 import styles from "./Index.module.scss";
 import Checkbox from "@/components/FormPattern/Forms/Checkbox/checkbox";
 import Label from "@/components/FormPattern/Forms/Label/label";
@@ -321,6 +322,13 @@ export default function RuralActivity() {
                         </button>
                     </div>
 
+                </div>
+                <div className={styles.boxForm__buttonForm}>
+                    <WhiteButton
+                        text="Voltar" />
+
+                    <GreenButton
+                        text="Continuar" />
                 </div>
             </form>
         </div>

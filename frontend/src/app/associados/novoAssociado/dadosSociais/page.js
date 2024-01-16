@@ -1,9 +1,9 @@
 "use client"
 import React from "react";
-import NewFarmerFormSocialData from "@/components/NewFarmerForm/indexTwo";
+import NewFarmerFormSocialData from "@/components/NewFarmerForm/IndexTwo";
 import Footer from "@/components/Home/Footer";
 import Header from "@/components/Home/Header"
-import styles from "@/app/novoAssociado/index.module.scss"
+import styles from "@/app/associados/novoAssociado/index.module.scss"
 
 
 export default function NewRegisterFarmerSocialData() {

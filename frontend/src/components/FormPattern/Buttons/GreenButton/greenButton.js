@@ -1,4 +1,4 @@
-import styles from './GreenButton.module.css'
+import styles from "@/components/FormPattern/Buttons/Button.module.css"
 
 export default function GreenButton({ text }) {
     return (
