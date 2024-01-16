@@ -24,7 +24,6 @@
         margin-top: 50px;
         margin-bottom: 0rem;
         gap: 3%;
-        
 
     }
     &__buttonForm{
@@ -76,10 +75,6 @@
             &__checkSolo{
                 margin-bottom: 1%;
             }
-        }
-        .textarea{
-            flex-direction: column;
-            width: 90%;
         }
     }
 }
@@ -139,7 +134,7 @@
     margin-top: 1%;
 }
 .largerFormSize{
-    width: 47.5%;
+    width: 50%;
     margin-right: 1em;
     margin-left: 1em;
 
@@ -153,6 +148,7 @@
     &__label{
         margin-right: 1em;
         margin-left: 1em;
+        margin-top: -1.5em;
     }
 
     &__checkSet{
@@ -167,13 +163,17 @@
         
     }
     &__checkSolo{
-        width: 9em;
+        width: 26em;
         
+    }
+
+    &__checkSoloSmall{
+        width: 18em;
     }
     &__fiveChecks{
         display: flex;
         flex-direction: row;
-        //margin-bottom: 1%; 
+        margin-bottom: 1%; 
         
         
     }
@@ -181,6 +181,7 @@
         display: flex;
         flex-direction: row;
         margin-bottom: 1%;
+
     }
     
 }
@@ -190,11 +191,4 @@
     margin-left: 1em;
 }
 
-.textarea{
-    width: 97.3%;
-    margin-left: 1em;
-    margin-right: 1em;
-    min-width: 50%;
-    
-}
 

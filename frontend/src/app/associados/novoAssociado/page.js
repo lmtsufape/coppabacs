@@ -1,25 +1,25 @@
 import React from "react";
-import NewFarmerForm from "@/components/NewBankForm/indexOne";
+import NewFarmerForm from "@/components/NewFarmerForm/IndexOne";
 import Footer from "@/components/Home/Footer";
 import Header from "@/components/Home/Header";
-import styles from "@/app/novoBanco/index.module.scss"
+import styles from "@/app/associados/novoAssociado/index.module.scss"
 
-export default function NewBank() {
+export default function NewRegisterFarmer() {
     return (
         <div>
             <div>
-                <Header />
+            <Header />
             </div>
             <div>
                 <h1 className={styles.title}>
-                    Adicionar um novo Banco
+                    Atividade Rural
                 </h1>
             </div>
             <div>
                 <NewFarmerForm />
             </div>
             <div>
-                <Footer />
+            <Footer />
             </div>
         </div>
     );
