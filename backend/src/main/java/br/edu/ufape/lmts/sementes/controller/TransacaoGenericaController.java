@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.TransacaoGenericaReques
 import br.edu.ufape.lmts.sementes.controller.dto.response.TransacaoGenericaResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.TransacaoGenerica;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class TransacaoGenericaController {
 	
 	@GetMapping("transacaoGenerica/{id}")
 	public TransacaoGenericaResponse getTransacaoGenericaById(@PathVariable Long id) {
-		try {
-			return new TransacaoGenericaResponse(facade.findTransacaoGenericaById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "TransacaoGenerica " + id + " not found.");
-		}
+		return new TransacaoGenericaResponse(facade.findTransacaoGenericaById(id));
 	}
 	
 	@PatchMapping("transacaoGenerica/{id}")
@@ -68,8 +65,11 @@ public class TransacaoGenericaController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new TransacaoGenericaResponse(facade.updateTransacaoGenerica(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class TransacaoGenericaController {
 		try {
 			facade.deleteTransacaoGenerica(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

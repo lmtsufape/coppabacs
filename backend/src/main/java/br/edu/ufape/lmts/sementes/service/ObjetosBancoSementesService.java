@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.ObjetosBancoSementes;
 import br.edu.ufape.lmts.sementes.repository.ObjetosBancoSementesRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class ObjetosBancoSementesService implements ObjetosBancoSementesServiceInterface {
@@ -23,7 +24,7 @@ public class ObjetosBancoSementesService implements ObjetosBancoSementesServiceI
 	}
 
 	public ObjetosBancoSementes findObjetosBancoSementesById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist ObjetosBancoSementes with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist ObjetosBancoSementes with id = " + id));
 	}
 
 	public List<ObjetosBancoSementes> getAllObjetosBancoSementes(){
@@ -36,7 +37,7 @@ public class ObjetosBancoSementesService implements ObjetosBancoSementesServiceI
 	}
 	
 	public void deleteObjetosBancoSementes(long id){
-		ObjetosBancoSementes obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist ObjetosBancoSementes with id = " + id));
+		ObjetosBancoSementes obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist ObjetosBancoSementes with id = " + id));
 		repository.delete(obj);
 	}	
 	

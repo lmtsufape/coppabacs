@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.Evento;
 import br.edu.ufape.lmts.sementes.repository.EventoRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class EventoService implements EventoServiceInterface {
@@ -23,7 +24,7 @@ public class EventoService implements EventoServiceInterface {
 	}
 
 	public Evento findEventoById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Evento with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Evento with id = " + id));
 	}
 
 	public List<Evento> getAllEvento(){
@@ -36,7 +37,7 @@ public class EventoService implements EventoServiceInterface {
 	}
 	
 	public void deleteEvento(long id){
-		Evento obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Evento with id = " + id));
+		Evento obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Evento with id = " + id));
 		repository.delete(obj);
 	}	
 	

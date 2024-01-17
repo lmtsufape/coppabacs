@@ -56,6 +56,39 @@
     border-radius: 1px;
     font-family: 'Inter', sans-serif;
     margin-bottom: 0.9em;
+    color: black;
     
+}
+
+
+
+.checkbox input[type="checkbox"]:checked + label {
+    font-weight: bold;
+    color: black;
+  }
+
+.textarea{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+    font-family: 'Inter', sans-serif;
+}
+
+.textarea label {
+    margin-bottom: 0.4em;
+    font-weight: bold;
+}
+
+.textarea textarea{
+    height: 8em;
+    border-radius: 1px;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 0.9em;
+    resize: none;
+    border: 2px solid #B1B1B1;
+    padding: 0.3rem;
+    border-radius: 6px;
+    opacity: 55%;
+    color: black;
 }
 

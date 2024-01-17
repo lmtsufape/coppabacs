@@ -23,9 +23,10 @@ import org.springframework.web.servlet.function.EntityResponse;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.AgricultorRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.AgricultorResponse;
-import br.edu.ufape.lmts.sementes.exceptions.EmailExistsException;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
+import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -54,11 +55,7 @@ public class AgricultorController {
 
 	@GetMapping("/{id}")
 	public AgricultorResponse getAgricultorById(@PathVariable Long id) {
-		try {
-			return new AgricultorResponse(facade.findAgricultorById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Agricultor " + id + " not found.");
-		}
+		return new AgricultorResponse(facade.findAgricultorById(id));
 	}
 
 	@PatchMapping("/{id}")
@@ -74,8 +71,11 @@ public class AgricultorController {
 
 			typeMapper.map(obj, oldObject);
 			return new AgricultorResponse(facade.updateAgricultor(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 
 	}
@@ -85,8 +85,11 @@ public class AgricultorController {
 		try {
 			facade.deleteAgricultor(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 
 	}

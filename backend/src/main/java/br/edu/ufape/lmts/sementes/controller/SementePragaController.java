@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.SementePragaRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.SementePragaResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.SementePraga;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class SementePragaController {
 	
 	@GetMapping("sementePraga/{id}")
 	public SementePragaResponse getSementePragaById(@PathVariable Long id) {
-		try {
-			return new SementePragaResponse(facade.findSementePragaById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "SementePraga " + id + " not found.");
-		}
+		return new SementePragaResponse(facade.findSementePragaById(id));
 	}
 	
 	@PatchMapping("sementePraga/{id}")
@@ -68,8 +65,11 @@ public class SementePragaController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new SementePragaResponse(facade.updateSementePraga(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class SementePragaController {
 		try {
 			facade.deleteSementePraga(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

@@ -7,9 +7,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
-import br.edu.ufape.lmts.sementes.exceptions.EmailExistsException;
 import br.edu.ufape.lmts.sementes.model.Usuario;
 import br.edu.ufape.lmts.sementes.repository.UsuarioRepository;
+import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -37,7 +38,7 @@ public class UsuarioService implements UsuarioServiceInterface {
 	}
 
 	public Usuario findUsuarioById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Usuario with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Usuario with id = " + id));
 	}
 
 	public List<Usuario> getAllUsuario(){
@@ -52,7 +53,7 @@ public class UsuarioService implements UsuarioServiceInterface {
 
 	@Transactional
 	public void deleteUsuario(long id){
-		Usuario obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Usuario with id = " + id));
+		Usuario obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Usuario with id = " + id));
 		repository.delete(obj);
 	}
 

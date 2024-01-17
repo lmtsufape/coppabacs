@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.CulturaRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.CulturaResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Cultura;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class CulturaController {
 	
 	@GetMapping("cultura/{id}")
 	public CulturaResponse getCulturaById(@PathVariable Long id) {
-		try {
-			return new CulturaResponse(facade.findCulturaById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cultura " + id + " not found.");
-		}
+		return new CulturaResponse(facade.findCulturaById(id));
 	}
 	
 	@PatchMapping("cultura/{id}")
@@ -68,8 +65,11 @@ public class CulturaController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new CulturaResponse(facade.updateCultura(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class CulturaController {
 		try {
 			facade.deleteCultura(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

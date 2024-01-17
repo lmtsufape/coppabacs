@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.ConjugeRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.ConjugeResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Conjuge;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class ConjugeController {
 	
 	@GetMapping("conjuge/{id}")
 	public ConjugeResponse getConjugeById(@PathVariable Long id) {
-		try {
-			return new ConjugeResponse(facade.findConjugeById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Conjuge " + id + " not found.");
-		}
+		return new ConjugeResponse(facade.findConjugeById(id));
 	}
 	
 	@PatchMapping("conjuge/{id}")
@@ -68,8 +65,11 @@ public class ConjugeController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new ConjugeResponse(facade.updateConjuge(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class ConjugeController {
 		try {
 			facade.deleteConjuge(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

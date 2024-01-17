@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.TabelaBancoSementesRequ
 import br.edu.ufape.lmts.sementes.controller.dto.response.TabelaBancoSementesResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.TabelaBancoSementes;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class TabelaBancoSementesController {
 	
 	@GetMapping("tabelaBancoSementes/{id}")
 	public TabelaBancoSementesResponse getTabelaBancoSementesById(@PathVariable Long id) {
-		try {
-			return new TabelaBancoSementesResponse(facade.findTabelaBancoSementesById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "TabelaBancoSementes " + id + " not found.");
-		}
+		return new TabelaBancoSementesResponse(facade.findTabelaBancoSementesById(id));
 	}
 	
 	@PatchMapping("tabelaBancoSementes/{id}")
@@ -68,8 +65,11 @@ public class TabelaBancoSementesController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new TabelaBancoSementesResponse(facade.updateTabelaBancoSementes(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class TabelaBancoSementesController {
 		try {
 			facade.deleteTabelaBancoSementes(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

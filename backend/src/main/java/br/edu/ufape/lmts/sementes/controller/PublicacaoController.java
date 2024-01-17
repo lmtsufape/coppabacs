@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.PublicacaoRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.PublicacaoResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Publicacao;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class PublicacaoController {
 	
 	@GetMapping("publicacao/{id}")
 	public PublicacaoResponse getPublicacaoById(@PathVariable Long id) {
-		try {
-			return new PublicacaoResponse(facade.findPublicacaoById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Publicacao " + id + " not found.");
-		}
+		return new PublicacaoResponse(facade.findPublicacaoById(id));
 	}
 	
 	@PatchMapping("publicacao/{id}")
@@ -68,8 +65,11 @@ public class PublicacaoController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new PublicacaoResponse(facade.updatePublicacao(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class PublicacaoController {
 		try {
 			facade.deletePublicacao(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.DoacaoUsuarioRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.DoacaoUsuarioResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.DoacaoUsuario;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class DoacaoUsuarioController {
 	
 	@GetMapping("doacaoUsuario/{id}")
 	public DoacaoUsuarioResponse getDoacaoUsuarioById(@PathVariable Long id) {
-		try {
-			return new DoacaoUsuarioResponse(facade.findDoacaoUsuarioById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "DoacaoUsuario " + id + " not found.");
-		}
+		return new DoacaoUsuarioResponse(facade.findDoacaoUsuarioById(id));
 	}
 	
 	@PatchMapping("doacaoUsuario/{id}")
@@ -68,8 +65,11 @@ public class DoacaoUsuarioController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new DoacaoUsuarioResponse(facade.updateDoacaoUsuario(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class DoacaoUsuarioController {
 		try {
 			facade.deleteDoacaoUsuario(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

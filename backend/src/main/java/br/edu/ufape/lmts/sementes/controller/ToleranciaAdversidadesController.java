@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.ToleranciaAdversidadesR
 import br.edu.ufape.lmts.sementes.controller.dto.response.ToleranciaAdversidadesResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.ToleranciaAdversidades;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class ToleranciaAdversidadesController {
 	
 	@GetMapping("toleranciaAdversidades/{id}")
 	public ToleranciaAdversidadesResponse getToleranciaAdversidadesById(@PathVariable Long id) {
-		try {
-			return new ToleranciaAdversidadesResponse(facade.findToleranciaAdversidadesById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ToleranciaAdversidades " + id + " not found.");
-		}
+		return new ToleranciaAdversidadesResponse(facade.findToleranciaAdversidadesById(id));
 	}
 	
 	@PatchMapping("toleranciaAdversidades/{id}")
@@ -68,8 +65,11 @@ public class ToleranciaAdversidadesController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new ToleranciaAdversidadesResponse(facade.updateToleranciaAdversidades(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class ToleranciaAdversidadesController {
 		try {
 			facade.deleteToleranciaAdversidades(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.Praga;
 import br.edu.ufape.lmts.sementes.repository.PragaRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class PragaService implements PragaServiceInterface {
@@ -23,7 +24,7 @@ public class PragaService implements PragaServiceInterface {
 	}
 
 	public Praga findPragaById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Praga with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Praga with id = " + id));
 	}
 
 	public List<Praga> getAllPraga(){
@@ -36,7 +37,7 @@ public class PragaService implements PragaServiceInterface {
 	}
 	
 	public void deletePraga(long id){
-		Praga obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Praga with id = " + id));
+		Praga obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Praga with id = " + id));
 		repository.delete(obj);
 	}	
 	

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.Finalidade;
 import br.edu.ufape.lmts.sementes.repository.FinalidadeRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class FinalidadeService implements FinalidadeServiceInterface {
@@ -23,7 +24,7 @@ public class FinalidadeService implements FinalidadeServiceInterface {
 	}
 
 	public Finalidade findFinalidadeById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Finalidade with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Finalidade with id = " + id));
 	}
 
 	public List<Finalidade> getAllFinalidade(){
@@ -36,7 +37,7 @@ public class FinalidadeService implements FinalidadeServiceInterface {
 	}
 	
 	public void deleteFinalidade(long id){
-		Finalidade obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Finalidade with id = " + id));
+		Finalidade obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Finalidade with id = " + id));
 		repository.delete(obj);
 	}	
 	

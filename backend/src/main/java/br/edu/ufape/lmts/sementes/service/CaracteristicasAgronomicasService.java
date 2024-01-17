@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.CaracteristicasAgronomicas;
 import br.edu.ufape.lmts.sementes.repository.CaracteristicasAgronomicasRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class CaracteristicasAgronomicasService implements CaracteristicasAgronomicasServiceInterface {
@@ -23,7 +24,7 @@ public class CaracteristicasAgronomicasService implements CaracteristicasAgronom
 	}
 
 	public CaracteristicasAgronomicas findCaracteristicasAgronomicasById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist CaracteristicasAgronomicas with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist CaracteristicasAgronomicas with id = " + id));
 	}
 
 	public List<CaracteristicasAgronomicas> getAllCaracteristicasAgronomicas(){
@@ -36,7 +37,7 @@ public class CaracteristicasAgronomicasService implements CaracteristicasAgronom
 	}
 	
 	public void deleteCaracteristicasAgronomicas(long id){
-		CaracteristicasAgronomicas obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist CaracteristicasAgronomicas with id = " + id));
+		CaracteristicasAgronomicas obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist CaracteristicasAgronomicas with id = " + id));
 		repository.delete(obj);
 	}	
 	

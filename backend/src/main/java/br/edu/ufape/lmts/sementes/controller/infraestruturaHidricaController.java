@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.infraestruturaHidricaRe
 import br.edu.ufape.lmts.sementes.controller.dto.response.infraestruturaHidricaResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.infraestruturaHidrica;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class infraestruturaHidricaController {
 	
 	@GetMapping("infraestruturaHidrica/{id}")
 	public infraestruturaHidricaResponse getinfraestruturaHidricaById(@PathVariable Long id) {
-		try {
-			return new infraestruturaHidricaResponse(facade.findinfraestruturaHidricaById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "infraestruturaHidrica " + id + " not found.");
-		}
+		return new infraestruturaHidricaResponse(facade.findinfraestruturaHidricaById(id));
 	}
 	
 	@PatchMapping("infraestruturaHidrica/{id}")
@@ -68,8 +65,11 @@ public class infraestruturaHidricaController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new infraestruturaHidricaResponse(facade.updateinfraestruturaHidrica(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class infraestruturaHidricaController {
 		try {
 			facade.deleteinfraestruturaHidrica(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

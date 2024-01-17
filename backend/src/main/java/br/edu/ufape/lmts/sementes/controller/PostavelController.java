@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.PostavelRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.PostavelResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Postavel;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class PostavelController {
 	
 	@GetMapping("postavel/{id}")
 	public PostavelResponse getPostavelById(@PathVariable Long id) {
-		try {
-			return new PostavelResponse(facade.findPostavelById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Postavel " + id + " not found.");
-		}
+		return new PostavelResponse(facade.findPostavelById(id));
 	}
 	
 	@PatchMapping("postavel/{id}")
@@ -68,8 +65,11 @@ public class PostavelController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new PostavelResponse(facade.updatePostavel(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class PostavelController {
 		try {
 			facade.deletePostavel(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

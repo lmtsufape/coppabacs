@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.sementeDoencaRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.sementeDoencaResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.sementeDoenca;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class sementeDoencaController {
 	
 	@GetMapping("sementeDoenca/{id}")
 	public sementeDoencaResponse getsementeDoencaById(@PathVariable Long id) {
-		try {
-			return new sementeDoencaResponse(facade.findsementeDoencaById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "sementeDoenca " + id + " not found.");
-		}
+		return new sementeDoencaResponse(facade.findsementeDoencaById(id));
 	}
 	
 	@PatchMapping("sementeDoenca/{id}")
@@ -68,8 +65,11 @@ public class sementeDoencaController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new sementeDoencaResponse(facade.updatesementeDoenca(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class sementeDoencaController {
 		try {
 			facade.deletesementeDoenca(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

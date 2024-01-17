@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.Empalhamento;
 import br.edu.ufape.lmts.sementes.repository.EmpalhamentoRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class EmpalhamentoService implements EmpalhamentoServiceInterface {
@@ -23,7 +24,7 @@ public class EmpalhamentoService implements EmpalhamentoServiceInterface {
 	}
 
 	public Empalhamento findEmpalhamentoById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Empalhamento with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Empalhamento with id = " + id));
 	}
 
 	public List<Empalhamento> getAllEmpalhamento(){
@@ -36,7 +37,7 @@ public class EmpalhamentoService implements EmpalhamentoServiceInterface {
 	}
 	
 	public void deleteEmpalhamento(long id){
-		Empalhamento obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Empalhamento with id = " + id));
+		Empalhamento obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Empalhamento with id = " + id));
 		repository.delete(obj);
 	}	
 	
