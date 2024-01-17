@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from "react";
 import Input from "@/components/FormPattern/Forms/Input/input";
 import Select from "@/components/FormPattern/Forms/Select/select";
@@ -80,7 +82,7 @@ export default function SocialDataFarmer() {
         event.preventDefault();
     }
 
-    return (
+    return (    
         <div className={styles.boxForm}>
             <form onSubmit={handleSubmit}>
                 <div className={styles.twoSidedForm}>
@@ -319,6 +321,9 @@ export default function SocialDataFarmer() {
                         text="Continuar" />
                 </div>
             </form>
+            <div className={styles.footer}>
+
+            </div>
         </div>
     );
 }
