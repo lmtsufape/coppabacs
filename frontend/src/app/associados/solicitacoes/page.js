@@ -1,12 +1,12 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Home/Footer";
-import ListAssociados from "@/components/ListAssociados";
+import ListSolicitacoes from "@/components/ListSolicitacoes";
 export default function AssociadosPage(){
 
   return(
     <div>
       <Header />
-      <ListAssociados table2="nome" table4="Ação" content2="Geronimo"/>
+      <ListSolicitacoes listName="Solicitações de cadastros" table1="nome" table2="Ação" content1  ="Geronimo"/>
 
       <Footer />
 

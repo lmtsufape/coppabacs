@@ -1,0 +1,52 @@
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5em 2em 2em 2em;
+
+  
+  h1{
+    font-size: 1.25em;
+    font-weight: bold;
+  }
+  
+  &__container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+
+  gap: 1em;
+
+    &_cadastro{
+
+      padding: 1em;
+
+      font-weight: bold;
+      color: #1A5537;
+      background-color: #fff;
+
+      border-radius: 0.8em;
+      text-decoration: none;
+    
+    }
+    &_cadastro:hover{
+      background-color: #1A5537;
+      color: #fff;
+      transition: 0.2s;
+    }
+    &_notificacao{
+      padding: 1em;
+
+      font-weight: bold;
+      background-color: #E49B58;
+      border: none;
+      border-radius: 0.8em;
+      text-decoration: none;
+    }
+  
+
+    
+  }
+
+}

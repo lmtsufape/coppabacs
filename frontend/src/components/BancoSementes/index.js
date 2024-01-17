@@ -2,7 +2,7 @@ import Image from 'next/image';
 import style from './bancoSementes.module.scss';
 import Header from './Header';
 import ListSementes from '../ListSementes';
-import ListAgricultor from '../ListAgricultor';
+import ListAgricultor from '../ListAssociados';
 
 
 export default function BancoSementes({ 
