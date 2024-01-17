@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.Cultura;
 import br.edu.ufape.lmts.sementes.repository.CulturaRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class CulturaService implements CulturaServiceInterface {
@@ -23,7 +24,7 @@ public class CulturaService implements CulturaServiceInterface {
 	}
 
 	public Cultura findCulturaById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Cultura with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Cultura with id = " + id));
 	}
 
 	public List<Cultura> getAllCultura(){
@@ -36,7 +37,7 @@ public class CulturaService implements CulturaServiceInterface {
 	}
 	
 	public void deleteCultura(long id){
-		Cultura obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Cultura with id = " + id));
+		Cultura obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Cultura with id = " + id));
 		repository.delete(obj);
 	}	
 	

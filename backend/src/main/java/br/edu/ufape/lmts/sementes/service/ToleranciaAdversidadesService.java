@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.ToleranciaAdversidades;
 import br.edu.ufape.lmts.sementes.repository.ToleranciaAdversidadesRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class ToleranciaAdversidadesService implements ToleranciaAdversidadesServiceInterface {
@@ -23,7 +24,7 @@ public class ToleranciaAdversidadesService implements ToleranciaAdversidadesServ
 	}
 
 	public ToleranciaAdversidades findToleranciaAdversidadesById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist ToleranciaAdversidades with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist ToleranciaAdversidades with id = " + id));
 	}
 
 	public List<ToleranciaAdversidades> getAllToleranciaAdversidades(){
@@ -36,7 +37,7 @@ public class ToleranciaAdversidadesService implements ToleranciaAdversidadesServ
 	}
 	
 	public void deleteToleranciaAdversidades(long id){
-		ToleranciaAdversidades obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist ToleranciaAdversidades with id = " + id));
+		ToleranciaAdversidades obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist ToleranciaAdversidades with id = " + id));
 		repository.delete(obj);
 	}	
 	

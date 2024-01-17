@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.InfraestruturaComunidade;
 import br.edu.ufape.lmts.sementes.repository.InfraestruturaComunidadeRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class InfraestruturaComunidadeService implements InfraestruturaComunidadeServiceInterface {
@@ -23,7 +24,7 @@ public class InfraestruturaComunidadeService implements InfraestruturaComunidade
 	}
 
 	public InfraestruturaComunidade findInfraestruturaComunidadeById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist InfraestruturaComunidade with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist InfraestruturaComunidade with id = " + id));
 	}
 
 	public List<InfraestruturaComunidade> getAllInfraestruturaComunidade(){
@@ -36,7 +37,7 @@ public class InfraestruturaComunidadeService implements InfraestruturaComunidade
 	}
 	
 	public void deleteInfraestruturaComunidade(long id){
-		InfraestruturaComunidade obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist InfraestruturaComunidade with id = " + id));
+		InfraestruturaComunidade obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist InfraestruturaComunidade with id = " + id));
 		repository.delete(obj);
 	}	
 	

@@ -22,6 +22,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.GerenteRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.GerenteResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Gerente;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -49,11 +50,7 @@ public class GerenteController {
 	
 	@GetMapping("gerente/{id}")
 	public GerenteResponse getGerenteById(@PathVariable Long id) {
-		try {
-			return new GerenteResponse(facade.findGerenteById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Gerente " + id + " not found.");
-		}
+		return new GerenteResponse(facade.findGerenteById(id));
 	}
 	
 	@PatchMapping("gerente/{id}")
@@ -69,8 +66,11 @@ public class GerenteController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new GerenteResponse(facade.updateGerente(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -80,8 +80,11 @@ public class GerenteController {
 		try {
 			facade.deleteGerente(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

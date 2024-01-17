@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.Item;
 import br.edu.ufape.lmts.sementes.repository.ItemRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class ItemService implements ItemServiceInterface {
@@ -23,7 +24,7 @@ public class ItemService implements ItemServiceInterface {
 	}
 
 	public Item findItemById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Item with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Item with id = " + id));
 	}
 
 	public List<Item> getAllItem(){
@@ -36,7 +37,7 @@ public class ItemService implements ItemServiceInterface {
 	}
 	
 	public void deleteItem(long id){
-		Item obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Item with id = " + id));
+		Item obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Item with id = " + id));
 		repository.delete(obj);
 	}	
 	

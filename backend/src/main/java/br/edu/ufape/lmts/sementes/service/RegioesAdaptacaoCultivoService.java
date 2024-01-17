@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.RegioesAdaptacaoCultivo;
 import br.edu.ufape.lmts.sementes.repository.RegioesAdaptacaoCultivoRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class RegioesAdaptacaoCultivoService implements RegioesAdaptacaoCultivoServiceInterface {
@@ -23,7 +24,7 @@ public class RegioesAdaptacaoCultivoService implements RegioesAdaptacaoCultivoSe
 	}
 
 	public RegioesAdaptacaoCultivo findRegioesAdaptacaoCultivoById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist RegioesAdaptacaoCultivo with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist RegioesAdaptacaoCultivo with id = " + id));
 	}
 
 	public List<RegioesAdaptacaoCultivo> getAllRegioesAdaptacaoCultivo(){
@@ -36,7 +37,7 @@ public class RegioesAdaptacaoCultivoService implements RegioesAdaptacaoCultivoSe
 	}
 	
 	public void deleteRegioesAdaptacaoCultivo(long id){
-		RegioesAdaptacaoCultivo obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist RegioesAdaptacaoCultivo with id = " + id));
+		RegioesAdaptacaoCultivo obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist RegioesAdaptacaoCultivo with id = " + id));
 		repository.delete(obj);
 	}	
 	

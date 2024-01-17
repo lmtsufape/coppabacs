@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.FinalidadeRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.FinalidadeResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Finalidade;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class FinalidadeController {
 	
 	@GetMapping("finalidade/{id}")
 	public FinalidadeResponse getFinalidadeById(@PathVariable Long id) {
-		try {
-			return new FinalidadeResponse(facade.findFinalidadeById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Finalidade " + id + " not found.");
-		}
+		return new FinalidadeResponse(facade.findFinalidadeById(id));
 	}
 	
 	@PatchMapping("finalidade/{id}")
@@ -68,8 +65,11 @@ public class FinalidadeController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new FinalidadeResponse(facade.updateFinalidade(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class FinalidadeController {
 		try {
 			facade.deleteFinalidade(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

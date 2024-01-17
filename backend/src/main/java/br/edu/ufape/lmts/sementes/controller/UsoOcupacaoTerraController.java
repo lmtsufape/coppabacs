@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.UsoOcupacaoTerraRequest
 import br.edu.ufape.lmts.sementes.controller.dto.response.UsoOcupacaoTerraResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.UsoOcupacaoTerra;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class UsoOcupacaoTerraController {
 	
 	@GetMapping("usoOcupacaoTerra/{id}")
 	public UsoOcupacaoTerraResponse getUsoOcupacaoTerraById(@PathVariable Long id) {
-		try {
-			return new UsoOcupacaoTerraResponse(facade.findUsoOcupacaoTerraById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "UsoOcupacaoTerra " + id + " not found.");
-		}
+		return new UsoOcupacaoTerraResponse(facade.findUsoOcupacaoTerraById(id));
 	}
 	
 	@PatchMapping("usoOcupacaoTerra/{id}")
@@ -68,8 +65,11 @@ public class UsoOcupacaoTerraController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new UsoOcupacaoTerraResponse(facade.updateUsoOcupacaoTerra(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class UsoOcupacaoTerraController {
 		try {
 			facade.deleteUsoOcupacaoTerra(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

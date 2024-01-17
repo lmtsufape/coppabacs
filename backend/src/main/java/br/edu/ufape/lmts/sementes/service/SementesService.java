@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.Sementes;
 import br.edu.ufape.lmts.sementes.repository.SementesRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class SementesService implements SementesServiceInterface {
@@ -23,7 +24,7 @@ public class SementesService implements SementesServiceInterface {
 	}
 
 	public Sementes findSementesById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Sementes with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Sementes with id = " + id));
 	}
 
 	public List<Sementes> getAllSementes(){
@@ -36,7 +37,7 @@ public class SementesService implements SementesServiceInterface {
 	}
 	
 	public void deleteSementes(long id){
-		Sementes obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Sementes with id = " + id));
+		Sementes obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Sementes with id = " + id));
 		repository.delete(obj);
 	}	
 	
