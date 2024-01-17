@@ -22,6 +22,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.GerenteRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.GerenteResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Gerente;
+import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
@@ -44,7 +45,8 @@ public class GerenteController {
 	}
 	
 	@PostMapping("gerente")
-	public GerenteResponse createGerente(@Valid @RequestBody GerenteRequest newObj) {
+	public GerenteResponse createGerente(@RequestBody GerenteRequest newObj) throws EmailExistsException {
+		System.out.println(newObj);
 		return new GerenteResponse(facade.saveGerente(newObj.convertToEntity()));
 	}
 	

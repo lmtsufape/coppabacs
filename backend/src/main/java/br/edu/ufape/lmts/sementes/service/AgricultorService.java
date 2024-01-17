@@ -6,13 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
-import br.edu.ufape.lmts.sementes.exceptions.EmailExistsException;
-
 import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.repository.AgricultorRepository;
-
-import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
+import jakarta.transaction.Transactional;
 
 
 @Service
@@ -22,6 +20,7 @@ public class AgricultorService implements AgricultorServiceInterface {
 	@Autowired
 	private UsuarioService usuario;
 
+	@Transactional
 	public Agricultor saveAgricultor(Agricultor agricultor) throws EmailExistsException {
 
 		usuario.saveUsuario(agricultor);

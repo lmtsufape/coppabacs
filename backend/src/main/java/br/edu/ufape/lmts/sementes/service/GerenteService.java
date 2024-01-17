@@ -7,15 +7,20 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.Gerente;
 import br.edu.ufape.lmts.sementes.repository.GerenteRepository;
+import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
+import jakarta.transaction.Transactional;
 
 @Service
 public class GerenteService implements GerenteServiceInterface {
 	@Autowired
 	private GerenteRepository repository;
+	@Autowired
+	private UsuarioService usuario;
 
-
-	public Gerente saveGerente(Gerente newInstance) {
+	@Transactional
+	public Gerente saveGerente(Gerente newInstance) throws EmailExistsException {
+		usuario.saveUsuario(newInstance);
 		return repository.save(newInstance);
 	}
 
@@ -30,12 +35,13 @@ public class GerenteService implements GerenteServiceInterface {
 	public List<Gerente> getAllGerente(){
 		return repository.findAll();
 	}
-
+	
+	@Transactional
 	public void deleteGerente(Gerente persistentObject){
 		this.deleteGerente(persistentObject.getId());
 		
 	}
-	
+	@Transactional
 	public void deleteGerente(long id){
 		Gerente obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Gerente with id = " + id));
 		repository.delete(obj);
