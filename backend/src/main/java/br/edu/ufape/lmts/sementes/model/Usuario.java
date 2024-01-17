@@ -102,11 +102,11 @@ public abstract class Usuario implements Serializable {
 		this.sexo = sexo;
 		this.conjuge = conjuge;
 		this.postavel = postavel;
-		this.addRole(TipoUsuario.USUARIO);
+//		this.addRole(TipoUsuario.USUARIO);
 	}
 
 	public Usuario() {
-		this.addRole(TipoUsuario.USUARIO);
+//		this.addRole(TipoUsuario.USUARIO);
 	}
 
 	public void addRole(TipoUsuario role) {

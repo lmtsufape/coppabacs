@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Input from "@/components/FormPattern/Forms/Input/input";
 import Select from "@/components/FormPattern/Forms/Select/select";
-import GreenButton from "@/components/FormPattern/Buttons/GreenButton";
+import GreenButton from "@/components/FormPattern/Buttons/GreenButton/greenButton";
+import WhiteButton from "@/components/FormPattern/Buttons/WhiteButton/whiteButton"
 import styles from "./Index.module.scss";
 import Checkbox from "@/components/FormPattern/Forms/Checkbox/checkbox";
 import Label from "@/components/FormPattern/Forms/Label/label";
@@ -35,9 +36,9 @@ export default function SocialDataFarmer() {
 
             const updatedOutraInfraHidrica =
                 updatedInfraHidrica.includes('outros')
-                ? prevData.outraInfraComunidade : '';
-            
-            return { ...prevData, infraestruturaHidrica: updatedInfraHidrica, outraInfraHidrica: updatedOutraInfraHidrica};
+                    ? prevData.outraInfraComunidade : '';
+
+            return { ...prevData, infraestruturaHidrica: updatedInfraHidrica, outraInfraHidrica: updatedOutraInfraHidrica };
         });
     }
 
@@ -52,9 +53,9 @@ export default function SocialDataFarmer() {
             return { ...prevData, infraestruturaComunidade: updatedinfraComunidade, outraInfraComunidade: updatedOutraInfraComunidade };
         });
     }
-    
+
     function handleOutraInfraHidrica(event) {
-        setSocialData({ ...socialData, outraInfraHidrica: event.target.value});
+        setSocialData({ ...socialData, outraInfraHidrica: event.target.value });
     }
 
     function handleOutraInfraComunidade(event) {
@@ -125,7 +126,7 @@ export default function SocialDataFarmer() {
                 <div className={styles.checkbox}>
                     <div className={styles.checkbox__label}>
                         <Label
-                            text="Infraestrutura Hídrica"/>
+                            text="Infraestrutura Hídrica" />
                     </div>
                     <div className={styles.checkbox__checkSet}>
                         <div className={styles.checkbox__fiveChecks}>
@@ -136,7 +137,7 @@ export default function SocialDataFarmer() {
                                     name="aguaTratada"
                                     value="aguaTratada"
                                     checked={socialData.infraestruturaHidrica.includes('aguaTratada')}
-                                    onChange={() => handleInfraHidrica('aguaTratada')}/>
+                                    onChange={() => handleInfraHidrica('aguaTratada')} />
 
                             </div>
                             <div className={styles.checkbox__checkSolo}>
@@ -146,7 +147,7 @@ export default function SocialDataFarmer() {
                                     name="acude"
                                     value="acude"
                                     checked={socialData.infraestruturaHidrica.includes('acude')}
-                                    onChange={() => handleInfraHidrica('acude')}/>
+                                    onChange={() => handleInfraHidrica('acude')} />
 
                             </div>
                             <div className={styles.checkbox__checkSolo}>
@@ -156,7 +157,7 @@ export default function SocialDataFarmer() {
                                     name="poco"
                                     value="poco"
                                     checked={socialData.infraestruturaHidrica.includes('poco')}
-                                    onChange={() => handleInfraHidrica('poco')}/>
+                                    onChange={() => handleInfraHidrica('poco')} />
 
                             </div>
                             <div className={styles.checkbox__checkSolo}>
@@ -166,7 +167,7 @@ export default function SocialDataFarmer() {
                                     name="rioRiacho"
                                     value="rioRiacho"
                                     checked={socialData.infraestruturaHidrica.includes('rioRiacho')}
-                                    onChange={() => handleInfraHidrica('rioRiacho')}/>
+                                    onChange={() => handleInfraHidrica('rioRiacho')} />
 
                             </div>
                             <div className={styles.checkbox__checkSolo}>
@@ -176,20 +177,20 @@ export default function SocialDataFarmer() {
                                     name="outros"
                                     value="outros"
                                     checked={socialData.infraestruturaHidrica.includes('outros')}
-                                    onChange={() => handleInfraHidrica('outros')}/>
+                                    onChange={() => handleInfraHidrica('outros')} />
 
                             </div>
                         </div>
                     </div>
                     {socialData.infraestruturaHidrica.includes('outros') && (
-                        <div className={styles.biggerFormSize}>
+                        <div className={styles.otherForm}>
                             <Input
                                 type="text"
                                 text="Outra Infraestrutura Hídrica"
                                 name="outraInfraHidrica"
                                 placeholder="Insira outra infraestrutura hídrica"
                                 value={socialData.outraInfraHidrica}
-                                onChange={handleOutraInfraHidrica}/>
+                                onChange={handleOutraInfraHidrica} />
 
                         </div>
                     )}
@@ -297,7 +298,7 @@ export default function SocialDataFarmer() {
                         </div>
                     </div>
                     {socialData.infraestruturaComunidade.includes('outros') && (
-                        <div className={styles.biggerFormSize}>
+                        <div className={styles.otherForm}>
                             <Input
                                 type="text"
                                 text="Outra Infraestrutura da Comunidade"
@@ -311,6 +312,9 @@ export default function SocialDataFarmer() {
 
                 </div>
                 <div className={styles.boxForm__buttonForm}>
+                    <WhiteButton
+                        text="Voltar" />
+
                     <GreenButton
                         text="Continuar" />
                 </div>

@@ -3,22 +3,17 @@ package br.edu.ufape.lmts.sementes.controller.dto.request;
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
-import br.edu.ufape.lmts.sementes.model.Admin;
+import br.edu.ufape.lmts.sementes.model.Coppabacs;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-@Getter @Setter @NoArgsConstructor 
-public  class AdminRequest extends UsuarioRequest {
-
-
-	public Admin convertToEntity() {
+@Getter @Setter @NoArgsConstructor
+public class CoppabacsRequest extends UsuarioRequest {
+	
+	public Coppabacs convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
-		Admin obj = modelMapper.map(this, Admin.class);
+		Coppabacs obj = modelMapper.map(this,  Coppabacs.class);
 		return obj;
 	}
-
-
-
 }

@@ -2,15 +2,15 @@ package br.edu.ufape.lmts.sementes.service;
 
 import java.util.List;
 
-import br.edu.ufape.lmts.sementes.model.Coppabacs;
+import br.edu.ufape.lmts.sementes.model.Admin;
 
 public interface AdminServiceInterface {
-	Coppabacs saveAdmin(Coppabacs o);
-	Coppabacs findAdminById(long id);
-	Coppabacs updateAdmin(Coppabacs u);
-	void deleteAdmin(Coppabacs u);
+	Admin saveAdmin(Admin o);
+	Admin findAdminById(Long id);
+	Admin updateAdmin(Admin u);
+	void deleteAdmin(Admin u);
 	void deleteAdmin(long id);
-	List<Coppabacs> getAllAdmin();
+	List<Admin> getAllAdmin();
     
     
 

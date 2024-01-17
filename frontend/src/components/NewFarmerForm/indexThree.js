@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Input from "@/components/FormPattern/Forms/Input/input";
 import Select from "@/components/FormPattern/Forms/Select/select";
-import GreenButton from "@/components/FormPattern/Buttons/GreenButton";
+import GreenButton from "@/components/FormPattern/Buttons/GreenButton/greenButton";
+import WhiteButton from "@/components/FormPattern/Buttons/WhiteButton/whiteButton"
 import styles from "./Index.module.scss";
 import Checkbox from "@/components/FormPattern/Forms/Checkbox/checkbox";
 import Label from "@/components/FormPattern/Forms/Label/label";
@@ -9,15 +10,49 @@ import Label from "@/components/FormPattern/Forms/Label/label";
 export default function RuralActivity() {
     const [ruralActivity, setRuralActivity] = useState({
         atividadeRural: [],
-        outraAtivRural:[],
+        outraAtividadeRural: [],
         producaoSementes: [],
     })
 
-    function handleRuralOnChange(event){
-        const {name, value } = event.target;
-        setRuralActivity({ ...ruralActivity, [name]: value});
+    const addInputButton = (e) => {
+        e.preventDefault();
+
+        setRuralActivity((prevRuralActivity) => ({
+            ...prevRuralActivity, producaoSementes: [...prevRuralActivity.producaoSementes, ""],
+        }));
+    };
+
+    const handleRemoveInput = (position) => {
+        setRuralActivity((prevRuralActivity) => ({
+            ...prevRuralActivity, producaoSementes: [...prevRuralActivity.producaoSementes.filter((_, index) => index != position)]
+        }))
+        
+    };
+
+
+    function handleRuralOnChange(event) {
+        const { name, value } = event.target;
+        setRuralActivity({ ...ruralActivity, [name]: value });
     }
-    
+
+    function handleAtividadeRural(ativRural) {
+        setRuralActivity((prevData) => {
+            const updateAtividadeRural = prevData.atividadeRural.includes(ativRural)
+                ? prevData.atividadeRural.filter((a) => a !== ativRural)
+                : [...prevData.atividadeRural, ativRural];
+
+            const updateOutraAtividadeRural =
+                updateAtividadeRural.includes('outros')
+                    ? prevData.outraAtividadeRural : '';
+
+            return { ...prevData, atividadeRural: updateAtividadeRural, outraAtividadeRural: updateOutraAtividadeRural };
+        });
+    }
+
+    function handleOutraAtividadeRural(event) {
+        setRuralActivity({ ...ruralActivity, outraAtividadeRural: event.target.value });
+    }
+
     async function handleSubmit(event) {
         event.preventDefault();
     }
@@ -39,8 +74,8 @@ export default function RuralActivity() {
                                     text="Caprino Ovinocultura"
                                     name="caprinoOvinocultura"
                                     value="caprinoOvinocultura"
-                                //checked={socialData.infraestruturaHidrica.includes('aguaTratada')}
-                                //onChange={() => handleInfraHidrica('aguaTratada')}
+                                    checked={ruralActivity.atividadeRural.includes('caprinoOvinocultura')}
+                                    onChange={() => handleAtividadeRural('caprinoOvinocultura')}
                                 />
                             </div>
                             <div className={styles.checkbox__checkSolo}>
@@ -49,9 +84,8 @@ export default function RuralActivity() {
                                     text="Fruticultura"
                                     name="fruticultura"
                                     value="fruticultura"
-                                //checked={socialData.infraestruturaHidrica.includes('aguaTratada')}
-                                //onChange={() => handleInfraHidrica('aguaTratada')}
-                                />
+                                    checked={ruralActivity.atividadeRural.includes('fruticultura')}
+                                    onChange={() => handleAtividadeRural('fruticultura')} />
                             </div>
                             <div className={styles.checkbox__checkSolo}>
                                 <Checkbox
@@ -59,9 +93,8 @@ export default function RuralActivity() {
                                     text="Suinocultura"
                                     name="suinocultura"
                                     value="suinocultura"
-                                //checked={socialData.infraestruturaHidrica.includes('aguaTratada')}
-                                //onChange={() => handleInfraHidrica('aguaTratada')}
-                                />
+                                    checked={ruralActivity.atividadeRural.includes('suinocultura')}
+                                    onChange={() => handleAtividadeRural('suinocultura')} />
                             </div>
                             <div className={styles.checkbox__checkSolo}>
                                 <Checkbox
@@ -69,9 +102,8 @@ export default function RuralActivity() {
                                     text="Pecuária"
                                     name="pecuaria"
                                     value="pecuaria"
-                                //checked={socialData.infraestruturaHidrica.includes('aguaTratada')}
-                                //onChange={() => handleInfraHidrica('aguaTratada')}
-                                />
+                                    checked={ruralActivity.atividadeRural.includes('pecuaria')}
+                                    onChange={() => handleAtividadeRural('pecuaria')} />
                             </div>
                             <div className={styles.checkbox__checkSolo}>
                                 <Checkbox
@@ -79,21 +111,20 @@ export default function RuralActivity() {
                                     text="Aquicultura"
                                     name="aquicultura"
                                     value="aquicultura"
-                                //checked={socialData.infraestruturaHidrica.includes('aguaTratada')}
-                                //onChange={() => handleInfraHidrica('aguaTratada')}
-                                />
+                                    checked={ruralActivity.atividadeRural.includes('aquicultura')}
+                                    onChange={() => handleAtividadeRural('aquicultura')} />
                             </div>
                         </div>
+                        <br></br>
                         <div className={styles.checkbox__fiveChecks}>
-                        <div className={styles.checkbox__checkSolo}>
+                            <div className={styles.checkbox__checkSolo}>
                                 <Checkbox
                                     type="checkbox"
                                     text="Pesca Artesanal"
                                     name="pescaArtesanal"
                                     value="pescaArtesanal"
-                                //checked={socialData.infraestruturaHidrica.includes('aguaTratada')}
-                                //onChange={() => handleInfraHidrica('aguaTratada')}
-                                />
+                                    checked={ruralActivity.atividadeRural.includes('pescaArtesanal')}
+                                    onChange={() => handleAtividadeRural('pescaArtesanal')} />
                             </div>
                             <div className={styles.checkbox__checkSolo}>
                                 <Checkbox
@@ -101,9 +132,8 @@ export default function RuralActivity() {
                                     text="Avicultura"
                                     name="avicultura"
                                     value="avicultura"
-                                //checked={socialData.infraestruturaHidrica.includes('aguaTratada')}
-                                //onChange={() => handleInfraHidrica('aguaTratada')}
-                                />
+                                    checked={ruralActivity.atividadeRural.includes('avicultura')}
+                                    onChange={() => handleAtividadeRural('avicultura')} />
                             </div>
                             <div className={styles.checkbox__checkSolo}>
                                 <Checkbox
@@ -111,9 +141,8 @@ export default function RuralActivity() {
                                     text="Apicultura"
                                     name="apicultura"
                                     value="apicultura"
-                                //checked={socialData.infraestruturaHidrica.includes('aguaTratada')}
-                                //onChange={() => handleInfraHidrica('aguaTratada')}
-                                />
+                                    checked={ruralActivity.atividadeRural.includes('apicultura')}
+                                    onChange={() => handleAtividadeRural('apicultura')} />
                             </div>
                             <div className={styles.checkbox__checkSolo}>
                                 <Checkbox
@@ -121,25 +150,186 @@ export default function RuralActivity() {
                                     text="Agricultura de Sequeiro Milho e Feijão"
                                     name="agSequeiroMilhoFeijao"
                                     value="agSequeiroMilhoFeijao"
-                                //checked={socialData.infraestruturaHidrica.includes('aguaTratada')}
-                                //onChange={() => handleInfraHidrica('aguaTratada')}
-                                />
+                                    checked={ruralActivity.atividadeRural.includes('agSequeiroMilhoFeijao')}
+                                    onChange={() => handleAtividadeRural('agSequeiroMilhoFeijao')} />
                             </div>
                             <div className={styles.checkbox__checkSolo}>
                                 <Checkbox
                                     type="checkbox"
                                     text="Outro"
-                                    name="outro"
-                                    value="outro"
-                                //checked={socialData.infraestruturaHidrica.includes('aguaTratada')}
-                                //onChange={() => handleInfraHidrica('aguaTratada')}
-                                />
+                                    name="outros"
+                                    value="outros"
+                                    checked={ruralActivity.atividadeRural.includes('outros')}
+                                    onChange={() => handleAtividadeRural('outros')} />
                             </div>
-
                         </div>
                     </div>
+                    {ruralActivity.atividadeRural.includes('outros') && (
+                        <div className={styles.otherForm}>
+                            <Input
+                                type="text"
+                                text="Outra Atividade Rural"
+                                name="outraAtividadeRural"
+                                placeholder="Insira outra atividade rural"
+                                value={ruralActivity.outraAtividadeRural}
+                                onChange={handleOutraAtividadeRural}
+                            />
+                        </div>
+                    )}
                 </div>
+                <div>
+                    <div className={styles.label}>
+                        <Label
+                            text="Produção de Sementes" />
+                    </div>
+                    <div>
+                        <div>
+                            <div className={styles.label}>
+                                <Label
+                                    for
+                                    text="Semente 1" />
+                            </div>
+                            <div className={styles.twoSidedForm}>
+                                <div className={styles.twoSidedForm__largerFormSize}>
+                                    <Input
+                                        type="text"
+                                        text="Cultura"
+                                        name="cultura"
+                                        placeholder="Ex: milho, feijão, etc."
+                                    //value={socialData.areaPropriedade}
+                                    // onChange={handleSocialOnChange}
+                                    />
+                                </div>
+                                <div className={styles.twoSidedForm__largerFormSize}>
+                                    <Input
+                                        type="text"
+                                        text="Variedade"
+                                        name="variedade"
+                                        placeholder="Ex: vagem roxa, cruzeta, etc."
+                                    //value={socialData.areaPropriedade}
+                                    // onChange={handleSocialOnChange}
+                                    />
+                                </div>
+                            </div>
+                            <div className={styles.threeSidedForm}>
+                                <div className={styles.threeSidedForm__smallerFormSize}>
+                                    <Input
+                                        type="text"
+                                        text="Área Plantada"
+                                        name="areaPlantada"
+                                        placeholder="Insira em tarefas"
+                                    //value={socialData.areaPropriedade}
+                                    // onChange={handleSocialOnChange}
+                                    />
+                                </div>
+                                <div className={styles.threeSidedForm__smallerFormSize}>
+                                    <Input
+                                        type="text"
+                                        text="Estimativa de Colheita"
+                                        name="estimativaColheita"
+                                        placeholder="Insira em kg/ano"
+                                    //value={socialData.areaPropriedade}
+                                    // onChange={handleSocialOnChange}
+                                    />
+                                </div>
+                                <div className={styles.threeSidedForm__smallerFormSize}>
+                                    <Input
+                                        type="text"
+                                        text="Previsão de Venda"
+                                        name="previsaoVenda"
+                                        placeholder="Insira em kg/ano"
+                                    //value={socialData.areaPropriedade}
+                                    // onChange={handleSocialOnChange}
+                                    />
+                                </div>
+                            </div>
+                        </div>
 
+                    </div>
+                    <div>
+                        {ruralActivity.producaoSementes.map((ruralActivity, index) => (
+                            <div key={index}>
+                                <div className={styles.label}>
+                                    <Label
+                                        for
+                                        text={`Semente ${index + 2}`} />
+                                </div>
+                                <div className={styles.twoSidedForm}>
+                                    <div className={styles.twoSidedForm__largerFormSize}>
+                                        <Input
+                                            type="text"
+                                            text="Cultura"
+                                            name="cultura"
+                                            placeholder="Ex: milho, feijão, etc."
+                                        //value={socialData.areaPropriedade}
+                                        // onChange={handleSocialOnChange}
+                                        />
+                                    </div>
+                                    <div className={styles.twoSidedForm__largerFormSize}>
+                                        <Input
+                                            type="text"
+                                            text="Variedade"
+                                            name="variedade"
+                                            placeholder="Ex: vagem roxa, cruzeta, etc."
+                                        //value={socialData.areaPropriedade}
+                                        // onChange={handleSocialOnChange}
+                                        />
+                                    </div>
+                                </div>
+                                <div className={styles.threeSidedForm}>
+                                    <div className={styles.threeSidedForm__smallerFormSize}>
+                                        <Input
+                                            type="text"
+                                            text="Área Plantada"
+                                            name="areaPlantada"
+                                            placeholder="Insira em tarefas"
+                                        //value={socialData.areaPropriedade}
+                                        // onChange={handleSocialOnChange}
+                                        />
+                                    </div>
+                                    <div className={styles.threeSidedForm__smallerFormSize}>
+                                        <Input
+                                            type="text"
+                                            text="Estimativa de Colheita"
+                                            name="estimativaColheita"
+                                            placeholder="Insira em kg/ano"
+                                        //value={socialData.areaPropriedade}
+                                        // onChange={handleSocialOnChange}
+                                        />
+                                    </div>
+                                    <div className={styles.threeSidedForm__smallerFormSize}>
+                                        <Input
+                                            type="text"
+                                            text="Previsão de Venda"
+                                            name="previsaoVenda"
+                                            placeholder="Insira em kg/ano"
+                                        //value={socialData.areaPropriedade}
+                                        // onChange={handleSocialOnChange}
+                                        />
+                                    </div>
+                                </div>
+                                <div>
+                                    <button
+                                        onClick={() => {handleRemoveInput(index)}}>Remover</button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <div>
+                        <button
+                            onClick={addInputButton}>
+                            Cadastrar mais
+                        </button>
+                    </div>
+
+                </div>
+                <div className={styles.boxForm__buttonForm}>
+                    <WhiteButton
+                        text="Voltar" />
+
+                    <GreenButton
+                        text="Continuar" />
+                </div>
             </form>
         </div>
     )

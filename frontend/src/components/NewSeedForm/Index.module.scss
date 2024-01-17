@@ -148,6 +148,7 @@
     &__label{
         margin-right: 1em;
         margin-left: 1em;
+        margin-top: -1.5em;
     }
 
     &__checkSet{
@@ -162,13 +163,17 @@
         
     }
     &__checkSolo{
-        width: 9em;
+        width: 26em;
         
+    }
+
+    &__checkSoloSmall{
+        width: 18em;
     }
     &__fiveChecks{
         display: flex;
         flex-direction: row;
-        //margin-bottom: 1%; 
+        margin-bottom: 1%; 
         
         
     }
@@ -176,6 +181,7 @@
         display: flex;
         flex-direction: row;
         margin-bottom: 1%;
+
     }
     
 }

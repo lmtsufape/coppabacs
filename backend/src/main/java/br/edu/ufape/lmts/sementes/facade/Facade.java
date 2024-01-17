@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.lmts.sementes.model.Admin;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.model.AtividadeRural;
 import br.edu.ufape.lmts.sementes.model.BancoSementes;
@@ -44,6 +45,7 @@ import br.edu.ufape.lmts.sementes.service.AtividadeRuralService;
 import br.edu.ufape.lmts.sementes.service.BancoSementesService;
 import br.edu.ufape.lmts.sementes.service.CaracteristicasAgronomicasService;
 import br.edu.ufape.lmts.sementes.service.ConjugeService;
+import br.edu.ufape.lmts.sementes.service.CoppabacsService;
 import br.edu.ufape.lmts.sementes.service.CorService;
 import br.edu.ufape.lmts.sementes.service.CulturaService;
 import br.edu.ufape.lmts.sementes.service.DoacaoUsuarioService;
@@ -75,6 +77,15 @@ import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 
 @Service
 public class Facade {
+	
+//	//Login
+//	@Autowired
+//	private AuthController authController;
+//	
+//	public 
+	
+	
+	
 	//sementeDoenca--------------------------------------------------------------
 	@Autowired
 	private sementeDoencaService  sementeDoencaService;
@@ -170,10 +181,45 @@ public class Facade {
 		usuarioService.deleteUsuario(id);
 	}
 	
-
+	//Coppabacs--------------------------------------------------------------
+	@Autowired
+	private CoppabacsService coppabacsService;
+	
+	public List<Coppabacs> getAllCoppabacs() {
+		return coppabacsService.getAllCoppabacs();
+	}
+	
+	public Coppabacs saveCoppabacs(Coppabacs newInstance) throws EmailExistsException {
+		try {
+			return coppabacsService.saveCoppabacs(newInstance);
+			
+		} catch (EmailExistsException e) {
+			throw e;
+			
+		} catch (Exception e) {
+	        throw new RuntimeException("Erro ao salvar o usuário", e);
+		}
+	}
+	
+	public Coppabacs updateCoppabacs(Coppabacs transientObject) {
+		return coppabacsService.updateCoppabacs(transientObject);
+	}
+	
+	public Coppabacs findCoppabacsById(long id) {
+		return coppabacsService.findCoppabacsById(id);
+	}
+	
+	public void deleteCoppabacs(Coppabacs coppabacs) {
+		coppabacsService.deleteCoppabacs(coppabacs);
+	}
+	
+	public void deleteCoppabacs(long id) {
+		coppabacsService.deleteCoppabacs(id);
+	}
+	
 	//Praga--------------------------------------------------------------
 	@Autowired
-	private PragaService  pragaService;
+	private PragaService pragaService;
 		
 	public Praga savePraga(Praga newInstance) {
 		return pragaService.savePraga(newInstance);
@@ -812,27 +858,27 @@ public class Facade {
 	@Autowired
 	private AdminService  adminService;
 		
-	public Coppabacs saveAdmin(Coppabacs newInstance) {
+	public Admin saveAdmin(Admin newInstance) {
 		return adminService.saveAdmin(newInstance);
 	}
 
-	public Coppabacs updateAdmin(Coppabacs transientObject) {
-		return adminService.updateAdmin(transientObject);
+	public Admin updateAdmin(Admin oldObject) {
+		return adminService.updateAdmin(oldObject);
 	}
 
-	public Coppabacs findAdminById(long id) {
+	public Admin findAdminById(Long id) {
 		return adminService.findAdminById(id);
 	}
 
-	public List<Coppabacs> getAllAdmin() {
+	public List<Admin> getAllAdmin() {
 		return adminService.getAllAdmin();
 	}
 
-	public void deleteAdmin(Coppabacs persistentObject) {
+	public void deleteAdmin(Admin persistentObject) {
 		adminService.deleteAdmin(persistentObject);
 	}
 
-	public void deleteAdmin(long id) {
+	public void deleteAdmin(Long id) {
 		adminService.deleteAdmin(id);
 	}
 	

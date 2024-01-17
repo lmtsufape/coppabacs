@@ -45,11 +45,13 @@ public class UsuarioService implements UsuarioServiceInterface {
 		return repository.findAll();
 	}
 
+	@Transactional
 	public void deleteUsuario(Usuario persistentObject){
 		this.deleteUsuario(persistentObject.getId());
 
 	}
 
+	@Transactional
 	public void deleteUsuario(long id){
 		Usuario obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Usuario with id = " + id));
 		repository.delete(obj);
