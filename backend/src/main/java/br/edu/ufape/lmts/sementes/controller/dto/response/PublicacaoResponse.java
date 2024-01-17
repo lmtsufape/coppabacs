@@ -13,8 +13,6 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor
 public  class PublicacaoResponse extends PostavelResponse {
 
-
-
 	public PublicacaoResponse(Publicacao obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		modelMapper.map(obj, this);	

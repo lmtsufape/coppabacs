@@ -84,8 +84,6 @@ public class Facade {
 //	
 //	public 
 	
-	
-	
 	//sementeDoenca--------------------------------------------------------------
 	@Autowired
 	private sementeDoencaService  sementeDoencaService;
@@ -148,12 +146,9 @@ public class Facade {
 	@Autowired
 	private UsuarioService  usuarioService;
 		
-	public Usuario saveUsuario(Usuario newInstance) throws EmailExistsException{
+	public Usuario saveUsuario(Usuario newInstance) {
 		try {
 			return usuarioService.saveUsuario(newInstance);
-			
-		} catch (EmailExistsException e) {
-			throw e;
 			
 		} catch (Exception e) {
 	        throw new RuntimeException("Erro ao salvar o usuário", e);
@@ -189,13 +184,9 @@ public class Facade {
 		return coppabacsService.getAllCoppabacs();
 	}
 	
-	public Coppabacs saveCoppabacs(Coppabacs newInstance) throws EmailExistsException {
+	public Coppabacs saveCoppabacs(Coppabacs newInstance) {
 		try {
 			return coppabacsService.saveCoppabacs(newInstance);
-			
-		} catch (EmailExistsException e) {
-			throw e;
-			
 		} catch (Exception e) {
 	        throw new RuntimeException("Erro ao salvar o usuário", e);
 		}
@@ -482,7 +473,7 @@ public class Facade {
 	@Autowired
 	private GerenteService  gerenteService;
 		
-	public Gerente saveGerente(Gerente newInstance) {
+	public Gerente saveGerente(Gerente newInstance) throws EmailExistsException {
 		return gerenteService.saveGerente(newInstance);
 	}
 
@@ -856,9 +847,9 @@ public class Facade {
 
 	//Admin--------------------------------------------------------------
 	@Autowired
-	private AdminService  adminService;
+	private AdminService adminService;
 		
-	public Admin saveAdmin(Admin newInstance) {
+	public Admin saveAdmin(Admin newInstance) throws EmailExistsException {
 		return adminService.saveAdmin(newInstance);
 	}
 

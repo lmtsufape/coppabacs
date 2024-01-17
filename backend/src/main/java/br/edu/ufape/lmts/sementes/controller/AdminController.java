@@ -21,7 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.AdminRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.AdminResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Admin;
-import br.edu.ufape.lmts.sementes.model.Coppabacs;
+import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
@@ -44,7 +44,7 @@ public class AdminController {
 	}
 	
 	@PostMapping("admin")
-	public AdminResponse createAdmin(@Valid @RequestBody AdminRequest newObj) {
+	public AdminResponse createAdmin(@Valid @RequestBody AdminRequest newObj) throws EmailExistsException {
 		return new AdminResponse(facade.saveAdmin(newObj.convertToEntity()));
 	}
 	

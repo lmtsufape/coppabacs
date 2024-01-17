@@ -5,11 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.repository.AgricultorRepository;
-
-import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
+import jakarta.transaction.Transactional;
 
 
 @Service
@@ -18,9 +19,10 @@ public class AgricultorService implements AgricultorServiceInterface {
 	private AgricultorRepository repository;
 	@Autowired
 	private UsuarioService usuario;
-	
+
+	@Transactional
 	public Agricultor saveAgricultor(Agricultor agricultor) throws EmailExistsException {
-		
+
 		usuario.saveUsuario(agricultor);
 		return repository.save(agricultor);
 	}
@@ -40,9 +42,9 @@ public class AgricultorService implements AgricultorServiceInterface {
 	@Transactional
 	public void deleteAgricultor(Agricultor persistentObject){
 		this.deleteAgricultor(persistentObject.getId());
-		
+
 	}
-	
+
 	@Transactional
 	public void deleteAgricultor(long id){
 		Agricultor obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Agricultor with id = " + id));
@@ -50,6 +52,15 @@ public class AgricultorService implements AgricultorServiceInterface {
 	}
 
 	public void validateAgricultor(long id) {
-		findAgricultorById(id);
-	}			
+		Agricultor obj = this.repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Agricultor with id = " + id));
+		obj.addRole(TipoUsuario.AGRICULTOR);
+		repository.save(obj);
+	}
 }
+
+
+
+
+
+
+

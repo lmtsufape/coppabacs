@@ -9,7 +9,6 @@ import br.edu.ufape.lmts.sementes.model.Admin;
 import br.edu.ufape.lmts.sementes.model.Coppabacs;
 import br.edu.ufape.lmts.sementes.repository.AdminRepository;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
-import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class AdminService implements AdminServiceInterface {
@@ -25,7 +24,7 @@ public class AdminService implements AdminServiceInterface {
 		return repository.save(transientObject);
 	}
 
-	public Coppabacs findAdminById(long id) {
+	public Admin findAdminById(long id) {
 		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Admin with id = " + id));
 	}
 
@@ -39,16 +38,8 @@ public class AdminService implements AdminServiceInterface {
 	}
 	
 	public void deleteAdmin(long id){
-		Coppabacs obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Admin with id = " + id));
+		Admin obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Admin with id = " + id));
 		repository.delete(obj);
 	}
-
-	@Override
-	public void deleteAdmin(long id) {
-		// TODO Auto-generated method stub
-		
-	}	
-	
-	
 	
 }
