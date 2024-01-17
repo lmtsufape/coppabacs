@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.exceptions.EmailExistsException;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.repository.AgricultorRepository;
@@ -49,8 +50,15 @@ public class AgricultorService implements AgricultorServiceInterface {
 	}
 
 	public void validateAgricultor(long id) {
-		
 		Agricultor obj = this.repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Agricultor with id = " + id));
-		
+		obj.addRole(TipoUsuario.AGRICULTOR);
+		repository.save(obj);
 	}			
 }
+
+
+
+
+
+
+

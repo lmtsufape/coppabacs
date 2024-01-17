@@ -30,7 +30,9 @@ public class AuthController {
 
 	@PostMapping("login")
 	public ResponseEntity<Void> login(@RequestBody AuthRequest data) {
+		System.out.println(data);
 		var userNamePassword = new UsernamePasswordAuthenticationToken(data.getEmail(), data.getSenha());
+		System.out.println("usernamepassword " + userNamePassword);
 		Authentication auth = this.authenticationManager.authenticate(userNamePassword);
 		String token = tokenService.generateToken((AuthUser) auth.getPrincipal());
 		return ResponseEntity.ok().header("Authorization", "Bearer " + token).header("access-control-expose-headers", "Authorization").build();

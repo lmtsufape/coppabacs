@@ -7,6 +7,8 @@ import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.function.EntityResponse;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.AgricultorRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.AgricultorResponse;
@@ -28,14 +31,14 @@ import jakarta.validation.Valid;
 
 @CrossOrigin (origins = "http://localhost:8081/" )
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/agricultor")
 public class AgricultorController {
 	@Autowired
 	private Facade facade;
 	@Autowired
 	private ModelMapper modelMapper;
 
-	@GetMapping("agricultor")
+	@GetMapping("")
 	public List<AgricultorResponse> getAllAgricultor() {
 		return facade.getAllAgricultor()
 			.stream()
@@ -43,13 +46,13 @@ public class AgricultorController {
 			.toList();
 	}
 
-	@PostMapping(value = "agricultor", consumes = MediaType.APPLICATION_JSON_VALUE,
+	@PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE,
 	        produces = MediaType.APPLICATION_JSON_VALUE)
 	public AgricultorResponse createAgricultor(@Valid @RequestBody AgricultorRequest newObj) throws EmailExistsException {
 		return new AgricultorResponse(facade.saveAgricultor(newObj.convertToEntity()));
 	}
 
-	@GetMapping("agricultor/{id}")
+	@GetMapping("/{id}")
 	public AgricultorResponse getAgricultorById(@PathVariable Long id) {
 		try {
 			return new AgricultorResponse(facade.findAgricultorById(id));
@@ -58,7 +61,7 @@ public class AgricultorController {
 		}
 	}
 
-	@PatchMapping("agricultor/{id}")
+	@PatchMapping("/{id}")
 	public AgricultorResponse updateAgricultor(@PathVariable Long id, @Valid @RequestBody AgricultorRequest obj) {
 		try {
 			//Agricultor o = obj.convertToEntity();
@@ -77,7 +80,7 @@ public class AgricultorController {
 
 	}
 
-	@DeleteMapping("agricultor/{id}")
+	@DeleteMapping("/{id}")
 	public String deleteAgricultor(@PathVariable Long id) {
 		try {
 			facade.deleteAgricultor(id);
@@ -86,6 +89,13 @@ public class AgricultorController {
 			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
 		}
 
+	}
+	@PreAuthorize("hasRole('GERENTE')")
+	@PatchMapping("/validar/{id}")
+	public ResponseEntity validateAgricultor(@PathVariable long id) {
+		facade.validateAgricultor(id);
+		return ResponseEntity.status(HttpStatus.OK).build();
+		
 	}
 
 

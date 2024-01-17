@@ -85,8 +85,6 @@ public class Facade {
 //	
 //	public 
 	
-	
-	
 	//sementeDoenca--------------------------------------------------------------
 	@Autowired
 	private sementeDoencaService  sementeDoencaService;
