@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.PragaRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.PragaResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Praga;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class PragaController {
 	
 	@GetMapping("praga/{id}")
 	public PragaResponse getPragaById(@PathVariable Long id) {
-		try {
-			return new PragaResponse(facade.findPragaById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Praga " + id + " not found.");
-		}
+		return new PragaResponse(facade.findPragaById(id));
 	}
 	
 	@PatchMapping("praga/{id}")
@@ -68,8 +65,11 @@ public class PragaController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new PragaResponse(facade.updatePraga(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class PragaController {
 		try {
 			facade.deletePraga(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

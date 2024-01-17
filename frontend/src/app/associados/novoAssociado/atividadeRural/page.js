@@ -1,10 +1,12 @@
+"use client"
 import React from "react";
-import NewFarmerForm from "@/components/NewFarmerForm/indexOne";
+import NewFarmerRuralActivity from "@/components/NewFarmerForm/IndexThree";
 import Footer from "@/components/Home/Footer";
-import Header from "@/components/Home/Header";
-import styles from "@/app/novoAssociado/index.module.scss"
+import Header from "@/components/Home/Header"
+import styles from "@/app/associados/novoAssociado/index.module.scss"
 
-export default function NewRegisterFarmer() {
+
+export default function NewRegisterFarmerSocialData() {
     return (
         <div>
             <div>
@@ -16,11 +18,12 @@ export default function NewRegisterFarmer() {
                 </h1>
             </div>
             <div>
-                <NewFarmerForm />
+                <NewFarmerRuralActivity />
             </div>
             <div>
-            <Footer />
+                <Footer />
             </div>
+            
         </div>
     );
 }

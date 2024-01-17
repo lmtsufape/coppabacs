@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.AtividadeRuralRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.AtividadeRuralResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.AtividadeRural;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class AtividadeRuralController {
 	
 	@GetMapping("atividadeRural/{id}")
 	public AtividadeRuralResponse getAtividadeRuralById(@PathVariable Long id) {
-		try {
-			return new AtividadeRuralResponse(facade.findAtividadeRuralById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "AtividadeRural " + id + " not found.");
-		}
+		return new AtividadeRuralResponse(facade.findAtividadeRuralById(id));
 	}
 	
 	@PatchMapping("atividadeRural/{id}")
@@ -68,8 +65,11 @@ public class AtividadeRuralController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new AtividadeRuralResponse(facade.updateAtividadeRural(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class AtividadeRuralController {
 		try {
 			facade.deleteAtividadeRural(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

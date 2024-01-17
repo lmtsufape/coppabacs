@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.AtividadeRural;
 import br.edu.ufape.lmts.sementes.repository.AtividadeRuralRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class AtividadeRuralService implements AtividadeRuralServiceInterface {
@@ -23,7 +24,7 @@ public class AtividadeRuralService implements AtividadeRuralServiceInterface {
 	}
 
 	public AtividadeRural findAtividadeRuralById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist AtividadeRural with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist AtividadeRural with id = " + id));
 	}
 
 	public List<AtividadeRural> getAllAtividadeRural(){
@@ -36,7 +37,7 @@ public class AtividadeRuralService implements AtividadeRuralServiceInterface {
 	}
 	
 	public void deleteAtividadeRural(long id){
-		AtividadeRural obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist AtividadeRural with id = " + id));
+		AtividadeRural obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist AtividadeRural with id = " + id));
 		repository.delete(obj);
 	}	
 	

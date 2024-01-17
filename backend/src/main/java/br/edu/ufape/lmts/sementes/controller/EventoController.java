@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.EventoRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.EventoResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Evento;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class EventoController {
 	
 	@GetMapping("evento/{id}")
 	public EventoResponse getEventoById(@PathVariable Long id) {
-		try {
-			return new EventoResponse(facade.findEventoById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evento " + id + " not found.");
-		}
+		return new EventoResponse(facade.findEventoById(id));
 	}
 	
 	@PatchMapping("evento/{id}")
@@ -68,8 +65,11 @@ public class EventoController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new EventoResponse(facade.updateEvento(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class EventoController {
 		try {
 			facade.deleteEvento(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

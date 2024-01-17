@@ -39,7 +39,7 @@ public abstract class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
-	private Long id;
+	private long id;
 	@Column(nullable = false)
 	private String nome;
 	@Column(unique = true, nullable = false)

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.Postavel;
 import br.edu.ufape.lmts.sementes.repository.PostavelRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class PostavelService implements PostavelServiceInterface {
@@ -23,7 +24,7 @@ public class PostavelService implements PostavelServiceInterface {
 	}
 
 	public Postavel findPostavelById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Postavel with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Postavel with id = " + id));
 	}
 
 	public List<Postavel> getAllPostavel(){
@@ -36,7 +37,7 @@ public class PostavelService implements PostavelServiceInterface {
 	}
 	
 	public void deletePostavel(long id){
-		Postavel obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Postavel with id = " + id));
+		Postavel obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Postavel with id = " + id));
 		repository.delete(obj);
 	}	
 	

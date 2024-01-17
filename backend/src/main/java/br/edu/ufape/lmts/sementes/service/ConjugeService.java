@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.Conjuge;
 import br.edu.ufape.lmts.sementes.repository.ConjugeRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class ConjugeService implements ConjugeServiceInterface {
@@ -23,7 +24,7 @@ public class ConjugeService implements ConjugeServiceInterface {
 	}
 
 	public Conjuge findConjugeById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Conjuge with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Conjuge with id = " + id));
 	}
 
 	public List<Conjuge> getAllConjuge(){
@@ -36,7 +37,7 @@ public class ConjugeService implements ConjugeServiceInterface {
 	}
 	
 	public void deleteConjuge(long id){
-		Conjuge obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Conjuge with id = " + id));
+		Conjuge obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Conjuge with id = " + id));
 		repository.delete(obj);
 	}	
 	

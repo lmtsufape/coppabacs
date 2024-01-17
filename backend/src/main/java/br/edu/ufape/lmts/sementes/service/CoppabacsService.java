@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.ufape.lmts.sementes.exceptions.EmailExistsException;
 import br.edu.ufape.lmts.sementes.model.Coppabacs;
 import br.edu.ufape.lmts.sementes.repository.CoppabacsRepository;
+import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -19,7 +19,7 @@ public class CoppabacsService {
 	private UsuarioService usuario;
 	
 	@Transactional
-	public Coppabacs saveCoppabacs(Coppabacs coppabacs)  throws EmailExistsException{
+	public Coppabacs saveCoppabacs(Coppabacs coppabacs) throws EmailExistsException {
 		
 		usuario.saveUsuario(coppabacs);
 		

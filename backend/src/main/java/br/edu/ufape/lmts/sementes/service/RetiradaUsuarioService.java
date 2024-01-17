@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.RetiradaUsuario;
 import br.edu.ufape.lmts.sementes.repository.RetiradaUsuarioRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class RetiradaUsuarioService implements RetiradaUsuarioServiceInterface {
@@ -23,7 +24,7 @@ public class RetiradaUsuarioService implements RetiradaUsuarioServiceInterface {
 	}
 
 	public RetiradaUsuario findRetiradaUsuarioById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist RetiradaUsuario with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist RetiradaUsuario with id = " + id));
 	}
 
 	public List<RetiradaUsuario> getAllRetiradaUsuario(){
@@ -36,7 +37,7 @@ public class RetiradaUsuarioService implements RetiradaUsuarioServiceInterface {
 	}
 	
 	public void deleteRetiradaUsuario(long id){
-		RetiradaUsuario obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist RetiradaUsuario with id = " + id));
+		RetiradaUsuario obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist RetiradaUsuario with id = " + id));
 		repository.delete(obj);
 	}	
 	

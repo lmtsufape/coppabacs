@@ -1,9 +1,10 @@
 "use client"
 import React, { useState } from "react";
 import Input from "@/components/FormPattern/Forms/Input/input";
-import Select from "@/components/FormPattern/Forms/Select/select";
-import GreenButton from "@/components/FormPattern/Buttons/GreenButton";
-import styles from "@/components/NewBankForm/index.module.scss"
+import Textarea from "@/components/FormPattern/Forms/Textarea/textarea";
+import GreenButton from "@/components/FormPattern/Buttons/GreenButton/greenButton";
+import WhiteButton from "@/components/FormPattern/Buttons/WhiteButton/whiteButton"
+import styles from "@/components/NewBankForm/Index.module.scss"
 import Checkbox from "@/components/FormPattern/Forms/Checkbox/checkbox";
 import Label from "@/components/FormPattern/Forms/Label/label";
 
@@ -90,14 +91,23 @@ export default function NewBank() {
                         />
                     </div>
                 </div>
-                <div>
-                    <textarea
-                        //value={}
-                        //onChange={}
-                        //rows={}
-                        />
+                <div className={styles.textarea}>
+                    <Textarea
+                        name="descricaoBanco"
+                        //value=""
+                        //onChange=""
+                        row="10"
+                        id="descricaoBanco"
+                        text="Descrição do Banco"
+                        cols="10"
+                        type="textarea"
+                    />
+
                 </div>
                 <div className={styles.boxForm__buttonForm}>
+                    <WhiteButton
+                        text="Voltar" />
+
                     <GreenButton
                         text="Continuar" />
                 </div>

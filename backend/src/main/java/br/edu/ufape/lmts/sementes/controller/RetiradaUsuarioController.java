@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.RetiradaUsuarioRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.RetiradaUsuarioResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.RetiradaUsuario;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class RetiradaUsuarioController {
 	
 	@GetMapping("retiradaUsuario/{id}")
 	public RetiradaUsuarioResponse getRetiradaUsuarioById(@PathVariable Long id) {
-		try {
-			return new RetiradaUsuarioResponse(facade.findRetiradaUsuarioById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "RetiradaUsuario " + id + " not found.");
-		}
+		return new RetiradaUsuarioResponse(facade.findRetiradaUsuarioById(id));
 	}
 	
 	@PatchMapping("retiradaUsuario/{id}")
@@ -68,8 +65,11 @@ public class RetiradaUsuarioController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new RetiradaUsuarioResponse(facade.updateRetiradaUsuario(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class RetiradaUsuarioController {
 		try {
 			facade.deleteRetiradaUsuario(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

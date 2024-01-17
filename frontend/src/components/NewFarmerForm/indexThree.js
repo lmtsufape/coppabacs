@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from "react";
 import Input from "@/components/FormPattern/Forms/Input/input";
+
 import styles from "./Index.module.scss";
 import Checkbox from "@/components/FormPattern/Forms/Checkbox/checkbox";
 import Label from "@/components/FormPattern/Forms/Label/label";
@@ -320,6 +321,13 @@ export default function RuralActivity() {
                         </button>
                     </div>
 
+                </div>
+                <div className={styles.boxForm__buttonForm}>
+                    <WhiteButton
+                        text="Voltar" />
+
+                    <GreenButton
+                        text="Continuar" />
                 </div>
             </form>
         </div>

@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.DoencaRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.DoencaResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Doenca;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class DoencaController {
 	
 	@GetMapping("doenca/{id}")
 	public DoencaResponse getDoencaById(@PathVariable Long id) {
-		try {
-			return new DoencaResponse(facade.findDoencaById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Doenca " + id + " not found.");
-		}
+		return new DoencaResponse(facade.findDoencaById(id));
 	}
 	
 	@PatchMapping("doenca/{id}")
@@ -68,8 +65,11 @@ public class DoencaController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new DoencaResponse(facade.updateDoenca(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class DoencaController {
 		try {
 			facade.deleteDoenca(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

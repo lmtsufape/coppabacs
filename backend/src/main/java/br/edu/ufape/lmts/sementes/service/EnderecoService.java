@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.Endereco;
 import br.edu.ufape.lmts.sementes.repository.EnderecoRepository;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class EnderecoService implements EnderecoServiceInterface {
@@ -23,7 +24,7 @@ public class EnderecoService implements EnderecoServiceInterface {
 	}
 
 	public Endereco findEnderecoById(long id) {
-		return repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Endereco with id = " + id));
+		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Endereco with id = " + id));
 	}
 
 	public List<Endereco> getAllEndereco(){
@@ -36,7 +37,7 @@ public class EnderecoService implements EnderecoServiceInterface {
 	}
 	
 	public void deleteEndereco(long id){
-		Endereco obj = repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Endereco with id = " + id));
+		Endereco obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Endereco with id = " + id));
 		repository.delete(obj);
 	}	
 	

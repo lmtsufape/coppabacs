@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.ItemRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.ItemResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Item;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class ItemController {
 	
 	@GetMapping("item/{id}")
 	public ItemResponse getItemById(@PathVariable Long id) {
-		try {
-			return new ItemResponse(facade.findItemById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Item " + id + " not found.");
-		}
+		return new ItemResponse(facade.findItemById(id));
 	}
 	
 	@PatchMapping("item/{id}")
@@ -68,8 +65,11 @@ public class ItemController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new ItemResponse(facade.updateItem(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class ItemController {
 		try {
 			facade.deleteItem(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

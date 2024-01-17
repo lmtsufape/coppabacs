@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.EmpalhamentoRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.EmpalhamentoResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Empalhamento;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class EmpalhamentoController {
 	
 	@GetMapping("empalhamento/{id}")
 	public EmpalhamentoResponse getEmpalhamentoById(@PathVariable Long id) {
-		try {
-			return new EmpalhamentoResponse(facade.findEmpalhamentoById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Empalhamento " + id + " not found.");
-		}
+		return new EmpalhamentoResponse(facade.findEmpalhamentoById(id));
 	}
 	
 	@PatchMapping("empalhamento/{id}")
@@ -68,8 +65,11 @@ public class EmpalhamentoController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new EmpalhamentoResponse(facade.updateEmpalhamento(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class EmpalhamentoController {
 		try {
 			facade.deleteEmpalhamento(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

@@ -6,7 +6,6 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +19,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.CoppabacsRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.CoppabacsResponse;
-import br.edu.ufape.lmts.sementes.exceptions.EmailExistsException;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Coppabacs;
+import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import jakarta.validation.Valid;
 
 @CrossOrigin (origins = "http://localhost:8081" )

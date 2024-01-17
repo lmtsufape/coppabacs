@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.ufape.lmts.sementes.controller.AuthController;
-import br.edu.ufape.lmts.sementes.exceptions.EmailExistsException;
 import br.edu.ufape.lmts.sementes.model.Admin;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.model.AtividadeRural;
@@ -75,6 +73,7 @@ import br.edu.ufape.lmts.sementes.service.UsoOcupacaoTerraService;
 import br.edu.ufape.lmts.sementes.service.UsuarioService;
 import br.edu.ufape.lmts.sementes.service.infraestruturaHidricaService;
 import br.edu.ufape.lmts.sementes.service.sementeDoencaService;
+import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 
 @Service
 public class Facade {
@@ -84,8 +83,6 @@ public class Facade {
 //	private AuthController authController;
 //	
 //	public 
-	
-	
 	
 	//sementeDoenca--------------------------------------------------------------
 	@Autowired
@@ -149,12 +146,9 @@ public class Facade {
 	@Autowired
 	private UsuarioService  usuarioService;
 		
-	public Usuario saveUsuario(Usuario newInstance) throws EmailExistsException{
+	public Usuario saveUsuario(Usuario newInstance) {
 		try {
 			return usuarioService.saveUsuario(newInstance);
-			
-		} catch (EmailExistsException e) {
-			throw e;
 			
 		} catch (Exception e) {
 	        throw new RuntimeException("Erro ao salvar o usuário", e);
@@ -190,13 +184,9 @@ public class Facade {
 		return coppabacsService.getAllCoppabacs();
 	}
 	
-	public Coppabacs saveCoppabacs(Coppabacs newInstance) throws EmailExistsException {
+	public Coppabacs saveCoppabacs(Coppabacs newInstance) {
 		try {
 			return coppabacsService.saveCoppabacs(newInstance);
-			
-		} catch (EmailExistsException e) {
-			throw e;
-			
 		} catch (Exception e) {
 	        throw new RuntimeException("Erro ao salvar o usuário", e);
 		}
@@ -483,7 +473,7 @@ public class Facade {
 	@Autowired
 	private GerenteService  gerenteService;
 		
-	public Gerente saveGerente(Gerente newInstance) {
+	public Gerente saveGerente(Gerente newInstance) throws EmailExistsException {
 		return gerenteService.saveGerente(newInstance);
 	}
 
@@ -857,9 +847,9 @@ public class Facade {
 
 	//Admin--------------------------------------------------------------
 	@Autowired
-	private AdminService  adminService;
+	private AdminService adminService;
 		
-	public Admin saveAdmin(Admin newInstance) {
+	public Admin saveAdmin(Admin newInstance) throws EmailExistsException {
 		return adminService.saveAdmin(newInstance);
 	}
 

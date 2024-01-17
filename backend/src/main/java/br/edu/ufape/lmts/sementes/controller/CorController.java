@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.CorRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.CorResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Cor;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class CorController {
 	
 	@GetMapping("cor/{id}")
 	public CorResponse getCorById(@PathVariable Long id) {
-		try {
-			return new CorResponse(facade.findCorById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cor " + id + " not found.");
-		}
+		return new CorResponse(facade.findCorById(id));
 	}
 	
 	@PatchMapping("cor/{id}")
@@ -68,8 +65,11 @@ public class CorController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new CorResponse(facade.updateCor(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class CorController {
 		try {
 			facade.deleteCor(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

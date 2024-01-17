@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.EnderecoRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.EnderecoResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Endereco;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class EnderecoController {
 	
 	@GetMapping("endereco/{id}")
 	public EnderecoResponse getEnderecoById(@PathVariable Long id) {
-		try {
-			return new EnderecoResponse(facade.findEnderecoById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Endereco " + id + " not found.");
-		}
+		return new EnderecoResponse(facade.findEnderecoById(id));
 	}
 	
 	@PatchMapping("endereco/{id}")
@@ -68,8 +65,11 @@ public class EnderecoController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new EnderecoResponse(facade.updateEndereco(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class EnderecoController {
 		try {
 			facade.deleteEndereco(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}

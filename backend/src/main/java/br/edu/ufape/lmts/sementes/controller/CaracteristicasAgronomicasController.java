@@ -21,6 +21,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.CaracteristicasAgronomi
 import br.edu.ufape.lmts.sementes.controller.dto.response.CaracteristicasAgronomicasResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.CaracteristicasAgronomicas;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
@@ -48,11 +49,7 @@ public class CaracteristicasAgronomicasController {
 	
 	@GetMapping("caracteristicasAgronomicas/{id}")
 	public CaracteristicasAgronomicasResponse getCaracteristicasAgronomicasById(@PathVariable Long id) {
-		try {
-			return new CaracteristicasAgronomicasResponse(facade.findCaracteristicasAgronomicasById(id));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "CaracteristicasAgronomicas " + id + " not found.");
-		}
+		return new CaracteristicasAgronomicasResponse(facade.findCaracteristicasAgronomicasById(id));
 	}
 	
 	@PatchMapping("caracteristicasAgronomicas/{id}")
@@ -68,8 +65,11 @@ public class CaracteristicasAgronomicasController {
 			
 			typeMapper.map(obj, oldObject);	
 			return new CaracteristicasAgronomicasResponse(facade.updateCaracteristicasAgronomicas(oldObject));
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
@@ -79,8 +79,11 @@ public class CaracteristicasAgronomicasController {
 		try {
 			facade.deleteCaracteristicasAgronomicas(id);
 			return "";
-		} catch (RuntimeException ex) {
-			throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
 		}
 		
 	}
