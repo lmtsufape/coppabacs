@@ -6,7 +6,7 @@ export default function AssociadosPage(){
   return(
     <div>
       <Header />
-      <ListAssociados listName=" > Layout em revisão" table2="nome" table4="Ação" content2="Geronimo"/>
+      <ListAssociados listName=" > Layout em revisãoo" table2="nome" table4="Ação" content2="Geronimo"/>
 
       <Footer />
 
