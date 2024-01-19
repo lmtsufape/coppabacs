@@ -22,7 +22,7 @@ public class AgricultorService implements AgricultorServiceInterface {
 
 	@Transactional
 	public Agricultor saveAgricultor(Agricultor agricultor) throws EmailExistsException {
-
+		System.out.println("olá");
 		usuario.saveUsuario(agricultor);
 		return repository.save(agricultor);
 	}
