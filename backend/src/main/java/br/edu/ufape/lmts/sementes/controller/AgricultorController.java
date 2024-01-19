@@ -93,7 +93,7 @@ public class AgricultorController {
 		}
 
 	}
-	@PreAuthorize("hasRole('GERENTE')")
+	@PreAuthorize("hasRole('GERENTE', 'COPPABACS')")
 	@PatchMapping("validar/{id}")
 	public ResponseEntity validateAgricultor(@PathVariable long id) {
 		facade.validateAgricultor(id);

@@ -876,7 +876,6 @@ public class Facade {
 		adminService.deleteAdmin(id);
 	}
 	
-
 	//Agricultor--------------------------------------------------------------
 	@Autowired
 	private AgricultorService  agricultorService;
