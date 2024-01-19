@@ -31,14 +31,14 @@ import jakarta.validation.Valid;
 
 @CrossOrigin (origins = "http://localhost:8081/" )
 @RestController
-@RequestMapping("/api/v1/agricultor")
+@RequestMapping("/api/v1/")
 public class AgricultorController {
 	@Autowired
 	private Facade facade;
 	@Autowired
 	private ModelMapper modelMapper;
 
-	@GetMapping("")
+	@GetMapping("agricultor")
 	public List<AgricultorResponse> getAllAgricultor() {
 		return facade.getAllAgricultor()
 			.stream()
@@ -46,18 +46,19 @@ public class AgricultorController {
 			.toList();
 	}
 
-	@PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE,
-	        produces = MediaType.APPLICATION_JSON_VALUE)
+//	@PostMapping(value = "agricultor", consumes = MediaType.APPLICATION_JSON_VALUE,
+//	        produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping("agricultor")
 	public AgricultorResponse createAgricultor(@Valid @RequestBody AgricultorRequest newObj) throws EmailExistsException {
 		return new AgricultorResponse(facade.saveAgricultor(newObj.convertToEntity()));
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("agricultor/{id}")
 	public AgricultorResponse getAgricultorById(@PathVariable Long id) {
 		return new AgricultorResponse(facade.findAgricultorById(id));
 	}
 
-	@PatchMapping("/{id}")
+	@PatchMapping("agricultor/{id}")
 	public AgricultorResponse updateAgricultor(@PathVariable Long id, @Valid @RequestBody AgricultorRequest obj) {
 		try {
 			//Agricultor o = obj.convertToEntity();
@@ -79,7 +80,7 @@ public class AgricultorController {
 
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("agricultor/{id}")
 	public String deleteAgricultor(@PathVariable Long id) {
 		try {
 			facade.deleteAgricultor(id);
@@ -92,8 +93,8 @@ public class AgricultorController {
 		}
 
 	}
-	@PreAuthorize("hasRole('GERENTE')")
-	@PatchMapping("/validar/{id}")
+	@PreAuthorize("hasRole('GERENTE', 'COPPABACS')")
+	@PatchMapping("validar/{id}")
 	public ResponseEntity validateAgricultor(@PathVariable long id) {
 		facade.validateAgricultor(id);
 		return ResponseEntity.status(HttpStatus.OK).build();

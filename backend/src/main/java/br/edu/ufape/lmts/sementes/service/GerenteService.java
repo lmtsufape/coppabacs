@@ -15,12 +15,9 @@ import jakarta.transaction.Transactional;
 public class GerenteService implements GerenteServiceInterface {
 	@Autowired
 	private GerenteRepository repository;
-	@Autowired
-	private UsuarioService usuario;
 
 	@Transactional
 	public Gerente saveGerente(Gerente newInstance) throws EmailExistsException {
-		usuario.saveUsuario(newInstance);
 		return repository.save(newInstance);
 	}
 
