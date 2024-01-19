@@ -17,13 +17,9 @@ import jakarta.transaction.Transactional;
 public class AgricultorService implements AgricultorServiceInterface {
 	@Autowired
 	private AgricultorRepository repository;
-	@Autowired
-	private UsuarioService usuario;
 
 	@Transactional
 	public Agricultor saveAgricultor(Agricultor agricultor) throws EmailExistsException {
-		System.out.println("olá");
-		usuario.saveUsuario(agricultor);
 		return repository.save(agricultor);
 	}
 

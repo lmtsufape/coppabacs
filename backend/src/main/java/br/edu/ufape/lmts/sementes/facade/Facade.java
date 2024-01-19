@@ -184,8 +184,9 @@ public class Facade {
 		return coppabacsService.getAllCoppabacs();
 	}
 	
-	public Coppabacs saveCoppabacs(Coppabacs newInstance) {
+	public Coppabacs saveCoppabacs(Coppabacs newInstance) throws EmailExistsException {
 		try {
+			usuarioService.saveUsuario(newInstance);
 			return coppabacsService.saveCoppabacs(newInstance);
 		} catch (Exception e) {
 	        throw new RuntimeException("Erro ao salvar o usuário", e);
@@ -474,6 +475,7 @@ public class Facade {
 	private GerenteService  gerenteService;
 		
 	public Gerente saveGerente(Gerente newInstance) throws EmailExistsException {
+		usuarioService.saveUsuario(newInstance);
 		return gerenteService.saveGerente(newInstance);
 	}
 
@@ -850,6 +852,7 @@ public class Facade {
 	private AdminService adminService;
 		
 	public Admin saveAdmin(Admin newInstance) throws EmailExistsException {
+		usuarioService.saveUsuario(newInstance);
 		return adminService.saveAdmin(newInstance);
 	}
 
@@ -879,6 +882,7 @@ public class Facade {
 	private AgricultorService  agricultorService;
 		
 	public Agricultor saveAgricultor(Agricultor newInstance) throws EmailExistsException {
+		usuarioService.saveUsuario(newInstance);
 		return agricultorService.saveAgricultor(newInstance);
 	}
 
