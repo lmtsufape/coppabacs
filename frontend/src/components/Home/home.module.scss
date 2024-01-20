@@ -59,6 +59,11 @@
                 outline: none;
             }}
       }
+      
+      &_errorLogin{
+        color: red;
+      }
+
       &_subtitle{
         text-align: right;
         font-size: 0.8em;
