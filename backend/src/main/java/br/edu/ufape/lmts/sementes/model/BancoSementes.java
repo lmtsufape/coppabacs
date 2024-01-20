@@ -69,5 +69,4 @@ public  class BancoSementes  {
 	@JoinColumn(name = "bancoSementes_id")
 	@ToString.Exclude
 	private List<TransacaoGenerica> transacaoGenerica; 
-
 }
