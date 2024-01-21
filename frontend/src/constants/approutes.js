@@ -1,29 +1,13 @@
 export const APP_ROUTES = {
-  privates:{
-    inicio:{
-      name: "/inicio",
-    },
-
-    sementes:{
-      name: "/sementes",
-    },
-    associados:{
-      name: "/associados",
+  private:{
+    list:{
+      name: "/inicio"
     },
     unauthorized:{
-      name: "/unauthorized",
-    },
+      name: "/unauthorized"
+    }
   },
   public:{
-    home: '/',
-    register:{
-      name: "/register",
-    },
-    mural:{
-      name: "/mural",
-    },
-    bancoSementes:{
-      name: "/bancoSementes",
-    },
+    home: '/'
   },
 }

@@ -1,13 +1,19 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Footer from "./Footer";
-import style from "./home.module.scss";
 import { useDispatch, useSelector } from "react-redux";
+import { setStorageItem } from "@/utils/localStore";
 import { useMutation } from "react-query";
+import { APP_ROUTES } from "@/constants/approutes";
 import { postLogin } from "@/api/login/postLogin";
+import { RootState } from '@/redux/store'
+import { setUserLogin } from "@/redux/userLogin/userLoginSlice";
+
+
 import api from "@/api/http-common";
 
+import style from "./home.module.scss";
+import Footer from "./Footer";
 
 
 const Home = () => {
@@ -15,9 +21,6 @@ const Home = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const {push} = useRouter();
-  const setStorageItem = (key, value) => {
-    localStorage.setItem(key, JSON.stringify(value));
-  };
 
   const userLogin = useSelector((state) => state.userLogin);
 
@@ -29,8 +32,10 @@ const Home = () => {
       },{
         onSuccess: (res) =>{
           api.defaults.headers.authorization = `Bearer ${res.data.acess_token}`;
+          console.log("teste", res.data)
           setStorageItem("token", res.data.acess_token)
-          dispatch(setEmail(email));
+          push(APP_ROUTES.private.list.name);
+          dispatch(setUserLogin(email));
           setStorageItem("userLogin", email);
         },
         onError: (error) => {
@@ -53,7 +58,7 @@ const Home = () => {
           <p className={style.home__content_subtitle}>Lorem ipsum dolor sit amet consectetur.
           Cursus donec lectus vel diam gravida mauris nisi erat. Pellentesque tortor ac ac
           nibh hendrerit risus viverra. Enim consectetur tristique turpis volutpat non egestas a
-          met velit platea. Enim nullam senectus turpis lacus volutpat magnis morbi pellentesque.
+          met velit platea. Enim nullam senectus.backgroundDro turpis lacus volutpat magnis morbi pellentesque.
           Blandit justo dolor auctor eu pellentesque augue molestie vitae odio.</p>
         </div>
         <form onSubmit={ (e) => { e.preventDefault(); mutate(); }}>
@@ -69,7 +74,7 @@ const Home = () => {
             </label>
             <h2 className={style.home__login_subtitle}>Esqueceu a senha?</h2>
             {status === "error" ? <p className={style.home__login_error}>Email ou senha incorretos</p> : null}
-            <button className={style.home__login_button}>Entrar</button>
+            <button className={`${style.home__login_button} ${status === "loading" || status === "success" ? style.active : ""}`}>Entrar</button>
             <h2 className={style.home__login_subtitle1}>Não possui conta? <span>Crie Agora</span></h2>
           </div>
         </form>
