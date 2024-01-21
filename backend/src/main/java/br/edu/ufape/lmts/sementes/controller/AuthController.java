@@ -18,7 +18,7 @@ import br.edu.ufape.lmts.sementes.auth.TokenService;
 import br.edu.ufape.lmts.sementes.controller.dto.request.AuthRequest;
 
 @RestController
-@CrossOrigin (origins = "http://localhost:8081/" )
+@CrossOrigin (origins = "http://localhost:3000/" )
 @RequestMapping("/api/v1/")
 public class AuthController {
 
@@ -31,9 +31,7 @@ public class AuthController {
 
 	@PostMapping("login")
 	public ResponseEntity<Void> login(@RequestBody AuthRequest data) {
-		System.out.println(data);
 		var userNamePassword = new UsernamePasswordAuthenticationToken(data.getEmail(), data.getSenha());
-		System.out.println("usernamepassword " + userNamePassword);
 		Authentication auth = this.authenticationManager.authenticate(userNamePassword);
 		String token = tokenService.generateToken((AuthUser) auth.getPrincipal());
 		return ResponseEntity.ok().header("Authorization", "Bearer " + token).header("access-control-expose-headers", "Authorization").build();
