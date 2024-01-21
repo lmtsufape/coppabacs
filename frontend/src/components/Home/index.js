@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import style from "./home.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useMutation } from "react-query";
+import { postLogin } from "@/api/login/postLogin";
 
 
 const Home = () => {
@@ -61,7 +62,7 @@ const Home = () => {
           </label>
           <h2 className={style.home__login_subtitle}>Esqueceu a senha?</h2>
           {status === "error" ? <p className={style.home__login_error}>Email ou senha incorretos</p> : null}
-          <button className={style.home__login_button}>Entrar</button>
+          <button className={style.home__login_button} onClick={mutate}>Entrar</button>
           <h2 className={style.home__login_subtitle1}>Não possui conta? <span>Crie Agora</span></h2>
         </div>
       </div>

@@ -16,18 +16,8 @@ const inter = Inter({ subsets: ['latin'] })
 //  title: 'Coppabacs',
 //  description: 'Banco de sementes',
 //}
-/**Substituir dentro do body
- * <ProviderQuery>
-          <ProviderRedux>
-            {isPublicPage && children}
-            {!isPublicPage && (
-              <PrivateRoute>
-                {children}
-              </PrivateRoute>
-            )}
-            
-          </ProviderRedux>
-        </ProviderQuery> */
+//Substituir dentro do body
+
 export default function RootLayout({
   children,
 }) {
@@ -37,7 +27,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-            {children}      
+          <ProviderQuery>
+              <ProviderRedux>
+                {isPublicPage && children}
+                {!isPublicPage && (
+                  <PrivateRoute>
+                    {children}
+                  </PrivateRoute>
+                )}
+                
+              </ProviderRedux>
+            </ProviderQuery>     
       </body>
     </html>
   )
