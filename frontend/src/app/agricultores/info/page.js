@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Home/Footer";
-import ListAssociados from "@/components/ListAssociados";
+import ListAssociados from "@/components/ListAgricultor";
 export default function AssociadosPage(){
 
   return(

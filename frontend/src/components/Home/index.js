@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setStorageItem } from "@/utils/localStore";
 import { useMutation } from "react-query";
-import { APP_ROUTES } from "@/constants/approutes";
+import { APP_ROUTES } from "@/constants/app-routes";
 import { postLogin } from "@/api/login/postLogin";
 import { RootState } from '@/redux/store'
 import { setUserLogin } from "@/redux/userLogin/userLoginSlice";
@@ -31,9 +31,8 @@ const Home = () => {
         return postLogin(email, senha);
       },{
         onSuccess: (res) =>{
-          api.defaults.headers.authorization = `Bearer ${res.data.acess_token}`;
-          console.log("teste", res.data)
-          setStorageItem("token", res.data.acess_token)
+          api.defaults.headers.authorization = `${res.headers.authorization}`;
+          setStorageItem("token", res.headers.authorization)
           push(APP_ROUTES.private.list.name);
           dispatch(setUserLogin(email));
           setStorageItem("userLogin", email);

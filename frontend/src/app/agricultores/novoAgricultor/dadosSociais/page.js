@@ -1,9 +1,9 @@
 "use client"
 import React from "react";
-import NewFarmerRuralActivity from "@/components/NewFarmerForm/IndexThree";
+import NewFarmerFormSocialData from "@/components/NewFarmerForm/IndexTwo";
 import Footer from "@/components/Home/Footer";
 import Header from "@/components/Home/Header"
-import styles from "@/app/associados/novoAssociado/index.module.scss"
+import styles from "@/app/agricultor/novoAgricultor/index.module.scss"
 
 
 export default function NewRegisterFarmerSocialData() {
@@ -14,16 +14,16 @@ export default function NewRegisterFarmerSocialData() {
             </div>
             <div>
                 <h1 className={styles.title}>
-                    Atividade Rural
+                    Dados Sociais
                 </h1>
             </div>
+
             <div>
-                <NewFarmerRuralActivity />
+                <NewFarmerFormSocialData />
             </div>
             <div>
-                <Footer />
+            <Footer />
             </div>
-            
         </div>
     );
 }
