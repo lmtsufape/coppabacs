@@ -46,7 +46,7 @@ export default function tableLayout({table1, table2, table3, table4, content1, c
           <tr >
             <td data-label="">{content1}</td>
             <td data-label="Nome">{content2}</td>
-            <td data-label="Responsavel">{content3}</td>
+            <td data-label="Quantidade">{content3}</td>
 
             <td>
               <div className={style.content__table_buttons}>
