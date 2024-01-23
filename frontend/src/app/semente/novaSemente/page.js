@@ -2,7 +2,7 @@ import React from "react";
 import NewSeedForm from "@/components/NewSeedForm/Index";
 import Footer from "@/components/Home/Footer";
 import Header from "@/components/Home/Header";
-import styles from "@/app/associados/novoAssociado/index.module.scss"
+import styles from "@/app/agricultores/novoAgricultor/index.module.scss"
 
 export default function NewRegisterFarmer() {
     return (
