@@ -18,9 +18,7 @@ export default function NewRegisterFarmer() {
             <div>
                 <NewSeedForm />
             </div>
-            <div>
             <Footer />
-            </div>
         </div>
     );
 }
