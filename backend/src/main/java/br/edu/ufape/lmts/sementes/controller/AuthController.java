@@ -31,15 +31,12 @@ public class AuthController {
 
 	@PostMapping("login")
 	public ResponseEntity<Void> login(@RequestBody AuthRequest data) {
-		System.out.println(data.getEmail());
-		System.out.println(data.getSenha());
 		var userNamePassword = new UsernamePasswordAuthenticationToken(data.getEmail(), data.getSenha());
-		System.out.println("user name senha " + userNamePassword);
 		Authentication auth = this.authenticationManager.authenticate(userNamePassword);
 		String token = tokenService.generateToken((AuthUser) auth.getPrincipal());
-		System.out.println(token);
 		return ResponseEntity.ok().header("Authorization", "Bearer " + token).header("access-control-expose-headers", "Authorization").build();
 	}
+	
 	@PostMapping("user/current")
 	public Authentication getCurrentUser() {
 		return SecurityContextHolder.getContext().getAuthentication();
