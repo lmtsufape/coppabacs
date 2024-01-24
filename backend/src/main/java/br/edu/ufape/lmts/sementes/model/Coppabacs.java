@@ -25,7 +25,7 @@ public class Coppabacs extends Usuario {
 		super(id, nome, email, senha, endereco, rg, cpf, dataNascimento, contato, imagem, nomePai, nomeMae, nis, tituloEleitor,
 				sexo, conjuge, postavel);
 		super.addRole(TipoUsuario.COPPABACS);
+		super.addRole(TipoUsuario.AGRICULTOR);
+		super.addRole(TipoUsuario.GERENTE);
 	}
-
-
 }

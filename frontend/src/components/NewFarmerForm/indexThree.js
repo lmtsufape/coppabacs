@@ -6,6 +6,8 @@ import GreenButton from "@/components/FormPattern/Buttons/GreenButton/greenButto
 import styles from "./Index.module.scss";
 import Checkbox from "@/components/FormPattern/Forms/Checkbox/checkbox";
 import Label from "@/components/FormPattern/Forms/Label/label";
+import WhiteButton from "../FormPattern/Buttons/WhiteButton/whiteButton";
+import GreenButton from "../FormPattern/Buttons/GreenButton/greenButton";
 
 export default function RuralActivity() {
     const [ruralActivity, setRuralActivity] = useState({

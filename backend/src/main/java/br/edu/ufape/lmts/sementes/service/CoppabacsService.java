@@ -15,13 +15,9 @@ public class CoppabacsService {
 	
 	@Autowired
 	private CoppabacsRepository repository;
-	@Autowired
-	private UsuarioService usuario;
 	
 	@Transactional
 	public Coppabacs saveCoppabacs(Coppabacs coppabacs) throws EmailExistsException {
-		
-		usuario.saveUsuario(coppabacs);
 		
 		return repository.save(coppabacs);
 	}

@@ -1,0 +1,73 @@
+.header{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  
+  font-size: 1em;
+  
+  margin: 5em 2em 2em 2em;
+  h1{
+    font-size: 1em;
+    font-weight: bold;
+  }
+  &__title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 1em;
+    margin: 0em 0em 3em 0em;
+  }
+  &__title_voltar{
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    &_link{
+      color: #000;
+    } 
+  }
+  &__title_guia{
+    display: flex;
+    align-items: center;
+    h1:first-child{
+      color: #A7A7A7;
+    }
+    h1:last-child{
+      color: #245501;
+    }
+  }
+  &__container{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 100%;
+    font-size: 1em;
+    gap: 1em;
+    margin-left: 2em;
+  button{
+    display: flex;
+    align-items: center;
+
+    gap: 0.5em;
+    padding: 1em;
+
+    font-weight: bold;
+    color: #68655C;
+    background-color: #fff;
+    border: #68655C 1px solid;
+    border-radius: 0.8em;
+  }
+  &_link{
+    color: #68655C;
+
+    text-decoration: none;
+  }
+
+
+
+    
+  }
+
+
+}

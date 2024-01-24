@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -33,15 +34,18 @@ public  class BancoSementes  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
 	private long id;
+	@NotBlank
 	private String nome;
-	private String municipio;
+	@NotBlank
 	private String comunidade;
 	private String anoFundacao;
 	private String historiaBanco;
 	private String variedadesTrabalhadas;
-	private String resposavel1;
+	
+	@OneToMany(mappedBy = "bancoSementes")
+	private List<Gerente> gerentes;
+	
 	private String contatoResponsavel1;
-	private String resposavel2;
 	private String contatoResponsavel2;
 	@OneToOne(cascade = CascadeType.ALL,
 		orphanRemoval = true		
@@ -53,10 +57,6 @@ public  class BancoSementes  {
 	)
 	@ToString.Exclude
 	private ObjetosBancoSementes objetosBancoSementes; 
-    	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "tecnico_id")
-	@ToString.Exclude
-	private Gerente gerente; 
 	@OneToMany
 	@JoinColumn(name = "bancoSementes_id")
 	@ToString.Exclude
@@ -69,5 +69,4 @@ public  class BancoSementes  {
 	@JoinColumn(name = "bancoSementes_id")
 	@ToString.Exclude
 	private List<TransacaoGenerica> transacaoGenerica; 
-
 }
