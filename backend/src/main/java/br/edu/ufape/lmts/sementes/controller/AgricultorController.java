@@ -29,7 +29,7 @@ import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
-@CrossOrigin (origins = "http://localhost:3000/" )
+@CrossOrigin (origins = "http://localhost:3000/", allowCredentials = "true")
 @RestController
 @RequestMapping("/api/v1/")
 public class AgricultorController {

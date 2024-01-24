@@ -16,15 +16,11 @@ import lombok.Setter;
 public  class BancoSementesResponse  {
 	private Long id;
 	private String nome;
-	private String municipio;
 	private String comunidade;
 	private String anoFundacao;
 	private String historiaBanco;
 	private String variedadesTrabalhadas;
-	private String resposavel1;
-	private String contatoResponsavel1;
-	private String resposavel2;
-	private String contatoResponsavel2;
+	private List<GerenteResponse> gerente;
 	private EnderecoResponse endereco; 
 	private ObjetosBancoSementesResponse objetosBancoSementes; 
 	private GerenteResponse tecnico; 

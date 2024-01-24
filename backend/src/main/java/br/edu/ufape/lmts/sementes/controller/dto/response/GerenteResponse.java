@@ -12,7 +12,8 @@ import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor
 public  class GerenteResponse extends UsuarioResponse {
-
+	
+	private BancoSementesResponse bancoSementes;
 	public GerenteResponse(Gerente obj) {
 		super(obj);
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
