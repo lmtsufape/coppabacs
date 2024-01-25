@@ -21,6 +21,8 @@ import org.springframework.web.server.ResponseStatusException;
 import br.edu.ufape.lmts.sementes.controller.dto.request.GerenteRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.GerenteResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
+import br.edu.ufape.lmts.sementes.model.Agricultor;
+import br.edu.ufape.lmts.sementes.model.BancoSementes;
 import br.edu.ufape.lmts.sementes.model.Gerente;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
@@ -46,8 +48,11 @@ public class GerenteController {
 	
 	@PostMapping("gerente")
 	public GerenteResponse createGerente(@RequestBody GerenteRequest newObj) throws EmailExistsException {
-		System.out.println(newObj);
-		return new GerenteResponse(facade.saveGerente(newObj.convertToEntity()));
+		Gerente g = newObj.convertToEntity();
+		BancoSementes banco = new BancoSementes();
+		banco.setId(newObj.getBancoId());
+		g.setBancoSementes(banco);
+		return new GerenteResponse(facade.saveGerente(g));
 	}
 	
 	@GetMapping("gerente/{id}")

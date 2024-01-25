@@ -485,7 +485,11 @@ public class Facade {
 	private GerenteService  gerenteService;
 		
 	public Gerente saveGerente(Gerente newInstance) throws EmailExistsException {
+		
+		bancoSementesService.findBancoSementesById(newInstance.getBancoSementes().getId());
+		
 		usuarioService.saveUsuario(newInstance);
+		
 		return gerenteService.saveGerente(newInstance);
 	}
 
@@ -891,7 +895,7 @@ public class Facade {
 	private AgricultorService  agricultorService;
 		
 	public Agricultor saveAgricultor(Agricultor newInstance) throws EmailExistsException {
-		BancoSementes banco = bancoSementesService.findBancoSementesById(newInstance.getBancoSementes().getId());
+		bancoSementesService.findBancoSementesById(newInstance.getBancoSementes().getId());
 		usuarioService.saveUsuario(newInstance);
 		return agricultorService.saveAgricultor(newInstance);
 	}

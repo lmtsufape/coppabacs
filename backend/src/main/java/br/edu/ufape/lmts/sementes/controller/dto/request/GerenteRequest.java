@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor 
 public  class GerenteRequest extends UsuarioRequest {
 	
-	private BancoSementesRequest bancoSementes;
+	private long bancoId;
 
 	public Gerente convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
