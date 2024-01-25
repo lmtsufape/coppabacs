@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.model.BancoSementes;
 import br.edu.ufape.lmts.sementes.repository.BancoSementesRepository;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
@@ -39,8 +40,5 @@ public class BancoSementesService implements BancoSementesServiceInterface {
 	public void deleteBancoSementes(long id){
 		BancoSementes obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist BancoSementes with id = " + id));
 		repository.delete(obj);
-	}	
-	
-	
-	
+	}
 }

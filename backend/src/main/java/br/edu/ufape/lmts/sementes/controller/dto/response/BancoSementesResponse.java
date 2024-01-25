@@ -1,7 +1,5 @@
 package br.edu.ufape.lmts.sementes.controller.dto.response;
 
-import java.util.List;
-
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
@@ -20,15 +18,7 @@ public  class BancoSementesResponse  {
 	private String anoFundacao;
 	private String historiaBanco;
 	private String variedadesTrabalhadas;
-	private List<GerenteResponse> gerente;
 	private EnderecoResponse endereco; 
-	private ObjetosBancoSementesResponse objetosBancoSementes; 
-	private GerenteResponse tecnico; 
-	private List<DoacaoUsuarioResponse> doacaoUsuario; 
-	private List<RetiradaUsuarioResponse> retiradaUsuario; 
-	private List<TransacaoGenericaResponse> transacaoGenerica; 
-
-
 
 	public BancoSementesResponse(BancoSementes obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
