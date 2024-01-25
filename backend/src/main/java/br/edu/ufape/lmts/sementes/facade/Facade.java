@@ -387,6 +387,11 @@ public class Facade {
 		System.out.println("agricultores do banco: " + banco.getAgricultores());
 		return banco.getAgricultores();
 	}
+	
+	public List<Gerente> getAllGerentesByBanco(long id) {
+		BancoSementes banco = bancoSementesService.findBancoSementesById(id);
+		return banco.getGerentes();
+	}
 
 	//RetiradaUsuario--------------------------------------------------------------
 	@Autowired
