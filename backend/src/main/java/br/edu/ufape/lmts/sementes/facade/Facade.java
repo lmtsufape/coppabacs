@@ -382,7 +382,7 @@ public class Facade {
 		bancoSementesService.deleteBancoSementes(id);
 	}
 	
-	public List<Agricultor> getAllAgrgetAllAgricultoresByBancoicultor(long id) {
+	public List<Agricultor> getAllAgricultoresByBanco(long id) {
 		
 		try {
 			BancoSementes banco = bancoSementesService.findBancoSementesById(id);
