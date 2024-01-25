@@ -13,7 +13,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Getter @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Gerente extends Usuario {
@@ -31,4 +30,12 @@ public class Gerente extends Usuario {
 	}
 
 	public Gerente() {}
+
+	public BancoSementes getBancoSementes() {
+		return bancoSementes;
+	}
+
+	public void setBancoSementes(BancoSementes bancoSementes) {
+		this.bancoSementes = bancoSementes;
+	}
 }
