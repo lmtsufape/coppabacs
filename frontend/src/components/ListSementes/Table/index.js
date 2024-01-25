@@ -25,7 +25,7 @@ export default function tableLayout({table1, table2, table3, table4, content1, c
         <tr >
             <td data-label="">{content1}</td>
             <td data-label="Nome">{content2}</td>
-            <td data-label="Quantidade">{content3}</td>
+            <td data-label="Safra">{content3}</td>
 
             <td>
               <div className={style.content__table_buttons}>
@@ -33,11 +33,6 @@ export default function tableLayout({table1, table2, table3, table4, content1, c
                 <button>
                   <span>
                     <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26}/>
-                  </span>
-                </button>
-                <button>
-                  <span>
-                    <Image src="/assets/iconLixeira.svg" alt="Desativar" width={27} height={26}/>
                   </span>
                 </button>
               </div>
@@ -46,7 +41,7 @@ export default function tableLayout({table1, table2, table3, table4, content1, c
           <tr >
             <td data-label="">{content1}</td>
             <td data-label="Nome">{content2}</td>
-            <td data-label="Quantidade">{content3}</td>
+            <td data-label="Safra">{content3}</td>
 
             <td>
               <div className={style.content__table_buttons}>
@@ -54,11 +49,6 @@ export default function tableLayout({table1, table2, table3, table4, content1, c
                 <button>
                   <span>
                     <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26}/>
-                  </span>
-                </button>
-                <button>
-                  <span>
-                    <Image src="/assets/iconLixeira.svg" alt="Desativar" width={27} height={26}/>
                   </span>
                 </button>
               </div>
