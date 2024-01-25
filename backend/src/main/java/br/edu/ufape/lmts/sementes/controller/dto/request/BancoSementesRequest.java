@@ -1,7 +1,5 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
-import java.util.List;
-
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
@@ -18,16 +16,7 @@ public  class BancoSementesRequest  {
 	private String anoFundacao;
 	private String historiaBanco;
 	private String variedadesTrabalhadas;
-	private String contatoResponsavel1;
-	private String contatoResponsavel2;
-	private List<GerenteRequest> gerentes;
 	private EnderecoRequest endereco; 
-	private ObjetosBancoSementesRequest objetosBancoSementes; 
-	private GerenteRequest tecnico; 
-	private List<DoacaoUsuarioRequest> doacaoUsuario; 
-	private List<RetiradaUsuarioRequest> retiradaUsuario; 
-	private List<TransacaoGenericaRequest> transacaoGenerica;
-
 
 	public BancoSementes convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

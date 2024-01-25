@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.BancoSementesRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.response.AgricultorResponse;
 import br.edu.ufape.lmts.sementes.controller.dto.response.BancoSementesResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.BancoSementes;
@@ -85,6 +86,17 @@ public class BancoSementesController {
 			else
 				throw e;
 		}
+		
+	}
+	
+	@GetMapping("bancoSementes/{id}/agricultores")
+	public List<AgricultorResponse> getAllAgricultor(@PathVariable long id) {
+		
+		System.out.println(id);
+		return facade.getAllAgricultor(id)
+				.stream()
+				.map(AgricultorResponse::new)
+				.toList();
 		
 	}
 }
