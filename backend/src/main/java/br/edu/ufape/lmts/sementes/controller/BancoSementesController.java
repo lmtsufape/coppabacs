@@ -90,10 +90,10 @@ public class BancoSementesController {
 	}
 	
 	@GetMapping("bancoSementes/{id}/agricultores")
-	public List<AgricultorResponse> getAllAgricultor(@PathVariable long id) {
+	public List<AgricultorResponse> getAllAgricultoresByBanco(@PathVariable long id) {
 		
 		System.out.println(id);
-		return facade.getAllAgricultor(id)
+		return facade.getAllAgricultoresByBanco(id)
 				.stream()
 				.map(AgricultorResponse::new)
 				.toList();
