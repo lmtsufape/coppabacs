@@ -42,7 +42,7 @@ import br.edu.ufape.lmts.sementes.model.sementeDoenca;
 import br.edu.ufape.lmts.sementes.service.AdminService;
 import br.edu.ufape.lmts.sementes.service.AgricultorService;
 import br.edu.ufape.lmts.sementes.service.AtividadeRuralService;
-import br.edu.ufape.lmts.sementes.service.BancoSementesService;
+import br.edu.ufape.lmts.sementes.service.BancoSementesServiceInterface;
 import br.edu.ufape.lmts.sementes.service.CaracteristicasAgronomicasService;
 import br.edu.ufape.lmts.sementes.service.ConjugeService;
 import br.edu.ufape.lmts.sementes.service.CoppabacsService;
@@ -356,7 +356,7 @@ public class Facade {
 
 	//BancoSementes--------------------------------------------------------------
 	@Autowired
-	private BancoSementesService  bancoSementesService;
+	private BancoSementesServiceInterface  bancoSementesService;
 		
 	public BancoSementes saveBancoSementes(BancoSementes newInstance) {
 		return bancoSementesService.saveBancoSementes(newInstance);
@@ -382,6 +382,16 @@ public class Facade {
 		bancoSementesService.deleteBancoSementes(id);
 	}
 	
+	public List<Agricultor> getAllAgricultor(long id) {
+		
+		try {
+			BancoSementes banco = bancoSementesService.findBancoSementesById(id);
+			System.out.println("agricultores do banco: " + banco.getAgricultores());
+			return banco.getAgricultores();
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
 	//RetiradaUsuario--------------------------------------------------------------
 	@Autowired
@@ -881,6 +891,7 @@ public class Facade {
 	private AgricultorService  agricultorService;
 		
 	public Agricultor saveAgricultor(Agricultor newInstance) throws EmailExistsException {
+		BancoSementes banco = bancoSementesService.findBancoSementesById(newInstance.getBancoSementes().getId());
 		usuarioService.saveUsuario(newInstance);
 		return agricultorService.saveAgricultor(newInstance);
 	}

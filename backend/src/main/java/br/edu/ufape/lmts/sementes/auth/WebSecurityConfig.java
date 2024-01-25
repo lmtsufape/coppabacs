@@ -41,8 +41,8 @@ public class WebSecurityConfig {
 			.csrf(csrf -> csrf.disable())
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.authorizeHttpRequests(authz -> authz
-					.requestMatchers("/api/v1/gerente/**").hasRole("GERENTE")
 					.requestMatchers(HttpMethod.POST, "/api/v1/agricultor/**").permitAll()
+					.requestMatchers("/api/v1/gerente/**").hasRole("GERENTE")
 					.requestMatchers("/api/v1/agricultor/**").hasRole("AGRICULTOR")
 					.requestMatchers("/api/v1/sementes/**").permitAll()
 					.requestMatchers("/security/**").permitAll()

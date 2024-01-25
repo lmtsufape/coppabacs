@@ -24,12 +24,14 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.AgricultorRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.AgricultorResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
+import br.edu.ufape.lmts.sementes.model.BancoSementes;
+import br.edu.ufape.lmts.sementes.service.BancoSementesServiceInterface;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
-@CrossOrigin (origins = "http://localhost:3000/", allowCredentials = "true")
+@CrossOrigin (origins = "http://localhost:8081/", allowCredentials = "true")
 @RestController
 @RequestMapping("/api/v1/")
 public class AgricultorController {
@@ -46,11 +48,13 @@ public class AgricultorController {
 			.toList();
 	}
 
-//	@PostMapping(value = "agricultor", consumes = MediaType.APPLICATION_JSON_VALUE,
-//	        produces = MediaType.APPLICATION_JSON_VALUE)
 	@PostMapping("agricultor")
 	public AgricultorResponse createAgricultor(@Valid @RequestBody AgricultorRequest newObj) throws EmailExistsException {
-		return new AgricultorResponse(facade.saveAgricultor(newObj.convertToEntity()));
+		Agricultor agricultor = newObj.convertToEntity();
+		BancoSementes banco = new BancoSementes();
+		banco.setId(newObj.getBancoId());
+		agricultor.setBancoSementes(banco);
+		return new AgricultorResponse(facade.saveAgricultor(agricultor));
 	}
 
 	@GetMapping("agricultor/{id}")
@@ -61,7 +65,6 @@ public class AgricultorController {
 	@PatchMapping("agricultor/{id}")
 	public AgricultorResponse updateAgricultor(@PathVariable Long id, @Valid @RequestBody AgricultorRequest obj) {
 		try {
-			//Agricultor o = obj.convertToEntity();
 			Agricultor oldObject = facade.findAgricultorById(id);
 
 			TypeMap<AgricultorRequest, Agricultor> typeMapper = modelMapper

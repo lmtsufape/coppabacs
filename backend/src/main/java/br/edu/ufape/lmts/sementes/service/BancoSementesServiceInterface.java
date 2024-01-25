@@ -11,8 +11,5 @@ public interface BancoSementesServiceInterface {
 	void deleteBancoSementes(BancoSementes u);
 	void deleteBancoSementes(long id);
 	List<BancoSementes> getAllBancoSementes();
-    
-    
-
-    
+     
 }

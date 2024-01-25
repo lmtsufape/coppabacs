@@ -6,6 +6,7 @@ import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
+import br.edu.ufape.lmts.sementes.model.BancoSementes;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,7 +19,7 @@ public  class AgricultorRequest extends UsuarioRequest {
 	private String rendaFamiliar;
 	private String numeroPessoas;
 	private Double areaPropriedade;
-	private BancoSementesRequest bancoSementes; 
+	private long bancoId;
 	private List<AtividadeRuralRequest> atividadeRural; 
 	private List<infraestruturaHidricaRequest> infraestruturaHidrica; 
 	private List<UsoOcupacaoTerraRequest> usoOcupacaoTerra; 
@@ -28,8 +29,7 @@ public  class AgricultorRequest extends UsuarioRequest {
 	public Agricultor convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		Agricultor obj = modelMapper.map(this, Agricultor.class);
+		System.out.println(obj.toString());
 		return obj;
 	}
-
-
 }
