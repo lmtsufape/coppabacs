@@ -383,14 +383,9 @@ public class Facade {
 	}
 	
 	public List<Agricultor> getAllAgricultoresByBanco(long id) {
-		
-		try {
-			BancoSementes banco = bancoSementesService.findBancoSementesById(id);
-			System.out.println("agricultores do banco: " + banco.getAgricultores());
-			return banco.getAgricultores();
-		} catch (Exception e) {
-			return null;
-		}
+		BancoSementes banco = bancoSementesService.findBancoSementesById(id);
+		System.out.println("agricultores do banco: " + banco.getAgricultores());
+		return banco.getAgricultores();
 	}
 
 	//RetiradaUsuario--------------------------------------------------------------
