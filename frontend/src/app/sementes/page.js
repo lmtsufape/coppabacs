@@ -9,7 +9,7 @@ export default function SementesPage(){
       <ListSementes 
         listName="Sementes" 
         table2="Nome" 
-        table3="Quantidade"
+        table3="Safra"
         table4="Ação" 
         content1="Foto" 
         content2="Zezinho" 
