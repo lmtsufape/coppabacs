@@ -3,6 +3,7 @@ package br.edu.ufape.lmts.sementes.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,14 +42,14 @@ public  class Sementes  {
 	private float altitudeMinima;
 	private String caracteristicasPositiva;
 	private String caracteristicasNegativas;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.PERSIST, orphanRemoval = true)
 	@ToString.Exclude
 	private ToleranciaAdversidades toleranciaAdversidades; 
-	@OneToMany
+	@OneToMany(orphanRemoval = true)
 	@JoinColumn(name = "sementes_id")
 	@ToString.Exclude
 	private List<ProducaoSementes> producaoSementes; 
-	@OneToMany
+	@OneToMany(orphanRemoval = true)
 	@JoinColumn(name = "sementes_id")
 	@ToString.Exclude
 	private List<TabelaBancoSementes> tabelaBancoSementes;

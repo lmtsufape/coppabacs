@@ -1,7 +1,5 @@
 package br.edu.ufape.lmts.sementes.controller.dto.response;
 
-import java.util.List;
-
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
@@ -11,10 +9,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-
-@Getter @Setter @NoArgsConstructor
-public  class ToleranciaAdversidadesResponse  {
+@Getter
+@Setter
+@NoArgsConstructor
+public class ToleranciaAdversidadesResponse {
 	private Long id;
 	private Resistencia altaTemperatura;
 	private Resistencia baixaTemperatura;
@@ -28,13 +26,10 @@ public  class ToleranciaAdversidadesResponse  {
 	private Resistencia soloArenoso;
 	private Resistencia soloAcido;
 	private Resistencia soloBaixaFertilidade;
-	private List<ToleranciaAdversidadesResponse> toleranciaAdversidades; 
-
-
 
 	public ToleranciaAdversidadesResponse(ToleranciaAdversidades obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
-		modelMapper.map(obj, this);	
+		modelMapper.map(obj, this);
 	}
 
 }

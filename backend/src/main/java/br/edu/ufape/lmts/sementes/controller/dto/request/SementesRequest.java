@@ -1,7 +1,6 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import org.modelmapper.ModelMapper;
 
@@ -11,9 +10,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-@Getter @Setter @NoArgsConstructor 
-public  class SementesRequest  {
+@Getter
+@Setter
+@NoArgsConstructor
+public class SementesRequest {
 	private String nome;
 	private String descricao;
 	private String imagem;
@@ -27,16 +27,11 @@ public  class SementesRequest  {
 	private String caracteristicasPositiva;
 	private String caracteristicasNegativas;
 	private ToleranciaAdversidadesRequest toleranciaAdversidades;
-	private List<ProducaoSementesRequest> producaoSementes; 
-	private List<TabelaBancoSementesRequest> tabelaBancoSementes; 
-
 
 	public Sementes convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		Sementes obj = modelMapper.map(this, Sementes.class);
 		return obj;
 	}
-
-
 
 }

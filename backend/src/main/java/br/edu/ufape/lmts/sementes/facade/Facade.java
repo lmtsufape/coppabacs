@@ -929,10 +929,12 @@ public class Facade {
 	private ProducaoSementesService  producaoSementesService;
 		
 	public ProducaoSementes saveProducaoSementes(ProducaoSementes newInstance) {
+		findAgricultorById(newInstance.getAgricultor().getId());
 		return producaoSementesService.saveProducaoSementes(newInstance);
 	}
 
 	public ProducaoSementes updateProducaoSementes(ProducaoSementes transientObject) {
+		findAgricultorById(transientObject.getAgricultor().getId());
 		return producaoSementesService.updateProducaoSementes(transientObject);
 	}
 

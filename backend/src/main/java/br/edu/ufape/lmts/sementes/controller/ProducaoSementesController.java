@@ -62,7 +62,8 @@ public class ProducaoSementesController {
 
 			TypeMap<ProducaoSementesRequest, ProducaoSementes> typeMapper = modelMapper
 													.typeMap(ProducaoSementesRequest.class, ProducaoSementes.class)
-													.addMappings(mapper -> mapper.skip(ProducaoSementes::setId));			
+													.addMappings(mapper -> mapper.skip(ProducaoSementes::setId))
+													.addMappings(mapper -> mapper.skip(ProducaoSementes::setAgricultor));			
 			
 			
 			typeMapper.map(obj, oldObject);	

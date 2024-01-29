@@ -62,7 +62,6 @@ public class SementesController {
 													.typeMap(SementesRequest.class, Sementes.class)
 													.addMappings(mapper -> mapper.skip(Sementes::setId));			
 			
-			
 			typeMapper.map(obj, oldObject);	
 			return new SementesResponse(facade.updateSementes(oldObject));
 		} catch (RuntimeException e) {
