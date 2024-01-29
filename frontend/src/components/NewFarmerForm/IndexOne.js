@@ -1,88 +1,146 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "@/components/FormPattern/Forms/Input/input";
 import GreenButton from "@/components/FormPattern/Buttons/GreenButton/greenButton";
 import WhiteButton from "@/components/FormPattern/Buttons/WhiteButton/whiteButton"
 import styles from "@/components/NewFarmerForm/Index.module.scss";
+import { postAgricultor } from "@/api/usuarios/agricultor/postAgricultor";
+import { useMutation } from "react-query";
 
 
 export default function NewFarmerForm() {
-    const [bankData, setBankData] = useState({
-        banco: "",
-        municipioBanco: "",
-    })
-    const [farmerData, setFarmerData] = useState({
+
+    const [ agricultor, setAgricultor] = useState({
         nome: "",
-        dataNascimento: "",
-        cpf: "",
+        email: "",
+        senha: "",
+        endereco: {
+            nome: "",
+            referencia: "",
+            cidade: "",
+            estado: "",
+            municipio: "",
+        },
         rg: "",
-        ufRg: "",
-        tituloEleitor: "",
+        cpf: "",
+        dataNascimento: "",
+        contato: "",
+        nomePai: "",
+        nomeMae: "",
         nis: "",
-        escolaridade: "",
-        endereco: "",
-        municipio: "",
-        uf: "",
-        comunidade: "",
-        dap: "",
-        classPronaf: "",
+        tituloEleitor: "",
+        sexo: "",
     });
 
-    function handleBankOnChange(event) {
+
+    function handleAgricultor(event) {
         const { name, value } = event.target;
-        setBankData({ ...bankData, [name]: value });
-    }
-    function handleFarmerOnChange(event) {
-        const { name, value } = event.target;
-        setFarmerData({ ...farmerData, [name]: value });
+        setAgricultor({ ...agricultor, [name]: value });
     }
 
     async function handleSubmit(event) {
         event.preventDefault();
     }
 
+
+    const { state, mutate } = useMutation(
+        async () => {
+            return postAgricultor(agricultor);
+        }, {
+            onSucess: (res) => {
+                console.log(res);
+                setAgricultor(res.data);
+            },
+            onError: (error) => {
+                console.log(error)
+            }
+        }
+    );
+
     return (
         <div className={styles.boxForm}>
             <form onSubmit={handleSubmit}>
-                <div className={styles.twoSidedForm}>
-                    <div className={styles.twoSidedForm__largerFormSize}>
+                   
+                <div className={styles.twoSidedForm} >
+                
+                    <div className={styles.twoSidedForm__smallerFormSize}>
                         <Input
                             type="text"
-                            text="Banco Comunitário de Sementes"
-                            name="banco"
-                            placeholder="Insira o banco comunitário"
-                            value={bankData.banco}
-                            onChange={handleBankOnChange} />
+                            text="Email"
+                            name="email"
+                            placeholder="Insira seu email"
+                            value={agricultor.email}
+                            onChange={handleAgricultor} />
                     </div>
                     <div className={styles.twoSidedForm__smallerFormSize}>
                         <Input
                             type="text"
-                            text="Município"
-                            name="municipioBanco"
-                            placeholder="Insira o município do banco"
-                            value={bankData.municipioBanco}
-                            onChange={handleBankOnChange} />
-
+                            text="Senha"
+                            name="senha"
+                            placeholder="Insira seu nome"
+                            value={agricultor.senha}
+                            onChange={handleAgricultor} />
+                    </div>
+                
+                </div>
+                <div className={styles.twoSidedForm} >
+                    <div className={styles.twoSidedForm__smallerFormSize} /*Nome, Email, Senha */>
+                        <Input
+                            type="text"
+                            text="Nome do Produtor"
+                            name="nome"
+                            placeholder="Insira seu nome"
+                            value={agricultor.nome}
+                            onChange={handleAgricultor} />
+                    </div>
+                    <div className={styles.twoSidedForm__smallerFormSize} /*Nome, Email, Senha */>
+                        <Input
+                            type="text"
+                            text="Contato"
+                            name="contato"
+                            placeholder="Insira seu Contato"
+                            value={agricultor.contato}
+                            onChange={handleAgricultor} />
                     </div>
                 </div>
-                <div className={styles.biggerFormSize}>
-                    <Input
-                        type="text"
-                        text="Nome do Produtor"
-                        name="nome"
-                        placeholder="Insira seu nome"
-                        value={farmerData.nome}
-                        onChange={handleFarmerOnChange} />
+                <div className={styles.threeSidedForm} /*Data Nascimento, Cpf, RG, RGuf, TItulo, NIS */>
+                    <div className={styles.threeSidedForm__smallerFormSize}>
+                        <Input
+                            type="text"
+                            text="NomeMae"
+                            name="nomeMae"
+                            placeholder="nome da mae"
+                            value={agricultor.nomeMae}
+                            onChange={handleAgricultor} />
+                    </div>
+                    <div className={styles.threeSidedForm__smallerFormSize}>
+                        <Input
+                            type="text"
+                            text="nomePai"
+                            name="nomePai"
+                            placeholder="nome do pai"
+                            value={agricultor.nomePai}
+                            onChange={handleAgricultor} />
+                    </div>
+                    <div className={styles.threeSidedForm__smallerFormSize}>
+                        <Input
+                            type="text"
+                            text="sexo"
+                            name="sexo"
+                            placeholder="Insira seu sexo"
+                            value={agricultor.sexo}
+                            onChange={handleAgricultor} />
+                    </div>
                 </div>
-                <div className={styles.threeSidedForm}>
+                <div className={styles.threeSidedForm} /*Data Nascimento, Cpf, RG, RGuf, TItulo, NIS */>
                     <div className={styles.threeSidedForm__smallerFormSize}>
                         <Input
                             type="text"
                             text="Data de Nascimento"
                             name="dataNascimento"
                             placeholder="Insira sua data de nascimento"
-                            value={farmerData.dataNascimento}
-                            onChange={handleFarmerOnChange} />
+                            value={agricultor.dataNascimento}
+                            onChange={handleAgricultor} />
                     </div>
                     <div className={styles.threeSidedForm__smallerFormSize}>
                         <Input
@@ -90,8 +148,8 @@ export default function NewFarmerForm() {
                             text="CPF"
                             name="cpf"
                             placeholder="Insira seu CPF"
-                            value={farmerData.cpf}
-                            onChange={handleFarmerOnChange} />
+                            value={agricultor.cpf}
+                            onChange={handleAgricultor} />
                     </div>
                     <div className={styles.threeSidedForm__smallerFormSize}>
                         <Input
@@ -99,112 +157,88 @@ export default function NewFarmerForm() {
                             text="RG"
                             name="rg"
                             placeholder="Insira seu RG"
-                            value={farmerData.rg}
-                            onChange={handleFarmerOnChange} />
+                            value={agricultor.rg}
+                            onChange={handleAgricultor} />
                     </div>
                 </div>
                 <div className={styles.threeSidedForm}>
-                    <div className={styles.threeSidedForm__smallerFormSize}>
-                        <Input
-                            type="text"
-                            text="UF"
-                            name="ufRG"
-                            placeholder="Insira o estado do seu RG"
-                            value={farmerData.ufRg}
-                            onChange={handleFarmerOnChange} />
-                    </div>
                     <div className={styles.threeSidedForm__smallerFormSize}>
                         <Input
                             type="text"
                             text="Título de Eleitor"
                             name="tituloEleitor"
                             placeholder="Insira o número do seu título"
-                            value={farmerData.tituloEleitor}
-                            onChange={handleFarmerOnChange} />
+                            só       value={agricultor.tituloEleitor}
+                            onChange={handleAgricultor} />
                     </div>
                     <div className={styles.threeSidedForm__smallerFormSize}>
                         <Input
                             type="text"
-                            text="NIS"
+                            text="Nis"
                             name="nis"
                             placeholder="Insira seu NIS"
-                            value={farmerData.nis}
-                            onChange={handleFarmerOnChange} />
+                            value={agricultor.nis}
+                            onChange={handleAgricultor} />
                     </div>
                 </div>
-                <div className={styles.largerFormSize}>
-                    <Input
-                        type="text"
-                        text="Escolaridade"
-                        name="escolaridade"
-                        placeholder="Insira sua escolaridade"
-                        value={farmerData.escolaridade}
-                        onChange={handleFarmerOnChange} />
-                </div>
-                <div className={styles.biggerFormSize}>
-                    <Input
-                        type="text"
-                        text="Endereço"
-                        name="endereco"
-                        placeholder="Insira seu Endereço"
-                        value={farmerData.endereco}
-                        onChange={handleFarmerOnChange} />
-                </div>
+                
                 <div className={styles.threeSidedForm}>
                     <div className={styles.threeSidedForm__smallerFormSize}>
                         <Input
                             type="text"
-                            text="Município"
-                            name="municipio"
-                            placeholder="Insira o seu município"
-                            value={farmerData.municipio}
-                            onChange={handleFarmerOnChange} />
+                            text="Endereco"
+                            name="endereco"
+                            placeholder="Insira o seu Endereco"
+                            value={agricultor.endereco.nome }
+                            onChange={handleAgricultor} />
+                    </div>
+                    <div className={styles.threeSidedForm__smallerFormSize}>
+                        <Input
+                            type="text"
+                            text="Cidade"
+                            name="cidade"
+                            placeholder="Insira cidade"
+                            value={agricultor.endereco.cidade}
+                            onChange={handleAgricultor} />
                     </div>
                     <div className={styles.threeSidedForm__smallerFormSize}>
                         <Input
                             type="text"
                             text="UF"
                             name="uf"
-                            placeholder="Insira o Estado"
-                            value={farmerData.uf}
-                            onChange={handleFarmerOnChange} />
+                            placeholder="Insira o UF"
+                            value={agricultor.endereco.estado}
+                            onChange={handleAgricultor} />
                     </div>
+                </div>
+                <div className={styles.threeSidedForm}>
+                    
                     <div className={styles.threeSidedForm__smallerFormSize}>
                         <Input
                             type="text"
                             text="Comunidade"
                             name="comunidade"
                             placeholder="Insira sua comunidade"
-                            value={farmerData.comunidade}
-                            onChange={handleFarmerOnChange} />
+                            value={agricultor.endereco.municipio}
+                            onChange={handleAgricultor} />
                     </div>
-                </div>
-                <div className={styles.twoSidedForm}>
-                    <div className={styles.twoSidedForm__smallerFormSize}>
+                    <div className={styles.threeSidedForm__smallerFormSize}>
                         <Input
                             type="text"
-                            text="Número do DAP"
-                            name="dap"
-                            placeholder="Insira o seu número DAP"
-                            value={farmerData.dap}
-                            onChange={handleFarmerOnChange} />
-                    </div>
-                    <div className={styles.twoSidedForm__smallerFormSize}>
-                        <Input
-                            type="text"
-                            text="Classificação no PRONAF"
-                            name="pronaf"
-                            placeholder="Insira sua classificação"
-                            value={farmerData.classPronaf}
-                            onChange={handleFarmerOnChange} />
+                            text="Referencia"
+                            name="referencia"
+                            placeholder="Insira o Referencia"
+                            value={agricultor.endereco.referencia}
+                            onChange={handleAgricultor} />
                     </div>
                 </div>
+                
                 <div className={styles.boxForm__buttonForm}>
-                <WhiteButton
+                    <WhiteButton
                         text="Voltar" />
 
                     <GreenButton
-                        text="Continuar" />
+                        text="enviar" onClick={() => mutate()} />
                 </div>
             </form>
         </div>

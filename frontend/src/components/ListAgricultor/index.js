@@ -11,10 +11,7 @@ import Link from "next/link";
 
 export default function                                                                                                                                 List({listName, buttonName, table1, table2, table3}) {
     
-  const [agricultor, setAgricultor] = useState([
-    {nome: "Geronimo", funcao: "Coordenador"},
-    {nome: "Giu", funcao: "Senior do next"},
-  ]);
+  const [agricultor, setAgricultor] = useState([]);
 
   useEffect(() => {
     mutate();

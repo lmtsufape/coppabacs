@@ -4,7 +4,13 @@ export async function postAgricultor(
   nome,
   email, 
   senha,
-  endereco,
+  endereco= {
+    nome: "",
+    referencia: "",
+    cidade: "",
+    estado: "",
+    municipio: ""
+  },
   rg,
   cpf,
   dataNascimento,
@@ -15,13 +21,18 @@ export async function postAgricultor(
   nis,
   tituloEleitor,
   sexo,
-  conjuge
-   ) {
+) {
   return await api.post("/agricultor", {
     nome,
     email, 
     senha,
-    endereco,
+    endereco: {
+      nome: endereco.nome,
+      referencia: endereco.referencia,
+      cidade: endereco.cidade,
+      estado: endereco.estado,
+      municipio: endereco.municipio
+    },
     rg,
     cpf,
     dataNascimento,
@@ -31,7 +42,6 @@ export async function postAgricultor(
     nomeMae,
     nis,
     tituloEleitor,
-    sexo,
-    conjuge
-  })
+    sexo  
+  });
 }
