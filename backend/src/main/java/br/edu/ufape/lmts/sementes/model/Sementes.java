@@ -1,6 +1,5 @@
 package br.edu.ufape.lmts.sementes.model;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -31,12 +30,12 @@ public  class Sementes  {
 	@EqualsAndHashCode.Include
 	private long id;
 	private String nome;
+	private String nomePopular;
 	private String descricao;
+	private String pragas;
 	private String imagem;
-	private String localOrigem;
 	private Boolean dominioPublico;
 	private Boolean polinizaacaoAbertaMelhorada;
-	private LocalDate tempoComunidade;
 	private String regiaoColetaDados;
 	private float altitudeMaxima;
 	private float altitudeMinima;

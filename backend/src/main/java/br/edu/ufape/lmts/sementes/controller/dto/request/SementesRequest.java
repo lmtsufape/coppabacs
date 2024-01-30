@@ -1,7 +1,5 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
-import java.time.LocalDate;
-
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
@@ -15,12 +13,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SementesRequest {
 	private String nome;
+	private String nomePopular;
 	private String descricao;
+	private String pragas;
 	private String imagem;
-	private String localOrigem;
 	private Boolean dominioPublico;
 	private Boolean polinizaacaoAbertaMelhorada;
-	private LocalDate tempoComunidade;
 	private String regiaoColetaDados;
 	private float altitudeMaxima;
 	private float altitudeMinima;
