@@ -18,8 +18,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @Configuration
@@ -44,7 +42,7 @@ public class WebSecurityConfig {
 					.requestMatchers(HttpMethod.POST, "/api/v1/agricultor/**").permitAll()
 					.requestMatchers("/api/v1/gerente/**").hasRole("GERENTE")
 					.requestMatchers("/api/v1/agricultor/**").hasRole("AGRICULTOR")
-					.requestMatchers("/api/v1/sementes/**").permitAll()
+					.requestMatchers("/api/v1/sementes/**").hasRole("COPPABACS")
 					.requestMatchers("/security/**").permitAll()
 					.requestMatchers("/api/**").permitAll()
 					.requestMatchers(HttpMethod.POST,"/api/v1/login").permitAll()

@@ -1,6 +1,5 @@
 package br.edu.ufape.lmts.sementes.controller.dto.response;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -17,12 +16,12 @@ import lombok.Setter;
 public  class SementesResponse  {
 	private Long id;
 	private String nome;
+	private String nomePopular;
+	private String pragas;
 	private String descricao;
 	private String imagem;
-	private String localOrigem;
 	private Boolean dominioPublico;
 	private Boolean polinizaacaoAbertaMelhorada;
-	private LocalDate tempoComunidade;
 	private String regiaoColetaDados;
 	private float altitudeMaxima;
 	private float altitudeMinima;

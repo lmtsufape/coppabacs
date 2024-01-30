@@ -31,6 +31,4 @@ public  class ToleranciaAdversidadesRequest  {
 		return obj;
 	}
 
-
-
 }
