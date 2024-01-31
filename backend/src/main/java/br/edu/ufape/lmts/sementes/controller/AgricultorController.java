@@ -23,8 +23,6 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.AgricultorRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.AgricultorResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
-import br.edu.ufape.lmts.sementes.model.BancoSementes;
-import br.edu.ufape.lmts.sementes.service.BancoSementesServiceInterface;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
@@ -50,9 +48,6 @@ public class AgricultorController {
 	@PostMapping("agricultor")
 	public AgricultorResponse createAgricultor(@Valid @RequestBody AgricultorRequest newObj) throws EmailExistsException {
 		Agricultor agricultor = newObj.convertToEntity();
-		BancoSementes banco = new BancoSementes();
-		banco.setId(newObj.getBancoId());
-		agricultor.setBancoSementes(banco);
 		return new AgricultorResponse(facade.saveAgricultor(agricultor));
 	}
 

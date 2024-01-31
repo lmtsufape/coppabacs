@@ -34,12 +34,11 @@ public class UserInitializer  implements CommandLineRunner {
 			admin.setContato("AdminContato");
 			admin.setEmail("admin@admin.com");
 			admin.setCpf("adminCpf");
-			admin.setNis("NisAdmin");
 			admin.setEndereco(null);
 			admin.setNomeMae("MaeAdmin");
 			admin.setNomePai("AdminPai");
-			admin.setTituloEleitor("TituloEleitor");
 			admin.setRg("AdminRg");
+			admin.setSexo("AdminSexo");
 			admin.setSenha(passwordEncoder.encode("AdminSenha"));
 			admin.setDataNascimento(new Date(18, 10, 2001));
 			
