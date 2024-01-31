@@ -21,7 +21,7 @@ public class PostResponse  {
 	private boolean visibilidade;
 	private String categoria;
 	private String titulo;
-	private String imagem;
+	private List<String> imagens;
 	private LocalDate data;
 
 

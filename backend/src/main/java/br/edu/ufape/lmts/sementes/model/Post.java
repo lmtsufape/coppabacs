@@ -31,7 +31,7 @@ public  class Post  {
 	private String categoria;
 	private Usuario autor;
 	private boolean visibilidade;
-	private String imagem;
+	private List<String> imagens;
 	private Date data;
 
 }
