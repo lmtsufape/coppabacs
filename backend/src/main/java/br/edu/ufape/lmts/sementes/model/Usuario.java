@@ -54,7 +54,7 @@ public abstract class Usuario implements Serializable {
 	@Column(nullable = false, unique = true)
 	private String cpf;
 	@Column(nullable = false)
-    //@DateTimeFormat(pattern = "dd-MM-yyyy", iso = DateTimeFormat.ISO.DATE)
+	// @DateTimeFormat(pattern = "dd-MM-yyyy", iso = DateTimeFormat.ISO.DATE)
 	@JsonFormat(pattern = "dd-MM-yyyy")
 	private Date dataNascimento;
 	@Column(nullable = false, unique = true)
@@ -64,10 +64,7 @@ public abstract class Usuario implements Serializable {
 	private String nomePai;
 	@Column(nullable = false)
 	private String nomeMae;
-	@Column(nullable = false, unique = true)
-	private String nis;
-	@Column(nullable = false, unique = true)
-	private String tituloEleitor;
+	@Column(nullable = false)
 	private String sexo;
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
@@ -83,8 +80,8 @@ public abstract class Usuario implements Serializable {
 	private Set<TipoUsuario> roles;
 
 	public Usuario(Long id, String nome, String email, String senha, Endereco endereco, String rg, String cpf,
-			Date dataNascimento, String contato, String imagem, String nomePai, String nomeMae, String nis,
-			String tituloEleitor, String sexo, Conjuge conjuge, List<Postavel> postavel) {
+			Date dataNascimento, String contato, String imagem, String nomePai, String nomeMae, String sexo,
+			Conjuge conjuge, List<Postavel> postavel) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -97,8 +94,6 @@ public abstract class Usuario implements Serializable {
 		this.imagem = imagem;
 		this.nomePai = nomePai;
 		this.nomeMae = nomeMae;
-		this.nis = nis;
-		this.tituloEleitor = tituloEleitor;
 		this.sexo = sexo;
 		this.conjuge = conjuge;
 		this.postavel = postavel;
@@ -110,7 +105,7 @@ public abstract class Usuario implements Serializable {
 	}
 
 	public void addRole(TipoUsuario role) {
-		if(this.roles == null) {
+		if (this.roles == null) {
 			roles = new HashSet<>();
 		}
 		roles.add(role);
@@ -218,22 +213,6 @@ public abstract class Usuario implements Serializable {
 
 	public void setNomeMae(String nomeMae) {
 		this.nomeMae = nomeMae;
-	}
-
-	public String getNis() {
-		return nis;
-	}
-
-	public void setNis(String nis) {
-		this.nis = nis;
-	}
-
-	public String getTituloEleitor() {
-		return tituloEleitor;
-	}
-
-	public void setTituloEleitor(String tituloEleitor) {
-		this.tituloEleitor = tituloEleitor;
 	}
 
 	public String getSexo() {

@@ -22,10 +22,12 @@ import br.edu.ufape.lmts.sementes.controller.dto.response.ProducaoSementesRespon
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.ProducaoSementes;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 
 
 @CrossOrigin (origins = "http://localhost:8081/" )
+@Hidden
 @RestController
 @RequestMapping("/api/v1/")
 public class ProducaoSementesController {
@@ -60,7 +62,8 @@ public class ProducaoSementesController {
 
 			TypeMap<ProducaoSementesRequest, ProducaoSementes> typeMapper = modelMapper
 													.typeMap(ProducaoSementesRequest.class, ProducaoSementes.class)
-													.addMappings(mapper -> mapper.skip(ProducaoSementes::setId));			
+													.addMappings(mapper -> mapper.skip(ProducaoSementes::setId))
+													.addMappings(mapper -> mapper.skip(ProducaoSementes::setAgricultor));			
 			
 			
 			typeMapper.map(obj, oldObject);	

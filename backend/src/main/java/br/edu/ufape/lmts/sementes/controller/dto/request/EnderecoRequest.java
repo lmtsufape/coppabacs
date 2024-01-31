@@ -9,9 +9,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-@Getter @Setter @NoArgsConstructor 
-public  class EnderecoRequest  {
+@Getter
+@Setter
+@NoArgsConstructor
+public class EnderecoRequest {
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String nome;
 	@NotEmpty(message = "Preenchimento obrigatório")
@@ -20,9 +21,6 @@ public  class EnderecoRequest  {
 	private String cidade;
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String estado;
-	@NotEmpty(message = "Preenchimento obrigatório")
-	private String municipio;
-
 
 	public Endereco convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

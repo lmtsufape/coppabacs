@@ -22,10 +22,12 @@ import br.edu.ufape.lmts.sementes.controller.dto.response.infraestruturaHidricaR
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.infraestruturaHidrica;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 
 
 @CrossOrigin (origins = "http://localhost:8081/" )
+@Hidden
 @RestController
 @RequestMapping("/api/v1/")
 public class infraestruturaHidricaController {
