@@ -8,22 +8,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-
-@Getter @Setter @NoArgsConstructor
-public  class EnderecoResponse  {
+@Getter
+@Setter
+@NoArgsConstructor
+public class EnderecoResponse {
 	private Long id;
 	private String nome;
 	private String referencia;
 	private String cidade;
 	private String estado;
-	private String municipio;
-
-
 
 	public EnderecoResponse(Endereco obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
-		modelMapper.map(obj, this);	
+		modelMapper.map(obj, this);
 	}
 
 }

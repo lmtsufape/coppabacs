@@ -19,10 +19,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@JsonPropertyOrder
+public class UsuarioRequest {
 
-@Getter @Setter @NoArgsConstructor @JsonPropertyOrder
-public  class UsuarioRequest  {
-	
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String nome;
 	@Email(message = "Email inválido")
@@ -46,9 +48,6 @@ public  class UsuarioRequest  {
 	private String nomePai;
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String nomeMae;
-	private String nis;
-	@NotEmpty(message = "Preenchimento obrigatório")
-	private String tituloEleitor;
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String sexo;
 	private ConjugeRequest conjuge;
@@ -66,10 +65,8 @@ public  class UsuarioRequest  {
 	public String toString() {
 		return "UsuarioRequest [nome=" + nome + ", email=" + email + ", senha=" + senha + ", endereco=" + endereco
 				+ ", rg=" + rg + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + ", contato=" + contato
-				+ ", imagem=" + imagem + ", nomePai=" + nomePai + ", nomeMae=" + nomeMae + ", nis=" + nis
-				+ ", tituloEleitor=" + tituloEleitor + ", sexo=" + sexo + ", conjuge=" + conjuge + ", postavel="
-				+ postavel + "]";
+				+ ", imagem=" + imagem + ", nomePai=" + nomePai + ", nomeMae=" + nomeMae + ", sexo=" + sexo
+				+ ", conjuge=" + conjuge + ", postavel=" + postavel + "]";
 	}
-	
-	
+
 }

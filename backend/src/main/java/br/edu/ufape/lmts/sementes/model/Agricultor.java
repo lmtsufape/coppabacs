@@ -1,9 +1,7 @@
 package br.edu.ufape.lmts.sementes.model;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import jakarta.persistence.Entity;
@@ -12,21 +10,17 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
-
-
 
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public  class Agricultor extends Usuario {
-	private String numeroDap;
-	private String classificacaoPronaf;
+public class Agricultor extends Usuario {
+	private String nomePopular;
 	private String rendaFamiliar;
 	private String numeroPessoas;
 	private Double areaPropriedade;
+	private String comunidade;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "bancoSementes_id")
 	@ToString.Exclude
@@ -48,121 +42,107 @@ public  class Agricultor extends Usuario {
 	@ToString.Exclude
 	private List<InfraestruturaComunidade> infraestruturaComunidade;
 
-
-	public Agricultor(Long id, String nome, String email, String senha, Endereco endereco, String rg, String cpf,
-			Date dataNascimento, String contato, String imagem, String nomePai, String nomeMae, String nis,
-			String tituloEleitor, String sexo, Conjuge conjuge, List<Postavel> postavel, BancoSementes bancoSementes) {
-		super(id, nome, email, senha, endereco, rg, cpf, dataNascimento, contato, imagem, nomePai, nomeMae, nis, tituloEleitor,
-				sexo, conjuge, postavel);
-		super.addRole(TipoUsuario.USUARIO);
-	}
-
-
 	public Agricultor() {
 		super();
 	}
 
-
-	public String getNumeroDap() {
-		return numeroDap;
+	public Agricultor(Long id, String nome, String email, String senha, Endereco endereco, String rg, String cpf,
+			Date dataNascimento, String contato, String imagem, String nomePai, String nomeMae, String sexo,
+			Conjuge conjuge, List<Postavel> postavel, String nomePopular, String rendaFamiliar, String numeroPessoas,
+			Double areaPropriedade, BancoSementes bancoSementes, List<AtividadeRural> atividadeRural,
+			List<br.edu.ufape.lmts.sementes.model.infraestruturaHidrica> infraestruturaHidrica,
+			List<UsoOcupacaoTerra> usoOcupacaoTerra, List<InfraestruturaComunidade> infraestruturaComunidade) {
+		super(id, nome, email, senha, endereco, rg, cpf, dataNascimento, contato, imagem, nomePai, nomeMae, sexo,
+				conjuge, postavel);
+		this.nomePopular = nomePopular;
+		this.rendaFamiliar = rendaFamiliar;
+		this.numeroPessoas = numeroPessoas;
+		this.areaPropriedade = areaPropriedade;
+		this.bancoSementes = bancoSementes;
+		this.atividadeRural = atividadeRural;
+		this.infraestruturaHidrica = infraestruturaHidrica;
+		this.usoOcupacaoTerra = usoOcupacaoTerra;
+		this.infraestruturaComunidade = infraestruturaComunidade;
+		super.addRole(TipoUsuario.USUARIO);
 	}
 
-
-	public void setNumeroDap(String numeroDap) {
-		this.numeroDap = numeroDap;
+	public String getNomePopular() {
+		return nomePopular;
 	}
 
-
-	public String getClassificacaoPronaf() {
-		return classificacaoPronaf;
+	public void setNomePopular(String nomePopular) {
+		this.nomePopular = nomePopular;
 	}
-
-
-	public void setClassificacaoPronaf(String classificacaoPronaf) {
-		this.classificacaoPronaf = classificacaoPronaf;
-	}
-
 
 	public String getRendaFamiliar() {
 		return rendaFamiliar;
 	}
 
-
 	public void setRendaFamiliar(String rendaFamiliar) {
 		this.rendaFamiliar = rendaFamiliar;
 	}
-
 
 	public String getNumeroPessoas() {
 		return numeroPessoas;
 	}
 
-
 	public void setNumeroPessoas(String numeroPessoas) {
 		this.numeroPessoas = numeroPessoas;
 	}
-
 
 	public Double getAreaPropriedade() {
 		return areaPropriedade;
 	}
 
-
 	public void setAreaPropriedade(Double areaPropriedade) {
 		this.areaPropriedade = areaPropriedade;
 	}
-
 
 	public BancoSementes getBancoSementes() {
 		return bancoSementes;
 	}
 
-
 	public void setBancoSementes(BancoSementes bancoSementes) {
 		this.bancoSementes = bancoSementes;
 	}
-
 
 	public List<AtividadeRural> getAtividadeRural() {
 		return atividadeRural;
 	}
 
-
 	public void setAtividadeRural(List<AtividadeRural> atividadeRural) {
 		this.atividadeRural = atividadeRural;
 	}
-
 
 	public List<infraestruturaHidrica> getInfraestruturaHidrica() {
 		return infraestruturaHidrica;
 	}
 
-
 	public void setInfraestruturaHidrica(List<infraestruturaHidrica> infraestruturaHidrica) {
 		this.infraestruturaHidrica = infraestruturaHidrica;
 	}
-
 
 	public List<UsoOcupacaoTerra> getUsoOcupacaoTerra() {
 		return usoOcupacaoTerra;
 	}
 
-
 	public void setUsoOcupacaoTerra(List<UsoOcupacaoTerra> usoOcupacaoTerra) {
 		this.usoOcupacaoTerra = usoOcupacaoTerra;
 	}
-
 
 	public List<InfraestruturaComunidade> getInfraestruturaComunidade() {
 		return infraestruturaComunidade;
 	}
 
-
 	public void setInfraestruturaComunidade(List<InfraestruturaComunidade> infraestruturaComunidade) {
 		this.infraestruturaComunidade = infraestruturaComunidade;
 	}
 
+	public String getComunidade() {
+		return comunidade;
+	}
+
+	public void setComunidade(String comunidade) {
+		this.comunidade = comunidade;
+	}
 }
-
-
-

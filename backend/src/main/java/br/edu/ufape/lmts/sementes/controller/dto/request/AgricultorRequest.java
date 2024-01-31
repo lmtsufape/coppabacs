@@ -14,11 +14,11 @@ import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor 
 public  class AgricultorRequest extends UsuarioRequest {
-	private String numeroDap;
-	private String classificacaoPronaf;
+	private String nomePopular;
 	private String rendaFamiliar;
 	private String numeroPessoas;
 	private Double areaPropriedade;
+	private String comunidade;
 	private long bancoId;
 	private List<AtividadeRuralRequest> atividadeRural; 
 	private List<infraestruturaHidricaRequest> infraestruturaHidrica; 
@@ -29,6 +29,9 @@ public  class AgricultorRequest extends UsuarioRequest {
 	public Agricultor convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		Agricultor obj = modelMapper.map(this, Agricultor.class);
+		BancoSementes banco = new BancoSementes();
+		banco.setId(bancoId);
+		obj.setBancoSementes(banco);
 		System.out.println(obj.toString());
 		return obj;
 	}

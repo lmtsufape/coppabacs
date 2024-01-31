@@ -16,20 +16,21 @@ import lombok.ToString;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Gerente extends Usuario {
-	
+
 	@ManyToOne
 	@JoinColumn(name = "bancoSementes_id")
 	private BancoSementes bancoSementes;
 
 	public Gerente(Long id, String nome, String email, String senha, Endereco endereco, String rg, String cpf,
-			Date dataNascimento, String contato, String imagem, String nomePai, String nomeMae, String nis,
-			String tituloEleitor, String sexo, Conjuge conjuge, List<Postavel> postavel) {
-		super(id, nome, email, senha, endereco, rg, cpf, dataNascimento, contato, imagem, nomePai, nomeMae, nis, tituloEleitor,
-				sexo, conjuge, postavel);
+			Date dataNascimento, String contato, String imagem, String nomePai, String nomeMae, String sexo,
+			Conjuge conjuge, List<Postavel> postavel) {
+		super(id, nome, email, senha, endereco, rg, cpf, dataNascimento, contato, imagem, nomePai, nomeMae, sexo,
+				conjuge, postavel);
 		super.addRole(TipoUsuario.GERENTE);
 	}
 
-	public Gerente() {}
+	public Gerente() {
+	}
 
 	public BancoSementes getBancoSementes() {
 		return bancoSementes;
