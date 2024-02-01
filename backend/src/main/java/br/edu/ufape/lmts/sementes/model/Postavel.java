@@ -21,17 +21,18 @@ import lombok.ToString;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public  class Post  {
+public  class Postavel  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
 	private long id;
-	private String titulo;
 	private String texto;
-	private String categoria;
 	private Usuario autor;
 	private boolean visibilidade;
-	private List<String> imagens;
-	private Date data;
+	private String categoria;
+	private String titulo;
+	private String imagem;
+	private LocalDate data;
+	private String imagem;
 
 }
