@@ -32,9 +32,14 @@ const AgricultorForm = () =>{
     sexo: ""
   });
 
+  // const errors = {nome: ""};
+
   const {status, mutate} = useMutation(
     async () =>{
-      return postAgricultor(newAgricultor);
+      console.log("valores formik: ", formik.values);
+      return postAgricultor(
+        formik.values
+        );
     }, {
       onSuccess:(res) =>{
         console.log("data", res.data);
@@ -50,17 +55,39 @@ const AgricultorForm = () =>{
       validateNewAgricultor();
     }
   }
+  const validate = (values) => {
+    
+  }
 
   const formik = useFormik({
-    initialValues: {
-        newAgricultor: "",
+    initialValues: { 
+      nome: "",
+      cpf: "",
+      email: "",
+      contato: "",
+      endereco: {
+        nome: "",
+        referencia: "",
+        cidade: "",
+        estado: "",
+        municipio: ""
+      },
+      senha: "",
+      confirmarSenha: "",
+      rg: "",
+      nomeMae: "",
+      nomePai: "",
+      tituloEleitor: "",
+      sexo: ""
     },
+    validate,
     validationSchema: Yup.object({
-        senha: Yup.string()
+        nome: Yup.string()
             .min(5, "Must be at least 5 characters or more")
             .required('Required')
     }),
     onSubmit: () => {
+      console.log("valores formik: ", formik.values);
         mutate();
     },
 })
@@ -113,93 +140,125 @@ const AgricultorForm = () =>{
     <div className={style.newAgricultor}>
       <div className={style.newAgricultor__inputContents}>
         <form className={style.newAgricultor__Form} onSubmit={formik.handleSubmit}>
-          <input 
+          <input
+          name="nome" 
           placeholder="Insira seu nome" 
-          value={newAgricultor.nome}
-          onChange={(e)=> setNewAgricultor({...newAgricultor, nome: e.target.value})}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.nome}
+            
           />
+          {formik.touched.nome && formik.errors.nome ? (
+                            <span className={style.editItem__form__error}>{formik.errors.nome}</span>
+                        ) : null}
           <input 
+          name="cpf"
           placeholder="Insira seu cpf"
-          value={newAgricultor.cpf}
-          onChange={(e)=> setNewAgricultor({...newAgricultor, cpf: e.target.value})}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.cpf}
           />
           <input
+          name="email"
           placeholder="Insira seu email"
-          value={newAgricultor.email}
-          onChange={(e)=> setNewAgricultor({...newAgricultor, email: e.target.value})}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.email}
           />
           <input
+          name="contato"
           placeholder="Insira seu telefone"
-          value={newAgricultor.contato}
-          onChange={(e)=> setNewAgricultor({...newAgricultor, contato: e.target.value})}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.contato}
           />
           <input
+          name="endereco"
           placeholder="Insira seu endereço"
-          value={newAgricultor.endereco.nome}
-          onChange={(e)=> setNewAgricultor({...newAgricultor, endereco: {...newAgricultor.endereco, nome: e.target.value}})}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.endereco.nome}
           />
           <input
+          name="referencia"
           placeholder="Insira sua referencia"
-          value={newAgricultor.endereco.referencia}
-          onChange={(e)=> setNewAgricultor({...newAgricultor, endereco: {...newAgricultor.endereco, referencia: e.target.value}})}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.endereco.referencia}
           />
           <input
+          name="cidade"
           placeholder="Insira sua cidade"
-          value={newAgricultor.endereco.cidade}
-          onChange={(e)=> setNewAgricultor({...newAgricultor, endereco: {...newAgricultor.endereco, cidade: e.target.value}})}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.endereco.cidade}
           />
           <input
+          name="estado"
           placeholder="Insira seu estado"
-          value={newAgricultor.endereco.estado}
-          onChange={(e)=> setNewAgricultor({...newAgricultor, endereco: {...newAgricultor.endereco, estado: e.target.value}})}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.endereco.estado}
           />
           <input
+          name="municipio"
           placeholder="Insira seu municipio"
-          value={newAgricultor.endereco.municipio}
-          onChange={(e)=> setNewAgricultor({...newAgricultor, endereco: {...newAgricultor.endereco, municipio: e.target.value}})}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.endereco.municipio}
           />
           <input
+          name="senha"
           placeholder="Insira sua senha"
-          value={newAgricultor.senha}
-          onChange={(e)=> setNewAgricultor({...newAgricultor, senha: e.target.value})}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.senha}
           />
           <input
+          name="confirmarSenha"
           placeholder="Confirme sua senha"
-          value={newAgricultor.confirmarSenha}
-          onChange={(e)=> setNewAgricultor({...newAgricultor, confirmarSenha: e.target.value})}
-          />
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.confirmarSenha}/>
           <input
+          name="rg"
           placeholder="Insira seu rg"
-          value={newAgricultor.rg}
-          onChange={(e)=> setNewAgricultor({...newAgricultor, rg: e.target.value})}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.rg}
           />
           <input
+          name="nomeMae"
           placeholder="Insira o nome da sua mãe"
-          value={newAgricultor.nomeMae}
-          onChange={(e)=> setNewAgricultor({...newAgricultor, nomeMae: e.target.value})}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.nomeMae}
           />
           <input
+          name="nomePai"
           placeholder="Insira o nome do seu pai"
-          value={newAgricultor.nomePai}
-          onChange={(e)=> setNewAgricultor({...newAgricultor, nomePai: e.target.value})}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.nomePai}
           />
           <input
+          name="tituloEleitor"
           placeholder="Insira seu titulo de eleitor"
-          value={newAgricultor.tituloEleitor}
-          onChange={(e)=> setNewAgricultor({...newAgricultor, tituloEleitor: e.target.value})}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.tituloEleitor}
           />
           <input
+          name="sexo"
           placeholder="Insira seu sexo"
-          value={newAgricultor.sexo}
-          onChange={(e)=> setNewAgricultor({...newAgricultor, sexo: e.target.value})}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.sexo}
           />
-
+          <button type="submit">
+            <h1>Cadastrar</h1>
+          </button>
         </form>
-      </div>
-      <div>
-        <button onClick={()=> mutate()}>
-          <h1>Cadastrar</h1>
-        </button>
       </div>
     </div>
   );
