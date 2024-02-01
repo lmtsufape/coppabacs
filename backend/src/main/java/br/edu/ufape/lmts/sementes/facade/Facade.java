@@ -24,9 +24,10 @@ import br.edu.ufape.lmts.sementes.model.Gerente;
 import br.edu.ufape.lmts.sementes.model.InfraestruturaComunidade;
 import br.edu.ufape.lmts.sementes.model.Item;
 import br.edu.ufape.lmts.sementes.model.ObjetosBancoSementes;
-import br.edu.ufape.lmts.sementes.model.Post;
+import br.edu.ufape.lmts.sementes.model.Postavel;
 import br.edu.ufape.lmts.sementes.model.Praga;
 import br.edu.ufape.lmts.sementes.model.ProducaoSementes;
+import br.edu.ufape.lmts.sementes.model.Publicacao;
 import br.edu.ufape.lmts.sementes.model.RegioesAdaptacaoCultivo;
 import br.edu.ufape.lmts.sementes.model.RetiradaUsuario;
 import br.edu.ufape.lmts.sementes.model.SementePraga;
@@ -57,9 +58,10 @@ import br.edu.ufape.lmts.sementes.service.GerenteService;
 import br.edu.ufape.lmts.sementes.service.InfraestruturaComunidadeService;
 import br.edu.ufape.lmts.sementes.service.ItemService;
 import br.edu.ufape.lmts.sementes.service.ObjetosBancoSementesService;
-import br.edu.ufape.lmts.sementes.service.PostService;
+import br.edu.ufape.lmts.sementes.service.PostavelService;
 import br.edu.ufape.lmts.sementes.service.PragaService;
 import br.edu.ufape.lmts.sementes.service.ProducaoSementesService;
+import br.edu.ufape.lmts.sementes.service.PublicacaoService;
 import br.edu.ufape.lmts.sementes.service.RegioesAdaptacaoCultivoService;
 import br.edu.ufape.lmts.sementes.service.RetiradaUsuarioService;
 import br.edu.ufape.lmts.sementes.service.SementePragaService;
@@ -75,17 +77,17 @@ import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 
 @Service
 public class Facade {
-
+	
 //	//Login
 //	@Autowired
 //	private AuthController authController;
-//
-//	public
-
+//	
+//	public 
+	
 	//sementeDoenca--------------------------------------------------------------
 	@Autowired
 	private sementeDoencaService  sementeDoencaService;
-
+		
 	public sementeDoenca savesementeDoenca(sementeDoenca newInstance) {
 		return sementeDoencaService.savesementeDoenca(newInstance);
 	}
@@ -109,19 +111,49 @@ public class Facade {
 	public void deletesementeDoenca(long id) {
 		sementeDoencaService.deletesementeDoenca(id);
 	}
+	
+
+	//Publicacao--------------------------------------------------------------
+	@Autowired
+	private PublicacaoService  publicacaoService;
+		
+	public Publicacao savePublicacao(Publicacao newInstance) {
+		return publicacaoService.savePublicacao(newInstance);
+	}
+
+	public Publicacao updatePublicacao(Publicacao transientObject) {
+		return publicacaoService.updatePublicacao(transientObject);
+	}
+
+	public Publicacao findPublicacaoById(long id) {
+		return publicacaoService.findPublicacaoById(id);
+	}
+
+	public List<Publicacao> getAllPublicacao() {
+		return publicacaoService.getAllPublicacao();
+	}
+
+	public void deletePublicacao(Publicacao persistentObject) {
+		publicacaoService.deletePublicacao(persistentObject);
+	}
+
+	public void deletePublicacao(long id) {
+		publicacaoService.deletePublicacao(id);
+	}
+	
 
 	//Usuario--------------------------------------------------------------
 	@Autowired
 	private UsuarioService  usuarioService;
-
+		
 	public Usuario saveUsuario(Usuario newInstance) {
 		try {
 			return usuarioService.saveUsuario(newInstance);
-
+			
 		} catch (Exception e) {
 	        throw new RuntimeException("Erro ao salvar o usuário", e);
 		}
-
+		
 	}
 
 	public Usuario updateUsuario(Usuario transientObject) {
@@ -143,15 +175,15 @@ public class Facade {
 	public void deleteUsuario(long id) {
 		usuarioService.deleteUsuario(id);
 	}
-
+	
 	//Coppabacs--------------------------------------------------------------
 	@Autowired
 	private CoppabacsService coppabacsService;
-
+	
 	public List<Coppabacs> getAllCoppabacs() {
 		return coppabacsService.getAllCoppabacs();
 	}
-
+	
 	public Coppabacs saveCoppabacs(Coppabacs newInstance) throws EmailExistsException {
 		try {
 			usuarioService.saveUsuario(newInstance);
@@ -160,27 +192,27 @@ public class Facade {
 	        throw new RuntimeException("Erro ao salvar o usuário", e);
 		}
 	}
-
+	
 	public Coppabacs updateCoppabacs(Coppabacs transientObject) {
 		return coppabacsService.updateCoppabacs(transientObject);
 	}
-
+	
 	public Coppabacs findCoppabacsById(long id) {
 		return coppabacsService.findCoppabacsById(id);
 	}
-
+	
 	public void deleteCoppabacs(Coppabacs coppabacs) {
 		coppabacsService.deleteCoppabacs(coppabacs);
 	}
-
+	
 	public void deleteCoppabacs(long id) {
 		coppabacsService.deleteCoppabacs(id);
 	}
-
+	
 	//Praga--------------------------------------------------------------
 	@Autowired
 	private PragaService pragaService;
-
+		
 	public Praga savePraga(Praga newInstance) {
 		return pragaService.savePraga(newInstance);
 	}
@@ -204,12 +236,12 @@ public class Facade {
 	public void deletePraga(long id) {
 		pragaService.deletePraga(id);
 	}
-
+	
 
 	//SementePraga--------------------------------------------------------------
 	@Autowired
 	private SementePragaService  sementePragaService;
-
+		
 	public SementePraga saveSementePraga(SementePraga newInstance) {
 		return sementePragaService.saveSementePraga(newInstance);
 	}
@@ -233,12 +265,12 @@ public class Facade {
 	public void deleteSementePraga(long id) {
 		sementePragaService.deleteSementePraga(id);
 	}
-
+	
 
 	//Empalhamento--------------------------------------------------------------
 	@Autowired
 	private EmpalhamentoService  empalhamentoService;
-
+		
 	public Empalhamento saveEmpalhamento(Empalhamento newInstance) {
 		return empalhamentoService.saveEmpalhamento(newInstance);
 	}
@@ -262,12 +294,12 @@ public class Facade {
 	public void deleteEmpalhamento(long id) {
 		empalhamentoService.deleteEmpalhamento(id);
 	}
-
+	
 
 	//InfraestruturaComunidade--------------------------------------------------------------
 	@Autowired
 	private InfraestruturaComunidadeService  infraestruturaComunidadeService;
-
+		
 	public InfraestruturaComunidade saveInfraestruturaComunidade(InfraestruturaComunidade newInstance) {
 		return infraestruturaComunidadeService.saveInfraestruturaComunidade(newInstance);
 	}
@@ -291,12 +323,12 @@ public class Facade {
 	public void deleteInfraestruturaComunidade(long id) {
 		infraestruturaComunidadeService.deleteInfraestruturaComunidade(id);
 	}
-
+	
 
 	//UsoOcupacaoTerra--------------------------------------------------------------
 	@Autowired
 	private UsoOcupacaoTerraService  usoOcupacaoTerraService;
-
+		
 	public UsoOcupacaoTerra saveUsoOcupacaoTerra(UsoOcupacaoTerra newInstance) {
 		return usoOcupacaoTerraService.saveUsoOcupacaoTerra(newInstance);
 	}
@@ -320,12 +352,12 @@ public class Facade {
 	public void deleteUsoOcupacaoTerra(long id) {
 		usoOcupacaoTerraService.deleteUsoOcupacaoTerra(id);
 	}
-
+	
 
 	//BancoSementes--------------------------------------------------------------
 	@Autowired
 	private BancoSementesServiceInterface  bancoSementesService;
-
+		
 	public BancoSementes saveBancoSementes(BancoSementes newInstance) {
 		return bancoSementesService.saveBancoSementes(newInstance);
 	}
@@ -349,22 +381,22 @@ public class Facade {
 	public void deleteBancoSementes(long id) {
 		bancoSementesService.deleteBancoSementes(id);
 	}
-
-	public List<Agricultor> getAllAgricultoresByBanco(long id) {
-		BancoSementes banco = bancoSementesService.findBancoSementesById(id);
-		System.out.println("agricultores do banco: " + banco.getAgricultores());
-		return banco.getAgricultores();
-	}
-
-	public List<Gerente> getAllGerentesByBanco(long id) {
-		BancoSementes banco = bancoSementesService.findBancoSementesById(id);
-		return banco.getGerentes();
+	
+	public List<Agricultor> getAllAgricultor(long id) {
+		
+		try {
+			BancoSementes banco = bancoSementesService.findBancoSementesById(id);
+			System.out.println("agricultores do banco: " + banco.getAgricultores());
+			return banco.getAgricultores();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	//RetiradaUsuario--------------------------------------------------------------
 	@Autowired
 	private RetiradaUsuarioService  retiradaUsuarioService;
-
+		
 	public RetiradaUsuario saveRetiradaUsuario(RetiradaUsuario newInstance) {
 		return retiradaUsuarioService.saveRetiradaUsuario(newInstance);
 	}
@@ -388,12 +420,12 @@ public class Facade {
 	public void deleteRetiradaUsuario(long id) {
 		retiradaUsuarioService.deleteRetiradaUsuario(id);
 	}
-
+	
 
 	//TabelaBancoSementes--------------------------------------------------------------
 	@Autowired
 	private TabelaBancoSementesService  tabelaBancoSementesService;
-
+		
 	public TabelaBancoSementes saveTabelaBancoSementes(TabelaBancoSementes newInstance) {
 		return tabelaBancoSementesService.saveTabelaBancoSementes(newInstance);
 	}
@@ -417,12 +449,12 @@ public class Facade {
 	public void deleteTabelaBancoSementes(long id) {
 		tabelaBancoSementesService.deleteTabelaBancoSementes(id);
 	}
-
+	
 
 	//Item--------------------------------------------------------------
 	@Autowired
 	private ItemService  itemService;
-
+		
 	public Item saveItem(Item newInstance) {
 		return itemService.saveItem(newInstance);
 	}
@@ -446,18 +478,18 @@ public class Facade {
 	public void deleteItem(long id) {
 		itemService.deleteItem(id);
 	}
-
+	
 
 	//Gerente--------------------------------------------------------------
 	@Autowired
 	private GerenteService  gerenteService;
-
+		
 	public Gerente saveGerente(Gerente newInstance) throws EmailExistsException {
-
+		
 		bancoSementesService.findBancoSementesById(newInstance.getBancoSementes().getId());
-
+		
 		usuarioService.saveUsuario(newInstance);
-
+		
 		return gerenteService.saveGerente(newInstance);
 	}
 
@@ -484,7 +516,7 @@ public class Facade {
 	//ObjetosBancoSementes--------------------------------------------------------------
 	@Autowired
 	private ObjetosBancoSementesService  objetosBancoSementesService;
-
+		
 	public ObjetosBancoSementes saveObjetosBancoSementes(ObjetosBancoSementes newInstance) {
 		return objetosBancoSementesService.saveObjetosBancoSementes(newInstance);
 	}
@@ -508,12 +540,12 @@ public class Facade {
 	public void deleteObjetosBancoSementes(long id) {
 		objetosBancoSementesService.deleteObjetosBancoSementes(id);
 	}
-
+	
 
 	//Evento--------------------------------------------------------------
 	@Autowired
 	private EventoService  eventoService;
-
+		
 	public Evento saveEvento(Evento newInstance) {
 		return eventoService.saveEvento(newInstance);
 	}
@@ -537,12 +569,12 @@ public class Facade {
 	public void deleteEvento(long id) {
 		eventoService.deleteEvento(id);
 	}
-
+	
 
 	//Cultura--------------------------------------------------------------
 	@Autowired
 	private CulturaService  culturaService;
-
+		
 	public Cultura saveCultura(Cultura newInstance) {
 		return culturaService.saveCultura(newInstance);
 	}
@@ -566,12 +598,12 @@ public class Facade {
 	public void deleteCultura(long id) {
 		culturaService.deleteCultura(id);
 	}
-
+	
 
 	//Conjuge--------------------------------------------------------------
 	@Autowired
 	private ConjugeService  conjugeService;
-
+		
 	public Conjuge saveConjuge(Conjuge newInstance) {
 		return conjugeService.saveConjuge(newInstance);
 	}
@@ -595,12 +627,12 @@ public class Facade {
 	public void deleteConjuge(long id) {
 		conjugeService.deleteConjuge(id);
 	}
-
+	
 
 	//TransacaoGenerica--------------------------------------------------------------
 	@Autowired
 	private TransacaoGenericaService  transacaoGenericaService;
-
+		
 	public TransacaoGenerica saveTransacaoGenerica(TransacaoGenerica newInstance) {
 		return transacaoGenericaService.saveTransacaoGenerica(newInstance);
 	}
@@ -624,41 +656,41 @@ public class Facade {
 	public void deleteTransacaoGenerica(long id) {
 		transacaoGenericaService.deleteTransacaoGenerica(id);
 	}
+	
 
-
-	//Post--------------------------------------------------------------
+	//Postavel--------------------------------------------------------------
 	@Autowired
-	private PostServiceInterface  postService;
-
-	public Post savePost(Post newInstance) {
-		return postService.savePost(newInstance);
+	private PostavelService  postavelService;
+		
+	public Postavel savePostavel(Postavel newInstance) {
+		return postavelService.savePostavel(newInstance);
 	}
 
-	public Post updatePost(Post transientObject) {
-		return postService.updatePost(transientObject);
+	public Postavel updatePostavel(Postavel transientObject) {
+		return postavelService.updatePostavel(transientObject);
 	}
 
-	public Post findPostById(long id) {
-		return postService.findPostById(id);
+	public Postavel findPostavelById(long id) {
+		return postavelService.findPostavelById(id);
 	}
 
-	public List<Post> getAllPost() {
-		return postService.getAllPost();
+	public List<Postavel> getAllPostavel() {
+		return postavelService.getAllPostavel();
 	}
 
-	public void deletePost(Post persistentObject) {
-		postService.deletePost(persistentObject);
+	public void deletePostavel(Postavel persistentObject) {
+		postavelService.deletePostavel(persistentObject);
 	}
 
-	public void deletePost(long id) {
-		postService.deletePost(id);
+	public void deletePostavel(long id) {
+		postavelService.deletePostavel(id);
 	}
-
+	
 
 	//Sementes--------------------------------------------------------------
 	@Autowired
 	private SementesService  sementesService;
-
+		
 	public Sementes saveSementes(Sementes newInstance) {
 		return sementesService.saveSementes(newInstance);
 	}
@@ -682,12 +714,12 @@ public class Facade {
 	public void deleteSementes(long id) {
 		sementesService.deleteSementes(id);
 	}
-
+	
 
 	//RegioesAdaptacaoCultivo--------------------------------------------------------------
 	@Autowired
 	private RegioesAdaptacaoCultivoService  regioesAdaptacaoCultivoService;
-
+		
 	public RegioesAdaptacaoCultivo saveRegioesAdaptacaoCultivo(RegioesAdaptacaoCultivo newInstance) {
 		return regioesAdaptacaoCultivoService.saveRegioesAdaptacaoCultivo(newInstance);
 	}
@@ -711,12 +743,12 @@ public class Facade {
 	public void deleteRegioesAdaptacaoCultivo(long id) {
 		regioesAdaptacaoCultivoService.deleteRegioesAdaptacaoCultivo(id);
 	}
-
+	
 
 	//Doenca--------------------------------------------------------------
 	@Autowired
 	private DoencaService  doencaService;
-
+		
 	public Doenca saveDoenca(Doenca newInstance) {
 		return doencaService.saveDoenca(newInstance);
 	}
@@ -740,12 +772,12 @@ public class Facade {
 	public void deleteDoenca(long id) {
 		doencaService.deleteDoenca(id);
 	}
-
+	
 
 	//Cor--------------------------------------------------------------
 	@Autowired
 	private CorService  corService;
-
+		
 	public Cor saveCor(Cor newInstance) {
 		return corService.saveCor(newInstance);
 	}
@@ -769,12 +801,12 @@ public class Facade {
 	public void deleteCor(long id) {
 		corService.deleteCor(id);
 	}
-
+	
 
 	//ToleranciaAdversidades--------------------------------------------------------------
 	@Autowired
 	private ToleranciaAdversidadesService  toleranciaAdversidadesService;
-
+		
 	public ToleranciaAdversidades saveToleranciaAdversidades(ToleranciaAdversidades newInstance) {
 		return toleranciaAdversidadesService.saveToleranciaAdversidades(newInstance);
 	}
@@ -798,12 +830,12 @@ public class Facade {
 	public void deleteToleranciaAdversidades(long id) {
 		toleranciaAdversidadesService.deleteToleranciaAdversidades(id);
 	}
-
+	
 
 	//infraestruturaHidrica--------------------------------------------------------------
 	@Autowired
 	private infraestruturaHidricaService  infraestruturaHidricaService;
-
+		
 	public infraestruturaHidrica saveinfraestruturaHidrica(infraestruturaHidrica newInstance) {
 		return infraestruturaHidricaService.saveinfraestruturaHidrica(newInstance);
 	}
@@ -827,12 +859,12 @@ public class Facade {
 	public void deleteinfraestruturaHidrica(long id) {
 		infraestruturaHidricaService.deleteinfraestruturaHidrica(id);
 	}
-
+	
 
 	//Admin--------------------------------------------------------------
 	@Autowired
 	private AdminService adminService;
-
+		
 	public Admin saveAdmin(Admin newInstance) throws EmailExistsException {
 		usuarioService.saveUsuario(newInstance);
 		return adminService.saveAdmin(newInstance);
@@ -857,11 +889,11 @@ public class Facade {
 	public void deleteAdmin(Long id) {
 		adminService.deleteAdmin(id);
 	}
-
+	
 	//Agricultor--------------------------------------------------------------
 	@Autowired
 	private AgricultorService  agricultorService;
-
+		
 	public Agricultor saveAgricultor(Agricultor newInstance) throws EmailExistsException {
 		bancoSementesService.findBancoSementesById(newInstance.getBancoSementes().getId());
 		usuarioService.saveUsuario(newInstance);
@@ -887,7 +919,7 @@ public class Facade {
 	public void deleteAgricultor(long id) {
 		agricultorService.deleteAgricultor(id);
 	}
-
+	
 	public void validateAgricultor(long id) {
 		agricultorService.validateAgricultor(id);
 	}
@@ -895,7 +927,7 @@ public class Facade {
 	//ProducaoSementes--------------------------------------------------------------
 	@Autowired
 	private ProducaoSementesService  producaoSementesService;
-
+		
 	public ProducaoSementes saveProducaoSementes(ProducaoSementes newInstance) {
 		findAgricultorById(newInstance.getAgricultor().getId());
 		return producaoSementesService.saveProducaoSementes(newInstance);
@@ -921,12 +953,12 @@ public class Facade {
 	public void deleteProducaoSementes(long id) {
 		producaoSementesService.deleteProducaoSementes(id);
 	}
-
+	
 
 	//Endereco--------------------------------------------------------------
 	@Autowired
 	private EnderecoService  enderecoService;
-
+		
 	public Endereco saveEndereco(Endereco newInstance) {
 		return enderecoService.saveEndereco(newInstance);
 	}
@@ -950,12 +982,12 @@ public class Facade {
 	public void deleteEndereco(long id) {
 		enderecoService.deleteEndereco(id);
 	}
-
+	
 
 	//DoacaoUsuario--------------------------------------------------------------
 	@Autowired
 	private DoacaoUsuarioService  doacaoUsuarioService;
-
+		
 	public DoacaoUsuario saveDoacaoUsuario(DoacaoUsuario newInstance) {
 		return doacaoUsuarioService.saveDoacaoUsuario(newInstance);
 	}
@@ -979,12 +1011,12 @@ public class Facade {
 	public void deleteDoacaoUsuario(long id) {
 		doacaoUsuarioService.deleteDoacaoUsuario(id);
 	}
-
+	
 
 	//CaracteristicasAgronomicas--------------------------------------------------------------
 	@Autowired
 	private CaracteristicasAgronomicasService  caracteristicasAgronomicasService;
-
+		
 	public CaracteristicasAgronomicas saveCaracteristicasAgronomicas(CaracteristicasAgronomicas newInstance) {
 		return caracteristicasAgronomicasService.saveCaracteristicasAgronomicas(newInstance);
 	}
@@ -1008,12 +1040,12 @@ public class Facade {
 	public void deleteCaracteristicasAgronomicas(long id) {
 		caracteristicasAgronomicasService.deleteCaracteristicasAgronomicas(id);
 	}
-
+	
 
 	//AtividadeRural--------------------------------------------------------------
 	@Autowired
 	private AtividadeRuralService  atividadeRuralService;
-
+		
 	public AtividadeRural saveAtividadeRural(AtividadeRural newInstance) {
 		return atividadeRuralService.saveAtividadeRural(newInstance);
 	}
@@ -1037,12 +1069,12 @@ public class Facade {
 	public void deleteAtividadeRural(long id) {
 		atividadeRuralService.deleteAtividadeRural(id);
 	}
-
+	
 
 	//Finalidade--------------------------------------------------------------
 	@Autowired
 	private FinalidadeService  finalidadeService;
-
+		
 	public Finalidade saveFinalidade(Finalidade newInstance) {
 		return finalidadeService.saveFinalidade(newInstance);
 	}
@@ -1066,6 +1098,6 @@ public class Facade {
 	public void deleteFinalidade(long id) {
 		finalidadeService.deleteFinalidade(id);
 	}
-
+	
 
 }
