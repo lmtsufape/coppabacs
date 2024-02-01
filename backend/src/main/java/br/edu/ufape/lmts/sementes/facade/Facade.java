@@ -382,15 +382,15 @@ public class Facade {
 		bancoSementesService.deleteBancoSementes(id);
 	}
 	
-	public List<Agricultor> getAllAgricultoresByBanco(long id) {
-		BancoSementes banco = bancoSementesService.findBancoSementesById(id);
-		System.out.println("agricultores do banco: " + banco.getAgricultores());
-		return banco.getAgricultores();
-	}
-	
-	public List<Gerente> getAllGerentesByBanco(long id) {
-		BancoSementes banco = bancoSementesService.findBancoSementesById(id);
-		return banco.getGerentes();
+	public List<Agricultor> getAllAgricultor(long id) {
+		
+		try {
+			BancoSementes banco = bancoSementesService.findBancoSementesById(id);
+			System.out.println("agricultores do banco: " + banco.getAgricultores());
+			return banco.getAgricultores();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	//RetiradaUsuario--------------------------------------------------------------
