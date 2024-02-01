@@ -17,6 +17,9 @@ public class EnderecoResponse {
 	private String referencia;
 	private String cidade;
 	private String estado;
+	private String cep;
+	private String numero;
+	private String bairro;
 
 	public EnderecoResponse(Endereco obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

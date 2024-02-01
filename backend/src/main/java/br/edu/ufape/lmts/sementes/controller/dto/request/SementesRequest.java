@@ -1,5 +1,7 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
+import java.util.ArrayList;
+
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
@@ -16,7 +18,6 @@ public class SementesRequest {
 	private String nomePopular;
 	private String descricao;
 	private String pragas;
-	private String imagem;
 	private Boolean dominioPublico;
 	private Boolean polinizaacaoAbertaMelhorada;
 	private String regiaoColetaDados;
@@ -29,6 +30,7 @@ public class SementesRequest {
 	public Sementes convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		Sementes obj = modelMapper.map(this, Sementes.class);
+		obj.setImagens(new ArrayList<>());
 		return obj;
 	}
 

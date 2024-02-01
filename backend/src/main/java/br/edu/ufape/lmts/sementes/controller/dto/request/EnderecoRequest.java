@@ -21,6 +21,12 @@ public class EnderecoRequest {
 	private String cidade;
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String estado;
+	@NotEmpty(message = "Preenchimento obrigatório")
+	private String cep;
+	@NotEmpty(message = "Preenchimento obrigatório")
+	private String numero;
+	@NotEmpty(message = "Preenchimento obrigatório")
+	private String bairro;
 
 	public Endereco convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
