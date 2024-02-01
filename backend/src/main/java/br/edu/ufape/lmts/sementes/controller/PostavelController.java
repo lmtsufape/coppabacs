@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.edu.ufape.lmts.sementes.controller.dto.request.PostRequest;
-import br.edu.ufape.lmts.sementes.controller.dto.response.PostResponse;
+import br.edu.ufape.lmts.sementes.controller.dto.request.PostavelRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.response.PostavelResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
-import br.edu.ufape.lmts.sementes.model.Post;
+import br.edu.ufape.lmts.sementes.model.Postavel;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
@@ -30,56 +30,56 @@ import jakarta.validation.Valid;
 @Hidden
 @RestController
 @RequestMapping("/api/v1/")
-public class PostController {
+public class PostavelController {
 	@Autowired
 	private Facade facade;
 	@Autowired
 	private ModelMapper modelMapper;
-
-	@GetMapping("post")
-	public List<PostResponse> getAllPost() {
-		return facade.getAllPost()
+	
+	@GetMapping("postavel")
+	public List<PostavelResponse> getAllPostavel() {
+		return facade.getAllPostavel()
 			.stream()
-			.map(PostResponse::new)
+			.map(PostavelResponse::new)
 			.toList();
 	}
-
-	@PostMapping("post")
-	public PostResponse createPost(@Valid @RequestBody PostRequest newObj) {
-		return new PostResponse(facade.savePost(newObj.convertToEntity()));
+	
+	@PostMapping("postavel")
+	public PostavelResponse createPostavel(@Valid @RequestBody PostavelRequest newObj) {
+		return new PostavelResponse(facade.savePostavel(newObj.convertToEntity()));
 	}
-
-	@GetMapping("post/{id}")
-	public PostResponse getPostById(@PathVariable Long id) {
-		return new PostResponse(facade.findPostById(id));
+	
+	@GetMapping("postavel/{id}")
+	public PostavelResponse getPostavelById(@PathVariable Long id) {
+		return new PostavelResponse(facade.findPostavelById(id));
 	}
-
-	@PatchMapping("post/{id}")
-	public PostResponse updatePost(@PathVariable Long id, @Valid @RequestBody PostRequest obj) {
+	
+	@PatchMapping("postavel/{id}")
+	public PostavelResponse updatePostavel(@PathVariable Long id, @Valid @RequestBody PostavelRequest obj) {
 		try {
-			//Post o = obj.convertToEntity();
-			Post oldObject = facade.findPostById(id);
+			//Postavel o = obj.convertToEntity();
+			Postavel oldObject = facade.findPostavelById(id);
 
-			TypeMap<PostRequest, Post> typeMapper = modelMapper
-													.typeMap(PostRequest.class, Post.class)
-													.addMappings(mapper -> mapper.skip(Post::setId));
-
-
-			typeMapper.map(obj, oldObject);
-			return new PostResponse(facade.updatePost(oldObject));
+			TypeMap<PostavelRequest, Postavel> typeMapper = modelMapper
+													.typeMap(PostavelRequest.class, Postavel.class)
+													.addMappings(mapper -> mapper.skip(Postavel::setId));			
+			
+			
+			typeMapper.map(obj, oldObject);	
+			return new PostavelResponse(facade.updatePostavel(oldObject));
 		} catch (RuntimeException e) {
 			if (!(e instanceof ObjectNotFoundException))
 				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
 			else
 				throw e;
 		}
-
+		
 	}
-
-	@DeleteMapping("post/{id}")
-	public String deletePost(@PathVariable Long id) {
+	
+	@DeleteMapping("postavel/{id}")
+	public String deletePostavel(@PathVariable Long id) {
 		try {
-			facade.deletePost(id);
+			facade.deletePostavel(id);
 			return "";
 		} catch (RuntimeException e) {
 			if (!(e instanceof ObjectNotFoundException))
@@ -87,8 +87,8 @@ public class PostController {
 			else
 				throw e;
 		}
-
+		
 	}
-
+	
 
 }
