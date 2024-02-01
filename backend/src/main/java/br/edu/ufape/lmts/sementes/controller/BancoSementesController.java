@@ -20,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 import br.edu.ufape.lmts.sementes.controller.dto.request.BancoSementesRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.AgricultorResponse;
 import br.edu.ufape.lmts.sementes.controller.dto.response.BancoSementesResponse;
+import br.edu.ufape.lmts.sementes.controller.dto.response.GerenteResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.BancoSementes;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
@@ -90,13 +91,18 @@ public class BancoSementesController {
 	}
 	
 	@GetMapping("bancoSementes/{id}/agricultores")
-	public List<AgricultorResponse> getAllAgricultor(@PathVariable long id) {
-		
-		System.out.println(id);
-		return facade.getAllAgricultor(id)
+	public List<AgricultorResponse> getAllAgricultoresByBanco(@PathVariable long id) {
+		return facade.getAllAgricultoresByBanco(id)
 				.stream()
 				.map(AgricultorResponse::new)
 				.toList();
-		
+	}
+	
+	@GetMapping("bancoSementes/{id}/coordenadores")
+	public List<GerenteResponse> getAllGerentesByBanco(@PathVariable long id) {
+		return facade.getAllGerentesByBanco(id)
+				.stream()
+				.map(GerenteResponse::new)
+				.toList();
 	}
 }

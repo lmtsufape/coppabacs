@@ -1,4 +1,4 @@
-package br.edu.ufape.lmts.sementes.controller.dto.request;
+package br.edu.ufape.lmts.sementes.controller.dto.response;
 
 import java.time.LocalDate;
 
@@ -12,23 +12,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@Getter @Setter @NoArgsConstructor 
-public  class PostavelRequest  {
+
+@Getter @Setter @NoArgsConstructor
+public class PostResponse  {
+	private Long id;
 	private String texto;
 	private Usuario autor;
 	private boolean visibilidade;
 	private String categoria;
 	private String titulo;
-	private String imagem;
+	private List<String> imagens;
 	private LocalDate data;
 
 
-	public Postavel convertToEntity() {
+
+	public PostavelResponse(Postavel obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
-		Postavel obj = modelMapper.map(this, Postavel.class);
-		return obj;
+		modelMapper.map(obj, this);
 	}
-
-
 
 }

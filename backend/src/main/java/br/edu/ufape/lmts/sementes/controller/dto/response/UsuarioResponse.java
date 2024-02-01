@@ -30,8 +30,6 @@ public  class UsuarioResponse  {
 	private String imagem;
 	private String nomePai;
 	private String nomeMae;
-	private String nis;
-	private String tituloEleitor;
 	private String sexo;
 	private ConjugeResponse conjuge; 
 	private List<PostavelResponse> postavel;

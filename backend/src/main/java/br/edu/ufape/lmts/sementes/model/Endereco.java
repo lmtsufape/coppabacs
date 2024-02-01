@@ -29,6 +29,5 @@ public  class Endereco  {
 	private String referencia;
 	private String cidade;
 	private String estado;
-	private String municipio;
 
 }

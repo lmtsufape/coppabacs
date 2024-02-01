@@ -18,20 +18,20 @@ import lombok.ToString;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor 
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public  class Postavel  {
+public  class Post  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
 	private long id;
+	private String titulo;
 	private String texto;
+	private String categoria;
 	private Usuario autor;
 	private boolean visibilidade;
-	private String categoria;
-	private String titulo;
-	private String imagem;
-	private LocalDate data;
+	private List<String> imagens;
+	private Date data;
 
 }

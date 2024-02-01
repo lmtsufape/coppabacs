@@ -20,10 +20,10 @@ import lombok.ToString;
 public class Coppabacs extends Usuario {
 
 	public Coppabacs(Long id, String nome, String email, String senha, Endereco endereco, String rg, String cpf,
-			Date dataNascimento, String contato, String imagem, String nomePai, String nomeMae, String nis,
-			String tituloEleitor, String sexo, Conjuge conjuge, List<Postavel> postavel) {
-		super(id, nome, email, senha, endereco, rg, cpf, dataNascimento, contato, imagem, nomePai, nomeMae, nis, tituloEleitor,
-				sexo, conjuge, postavel);
+			Date dataNascimento, String contato, String imagem, String nomePai, String nomeMae, String sexo,
+			Conjuge conjuge, List<Postavel> postavel) {
+		super(id, nome, email, senha, endereco, rg, cpf, dataNascimento, contato, imagem, nomePai, nomeMae, sexo,
+				conjuge, postavel);
 		super.addRole(TipoUsuario.COPPABACS);
 		super.addRole(TipoUsuario.AGRICULTOR);
 		super.addRole(TipoUsuario.GERENTE);
