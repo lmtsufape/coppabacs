@@ -11,54 +11,10 @@ import * as Yup from 'yup';
 
 const AgricultorForm = () =>{
 
-  const [newAgricultor, setNewAgricultor] = useState({
-    nome: "",
-    cpf: "",
-    email: "",
-    contato: "",
-    endereco: {
-      nome: "",
-      referencia: "",
-      cidade: "",
-      estado: "",
-      municipio: ""
-    },
-    senha: "",
-    confirmarSenha: "",
-    rg: "",
-    nomeMae: "",
-    nomePai: "",
-    tituloEleitor: "",
-    sexo: ""
-  });
-
   // const errors = {nome: ""};
-
-  const {status, mutate} = useMutation(
-    async () =>{
-      console.log("valores formik: ", formik.values);
-      return postAgricultor(
-        formik.values
-        );
-    }, {
-      onSuccess:(res) =>{
-        console.log("data", res.data);
-      },
-      onError: (error) => {
-        console.log(error);
-      }
-    }
-  );
-
-  const getEnter = e =>{
-    if(e.key === 'Enter'){
-      validateNewAgricultor();
-    }
-  }
   const validate = (values) => {
     
   }
-
   const formik = useFormik({
     initialValues: { 
       nome: "",
@@ -90,50 +46,35 @@ const AgricultorForm = () =>{
       console.log("valores formik: ", formik.values);
         mutate();
     },
-})
+}
+)
 
-  function validateNewAgricultor() {
-    if (newAgricultor.nome === "") {
-      alert("Preencha o campo nome");
-    } else if (newAgricultor.cpf === "") {
-      alert("Preencha o campo cpf");
-    } else if (newAgricultor.email === "") {
-      alert("Preencha o campo email");
-    } else if (newAgricultor.telefone === "") {
-      alert("Preencha o campo telefone");
-    } else if (newAgricultor.endereco.nome === "") {
-      alert("Preencha o campo endereço");
-    } else if (newAgricultor.endereco.referencia === "") {
-      alert("Preencha o campo referencia");
-    } else if (newAgricultor.endereco.cidade === "") {
-      alert("Preencha o campo cidade");
-    } else if (newAgricultor.endereco.estado === "") {
-      alert("Preencha o campo estado");
-    } else if (newAgricultor.endereco.municipio === "") {
-      alert("Preencha o campo municipio");
-    } else if (newAgricultor.senha === "") {
-      alert("Preencha o campo senha");
-    } else if (newAgricultor.confirmarSenha === "") {
-      alert("Preencha o campo confirmar senha");
-    } else if (newAgricultor.rg === "") {
-      alert("Preencha o campo rg");
-    } else if (newAgricultor.cpf === "") {
-      alert("Preencha o campo cpf");
-    } else if (newAgricultor.nomeMae === "") {
-      alert("Preencha o campo nome da mãe");
-    } else if (newAgricultor.nomePai === "") {
-      alert("Preencha o campo nome do pai");
-    } else if (newAgricultor.tituloEleitor === "") {
-      alert("Preencha o campo titulo de eleitor");
-    } else if (newAgricultor.sexo === "") {
-      alert("Preencha o campo sexo");
-    } else {
-      // Se todas as verificações passarem, chame o mutate
-      setError("");
-      mutate();
+
+
+  const {status, mutate} = useMutation(
+    async () =>{
+      console.log("valores formik: ", formik.values);
+      return postAgricultor(
+        formik.values
+        );
+    }, {
+      onSuccess:(res) =>{
+        console.log("data", res.data);
+      },
+      onError: (error) => {
+        console.log(error);
+      }
+    }
+  );
+
+  const getEnter = e =>{
+    if(e.key === 'Enter'){
+      validateNewAgricultor();
     }
   }
-  
+
+
+ 
 
 
   return(
@@ -173,35 +114,35 @@ const AgricultorForm = () =>{
           value={formik.values.contato}
           />
           <input
-          name="endereco"
+          name="endereco.nome"
           placeholder="Insira seu endereço"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.endereco.nome}
           />
           <input
-          name="referencia"
+          name="endereco.referencia"
           placeholder="Insira sua referencia"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.endereco.referencia}
           />
           <input
-          name="cidade"
+          name="endereco.cidade"
           placeholder="Insira sua cidade"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.endereco.cidade}
           />
           <input
-          name="estado"
+          name="endereco.estado"
           placeholder="Insira seu estado"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.endereco.estado}
           />
           <input
-          name="municipio"
+          name="endereco.municipio"
           placeholder="Insira seu municipio"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
