@@ -1,7 +1,6 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
 import java.util.Date;
-import java.util.List;
 
 import org.modelmapper.ModelMapper;
 
@@ -43,7 +42,6 @@ public class UsuarioRequest {
 	private Date dataNascimento;
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String contato;
-	private String imagem;
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String nomePai;
 	@NotEmpty(message = "Preenchimento obrigatório")
@@ -51,7 +49,6 @@ public class UsuarioRequest {
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String sexo;
 	private ConjugeRequest conjuge;
-	private List<PostavelRequest> postavel;
 
 	public Usuario convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
@@ -65,8 +62,7 @@ public class UsuarioRequest {
 	public String toString() {
 		return "UsuarioRequest [nome=" + nome + ", email=" + email + ", senha=" + senha + ", endereco=" + endereco
 				+ ", rg=" + rg + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + ", contato=" + contato
-				+ ", imagem=" + imagem + ", nomePai=" + nomePai + ", nomeMae=" + nomeMae + ", sexo=" + sexo
-				+ ", conjuge=" + conjuge + ", postavel=" + postavel + "]";
+				+ ", nomePai=" + nomePai + ", nomeMae=" + nomeMae + ", sexo=" + sexo + ", conjuge=" + conjuge + "]";
 	}
 
 }

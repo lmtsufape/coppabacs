@@ -33,7 +33,7 @@ public  class Sementes  {
 	private String nomePopular;
 	private String descricao;
 	private String pragas;
-	private String imagem;
+	private List<String> imagens;
 	private Boolean dominioPublico;
 	private Boolean polinizaacaoAbertaMelhorada;
 	private String regiaoColetaDados;
