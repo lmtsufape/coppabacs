@@ -19,7 +19,7 @@ public  class SementesResponse  {
 	private String nomePopular;
 	private String pragas;
 	private String descricao;
-	private String imagem;
+	private List<String> imagens;
 	private Boolean dominioPublico;
 	private Boolean polinizaacaoAbertaMelhorada;
 	private String regiaoColetaDados;
