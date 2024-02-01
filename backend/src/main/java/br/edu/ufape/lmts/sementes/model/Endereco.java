@@ -13,8 +13,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
-
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor 
@@ -29,5 +27,7 @@ public  class Endereco  {
 	private String referencia;
 	private String cidade;
 	private String estado;
-
+	private String cep;
+	private String numero;
+	private String bairro;
 }
