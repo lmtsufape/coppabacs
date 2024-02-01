@@ -18,7 +18,7 @@ import lombok.ToString;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public  class Postavel  {
@@ -33,6 +33,5 @@ public  class Postavel  {
 	private String titulo;
 	private String imagem;
 	private LocalDate data;
-	private String imagem;
 
 }
