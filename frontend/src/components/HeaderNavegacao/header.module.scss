@@ -1,0 +1,48 @@
+.header{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  
+  font-size: 1em;
+  
+  margin: 4em 2em 0em 2em;
+  
+  h1{
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+
+  &__title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 1em;
+    margin: 0em 0em 3em 0em;
+  }
+  &__title_voltar{
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    &_link{
+      color: #000;
+    } 
+  }
+  &__title_guia{
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+    h1{
+      font-size: 1em;
+      font-weight: bold;
+    }
+    h1:first-child{
+      color: #A7A7A7;
+    }
+    h1:last-child{
+      color: #245501;
+    }
+  }
+}

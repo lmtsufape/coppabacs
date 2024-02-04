@@ -8,10 +8,7 @@ export default function NewRegisterFarmer() {
     return (
         <div>
             <Header />
-            <h1 className={styles.title}>
-                Atividade Rural
-            </h1>
-            <AgricultorForm />
+            <AgricultorForm diretorioAnterior="Home / Agricultores /" diretorioAtual= "Novo Agricultor" hrefAnterior="/agricultores"/>
             <Footer />
         </div>
     );

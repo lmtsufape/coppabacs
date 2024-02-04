@@ -6,10 +6,12 @@ import style from "./list.module.scss";
 import Table from "./Table";
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
-import { getAllAgricultores } from "@/api/usuarios/agricultor/getAllAgricultores";
+import getAllUsuarios from "@/api/usuarios/getAllUsuarios";
 import Link from "next/link";
+import Header from "../HeaderNavegacao";
+import { getStorageItem } from "@/utils/localStore";
 
-export default function                                                                                                                                 List({listName, buttonName, table1, table2, table3}) {
+export default function List({diretorioAnterior, diretorioAtual, hrefAnterior, listName, buttonName, table1, table2, table3}) {
     
   const [agricultor, setAgricultor] = useState([]);
 
@@ -19,7 +21,8 @@ export default function                                                         
 
   const { state, mutate } = useMutation(
     async () =>{
-      return getAllAgricultores();
+      const token = getStorageItem("token");
+      return getAllUsuarios(token);
     }, {
       onSuccess:(res) =>{
         console.log(res);
@@ -33,18 +36,12 @@ export default function                                                         
   
     return (
     <div>
+          <Header
+            diretorioAnterior={diretorioAnterior}
+            diretorioAtual={diretorioAtual}
+            hrefAnterior={hrefAnterior}
+          />
         <div className={style.header}>
-            <div className={style.header__title}>
-              <div className={style.header__title_voltar}>
-                <Image src="/assets/IconMenorQue.svg" alt="Voltar" width={27} height={24}/>
-                <Link className={style.header__title_voltar_link}href="/inicio"><h1>Voltar</h1></Link>
-              </div>
-              <div className={style.header__title_guia}>
-                <h1>Home /</h1>
-                <h1> Agricultores</h1>
-              </div>
-
-            </div>
           <div className={style.header__container}>
               <button >
                <Link className={style.header__container_link}href="agricultores/solicitacoes">
@@ -69,8 +66,8 @@ export default function                                                         
 
             </div>
             
+         </div>
         </div>
-          </div>
 
 
         <Table 
