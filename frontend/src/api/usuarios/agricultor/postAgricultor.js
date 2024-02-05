@@ -21,10 +21,6 @@ export async function postAgricultor(novoAgricultor ={
   }, 
   bancoId: "",
   
-}, token) {
-  return await api.post("/agricultor", novoAgricultor, {
-    headers: {
-      "Authorization": `Bearer ${token}`,
-    }
-  });
+}) {
+  return await api.post("/agricultor", novoAgricultor);
 }

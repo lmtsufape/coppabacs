@@ -3,7 +3,7 @@ import style from "./table.module.scss";
 import Link from "next/link";
 
 
-export default function tableLayout({table1, table2, table3, table4, listAgricultor}){
+export default function tableLayout({table1, table2, table3, listUsuarios}){
   
   
   return(
@@ -13,11 +13,10 @@ export default function tableLayout({table1, table2, table3, table4, listAgricul
           <tr>
             <th>{table1}</th>
             <th>{table2}</th>            
-            <th>{table3}</th>            
 
             <th className={style.content__table__header_name3}>
               <div >
-              {table4}
+              {table3}
                <Image src="/assets/iconInformacao.svg" alt="Visualizar" width={27} height={26}/>
 
               </div>
@@ -26,11 +25,10 @@ export default function tableLayout({table1, table2, table3, table4, listAgricul
           </tr>
         </thead>
         <tbody className={style.content__table__body}>
-        {listAgricultor.map((agricultor, index) => {
+        {listUsuarios.map((agricultor, index) => {
             return(
               <tr key={index}>
                 <td>{agricultor.nome}</td>
-                <td>{agricultor.apelido}</td>
                 <td>{agricultor.contato}</td>
                 <td>
                   <div className={style.content__table_container_buttons}>

@@ -3,79 +3,72 @@
 import Image from "next/image";
 import style from "./list.module.scss";
 
-import Table from "./Table";
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
-import getAllUsuarios from "@/api/usuarios/getAllUsuarios";
+
 import Link from "next/link";
 import Header from "../HeaderNavegacao";
-import { getStorageItem } from "@/utils/localStore";
+import Table from "./Table";
+import { getAllAgricultores } from "@/api/usuarios/agricultor/getAllAgricultores";
 
-export default function List({diretorioAnterior, diretorioAtual, hrefAnterior, listName, buttonName, table1, table2, table3}) {
-    
-  const [agricultor, setAgricultor] = useState([]);
+export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4 }) {
+
+  const [agricultores, setAgricultores] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
 
   useEffect(() => {
     mutate();
-  },[])
+  }, [])
 
   const { state, mutate } = useMutation(
-    async () =>{
-      const token = getStorageItem("token");
-      return getAllUsuarios(token);
+    async () => {
+      return getAllAgricultores();
     }, {
-      onSuccess:(res) =>{
-        console.log(res);
-        setAgricultor(res.data);
-      },
-      onError: (error) => {
-        console.log(error)
-      }
+    onSuccess: (res) => {
+      console.log(res);
+      setAgricultores(res.data);
+    },
+    onError: (error) => {
+      console.log(error)
     }
+  }
   );
-  
-    return (
+  const filteredAgricultores = agricultores.filter((agricultor) =>
+    agricultor.nome.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  return (
     <div>
-          <Header
-            diretorioAnterior={diretorioAnterior}
-            diretorioAtual={diretorioAtual}
-            hrefAnterior={hrefAnterior}
-          />
-        <div className={style.header}>
-          <div className={style.header__container}>
-              <button >
-               <Link className={style.header__container_link}href="agricultores/solicitacoes">
-                  <h1>
-                  Solicitações de Cadastro
-                  </h1>
-                </Link>
-                <Image src="/assets/iconSinoGray.svg" alt="Adicionar Agricultor" width={27} height={24}/>
+      <Header
+        diretorioAnterior={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
+        hrefAnterior={hrefAnterior}
+      />
+      <div className={style.header}>
 
-              </button>
-              <button>
-               
-                <Link className={style.header__container_link}href="agricultores/novoAgricultor">
-                  <h1>
-                  Adicionar Agricultor
-                  </h1>
-                </Link>
+          <div className={style.header__search}>
+            <input
+            className={style.header__search_input}
+              type="text"
+              placeholder="Pesquisar agricultor..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <button className={style.header__search_button}>
+              <Image src="/assets/iconLupa.svg" alt="Pesquisar" width={27} height={26} />
+            </button>
+          </div>
 
-                <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Agricultor" width={27} height={24}/>
-              </button>
-            <div className={style.header__container_buttons}>
-
-            </div>
-            
-         </div>
-        </div>
+      </div>
 
 
-        <Table 
-          table1={table1}
-          table2={table2} 
-          table3={table3}
-          listAgricultor={agricultor}
-        />
-     </div>   
-    );
+      <Table
+        table1={table1}
+        table2={table2}
+        table3={table3}
+        table4={table4}
+        listAgricultor={filteredAgricultores}
+      />
+    </div>
+  );
 }

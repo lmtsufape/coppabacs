@@ -4,6 +4,7 @@ import { useMutation } from "react-query";
 import { postAgricultor } from "@/api/usuarios/agricultor/postAgricultor";
 
 import { Form, Formik } from "formik";
+import { useState } from "react";
 import * as Yup from 'yup';
 
 import style from "./agricultorForm.module.scss";
@@ -13,8 +14,6 @@ import DadosForm from "./DadosUsuario";
 import DadosEndereco from "./DadosEndereco";
 import DadosAtividadesRurais from "./DadosAtividadesRurais";
 import Link from "next/link";
-import { useState } from "react";
-import { getStorageItem } from "@/utils/localStore";
 
 
 const AgricultorForm = ({diretorioAnterior, diretorioAtual, hrefAnterior}) =>{
@@ -36,10 +35,31 @@ const AgricultorForm = ({diretorioAnterior, diretorioAtual, hrefAnterior}) =>{
       nome: "",
       numero: "",
       referencia: "",
-    }    
+    },
+    bancoId: "",
+    atividadeRural: {
+      caprino: false,
+      fruticultura: false,
+      avicultura: false,
+      agriculturaMilho: false,
+      suinoCultura: false,
+      aquiCultura: false,
+      apicultura: false,
+      agriculturaFeijao: false,
+      pecuaria: false,
+      pescaArtesanal: false,
+      agriculturaSequeira: false,
+      outro: false,
+    },
+    producaoSementes: {
+      cultura: '',
+      variedade: '',
+      areaPlantada: '',
+      previsaoVenda: '',
+    }
   }
 
-    const validateSchema = Yup.object().shape({
+  const validateSchema = Yup.object().shape({
     nome: Yup.string()
         .min(5, "O nome deve ter no mínimo 5 caracteres")
         .required('Required'),
@@ -56,9 +76,7 @@ const AgricultorForm = ({diretorioAnterior, diretorioAtual, hrefAnterior}) =>{
   const {status, mutate} = useMutation(
     async (values) =>{
         console.log("valores: ", values );
-        const token = getStorageItem("token");
-        console.log("token", token);
-        return postAgricultor(values, token);
+        return postAgricultor(values);
       }, {
         onSuccess:(res) =>{
           console.log("data", res);
@@ -72,12 +90,6 @@ const AgricultorForm = ({diretorioAnterior, diretorioAtual, hrefAnterior}) =>{
   
 
   const [etapas, setEtapas] = useState(0);
-  if(etapas < 0){
-    setEtapas(0);
-  }else if(etapas > 2){
-    setEtapas(2);
-  }
-
 
   return(
     <div id="header" className={style.container}>
@@ -120,6 +132,7 @@ const AgricultorForm = ({diretorioAnterior, diretorioAtual, hrefAnterior}) =>{
               
                 {etapas === 0 && <DadosForm formik={formik} />}
                 {etapas === 1 && <DadosEndereco formik={formik} />}
+                {etapas === 2 && <DadosAtividadesRurais formik={formik} />}
                 {etapas === 0 && (
                   <div className={style.container__ContainerForm_buttons}>
                     <button>

@@ -8,7 +8,7 @@ export default function NewRegisterFarmer() {
     return (
         <div>
             <Header />
-            <AgricultorForm diretorioAnterior="Home / Agricultores /" diretorioAtual= "Novo Agricultor" hrefAnterior="/agricultores"/>
+            <AgricultorForm diretorioAnterior="Home / Agricultores /" diretorioAtual="Novo Agricultor" hrefAnterior="/agricultores" />
             <Footer />
         </div>
     );

@@ -1,13 +1,21 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Home/Footer";
-import ListSolicitacoes from "@/components/ListSolicitacoes";
-export default function AssociadosPage(){
+import ListAgricultor from "@/components/ListAgricultor";
 
-  return(
+export default function SolicitacoesPage() {
+
+  return (
     <div>
       <Header />
-      <ListSolicitacoes listName="Solicitações de cadastros" table1="nome" table2="Ação" content1  ="Geronimo"/>
-
+      <ListAgricultor 
+        diretorioAnterior="Home / Agricultores /"
+        diretorioAtual="Solicitações"
+        hrefAnterior="/agricultores"
+        table1="Nome"
+        table2="Apelido"
+        table3="Contato"
+        table4="Ação"
+      />
       <Footer />
 
     </div>

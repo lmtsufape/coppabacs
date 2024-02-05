@@ -9,7 +9,7 @@ export default function Input({ type, text, name, placeholder, onChange, value})
             <input 
             type={type} 
             name={name} 
-            placeholder={placeholder}
+            value={placeholder}
             onChange={onChange} 
             value={value}
             />

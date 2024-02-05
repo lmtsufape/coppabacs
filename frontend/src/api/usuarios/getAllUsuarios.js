@@ -1,9 +1,5 @@
-import api from "@/api/http-common.js";
+import api from "@/api/http-common";
 
-export async function getAllAgricultores(token) {
-  return await api.get("/usuario", {
-    headers: {
-      "Authorization": `Bearer ${token}`,
-    }
-  });
+export async function getAllUsuarios(){
+  return api.get("/usuario")
 }
