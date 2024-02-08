@@ -9,6 +9,7 @@ import Footer from '@/components/Home/Footer';
 
 import { getUsuario } from "@/api/usuarios/getUsuario ";
 import { useEffect, useState } from "react";
+import DetalhamentoUsuario from "@/components/DetalhamentoUsuario";
 
 export default function Info() {
 
@@ -38,7 +39,14 @@ export default function Info() {
   return (
     <>
       <Header />
-
+      { status === "success" && usuario &&
+        <DetalhamentoUsuario 
+        usuario={usuario}
+        diretorioAnterior={"Home / Agricultores / "}
+        diretorioAtual={"Detalhamento do Agricultor"}
+        hrefAnterior={"/agricultores"}
+        />
+      }
       <Footer />
     </>
   )

@@ -115,7 +115,7 @@ const AgricultorForm = ({diretorioAnterior, diretorioAtual, hrefAnterior}) =>{
 
       <div className={style.container__ContainerForm}>
         <Formik
-          initialValues={initialValues}
+        initialValues={initialValues}
 
         validationSchema={validateSchema}
               

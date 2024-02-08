@@ -36,14 +36,9 @@ export default function tableLayout({table1, table2, table3, table4, listAgricul
                   <div className={style.content__table_container_buttons}>
                     <button>
                       <span>
-                        <Link href={`/agricultores/info/${agricultor.id}`}>
+                        <Link href={`/agricultores/solicitacoes/${agricultor.id}`}>
                           <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26}/>
                         </Link>
-                      </span>
-                    </button>
-                    <button className={style.content__table_container_content__table_container_buttons_lastButton}>
-                      <span>
-                        <Image src="/assets/iconLixeira.svg" alt="Desativar" width={27} height={26}/>
                       </span>
                     </button>
                   </div>
