@@ -6,6 +6,7 @@ import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
+import br.edu.ufape.lmts.sementes.model.AtividadeRural;
 import br.edu.ufape.lmts.sementes.model.BancoSementes;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,7 @@ public  class AgricultorRequest extends UsuarioRequest {
 	private Double areaPropriedade;
 	private String comunidade;
 	private long bancoId;
-	private List<AtividadeRuralRequest> atividadeRural; 
+	private List<String> atividadesRurais; 
 	private List<infraestruturaHidricaRequest> infraestruturaHidrica; 
 	private List<UsoOcupacaoTerraRequest> usoOcupacaoTerra; 
 	private List<InfraestruturaComunidadeRequest> infraestruturaComunidade; 
@@ -32,6 +33,7 @@ public  class AgricultorRequest extends UsuarioRequest {
 		BancoSementes banco = new BancoSementes();
 		banco.setId(bancoId);
 		obj.setBancoSementes(banco);
+		obj.setAtividadeRural(atividadesRurais.stream().map(n -> new AtividadeRural(n)).toList());
 		System.out.println(obj.toString());
 		return obj;
 	}

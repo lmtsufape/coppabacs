@@ -18,6 +18,10 @@ public class AtividadeRuralService implements AtividadeRuralServiceInterface {
 	public AtividadeRural saveAtividadeRural(AtividadeRural newInstance) {
 		return repository.save(newInstance);
 	}
+	
+	public List<AtividadeRural> saveAllAtividadeRural(List<AtividadeRural> newInstances) {
+		return repository.saveAll(newInstances);
+	}
 
 	public AtividadeRural updateAtividadeRural(AtividadeRural transientObject) {
 		return repository.save(transientObject);
@@ -39,8 +43,6 @@ public class AtividadeRuralService implements AtividadeRuralServiceInterface {
 	public void deleteAtividadeRural(long id){
 		AtividadeRural obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist AtividadeRural with id = " + id));
 		repository.delete(obj);
-	}	
-	
-	
-	
+	}
+
 }
