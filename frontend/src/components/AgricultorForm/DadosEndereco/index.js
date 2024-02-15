@@ -12,7 +12,7 @@ export default function DadosEndereco({ formik }) {
         className={style.container__ContainerForm_form_input}
         id="estado"
         name="endereco.estado"
-        value="Insira seu estado"
+        placeHolder="Insira seu estado"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.endereco.estado}
@@ -26,7 +26,7 @@ export default function DadosEndereco({ formik }) {
         className={style.container__ContainerForm_form_input}
         id="cidade"
         name="endereco.cidade"
-        value="Insira sua cidade"
+        placeHolder="Insira sua cidade"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.endereco.cidade}
@@ -40,7 +40,7 @@ export default function DadosEndereco({ formik }) {
         className={style.container__ContainerForm_form_input}
         id="bairro"
         name="endereco.bairro"
-        value="Insira seu bairro"
+        placeHolder="Insira seu bairro"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.endereco.bairro}
@@ -54,7 +54,7 @@ export default function DadosEndereco({ formik }) {
         className={style.container__ContainerForm_form_input}
         id="nomeEndereco"
         name="endereco.nome"
-        value="Insira seu endereço"
+        placeHolder="Insira seu endereço"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.endereco.nome}
@@ -69,7 +69,7 @@ export default function DadosEndereco({ formik }) {
           <input
             className={style.container__ContainerForm_form_input}
             name="endereco.numero"
-            value="Insira o número"
+            valplaceHolderue="Insira o número"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.endereco.numero}
@@ -85,7 +85,7 @@ export default function DadosEndereco({ formik }) {
             className={style.container__ContainerForm_form_input}
             id="complemento"
             name="endereco.referencia"
-            value="Insira uma complemento"
+            placeHolder="Insira uma complemento"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.endereco.referencia}
@@ -100,7 +100,7 @@ export default function DadosEndereco({ formik }) {
         className={style.container__ContainerForm_form_input}
         id="bancoId"
         name="bancoId"
-        value="Insira o banco de sementes"
+        placeHolder="Insira o banco de sementes"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.bancoId}
@@ -108,10 +108,7 @@ export default function DadosEndereco({ formik }) {
       {formik.touched.bancoId && formik.errors.bancoId ? (
         <span className={style.form__error}>{formik.errors.bancoId}</span>
       ) : null}
-      <div>
 
-
-      </div>
 
     </>
   )

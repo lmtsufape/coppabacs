@@ -13,7 +13,7 @@ export default function DadosForm({ formik }) {
         id="email"
         name="email"
         type="email"
-        value="Insira seu email"
+        placeHolder="Insira seu email"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.email}
@@ -28,7 +28,7 @@ export default function DadosForm({ formik }) {
         id="senha"
         name="senha"
         type="password"
-        value="Insira sua senha"
+        placeHolder="Insira sua senha"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.senha}
@@ -43,7 +43,7 @@ export default function DadosForm({ formik }) {
         id="confirmarSenha"
         name="confirmarSenha"
         type="password"
-        value="Confirme sua senha"
+        placeHolder="Confirme sua senha"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.confirmarSenha}
@@ -57,7 +57,7 @@ export default function DadosForm({ formik }) {
         className={style.container__ContainerForm_form_input}
         id="nome"
         name="nome"
-        value="Insira seu nome"
+        placeHolder="Insira seu nome"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.nome}
@@ -71,7 +71,7 @@ export default function DadosForm({ formik }) {
         className={style.container__ContainerForm_form_input}
         id="apelido"
         name="apelido"
-        value="Insira seu apelido"
+        placeHolder="Insira seu apelido"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.apelido}
@@ -87,7 +87,7 @@ export default function DadosForm({ formik }) {
             className={style.container__ContainerForm_form_halfContainer_input}
             id="contato"
             name="contato"
-            value="Insira seu contato"
+            placeHolder="Insira seu contato"
             onChange={(e) => {
               formik.setFieldValue("contato", telefoneMask(e.target.value));
             }}
@@ -106,7 +106,7 @@ export default function DadosForm({ formik }) {
             className={style.container__ContainerForm_form_halfContainer_input}
             id="cpf"
             name="cpf"
-            value="Insira seu cpf"
+            placeHolder="Insira seu cpf"
             onChange={(e) => {
               formik.setFieldValue("cpf", cpfMask(e.target.value));
             }}
@@ -126,7 +126,7 @@ export default function DadosForm({ formik }) {
             id="dataNascimento"
             name="dataNascimento"
             type="date"
-            value="Insira sua data de nascimento"
+            placeHolder="Insira sua data de nascimento"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.dataNascimento}
@@ -143,7 +143,7 @@ export default function DadosForm({ formik }) {
             className={style.container__ContainerForm_form_halfContainer_input}
             id="sexo"
             name="sexo"
-            value="Insira seu sexo"
+            placeHolder="Insira seu sexo"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.sexo}

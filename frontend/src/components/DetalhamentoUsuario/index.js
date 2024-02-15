@@ -12,6 +12,7 @@ import HeaderNavegacao from "../HeaderNavegacao";
 import DadosForm from "./DadosUsuario";
 import DadosEndereco from "./DadosEndereco";
 import DadosAtividadesRurais from "./DadosAtividadesRurais";
+import Image from "next/image";
 
 
 const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuario }) => {
@@ -45,7 +46,8 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
       pecuaria: false,
       pescaArtesanal: false,
       agriculturaSequeira: false,
-      outro: false,
+      outra: false,
+      outraAtividade: 'Outra Atividade',
     },
     producaoSementes: {
       cultura: '',
@@ -59,6 +61,8 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
 
   const [etapas, setEtapas] = useState(0);
   console.log("Usuario ", usuario);
+  const [editar, setEditar] = useState(false);
+
   return (
     <div id="header" className={style.container}>
       <HeaderNavegacao
@@ -68,6 +72,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
         etapas={etapas}
 
       />
+
 
 
       <div className={style.container__ContainerForm}>
@@ -81,13 +86,40 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
         >
           {(formik) => {
             return (
+
               <Form
                 className={style.container__ContainerForm_form}
               >
 
-                <DadosForm formik={formik} />
-                <DadosEndereco formik={formik} />
-                <DadosAtividadesRurais formik={formik} />
+                <div className={style.container__profile}>
+                  <div className={style.container__profile_img}>
+                    <Image src="/assets/profile.jpeg" alt="Foto do usuário" width={72} height={72} />
+                    <h1>{usuario?.nome}</h1>
+                  </div>
+                  {editar === false ? (
+                    <button
+                      onClick={() => setEditar(true)}
+                      className={style.container__profile_button}>
+
+                      <span>Editar</span>
+                      <Image src="/assets/iconLapis.svg" alt="editar perfil" width={25} height={25} />
+                    </button >
+                  ) : (
+                    <button
+                      onClick={() => setEditar(false)}
+                      className={style.container__profile_button}>
+
+                      <span>Salvar</span>
+                      <Image src="/assets/iconLapis.svg" alt="editar perfil" width={25} height={25} />
+                    </button >
+                  )}
+
+                </div>
+
+                <DadosForm formik={formik} editar={editar} />
+                <DadosEndereco formik={formik} editar={editar}/>
+                <DadosAtividadesRurais formik={formik} editar={editar}/>
+
 
               </Form>
             )

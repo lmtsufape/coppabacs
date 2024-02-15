@@ -1,7 +1,7 @@
 import style from "../agricultorForm.module.scss";
 
 export default function DadosAtividadesRurais({ formik }) {
-
+  console.log("formik.values.atividadeRural", formik.values.atividadeRural)
   return (
     <>
       <label htmlFor="AtividadeRural">Atividade Rural</label>
@@ -123,21 +123,22 @@ export default function DadosAtividadesRurais({ formik }) {
               type="checkbox"
               onChange={(e) => {
                 formik.handleChange(e);
-                formik.setFieldValue('atividadeRural.outro', e.target.checked);
+                formik.setFieldValue('atividadeRural.outraAtividade', e.target.checked);
               }}
               onBlur={formik.handleBlur}
-              checked={formik.values.atividadeRural.outro}
+              checked={formik.values.atividadeRural.outraAtividade}
             />
-            <label htmlFor="outro">Outro</label>
-            {formik.values.atividadeRural.outro && ( // Renderizar apenas se 'outro' estiver marcado
+            <label htmlFor="outraAtividade">Outra Atividade</label>
+            {formik.values.atividadeRural.outraAtividade && ( // Renderizar apenas se 'outro' estiver marcado
               <input
                 className={style.container__ContainerForm_form_input}
                 name="outro"
-                value="Insira a atividade rural"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                value={formik.values.atividadeRural.outraAtividade} 
               />
             )}
+
           </div>
 
         </div>
@@ -151,7 +152,7 @@ export default function DadosAtividadesRurais({ formik }) {
           <input
             className={style.container__ContainerForm_form_input}
             name="producaoSementes.cultura"
-            value="Cultura"
+            placeHolder="Cultura"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.producaoSementes.cultura}
@@ -166,7 +167,7 @@ export default function DadosAtividadesRurais({ formik }) {
           <input
             className={style.container__ContainerForm_form_input}
             name="producaoSementes.variedade"
-            value="Variedade"
+            placeHolder="Variedade"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.producaoSementes.variedade}
@@ -180,7 +181,7 @@ export default function DadosAtividadesRurais({ formik }) {
           <input
             className={style.container__ContainerForm_form_input}
             name="producaoSementes.areaPlantada"
-            value="Área Plantada"
+            placeHolder="Área Plantada"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.producaoSementes.areaPlantada}
@@ -194,7 +195,7 @@ export default function DadosAtividadesRurais({ formik }) {
           <input
             className={style.container__ContainerForm_form_input}
             name="producaoSementes.previsaoVenda"
-            value="Previsão de Venda"
+            placeHolder="Previsão de Venda"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.producaoSementes.previsaoVenda}
