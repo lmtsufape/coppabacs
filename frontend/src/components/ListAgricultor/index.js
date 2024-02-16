@@ -10,6 +10,7 @@ import Link from "next/link";
 import Header from "../HeaderNavegacao";
 import Table from "./Table";
 import { getAllAgricultores } from "@/api/usuarios/agricultor/getAllAgricultores";
+import { Search } from "../searchUsuario";
 
 export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4 }) {
 
@@ -44,24 +45,7 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
         diretorioAtual={diretorioAtual}
         hrefAnterior={hrefAnterior}
       />
-      <div className={style.header}>
-
-          <div className={style.header__search}>
-            <input
-            className={style.header__search_input}
-              type="text"
-              placeholder="Pesquisar agricultor..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <button className={style.header__search_button}>
-              <Image src="/assets/iconLupa.svg" alt="Pesquisar" width={27} height={26} />
-            </button>
-          </div>
-
-      </div>
-
-
+     <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <Table
         table1={table1}
         table2={table2}

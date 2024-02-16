@@ -1,7 +1,7 @@
 import api from "@/api/http-common.js";
 
-export async function postAgricultor(novoAgricultor ={
-  
+export async function postAgricultor(novoAgricultor = {
+
   email: "",
   senha: "",
   confirmarSenha: "",
@@ -18,9 +18,22 @@ export async function postAgricultor(novoAgricultor ={
     nome: "",
     numero: "",
     referencia: "",
-  }, 
+  },
   bancoId: "",
-  
+  conjuge: {
+    nome: "",
+    sexo: "",
+  },
+  atividadeRural: [],
+  producaoSementes: {
+    cultura: "",
+    variedade: "",
+    areaPlantada: "",
+    previsaoVenda: "",
+  }
+
+
+
 }) {
   return await api.post("/agricultor", novoAgricultor);
 }

@@ -17,71 +17,110 @@ export default function DadosForm({ formik, editar }) {
         <div>
           <label htmlFor="nome">Nome</label>
           {editar === false ? (
-            <input
-              className={style.container__ContainerForm_form_input}
-              name="nome"
-              placeHolder="Não informado"
-              onBlur={formik.h1andleBlur}
-              value={formik.values.nome}
-              disabled
-            />) : (<input
-              className={style.container__ContainerForm_form_halfContainer_input}
-              id="nome"
-              name="nome"
-              placeHolder="Insira seu nome"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.nome}
-              required
-            />
-          )}
-
-        </div>
-        <div>
-          <label htmlFor="contato">Telefone</label>
-          {editar === false ? (
-            <input
-              className={style.container__ContainerForm_form_input}
-              name="contato"
-              placeHolder="Não informado"
-              onBlur={formik.handleBlur}
-              value={formik.values.contato}
-              disabled
-            />
-          ) : (<>
-            <input
-              className={style.container__ContainerForm_form_halfContainer_input}
-              id="contato"
-              name="contato"
-              placeHolder="Insira seu contato"
-              onChange={(e) => {
-                formik.setFieldValue("contato", telefoneMask(e.target.value));
-              }}
-              onBlur={formik.handleBlur}
-              value={formik.values.contato}
-              required
-            />
-            {formik.touched.contato && formik.errors.contato ? (
-              <span className={style.form__error}>{formik.errors.contato}</span>
-            ) : null}
-          </>
-          )}
+            <>
+              <input
+                className={style.container__ContainerForm_form_input}
+                name="nome"
+                placeHolder="Não informado"
+                onBlur={formik.h1andleBlur}
+                value={formik.values.nome}
+                disabled
+              />
+              <label htmlFor="contato">Telefone</label>
+              <input
+                className={style.container__ContainerForm_form_input}
+                name="contato"
+                placeHolder="Não informado"
+                onBlur={formik.handleBlur}
+                value={formik.values.contato}
+                disabled
+              />
+              <label htmlFor="cpf">CPF </label>
 
 
-        </div>
-        <div>
-          <label htmlFor="cpf">CPF </label>
-          {editar === false ? (
-            <input
-              className={style.container__ContainerForm_form_input}
-              name="cpf"
-              placeHolder="Não informado"
-              onBlur={formik.handleBlur}
-              value={formik.values.cpf}
+              <input
+                className={style.container__ContainerForm_form_input}
+                name="cpf"
+                placeHolder="Não informado"
+                onBlur={formik.handleBlur}
+                value={formik.values.cpf}
 
-            />
+              />
+
+              <label htmlFor="apelido">Apelido</label>
+
+              <input
+                className={style.container__ContainerForm_form_input}
+                name="apelido"
+                placeHolder="Não informado"
+                value={formik.values.apelido}
+                disabled
+              />
+              <label htmlFor="dataNascimento">Data de nascimento </label>
+
+              <input
+                className={style.container__ContainerForm_form_input}
+                name="dataNascimento"
+                placeHolder="Não informado"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.dataNascimento}
+                disabled
+              />
+
+
+
+              <label htmlFor="bancoSementes">Banco sementes </label>
+              <input
+                className={style.container__ContainerForm_form_input}
+                name="BancoSementes"
+                placeHolder="Não informado"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.BancoSementes}
+                disabled
+              />
+              <label htmlFor="sexo">Sexo </label>
+              <input
+                name="sexo"
+                placeHolder="Não informado"
+                value={formik.values.sexo}
+
+              />
+            </>
           ) : (
             <>
+              <label htmlFor="nome">Nome</label>
+
+              <input
+                className={style.container__ContainerForm_form_halfContainer_input}
+                id="nome"
+                name="nome"
+                placeHolder="Insira seu nome"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.nome}
+                required
+              />
+
+              <label htmlFor="contato">Telefone</label>
+              <input
+                className={style.container__ContainerForm_form_halfContainer_input}
+                id="contato"
+                name="contato"
+                placeHolder="Insira seu contato"
+                onChange={(e) => {
+                  formik.setFieldValue("contato", telefoneMask(e.target.value));
+                }}
+                onBlur={formik.handleBlur}
+                value={formik.values.contato}
+                required
+              />
+              {formik.touched.contato && formik.errors.contato ? (
+                <span className={style.form__error}>{formik.errors.contato}</span>
+              ) : null}
+              <label htmlFor="cpf">CPF </label>
+
               <input
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="cpf"
@@ -96,22 +135,10 @@ export default function DadosForm({ formik, editar }) {
               />
               {formik.touched.cpf && formik.errors.cpf ? (
                 <span className={style.form__error}>{formik.errors.cpf}</span>
-              ) : null}</>
-          )}
-        </div>
-        <div>
-          <label htmlFor="apelido">Apelido</label>
-          {editar === false ? (
-            <input
-              className={style.container__ContainerForm_form_input}
-              name="apelido"
-              placeHolder="Não informado"
-              value={formik.values.apelido}
-              disabled
-            />
+              ) : null}
 
-          ) : (
-            <>
+              <label htmlFor="apelido">Apelido</label>
+
               <input
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="apelido"
@@ -125,24 +152,8 @@ export default function DadosForm({ formik, editar }) {
               {formik.touched.apelido && formik.errors.apelido ? (
                 <span className={style.form__error}>{formik.errors.apelido}</span>
               ) : null}
-            </>
-          )}
-        </div>
 
-        <div>
-          <label htmlFor="dataNascimento">Data de nascimento </label>
-          {editar === false ? (
-            <input
-              className={style.container__ContainerForm_form_input}
-              name="dataNascimento"
-              placeHolder="Não informado"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.dataNascimento}
-              disabled
-            />
-          ) : (
-            <>
+              <label htmlFor="dataNascimento">Data de nascimento </label>
               <input
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="dataNascimento"
@@ -158,25 +169,7 @@ export default function DadosForm({ formik, editar }) {
 
                 <span className={style.form__error}>{formik.errors.dataNascimento}</span>
               ) : null}
-            </>
-          )}
-
-
-        </div>
-        <div>
-          <label htmlFor="bancoSementes">Banco sementes </label>
-          {editar === false ? (
-            <input
-              className={style.container__ContainerForm_form_input}
-              name="BancoSementes"
-              placeHolder="Não informado"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.BancoSementes}
-              disabled
-            />
-          ) : (
-            <>
+              <label htmlFor="bancoSementes">Banco sementes </label>
               <input
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="bancoId"
@@ -190,48 +183,34 @@ export default function DadosForm({ formik, editar }) {
                 <span className={style.form__error}>{formik.errors.bancoId}</span>
               ) : null}
 
-              </>
+              <label htmlFor="sexo">Sexo </label>
+              <select
+                id="sexo"
+                name="sexo"
+                placeHolder="Escolha seu sexo"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.sexo}
+                required
+              >
+                <option value="" >Escolha ...</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino" >Feminino</option>
+              </select>
+              {formik.touched.sexo && formik.errors.sexo ? (
+                <span className={style.form__error}>{formik.errors.sexo}</span>
+              ) : null}
+            </>
           )}
 
-
-            </div>
-          <div>
-            <label htmlFor="sexo">Sexo </label>
-            {editar === false ? (
-              <input
-                className={style.container__ContainerForm_form_input}
-                name="sexo"
-                placeHolder="Não informado"
-                value={formik.values.sexo}
-
-              />
-
-            ) : (
-              <>
-                <select
-                className={style.container__ContainerForm_form_halfContainer_select}
-                id="sexo"
-                  name="sexo"
-                  placeHolder="Escolha seu sexo"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.sexo}
-                  required
-                >
-                  <option value="" selected>Escolha seu sexo</option>
-                  <option value="Masculino">Masculino</option>
-                  <option value="Feminino" >Feminino</option>
-                </select>
-                {formik.touched.sexo && formik.errors.sexo ? (
-                  <span className={style.form__error}>{formik.errors.sexo}</span>
-                ) : null}
-              </>
-
-            )}
-
-          </div>
         </div>
 
-      </>
-      )
+
+
+
+
+      </div>
+
+    </>
+  )
 }

@@ -11,9 +11,11 @@ import Header from "../HeaderNavegacao";
 import Table from "./Table";
 
 import { getAllUsuarios } from "@/api/usuarios/getAllUsuarios";
+import { Search, SearchUsuarios } from "../searchUsuario";
 export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, listName, buttonName, table1, table2, table3 }) {
 
   const [usuarios, setAgricultor] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     mutate();
@@ -33,6 +35,9 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
   }
   );
 
+  const listUsuarios = usuarios.filter((usuario) => {
+    return usuario.nome.toLowerCase().includes(searchTerm.toLowerCase());
+  });
   return (
     <div>
       <Header
@@ -68,12 +73,12 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
         </div>
       </div>
 
-
+      <Search  searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <Table
         table1={table1}
         table2={table2}
         table3={table3}
-        listUsuarios={usuarios}
+        listUsuarios={listUsuarios}
       />
     </div>
   );
