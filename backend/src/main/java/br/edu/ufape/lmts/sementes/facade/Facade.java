@@ -895,11 +895,12 @@ public class Facade {
 	private AgricultorService  agricultorService;
 		
 	public Agricultor saveAgricultor(Agricultor newInstance) throws EmailExistsException {
+		newInstance.setAtividadeRural(saveAtividadesRuraisFromAgricultor(newInstance.getAtividadeRural()));
 		bancoSementesService.findBancoSementesById(newInstance.getBancoSementes().getId());
 		usuarioService.saveUsuario(newInstance);
 		return agricultorService.saveAgricultor(newInstance);
 	}
-
+	
 	public Agricultor updateAgricultor(Agricultor transientObject) {
 		return agricultorService.updateAgricultor(transientObject);
 	}
@@ -1048,6 +1049,24 @@ public class Facade {
 		
 	public AtividadeRural saveAtividadeRural(AtividadeRural newInstance) {
 		return atividadeRuralService.saveAtividadeRural(newInstance);
+	}
+	
+	public List<AtividadeRural> saveAllAtividadeRural(List<AtividadeRural> newInstances) {
+		return atividadeRuralService.saveAllAtividadeRural(newInstances);
+	}
+	
+	public List<AtividadeRural> saveAtividadesRuraisFromAgricultor(List<AtividadeRural> atividades){
+		List<AtividadeRural> todasAtividades = getAllAtividadeRural();
+		List<String> nomesAtividadesCadatradas = todasAtividades.stream().map(a -> a.getNome()).toList();
+		List<String> nomesAtividades = atividades.stream().map(a -> a.getNome()).toList();
+		List<AtividadeRural> atividadesNaoCadatradas = atividades.stream().filter(a -> !nomesAtividadesCadatradas.contains(a.getNome())).toList();
+		List<AtividadeRural> atividadesCadatradas = todasAtividades.stream().filter(a -> nomesAtividades.contains(a.getNome())).toList();
+		if(atividadesNaoCadatradas.isEmpty()) {
+			return atividadesCadatradas;
+		}
+		atividades = saveAllAtividadeRural(atividadesNaoCadatradas);
+		atividades.addAll(atividadesCadatradas);
+		return atividades;
 	}
 
 	public AtividadeRural updateAtividadeRural(AtividadeRural transientObject) {

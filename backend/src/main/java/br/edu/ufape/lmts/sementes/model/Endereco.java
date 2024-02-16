@@ -23,7 +23,7 @@ public  class Endereco  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
 	private long id;
-	private String nome;
+	private String logradouro;
 	private String referencia;
 	private String cidade;
 	private String estado;

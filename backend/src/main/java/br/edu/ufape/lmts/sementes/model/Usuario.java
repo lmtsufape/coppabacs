@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
@@ -50,20 +48,12 @@ public abstract class Usuario implements Serializable {
 	@ToString.Exclude
 	private Endereco endereco;
 	@Column(nullable = false, unique = true)
-	private String rg;
-	@Column(nullable = false, unique = true)
 	private String cpf;
 	@Column(nullable = false)
-	// @DateTimeFormat(pattern = "dd-MM-yyyy", iso = DateTimeFormat.ISO.DATE)
-	@JsonFormat(pattern = "dd-MM-yyyy")
 	private Date dataNascimento;
 	@Column(nullable = false, unique = true)
 	private String contato;
 	private String imagem;
-	@Column(nullable = false)
-	private String nomePai;
-	@Column(nullable = false)
-	private String nomeMae;
 	@Column(nullable = false)
 	private String sexo;
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -79,21 +69,18 @@ public abstract class Usuario implements Serializable {
 	@Column(name = "role")
 	private Set<TipoUsuario> roles;
 
-	public Usuario(Long id, String nome, String email, String senha, Endereco endereco, String rg, String cpf,
-			Date dataNascimento, String contato, String imagem, String nomePai, String nomeMae, String sexo,
+	public Usuario(Long id, String nome, String email, String senha, Endereco endereco, String cpf,
+			Date dataNascimento, String contato, String imagem, String sexo,
 			Conjuge conjuge, List<Postavel> postavel) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 		this.endereco = endereco;
-		this.rg = rg;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 		this.contato = contato;
 		this.imagem = imagem;
-		this.nomePai = nomePai;
-		this.nomeMae = nomeMae;
 		this.sexo = sexo;
 		this.conjuge = conjuge;
 		this.postavel = postavel;
@@ -159,14 +146,6 @@ public abstract class Usuario implements Serializable {
 		this.endereco = endereco;
 	}
 
-	public String getRg() {
-		return rg;
-	}
-
-	public void setRg(String rg) {
-		this.rg = rg;
-	}
-
 	public String getCpf() {
 		return cpf;
 	}
@@ -198,23 +177,7 @@ public abstract class Usuario implements Serializable {
 	public void setImagem(String imagem) {
 		this.imagem = imagem;
 	}
-
-	public String getNomePai() {
-		return nomePai;
-	}
-
-	public void setNomePai(String nomePai) {
-		this.nomePai = nomePai;
-	}
-
-	public String getNomeMae() {
-		return nomeMae;
-	}
-
-	public void setNomeMae(String nomeMae) {
-		this.nomeMae = nomeMae;
-	}
-
+	
 	public String getSexo() {
 		return sexo;
 	}
@@ -250,24 +213,9 @@ public abstract class Usuario implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-	@Override
-	public int hashCode() {
-		return super.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj);
-	}
-
+	
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		return super.clone();
-	}
-
-	@Override
-	public String toString() {
-		return super.toString();
 	}
 }

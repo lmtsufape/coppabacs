@@ -22,14 +22,11 @@ public  class UsuarioResponse  {
 	private String nome;
 	private String email;
 	private EnderecoResponse endereco;
-	private String rg;
 	private String cpf;
 	@JsonFormat(pattern = "dd-MM-yyyy")
 	private Date dataNascimento;
 	private String contato;
 	private String imagem;
-	private String nomePai;
-	private String nomeMae;
 	private String sexo;
 	private ConjugeResponse conjuge; 
 	private List<PostavelResponse> postavel;

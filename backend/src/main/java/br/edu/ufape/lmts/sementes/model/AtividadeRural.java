@@ -17,7 +17,7 @@ import lombok.ToString;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor 
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public  class AtividadeRural  {
@@ -26,5 +26,9 @@ public  class AtividadeRural  {
 	@EqualsAndHashCode.Include
 	private long id;
 	private String nome;
+	
+	public AtividadeRural(String nome) {
+		this.nome = nome;
+	}
 
 }
