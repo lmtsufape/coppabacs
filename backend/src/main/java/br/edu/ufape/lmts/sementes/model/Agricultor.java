@@ -46,14 +46,13 @@ public class Agricultor extends Usuario {
 		super();
 	}
 
-	public Agricultor(Long id, String nome, String email, String senha, Endereco endereco, String rg, String cpf,
-			Date dataNascimento, String contato, String imagem, String nomePai, String nomeMae, String sexo,
-			Conjuge conjuge, List<Postavel> postavel, String nomePopular, String rendaFamiliar, String numeroPessoas,
-			Double areaPropriedade, BancoSementes bancoSementes, List<AtividadeRural> atividadeRural,
+	public Agricultor(Long id, String nome, String email, String senha, Endereco endereco, String cpf,
+			Date dataNascimento, String contato, String imagem, String sexo, Conjuge conjuge, List<Postavel> postavel,
+			String nomePopular, String rendaFamiliar, String numeroPessoas, Double areaPropriedade,
+			BancoSementes bancoSementes, List<AtividadeRural> atividadeRural,
 			List<br.edu.ufape.lmts.sementes.model.infraestruturaHidrica> infraestruturaHidrica,
 			List<UsoOcupacaoTerra> usoOcupacaoTerra, List<InfraestruturaComunidade> infraestruturaComunidade) {
-		super(id, nome, email, senha, endereco, rg, cpf, dataNascimento, contato, imagem, nomePai, nomeMae, sexo,
-				conjuge, postavel);
+		super(id, nome, email, senha, endereco, cpf, dataNascimento, contato, imagem, sexo, conjuge, postavel);
 		this.nomePopular = nomePopular;
 		this.rendaFamiliar = rendaFamiliar;
 		this.numeroPessoas = numeroPessoas;

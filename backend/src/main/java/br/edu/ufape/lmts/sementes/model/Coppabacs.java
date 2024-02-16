@@ -19,11 +19,9 @@ import lombok.ToString;
 @ToString
 public class Coppabacs extends Usuario {
 
-	public Coppabacs(Long id, String nome, String email, String senha, Endereco endereco, String rg, String cpf,
-			Date dataNascimento, String contato, String imagem, String nomePai, String nomeMae, String sexo,
-			Conjuge conjuge, List<Postavel> postavel) {
-		super(id, nome, email, senha, endereco, rg, cpf, dataNascimento, contato, imagem, nomePai, nomeMae, sexo,
-				conjuge, postavel);
+	public Coppabacs(Long id, String nome, String email, String senha, Endereco endereco, String cpf,
+			Date dataNascimento, String contato, String imagem, String sexo, Conjuge conjuge, List<Postavel> postavel) {
+		super(id, nome, email, senha, endereco, cpf, dataNascimento, contato, imagem, sexo, conjuge, postavel);
 		super.addRole(TipoUsuario.COPPABACS);
 		super.addRole(TipoUsuario.AGRICULTOR);
 		super.addRole(TipoUsuario.GERENTE);

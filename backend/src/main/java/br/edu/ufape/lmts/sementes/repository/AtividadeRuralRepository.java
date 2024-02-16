@@ -8,6 +8,4 @@ import br.edu.ufape.lmts.sementes.model.AtividadeRural;
 @Repository
 public interface AtividadeRuralRepository extends JpaRepository<AtividadeRural, Long> {
 
-	
-
 }
