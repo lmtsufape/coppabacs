@@ -21,7 +21,7 @@ export default function DadosForm({ formik, editar }) {
               className={style.container__ContainerForm_form_input}
               name="nome"
               placeHolder="Não informado"
-              onBlur={formik.handleBlur}
+              onBlur={formik.h1andleBlur}
               value={formik.values.nome}
               disabled
             />) : (<input

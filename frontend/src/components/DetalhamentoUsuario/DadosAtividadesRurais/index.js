@@ -341,7 +341,7 @@ export default function DadosAtividadesRurais({ formik, editar }) {
               name="producaoSementes.previsaoVenda"
               placeHolder="Não informado"
               value={formik.values.producaoSementes.previsaoVenda}
-              disabled
+              disabled  
             />
           ) : (
             <input
