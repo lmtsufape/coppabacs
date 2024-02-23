@@ -20,13 +20,17 @@ export default function List({ listName, table1, table2, table3, table4, content
           </div>
 
         </div>
-        <div className={style.header__container}>
+        <div className={style.pesquisaBotao}>
             <input type="text"
               name="search"
             //value={}
             //onChange={} 
             />
-            <div> <Image src="assets/iconSearch.svg" width={30} height={30} className={style.header__searchIcon} /></div>
+
+            <div className={style.pesquisaBotao__searchIcon}>
+            <Image src="assets/iconSearch.svg" width={20} height={20}  />
+            </div>
+            
             
             <button className={style.header__container_link}>
               Adicionar Semente
@@ -34,6 +38,7 @@ export default function List({ listName, table1, table2, table3, table4, content
             </button>
         </div>
       </div>
+      <div className={style.content__table__header}>
       <Table
         table1={table1}
         table2={table2}
@@ -43,6 +48,7 @@ export default function List({ listName, table1, table2, table3, table4, content
         content2={content2}
         content3={content3}
       />
+      </div>
     </div>
   );
 }
