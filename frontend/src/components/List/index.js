@@ -7,6 +7,7 @@ export default function List({listName, buttonName, table1, table2, table3, tabl
     return (
     <div>
         <div className={style.header}>
+          
           <h1>{listName}</h1>
           <button>
             {buttonName}

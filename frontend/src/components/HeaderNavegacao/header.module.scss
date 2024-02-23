@@ -1,0 +1,85 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1em;
+  margin: 4em 2em 0em 2em;
+
+
+.header__container_desckButton {
+  background-color: #fff;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+
+  &:hover {
+    background-color: #f1f1f1;
+  }
+}
+
+.header__container_link {
+  color: black;
+  text-decoration: none;
+
+  &:hover {
+    color: #245501;
+  }
+}
+  h1 {
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+  &__title {
+    display: flex;
+    justify-content: flex-start; // Alinha o título à esquerda por padrão
+    align-items: center;
+    width: 100%;
+    font-size: 1em;
+    margin: 0em 0em 3em 0em;
+  }
+
+  &__title_voltar {
+    display: none; // Esconde o botão voltar por padrão em dispositivos móveis
+  }
+
+  &__title_guia {
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+
+    h1 {
+      font-size: 1em;
+      font-weight: bold;
+    }
+
+    h1:first-child {
+      color: #A7A7A7;
+    }
+
+    h1:last-child {
+      color: #245501;
+    }
+  }
+
+  // Media query para telas maiores
+  @media screen and (min-width: 700px) {
+    flex-direction: row; // Muda a direção do flex para linha em telas maiores
+    justify-content: space-between; // Justifica o conteúdo para a esquerda e direita
+
+    &__title_voltar {
+      display: flex; // Mostra o botão voltar em telas maiores
+      align-items: center;
+      font-size: 1em;
+      &_link{
+        color: #000;
+      } 
+    }
+
+    &__title {
+      justify-content: space-between; // Reajusta o conteúdo do título para espaçamento entre itens
+    }
+  }
+}

@@ -65,11 +65,11 @@ const Home = () => {
             <h1 className={style.home__login_title}>Entrar</h1>
             <label htmlFor="email" className={style.home__login_label}>
               <p>Email</p>
-              <input type="email" name="email" placeholder="Digite seu email" onChange={(e) => setEmail(e.target.value)} value={email} />
+              <input type="email" name="email" value="Digite seu email" onChange={(e) => setEmail(e.target.value)} value={email} />
             </label>
             <label htmlFor="senha" className={style.home__login_label}>
               <p>Senha</p>
-              <input type="password" name="senha" placeholder="Digite sua senha" onChange={ (e) => setSenha(e.target.value)} value={senha}/>
+              <input type="password" name="senha" value="Digite sua senha" onChange={ (e) => setSenha(e.target.value)} value={senha}/>
             </label>
             <h2 className={style.home__login_subtitle}>Esqueceu a senha?</h2>
             {status === "error" ? <p className={style.home__login_error}>Email ou senha incorretos</p> : null}
