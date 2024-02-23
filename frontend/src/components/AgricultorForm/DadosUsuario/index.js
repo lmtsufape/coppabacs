@@ -161,7 +161,7 @@ export default function DadosForm({ formik }) {
             placeholder="Insira o nome do seu conjuge"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.conjuge.conjugeNome}
+            value={formik.values.conjuge.nome}
             required />
           {formik.touched.conjugeNome && formik.errors.conjugeNome ? (
             <span className={style.form__error}>{formik.errors.conjugeNome}</span>
@@ -191,6 +191,7 @@ export default function DadosForm({ formik }) {
 
       </div>
 
+        
     </>
   );
 }

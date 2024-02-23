@@ -4,7 +4,6 @@ import style from "../agricultorForm.module.scss";
 
 export default function DadosEndereco({ formik }) {
 
-console.log("formik.values", formik.values)
   return (
     <>
     <label htmlFor="endereco.cep">Cep <span >*</span></label>

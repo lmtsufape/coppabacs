@@ -12,32 +12,34 @@ import Table from "./Table";
 
 import { getAllUsuarios } from "@/api/usuarios/getAllUsuarios";
 import { Search, SearchUsuarios } from "../searchUsuario";
+
 export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, listName, buttonName, table1, table2, table3 }) {
 
-  const [usuarios, setAgricultor] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+
 
   useEffect(() => {
     mutate();
   }, [])
 
-  const { state, mutate } = useMutation(
+  const { status, mutate } = useMutation(
     async () => {
       return getAllUsuarios();
     }, {
     onSuccess: (res) => {
-      console.log(res);
-      setAgricultor(res.data);
+      setUsuarios(res.data);
     },
     onError: (error) => {
-      console.log(error)
+      console.error(error);
     }
   }
   );
 
-  const listUsuarios = usuarios.filter((usuario) => {
-    return usuario.nome.toLowerCase().includes(searchTerm.toLowerCase());
-  });
+
+  const listUsuarios = usuarios.filter((usuarios) =>
+    usuarios.nome.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return (
     <div>
       <Header
@@ -73,13 +75,15 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
         </div>
       </div>
 
-      <Search  searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <Table
-        table1={table1}
-        table2={table2}
-        table3={table3}
-        listUsuarios={listUsuarios}
-      />
+      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      {listUsuarios && (
+        <Table
+          table1={table1}
+          table2={table2}
+          table3={table3}
+          listUsuarios={listUsuarios}
+        />
+      )}
     </div>
   );
 }

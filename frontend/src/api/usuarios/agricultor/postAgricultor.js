@@ -24,7 +24,7 @@ export async function postAgricultor(novoAgricultor = {
     nome: "",
     sexo: "",
   },
-  atividadeRural: [],
+  atividadesRurais: [],
   producaoSementes: {
     cultura: "",
     variedade: "",

@@ -16,7 +16,7 @@ export function Search({searchTerm, setSearchTerm}){
       <input
       className={style.header__search_input}
         type="text"
-        placeholder="Pesquisar agricultor..."
+        placeholder="Pesquisar usuario..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />

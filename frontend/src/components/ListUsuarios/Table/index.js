@@ -5,7 +5,6 @@ import Link from "next/link";
 
 export default function tableLayout({table1, table2, table3, listUsuarios}){
   
-  
   return(
     <div className={style.content}>
       <table className={style.content__table}>
@@ -25,16 +24,16 @@ export default function tableLayout({table1, table2, table3, listUsuarios}){
           </tr>
         </thead>
         <tbody className={style.content__table__body}>
-        {listUsuarios.map((agricultor, index) => {
+        {listUsuarios.map((usuario, index) => {
             return(
               <tr key={index}>
-                <td>{agricultor.nome}</td>
-                <td>{agricultor.contato}</td>
+                <td>{usuario.nome}</td>
+                <td>{usuario.contato}</td>
                 <td>
                   <div className={style.content__table_container_buttons}>
                     <button>
                       <span>
-                        <Link href={`/agricultores/info/${agricultor.id}`}>
+                        <Link href={`/agricultores/info/${usuario.id}`}>
                           <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26}/>
                         </Link>
                       </span>

@@ -4,7 +4,7 @@ import { useMutation } from "react-query";
 import { postAgricultor } from "@/api/usuarios/agricultor/postAgricultor";
 
 import { Form, Formik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Yup from 'yup';
 
 import style from "./agricultorForm.module.scss";
@@ -17,6 +17,7 @@ import Link from "next/link";
 
 
 const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
+  
 
   const initialValues = {
     email: "",
@@ -43,7 +44,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
       sexo: "",
     },
     bancoId: "",
-    atividadeRural: [],
+    atividadesRurais: [],
     producaoSementes: {
       cultura: "",
       variedade: "",
@@ -68,10 +69,10 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
     contato: Yup.string()
       .min(11, "O contato deve ter no mínimo 11 caracteres")
       .required('Required'),
-    //dataNascimento:Yup.date()
-    //.max(new Date(), "A data de nascimento não pode ser maior que a data atual")
-    //.min(new Date(1900, 1, 1), "A data de nascimento não pode ser menor que 01/01/1900")
-    //.required('Required'),  
+    dataNascimento: Yup.date()
+      .max(new Date(), "A data de nascimento não pode ser maior que a data atual")
+      .min(new Date(1, 1, 1900), "A data de nascimento não pode ser menor que 01/01/1900")
+      .required('Required'),
   })
   const { status, mutate } = useMutation(
     async (values) => {
@@ -79,7 +80,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
       return postAgricultor(values);
     }, {
     onSuccess: (res) => {
-      console.log("data", res);
+
     },
     onError: (error) => {
       console.log(error);
@@ -88,8 +89,8 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
   }
   );
 
-
   const [etapas, setEtapas] = useState(0);
+  
   return (
     <div id="header" className={style.container}>
       <HeaderNavegacao
@@ -119,9 +120,13 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
           validationSchema={validateSchema}
 
           onSubmit={(values, { setSubmitting }) => {
-            console.log("valores", values);
-            mutate(values);
-            setSubmitting(false);
+            mutate(values,{
+              onSuccess: (res) => {
+                window.location.href = '/agricultores';
+              }
+            
+            });
+
           }}
         >
           {(formik) => {
@@ -168,10 +173,8 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
                         <h1>Voltar</h1>
                       </Link>
                     </button>
-                    <button type="submit" >
-                      <Link href="/agricultores" className={style.container__ContainerForm_buttons_linkWhite}>
+                    <button type="submit" className={style.container__ContainerForm_buttons_linkWhite}>
                         <h1>Finalizar</h1>
-                      </Link>
                     </button>
                   </div>
                 )}

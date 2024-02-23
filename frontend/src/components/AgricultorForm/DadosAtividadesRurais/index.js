@@ -24,7 +24,7 @@ export default function DadosAtividadesRurais({ formik }) {
   ];
 
   const handleCheckboxChange = (atividade, isChecked) => {
-    let novasAtividades = [...values.atividadeRural];
+    let novasAtividades = [...values.atividadesRurais];
 
     if (isChecked) {
         // Para "Outra", verifica se já existe algum valor customizado antes de adicionar
@@ -50,7 +50,7 @@ export default function DadosAtividadesRurais({ formik }) {
         }
     }
 
-    setFieldValue('atividadeRural', novasAtividades);
+    setFieldValue('atividadesRurais', novasAtividades);
 };
 
   const handleOutraAtividadeChange = (e) => {
@@ -58,23 +58,22 @@ export default function DadosAtividadesRurais({ formik }) {
     setOutraAtividade(novoValor);
 
     // Atualiza imediatamente a lista de atividades se já estiver na lista
-    if (values.atividadeRural.includes(outraAtividade) || isOutraAtividadeSelecionada) {
-      const novasAtividades = values.atividadeRural.filter(item => item !== outraAtividade);
+    if (values.atividadesRurais.includes(outraAtividade) || isOutraAtividadeSelecionada) {
+      const novasAtividades = values.atividadesRurais.filter(item => item !== outraAtividade);
       novasAtividades.push(novoValor);
-      setFieldValue('atividadeRural', novasAtividades);
+      setFieldValue('atividadesRurais', novasAtividades);
     }
   };
-  console.log("atividades", values);
   return (
     <>
-      <label htmlFor="AtividadeRural">Atividade Rural</label>
+      <label htmlFor="AtividadeRural">Atividades Rurais</label>
       <div className={style.container__ContainerForm_form_threePartsContainer}>
         {atividades.map((atividade) => (
           <div key={atividade.name}>
             <input
               type="checkbox"
               name={atividade.name}
-              checked={values.atividadeRural.includes(atividade.name) || (atividade.name === 'outra' && isOutraAtividadeSelecionada)}
+              checked={values.atividadesRurais.includes(atividade.name) || (atividade.name === 'outra' && isOutraAtividadeSelecionada)}
               onChange={(e) => handleCheckboxChange(atividade.name, e.target.checked)}
             />
             {atividade.name !== 'outra' || !isOutraAtividadeSelecionada ? (
