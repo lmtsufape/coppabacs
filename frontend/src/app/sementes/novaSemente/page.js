@@ -1,23 +1,14 @@
 import React from "react";
-import NewSeedForm from "@/components/NewSeedForm/Index";
+import SementeForm from "@/components/SementeForm/index";
 import Footer from "@/components/Home/Footer";
 import Header from "@/components/Home/Header";
-import styles from "@/app/agricultores/novoAgricultor/index.module.scss"
 
-export default function NewRegisterFarmer() {
+
+export default function SeedFormPage() {
     return (
         <div>
-            <div>
             <Header />
-            </div>
-            <div>
-                <h1 className={styles.title}>
-                    Cadastro de Cultivares Crioulas
-                </h1>
-            </div>
-            <div>
-                <NewSeedForm />
-            </div>
+            <SementeForm diretorioAnterior="Home / Agricultores /" diretorioAtual="Nova Semente" hrefAnterior="/sementes"/>
             <Footer />
         </div>
     );
