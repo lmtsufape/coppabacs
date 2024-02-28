@@ -9,23 +9,45 @@ import styles from "@/components/SementeForm/SementeForm.module.scss";
 import HeaderNavegacao from "../HeaderNavegacao";
 import Link from "next/link";
 import DadosSementesForm from "@/components/SementeForm/DadosSementesForm/index";
-import OutrosDadosSementesForm from "@/components/SementeForm/OutrosDadosSementesForm/index";
+import DadosCaracteristicasAgronomicas from "@/components/SementeForm/DadosCaracteristicasAgronomicas/index";
+import ToleranciaAdversidades from "@/components/SementeForm/DadosToleranciaAdversidades/index";
 
 
 const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
     const initialValues = {
+        tecnico:"",
+        cpf: "",
+        numConselho: "",
+        cultura:"",
         nome: "",
+        finalidadeSemente:[],
         nomePopular: "",
         descricao: "",
         pragas: "",
         dominioPublico: "",
         polinizaacaoAbertaMelhorada: "",
+        regAdaptCultivar:"",
         regiaoColetaDados: "",
         altitudeMaxima: "",
         altitudeMinima: "",
         caracteristicasPositiva: "",
         caracteristicasNegativas: "",
+        caracteristicasAgronomicas:{
+            cicloFenologico:"",
+            stand:"",
+            produtividade:"",
+            alturaPlanta:"",
+            pesoMilGraos:"",
+            pesoHectolitro:"",
+            tipoGrao:"",
+            corGrao:"",
+            corCaule:"",
+            corFolha:"",
+            corFlor:"",
+            empalhamento:"",
+            habitoCrescimento:"",
+        },
         toleranciaAdversidades: {
             altaTemperatura: "",
             baixaTemperatura: "",
@@ -82,8 +104,11 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
                 {etapas === 0 && <h1 className={styles.container__header_currentNav}>1. Dados da semente</h1>}
                 {etapas >= 1 && etapas <= 2 && <h1 className={styles.container__header_current}>1. Dados da Semente</h1>}
 
-                {etapas === 1 && <h1 className={styles.container__header_currentNav}>2. Dados da semente dados</h1>}
+                {etapas === 1 && <h1 className={styles.container__header_currentNav}>2. Dados da semente</h1>}
                 {etapas != 1 && <h1 className={styles.container__header_current}>2. Dados da semente</h1>}
+
+                {etapas === 2 && <h1 className={styles.container__header_currentNav}>3. Dados da semente</h1>}
+                {etapas >= 0 && etapas < 2 && <h1 className={styles.container__header_current}>3. Dados da semente</h1>}
 
             </div>
 
@@ -102,32 +127,47 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
                         return (
                             <Form className={styles.container_ContainerForm_form}>
                                 {etapas === 0 && <DadosSementesForm formik={formik} />}
-                                {etapas === 1 && <OutrosDadosSementesForm formik={formik} />}
+                                {etapas === 1 && <DadosCaracteristicasAgronomicas formik={formik} />}
+                                {etapas === 2 && <ToleranciaAdversidades formik={formik} />}
                                 {etapas === 0 && (
                                     <div className={styles.container__ContainerForm_buttons}>
-                                        <button>
-                                            <Link className={styles.container__ContainerForm_buttons_link} href="/sementes">
-                                                <h1>Voltar</h1>
-                                            </Link>
-                                        </button>
-                                        <button onClick={() => setEtapas(etapas + 1)}>
-                                            <Link href="#header" className={styles.container__Container_buttons_linkWhite}>
-                                                <h1>Continuar</h1>
-                                            </Link>
-                                        </button>
-                                    </div>
+                                    <button>
+                                      <Link className={styles.container__ContainerForm_buttons_link} href="/agricultores">
+                                        <h1>Voltar</h1>
+                                      </Link>
+                                    </button>
+                                    <button onClick={() => setEtapas(etapas + 1)}>
+                                      <Link href="#header" className={styles.container__ContainerForm_buttons_linkWhite}>
+                                        <h1>Continuar</h1>
+                                      </Link>
+                                    </button>
+                                  </div>
                                 )}
                                 {etapas === 1 && (
-                                    <div className={styles.container__ContainerForm_buttons}>
-                                        <button onClick={() => setEtapas(etapas - 1)}>
-                                            <Link href="#header" className={styles.container__ContainerForm_buttons_link}>
-                                                <h1>Voltar</h1>
-                                            </Link>
-                                        </button>
-                                        <button type="submit" className={styles.container__ContainerForm_buttons_linkWhite}>
-                                                <h1>Finalizar</h1>
-                                        </button>
-                                    </div>
+                                  <div className={styles.container__ContainerForm_buttons}>
+                                    <button onClick={() => setEtapas(etapas - 1)}>
+                                      <Link href="#header" className={styles.container__ContainerForm_buttons_link}>
+                                        <h1>Voltar</h1>
+                                      </Link>
+                                    </button>
+                                    <button onClick={() => setEtapas(etapas + 1)}>
+                                      <Link href="#header" className={styles.container__ContainerForm_buttons_linkWhite}>
+                                        <h1>Continuar</h1>
+                                      </Link>
+                                    </button>
+                                  </div>
+                                )}
+                                {etapas === 2 && (
+                                  <div className={styles.container__ContainerForm_buttons}>
+                                    <button onClick={() => setEtapas(etapas - 1)}>
+                                      <Link href="#header" className={styles.container__ContainerForm_buttons_link}>
+                                        <h1>Voltar</h1>
+                                      </Link>
+                                    </button>
+                                    <button type="submit" className={styles.container__ContainerForm_buttons_linkWhite}>
+                                        <h1>Finalizar</h1>
+                                    </button>
+                                  </div>
                                 )}
                             </Form>
                         )
