@@ -5,7 +5,7 @@ import { postSemente } from "@/api/sementes/postSemente";
 import { Form, Formik } from "formik";
 import { useEffect,useState } from "react";
 import * as Yup from 'yup';
-import styles from "@/components/SementeForm/SementeForm.module.scss";
+import styles from "@/components/SementeForm/sementeForm.module.scss";
 import HeaderNavegacao from "../HeaderNavegacao";
 import Link from "next/link";
 import DadosSementesForm from "@/components/SementeForm/DadosSementesForm/index";
@@ -24,6 +24,7 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
         finalidadeSemente:[],
         nomePopular: "",
         descricao: "",
+        doencas: "",
         pragas: "",
         dominioPublico: "",
         polinizaacaoAbertaMelhorada: "",
@@ -33,6 +34,7 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
         altitudeMinima: "",
         caracteristicasPositiva: "",
         caracteristicasNegativas: "",
+        avaliacaoSemente:"",
         caracteristicasAgronomicas:{
             cicloFenologico:"",
             stand:"",
@@ -112,7 +114,7 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
             </div>
 
-            <div className={styles.container__ContainerForm}>
+            <div className={styles.containerForm}>
                 <Formik initialValues={initialValues}
                     validationSchema={validateSchema}
                     onSubmit={(values, { setSubmitting }) => {
@@ -125,46 +127,46 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
                 >
                     {(formik) => {
                         return (
-                            <Form className={styles.container_ContainerForm_form}>
+                            <Form >
                                 {etapas === 0 && <DadosSementesForm formik={formik} />}
                                 {etapas === 1 && <DadosCaracteristicasAgronomicas formik={formik} />}
                                 {etapas === 2 && <ToleranciaAdversidades formik={formik} />}
                                 {etapas === 0 && (
-                                    <div className={styles.container__ContainerForm_buttons}>
+                                    <div className={styles.buttons}>
                                     <button>
-                                      <Link className={styles.container__ContainerForm_buttons_link} href="/agricultores">
+                                      <Link className={styles.buttons_link} href="/sementes">
                                         <h1>Voltar</h1>
                                       </Link>
                                     </button>
                                     <button onClick={() => setEtapas(etapas + 1)}>
-                                      <Link href="#header" className={styles.container__ContainerForm_buttons_linkWhite}>
+                                      <Link href="#header" className={styles.buttons_linkWhite}>
                                         <h1>Continuar</h1>
                                       </Link>
                                     </button>
                                   </div>
                                 )}
                                 {etapas === 1 && (
-                                  <div className={styles.container__ContainerForm_buttons}>
+                                  <div className={styles.buttons}>
                                     <button onClick={() => setEtapas(etapas - 1)}>
-                                      <Link href="#header" className={styles.container__ContainerForm_buttons_link}>
+                                      <Link href="#header" className={styles.buttons_link}>
                                         <h1>Voltar</h1>
                                       </Link>
                                     </button>
                                     <button onClick={() => setEtapas(etapas + 1)}>
-                                      <Link href="#header" className={styles.container__ContainerForm_buttons_linkWhite}>
+                                      <Link href="#header" className={styles.buttons_linkWhite}>
                                         <h1>Continuar</h1>
                                       </Link>
                                     </button>
                                   </div>
                                 )}
                                 {etapas === 2 && (
-                                  <div className={styles.container__ContainerForm_buttons}>
+                                  <div className={styles.buttons}>
                                     <button onClick={() => setEtapas(etapas - 1)}>
-                                      <Link href="#header" className={styles.container__ContainerForm_buttons_link}>
+                                      <Link href="#header" className={styles.buttons_link}>
                                         <h1>Voltar</h1>
                                       </Link>
                                     </button>
-                                    <button type="submit" className={styles.container__ContainerForm_buttons_linkWhite}>
+                                    <button type="submit" className={styles.buttons_linkWhite}>
                                         <h1>Finalizar</h1>
                                     </button>
                                   </div>

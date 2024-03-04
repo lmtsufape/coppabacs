@@ -5,12 +5,13 @@ import styles from "@/components/SementeForm/sementeForm.module.scss"
 export default function DadosCaracteristicasAgronomicas({ formik }) {
 
     return (
-        <div>
-            <div className={styles.container__ContainerForm_form_halfContainer}>
+        <>
+            <h1 className={styles.title}>Tolerância à adversidades</h1>
+            <div className={styles.sidedForm}>
                 <div>
                     <label htmlFor="toleranciaAdversidades.altaTemperatura">Alta Temperatura <span>*</span></label>
                     <select
-                        className={styles.container__ContainerForm_form_halfContainer_input}
+                        className={styles.sidedForm_select}
                         id="altaTemperatura"
                         name="toleranciaAdversidades.altaTemperatura"
                         placeholder="Selecione"
@@ -32,7 +33,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                 <div>
                     <label htmlFor="toleranciaAdversidades.baixaTemperatura">Baixa Temperatura <span>*</span></label>
                     <select
-                        className={styles.container__ContainerForm_form_halfContainer_input}
+                        className={styles.sidedForm_select}
                         id="baixaTemperatura"
                         name="toleranciaAdversidades.baixaTemperatura"
                         placeholder="Selecione"
@@ -54,7 +55,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                 <div>
                     <label htmlFor="toleranciaAdversidades.Geada">Geada <span>*</span></label>
                     <select
-                        className={styles.container__ContainerForm_form_halfContainer_input}
+                        className={styles.sidedForm_select}
                         id="geada"
                         name="toleranciaAdversidades.geada"
                         placeholder="Selecione"
@@ -76,7 +77,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                 <div>
                     <label htmlFor="toleranciaAdversidades.chuvaExcessiva">Chuva excessiva <span>*</span></label>
                     <select
-                        className={styles.container__ContainerForm_form_halfContainer_input}
+                        className={styles.sidedForm_select}
                         id="chuvaExcessiva"
                         name="toleranciaAdversidades.chuvaExcessiva"
                         placeholder="Selecione"
@@ -98,7 +99,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                 <div>
                     <label htmlFor="toleranciaAdversidades.seca">Seca <span>*</span></label>
                     <select
-                        className={styles.container__ContainerForm_form_halfContainer_input}
+                        className={styles.sidedForm_select}
                         id="seca"
                         name="toleranciaAdversidades.seca"
                         placeholder="Selecione"
@@ -120,7 +121,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                 <div>
                     <label htmlFor="toleranciaAdversidades.ventos">Ventos <span>*</span></label>
                     <select
-                        className={styles.container__ContainerForm_form_halfContainer_input}
+                        className={styles.sidedForm_select}
                         id="ventos"
                         name="toleranciaAdversidades.ventos"
                         placeholder="Selecione"
@@ -142,7 +143,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                 <div>
                     <label htmlFor="toleranciaAdversidades.salinidade">Salinidade <span>*</span></label>
                     <select
-                        className={styles.container__ContainerForm_form_halfContainer_input}
+                        className={styles.sidedForm_select}
                         id="salinidade"
                         name="salinidade."
                         placeholder="Selecione"
@@ -164,8 +165,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                 <div>
                     <label htmlFor="toleranciaAdversidades.toxidadeAluminio">Toxidade alumínio <span>*</span></label>
                     <select
-                        className={styles.container__ContainerForm_form_halfContainer_input}
-                        id="toxidadeAluminio"
+                        className={styles.sidedForm_select}
                         name="toleranciaAdversidades.toxidadeAluminio"
                         placeholder="Selecione"
                         onChange={formik.handleChange}
@@ -186,7 +186,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                 <div>
                     <label htmlFor="toleranciaAdversidades.soloArgiloso">Solo argiloso <span>*</span></label>
                     <select
-                        className={styles.container__ContainerForm_form_halfContainer_input}
+                        className={styles.sidedForm_select}
                         id="soloArgiloso"
                         name="toleranciaAdversidades.soloArgiloso"
                         placeholder="Selecione"
@@ -208,7 +208,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                 <div>
                     <label htmlFor="toleranciaAdversidades.soloArenoso">Solo arenoso <span>*</span></label>
                     <select
-                        className={styles.container__ContainerForm_form_halfContainer_input}
+                        className={styles.sidedForm_select}
                         id="soloArenoso"
                         name="toleranciaAdversidades.soloArenoso"
                         placeholder="Selecione"
@@ -230,7 +230,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                 <div>
                     <label htmlFor="toleranciaAdversidades.soloAcido">Solo ácido <span>*</span></label>
                     <select
-                        className={styles.container__ContainerForm_form_halfContainer_input}
+                        className={styles.sidedForm_select}
                         id="soloAcido"
                         name="toleranciaAdversidades.soloAcido"
                         placeholder="Selecione"
@@ -249,10 +249,10 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         <span className={styles.form__error}>{formik.errors.toleranciaAdversidades.soloAcido}</span>
                     ) : null}
                 </div>
-                <div>
+                <div >
                     <label htmlFor="toleranciaAdversidades.soloBaixaFertilidade">Solo Baixa Fertilidade <span>*</span></label>
                     <select
-                        className={styles.container__ContainerForm_form_halfContainer_input}
+                        className={styles.sidedForm_select}
                         id="soloBaixaFertilidade"
                         name="toleranciaAdversidades.soloBaixaFertilidade"
                         placeholder="Selecione"
@@ -272,6 +272,41 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
             </div>
-        </div>
+            <h1 className={styles.title}>Informações de Coleta e Avaliação</h1>
+            <div className={styles.sidedForm}>
+                <div>
+                        <label htmlFor="regiaoColetaDados">Região de coleta dos dados <span>*</span></label>
+                        <input
+                            className={styles.sidedForm_input}
+                            id="regiaoColetaDados"
+                            name="regiaoColetaDados"
+                            placeholder="Insira a região de coleta dos dados"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.regiaoColetaDados}
+                            required />
+                        {formik.touched.regiaoColetaDados && formik.errors.regiaoColetaDados ? (
+                            <span className={styles.form__error}>{formik.errors.regiaoColetaDados}</span>
+                        ) : null}
+
+                    </div>
+                    <div>
+                        <label htmlFor="avaliacaoSemente">Avaliação geral da semente <span>*</span></label>
+                        <textarea
+                            className={styles.sidedForm_textarea}
+                            id="avaliacaoSemente"
+                            name="avaliacaoSemente"
+                            placeholder="Insira avaliação geral da semente"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.avaliacaoSemente}
+                            required />
+                        {formik.touched.avaliacaoSemente && formik.errors.avaliacaoSemente ? (
+                            <span className={styles.form__error}>{formik.errors.avaliacaoSemente}</span>
+                        ) : null}
+
+                    </div>
+            </div>
+        </>
     )
 }

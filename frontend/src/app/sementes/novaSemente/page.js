@@ -4,11 +4,11 @@ import Footer from "@/components/Home/Footer";
 import Header from "@/components/Home/Header";
 
 
-export default function SeedFormPage() {
+export default function NovaSementeFormPage() {
     return (
         <div>
             <Header />
-            <SementeForm diretorioAnterior="Home / Agricultores /" diretorioAtual="Nova Semente" hrefAnterior="/sementes"/>
+            <SementeForm diretorioAnterior="Home / Sementes /" diretorioAtual="Nova Semente" hrefAnterior="/sementes"/>
             <Footer />
         </div>
     );
