@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
-    "axios": "^1.6.2",
+    "axios": "^1.6.7",
     "formik": "^2.4.5",
     "next": "^14.0.5-canary.49",
     "react": "^18",

@@ -1,6 +1,5 @@
 import Header from "@/components/Home/Header";
 import Footer from "@/components/Home/Footer";
-import ListAgricultor from "@/components/ListAgricultor";
 import ListSementes from "@/components/ListSementes"
 
 export default function SolicitacoesPage() {

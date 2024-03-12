@@ -1,52 +1,251 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-.container{
-    display: block;
-    width: 80%;
-    max-width: 1500px;
-    min-width: none;
-    height: auto;
-    background-color: white;
-    padding: 30px;
-    margin: auto;
-    font-family: 'Inter', sans-serif;
-    justify-content: center;
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 1em;
+
+  margin: 5em 2em 2em 2em;
+
+
+  h1 {
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+  button {
+    display: flex;
     align-items: center;
-    border-radius: 16px;
-    box-shadow: -4px 5px 12px 0px #00000026;
-    border: 0.5px solid #B1B1B1;
-    margin-top: 2em;
-    margin-bottom: 5em;
 
-    h1{
-        font-weight: bold;
-        color: #2A8B5A;
-        margin-bottom: 1em;
-        font-size: 20px;
+    gap: 0.5em;
+    padding: 1em;
+
+    font-weight: bold;
+    color: #68655C;
+    background-color: #fff;
+    border: #68655C 1px solid;
+    border-radius: 0.8em;
+    margin-right: 18%;
+  }
+
+  button>span {
+    font-size: 1.5em;
+  }
+
+
+  button:hover {
+    background-color: #1A5537;
+    color: #fff;
+    transition: 0.2s;
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    font-size: 1em;
+    margin: 0em 0em 3em 0em;
+    margin-left: 5em;
+    margin-right: 5em;
+  }
+
+  &__title_voltar {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+
+    &_link {
+      color: #000;
     }
-    h2{
-        font-weight: bold;
-        margin-top: 1em;
-        
+  }
+
+  &__title_guia {
+    display: flex;
+    align-items: center;
+
+    h1 {
+      color: #A7A7A7;
     }
 
-    
+    h1:last-child {
+      color: #245501;
+    }
+  }
+
+  &__container {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 100%;
+    font-size: 1em;
+    gap: 1em;
+    margin-left: 2em;
+
+    button {
+      display: flex;
+      align-items: center;
+
+      gap: 0.5em;
+      padding: 1em;
+
+      font-weight: bold;
+      color: #68655C;
+      background-color: #fff;
+      border: #EAEAEA 1px;
+      border-radius: 0.8em;
+    }
+
+    &_link {
+      color: #68655C;
+
+      text-decoration: none;
+    }
+
+
+  }
+
+  &__searchIcon {
+    background-color: #245501;
+  }
+
 }
 
-.sidedInfo{
+.container {
+  display: block;
+  width: 80%;
+  max-width: 1500px;
+  min-width: none;
+  height: auto;
+  background-color: white;
+  padding: 30px;
+  margin: auto;
+  font-family: 'Inter', sans-serif;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  box-shadow: -4px 5px 12px 0px #00000026;
+  border: 0.5px solid #B1B1B1;
+  margin-top: 2em;
+  margin-bottom: 5em;
+  text-align: justify;
+  padding-top: 4em;
+  padding-bottom: 4em;
+
+  h1 {
+    font-weight: bold;
+    color: #2A8B5A;
+    margin-bottom: 1em;
+    font-size: 20px;
+  }
+
+  h2 {
+    font-weight: bold;
+    margin-top: 1em;
+
+  }
+
+  button {
     display: flex;
-    justify-content:space-between;
     align-items: center;
-    flex-direction: row;
 
+    gap: 0.5em;
+    padding: 0.8em;
 
-        &_solo{
-            text-align: left;
-        }
-        div:last-child{
-        display: flex;
-        justify-content: left;
-        flex-direction: column;
-        text-align: left;
-        }
+    font-weight: bold;
+    
+    border-radius: 0.8em;
+    font-size: 1em;
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      color: #68655C;
+      background-color: #fff;
+      border: #68655C 1px solid;
     }
+  }
+
+  &__deleteButton{
+    margin-top: 3em;
+    display: flex;
+    margin-left: auto;
+    color: #DE8074;
+    background-color: #FFF1EF;
+    border: #DE8074 1px solid;
+
+  }
+}
+
+.sidedInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  
+  
+
+  h2 {
+    
+    margin-bottom: 0.4em;
+  }
+
+  h3 {
+    
+    
+  }
+
+}
+
+.firstDiv {
+  margin-right: auto;
+  margin-top: 2em;
+  width: 40em;
+}
+
+.secondDiv {
+  margin-right: auto;
+  margin-top: 2em;
+  width: 40em;
+
+}
+
+.soloDiv {
+  margin-top: 2em;
+
+  h2 {
+    width: 25em;
+    margin-bottom: 0.4em;
+  }
+
+
+}
+
+@media only screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container {
+    width: 90%;
+  }
+
+  .firstDiv,
+  .secondDiv,
+  .soloDiv {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .sidedInfo {
+    flex-direction: column;
+  }
+}

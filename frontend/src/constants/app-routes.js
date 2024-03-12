@@ -6,6 +6,9 @@ export const APP_ROUTES = {
     agricultorForm:{
       name: "/agricultores/novoAgricultor",
     },
+    sementeForm:{
+      name: "sementes/novaSemente",
+    },
     unauthorized:{
       name: "/unauthorized"
     }

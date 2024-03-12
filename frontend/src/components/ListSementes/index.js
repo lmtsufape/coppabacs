@@ -1,53 +1,58 @@
+"use client"
+
 import Image from "next/image";
 import style from "./list.module.scss";
+
+import { useEffect, useState } from "react";
+import { useMutation } from "react-query";
+
 import Link from "next/link";
-
+import Header from "../HeaderNavegacao";
 import Table from "./Table";
+import { getAllSementes } from "@/api/sementes/getAllSementes";
+import { Search } from "../searchSemente";
 
-export default function List({ listName, table1, table2, table3, table4, content1, content2, content3 }) {
+export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4 }) {
+
+  const [sementes, setSementes] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
+
+  useEffect(() => {
+    mutate();
+  }, [])
+
+  const { state, mutate } = useMutation(
+    async () => {
+      return getAllSementes();
+    }, {
+    onSuccess: (res) => {
+      console.log(res);
+      setSementes(res.data);
+    },
+    onError: (error) => {
+      console.log(error)
+    }
+  }
+  );
+  const filteredSementes = sementes.filter((sementes) =>
+    sementes.nome.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return (
     <div>
-      <div className={style.header}>
-        <div className={style.header__title}>
-          <div className={style.header__title_voltar}>
-            <Image src="/assets/IconMenorQue.svg" alt="Voltar" width={27} height={24} />
-            <Link className={style.header__title_voltar_link} href="/inicio"><h1>Voltar</h1></Link>
-          </div>
-          <div className={style.header__title_guia}>
-            <h1>Home /</h1>
-            <h1> Sementes</h1>
-          </div>
-
-        </div>
-        <div className={style.pesquisaBotao}>
-            <input type="text"
-              name="search"
-            //value={}
-            //onChange={} 
-            />
-
-            <div className={style.pesquisaBotao__searchIcon}>
-            <Image src="assets/iconSearch.svg" width={20} height={20}  />
-            </div>
-            
-            
-            <button className={style.header__container_link}>
-              Adicionar Semente
-              <Image src="/assets/iconSeedGrey+.svg" width={20} height={20} />
-            </button>
-        </div>
-      </div>
-      <div className={style.content__table__header}>
+      <Header
+        diretorioAnterior={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
+        hrefAnterior={hrefAnterior}
+      />
+     
       <Table
         table1={table1}
         table2={table2}
         table3={table3}
         table4={table4}
-        content1={content1}
-        content2={content2}
-        content3={content3}
+        listSementes={filteredSementes}
       />
-      </div>
     </div>
   );
 }
