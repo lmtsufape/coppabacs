@@ -17,7 +17,7 @@ import Link from "next/link";
 import Footer from "../Home/Footer";
 
 
-const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
+const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   
 
   const initialValues = {
@@ -190,4 +190,4 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
 }
 
 
-export default AgricultorForm;
+export default UsuarioForm;
