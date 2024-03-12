@@ -6,10 +6,13 @@ import styles from "@/app/agricultores/novoAgricultor/index.module.scss"
 
 export default function NewRegisterFarmer() {
     return (
-        <div>
-            <Header />
-            <AgricultorForm diretorioAnterior="Home / Agricultores /" diretorioAtual="Novo Agricultor" hrefAnterior="/agricultores" />
+        <div className={styles.pageContainer}>
+            <Header hrefAnterior="/agricultores" />
+            <div className={styles.pageContainer__content}>
+                <AgricultorForm diretorioAnterior="Home / Agricultores /" diretorioAtual="Novo Agricultor" hrefAnterior="/agricultores" />
+            </div>
             <Footer />
+
         </div>
     );
 }

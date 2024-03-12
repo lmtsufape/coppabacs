@@ -6,7 +6,7 @@ export default function AssociadosPage(){
 
   return(
     <div>
-      <Header />
+      <Header hrefAnterior="/inicio"/>
       <ListUsuarios diretorioAnterior= "Home /" diretorioAtual="Agricultores" hrefAnterior="/inicio" table1="nome" table2="Função" table3="Ação"/>
 
       <Footer />

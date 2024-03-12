@@ -6,7 +6,7 @@ export default function SolicitacoesPage() {
 
   return (
     <>
-      <Header />
+      <Header hrefAnterior="/agricultores" />
         <ListAgricultor
           class="content"
           diretorioAnterior="Home / Agricultores /"
