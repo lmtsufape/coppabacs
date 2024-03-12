@@ -1,0 +1,11 @@
+
+
+.page-container {
+    display: flex; // Ativa o Flexbox
+    flex-direction: column; // Coloca os elementos em uma coluna
+    min-height: 100vh; // A altura mínima é 100% da altura da viewport
+
+    &__content{
+        flex-grow: 1; // O conteúdo principal ocupa todo o espaço disponível
+    }
+}
