@@ -10,26 +10,21 @@ import * as Yup from 'yup';
 import style from "./agricultorForm.module.scss";
 
 import HeaderNavegacao from "../HeaderNavegacao";
-import DadosForm from "./DadosUsuario/index";
 import DadosEndereco from "./DadosEndereco";
-import DadosAtividadesRurais from "./DadosAtividadesRurais";
+import DadosAtividadesRurais from "./ObjetosBanco";
 import Link from "next/link";
-import Footer from "../Home/Footer";
+import DadosBanco from "./DadosBanco";
+import ObjetosBanco from "./ObjetosBanco";
+import { postBanco } from "@/api/bancoSementes/postBanco";
 
 
-const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
+const BancoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   
 
   const initialValues = {
-    email: "",
-    senha: "",
-    confirmarSenha: "",
-    nome: "",
-    nomePopular: "",
+    nomeBanco: "",
+    responsavel: "",
     contato: "",
-    cpf: "",
-    dataNascimento: "",
-    sexo: "",
     endereco: {
       cep: "",
       estado: "",
@@ -39,18 +34,17 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
       numero: "",
       referencia: "",
     },
-    bancoId: "",
-    conjuge: {
-      nome: "",
-      sexo: "",
-    },
-    bancoId: "",
-    atividadesRurais: [],
-    producaoSementes: {
-      cultura: "",
-      variedade: "",
-      areaPlantada: "",
-      previsaoVenda: "",
+    comunidade: "",
+    anoFundacao: "",
+    descricaoBanco: "",
+    objetosBanco: {
+      bombonas: "",
+      peneirasSelecao: "",
+      balanca: "",
+      armarios: "",
+      plantadeiras: "",
+      lona: "",
+      batedeirasCereais: "",
     }
 
 
@@ -78,7 +72,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
   const { status, mutate } = useMutation(
     async (values) => {
       console.log("valores: ", values);
-      return postAgricultor(values);
+      return postBanco(values);
     }, {
     onSuccess: (res) => {
 
@@ -103,14 +97,14 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
       />
 
       <div className={style.container__header}>
-        {etapas === 0 && <h1 className={style.container__header_currentNav}>1. Dados do agricultor</h1>}
-        {etapas >= 1 && etapas <= 2 && <h1 className={style.container__header_current}>1. Dados do agricultor</h1>}
+        {etapas === 0 && <h1 className={style.container__header_currentNav}>1. Dados do banco</h1>}
+        {etapas >= 1 && etapas <= 2 && <h1 className={style.container__header_current}>1. Dados do banco</h1>}
 
-        {etapas === 1 && <h1 className={style.container__header_currentNav}>2. Endereço do Endereço</h1>}
-        {etapas != 1 && <h1 className={style.container__header_current}>2. Endereço do Endereço</h1>}
+        {etapas === 1 && <h1 className={style.container__header_currentNav}>2. Endereço do banco</h1>}
+        {etapas != 1 && <h1 className={style.container__header_current}>2. Endereço do banco</h1>}
 
-        {etapas === 2 && <h1 className={style.container__header_currentNav}>3. Atvidades rurais</h1>}
-        {etapas >= 0 && etapas < 2 && <h1 className={style.container__header_current}>3. Atvidades rurais</h1>}
+        {etapas === 2 && <h1 className={style.container__header_currentNav}>3. Objetos do banco</h1>}
+        {etapas >= 0 && etapas < 2 && <h1 className={style.container__header_current}>3. Objetos do banco</h1>}
 
       </div>
 
@@ -123,7 +117,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
           onSubmit={(values, { setSubmitting }) => {
             mutate(values,{
               onSuccess: (res) => {
-                window.location.href = '/agricultores';
+                window.location.href = '/bancosSementes';
               },
               onError: (error) => {
                 console.log(error)
@@ -139,13 +133,13 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
                 className={style.container__ContainerForm_form}
               >
 
-                {etapas === 0 && <DadosForm formik={formik} />}
+                {etapas === 0 && <DadosBanco formik={formik} />}
                 {etapas === 1 && <DadosEndereco formik={formik} />}
-                {etapas === 2 && <DadosAtividadesRurais formik={formik} />}
+                {etapas === 2 && <ObjetosBanco formik={formik} />}
                 {etapas === 0 && (
                   <div className={style.container__ContainerForm_buttons}>
                     <button>
-                      <Link className={style.container__ContainerForm_buttons_link} href="/agricultores">
+                      <Link className={style.container__ContainerForm_buttons_link} href="/bancoSementes">
                         <h1>Voltar</h1>
                       </Link>
                     </button>
@@ -193,4 +187,4 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
 }
 
 
-export default AgricultorForm;
+export default BancoForm;
