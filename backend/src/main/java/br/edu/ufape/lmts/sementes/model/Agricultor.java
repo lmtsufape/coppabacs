@@ -1,5 +1,6 @@
 package br.edu.ufape.lmts.sementes.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,16 +41,19 @@ public class Agricultor extends Usuario {
 	@JoinColumn(name = "agricultor_id")
 	@ToString.Exclude
 	private List<InfraestruturaComunidade> infraestruturaComunidade;
-
+	@OneToMany
+	@ToString.Exclude
+	private List<ProducaoSementes> producaoSementes;
 	public Agricultor() {
 		super();
+		this.atividadeRural = new ArrayList<>();
 	}
 
 	public Agricultor(Long id, String nome, String email, String senha, Endereco endereco, String cpf,
 			Date dataNascimento, String contato, String imagem, String sexo, Conjuge conjuge,
 			String nomePopular, String rendaFamiliar, String numeroPessoas, Double areaPropriedade,
 			BancoSementes bancoSementes, List<AtividadeRural> atividadeRural,
-			List<br.edu.ufape.lmts.sementes.model.infraestruturaHidrica> infraestruturaHidrica,
+			List<infraestruturaHidrica> infraestruturaHidrica,
 			List<UsoOcupacaoTerra> usoOcupacaoTerra, List<InfraestruturaComunidade> infraestruturaComunidade) {
 		super(id, nome, email, senha, endereco, cpf, dataNascimento, contato, imagem, sexo, conjuge);
 		this.nomePopular = nomePopular;

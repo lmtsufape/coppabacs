@@ -834,6 +834,7 @@ public class Facade {
 	private AgricultorService  agricultorService;
 
 	public Agricultor saveAgricultor(Agricultor newInstance) throws EmailExistsException {
+		System.out.println("resultado:" +  newInstance.getAtividadeRural());
 		newInstance.setAtividadeRural(saveAtividadesRuraisFromAgricultor(newInstance.getAtividadeRural()));
 		bancoSementesService.findBancoSementesById(newInstance.getBancoSementes().getId());
 		usuarioService.saveUsuario(newInstance);

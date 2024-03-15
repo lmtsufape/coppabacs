@@ -1,15 +1,25 @@
-import Header from "@/components/Header";
+import Header from "@/components/Home/Header";
 import Footer from "@/components/Home/Footer";
-import ListSolicitacoes from "@/components/ListSolicitacoes";
-export default function AssociadosPage(){
+import ListAgricultor from "@/components/ListAgricultor";
 
-  return(
-    <div>
-      <Header />
-      <ListSolicitacoes listName="Solicitações de cadastros" table1="nome" table2="Ação" content1  ="Geronimo"/>
+export default function SolicitacoesPage() {
 
-      <Footer />
+  return (
+    <>
+      <Header hrefAnterior="/agricultores" />
+        <ListAgricultor
+          class="content"
+          diretorioAnterior="Home / Agricultores /"
+          diretorioAtual="Solicitações"
+          hrefAnterior="/agricultores"
+          table1="Nome"
+          table2="Apelido"
+          table3="Contato"
+          table4="Ação"
+        />
 
-    </div>
+        <Footer class="footer" />
+
+    </>
   )
 }

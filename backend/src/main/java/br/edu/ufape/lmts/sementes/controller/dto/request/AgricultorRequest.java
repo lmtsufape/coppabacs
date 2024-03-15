@@ -21,6 +21,7 @@ public  class AgricultorRequest extends UsuarioRequest {
 	private String comunidade;
 	private long bancoId;
 	private List<String> atividadesRurais; 
+	//private List<ProducaoSementesRequest> producaoSementes; 
 	private List<infraestruturaHidricaRequest> infraestruturaHidrica; 
 	private List<UsoOcupacaoTerraRequest> usoOcupacaoTerra; 
 	private List<InfraestruturaComunidadeRequest> infraestruturaComunidade; 
@@ -32,6 +33,8 @@ public  class AgricultorRequest extends UsuarioRequest {
 		BancoSementes banco = new BancoSementes();
 		banco.setId(bancoId);
 		obj.setBancoSementes(banco);
+		System.out.println("atividades rurais:" +  atividadesRurais);
+
 		obj.setAtividadeRural(atividadesRurais.stream().map(n -> new AtividadeRural(n)).toList());
 		System.out.println(obj.toString());
 		return obj;

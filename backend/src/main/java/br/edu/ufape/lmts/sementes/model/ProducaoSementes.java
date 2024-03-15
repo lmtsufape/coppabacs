@@ -31,9 +31,18 @@ public  class ProducaoSementes  {
 	private Double areaPlantada;
 	private Double estimativaColheita;
 	private String previsaoVenda;
-    	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "agricultor_id")
 	@ToString.Exclude
-	private Agricultor agricultor; 
+	private Agricultor agricultor;
+    // Getter e Setter para o campo agricultor
+    public Agricultor getAgricultor() {
+        return this.agricultor;
+    }
+
+    public void setAgricultor(Agricultor agricultor) {
+        this.agricultor = agricultor;
+    }
+	
 
 }

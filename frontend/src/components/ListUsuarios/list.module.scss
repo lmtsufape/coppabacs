@@ -1,0 +1,45 @@
+.header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  
+  margin: 0 2em 2em 2em;
+  h1{
+    font-size: 1em;
+    font-weight: bold;
+  }
+  &__container{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 100%;
+    font-size: 1em;
+    gap: 1em;
+    margin-left: 2em;
+  button{
+    display: flex;
+    align-items: center;
+
+    gap: 0.5em;
+    padding: 1em;
+
+    font-weight: bold;
+    color: #68655C;
+    background-color: #fff;
+    border: #68655C 1px solid;
+    border-radius: 0.8em;
+  }
+  &_link{
+    color: #68655C;
+
+    text-decoration: none;
+  }
+
+
+
+    
+  }
+
+
+}
