@@ -13,10 +13,9 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper=false)
 @ToString
 public class Agricultor extends Usuario {
-	private String nomePopular;
 	private String rendaFamiliar;
 	private String numeroPessoas;
 	private Double areaPropriedade;
@@ -47,12 +46,12 @@ public class Agricultor extends Usuario {
 	}
 
 	public Agricultor(Long id, String nome, String email, String senha, Endereco endereco, String cpf,
-			Date dataNascimento, String contato, String imagem, String sexo, Conjuge conjuge, List<Postavel> postavel,
+			Date dataNascimento, String contato, String imagem, String sexo, Conjuge conjuge,
 			String nomePopular, String rendaFamiliar, String numeroPessoas, Double areaPropriedade,
 			BancoSementes bancoSementes, List<AtividadeRural> atividadeRural,
 			List<br.edu.ufape.lmts.sementes.model.infraestruturaHidrica> infraestruturaHidrica,
 			List<UsoOcupacaoTerra> usoOcupacaoTerra, List<InfraestruturaComunidade> infraestruturaComunidade) {
-		super(id, nome, email, senha, endereco, cpf, dataNascimento, contato, imagem, sexo, conjuge, postavel);
+		super(id, nome, email, senha, endereco, cpf, dataNascimento, contato, imagem, sexo, conjuge);
 		this.nomePopular = nomePopular;
 		this.rendaFamiliar = rendaFamiliar;
 		this.numeroPessoas = numeroPessoas;

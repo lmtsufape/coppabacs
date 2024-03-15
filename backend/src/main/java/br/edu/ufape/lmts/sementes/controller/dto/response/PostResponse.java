@@ -5,16 +5,14 @@ import java.time.LocalDate;
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
-import br.edu.ufape.lmts.sementes.model.Postavel;
+import br.edu.ufape.lmts.sementes.model.Post;
 import br.edu.ufape.lmts.sementes.model.Usuario;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-
 @Getter @Setter @NoArgsConstructor
-public  class PostavelResponse  {
+public  class PostResponse  {
 	private Long id;
 	private String texto;
 	private Usuario autor;
@@ -26,9 +24,8 @@ public  class PostavelResponse  {
 
 
 
-	public PostavelResponse(Postavel obj) {
+	public PostResponse(Post obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
-		modelMapper.map(obj, this);	
+		modelMapper.map(obj, this);
 	}
-
 }

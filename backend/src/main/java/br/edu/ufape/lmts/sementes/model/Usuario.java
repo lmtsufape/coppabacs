@@ -1,6 +1,7 @@
 package br.edu.ufape.lmts.sementes.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -44,6 +45,7 @@ public abstract class Usuario implements Serializable {
 	private String email;
 	@Column(nullable = false)
 	private String senha;
+	private String nomePopular;
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
 	private Endereco endereco;
@@ -62,7 +64,7 @@ public abstract class Usuario implements Serializable {
 	@OneToMany
 	@JoinColumn(name = "usuario_id")
 	@ToString.Exclude
-	private List<Postavel> postavel;
+	private List<Post> posts;
 	@ElementCollection(targetClass = TipoUsuario.class, fetch = FetchType.EAGER)
 	@CollectionTable(name = "usuario_roles", joinColumns = @JoinColumn(name = "user_id"))
 	@Enumerated(EnumType.STRING)
@@ -71,7 +73,7 @@ public abstract class Usuario implements Serializable {
 
 	public Usuario(Long id, String nome, String email, String senha, Endereco endereco, String cpf,
 			Date dataNascimento, String contato, String imagem, String sexo,
-			Conjuge conjuge, List<Postavel> postavel) {
+			Conjuge conjuge) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -83,7 +85,6 @@ public abstract class Usuario implements Serializable {
 		this.imagem = imagem;
 		this.sexo = sexo;
 		this.conjuge = conjuge;
-		this.postavel = postavel;
 //		this.addRole(TipoUsuario.USUARIO);
 	}
 
@@ -98,9 +99,12 @@ public abstract class Usuario implements Serializable {
 		roles.add(role);
 	}
 
-	public void addPostavel(Postavel post) {
-		postavel.add(post);
-	}
+	public void addPost(Post post) {
+		if (this.posts == null) {
+			this.posts = new ArrayList<>();
+		}
+        this.posts.add(post);
+    }
 
 	public List<String> getAuthoritiesForUser(Usuario usuario) {
 		return roles.stream().map(x -> x.getRole()).toList();
@@ -177,7 +181,7 @@ public abstract class Usuario implements Serializable {
 	public void setImagem(String imagem) {
 		this.imagem = imagem;
 	}
-	
+
 	public String getSexo() {
 		return sexo;
 	}
@@ -194,12 +198,12 @@ public abstract class Usuario implements Serializable {
 		this.conjuge = conjuge;
 	}
 
-	public List<Postavel> getPostavel() {
-		return postavel;
+	public List<Post> getPost() {
+		return posts;
 	}
 
-	public void setPostavel(List<Postavel> postavel) {
-		this.postavel = postavel;
+	public void setPost(List<Post> posts) {
+		this.posts = posts;
 	}
 
 	public Set<TipoUsuario> getRoles() {
@@ -213,7 +217,7 @@ public abstract class Usuario implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		return super.clone();

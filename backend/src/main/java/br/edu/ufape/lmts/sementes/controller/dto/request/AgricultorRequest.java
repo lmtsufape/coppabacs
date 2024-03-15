@@ -15,7 +15,6 @@ import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor 
 public  class AgricultorRequest extends UsuarioRequest {
-	private String nomePopular;
 	private String rendaFamiliar;
 	private String numeroPessoas;
 	private Double areaPropriedade;
