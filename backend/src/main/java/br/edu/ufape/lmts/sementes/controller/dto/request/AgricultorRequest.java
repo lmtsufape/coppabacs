@@ -15,18 +15,9 @@ import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor 
 public  class AgricultorRequest extends UsuarioRequest {
-	private String nomePopular;
-	private String rendaFamiliar;
-	private String numeroPessoas;
-	private Double areaPropriedade;
-	private String comunidade;
 	private long bancoId;
 	private List<String> atividadesRurais; 
-	//private List<ProducaoSementesRequest> producaoSementes; 
-	private List<infraestruturaHidricaRequest> infraestruturaHidrica; 
-	private List<UsoOcupacaoTerraRequest> usoOcupacaoTerra; 
-	private List<InfraestruturaComunidadeRequest> infraestruturaComunidade; 
-
+	private List<String> sementes;
 
 	public Agricultor convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

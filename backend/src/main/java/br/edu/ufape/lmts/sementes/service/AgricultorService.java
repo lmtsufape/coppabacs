@@ -50,6 +50,7 @@ public class AgricultorService implements AgricultorServiceInterface {
 	public void validateAgricultor(long id) {
 		Agricultor obj = this.repository.findById(id).orElseThrow( () -> new RuntimeException("It doesn't exist Agricultor with id = " + id));
 		obj.addRole(TipoUsuario.AGRICULTOR);
+		obj.removeRole(TipoUsuario.USUARIO);
 		repository.save(obj);
 	}
 }

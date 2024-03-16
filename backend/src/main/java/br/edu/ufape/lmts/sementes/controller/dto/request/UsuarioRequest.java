@@ -30,6 +30,7 @@ public class UsuarioRequest {
 	private String email;
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String senha;
+	private String nomePopular;
 	@Valid
 	@NotNull(message = "Preenchimento obrigatório")
 	private EnderecoRequest endereco;

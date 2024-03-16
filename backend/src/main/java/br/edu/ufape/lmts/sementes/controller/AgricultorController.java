@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.AgricultorRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.AgricultorResponse;
+import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
@@ -37,10 +39,12 @@ public class AgricultorController {
 	@Autowired
 	private ModelMapper modelMapper;
 
+	@PreAuthorize("hasRole('GERENTE')")
 	@GetMapping("agricultor")
 	public List<AgricultorResponse> getAllAgricultor() {
 		return facade.getAllAgricultor()
 			.stream()
+			.filter(agricultor -> agricultor.getRoles().contains(TipoUsuario.AGRICULTOR))
 			.map(AgricultorResponse::new)
 			.toList();
 	}
@@ -56,7 +60,7 @@ public class AgricultorController {
 		return new AgricultorResponse(facade.findAgricultorById(id));
 	}
 
-	@PatchMapping("agricultor/{id}")
+	@PutMapping("agricultor/{id}")
 	public AgricultorResponse updateAgricultor(@PathVariable Long id, @Valid @RequestBody AgricultorRequest obj) {
 		try {
 			Agricultor oldObject = facade.findAgricultorById(id);
@@ -90,13 +94,11 @@ public class AgricultorController {
 		}
 
 	}
-	@PreAuthorize("hasRole('GERENTE', 'COPPABACS')")
-	@PatchMapping("validar/{id}")
+	
+	@PreAuthorize("hasRole('COPPABACS')")
+	@PatchMapping("agricultor/validar/{id}")
 	public ResponseEntity validateAgricultor(@PathVariable long id) {
 		facade.validateAgricultor(id);
 		return ResponseEntity.status(HttpStatus.OK).build();
-		
 	}
-
-
 }

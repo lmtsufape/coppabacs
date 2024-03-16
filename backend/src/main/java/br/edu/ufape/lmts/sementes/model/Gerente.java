@@ -13,7 +13,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper=false)
 @ToString
 public class Gerente extends Usuario {
 
@@ -21,15 +21,16 @@ public class Gerente extends Usuario {
 	@JoinColumn(name = "bancoSementes_id")
 	private BancoSementes bancoSementes;
 
-	public Gerente(Long id, String nome, String email, String senha, Endereco endereco, String cpf,
+	public Gerente(Long id, String nome, String nomePopular, String email, String senha, Endereco endereco, String cpf,
 			Date dataNascimento, String contato, String imagem, String sexo,
-			Conjuge conjuge, List<Postavel> postavel) {
-		super(id, nome, email, senha, endereco, cpf, dataNascimento, contato, imagem, sexo,
-				conjuge, postavel);
+			Conjuge conjuge) {
+		super(id, nome, nomePopular,email, senha, endereco, cpf, dataNascimento, contato, imagem, sexo,
+				conjuge);
 		super.addRole(TipoUsuario.GERENTE);
 	}
 
 	public Gerente() {
+		super.addRole(TipoUsuario.GERENTE);
 	}
 
 	public BancoSementes getBancoSementes() {
