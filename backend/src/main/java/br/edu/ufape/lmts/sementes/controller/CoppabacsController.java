@@ -1,6 +1,7 @@
 package br.edu.ufape.lmts.sementes.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
@@ -19,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.CoppabacsRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.CoppabacsResponse;
+import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Coppabacs;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
@@ -34,9 +36,17 @@ public class CoppabacsController {
 	private ModelMapper modelMapper;
 	
 	
+//	@GetMapping("coppabacs/usuarios")
+//	public List<usuario>
+//	
+	
 	@GetMapping("coppabacs")
-	public List<Coppabacs> getAllCoppabacs() {
-		return facade.getAllCoppabacs();
+	public List<CoppabacsResponse> getAllCoppabacs() {
+		return facade.getAllCoppabacs()
+				.stream()
+				.filter(coppabacs -> coppabacs.getRoles().contains(TipoUsuario.COPPABACS))
+				.map(CoppabacsResponse::new)
+				.collect(Collectors.toList());
 	}
 	
 	@PostMapping("coppabacs")

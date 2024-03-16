@@ -41,7 +41,8 @@ public class WebSecurityConfig {
 			.authorizeHttpRequests(authz -> authz
 					.requestMatchers(HttpMethod.POST, "/api/v1/agricultor/**").permitAll()
 					.requestMatchers("/api/v1/gerente/**").hasRole("GERENTE")
-					.requestMatchers("/api/v1/agricultor/**").hasRole("AGRICULTOR")
+					.requestMatchers(HttpMethod.PATCH, "/api/v1/agricultor/**").hasRole("GERENTE")
+					.requestMatchers("/api/v1/agricultor/**").hasAnyRole("AGRICULTOR", "GERENTE")
 					.requestMatchers("/api/v1/sementes/**").hasRole("COPPABACS")
 					.requestMatchers("/security/**").permitAll()
 					.requestMatchers("/api/**").permitAll()

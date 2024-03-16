@@ -71,11 +71,11 @@ public abstract class Usuario implements Serializable {
 	@Column(name = "role")
 	private Set<TipoUsuario> roles;
 
-	public Usuario(Long id, String nome, String email, String senha, Endereco endereco, String cpf,
-			Date dataNascimento, String contato, String imagem, String sexo,
-			Conjuge conjuge) {
+	public Usuario(Long id, String nome, String nomePopular, String email, String senha, Endereco endereco, String cpf,
+			Date dataNascimento, String contato, String imagem, String sexo, Conjuge conjuge) {
 		this.id = id;
 		this.nome = nome;
+		this.nomePopular = nomePopular;
 		this.email = email;
 		this.senha = senha;
 		this.endereco = endereco;
@@ -85,11 +85,10 @@ public abstract class Usuario implements Serializable {
 		this.imagem = imagem;
 		this.sexo = sexo;
 		this.conjuge = conjuge;
-//		this.addRole(TipoUsuario.USUARIO);
 	}
 
 	public Usuario() {
-//		this.addRole(TipoUsuario.USUARIO);
+		this.roles = new HashSet<>();
 	}
 
 	public void addRole(TipoUsuario role) {
@@ -105,6 +104,10 @@ public abstract class Usuario implements Serializable {
 		}
         this.posts.add(post);
     }
+	
+	public void removeRole(TipoUsuario role) {
+        roles.remove(role);
+	}
 
 	public List<String> getAuthoritiesForUser(Usuario usuario) {
 		return roles.stream().map(x -> x.getRole()).toList();
@@ -124,6 +127,14 @@ public abstract class Usuario implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public String getNomePopular() {
+		return nomePopular;
+	}
+
+	public void setNomePopular(String nomePopular) {
+		this.nomePopular = nomePopular;
 	}
 
 	public String getEmail() {
