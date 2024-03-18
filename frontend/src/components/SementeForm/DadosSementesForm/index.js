@@ -80,6 +80,7 @@ export default function DadosSementesForm({ formik }) {
                         <label htmlFor="nome">Nome da Cultivar <span>*</span></label>
                         <input
                             className={styles.sidedForm_input}
+                            type="text"
                             id="nome"
                             name="nome"
                             placeholder="Insira o nome da cultivar"
@@ -96,6 +97,7 @@ export default function DadosSementesForm({ formik }) {
                         <label htmlFor="nomePopular">Nome Popular da Cultivar <span>*</span></label>
                         <input
                             className={styles.sidedForm_input}
+                            type="text"
                             id="nomePopular"
                             name="nomePopular"
                             placeholder="Insira o nome da cultivar"
@@ -111,6 +113,7 @@ export default function DadosSementesForm({ formik }) {
                         <label htmlFor="descricao">Descricao <span>*</span></label>
                         <input
                             className={styles.sidedForm_input}
+                            type="text"
                             id="descricao"
                             name="descricao"
                             placeholder="Insira o nome da cultivar"
@@ -135,8 +138,8 @@ export default function DadosSementesForm({ formik }) {
                                 type="radio"
                                 id="sim"
                                 name="dominioPublico"
-                                value="sim"
-                                checked={values.dominioPublico === 'sim'}
+                                value="true"
+                                checked={values.dominioPublico === 'true'}
                                 onChange={formik.handleChange}
                             />
                             <label htmlFor="sim">Sim</label>
@@ -145,8 +148,8 @@ export default function DadosSementesForm({ formik }) {
                                 type="radio"
                                 id="nao"
                                 name="dominioPublico"
-                                value="nao"
-                                checked={values.dominioPublico === 'nao'}
+                                value="false"
+                                checked={values.dominioPublico === 'false'}
                                 onChange={formik.handleChange}
                             />
                             <label htmlFor="nao">Não</label>
@@ -159,8 +162,8 @@ export default function DadosSementesForm({ formik }) {
                                 type="radio"
                                 id="sim"
                                 name="polinizaacaoAbertaMelhorada"
-                                value="sim"
-                                checked={values.polinizaacaoAbertaMelhorada === 'sim'}
+                                value="true"
+                                checked={values.polinizaacaoAbertaMelhorada === 'true'}
                                 onChange={formik.handleChange}
                             />
                             <label htmlFor="sim">Sim</label>
@@ -169,8 +172,8 @@ export default function DadosSementesForm({ formik }) {
                                 type="radio"
                                 id="nao"
                                 name="polinizaacaoAbertaMelhorada"
-                                value="nao"
-                                checked={values.polinizaacaoAbertaMelhorada === 'nao'}
+                                value="false"
+                                checked={values.polinizaacaoAbertaMelhorada === 'false'}
                                 onChange={formik.handleChange}
                             />
                             <label htmlFor="nao">Não</label>
@@ -184,6 +187,7 @@ export default function DadosSementesForm({ formik }) {
                             <label htmlFor="altitudeMaxima">Altitude máxima</label>
                             <input
                                 className={styles.sidedForm_input}
+                                type="number"
                                 id="altitudeMaxima"
                                 name="altitudeMaxima"
                                 placeholder="Insira a altitude máxima"
@@ -200,6 +204,7 @@ export default function DadosSementesForm({ formik }) {
                         <label htmlFor="altitudeMinima">Altitude mínima </label>
                         <input
                             className={styles.sidedForm_input}
+                            type="number"
                             id="altitudeMinima"
                             name="altitudeMinima"
                             placeholder="Insira a altitude mínima"
@@ -216,6 +221,7 @@ export default function DadosSementesForm({ formik }) {
                         <label htmlFor="pragas">Resistência à Pragas </label>
                         <input
                             className={styles.sidedForm_input}
+                            type="text"
                             id="pragas"
                             name="pragas"
                             placeholder="Insira quais pragas a planta possui resistência"
@@ -225,6 +231,38 @@ export default function DadosSementesForm({ formik }) {
                             required />
                         {formik.touched.pragas && formik.errors.pragas ? (
                             <span className={styles.form__error}>{formik.errors.pragas}</span>
+                        ) : null}
+                    </div>
+                    <div>
+                        <label htmlFor="caracteristicasPositiva">Caracteristicas Positivas </label>
+                        <input
+                            type="text"
+                            className={styles.sidedForm_input}
+                            id="caracteristicasPositiva"
+                            name="caracteristicasPositiva"
+                            placeholder="Insira quais caracteristicas positivas a planta possui"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.caracteristicasPositiva}
+                            required />
+                        {formik.touched.caracteristicasPositiva && formik.errors.caracteristicasPositiva ? (
+                            <span className={styles.form__error}>{formik.errors.caracteristicasPositiva}</span>
+                        ) : null}
+                    </div>
+                    <div>
+                        <label htmlFor="caracteristicasNegativas">Caracteristicas Negativas </label>
+                        <input
+                            className={styles.sidedForm_input}
+                            type="text"
+                            id="caracteristicasNegativas"
+                            name="caracteristicasNegativas"
+                            placeholder="Insira quais caracteristicasNegativas a planta possui"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.caracteristicasNegativas}
+                            required />
+                        {formik.touched.pragas && formik.errors.caracteristicasNegativas ? (
+                            <span className={styles.form__error}>{formik.errors.caracteristicasNegativas}</span>
                         ) : null}
                     </div>
                 </div>

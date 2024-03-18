@@ -7,7 +7,7 @@ import Header from "@/components/Home/Header";
 export default function NovaSementeFormPage() {
     return (
         <div>
-            <Header />
+            <Header hrefAnterior="/sementes"/>
             <SementeForm diretorioAnterior="Home / Sementes /" diretorioAtual="Nova Semente" hrefAnterior="/sementes"/>
             <Footer />
         </div>

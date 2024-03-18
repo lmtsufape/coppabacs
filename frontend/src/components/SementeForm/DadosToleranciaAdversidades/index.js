@@ -22,10 +22,10 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                    >
                    
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
-                        <option value="baixa">Baixa</option>
-                        <option value="media">Média</option>
-                        <option value="alta">Alta</option>
+                        <option value="SEMINFORMACAO">Sem informação</option>
+                        <option value="BAIXA">Baixa</option>
+                        <option value="MEDIA">Média</option>
+                        <option value="ALTA">Alta</option>
                     </select>
                     {formik.touched.toleranciaAdversidades && formik.touched.toleranciaAdversidades.altaTemperatura && formik.errors.toleranciaAdversidades && formik.errors.toleranciaAdversidades.altaTemperatura ? (
     <span className={styles.form__error}>{formik.errors.toleranciaAdversidades.altaTemperatura}</span>
@@ -46,10 +46,10 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
-                        <option value="baixa">Baixa</option>
-                        <option value="media">Média</option>
-                        <option value="alta">Alta</option>
+                        <option value="SEMINFORMACAO">Sem informação</option>
+                        <option value="BAIXA">Baixa</option>
+                        <option value="MEDIA">Média</option>
+                        <option value="ALTA">Alta</option>
                     </select>
                     {formik.touched.baixaTemperatura && formik.errors.baixaTemperatura ? (
                         <span className={styles.form__error}>{formik.errors.toleranciaAdversidades.baixaTemperatura}</span>
@@ -68,10 +68,10 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
-                        <option value="baixa">Baixa</option>
-                        <option value="media">Média</option>
-                        <option value="alta">Alta</option>
+                        <option value="SEMINFORMACAO">Sem informação</option>
+                        <option value="BAIXA">Baixa</option>
+                        <option value="MEDIA">Média</option>
+                        <option value="ALTA">Alta</option>
                     </select>
                     {formik.touched.geada && formik.errors.geada ? (
                         <span className={styles.form__error}>{formik.errors.geada}</span>
@@ -90,10 +90,10 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
-                        <option value="baixa">Baixa</option>
-                        <option value="media">Média</option>
-                        <option value="alta">Alta</option>
+                        <option value="SEMINFORMACAO">Sem informação</option>
+                        <option value="BAIXA">Baixa</option>
+                        <option value="MEDIA">Média</option>
+                        <option value="ALTA">Alta</option>
                     </select>
                     {formik.touched.chuvaExcessiva && formik.errors.chuvaExcessiva ? (
                         <span className={styles.form__error}>{formik.errors.toleranciaAdversidades.chuvaExcessiva}</span>
@@ -112,10 +112,10 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
-                        <option value="baixa">Baixa</option>
-                        <option value="media">Média</option>
-                        <option value="alta">Alta</option>
+                        <option value="SEMINFORMACAO">Sem informação</option>
+                        <option value="BAIXA">Baixa</option>
+                        <option value="MEDIA">Média</option>
+                        <option value="ALTA">Alta</option>
                     </select>
                     {formik.touched.seca && formik.errors.seca ? (
                         <span className={styles.form__error}>{formik.errors.toleranciaAdversidades.seca}</span>
@@ -134,10 +134,10 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
-                        <option value="baixa">Baixa</option>
-                        <option value="media">Média</option>
-                        <option value="alta">Alta</option>
+                        <option value="SEMINFORMACAO">Sem informação</option>
+                        <option value="BAIXA">Baixa</option>
+                        <option value="MEDIA">Média</option>
+                        <option value="ALTA">Alta</option>
                     </select>
                     {formik.touched.ventos && formik.errors.ventos ? (
                         <span className={styles.form__error}>{formik.errors.toleranciaAdversidades.ventos}</span>
@@ -156,10 +156,10 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
-                        <option value="baixa">Baixa</option>
-                        <option value="media">Média</option>
-                        <option value="alta">Alta</option>
+                        <option value="SEMINFORMACAO">Sem informação</option>
+                        <option value="BAIXA">Baixa</option>
+                        <option value="MEDIA">Média</option>
+                        <option value="ALTA">Alta</option>
                     </select>
                     {formik.touched.salinidade && formik.errors.salinidade ? (
                         <span className={styles.form__error}>{formik.errors.toleranciaAdversidades.salinidade}</span>
@@ -177,10 +177,10 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
-                        <option value="baixa">Baixa</option>
-                        <option value="media">Média</option>
-                        <option value="alta">Alta</option>
+                        <option value="SEMINFORMACAO">Sem informação</option>
+                        <option value="BAIXA">Baixa</option>
+                        <option value="MEDIA">Média</option>
+                        <option value="ALTA">Alta</option>
                     </select>
                     {formik.touched.toxidadeAluminio && formik.errors.toxidadeAluminio ? (
                         <span className={styles.form__error}>{formik.errors.toleranciaAdversidades.toxidadeAluminio}</span>
@@ -199,10 +199,10 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
-                        <option value="baixa">Baixa</option>
-                        <option value="media">Média</option>
-                        <option value="alta">Alta</option>
+                        <option value="SEMINFORMACAO">Sem informação</option>
+                        <option value="BAIXA">Baixa</option>
+                        <option value="MEDIA">Média</option>
+                        <option value="ALTA">Alta</option>
                     </select>
                     {formik.touched.soloArgiloso && formik.errors.soloArgiloso ? (
                         <span className={styles.form__error}>{formik.errors.toleranciaAdversidades.soloArgiloso}</span>
@@ -221,10 +221,10 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
-                        <option value="baixa">Baixa</option>
-                        <option value="media">Média</option>
-                        <option value="alta">Alta</option>
+                        <option value="SEMINFORMACAO">Sem informação</option>
+                        <option value="BAIXA">Baixa</option>
+                        <option value="MEDIA">Média</option>
+                        <option value="ALTA">Alta</option>
                     </select>
                     {formik.touched.soloArenoso && formik.errors.soloArenoso ? (
                         <span className={styles.form__error}>{formik.errors.toleranciaAdversidades.soloArenoso}</span>
@@ -243,10 +243,10 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
-                        <option value="baixa">Baixa</option>
-                        <option value="media">Média</option>
-                        <option value="alta">Alta</option>
+                        <option value="SEMINFORMACAO">Sem informação</option>
+                        <option value="BAIXA">Baixa</option>
+                        <option value="MEDIA">Média</option>
+                        <option value="ALTA">Alta</option>
                     </select>
                     {formik.touched.soloAcido && formik.errors.soloAcido ? (
                         <span className={styles.form__error}>{formik.errors.toleranciaAdversidades.soloAcido}</span>
@@ -265,10 +265,10 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
-                        <option value="baixa">Baixa</option>
-                        <option value="media">Média</option>
-                        <option value="alta">Alta</option>
+                        <option value="SEMINFORMACAO">Sem informação</option>
+                        <option value="BAIXA">Baixa</option>
+                        <option value="MEDIA">Média</option>
+                        <option value="ALTA">Alta</option>
                     </select>
                     {formik.touched.soloBaixaFertilidade && formik.errors.soloBaixaFertilidade ? (
                         <span className={styles.form__error}>{formik.errors.toleranciaAdversidades.soloBaixaFertilidade}</span>
