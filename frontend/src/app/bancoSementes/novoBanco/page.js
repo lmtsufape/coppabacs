@@ -1,26 +1,18 @@
 import React from "react";
-import NewBankForm from "@/components/NewBankForm/IndexOne";
 import Footer from "@/components/Home/Footer";
 import Header from "@/components/Home/Header";
-import styles from "@/app/bancoSementes/novoBanco/index.module.scss"
+import styles from "@/app/agricultores/novoAgricultor/index.module.scss"
+import BancoForm from "@/components/BancoForm";
 
-export default function NewBank() {
+export default function NewRegisterFarmer() {
     return (
-        <div>
-            <div>
-                <Header />
+        <div className={styles.pageContainer}>
+            <Header hrefAnterior="/bancoSementes" />
+            <div className={styles.pageContainer__content}>
+                <BancoForm diretorioAnterior="Home / Bancos Sementes /" diretorioAtual="Novo Banco de Semente" hrefAnterior="/bancoSementes" />
             </div>
-            <div>
-                <h1 className={styles.title}>
-                    Adicionar um novo Banco
-                </h1>
-            </div>
-            <div>
-                <NewBankForm />
-            </div>
-            <div>
-                <Footer />
-            </div>
+            <Footer />
+
         </div>
     );
 }

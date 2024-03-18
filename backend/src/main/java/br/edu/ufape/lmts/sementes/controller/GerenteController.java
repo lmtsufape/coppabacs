@@ -1,6 +1,7 @@
 package br.edu.ufape.lmts.sementes.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
@@ -20,8 +21,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.GerenteRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.GerenteResponse;
+import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.facade.Facade;
-import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.model.BancoSementes;
 import br.edu.ufape.lmts.sementes.model.Gerente;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
@@ -42,8 +43,9 @@ public class GerenteController {
 	public List<GerenteResponse> getAllGerente() {
 		return facade.getAllGerente()
 			.stream()
+			.filter(gerente -> gerente.getRoles().contains(TipoUsuario.GERENTE))
 			.map(GerenteResponse::new)
-			.toList();
+            .collect(Collectors.toList());
 	}
 	
 	@PostMapping("gerente")
@@ -63,7 +65,6 @@ public class GerenteController {
 	@PatchMapping("gerente/{id}")
 	public GerenteResponse updateGerente(@PathVariable Long id, @Valid @RequestBody GerenteRequest obj) {
 		try {
-			//Gerente o = obj.convertToEntity();
 			Gerente oldObject = facade.findGerenteById(id);
 
 			TypeMap<GerenteRequest, Gerente> typeMapper = modelMapper

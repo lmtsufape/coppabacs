@@ -1,6 +1,7 @@
 package br.edu.ufape.lmts.sementes.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
@@ -19,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.UsuarioRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.UsuarioResponse;
+import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Usuario;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
@@ -37,13 +39,13 @@ public class UsuarioController {
 	@Autowired
 	private ModelMapper modelMapper;
 	
-	@GetMapping("usuario")
-	public List<UsuarioResponse> getAllUsuario() {
-		return facade.getAllUsuario()
-			.stream()
-			.map(UsuarioResponse::new)
-			.toList();
-	}
+		@GetMapping("usuario")
+		public List<UsuarioResponse> getAllUsuario() {
+			return facade.getAllUsuario()
+				.stream()
+				.map(UsuarioResponse::new)
+				.toList();
+		}
 	
 	@PostMapping("usuario")
 	public UsuarioResponse createUsuario(@Valid @RequestBody UsuarioRequest newObj) throws EmailExistsException {
@@ -91,5 +93,13 @@ public class UsuarioController {
 		
 	}
 	
+	@GetMapping("usuarios/solicitacoes")
+	public List<UsuarioResponse> filterUsuariosComRoleUsuario() {
+	    return facade.getAllUsuario()
+	            .stream()
+	            .filter(usuario -> usuario.getRoles().contains(TipoUsuario.USUARIO))
+	            .map(UsuarioResponse::new)
+	            .collect(Collectors.toList());
+	}
 
 }

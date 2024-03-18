@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -44,10 +45,6 @@ public  class Sementes  {
 	@OneToOne(cascade=CascadeType.PERSIST, orphanRemoval = true)
 	@ToString.Exclude
 	private ToleranciaAdversidades toleranciaAdversidades; 
-	@OneToMany(orphanRemoval = true)
-	@JoinColumn(name = "sementes_id")
-	@ToString.Exclude
-	private List<ProducaoSementes> producaoSementes; 
 	@OneToMany(orphanRemoval = true)
 	@JoinColumn(name = "sementes_id")
 	@ToString.Exclude

@@ -28,12 +28,12 @@ public  class UsuarioResponse  {
 	private String contato;
 	private String imagem;
 	private String sexo;
-	private ConjugeResponse conjuge; 
-	private List<PostavelResponse> postavel;
+	private ConjugeResponse conjuge;
+	private List<PostResponse> post;
 
 	public UsuarioResponse(Usuario obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
-		modelMapper.map(obj, this);	
+		modelMapper.map(obj, this);
 	}
 
 }
