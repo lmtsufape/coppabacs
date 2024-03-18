@@ -15,7 +15,6 @@ import lombok.Setter;
 public class EnderecoRequest {
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String nome;
-	@NotEmpty(message = "Preenchimento obrigatório")
 	private String referencia;
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String cidade;

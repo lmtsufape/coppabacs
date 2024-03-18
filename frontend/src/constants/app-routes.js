@@ -1,13 +1,21 @@
 export const APP_ROUTES = {
   private:{
     list:{
-      name: "/inicio"
+      name: "/inicio",
+    },
+    bancoSementes:{
+      name: "/bancoSementes"
+    },
+    agricultorForm:{
+      name: "/agricultores/novoAgricultor",
     },
     unauthorized:{
       name: "/unauthorized"
     }
   },
   public:{
-    home: '/'
+    home: '/',
+    novoUsuario: '/novoUsuario'
+    
   },
 }

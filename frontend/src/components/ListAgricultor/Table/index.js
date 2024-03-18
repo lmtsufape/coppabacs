@@ -1,8 +1,9 @@
 import Image from "next/image";
 import style from "./table.module.scss";
+import Link from "next/link";
 
 
-export default function tableLayout({table1, table2, table3, listAgricultor}){
+export default function tableLayout({table1, table2, table3, table4, listAgricultor}){
   
   
   return(
@@ -12,10 +13,11 @@ export default function tableLayout({table1, table2, table3, listAgricultor}){
           <tr>
             <th>{table1}</th>
             <th>{table2}</th>            
+            <th>{table3}</th>            
 
             <th className={style.content__table__header_name3}>
               <div >
-              {table3}
+              {table4}
                <Image src="/assets/iconInformacao.svg" alt="Visualizar" width={27} height={26}/>
 
               </div>
@@ -28,17 +30,15 @@ export default function tableLayout({table1, table2, table3, listAgricultor}){
             return(
               <tr key={index}>
                 <td>{agricultor.nome}</td>
-                <td>{agricultor.funcao}</td>
+                <td>{agricultor.apelido}</td>
+                <td>{agricultor.contato}</td>
                 <td>
                   <div className={style.content__table_container_buttons}>
                     <button>
                       <span>
-                        <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26}/>
-                      </span>
-                    </button>
-                    <button className={style.content__table_container_content__table_container_buttons_lastButton}>
-                      <span>
-                        <Image src="/assets/iconLixeira.svg" alt="Desativar" width={27} height={26}/>
+                        <Link href={`/agricultores/solicitacoes/${agricultor.id}`}>
+                          <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26}/>
+                        </Link>
                       </span>
                     </button>
                   </div>

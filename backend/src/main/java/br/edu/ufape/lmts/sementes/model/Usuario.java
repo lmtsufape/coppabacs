@@ -1,12 +1,11 @@
 package br.edu.ufape.lmts.sementes.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import jakarta.persistence.CascadeType;
@@ -46,24 +45,17 @@ public abstract class Usuario implements Serializable {
 	private String email;
 	@Column(nullable = false)
 	private String senha;
+	private String nomePopular;
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
 	private Endereco endereco;
 	@Column(nullable = false, unique = true)
-	private String rg;
-	@Column(nullable = false, unique = true)
 	private String cpf;
 	@Column(nullable = false)
-	// @DateTimeFormat(pattern = "dd-MM-yyyy", iso = DateTimeFormat.ISO.DATE)
-	@JsonFormat(pattern = "dd-MM-yyyy")
 	private Date dataNascimento;
 	@Column(nullable = false, unique = true)
 	private String contato;
 	private String imagem;
-	@Column(nullable = false)
-	private String nomePai;
-	@Column(nullable = false)
-	private String nomeMae;
 	@Column(nullable = false)
 	private String sexo;
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -72,36 +64,31 @@ public abstract class Usuario implements Serializable {
 	@OneToMany
 	@JoinColumn(name = "usuario_id")
 	@ToString.Exclude
-	private List<Postavel> postavel;
+	private List<Post> posts;
 	@ElementCollection(targetClass = TipoUsuario.class, fetch = FetchType.EAGER)
 	@CollectionTable(name = "usuario_roles", joinColumns = @JoinColumn(name = "user_id"))
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role")
 	private Set<TipoUsuario> roles;
 
-	public Usuario(Long id, String nome, String email, String senha, Endereco endereco, String rg, String cpf,
-			Date dataNascimento, String contato, String imagem, String nomePai, String nomeMae, String sexo,
-			Conjuge conjuge, List<Postavel> postavel) {
+	public Usuario(Long id, String nome, String nomePopular, String email, String senha, Endereco endereco, String cpf,
+			Date dataNascimento, String contato, String imagem, String sexo, Conjuge conjuge) {
 		this.id = id;
 		this.nome = nome;
+		this.nomePopular = nomePopular;
 		this.email = email;
 		this.senha = senha;
 		this.endereco = endereco;
-		this.rg = rg;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 		this.contato = contato;
 		this.imagem = imagem;
-		this.nomePai = nomePai;
-		this.nomeMae = nomeMae;
 		this.sexo = sexo;
 		this.conjuge = conjuge;
-		this.postavel = postavel;
-//		this.addRole(TipoUsuario.USUARIO);
 	}
 
 	public Usuario() {
-//		this.addRole(TipoUsuario.USUARIO);
+		this.roles = new HashSet<>();
 	}
 
 	public void addRole(TipoUsuario role) {
@@ -111,8 +98,15 @@ public abstract class Usuario implements Serializable {
 		roles.add(role);
 	}
 
-	public void addPostavel(Postavel post) {
-		postavel.add(post);
+	public void addPost(Post post) {
+		if (this.posts == null) {
+			this.posts = new ArrayList<>();
+		}
+        this.posts.add(post);
+    }
+	
+	public void removeRole(TipoUsuario role) {
+        roles.remove(role);
 	}
 
 	public List<String> getAuthoritiesForUser(Usuario usuario) {
@@ -133,6 +127,14 @@ public abstract class Usuario implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public String getNomePopular() {
+		return nomePopular;
+	}
+
+	public void setNomePopular(String nomePopular) {
+		this.nomePopular = nomePopular;
 	}
 
 	public String getEmail() {
@@ -157,14 +159,6 @@ public abstract class Usuario implements Serializable {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
-	}
-
-	public String getRg() {
-		return rg;
-	}
-
-	public void setRg(String rg) {
-		this.rg = rg;
 	}
 
 	public String getCpf() {
@@ -199,22 +193,6 @@ public abstract class Usuario implements Serializable {
 		this.imagem = imagem;
 	}
 
-	public String getNomePai() {
-		return nomePai;
-	}
-
-	public void setNomePai(String nomePai) {
-		this.nomePai = nomePai;
-	}
-
-	public String getNomeMae() {
-		return nomeMae;
-	}
-
-	public void setNomeMae(String nomeMae) {
-		this.nomeMae = nomeMae;
-	}
-
 	public String getSexo() {
 		return sexo;
 	}
@@ -231,12 +209,12 @@ public abstract class Usuario implements Serializable {
 		this.conjuge = conjuge;
 	}
 
-	public List<Postavel> getPostavel() {
-		return postavel;
+	public List<Post> getPost() {
+		return posts;
 	}
 
-	public void setPostavel(List<Postavel> postavel) {
-		this.postavel = postavel;
+	public void setPost(List<Post> posts) {
+		this.posts = posts;
 	}
 
 	public Set<TipoUsuario> getRoles() {
@@ -252,22 +230,7 @@ public abstract class Usuario implements Serializable {
 	}
 
 	@Override
-	public int hashCode() {
-		return super.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj);
-	}
-
-	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		return super.clone();
-	}
-
-	@Override
-	public String toString() {
-		return super.toString();
 	}
 }

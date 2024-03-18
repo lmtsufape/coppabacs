@@ -11,7 +11,6 @@ import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
 import br.edu.ufape.lmts.sementes.model.Usuario;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -31,21 +30,16 @@ public class UsuarioRequest {
 	private String email;
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String senha;
+	private String nomePopular;
 	@Valid
 	@NotNull(message = "Preenchimento obrigatório")
 	private EnderecoRequest endereco;
-	@NotBlank(message = "Preenchimento obrigatório")
-	private String rg;
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String cpf;
 	@JsonFormat(pattern = "dd-MM-yyyy")
 	private Date dataNascimento;
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String contato;
-	@NotEmpty(message = "Preenchimento obrigatório")
-	private String nomePai;
-	@NotEmpty(message = "Preenchimento obrigatório")
-	private String nomeMae;
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String sexo;
 	private ConjugeRequest conjuge;
@@ -56,13 +50,6 @@ public class UsuarioRequest {
 		Usuario obj = modelMapper.map(this, Usuario.class);
 
 		return obj;
-	}
-
-	@Override
-	public String toString() {
-		return "UsuarioRequest [nome=" + nome + ", email=" + email + ", senha=" + senha + ", endereco=" + endereco
-				+ ", rg=" + rg + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + ", contato=" + contato
-				+ ", nomePai=" + nomePai + ", nomeMae=" + nomeMae + ", sexo=" + sexo + ", conjuge=" + conjuge + "]";
 	}
 
 }

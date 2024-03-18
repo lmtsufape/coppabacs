@@ -26,7 +26,7 @@ import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
-@CrossOrigin (origins = "http://localhost:8081/" )
+@CrossOrigin (origins = "http://localhost:3000/" )
 @RestController
 @RequestMapping("/api/v1/")
 public class AdminController {
@@ -52,26 +52,16 @@ public class AdminController {
 	public AdminResponse getAdminById(@PathVariable Long id) {
 		return new AdminResponse(facade.findAdminById(id));
 	}
-	
 	@PatchMapping("admin/{id}")
-	public AdminResponse updateAdmin(@PathVariable Long id, @Valid @RequestBody AdminRequest obj) {
-		try {
-			Admin oldObject = facade.findAdminById(id);
+    public AdminResponse updateAdmin(@PathVariable Long id, @Valid @RequestBody AdminRequest obj) {
+		 Admin existingAdmin = facade.findAdminById(id);
 
-			TypeMap<AdminRequest, Admin> typeMapper = modelMapper
-													.typeMap(AdminRequest.class, Admin.class)
-													.addMappings(mapper -> mapper.skip(Admin::setId));			
-			
-			typeMapper.map(obj, oldObject);	
-			return new AdminResponse(facade.updateAdmin(oldObject));
-		} catch (RuntimeException e) {
-			if (!(e instanceof ObjectNotFoundException))
-				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
-			else
-				throw e;
-		}
-		
-	}
+        // O mapeamento direto evita a necessidade de configurar manualmente cada campo
+        modelMapper.map(obj, existingAdmin);
+
+        Admin updatedAdmin = facade.updateAdmin(existingAdmin);
+        return new AdminResponse(updatedAdmin);
+    }
 	
 	@DeleteMapping("admin/{id}")
 	public String deleteAdmin(@PathVariable Long id) {
