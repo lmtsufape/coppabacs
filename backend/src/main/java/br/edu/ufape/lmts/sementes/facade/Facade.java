@@ -3,6 +3,8 @@ package br.edu.ufape.lmts.sementes.facade;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.Admin;
@@ -27,6 +29,7 @@ import br.edu.ufape.lmts.sementes.model.Post;
 import br.edu.ufape.lmts.sementes.model.Praga;
 import br.edu.ufape.lmts.sementes.model.ProducaoSementes;
 import br.edu.ufape.lmts.sementes.model.RegioesAdaptacaoCultivo;
+import br.edu.ufape.lmts.sementes.model.ResponsavelTecnico;
 import br.edu.ufape.lmts.sementes.model.RetiradaUsuario;
 import br.edu.ufape.lmts.sementes.model.SementePraga;
 import br.edu.ufape.lmts.sementes.model.Sementes;
@@ -59,6 +62,7 @@ import br.edu.ufape.lmts.sementes.service.PostServiceInterface;
 import br.edu.ufape.lmts.sementes.service.PragaService;
 import br.edu.ufape.lmts.sementes.service.ProducaoSementesService;
 import br.edu.ufape.lmts.sementes.service.RegioesAdaptacaoCultivoService;
+import br.edu.ufape.lmts.sementes.service.ResponsavelTecnicoService;
 import br.edu.ufape.lmts.sementes.service.RetiradaUsuarioService;
 import br.edu.ufape.lmts.sementes.service.SementePragaService;
 import br.edu.ufape.lmts.sementes.service.SementesService;
@@ -66,11 +70,11 @@ import br.edu.ufape.lmts.sementes.service.TabelaBancoSementesService;
 import br.edu.ufape.lmts.sementes.service.ToleranciaAdversidadesService;
 import br.edu.ufape.lmts.sementes.service.TransacaoGenericaService;
 import br.edu.ufape.lmts.sementes.service.UsoOcupacaoTerraService;
-import br.edu.ufape.lmts.sementes.service.UsuarioService;
 import br.edu.ufape.lmts.sementes.service.UsuarioServiceInterface;
 import br.edu.ufape.lmts.sementes.service.infraestruturaHidricaService;
 import br.edu.ufape.lmts.sementes.service.sementeDoencaService;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
+import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 @Service
 public class Facade {
@@ -81,9 +85,9 @@ public class Facade {
 //
 //	public
 
-	//sementeDoenca--------------------------------------------------------------
+	// sementeDoenca--------------------------------------------------------------
 	@Autowired
-	private sementeDoencaService  sementeDoencaService;
+	private sementeDoencaService sementeDoencaService;
 
 	public sementeDoenca savesementeDoenca(sementeDoenca newInstance) {
 		return sementeDoencaService.savesementeDoenca(newInstance);
@@ -109,7 +113,7 @@ public class Facade {
 		sementeDoencaService.deletesementeDoenca(id);
 	}
 
-	//Usuario--------------------------------------------------------------
+	// Usuario--------------------------------------------------------------
 	@Autowired
 	private UsuarioServiceInterface usuarioService;
 
@@ -118,7 +122,7 @@ public class Facade {
 			return usuarioService.saveUsuario(newInstance);
 
 		} catch (Exception e) {
-	        throw new RuntimeException("Erro ao salvar o usuário", e);
+			throw new RuntimeException("Erro ao salvar o usuário", e);
 		}
 
 	}
@@ -143,7 +147,7 @@ public class Facade {
 		usuarioService.deleteUsuario(id);
 	}
 
-	//Coppabacs--------------------------------------------------------------
+	// Coppabacs--------------------------------------------------------------
 	@Autowired
 	private CoppabacsService coppabacsService;
 
@@ -156,7 +160,7 @@ public class Facade {
 			usuarioService.saveUsuario(newInstance);
 			return coppabacsService.saveCoppabacs(newInstance);
 		} catch (Exception e) {
-	        throw new RuntimeException("Erro ao salvar o usuário", e);
+			throw new RuntimeException("Erro ao salvar o usuário", e);
 		}
 	}
 
@@ -176,7 +180,7 @@ public class Facade {
 		coppabacsService.deleteCoppabacs(id);
 	}
 
-	//Praga--------------------------------------------------------------
+	// Praga--------------------------------------------------------------
 	@Autowired
 	private PragaService pragaService;
 
@@ -204,10 +208,9 @@ public class Facade {
 		pragaService.deletePraga(id);
 	}
 
-
-	//SementePraga--------------------------------------------------------------
+	// SementePraga--------------------------------------------------------------
 	@Autowired
-	private SementePragaService  sementePragaService;
+	private SementePragaService sementePragaService;
 
 	public SementePraga saveSementePraga(SementePraga newInstance) {
 		return sementePragaService.saveSementePraga(newInstance);
@@ -233,10 +236,9 @@ public class Facade {
 		sementePragaService.deleteSementePraga(id);
 	}
 
-
-	//Empalhamento--------------------------------------------------------------
+	// Empalhamento--------------------------------------------------------------
 	@Autowired
-	private EmpalhamentoService  empalhamentoService;
+	private EmpalhamentoService empalhamentoService;
 
 	public Empalhamento saveEmpalhamento(Empalhamento newInstance) {
 		return empalhamentoService.saveEmpalhamento(newInstance);
@@ -262,10 +264,9 @@ public class Facade {
 		empalhamentoService.deleteEmpalhamento(id);
 	}
 
-
-	//InfraestruturaComunidade--------------------------------------------------------------
+	// InfraestruturaComunidade--------------------------------------------------------------
 	@Autowired
-	private InfraestruturaComunidadeService  infraestruturaComunidadeService;
+	private InfraestruturaComunidadeService infraestruturaComunidadeService;
 
 	public InfraestruturaComunidade saveInfraestruturaComunidade(InfraestruturaComunidade newInstance) {
 		return infraestruturaComunidadeService.saveInfraestruturaComunidade(newInstance);
@@ -291,10 +292,9 @@ public class Facade {
 		infraestruturaComunidadeService.deleteInfraestruturaComunidade(id);
 	}
 
-
-	//UsoOcupacaoTerra--------------------------------------------------------------
+	// UsoOcupacaoTerra--------------------------------------------------------------
 	@Autowired
-	private UsoOcupacaoTerraService  usoOcupacaoTerraService;
+	private UsoOcupacaoTerraService usoOcupacaoTerraService;
 
 	public UsoOcupacaoTerra saveUsoOcupacaoTerra(UsoOcupacaoTerra newInstance) {
 		return usoOcupacaoTerraService.saveUsoOcupacaoTerra(newInstance);
@@ -320,10 +320,9 @@ public class Facade {
 		usoOcupacaoTerraService.deleteUsoOcupacaoTerra(id);
 	}
 
-
-	//BancoSementes--------------------------------------------------------------
+	// BancoSementes--------------------------------------------------------------
 	@Autowired
-	private BancoSementesServiceInterface  bancoSementesService;
+	private BancoSementesServiceInterface bancoSementesService;
 
 	public BancoSementes saveBancoSementes(BancoSementes newInstance) {
 		return bancoSementesService.saveBancoSementes(newInstance);
@@ -360,9 +359,9 @@ public class Facade {
 		}
 	}
 
-	//RetiradaUsuario--------------------------------------------------------------
+	// RetiradaUsuario--------------------------------------------------------------
 	@Autowired
-	private RetiradaUsuarioService  retiradaUsuarioService;
+	private RetiradaUsuarioService retiradaUsuarioService;
 
 	public RetiradaUsuario saveRetiradaUsuario(RetiradaUsuario newInstance) {
 		return retiradaUsuarioService.saveRetiradaUsuario(newInstance);
@@ -388,10 +387,9 @@ public class Facade {
 		retiradaUsuarioService.deleteRetiradaUsuario(id);
 	}
 
-
-	//TabelaBancoSementes--------------------------------------------------------------
+	// TabelaBancoSementes--------------------------------------------------------------
 	@Autowired
-	private TabelaBancoSementesService  tabelaBancoSementesService;
+	private TabelaBancoSementesService tabelaBancoSementesService;
 
 	public TabelaBancoSementes saveTabelaBancoSementes(TabelaBancoSementes newInstance) {
 		return tabelaBancoSementesService.saveTabelaBancoSementes(newInstance);
@@ -417,10 +415,9 @@ public class Facade {
 		tabelaBancoSementesService.deleteTabelaBancoSementes(id);
 	}
 
-
-	//Item--------------------------------------------------------------
+	// Item--------------------------------------------------------------
 	@Autowired
-	private ItemService  itemService;
+	private ItemService itemService;
 
 	public Item saveItem(Item newInstance) {
 		return itemService.saveItem(newInstance);
@@ -446,10 +443,9 @@ public class Facade {
 		itemService.deleteItem(id);
 	}
 
-
-	//Gerente--------------------------------------------------------------
+	// Gerente--------------------------------------------------------------
 	@Autowired
-	private GerenteService  gerenteService;
+	private GerenteService gerenteService;
 
 	public Gerente saveGerente(Gerente newInstance) throws EmailExistsException {
 
@@ -480,9 +476,9 @@ public class Facade {
 		gerenteService.deleteGerente(id);
 	}
 
-	//ObjetosBancoSementes--------------------------------------------------------------
+	// ObjetosBancoSementes--------------------------------------------------------------
 	@Autowired
-	private ObjetosBancoSementesService  objetosBancoSementesService;
+	private ObjetosBancoSementesService objetosBancoSementesService;
 
 	public ObjetosBancoSementes saveObjetosBancoSementes(ObjetosBancoSementes newInstance) {
 		return objetosBancoSementesService.saveObjetosBancoSementes(newInstance);
@@ -508,9 +504,9 @@ public class Facade {
 		objetosBancoSementesService.deleteObjetosBancoSementes(id);
 	}
 
-	//Cultura--------------------------------------------------------------
+	// Cultura--------------------------------------------------------------
 	@Autowired
-	private CulturaService  culturaService;
+	private CulturaService culturaService;
 
 	public Cultura saveCultura(Cultura newInstance) {
 		return culturaService.saveCultura(newInstance);
@@ -536,10 +532,9 @@ public class Facade {
 		culturaService.deleteCultura(id);
 	}
 
-
-	//Conjuge--------------------------------------------------------------
+	// Conjuge--------------------------------------------------------------
 	@Autowired
-	private ConjugeService  conjugeService;
+	private ConjugeService conjugeService;
 
 	public Conjuge saveConjuge(Conjuge newInstance) {
 		return conjugeService.saveConjuge(newInstance);
@@ -565,10 +560,9 @@ public class Facade {
 		conjugeService.deleteConjuge(id);
 	}
 
-
-	//TransacaoGenerica--------------------------------------------------------------
+	// TransacaoGenerica--------------------------------------------------------------
 	@Autowired
-	private TransacaoGenericaService  transacaoGenericaService;
+	private TransacaoGenericaService transacaoGenericaService;
 
 	public TransacaoGenerica saveTransacaoGenerica(TransacaoGenerica newInstance) {
 		return transacaoGenericaService.saveTransacaoGenerica(newInstance);
@@ -594,8 +588,7 @@ public class Facade {
 		transacaoGenericaService.deleteTransacaoGenerica(id);
 	}
 
-
-	//Post--------------------------------------------------------------
+	// Post--------------------------------------------------------------
 	@Autowired
 	private PostServiceInterface postService;
 
@@ -625,22 +618,41 @@ public class Facade {
 		postService.deletePost(id);
 	}
 
-
-	//Sementes--------------------------------------------------------------
+	// Sementes--------------------------------------------------------------
 	@Autowired
-	private SementesService  sementesService;
+	private SementesService sementesService;
 
 	public Sementes saveSementes(Sementes newInstance) {
+
+		try {
+			String cpf = newInstance.getResponsavelTecnico().getCpf();
+			ResponsavelTecnico responsavelTecnico;
+			responsavelTecnico = findResponsavelTecnicoByCpf(cpf);
+			newInstance.setResponsavelTecnico(responsavelTecnico);
+		} catch (ObjectNotFoundException e) {
+		}
 		return sementesService.saveSementes(newInstance);
 	}
 
 	public Sementes updateSementes(Sementes transientObject) {
+		try {
+			String cpf = transientObject.getResponsavelTecnico().getCpf();
+			ResponsavelTecnico responsavelTecnico;
+			responsavelTecnico = findResponsavelTecnicoByCpf(cpf);
+			transientObject.setResponsavelTecnico(responsavelTecnico);
+		} catch (ObjectNotFoundException e) {
+		}
 		return sementesService.updateSementes(transientObject);
 	}
 
 	public Sementes findSementesById(long id) {
 		return sementesService.findSementesById(id);
 	}
+	
+	public List<Sementes> findSementesByResponsavelTecnico(long responsavelTecnicoId) {
+		return sementesService.findSementesByResponsavelTecnico(findResponsavelTecnicoById(responsavelTecnicoId));
+	}
+	
 
 	public List<Sementes> getAllSementes() {
 		return sementesService.getAllSementes();
@@ -653,11 +665,54 @@ public class Facade {
 	public void deleteSementes(long id) {
 		sementesService.deleteSementes(id);
 	}
+	
+	public List<Sementes> searchSementes(String string) {
+		return sementesService.searchSementes(string);
+	}
 
+	public Page<Sementes> searchPageSementes(String string, Pageable pageRequest) {
+		return sementesService.searchPageSementes(string, pageRequest);
+	}
 
-	//RegioesAdaptacaoCultivo--------------------------------------------------------------
+	// ResponsavelTecnico--------------------------------------------------------------
 	@Autowired
-	private RegioesAdaptacaoCultivoService  regioesAdaptacaoCultivoService;
+	private ResponsavelTecnicoService responsavelTecnicoService;
+
+	public ResponsavelTecnico saveResponsavelTecnico(ResponsavelTecnico newInstance) {
+		return responsavelTecnicoService.saveResponsavelTecnico(newInstance);
+	}
+
+	public ResponsavelTecnico updateResponsavelTecnico(ResponsavelTecnico transientObject) {
+		return responsavelTecnicoService.updateResponsavelTecnico(transientObject);
+	}
+
+	public ResponsavelTecnico findResponsavelTecnicoById(long id) {
+		return responsavelTecnicoService.findResponsavelTecnicoById(id);
+	}
+
+	public ResponsavelTecnico findResponsavelTecnicoByCpf(String cpf) {
+		return responsavelTecnicoService.findResponsavelTecnicoByCpf(cpf);
+	}
+
+	public ResponsavelTecnico findResponsavelTecnicoBySementesId(long sementesId) {
+		return findSementesById(sementesId).getResponsavelTecnico();
+	}
+
+	public List<ResponsavelTecnico> getAllResponsavelTecnico() {
+		return responsavelTecnicoService.getAllResponsavelTecnico();
+	}
+
+	public void deleteResponsavelTecnico(ResponsavelTecnico persistentObject) {
+		responsavelTecnicoService.deleteResponsavelTecnico(persistentObject);
+	}
+
+	public void deleteResponsavelTecnico(long id) {
+		responsavelTecnicoService.deleteResponsavelTecnico(id);
+	}
+
+	// RegioesAdaptacaoCultivo--------------------------------------------------------------
+	@Autowired
+	private RegioesAdaptacaoCultivoService regioesAdaptacaoCultivoService;
 
 	public RegioesAdaptacaoCultivo saveRegioesAdaptacaoCultivo(RegioesAdaptacaoCultivo newInstance) {
 		return regioesAdaptacaoCultivoService.saveRegioesAdaptacaoCultivo(newInstance);
@@ -683,10 +738,9 @@ public class Facade {
 		regioesAdaptacaoCultivoService.deleteRegioesAdaptacaoCultivo(id);
 	}
 
-
-	//Doenca--------------------------------------------------------------
+	// Doenca--------------------------------------------------------------
 	@Autowired
-	private DoencaService  doencaService;
+	private DoencaService doencaService;
 
 	public Doenca saveDoenca(Doenca newInstance) {
 		return doencaService.saveDoenca(newInstance);
@@ -712,10 +766,9 @@ public class Facade {
 		doencaService.deleteDoenca(id);
 	}
 
-
-	//Cor--------------------------------------------------------------
+	// Cor--------------------------------------------------------------
 	@Autowired
-	private CorService  corService;
+	private CorService corService;
 
 	public Cor saveCor(Cor newInstance) {
 		return corService.saveCor(newInstance);
@@ -741,10 +794,9 @@ public class Facade {
 		corService.deleteCor(id);
 	}
 
-
-	//ToleranciaAdversidades--------------------------------------------------------------
+	// ToleranciaAdversidades--------------------------------------------------------------
 	@Autowired
-	private ToleranciaAdversidadesService  toleranciaAdversidadesService;
+	private ToleranciaAdversidadesService toleranciaAdversidadesService;
 
 	public ToleranciaAdversidades saveToleranciaAdversidades(ToleranciaAdversidades newInstance) {
 		return toleranciaAdversidadesService.saveToleranciaAdversidades(newInstance);
@@ -770,10 +822,9 @@ public class Facade {
 		toleranciaAdversidadesService.deleteToleranciaAdversidades(id);
 	}
 
-
-	//infraestruturaHidrica--------------------------------------------------------------
+	// infraestruturaHidrica--------------------------------------------------------------
 	@Autowired
-	private infraestruturaHidricaService  infraestruturaHidricaService;
+	private infraestruturaHidricaService infraestruturaHidricaService;
 
 	public infraestruturaHidrica saveinfraestruturaHidrica(infraestruturaHidrica newInstance) {
 		return infraestruturaHidricaService.saveinfraestruturaHidrica(newInstance);
@@ -799,8 +850,7 @@ public class Facade {
 		infraestruturaHidricaService.deleteinfraestruturaHidrica(id);
 	}
 
-
-	//Admin--------------------------------------------------------------
+	// Admin--------------------------------------------------------------
 	@Autowired
 	private AdminService adminService;
 
@@ -829,12 +879,12 @@ public class Facade {
 		adminService.deleteAdmin(id);
 	}
 
-	//Agricultor--------------------------------------------------------------
+	// Agricultor--------------------------------------------------------------
 	@Autowired
-	private AgricultorService  agricultorService;
+	private AgricultorService agricultorService;
 
 	public Agricultor saveAgricultor(Agricultor newInstance) throws EmailExistsException {
-		System.out.println("resultado:" +  newInstance.getAtividadeRural());
+		System.out.println("resultado:" + newInstance.getAtividadeRural());
 		newInstance.setAtividadeRural(saveAtividadesRuraisFromAgricultor(newInstance.getAtividadeRural()));
 		bancoSementesService.findBancoSementesById(newInstance.getBancoSementes().getId());
 		usuarioService.saveUsuario(newInstance);
@@ -865,9 +915,9 @@ public class Facade {
 		agricultorService.validateAgricultor(id);
 	}
 
-	//ProducaoSementes--------------------------------------------------------------
+	// ProducaoSementes--------------------------------------------------------------
 	@Autowired
-	private ProducaoSementesService  producaoSementesService;
+	private ProducaoSementesService producaoSementesService;
 
 	public ProducaoSementes saveProducaoSementes(ProducaoSementes newInstance) {
 		findAgricultorById(newInstance.getAgricultor().getId());
@@ -895,10 +945,9 @@ public class Facade {
 		producaoSementesService.deleteProducaoSementes(id);
 	}
 
-
-	//Endereco--------------------------------------------------------------
+	// Endereco--------------------------------------------------------------
 	@Autowired
-	private EnderecoService  enderecoService;
+	private EnderecoService enderecoService;
 
 	public Endereco saveEndereco(Endereco newInstance) {
 		return enderecoService.saveEndereco(newInstance);
@@ -924,10 +973,9 @@ public class Facade {
 		enderecoService.deleteEndereco(id);
 	}
 
-
-	//DoacaoUsuario--------------------------------------------------------------
+	// DoacaoUsuario--------------------------------------------------------------
 	@Autowired
-	private DoacaoUsuarioService  doacaoUsuarioService;
+	private DoacaoUsuarioService doacaoUsuarioService;
 
 	public DoacaoUsuario saveDoacaoUsuario(DoacaoUsuario newInstance) {
 		return doacaoUsuarioService.saveDoacaoUsuario(newInstance);
@@ -953,10 +1001,9 @@ public class Facade {
 		doacaoUsuarioService.deleteDoacaoUsuario(id);
 	}
 
-
-	//CaracteristicasAgronomicas--------------------------------------------------------------
+	// CaracteristicasAgronomicas--------------------------------------------------------------
 	@Autowired
-	private CaracteristicasAgronomicasService  caracteristicasAgronomicasService;
+	private CaracteristicasAgronomicasService caracteristicasAgronomicasService;
 
 	public CaracteristicasAgronomicas saveCaracteristicasAgronomicas(CaracteristicasAgronomicas newInstance) {
 		return caracteristicasAgronomicasService.saveCaracteristicasAgronomicas(newInstance);
@@ -982,10 +1029,9 @@ public class Facade {
 		caracteristicasAgronomicasService.deleteCaracteristicasAgronomicas(id);
 	}
 
-
-	//AtividadeRural--------------------------------------------------------------
+	// AtividadeRural--------------------------------------------------------------
 	@Autowired
-	private AtividadeRuralService  atividadeRuralService;
+	private AtividadeRuralService atividadeRuralService;
 
 	public AtividadeRural saveAtividadeRural(AtividadeRural newInstance) {
 		return atividadeRuralService.saveAtividadeRural(newInstance);
@@ -995,13 +1041,15 @@ public class Facade {
 		return atividadeRuralService.saveAllAtividadeRural(newInstances);
 	}
 
-	public List<AtividadeRural> saveAtividadesRuraisFromAgricultor(List<AtividadeRural> atividades){
+	public List<AtividadeRural> saveAtividadesRuraisFromAgricultor(List<AtividadeRural> atividades) {
 		List<AtividadeRural> todasAtividades = getAllAtividadeRural();
 		List<String> nomesAtividadesCadatradas = todasAtividades.stream().map(a -> a.getNome()).toList();
 		List<String> nomesAtividades = atividades.stream().map(a -> a.getNome()).toList();
-		List<AtividadeRural> atividadesNaoCadatradas = atividades.stream().filter(a -> !nomesAtividadesCadatradas.contains(a.getNome())).toList();
-		List<AtividadeRural> atividadesCadatradas = todasAtividades.stream().filter(a -> nomesAtividades.contains(a.getNome())).toList();
-		if(atividadesNaoCadatradas.isEmpty()) {
+		List<AtividadeRural> atividadesNaoCadatradas = atividades.stream()
+				.filter(a -> !nomesAtividadesCadatradas.contains(a.getNome())).toList();
+		List<AtividadeRural> atividadesCadatradas = todasAtividades.stream()
+				.filter(a -> nomesAtividades.contains(a.getNome())).toList();
+		if (atividadesNaoCadatradas.isEmpty()) {
 			return atividadesCadatradas;
 		}
 		atividades = saveAllAtividadeRural(atividadesNaoCadatradas);
@@ -1029,10 +1077,9 @@ public class Facade {
 		atividadeRuralService.deleteAtividadeRural(id);
 	}
 
-
-	//Finalidade--------------------------------------------------------------
+	// Finalidade--------------------------------------------------------------
 	@Autowired
-	private FinalidadeService  finalidadeService;
+	private FinalidadeService finalidadeService;
 
 	public Finalidade saveFinalidade(Finalidade newInstance) {
 		return finalidadeService.saveFinalidade(newInstance);
@@ -1057,6 +1104,5 @@ public class Facade {
 	public void deleteFinalidade(long id) {
 		finalidadeService.deleteFinalidade(id);
 	}
-
 
 }

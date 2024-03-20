@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -49,4 +49,8 @@ public  class Sementes  {
 	@JoinColumn(name = "sementes_id")
 	@ToString.Exclude
 	private List<TabelaBancoSementes> tabelaBancoSementes;
+	@ManyToOne(cascade = CascadeType.PERSIST, targetEntity = ResponsavelTecnico.class)
+	@JoinColumn(name = "responsavel_tecnico_id")
+	@ToString.Exclude
+	private ResponsavelTecnico responsavelTecnico;
 }

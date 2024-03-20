@@ -44,6 +44,7 @@ public class WebSecurityConfig {
 					.requestMatchers(HttpMethod.PATCH, "/api/v1/agricultor/**").hasRole("GERENTE")
 					.requestMatchers("/api/v1/agricultor/**").hasAnyRole("AGRICULTOR", "GERENTE")
 					.requestMatchers("/api/v1/sementes/**").hasRole("COPPABACS")
+					.requestMatchers("/api/v1/responsavel-tecnico/**").hasRole("COPPABACS")
 					.requestMatchers("/security/**").permitAll()
 					.requestMatchers("/api/**").permitAll()
 					.requestMatchers(HttpMethod.POST,"/api/v1/login").permitAll()

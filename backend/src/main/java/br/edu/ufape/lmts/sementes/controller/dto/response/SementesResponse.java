@@ -30,8 +30,7 @@ public  class SementesResponse  {
 	private ToleranciaAdversidadesResponse toleranciaAdversidades; 
 	private List<ProducaoSementesResponse> producaoSementes; 
 	private List<TabelaBancoSementesResponse> tabelaBancoSementes; 
-
-
+	private ResponsavelTecnicoResponse responsavelTecnico;
 
 	public SementesResponse(Sementes obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

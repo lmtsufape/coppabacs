@@ -6,6 +6,7 @@ import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
 import br.edu.ufape.lmts.sementes.model.Sementes;
+import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,6 +27,8 @@ public class SementesRequest {
 	private String caracteristicasPositiva;
 	private String caracteristicasNegativas;
 	private ToleranciaAdversidadesRequest toleranciaAdversidades;
+	@Valid
+	private ResponsavelTecnicoRequest responsavelTecnico;
 
 	public Sementes convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
