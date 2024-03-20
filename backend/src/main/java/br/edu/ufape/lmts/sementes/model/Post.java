@@ -82,8 +82,4 @@ public class Post  {
 	public void setData(Date data) {
 		this.data = data;
 	}
-	
-	
-	
-	
 }
