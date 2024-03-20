@@ -1,6 +1,7 @@
 package br.edu.ufape.lmts.sementes.model;
 
 import java.util.Date;
+import java.util.List;
 
 import br.edu.ufape.lmts.sementes.model.Usuario;
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
@@ -18,8 +19,9 @@ import lombok.ToString;
 public class Coppabacs extends Usuario {
 
 	public Coppabacs(Long id, String nome, String nomePopular, String email, String senha, Endereco endereco, String cpf,
-			Date dataNascimento, String contato, String imagem, String sexo, Conjuge conjuge) {
-		super(id, nome, nomePopular, email, senha, endereco, cpf, dataNascimento, contato, imagem, sexo, conjuge);
+			Date dataNascimento, String contato, String imagem, String sexo, Conjuge conjuge, List<Post> posts) {
+		
+		super(id, nome, nomePopular, email, senha, endereco, cpf, dataNascimento, contato, imagem, sexo, conjuge, posts);
 		super.addRole(TipoUsuario.COPPABACS);
 		super.addRole(TipoUsuario.AGRICULTOR);
 		super.addRole(TipoUsuario.GERENTE);

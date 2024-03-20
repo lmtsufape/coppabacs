@@ -1,6 +1,7 @@
 package br.edu.ufape.lmts.sementes.facade;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,9 +53,10 @@ import br.edu.ufape.lmts.sementes.service.EmpalhamentoService;
 import br.edu.ufape.lmts.sementes.service.EnderecoService;
 import br.edu.ufape.lmts.sementes.service.FinalidadeService;
 import br.edu.ufape.lmts.sementes.service.GerenteService;
+import br.edu.ufape.lmts.sementes.service.GerenteServiceInterface;
 import br.edu.ufape.lmts.sementes.service.InfraestruturaComunidadeService;
 import br.edu.ufape.lmts.sementes.service.ItemService;
-import br.edu.ufape.lmts.sementes.service.ObjetosBancoSementesService;
+//import br.edu.ufape.lmts.sementes.service.ObjetosBancoSementesService;
 import br.edu.ufape.lmts.sementes.service.PostServiceInterface;
 import br.edu.ufape.lmts.sementes.service.PragaService;
 import br.edu.ufape.lmts.sementes.service.ProducaoSementesService;
@@ -323,7 +325,7 @@ public class Facade {
 
 	//BancoSementes--------------------------------------------------------------
 	@Autowired
-	private BancoSementesServiceInterface  bancoSementesService;
+	private BancoSementesServiceInterface bancoSementesService;
 
 	public BancoSementes saveBancoSementes(BancoSementes newInstance) {
 		return bancoSementesService.saveBancoSementes(newInstance);
@@ -359,10 +361,20 @@ public class Facade {
 			return null;
 		}
 	}
+	
+	public BancoSementes adicionarGerenteAoBancoSemente(long bancoId, long gerenteId) {
+        BancoSementes banco = bancoSementesService.findBancoSementesById(bancoId);
+
+        Gerente gerente = gerenteService.findGerenteById(gerenteId);        
+        
+        banco.adicionarGerente(gerente);
+
+        return bancoSementesService.saveBancoSementes(banco);
+	}
 
 	//RetiradaUsuario--------------------------------------------------------------
 	@Autowired
-	private RetiradaUsuarioService  retiradaUsuarioService;
+	private RetiradaUsuarioService retiradaUsuarioService;
 
 	public RetiradaUsuario saveRetiradaUsuario(RetiradaUsuario newInstance) {
 		return retiradaUsuarioService.saveRetiradaUsuario(newInstance);
@@ -449,7 +461,7 @@ public class Facade {
 
 	//Gerente--------------------------------------------------------------
 	@Autowired
-	private GerenteService  gerenteService;
+	private GerenteServiceInterface gerenteService;
 
 	public Gerente saveGerente(Gerente newInstance) throws EmailExistsException {
 
@@ -481,32 +493,32 @@ public class Facade {
 	}
 
 	//ObjetosBancoSementes--------------------------------------------------------------
-	@Autowired
-	private ObjetosBancoSementesService  objetosBancoSementesService;
-
-	public ObjetosBancoSementes saveObjetosBancoSementes(ObjetosBancoSementes newInstance) {
-		return objetosBancoSementesService.saveObjetosBancoSementes(newInstance);
-	}
-
-	public ObjetosBancoSementes updateObjetosBancoSementes(ObjetosBancoSementes transientObject) {
-		return objetosBancoSementesService.updateObjetosBancoSementes(transientObject);
-	}
-
-	public ObjetosBancoSementes findObjetosBancoSementesById(long id) {
-		return objetosBancoSementesService.findObjetosBancoSementesById(id);
-	}
-
-	public List<ObjetosBancoSementes> getAllObjetosBancoSementes() {
-		return objetosBancoSementesService.getAllObjetosBancoSementes();
-	}
-
-	public void deleteObjetosBancoSementes(ObjetosBancoSementes persistentObject) {
-		objetosBancoSementesService.deleteObjetosBancoSementes(persistentObject);
-	}
-
-	public void deleteObjetosBancoSementes(long id) {
-		objetosBancoSementesService.deleteObjetosBancoSementes(id);
-	}
+//	@Autowired
+//	private ObjetosBancoSementesService  objetosBancoSementesService;
+//
+//	public ObjetosBancoSementes saveObjetosBancoSementes(ObjetosBancoSementes newInstance) {
+//		return objetosBancoSementesService.saveObjetosBancoSementes(newInstance);
+//	}
+//
+//	public ObjetosBancoSementes updateObjetosBancoSementes(ObjetosBancoSementes transientObject) {
+//		return objetosBancoSementesService.updateObjetosBancoSementes(transientObject);
+//	}
+//
+//	public ObjetosBancoSementes findObjetosBancoSementesById(long id) {
+//		return objetosBancoSementesService.findObjetosBancoSementesById(id);
+//	}
+//
+//	public List<ObjetosBancoSementes> getAllObjetosBancoSementes() {
+//		return objetosBancoSementesService.getAllObjetosBancoSementes();
+//	}
+//
+//	public void deleteObjetosBancoSementes(ObjetosBancoSementes persistentObject) {
+//		objetosBancoSementesService.deleteObjetosBancoSementes(persistentObject);
+//	}
+//
+//	public void deleteObjetosBancoSementes(long id) {
+//		objetosBancoSementesService.deleteObjetosBancoSementes(id);
+//	}
 
 	//Cultura--------------------------------------------------------------
 	@Autowired

@@ -35,7 +35,7 @@ public class BancoSementesController {
 	@Autowired
 	private ModelMapper modelMapper;
 	
-	@GetMapping("bancoSementes")
+	@GetMapping("banco-sementes")
 	public List<BancoSementesResponse> getAllBancoSementes() {
 		return facade.getAllBancoSementes()
 			.stream()
@@ -43,17 +43,17 @@ public class BancoSementesController {
 			.toList();
 	}
 	
-	@PostMapping("bancoSementes")
+	@PostMapping("banco-sementes")
 	public BancoSementesResponse createBancoSementes(@Valid @RequestBody BancoSementesRequest newObj) {
 		return new BancoSementesResponse(facade.saveBancoSementes(newObj.convertToEntity()));
 	}
 	
-	@GetMapping("bancoSementes/{id}")
+	@GetMapping("banco-sementes/{id}")
 	public BancoSementesResponse getBancoSementesById(@PathVariable Long id) {
 		return new BancoSementesResponse(facade.findBancoSementesById(id));
 	}
 	
-	@PatchMapping("bancoSementes/{id}")
+	@PatchMapping("banco-sementes/{id}")
 	public BancoSementesResponse updateBancoSementes(@PathVariable Long id, @Valid @RequestBody BancoSementesRequest obj) {
 		try {
 			//BancoSementes o = obj.convertToEntity();
@@ -72,10 +72,13 @@ public class BancoSementesController {
 			else
 				throw e;
 		}
-		
+	}
+	@PatchMapping("/banco-sementes/{bancoSementeId}/adicionar-gerente/{gerenteId}")
+    public BancoSementesResponse adicionarGerenteAoBancoSemente(@PathVariable long bancoSementeId, @PathVariable long gerenteId) {
+		return new BancoSementesResponse(facade.adicionarGerenteAoBancoSemente(bancoSementeId, gerenteId)); 
 	}
 	
-	@DeleteMapping("bancoSementes/{id}")
+	@DeleteMapping("banco-sementes/{id}")
 	public String deleteBancoSementes(@PathVariable Long id) {
 		try {
 			facade.deleteBancoSementes(id);
@@ -89,9 +92,8 @@ public class BancoSementesController {
 		
 	}
 	
-	@GetMapping("bancoSementes/{id}/agricultores")
+	@GetMapping("banco-sementes/{id}/agricultores")
 	public List<AgricultorResponse> getAllAgricultor(@PathVariable long id) {
-		
 		System.out.println(id);
 		return facade.getAllAgricultor(id)
 				.stream()
