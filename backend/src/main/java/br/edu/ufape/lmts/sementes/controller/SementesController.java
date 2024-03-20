@@ -56,7 +56,7 @@ public class SementesController {
 		return new SementesResponse(facade.findSementesById(id));
 	}
 	
-	@GetMapping("sementes/responsavelTecnico/{ResponsavelTecnicoId}")
+	@GetMapping("sementes/responsavel-tecnico/{ResponsavelTecnicoId}")
 	public List<SementesResponse> getSementesByResponsavelTecnicoId(@PathVariable Long ResponsavelTecnicoId) {
 		return facade.findSementesByResponsavelTecnico(ResponsavelTecnicoId)
 			.stream()

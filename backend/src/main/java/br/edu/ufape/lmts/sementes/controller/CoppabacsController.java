@@ -36,10 +36,6 @@ public class CoppabacsController {
 	private ModelMapper modelMapper;
 	
 	
-//	@GetMapping("coppabacs/usuarios")
-//	public List<usuario>
-//	
-	
 	@GetMapping("coppabacs")
 	public List<CoppabacsResponse> getAllCoppabacs() {
 		return facade.getAllCoppabacs()
