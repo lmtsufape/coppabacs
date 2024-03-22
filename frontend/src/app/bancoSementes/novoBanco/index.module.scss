@@ -1,11 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-
-.page-container {
-    display: flex; // Ativa o Flexbox
-    flex-direction: column; // Coloca os elementos em uma coluna
-    min-height: 100vh; // A altura mínima é 100% da altura da viewport
-
-    &__content{
-        flex-grow: 1; // O conteúdo principal ocupa todo o espaço disponível
-    }
+.title{
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    color: black;
+    margin: 2em 0 2em 7.1em;
+    font-size: 24px;
+    text-align:left;
 }

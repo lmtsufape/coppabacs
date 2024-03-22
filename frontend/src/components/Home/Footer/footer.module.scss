@@ -6,6 +6,8 @@
   align-items: center;
   justify-content: space-around;
 
+  position: relative;
+  bottom: 0;
 
   flex-wrap: wrap;
   gap: 1em;
@@ -21,8 +23,10 @@
   }
 
   @media screen and (max-width: 700px) {
-    height: 10em;
+    height: 15em;
 
+    bottom: 0;
+    position: relative;
 
     &__logo_sementes{
       padding-top: 1em;

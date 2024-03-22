@@ -114,7 +114,7 @@ export default function DadosAtividadesRurais({ formik, editar }) {
           </div>
         </div>
       ) : (
-        <div className={style.container__ContainerForm_form_threePartsContainer}>
+        <>
           <div>
             <label htmlFor="Cultura">Cultura</label>
             <input
@@ -159,7 +159,7 @@ export default function DadosAtividadesRurais({ formik, editar }) {
               value={formik.values.producaoSementes.previsaoVenda}
             />
           </div>
-        </div>
+        </>
       )}
     </>
   )

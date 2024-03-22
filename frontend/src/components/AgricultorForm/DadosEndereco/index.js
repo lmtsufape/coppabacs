@@ -80,7 +80,7 @@ export default function DadosEndereco({ formik }) {
         <div>
           <label htmlFor="endereco.numero">Número <span >*</span></label>
           <input
-            className={style.container__ContainerForm_form_halfContainer_input}
+            className={style.container__ContainerForm_form_input}
             name="endereco.numero"
             placeholder="Insira o número"
             onChange={formik.handleChange}
@@ -95,7 +95,7 @@ export default function DadosEndereco({ formik }) {
         <div>
           <label htmlFor="endereco.complemento">Complemento <span >*</span></label>
           <input
-            className={style.container__ContainerForm_form_halfContainer_input}
+            className={style.container__ContainerForm_form_input}
             id="complemento"
             name="endereco.referencia"
             placeholder="Insira uma complemento"

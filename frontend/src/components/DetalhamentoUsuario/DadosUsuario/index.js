@@ -210,7 +210,7 @@ export default function DadosForm({ formik, editar }) {
 
               <label htmlFor="sexo">Sexo </label>
               <select
-                className={style.container__ContainerForm_form_halfContainer_select}
+                className={style.container__ContainerForm_form_halfContainer_input}
 
                 id="sexo"
                 name="sexo"

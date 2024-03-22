@@ -3,9 +3,6 @@ export const APP_ROUTES = {
     list:{
       name: "/inicio",
     },
-    bancoSementes:{
-      name: "/bancoSementes"
-    },
     agricultorForm:{
       name: "/agricultores/novoAgricultor",
     },
@@ -14,8 +11,6 @@ export const APP_ROUTES = {
     }
   },
   public:{
-    home: '/',
-    novoUsuario: '/novoUsuario'
-    
+    home: '/'
   },
 }

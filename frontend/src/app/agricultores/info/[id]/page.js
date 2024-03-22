@@ -38,7 +38,7 @@ export default function Info() {
 
   return (
     <>
-      <Header hrefAnterior={"/agricultores"} />
+      <Header />
       { status === "success" && usuario &&
         <DetalhamentoUsuario 
         usuario={usuario}

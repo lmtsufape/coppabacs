@@ -133,7 +133,7 @@ export default function DadosForm({ formik }) {
         <div>
           <label htmlFor="sexo">Sexo <span>*</span></label>
           <select
-            className={style.container__ContainerForm_form_halfContainer_select}
+            className={style.container__ContainerForm_form_halfContainer_input}
             id="sexo"
             name="sexo"
             placeholder="Escolha seu sexo"
@@ -169,9 +169,9 @@ export default function DadosForm({ formik }) {
 
         </div>
         <div>
-          <label className={style.container__ContainerForm_label} htmlFor="conjugeSexo">Sexo Conjuge <span>*</span></label>
+          <label htmlFor="conjugeSexo">Sexo Conjuge <span>*</span></label>
           <select
-            className={style.container__ContainerForm_form_halfContainer_select}
+            className={style.container__ContainerForm_form_halfContainer_input}
             id="conjugueSexo"
             name="conjuge.sexo" // Ajuste aqui para refletir a estrutura aninhada
             placeholder="Escolha o sexo do seu conjugue"

@@ -1,10 +1,10 @@
 import React from "react";
-import NewBankForm from "@/components/NewBankForm/IndexOne";
+import NewBankObjects from "@/components/NewBankForm/IndexTwo";
 import Footer from "@/components/Home/Footer";
 import Header from "@/components/Home/Header";
 import styles from "@/app/bancoSementes/novoBanco/index.module.scss"
 
-export default function NewBank() {
+export default function BankObjects() {
     return (
         <div>
             <div>
@@ -16,7 +16,7 @@ export default function NewBank() {
                 </h1>
             </div>
             <div>
-                <NewBankForm />
+                <NewBankObjects />
             </div>
             <div>
                 <Footer />

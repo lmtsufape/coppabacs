@@ -13,7 +13,7 @@ import Table from "./Table";
 import { getAllUsuarios } from "@/api/usuarios/getAllUsuarios";
 import { Search, SearchUsuarios } from "../searchUsuario";
 
-export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3 }) {
+export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, listName, buttonName, table1, table2, table3 }) {
 
   const [usuarios, setUsuarios] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');

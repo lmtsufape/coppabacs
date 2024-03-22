@@ -48,7 +48,7 @@ export default function DadosEndereco({ formik, editar }) {
               />
             </div>
             <div>
-              <label htmlFor="endereco.nome">Rua</label>
+              <label htmlFor="endereco.nome">Nome</label>
               <input
                 className={style.container__ContainerForm_form_input}
                 id="nomeEndereco"
@@ -84,60 +84,54 @@ export default function DadosEndereco({ formik, editar }) {
           </>
         ) : (
           <>
+            <label htmlFor="endereco.estado">Estado</label>
+            <input
+              className={style.container__ContainerForm_form_halfContainer_input}
+              id="estado"
+              name="endereco.estado"
+              placeholder="Insira seu estado"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.endereco.estado}
+              required
+            />
+            {formik.touched.estado && formik.errors.estado ? (
+              <span className={style.form__error}>{formik.errors.endereco.estado}</span>
+            ) : null}
+
+
+            <label htmlFor="endereco.cidade">Cidade</label>
+            <input
+              className={style.container__ContainerForm_form_halfContainer_input}
+              id="cidade"
+              name="endereco.cidade"
+              placeholder="Insira sua cidade"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.endereco.cidade}
+              required
+            />
+            {formik.touched.cidade && formik.errors.cidade ? (
+              <span className={style.form__error}>{formik.errors.endereco.cidade}</span>
+            ) : null}
+
+            <label htmlFor="endereco.bairro">Bairro</label>
+
+            <input
+              className={style.container__ContainerForm_form_halfContainer_input}
+              id="bairro"
+              name="endereco.bairro"
+              placeholder="Insira seu bairro"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.endereco.bairro}
+              required
+            />
+            {formik.touched.bairro && formik.errors.bairro ? (
+              <span className={style.form__error}>{formik.errors.endereco.bairro}</span>
+            ) : null}
             <div>
-              <label htmlFor="endereco.estado">Estado</label>
-              <input
-                className={style.container__ContainerForm_form_halfContainer_input}
-                id="estado"
-                name="endereco.estado"
-                placeholder="Insira seu estado"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.endereco.estado}
-                required
-              />
-              {formik.touched.estado && formik.errors.estado ? (
-                <span className={style.form__error}>{formik.errors.endereco.estado}</span>
-              ) : null}
 
-            </div>
-            <div>
-
-              <label htmlFor="endereco.cidade">Cidade</label>
-              <input
-                className={style.container__ContainerForm_form_halfContainer_input}
-                id="cidade"
-                name="endereco.cidade"
-                placeholder="Insira sua cidade"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.endereco.cidade}
-                required
-              />
-              {formik.touched.cidade && formik.errors.cidade ? (
-                <span className={style.form__error}>{formik.errors.endereco.cidade}</span>
-              ) : null}
-
-            </div>
-            <div>
-              <label htmlFor="endereco.bairro">Bairro</label>
-
-              <input
-                className={style.container__ContainerForm_form_halfContainer_input}
-                id="bairro"
-                name="endereco.bairro"
-                placeholder="Insira seu bairro"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.endereco.bairro}
-                required
-              />
-              {formik.touched.bairro && formik.errors.bairro ? (
-                <span className={style.form__error}>{formik.errors.endereco.bairro}</span>
-              ) : null}
-
-            </div>
-            <div>
               <label htmlFor="endereco.nome">Nome</label>
               <input
                 className={style.container__ContainerForm_form_halfContainer_input}
@@ -151,8 +145,7 @@ export default function DadosEndereco({ formik, editar }) {
               />
               {formik.touched.nomeEndereco && formik.errors.endereco.nome ? (
                 <span className={style.form__error}>{formik.errors.endereco.nome}</span>
-              ) : null}
-            </div>
+              ) : null}</div>
             <div>
               <label htmlFor="endereco.numero">Número</label>
               <input

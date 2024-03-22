@@ -8,7 +8,7 @@ import style from "./inicio.module.scss";
 export default function inicioPage() {
   return (
     <div>
-      <Header hrefAnterior="invalid"/>
+      <Header />
       <div className={style.menu}>
         <Card title="Agricultores" icon="/assets/iconAssociates.svg" description="Associados" link="/agricultores"/>
         <Card title="Banco de Sementes" icon="/assets/iconBancoSementes.svg" description="Banco Sementes" link="/bancoSementes"/>
