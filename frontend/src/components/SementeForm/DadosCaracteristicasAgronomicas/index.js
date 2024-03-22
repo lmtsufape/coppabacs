@@ -8,7 +8,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
             <h1 className={styles.title}>Características Agronômicas</h1>
             <div className={styles.sidedForm}>
                 <div>
-                    <label htmlFor="caracteristicasAgronomicas.cicloFenologico">Ciclo fenológico </label>
+                    <label htmlFor="caracteristicasAgronomicas.cicloFenologico">Ciclo Fenológico </label>
                     <input
                         className={styles.sidedForm_input}
                         id="cicloFenologico"
@@ -23,7 +23,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="caracteristicasAgronomicas.stand"> Stand recomendado</label>
+                    <label htmlFor="caracteristicasAgronomicas.stand"> Stand Recomendado</label>
                     <input
                         className={styles.sidedForm_input}
                         id="stand"
@@ -53,7 +53,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="caracteristicasAgronomicas.alturaPlanta">Altura da planta </label>
+                    <label htmlFor="caracteristicasAgronomicas.alturaPlanta">Altura da Planta </label>
                     <input
                         className={styles.sidedForm_input}
                         id="alturaPlanta"
@@ -68,7 +68,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="caracteristicasAgronomicas.pesoMilGraos">Peso de mil grãos </label>
+                    <label htmlFor="caracteristicasAgronomicas.pesoMilGraos">Peso de Mil Grãos </label>
                     <input
                        className={styles.sidedForm_input}
                         id="pesoMilGraos"
@@ -83,7 +83,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="caracteristicasAgronomicas.pesoHectolitro">Peso hectolitro </label>
+                    <label htmlFor="caracteristicasAgronomicas.pesoHectolitro">Peso Hectolitro </label>
                     <input
                        className={styles.sidedForm_input}
                         id="pesoHectolitro"
@@ -98,7 +98,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="caracteristicasAgronomicas.tipoGrao">Tipo de grão/fruto/tubérculo/raiz </label>
+                    <label htmlFor="caracteristicasAgronomicas.tipoGrao">Tipo de Grão/Fruto/Tubérculo/Raiz </label>
                     <input
                         className={styles.sidedForm_input}
                         id="tipoGrao"
@@ -113,7 +113,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="caracteristicasAgronomicas.corGrao">Cor do grão/fruto/tubérculo/raiz </label>
+                    <label htmlFor="caracteristicasAgronomicas.corGrao">Cor do Grão/Fruto/Tubérculo/Raiz </label>
                     <input
                         className={styles.sidedForm_input}
                         id="corGrao"
@@ -143,7 +143,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="caracteristicasAgronomicas.corFolha">Cor da folha </label>
+                    <label htmlFor="caracteristicasAgronomicas.corFolha">Cor da Folha </label>
                     <input
                         className={styles.sidedForm_input}
                         id="corFolha"
@@ -158,7 +158,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="caracteristicasAgronomicas.corFlor">Cor da flor/inflorência </label>
+                    <label htmlFor="caracteristicasAgronomicas.corFlor">Cor da Flor/Inflorência </label>
                     <input
                         className={styles.sidedForm_input}
                         id="corFlor"

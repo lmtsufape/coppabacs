@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image";
-import style from "./list.module.scss";
+import styles from "./list.module.scss";
 
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
@@ -45,7 +45,22 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
         diretorioAtual={diretorioAtual}
         hrefAnterior={hrefAnterior}
       />
-     
+      <div className={styles.header}>
+        <div className={styles.header__container}>
+          <button>
+            <Link className={styles.header__container_link} href="sementes/novaSemente">
+              <h1>
+                Adicionar Semente
+                </h1>
+            </Link>
+            <Image src="/assets/iconSeedGrey+.svg" width={20} height={20} />
+          </button>
+          <div className={styles.header__container_buttons}>
+
+          </div>
+        </div>
+      </div>
+     <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <Table
         table1={table1}
         table2={table2}

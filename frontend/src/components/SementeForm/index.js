@@ -16,30 +16,52 @@ import ToleranciaAdversidades from "@/components/SementeForm/DadosToleranciaAdve
 const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
     const initialValues = {
+        tecnico:"",
+        cpf: "",
+        numConselho: "",
+        cultura:"",
         nome: "",
-        nomePopular: "",
+        finalidadeSemente:[],
         descricao: "",
+        doencas: "",
         pragas: "",
-        dominioPublico: true,
-        polinizaacaoAbertaMelhorada: true,
+        dominioPublico: "",
+        polinizaacaoAbertaMelhorada: "",
+        regAdaptCultivar:"",
         regiaoColetaDados: "",
-        altitudeMaxima: 0,
-        altitudeMinima: 0,
-        caracteristicasPositiva:"",
+        altitudeMaxima: "",
+        altitudeMinima: "",
+        caracteristicasPositiva: "",
         caracteristicasNegativas: "",
+        avaliacaoSemente:"",
+        caracteristicasAgronomicas:{
+            cicloFenologico:"",
+            stand:"",
+            produtividade:"",
+            alturaPlanta:"",
+            pesoMilGraos:"",
+            pesoHectolitro:"",
+            tipoGrao:"",
+            corGrao:"",
+            corCaule:"",
+            corFolha:"",
+            corFlor:"",
+            empalhamento:"",
+            habitoCrescimento:"",
+        },
         toleranciaAdversidades: {
-            altaTemperatura: "ALTA",
-            baixaTemperatura: "ALTA",
-            geada: "ALTA",
-            chuvaExcessiva: "ALTA",
-            seca: "ALTA",
-            ventos: "ALTA",
-            salinidade: "ALTA",
-            toxidadeAluminio: "ALTA",
-            soloArgiloso: "ALTA",
-            soloArenoso: "ALTA",
-            soloAcido: "ALTA",
-            soloBaixaFertilidade: "ALTA",
+            altaTemperatura: "",
+            baixaTemperatura: "",
+            geada: "",
+            chuvaExcessiva: "",
+            seca: "",
+            ventos: "",
+            salinidade: "",
+            toxidadeAluminio: "",
+            soloArgiloso: "",
+            soloArenoso: "",
+            soloAcido: "",
+            soloBaixaFertilidade: "",
         }
     }
 
@@ -81,19 +103,19 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
             <div className={styles.container__header}>
                 {etapas === 0 && <h1 className={styles.container__header_currentNav}>1. Dados da semente</h1>}
-                {etapas >= 1 && etapas <= 1 && <h1 className={styles.container__header_current}>1. Dados da Semente</h1>}
+                {etapas >= 1 && etapas <= 2 && <h1 className={styles.container__header_current}>1. Dados da Semente</h1>}
 
-                
+                {etapas === 1 && <h1 className={styles.container__header_currentNav}>2. Dados da semente</h1>}
+                {etapas != 1 && <h1 className={styles.container__header_current}>2. Dados da semente</h1>}
 
-                {etapas === 1 && <h1 className={styles.container__header_currentNav}>3. Dados da semente</h1>}
-                {etapas >= 0 && etapas < 1 && <h1 className={styles.container__header_current}>3. Dados da semente</h1>}
+                {etapas === 2 && <h1 className={styles.container__header_currentNav}>3. Dados da semente</h1>}
+                {etapas >= 0 && etapas < 2 && <h1 className={styles.container__header_current}>3. Dados da semente</h1>}
 
             </div>
 
             <div className={styles.containerForm}>
                 <Formik initialValues={initialValues}
                     validationSchema={validateSchema}
-
                     onSubmit={(values, { setSubmitting }) => {
                         mutate(values, {
                             onSuccess:(res) => {
@@ -106,8 +128,8 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
                         return (
                             <Form >
                                 {etapas === 0 && <DadosSementesForm formik={formik} />}
-
-                                {etapas === 1 && <ToleranciaAdversidades formik={formik} />}
+                                {etapas === 1 && <DadosCaracteristicasAgronomicas formik={formik} />}
+                                {etapas === 2 && <ToleranciaAdversidades formik={formik} />}
                                 {etapas === 0 && (
                                     <div className={styles.buttons}>
                                     <button>
@@ -123,6 +145,20 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
                                   </div>
                                 )}
                                 {etapas === 1 && (
+                                  <div className={styles.buttons}>
+                                    <button onClick={() => setEtapas(etapas - 1)}>
+                                      <Link href="#header" className={styles.buttons_link}>
+                                        <h1>Voltar</h1>
+                                      </Link>
+                                    </button>
+                                    <button onClick={() => setEtapas(etapas + 1)}>
+                                      <Link href="#header" className={styles.buttons_linkWhite}>
+                                        <h1>Continuar</h1>
+                                      </Link>
+                                    </button>
+                                  </div>
+                                )}
+                                {etapas === 2 && (
                                   <div className={styles.buttons}>
                                     <button onClick={() => setEtapas(etapas - 1)}>
                                       <Link href="#header" className={styles.buttons_link}>

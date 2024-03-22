@@ -7,7 +7,12 @@ export default function SementesPage() {
     <div>
       <Header hrefAnterior="/inicio"/>
       <ListSementes
-        diretorioAnterior= "Home /" diretorioAtual="Sementes" hrefAnterior="/inicio" table1="Nome" table2="Cultivar" table3="Ação"/>
+        diretorioAnterior= "Home /" 
+        diretorioAtual="Sementes" 
+        hrefAnterior="/inicio" 
+        table1="Nome" 
+        table2="Cultivar" 
+        table3="Ação"/>
       <Footer />
 
     </div>

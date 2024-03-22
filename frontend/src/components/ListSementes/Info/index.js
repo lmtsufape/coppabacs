@@ -1,77 +1,9 @@
-"use client"
-
-
-import { useMutation } from "react-query";
-import { Form, Formik } from "formik";
-import { useState } from "react";
-import * as Yup from 'yup';
-import HeaderNavegacao from "@/components/HeaderNavegacao";
-import DadosSementesForm from "@/components/SementeForm/DadosSementesForm";
-import DadosCaracteristicasAgronomicas from "@/components/SementeForm/DadosCaracteristicasAgronomicas";
-import DadosAtividadesRurais from "@/components/DetalhamentoUsuario/DadosAtividadesRurais";
+import React from "react";
 import styles from "@/components/ListSementes/Info/info.module.scss"
 import Link from "next/link";
 import Image from "next/image";
 
-const DetalhamentoSementes = ({diretorioAnterior, diretorioAtual, hrefAnterior, sementes}) => {
-
-const initialValues = {
-    cultura: sementes?.cultura,
-    nome: sementes?.nome,
-    finalidadeSemente:{
-        etilica: false,
-        naoEtilica: false,
-        inNatura: false,
-        forragem: false,
-        processamento: false,
-        outra:false,
-        outraFinalidade: 'Outra Finalidade',
-    },
-    nomePopular: sementes?.nomePopular,
-    descricao: sementes?.descricao,
-    doencas: sementes?.doenca,
-    pragas: sementes?.pragas,
-    dominioPublico: sementes?.dominioPubllico,
-    polinizaacaoAbertaMelhorada: sementes?.polinizaacaoAbertaMelhorada,
-    regAdaptCultivar:sementes?.regAdaptCultivar,
-    regiaoColetaDados: sementes?.regiaoColetaDados,
-    altitudeMaxima: sementes?.altitudeMaxima,
-    altitudeMinima: sementes?.altitudeMinima,
-    caracteristicasPositiva: sementes?.caracteristicasPositiva,
-    caracteristicasNegativas: sementes?.caracteristicasNegativas,
-    avaliacaoSemente:sementes?.avaliacaoSemente,
-    caracteristicasAgronomicas:{
-        cicloFenologico:sementes?.caracteristicasAgronomicas?.cicloFenologico,
-        stand:sementes?.caracteristicasAgronomicas?.stand,
-        produtividade:sementes?.caracteristicasAgronomicas?.produtividade,
-        alturaPlanta:sementes?.caracteristicasAgronomicas?.alturaPlanta,
-        pesoMilGraos:sementes?.caracteristicasAgronomicas?.pesoMilGraos,
-        pesoHectolitro:sementes?.caracteristicasAgronomicas?.pesoHectolitro,
-        tipoGrao:sementes?.caracteristicasAgronomicas?.tipoGrao,
-        corGrao:sementes?.caracteristicasAgronomicas?.corGrao,
-        corCaule:sementes?.caracteristicasAgronomicas?.corCaule,
-        corFolha:sementes?.caracteristicasAgronomicas?.corFolha,
-        corFlor:sementes?.caracteristicasAgronomicas?.corFlor,
-        empalhamento:sementes?.caracteristicasAgronomicas?.empalhamento,
-        habitoCrescimento:sementes?.caracteristicasAgronomicas?.habitoCrescimento,
-    },
-    toleranciaAdversidades: {
-        altaTemperatura: sementes?.toleranciaAdversidades?.altaTemperatura,
-        baixaTemperatura: sementes?.toleranciaAdversidades?.baixaTemperatura,
-        geada: sementes?.toleranciaAdversidades?.geada,
-        chuvaExcessiva: sementes?.toleranciaAdversidades?.chuvaExcessiva,
-        seca: sementes?.toleranciaAdversidades?.seca,
-        ventos: sementes?.toleranciaAdversidades?.ventos,
-        salinidade: sementes?.toleranciaAdversidades?.salinidade,
-        toxidadeAluminio: sementes?.toleranciaAdversidades?.toxidadeAluminio,
-        soloArgiloso: sementes?.toleranciaAdversidades?.soloArgiloso,
-        soloArenoso: sementes?.toleranciaAdversidades?.soloArenoso,
-        soloAcido: sementes?.toleranciaAdversidades?.soloAcido,
-        soloBaixaFertilidade: sementes?.toleranciaAdversidades?.soloBaixaFertilidade,
-    }
-
-
-}
+export default function InfoSementes() {
     return (
         <div>
             <div>
@@ -79,7 +11,7 @@ const initialValues = {
                     <div className={styles.header__title}>
                         <div className={styles.header__title_voltar}>
                             <Image src="/assets/IconMenorQue.svg" alt="Voltar" width={27} height={24} />
-                            <Link className={styles.header__title_voltar_link} href="/inicio"><h1>Voltar</h1></Link>
+                            <Link className={styles.header__title_voltar_link} href="/sementes"><h1>Voltar</h1></Link>
                         </div>
                         <div className={styles.header__title_guia}>
                             <h1>Home /</h1>

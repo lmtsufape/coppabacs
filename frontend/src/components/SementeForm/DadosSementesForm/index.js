@@ -24,6 +24,7 @@ export default function DadosSementesForm({ formik }) {
         let novasFinalidades = [...finalidadeSementeArray];
 
         if (isChecked) {
+            // Para "Outra", verifica se já existe algum valor customizado antes de adicionar
             if (finalidade === 'outra') {
                 setIsOutraFinalidadeSelecionada(true);
                 if (outraFinalidade && !novasFinalidades.includes(outraFinalidade)) {
@@ -68,19 +69,93 @@ export default function DadosSementesForm({ formik }) {
     return (
         <>
             <div className={styles.sidedForm}>
-                
+                <div>
+                    <label htmlFor="tecnico">Responsável técnico pelo cadastro <span>*</span></label>
+                    <input
+                        className={styles.sidedForm_input}
+                        id="tecnico"
+                        name="tecnico"
+                        placeholder="Insira o técnico responsável"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.tecnico}
+                        required />
+                    {formik.touched.tecnico && formik.errors.tecnico ? (
+                        <span className={styles.form__error}>{formik.errors.tecnico}</span>
+                    ) : null}
+                </div>
+                <div>
+                    <label htmlFor="cpf">CPF <span>*</span></label>
+                    <input
+                        className={styles.sidedForm_input}
+                        id="cpf"
+                        name="cpf"
+                        placeholder="Insira seu CPF"
+                        onChange={(e) => {
+                            formik.setFieldValue("cpf", cpfMask(e.target.value));
+                        }}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.cpf}
+                        required />
+                    {formik.touched.cpf && formik.errors.cpf ? (
+                        <span className={styles.form__error}>{formik.errors.cpf}</span>
+                    ) : null}
+                </div>
+                <div>
+                    <label htmlFor="conselho"> Conselho/UF</label>
+                    <input
+                        className={styles.sidedForm_input}
+                        id="conselho"
+                        name="conselho"
+                        placeholder="Insira o Conselho/UF"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.conselho}
+                    />
+                    {formik.touched.conselho && formik.errors.conselho ? (
+                        <span className={styles.form__error}>{formik.errors.conselho}</span>
+                    ) : null}
+                </div>
+                <div>
+                    <label htmlFor="numConselho"> Número de Registro</label>
+                    <input
+                        className={styles.sidedForm_input}
+                        id="numConselho"
+                        name="numConselho"
+                        placeholder="Insira o número de Registro do Conselho"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.numConselho}
+                    />
+                    {formik.touched.numConselho && formik.errors.numConselho ? (
+                        <span className={styles.form__error}>{formik.errors.numConselho}</span>
+                    ) : null}
+                </div>
             </div>
             <div >
                 <br />
                 <h1 className={styles.title}>Características Gerais da Cultivar</h1>
                 <br />
                 <div className={styles.sidedForm}>
-                    
+                    <div>
+                        <label htmlFor="cultura">Cultura <span>*</span></label>
+                        <input
+                            className={styles.sidedForm_input}
+                            id="cultura"
+                            name="cultura"
+                            placeholder="Insira a cultura"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.cultura}
+                            required />
+                        {formik.touched.cultura && formik.errors.cultura ? (
+                            <span className={styles.form__error}>{formik.errors.cultura}</span>
+                        ) : null}
+                    </div>
                     <div>
                         <label htmlFor="nome">Nome da Cultivar <span>*</span></label>
                         <input
                             className={styles.sidedForm_input}
-                            type="text"
                             id="nome"
                             name="nome"
                             placeholder="Insira o nome da cultivar"
@@ -93,41 +168,34 @@ export default function DadosSementesForm({ formik }) {
                         ) : null}
 
                     </div>
-                    <div>
-                        <label htmlFor="nomePopular">Nome Popular da Cultivar <span>*</span></label>
-                        <input
-                            className={styles.sidedForm_input}
-                            type="text"
-                            id="nomePopular"
-                            name="nomePopular"
-                            placeholder="Insira o nome da cultivar"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.nomePopular}
-                            required />
-                        {formik.touched.nomePopular && formik.errors.nomePopular ? (
-                            <span className={styles.form__error}>{formik.errors.nomePopular}</span>
-                        ) : null}
-
-                    </div><div>
-                        <label htmlFor="descricao">Descricao <span>*</span></label>
-                        <input
-                            className={styles.sidedForm_input}
-                            type="text"
-                            id="descricao"
-                            name="descricao"
-                            placeholder="Insira o nome da cultivar"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.descricao}
-                            required />
-                        {formik.touched.descricao && formik.errors.descricao ? (
-                            <span className={styles.form__error}>{formik.errors.descricao}</span>
-                        ) : null}
-
+                </div>
+                <div className={styles.checkbox}>
+                    <label htmlFor="finalidadeSemente" className={styles.checkbox__label}>Finalidade <span>*</span></label>
+                    <div className={styles.checkbox__itens}>
+                        {finalidades.map((finalidade) => (
+                            <div key={finalidade.name}>
+                                <input
+                                    type="checkbox"
+                                    name={finalidade.name}
+                                    checked={finalidadeSementeArray.includes(finalidade.name) || (finalidade.name === 'outra' && isOutraFinalidadeSelecionada)}
+                                    onChange={(e) => handleCheckboxChange(finalidade.name, e.target.checked)}
+                                    required
+                                />
+                                {finalidade.name !== 'outra' || !isOutraFinalidadeSelecionada ? (
+                                    <label htmlFor={finalidade.name}>{finalidade.label}</label>
+                                ) : (
+                                    <input
+                                        className={styles.inputCheckbox}
+                                        type="text"
+                                        value={outraFinalidade}
+                                        onChange={handleOutraFinalidadeChange}
+                                        placeholder="Insira outra finalidade"
+                                    />
+                                )}
+                            </div>
+                        ))}
                     </div>
                 </div>
-
             </div>
             <div>
                 <div className={styles.sidedForm}>
@@ -138,8 +206,8 @@ export default function DadosSementesForm({ formik }) {
                                 type="radio"
                                 id="sim"
                                 name="dominioPublico"
-                                value="true"
-                                checked={values.dominioPublico === 'true'}
+                                value="sim"
+                                checked={values.dominioPublico === 'sim'}
                                 onChange={formik.handleChange}
                             />
                             <label htmlFor="sim">Sim</label>
@@ -148,22 +216,22 @@ export default function DadosSementesForm({ formik }) {
                                 type="radio"
                                 id="nao"
                                 name="dominioPublico"
-                                value="false"
-                                checked={values.dominioPublico === 'false'}
+                                value="nao"
+                                checked={values.dominioPublico === 'nao'}
                                 onChange={formik.handleChange}
                             />
                             <label htmlFor="nao">Não</label>
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="polinizaacaoAbertaMelhorada">Cultivar de polinização <span>*</span></label>
+                        <label htmlFor="polinizaacaoAbertaMelhorada">Cultivar de Polinização Aberta Melhorada <span>*</span></label>
                         <div className={styles.radio__itens}>
                             <input
                                 type="radio"
                                 id="sim"
                                 name="polinizaacaoAbertaMelhorada"
-                                value="true"
-                                checked={values.polinizaacaoAbertaMelhorada === 'true'}
+                                value="sim"
+                                checked={values.polinizaacaoAbertaMelhorada === 'sim'}
                                 onChange={formik.handleChange}
                             />
                             <label htmlFor="sim">Sim</label>
@@ -172,8 +240,8 @@ export default function DadosSementesForm({ formik }) {
                                 type="radio"
                                 id="nao"
                                 name="polinizaacaoAbertaMelhorada"
-                                value="false"
-                                checked={values.polinizaacaoAbertaMelhorada === 'false'}
+                                value="nao"
+                                checked={values.polinizaacaoAbertaMelhorada === 'nao'}
                                 onChange={formik.handleChange}
                             />
                             <label htmlFor="nao">Não</label>
@@ -181,13 +249,26 @@ export default function DadosSementesForm({ formik }) {
                     </div>
                 </div>
                 <div className={styles.sidedForm}>
-                    
+                    <div>
+                        <label htmlFor="regAdaptCultivar">Região de Adaptação da Cultivar <span>*</span></label>
+                        <input
+                            className={styles.sidedForm_input}
+                            id="regAdaptCultivar"
+                            name="regAdaptCultivar"
+                            placeholder="Insira a região de adaptação"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.regAdaptCultivar}
+                            required />
+                        {formik.touched.tecnico && formik.errors.regAdaptCultivar ? (
+                            <span className={styles.form__error}>{formik.errors.regAdaptCultivar}</span>
+                        ) : null}
+                    </div>
                     <div>
                         <div>
-                            <label htmlFor="altitudeMaxima">Altitude máxima</label>
+                            <label htmlFor="altitudeMaxima">Altitude Máxima</label>
                             <input
                                 className={styles.sidedForm_input}
-                                type="number"
                                 id="altitudeMaxima"
                                 name="altitudeMaxima"
                                 placeholder="Insira a altitude máxima"
@@ -201,10 +282,9 @@ export default function DadosSementesForm({ formik }) {
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="altitudeMinima">Altitude mínima </label>
+                        <label htmlFor="altitudeMinima">Altitude Mínima </label>
                         <input
                             className={styles.sidedForm_input}
-                            type="number"
                             id="altitudeMinima"
                             name="altitudeMinima"
                             placeholder="Insira a altitude mínima"
@@ -216,12 +296,25 @@ export default function DadosSementesForm({ formik }) {
                             <span className={styles.form__error}>{formik.errors.altitudeMinima}</span>
                         ) : null}
                     </div>
-                    
+                    <div>
+                        <label htmlFor="doencas">Resistência à Doenças </label>
+                        <input
+                            className={styles.sidedForm_input}
+                            id="doencas"
+                            name="doencas"
+                            placeholder="Insira quais doencas a planta possui resistência"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.doencas}
+                            required />
+                        {formik.touched.doencas && formik.errors.doencas ? (
+                            <span className={styles.form__error}>{formik.errors.doencas}</span>
+                        ) : null}
+                    </div>
                     <div>
                         <label htmlFor="pragas">Resistência à Pragas </label>
                         <input
                             className={styles.sidedForm_input}
-                            type="text"
                             id="pragas"
                             name="pragas"
                             placeholder="Insira quais pragas a planta possui resistência"
@@ -231,38 +324,6 @@ export default function DadosSementesForm({ formik }) {
                             required />
                         {formik.touched.pragas && formik.errors.pragas ? (
                             <span className={styles.form__error}>{formik.errors.pragas}</span>
-                        ) : null}
-                    </div>
-                    <div>
-                        <label htmlFor="caracteristicasPositiva">Caracteristicas Positivas </label>
-                        <input
-                            type="text"
-                            className={styles.sidedForm_input}
-                            id="caracteristicasPositiva"
-                            name="caracteristicasPositiva"
-                            placeholder="Insira quais caracteristicas positivas a planta possui"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.caracteristicasPositiva}
-                            required />
-                        {formik.touched.caracteristicasPositiva && formik.errors.caracteristicasPositiva ? (
-                            <span className={styles.form__error}>{formik.errors.caracteristicasPositiva}</span>
-                        ) : null}
-                    </div>
-                    <div>
-                        <label htmlFor="caracteristicasNegativas">Caracteristicas Negativas </label>
-                        <input
-                            className={styles.sidedForm_input}
-                            type="text"
-                            id="caracteristicasNegativas"
-                            name="caracteristicasNegativas"
-                            placeholder="Insira quais caracteristicasNegativas a planta possui"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.caracteristicasNegativas}
-                            required />
-                        {formik.touched.pragas && formik.errors.caracteristicasNegativas ? (
-                            <span className={styles.form__error}>{formik.errors.caracteristicasNegativas}</span>
                         ) : null}
                     </div>
                 </div>
