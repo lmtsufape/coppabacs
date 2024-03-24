@@ -27,7 +27,6 @@ import br.edu.ufape.lmts.sementes.model.InfraestruturaComunidade;
 import br.edu.ufape.lmts.sementes.model.Item;
 import br.edu.ufape.lmts.sementes.model.ObjetosBancoSementes;
 import br.edu.ufape.lmts.sementes.model.Post;
-import br.edu.ufape.lmts.sementes.model.Praga;
 import br.edu.ufape.lmts.sementes.model.ProducaoSementes;
 import br.edu.ufape.lmts.sementes.model.RegioesAdaptacaoCultivo;
 import br.edu.ufape.lmts.sementes.model.ResponsavelTecnico;
@@ -61,7 +60,6 @@ import br.edu.ufape.lmts.sementes.service.InfraestruturaComunidadeService;
 import br.edu.ufape.lmts.sementes.service.ItemService;
 //import br.edu.ufape.lmts.sementes.service.ObjetosBancoSementesService;
 import br.edu.ufape.lmts.sementes.service.PostServiceInterface;
-import br.edu.ufape.lmts.sementes.service.PragaService;
 import br.edu.ufape.lmts.sementes.service.ProducaoSementesService;
 import br.edu.ufape.lmts.sementes.service.RegioesAdaptacaoCultivoService;
 import br.edu.ufape.lmts.sementes.service.ResponsavelTecnicoService;
@@ -180,34 +178,6 @@ public class Facade {
 
 	public void deleteCoppabacs(long id) {
 		coppabacsService.deleteCoppabacs(id);
-	}
-
-	// Praga--------------------------------------------------------------
-	@Autowired
-	private PragaService pragaService;
-
-	public Praga savePraga(Praga newInstance) {
-		return pragaService.savePraga(newInstance);
-	}
-
-	public Praga updatePraga(Praga transientObject) {
-		return pragaService.updatePraga(transientObject);
-	}
-
-	public Praga findPragaById(long id) {
-		return pragaService.findPragaById(id);
-	}
-
-	public List<Praga> getAllPraga() {
-		return pragaService.getAllPraga();
-	}
-
-	public void deletePraga(Praga persistentObject) {
-		pragaService.deletePraga(persistentObject);
-	}
-
-	public void deletePraga(long id) {
-		pragaService.deletePraga(id);
 	}
 
 	// SementePraga--------------------------------------------------------------
@@ -360,15 +330,15 @@ public class Facade {
 			return null;
 		}
 	}
-	
+
 	public BancoSementes adicionarGerenteAoBancoSemente(long bancoId, long gerenteId) {
-        BancoSementes banco = bancoSementesService.findBancoSementesById(bancoId);
+		BancoSementes banco = bancoSementesService.findBancoSementesById(bancoId);
 
-        Gerente gerente = gerenteService.findGerenteById(gerenteId);        
-        
-        banco.adicionarGerente(gerente);
+		Gerente gerente = gerenteService.findGerenteById(gerenteId);
 
-        return bancoSementesService.saveBancoSementes(banco);
+		banco.adicionarGerente(gerente);
+
+		return bancoSementesService.saveBancoSementes(banco);
 	}
 
 	// RetiradaUsuario--------------------------------------------------------------
@@ -487,7 +457,7 @@ public class Facade {
 		gerenteService.deleteGerente(id);
 	}
 
-	//ObjetosBancoSementes--------------------------------------------------------------
+	// ObjetosBancoSementes--------------------------------------------------------------
 //	@Autowired
 //	private ObjetosBancoSementesService  objetosBancoSementesService;
 //
@@ -659,11 +629,10 @@ public class Facade {
 	public Sementes findSementesById(long id) {
 		return sementesService.findSementesById(id);
 	}
-	
+
 	public List<Sementes> findSementesByResponsavelTecnico(long responsavelTecnicoId) {
 		return sementesService.findSementesByResponsavelTecnico(findResponsavelTecnicoById(responsavelTecnicoId));
 	}
-	
 
 	public List<Sementes> getAllSementes() {
 		return sementesService.getAllSementes();
@@ -676,7 +645,7 @@ public class Facade {
 	public void deleteSementes(long id) {
 		sementesService.deleteSementes(id);
 	}
-	
+
 	public List<Sementes> searchSementes(String string) {
 		return sementesService.searchSementes(string);
 	}
