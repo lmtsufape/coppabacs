@@ -6,8 +6,12 @@ import { disconnect } from "process";
 export default function muralPage() {
     return (
         <div>
-            <Header />
-            <Mural />
+            <Header
+                hrefAnterior="/inicio" />
+            <Mural
+                diretorioAnterior="Home /"
+                diretorioAtual="Mural"
+                hrefAnterior="/inicio" />
             <Footer />
         </div>
     )
