@@ -1,0 +1,162 @@
+.tela_mural {
+    margin: 1em 4em 5em 4em;
+    padding-bottom: 5em;
+
+}
+
+// <Voltar_________________Home/Mural/Criar Nova Postagem
+.list_header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1em;
+}
+
+.list_header h1 {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.list_header h2 {
+    color: #A7A7A7;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.list_header h3 {
+    color: #245501;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.list_header__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 1em;
+    margin: 3em 0em 3em 0em;
+}
+
+.list_header__title_voltar {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+}
+
+.element.style {
+    color: transparent;
+}
+
+.list_header__title_voltar_link {
+    color: black;
+}
+
+.list_header__title_guia {
+    display: flex;
+    align-items: center;
+}
+
+// Componente que engloba todos os itens do criarPostagem
+
+.criarPostagem__box{
+    display: flex;
+    width: auto;
+    padding: 40px 30px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    gap: 32px;
+    border-radius: 10px;
+    border: 2px solid var(--Foundation-Grey-G50, #EAEAEA);
+}
+
+// Componente que guarda a imagem
+
+.criarPostagem__addImagem {
+    display: flex;
+    flex-direction: column;
+    padding: 40px 30px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 10px;
+    border: 2px dashed #DADADA;
+}
+
+.criarPostagem__formatosSuportados{
+    color: var(--Foundation-Grey-G100, #838383);
+    text-align: center;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+// Componente da caixa de texto
+
+.criarPostagem__componenteTexto{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.criarPostagem__TextoDaPostagem{
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.criarPostagem__textarea {
+    width: calc(100% - 60px);
+    max-width: 100%;
+    min-height: 150px;
+    padding: 10px 30px;
+    border: 2px solid #DADADA;
+    border-radius: 10px;
+    resize: vertical;
+  }
+
+// ____________
+//| Finalizar |
+//-------------
+.list_header__containerBotao {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2%;
+}
+
+.botao__finalizar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 172px;
+    height: 48px;
+    font-weight: bold;
+    color: white;
+    background: var(--Foundation-Green-G500, #2C5537);
+    border: none;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    box-shadow: none; 
+    text-shadow: none; 
+    text-decoration: none;
+}
+
+.botao__finalizar:not(:active):hover {
+    background-color: #2C5537;
+    border: none;
+}
+
+.botao__finalizar:active {
+    transform: scale(0.95);
+}
+
+.list_header__title_criar_link {
+    color: white;
+    text-decoration: none;
+}
