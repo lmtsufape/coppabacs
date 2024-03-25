@@ -1,0 +1,161 @@
+.tela_mural{
+    margin: 1em 4em 5em 4em;
+    padding-bottom: 5em;
+
+}
+// <Voltar_________________Home/Mural
+
+.list_header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1em;
+}
+
+.list_header h1 {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.list_header h2 {
+    color: #A7A7A7;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.list_header h3 {
+    color: #245501;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.list_header__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 1em;
+    margin: 3em 0em 3em 0em;
+}
+
+.list_header__title_voltar {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+}
+
+.element.style {
+    color: transparent;
+}
+
+.list_header__title_voltar_link {
+    color: #000;
+}
+
+.list_header__title_guia {
+    display: flex;
+    align-items: center;
+}
+
+// ____________________
+//|Criar nova postagem|
+//--------------------
+.list_header__containerBotao{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 1em;
+    margin-bottom: 2%;
+}
+
+.botao__criarNovaPostagem{
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 1em;
+    font-weight: bold;
+    color: white;
+    background-color: #245501;
+    border: none;
+    border-radius: 1em;
+    transition: all 0.3s ease;
+
+}
+
+.botao__criarNovaPostagem:hover{
+    background-color: #245501;
+    border-color: #245501;
+}
+
+.botao__criarNovaPostagem:active{
+    transform: scale(0.95);
+
+}
+
+.list_header__title_criar_link{
+    color: white;    
+    border-bottom: none;
+    text-decoration: none;
+}
+
+// Publicação
+
+.card_publicacao{
+    display: flex;
+    width: auto;
+    height: auto;
+    gap: 18px;
+    padding: 40px 30px;
+    align-items: flex-start;
+    flex-direction: row-reverse;
+    border-radius: 18px;
+    border: 2px solid var(--Foundation-Grey-G50, #EAEAEA);
+    margin-bottom: 3em;
+}
+
+.card_publicacao__descricao{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 13px;
+    flex: 1 0 0;
+}
+
+.card_publicacao__descricao h2{
+    color: var(--Verde, #245501);
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;}
+
+.card_publicacao__descricao p{
+    color: var(--Foundation-Grey-G300, #292929);
+    text-align: justify;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.card_publicacao__descricao .date{
+    align-self: stretch;
+    color: var(--Foundation-Grey-G100, #838383);
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.card_publicacao__image{
+    width: 343.482px;
+    height: 207px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: url(/assets/muralWalle.svg), lightgray 50% / cover no-repeat;
+}
+
