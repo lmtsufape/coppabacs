@@ -15,10 +15,13 @@ import DadosEndereco from "./DadosEndereco";
 import DadosAtividadesRurais from "./DadosAtividadesRurais";
 import Link from "next/link";
 import Footer from "../Home/Footer";
+import { postAdmin } from "@/api/usuarios/admin/postAdmin";
+import { postCoordenador } from "@/api/usuarios/coordenador/postCoordenador";
+import { postCoppabacs } from "@/api/usuarios/coppabacs/postCoppabacs";
 
 
 const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
-  
+
 
   const initialValues = {
     email: "",
@@ -30,6 +33,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
     cpf: "",
     dataNascimento: "",
     sexo: "",
+    tipo:"",
     endereco: {
       cep: "",
       estado: "",
@@ -75,12 +79,13 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
       .min(new Date(1, 1, 1900), "A data de nascimento não pode ser menor que 01/01/1900")
       .required('Required'),
   })
-  const { status, mutate } = useMutation(
+
+  const { statusCoppabacs, mutateCoppabacs } = useMutation(
     async (values) => {
-      console.log("valores: ", values);
-      return postAgricultor(values);
+      return postCoppabacs(values);
     }, {
     onSuccess: (res) => {
+      window.location.href = '/agricultores';
 
     },
     onError: (error) => {
@@ -89,9 +94,65 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
     }
   }
   );
+  const { statusAdmin, mutateAdmin } = useMutation(
+    async (values) => {
+      return postAdmin(values);
+    }, {
+    onSuccess: (res) => {
+      window.location.href = '/agricultores';
 
-  const [etapas, setEtapas] = useState(0);
+    },
+    onError: (error) => {
+      console.log(error);
+
+    }
+  }
+  );
+  const { statusGerente, mutateGerente } = useMutation(
+    async (values) => {
+      return postCoordenador(values);
+    }, {
+    onSuccess: (res) => {
+      window.location.href = '/agricultores';
+
+    },
+    onError: (error) => {
+      console.log(error);
+
+    }
+  }
+  );
+  const { statusAgricultor, mutateAgricultor } = useMutation(
+    async (values) => {
+      return postAgricultor(values);
+    }, {
+    onSuccess: (res) => {
+      window.location.href = '/agricultores';
+
+    },
+    onError: (error) => {
+      console.log(error);
+
+    }
+  }
+  );
   
+  function tipoUsuario(values) {
+
+
+    if (values.tipo === "coppabacs") {
+      mutateCoppabacs(values)
+    } else if (values.tipo === "admin") {
+      mutateAdmin(values)
+
+    } else if (values.tipo === "gerente") {
+      mutateGerente(values)
+
+    } else if (values.tipo === "agricultor") {
+      mutateAgricultor(values)
+    }
+  }
+  const [etapas, setEtapas] = useState(0);
   return (
     <div id="header" className={style.container}>
       <HeaderNavegacao
@@ -107,7 +168,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
         {etapas >= 1 && etapas <= 2 && <h1 className={style.container__header_current}>1. Dados do agricultor</h1>}
 
         {etapas === 1 && <h1 className={style.container__header_currentNav}>2. Endereço do Endereço</h1>}
-        {etapas != 1 && <h1 className={style.container__header_current}>2. Endereço do Endereço</h1>}
+        {etapas != 1 && <h1 className={style.container__header_current}>2. Dados do Endereço</h1>}
 
         {etapas === 2 && <h1 className={style.container__header_currentNav}>3. Atvidades rurais</h1>}
         {etapas >= 0 && etapas < 2 && <h1 className={style.container__header_current}>3. Atvidades rurais</h1>}
@@ -121,16 +182,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
           validationSchema={validateSchema}
 
           onSubmit={(values, { setSubmitting }) => {
-            mutate(values,{
-              onSuccess: (res) => {
-                window.location.href = '/agricultores';
-              },
-              onError: (error) => {
-                console.log(error)
-              }
-            
-            });
-
+            tipoUsuario(values)
           }}
         >
           {(formik) => {
@@ -177,8 +229,13 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
                         <h1>Voltar</h1>
                       </Link>
                     </button>
-                    <button type="submit" className={style.container__ContainerForm_buttons_linkWhite}>
-                        <h1>Finalizar</h1>
+                    <button 
+                    onClick={()=>{
+                      tipoUsuario(formik.values)
+                    }}
+                    type="submit" 
+                    className={style.container__ContainerForm_buttons_linkWhite}>
+                      <h1>Finalizar</h1>
                     </button>
                   </div>
                 )}

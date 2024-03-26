@@ -4,9 +4,33 @@ import { cpfMask } from "@/utils/Masks/cpfMask";
 
 
 export default function DadosForm({ formik }) {
+  console.log('values', formik.values)
 
   return (
     <>
+      <div className={style.container__ContainerForm_form}>
+        <label htmlFor="tipo">Tipo Usuario <span>*</span></label>
+        <select
+          className={style.container__ContainerForm_form_halfContainer_select}
+          id="tipo"
+          name="tipo"
+          placeholder="Escolha o tipo do usuario"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.tipo}
+          required
+        >
+          <option value="" >Selecione...</option>
+          <option value="Admin">Admin</option>
+          <option value="Agricultor">Agricultor</option>
+          <option value="Coordenador">Coordenador</option>
+          <option value="Copppabacs">Copppabacs</option>
+        </select>
+        {formik.touched.tipo && formik.errors.tipo ? (
+          <span className={style.form__error}>{formik.errors.tipo}</span>
+        ) : null}
+
+      </div>
       <label htmlFor="email">E-mail <span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
@@ -191,7 +215,7 @@ export default function DadosForm({ formik }) {
 
       </div>
 
-        
+
     </>
   );
 }

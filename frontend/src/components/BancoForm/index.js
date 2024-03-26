@@ -1,7 +1,6 @@
 "use client"
 
 import { useMutation } from "react-query";
-import { postAgricultor } from "@/api/usuarios/agricultor/postAgricultor";
 
 import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
@@ -11,7 +10,6 @@ import style from "./agricultorForm.module.scss";
 
 import HeaderNavegacao from "../HeaderNavegacao";
 import DadosEndereco from "./DadosEndereco";
-import DadosAtividadesRurais from "./ObjetosBanco";
 import Link from "next/link";
 import DadosBanco from "./DadosBanco";
 import ObjetosBanco from "./ObjetosBanco";
@@ -22,30 +20,30 @@ const BancoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   
 
   const initialValues = {
-    nomeBanco: "",
-    responsavel: "",
-    contato: "",
-    endereco: {
-      cep: "",
-      estado: "",
-      cidade: "",
-      bairro: "",
-      nome: "",
-      numero: "",
-      referencia: "",
-    },
+    nome: "",
     comunidade: "",
     anoFundacao: "",
-    descricaoBanco: "",
-    objetosBanco: {
-      bombonas: "",
-      peneirasSelecao: "",
+    historiaBanco: "",
+    variedadesTrabalhadas: "",
+    endereco: {
+      logradouro: "",
+      referencia: "",
+      cidade: "",
+      estado: "",
+      cep: "",
+      numero: "",
+      bairro: ""
+    },
+    objetos: {
+      bombona: "",
+      peneiraSelecao: "",
       balanca: "",
-      armarios: "",
-      plantadeiras: "",
+      armario: "",
+      plantadeira: "",
       lona: "",
-      batedeirasCereais: "",
-    }
+      batedeiraCereal: "",
+    },
+    
 
 
   }
@@ -71,11 +69,9 @@ const BancoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   })
   const { status, mutate } = useMutation(
     async (values) => {
-      console.log("valores: ", values);
       return postBanco(values);
     }, {
     onSuccess: (res) => {
-
     },
     onError: (error) => {
       console.log(error);
@@ -83,9 +79,7 @@ const BancoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
     }
   }
   );
-
   const [etapas, setEtapas] = useState(0);
-  
   return (
     <div id="header" className={style.container}>
       <HeaderNavegacao
@@ -115,11 +109,14 @@ const BancoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
           validationSchema={validateSchema}
 
           onSubmit={(values, { setSubmitting }) => {
+            console.log(values)
             mutate(values,{
               onSuccess: (res) => {
-                window.location.href = '/bancosSementes';
+                console.log("enviou");
+                window.location.href = '/bancoSementes';
               },
               onError: (error) => {
+                console.log(teste)
                 console.log(error)
               }
             
@@ -171,7 +168,20 @@ const BancoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
                         <h1>Voltar</h1>
                       </Link>
                     </button>
-                    <button type="submit" className={style.container__ContainerForm_buttons_linkWhite}>
+                    <button onClick={()=> {
+                       mutate(formik.values,{
+                        onSuccess: (res) => {
+                          console.log("enviou");
+                          window.location.href = '/bancoSementes';
+                        },
+                        onError: (error) => {
+                          console.log(teste)
+                          console.log(error)
+                        }
+                      
+                      });
+                    }}
+                    className={style.container__ContainerForm_buttons_linkWhite}>
                         <h1>Finalizar</h1>
                     </button>
                   </div>

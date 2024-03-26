@@ -9,9 +9,9 @@ export default function muralPage() {
             <Header
                 hrefAnterior="/inicio" />
             <Mural
-                diretorioAnterior="Home /"
-                diretorioAtual="Mural"
-                hrefAnterior="/inicio" />
+                diretorioAnterior="Home  "
+                diretorioAtual="/ Mural"
+                hrefAnterior="/ inicio" />
             <Footer />
         </div>
     )

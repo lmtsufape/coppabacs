@@ -11,7 +11,7 @@ export default function bancoSementesPage() {
 
       <ListBancoSementes
         diretorioAnterior="Home /"
-        diretorioAtual="Agricultores"
+        diretorioAtual="Bancos de Sementes"
         hrefAnterior="/inicio"
         table1="nome"
         table2="Responsavel"
