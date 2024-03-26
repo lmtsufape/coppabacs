@@ -4,21 +4,20 @@ import { cpfMask } from "@/utils/Masks/cpfMask";
 
 
 export default function DadosBanco({ formik }) {
-
   return (
     <>
-      <label htmlFor="nomeBanco">Nome do Banco <span>*</span></label>
+      <label htmlFor="nome">Nome do Banco <span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
-        id="nomeBanco"
-        name="nomeBanco"
+        id="nome"
+        name="nome"
         placeholder="Insira o nome do banco"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
-        value={formik.values.nomeBanco}
+        value={formik.values.nome}
         required />
-      {formik.touched.nomeBanco && formik.errors.nomeBanco ? (
-        <span className={style.form__error}>{formik.errors.nomeBanco}</span>
+      {formik.touched.nome && formik.errors.nome ? (
+        <span className={style.form__error}>{formik.errors.nome}</span>
       ) : null}
       <div className={style.container__ContainerForm_form_halfContainer}>
         <div>
@@ -55,21 +54,55 @@ export default function DadosBanco({ formik }) {
           ) : null}
 
         </div>
+        <div>
+          <label htmlFor="comunidade">Comunidade <span>*</span></label>
+          <input
+            className={style.container__ContainerForm_form_halfContainer_input}
+            id="comunidade"
+            name="comunidade"
+            placeholder="Insira comunidade"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.comunidade}
+            required />
+          {formik.touched.comunidade && formik.errors.comunidade ? (
+            <span className={style.form__error}>{formik.errors.comunidade}</span>
+          ) : null}
+
+        </div>
+        <div>
+          <label htmlFor="anoFundacao">data Fundacao <span>*</span></label>
+          <input
+            className={style.container__ContainerForm_form_halfContainer_input}
+            id="anoFundacao"
+            name="anoFundacao"
+            type="date"
+            format="dd/MM/yyyy"
+            placeholder="Insira seu dataFundacao"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.anoFundacao}
+            required />
+          {formik.touched.anoFundacao && formik.errors.anoFundacao ? (
+            <span className={style.form__error}>{formik.errors.anoFundacao}</span>
+          ) : null}
+
+        </div>
       </div>
-      <label htmlFor="descricaoBanco">Descricao do Banco <span>*</span></label>
+      <label htmlFor="historiaBanco">Historia do Banco <span>*</span></label>
       <textarea
         className={style.container__ContainerForm_form_input}
-        id="descricaoBanco"
-        name="descricaoBanco"
-        placeholder="Insira a descricao do banco"
+        id="historiaBanco"
+        name="historiaBanco"
+        placeholder="Insira a historia do banco"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
-        value={formik.values.descricaoBanco}
+        value={formik.values.historiaBanco}
         required
         style={{ height: '10em', resize: 'none' }}
       />
-      {formik.touched.descricaoBanco && formik.errors.descricaoBanco ? (
-        <span className={style.form__error}>{formik.errors.descricaoBanco}</span>
+      {formik.touched.historiaBanco && formik.errors.historiaBanco ? (
+        <span className={style.form__error}>{formik.errors.historiaBanco}</span>
       ) : null}
 
     </>
