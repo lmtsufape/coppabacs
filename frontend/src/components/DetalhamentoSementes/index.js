@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 import HeaderNavegacao from "@/components/HeaderNavegacao";
 import DadosSementes from "./DadosSementes"
 import DadosToleranciaAdversidades from "./DadosToleranciaAdversidades";
+import InformacoesColeta from "./InformacoesColeta";
 import styles from "@/components/DetalhamentoSementes/detalhamentoSementes.module.scss";
 import Image from "next/image";
 import DadosCaracteristicasAgronomicas from "./DadosCaracteristicasAgronomicas";
@@ -126,6 +127,7 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
                                 <DadosSementes formik={formik} editar={editar} />
                                 <DadosCaracteristicasAgronomicas formik={formik} editar={editar}/>
                                 <DadosToleranciaAdversidades formik={formik} editar={editar} />
+                                <InformacoesColeta formik={formik} editar={editar} />
 
                             </Form>
                         )

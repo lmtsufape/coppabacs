@@ -6,11 +6,9 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
             <div className={styles.container__header_title}>
                 <h1>Tolerância à adversidades</h1>
             </div>
-
             <div className={styles.container__ContainerForm_form_threePartsContainer}>
                 {editar === false ? (
                     <>
-
                         <div>
                             <label htmlFor="toleranciaAdversidades.altaTemperatura">Alta Temperatura </label>
                             <input
@@ -18,7 +16,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 name="toleranciaAdversidades.altaTemperatura"
                                 placeholder="Não informado"
                                 value={formik.values.toleranciaAdversidades.altaTemperatura}
-
+                                disabled
                             />
                         </div>
                         <div>
@@ -28,7 +26,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 name="toleranciaAdversidades.baixaTemperatura"
                                 placeholder="Não informado"
                                 value={formik.values.toleranciaAdversidades.baixaTemperatura}
-
+                                disabled
                             />
                         </div>
                         <div>
@@ -38,7 +36,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 name="toleranciaAdversidades.geada"
                                 placeholder="Não informado"
                                 value={formik.values.toleranciaAdversidades.geada}
-
+                                disabled
                             />
                         </div>
                         <div>
@@ -48,7 +46,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 name="toleranciaAdversidades.chuvaExcessiva"
                                 placeholder="Não informado"
                                 value={formik.values.toleranciaAdversidades.chuvaExcessiva}
-
+                                disabled
                             />
                         </div>
                         <div>
@@ -58,7 +56,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 name="toleranciaAdversidades.seca"
                                 placeholder="Não informado"
                                 value={formik.values.toleranciaAdversidades.seca}
-
+                                disabled
                             />
                         </div>
                         <div>
@@ -68,7 +66,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 name="toleranciaAdversidades.ventos"
                                 placeholder="Não informado"
                                 value={formik.values.toleranciaAdversidades.ventos}
-
+                                disabled
                             />
                         </div>
                         <div>
@@ -78,7 +76,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 name="toleranciaAdversidades.salinidade"
                                 placeholder="Não informado"
                                 value={formik.values.toleranciaAdversidades.salinidade}
-
+                                disabled
                             />
                         </div>
                         <div>
@@ -88,7 +86,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 name="toleranciaAdversidades.toxidadeAluminio"
                                 placeholder="Não informado"
                                 value={formik.values.toleranciaAdversidades.toxidadeAluminio}
-
+                                disabled
                             />
                         </div>
                         <div>
@@ -98,7 +96,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 name="toleranciaAdversidades.soloArgiloso"
                                 placeholder="Não informado"
                                 value={formik.values.toleranciaAdversidades.soloArgiloso}
-
+                                disabled
                             />
                         </div>
                         <div>
@@ -108,7 +106,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 name="toleranciaAdversidades.soloArenoso"
                                 placeholder="Não informado"
                                 value={formik.values.toleranciaAdversidades.soloArenoso}
-
+                                disabled
                             />
                         </div>
                         <div>
@@ -118,7 +116,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 name="toleranciaAdversidades.soloAcido"
                                 placeholder="Não informado"
                                 value={formik.values.toleranciaAdversidades.soloAcido}
-
+                                disabled
                             />
                         </div>
                         <div>
@@ -128,7 +126,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 name="toleranciaAdversidades.soloBaixaFertilidade"
                                 placeholder="Não informado"
                                 value={formik.values.toleranciaAdversidades.soloBaixaFertilidade}
-
+                                disabled
                             />
                         </div>
                     </>

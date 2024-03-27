@@ -1,15 +1,75 @@
 import styles from "../detalhamentoSementes.module.scss";
+import { Field, useFormikContext } from "formik";
+import { useState } from "react";
 
 export default function DadosSementes({ formik, editar }) {
+    const { values, setFieldValue, errors, touched } = useFormikContext();
+    const [outraFinalidade, setOutraFinalidade] = useState("");
+    const [isOutraFinalidadeSelecionada, setIsOutraFinalidadeSelecionada] = useState(false);
+
+
+    const finalidadeSementeArray = Array.isArray(values.finalidadeSemente) ? values.finalidadeSemente : [];
+
+
+    const finalidades = [
+        { name: "etilica", label: "Bebídas Etílicas" },
+        { name: "naoEtilica", label: "Bebidas não Etílicas" },
+        { name: "inNatura", label: "Consumo in Natura" },
+        { name: "forragem", label: "Forragem/Silagem" },
+        { name: "processamento", label: "Processamento (Industrial/Artesanal)" },
+        { name: "outra", label: "Outra Finalidade" },
+    ];
+
+    const handleCheckboxChange = (finalidade, isChecked) => {
+        let novasFinalidades = [...finalidadeSementeArray];
+
+        if (isChecked) {
+            // Para "Outra", verifica se já existe algum valor customizado antes de adicionar
+            if (finalidade === 'outra') {
+                setIsOutraFinalidadeSelecionada(true);
+                if (outraFinalidade && !novasFinalidades.includes(outraFinalidade)) {
+                    novasFinalidades.push(outraFinalidade);
+                }
+            } else if (!novasFinalidades.includes(finalidade)) {
+                novasFinalidades.push(finalidade);
+            }
+        } else {
+            // Se desmarcado, remove a atividade ou a última atividade customizada "Outra"
+            if (finalidade === 'outra') {
+                setIsOutraFinalidadeSelecionada(false);
+                // Remove a última entrada de "Outra" se houver
+                if (outraFinalidade) {
+                    novasFinalidades = novasFinalidades.filter(item => item !== outraFinalidade);
+                    setOutraFinalidade(''); // Limpa o valor de outra atividade após remoção
+                }
+            } else {
+                novasFinalidades = novasFinalidades.filter(item => item !== finalidade);
+            }
+        }
+
+        setFieldValue('finalidadeSemente', novasFinalidades);
+    };
+
+    const handleOutraFinalidadeChange = (e) => {
+        const novoValor = e.target.value;
+        setOutraFinalidade(novoValor);
+
+
+        // Atualiza imediatamente a lista de atividades se já estiver na lista
+        if (finalidadeSementeArray.includes(outraFinalidade) || isOutraFinalidadeSelecionada) {
+            const novasFinalidades = finalidadeSementeArray.filter(item => item !== outraFinalidade);
+            novasFinalidades.push(novoValor);
+            setFieldValue('finalidadeSemente', novasFinalidades);
+        }
+    };
     return (
         <>
             <div className={styles.container__header_title}>
                 <h1>Dados da Semente</h1>
             </div>
             <div className={styles.container__ContainerForm_form_threePartsContainer}>
-                {editar === false ? (
+            {editar === false ? (
                     <>
-
                         <div>
                             <label htmlFor="cultura">Cultura</label>
                             <input
@@ -142,6 +202,17 @@ export default function DadosSementes({ formik, editar }) {
                                 disabled
                             />
                         </div>
+                        <div>
+                            <label htmlFor="finalidadeSemente">Finalidade </label>
+                            <input
+                                className={styles.container__ContainerForm_form_input}
+                                name="finalidadeSemente"
+                                placeholder="Não informado"
+                                onBlur={formik.handleBlur}
+                                value={formik.values.finalidadeSemente}
+                                disabled
+                            />
+                        </div>
 
                     </>
                 ) : (
@@ -195,7 +266,7 @@ export default function DadosSementes({ formik, editar }) {
                             ) : null}
 
                         </div>
-                        <div className={styles.radio}>
+                        <div >
                             <label htmlFor="dominioPublico">Cultivar de Domínio Público </label>
                             <div className={styles.radio__itens}>
                                 <input
@@ -244,20 +315,20 @@ export default function DadosSementes({ formik, editar }) {
                             </div>
                         </div>
                         <div>
-                        <label htmlFor="regAdaptCultivar">Região de Adaptação da Cultivar </label>
-                        <input
-                            className={styles.container__ContainerForm_form_halfContainer_input}
-                            id="regAdaptCultivar"
-                            name="regAdaptCultivar"
-                            placeholder="Insira a região de adaptação"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.regAdaptCultivar}
-                            required />
-                        {formik.touched.tecnico && formik.errors.regAdaptCultivar ? (
-                            <span className={styles.form__error}>{formik.errors.regAdaptCultivar}</span>
-                        ) : null}
-                    </div>
+                            <label htmlFor="regAdaptCultivar">Região de Adaptação da Cultivar </label>
+                            <input
+                                className={styles.container__ContainerForm_form_halfContainer_input}
+                                id="regAdaptCultivar"
+                                name="regAdaptCultivar"
+                                placeholder="Insira a região de adaptação"
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.regAdaptCultivar}
+                                required />
+                            {formik.touched.tecnico && formik.errors.regAdaptCultivar ? (
+                                <span className={styles.form__error}>{formik.errors.regAdaptCultivar}</span>
+                            ) : null}
+                        </div>
                         <div>
                             <label htmlFor="altitudeMaxima">Altitude máxima</label>
                             <input
@@ -291,20 +362,20 @@ export default function DadosSementes({ formik, editar }) {
                             ) : null}
                         </div>
                         <div>
-                        <label htmlFor="doencas">Resistência à Doenças </label>
-                        <input
-                            className={styles.container__ContainerForm_form_halfContainer_input}
-                            id="doencas"
-                            name="doencas"
-                            placeholder="Insira quais doencas a planta possui resistência"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.doencas}
-                            required />
-                        {formik.touched.doencas && formik.errors.doencas ? (
-                            <span className={styles.form__error}>{formik.errors.doencas}</span>
-                        ) : null}
-                    </div>
+                            <label htmlFor="doencas">Resistência à Doenças </label>
+                            <input
+                                className={styles.container__ContainerForm_form_halfContainer_input}
+                                id="doencas"
+                                name="doencas"
+                                placeholder="Insira quais doencas a planta possui resistência"
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.doencas}
+                                required />
+                            {formik.touched.doencas && formik.errors.doencas ? (
+                                <span className={styles.form__error}>{formik.errors.doencas}</span>
+                            ) : null}
+                        </div>
                         <div>
                             <label htmlFor="pragas">Resistência à Pragas </label>
                             <input
@@ -353,9 +424,37 @@ export default function DadosSementes({ formik, editar }) {
                                 <span className={styles.form__error}>{formik.errors.caracteristicasNegativas}</span>
                             ) : null}
                         </div>
+                        <div className={styles.checkbox}>
+                            <label htmlFor="finalidadeSemente" className={styles.checkbox__label}>Finalidade</label>
+                            <div className={styles.checkbox__itens}>
+                                {finalidades.map((finalidade) => (
+                                    <div key={finalidade.name}>
+                                        <input
+                                            type="checkbox"
+                                            name={finalidade.name}
+                                            checked={finalidadeSementeArray.includes(finalidade.name) || (finalidade.name === 'outra' && isOutraFinalidadeSelecionada)}
+                                            onChange={(e) => handleCheckboxChange(finalidade.name, e.target.checked)}
+                                            required
+                                        />
+                                        {finalidade.name !== 'outra' || !isOutraFinalidadeSelecionada ? (
+                                            <label htmlFor={finalidade.name}>{finalidade.label}</label>
+                                        ) : (
+                                            <input
+                                                className={styles.inputCheckbox}
+                                                type="text"
+                                                value={outraFinalidade}
+                                                onChange={handleOutraFinalidadeChange}
+                                                placeholder="Insira outra finalidade"
+                                            />
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </>
                 )}
             </div>
+
         </>
     )
 }

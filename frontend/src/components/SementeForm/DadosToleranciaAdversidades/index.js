@@ -275,37 +275,37 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
             <h1 className={styles.title}>Informações de Coleta e Avaliação</h1>
             <div className={styles.sidedForm}>
                 <div>
-                        <label htmlFor="regiaoColetaDados">Região de Coleta dos Dados <span>*</span></label>
-                        <input
-                            className={styles.sidedForm_input}
-                            id="regiaoColetaDados"
-                            name="regiaoColetaDados"
-                            placeholder="Insira a região de coleta dos dados"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.regiaoColetaDados}
-                            required />
-                        {formik.touched.regiaoColetaDados && formik.errors.regiaoColetaDados ? (
-                            <span className={styles.form__error}>{formik.errors.regiaoColetaDados}</span>
-                        ) : null}
+                    <label htmlFor="regiaoColetaDados">Região de Coleta dos Dados <span>*</span></label>
+                    <input
+                        className={styles.sidedForm_input}
+                        id="regiaoColetaDados"
+                        name="regiaoColetaDados"
+                        placeholder="Insira a região de coleta dos dados"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.regiaoColetaDados}
+                        required />
+                    {formik.touched.regiaoColetaDados && formik.errors.regiaoColetaDados ? (
+                        <span className={styles.form__error}>{formik.errors.regiaoColetaDados}</span>
+                    ) : null}
 
-                    </div>
-                    <div>
-                        <label htmlFor="avaliacaoSemente">Avaliação Geral da Semente <span>*</span></label>
-                        <textarea
-                            className={styles.sidedForm_textarea}
-                            id="avaliacaoSemente"
-                            name="avaliacaoSemente"
-                            placeholder="Insira avaliação geral da semente"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.avaliacaoSemente}
-                            required />
-                        {formik.touched.avaliacaoSemente && formik.errors.avaliacaoSemente ? (
-                            <span className={styles.form__error}>{formik.errors.avaliacaoSemente}</span>
-                        ) : null}
+                </div>
+                <div>
+                    <label htmlFor="avaliacaoSemente">Avaliação Geral da Semente <span>*</span></label>
+                    <textarea
+                        className={styles.sidedForm_textarea}
+                        id="avaliacaoSemente"
+                        name="avaliacaoSemente"
+                        placeholder="Insira avaliação geral da semente"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.avaliacaoSemente}
+                        required />
+                    {formik.touched.avaliacaoSemente && formik.errors.avaliacaoSemente ? (
+                        <span className={styles.form__error}>{formik.errors.avaliacaoSemente}</span>
+                    ) : null}
 
-                    </div>
+                </div>
             </div>
         </>
     )

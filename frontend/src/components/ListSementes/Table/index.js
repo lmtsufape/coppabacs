@@ -29,8 +29,8 @@ export default function tableLayout({table1, table2, table3, table4, listSemente
         {listSementes.map((sementes,index) => {
           return(
             <tr key={index}>
+              <td>{sementes.cultura}</td>
               <td>{sementes.nome}</td>
-              <td>{sementes.descricao}</td>
               <td>{sementes.pragas}</td>
               <td>
               <div className={styles.content__table_container_buttons}>

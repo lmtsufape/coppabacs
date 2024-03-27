@@ -76,7 +76,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.tipoGrao">Tipo de Grão/Fruto/Tubérculo/Raiz</label>
+                            <label htmlFor="caracteristicasAgronomicas.tipoGrao">Tipo de Grão/ Fruto /Tubérculo/ Raiz</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
                                 name="caracteristicasAgronomicas.tipoGrao"
@@ -87,7 +87,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.corGrao">Cor do Grão/Fruto/Tubérculo/Raiz</label>
+                            <label htmlFor="caracteristicasAgronomicas.corGrao">Cor do Grão/ Fruto/ Tubérculo/ Raiz</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
                                 name="caracteristicasAgronomicas.corGrao"
