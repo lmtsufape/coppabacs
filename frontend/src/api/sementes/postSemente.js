@@ -17,7 +17,7 @@ export async function postSemente(
   producaoSementes,
   tabelaBancoSementes
 ) {
-  return await api.post("/semente", {
+  return await api.post("/sementes", {
     nome,
     descricao,
     imagem,

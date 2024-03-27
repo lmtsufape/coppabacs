@@ -17,7 +17,7 @@ export async function patchSemente(
   toleranciaAdversidades,
   producaoSementes,
   tabelaBancoSementes) {
-   return await api.patch(`/semente/${id}`, {
+   return await api.patch(`/sementes/${id}`, {
     nome,
     descricao,
     imagem,
