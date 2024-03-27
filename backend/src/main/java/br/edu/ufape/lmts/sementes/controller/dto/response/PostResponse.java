@@ -22,8 +22,6 @@ public  class PostResponse  {
 	private String imagem;
 	private LocalDate data;
 
-
-
 	public PostResponse(Post obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		modelMapper.map(obj, this);

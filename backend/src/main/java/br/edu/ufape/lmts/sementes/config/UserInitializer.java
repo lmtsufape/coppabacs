@@ -45,6 +45,7 @@ public class UserInitializer  implements CommandLineRunner {
 			admin.setContato("AdminContato");
 			admin.setEmail("admin@admin.com");
 			admin.setCpf("adminCpf");
+			admin.setContato("11 11111-1111");
 			admin.setEndereco(null);
 			admin.setSexo("admin");
 			admin.setSenha(passwordEncoder.encode("AdminSenha"));
@@ -56,6 +57,7 @@ public class UserInitializer  implements CommandLineRunner {
 			Gerente gerente = new Gerente();
 			gerente.setNome("Gerente");
 			gerente.setCpf("11111111111");
+			gerente.setContato("14 11111-1111");
 			gerente.setConjuge(null);
 			gerente.setEmail("gerente@gerente.com");
 			gerente.setEndereco(null);
@@ -70,6 +72,7 @@ public class UserInitializer  implements CommandLineRunner {
 			agricultor.setNome("Agricultor");
 			agricultor.setCpf("22222222222");
 			agricultor.setConjuge(null);
+			agricultor.setContato("12 11111-1111");
 			agricultor.setEmail("agricultor@agricultor.com");
 			agricultor.setEndereco(null);
 			agricultor.setSexo("agricultor");
@@ -82,6 +85,7 @@ public class UserInitializer  implements CommandLineRunner {
 			Coppabacs coppabacs = new Coppabacs();
 			coppabacs.setNome("Coppabacs");
 			coppabacs.setCpf("33333333333");
+			coppabacs.setContato("13 11111-1111");
 			coppabacs.setConjuge(null);
 			coppabacs.setEmail("coppabacs@coppabacs.com");
 			coppabacs.setEndereco(null);

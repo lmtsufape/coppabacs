@@ -1,12 +1,33 @@
 "use client"
 
+import { useEffect, useState } from "react";
 import style from "../agricultorForm.module.scss";
+import { useMutation } from "react-query";
+import { getAllBancos } from "@/api/bancoSementes/getAllBancos";
 
 export default function DadosEndereco({ formik }) {
 
+  const [bancos, setBancos] = useState([]);
+  useEffect(() => {
+    mutate();
+  }, [])
+
+  const { state, mutate } = useMutation(
+    async () => {
+      return getAllBancos();
+    }, {
+    onSuccess: (res) => {
+      console.log(res)
+      setBancos(res.data);
+    },
+    onError: (error) => {
+      console.log(error)
+    }
+  }
+  );
   return (
     <>
-    <label htmlFor="endereco.cep">Cep <span >*</span></label>
+      <label htmlFor="endereco.cep">Cep <span >*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="cep"
@@ -62,19 +83,19 @@ export default function DadosEndereco({ formik }) {
       {formik.touched.bairro && formik.errors.bairro ? (
         <span className={style.form__error}>{formik.errors.endereco.bairro}</span>
       ) : null}
-      <label htmlFor="endereco.nome">Nome <span >*</span></label>
+      <label htmlFor="endereco.logradouro">Rua <span >*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="nomeEndereco"
-        name="endereco.nome"
+        name="endereco.logradouro"
         placeholder="Insira seu endereço"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
-        value={formik.values.endereco.nome}
+        value={formik.values.endereco.logradouro}
         required
       />
-      {formik.touched.nomeEndereco && formik.errors.endereco.nome ? (
-        <span className={style.form__error}>{formik.errors.endereco.nome}</span>
+      {formik.touched.nomeEndereco && formik.errors.endereco.logradouro ? (
+        <span className={style.form__error}>{formik.errors.endereco.logradouro}</span>
       ) : null}
       <div className={style.container__ContainerForm_form_halfContainer}>
         <div>
@@ -109,15 +130,25 @@ export default function DadosEndereco({ formik }) {
         </div>
       </div>
       <label htmlFor="">Banco de sementes</label>
-      <input
-        className={style.container__ContainerForm_form_input}
+
+      <select
+        className={style.container__ContainerForm_form_halfContainer_input}
         id="bancoId"
         name="bancoId"
         placeholder="Insira o banco de sementes"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.bancoId}
-      />
+        required
+      >
+        <option value="" >Selecione...</option>
+        {bancos.map((bancos, index) => {
+          return (
+            <option key={index} value={bancos.id}>{bancos.nome}</option>
+
+          )
+        })}
+      </select>
       {formik.touched.bancoId && formik.errors.bancoId ? (
         <span className={style.form__error}>{formik.errors.bancoId}</span>
       ) : null}

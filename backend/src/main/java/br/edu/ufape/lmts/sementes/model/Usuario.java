@@ -72,7 +72,7 @@ public abstract class Usuario implements Serializable {
 	private Set<TipoUsuario> roles;
 
 	public Usuario(Long id, String nome, String nomePopular, String email, String senha, Endereco endereco, String cpf,
-			Date dataNascimento, String contato, String imagem, String sexo, Conjuge conjuge) {
+			Date dataNascimento, String contato, String imagem, String sexo, Conjuge conjuge, List<Post> posts) {
 		this.id = id;
 		this.nome = nome;
 		this.nomePopular = nomePopular;
@@ -85,7 +85,24 @@ public abstract class Usuario implements Serializable {
 		this.imagem = imagem;
 		this.sexo = sexo;
 		this.conjuge = conjuge;
+		this.posts = posts;
 	}
+	public Usuario(Long id, String nome, String nomePopular, String email, String senha, Endereco endereco, String cpf,
+	        Date dataNascimento, String contato, String imagem, String sexo, Conjuge conjuge) {     
+		this.id = id;
+		this.nome = nome;
+		this.nomePopular = nomePopular;
+		this.email = email;
+		this.senha = senha;
+		this.endereco = endereco;
+		this.cpf = cpf;
+		this.dataNascimento = dataNascimento;
+		this.contato = contato;
+		this.imagem = imagem;
+		this.sexo = sexo;
+		this.conjuge = conjuge;
+	    this.posts = new ArrayList<>();
+	    }
 
 	public Usuario() {
 		this.roles = new HashSet<>();

@@ -1,10 +1,12 @@
 package br.edu.ufape.lmts.sementes.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.validator.constraints.UniqueElements;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +33,7 @@ import lombok.ToString;
 @NoArgsConstructor @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public  class BancoSementes  {
+public class BancoSementes  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
@@ -47,7 +49,8 @@ public  class BancoSementes  {
 
 	@OneToMany(mappedBy = "bancoSementes")
 	private List<Agricultor> agricultores;
-
+	
+	
 	@OneToMany(mappedBy = "bancoSementes")
 	private List<Gerente> gerentes;
 
@@ -56,10 +59,7 @@ public  class BancoSementes  {
 	)
 	@ToString.Exclude
 	private Endereco endereco;
-	@OneToOne(cascade = CascadeType.ALL,
-		orphanRemoval = true
-	)
-	@ToString.Exclude
+	@Embedded
 	private ObjetosBancoSementes objetosBancoSementes;
 	@OneToMany
 	@JoinColumn(name = "bancoSementes_id")
@@ -73,6 +73,14 @@ public  class BancoSementes  {
 	@JoinColumn(name = "bancoSementes_id")
 	@ToString.Exclude
 	private List<TransacaoGenerica> transacaoGenerica;
+	
+	public void adicionarGerente(Gerente gerente) {
+	    if (this.gerentes == null) {
+	        this.gerentes = new ArrayList<>();
+	    }
+	    this.gerentes.add(gerente);
+	}
+
 
 	public long getId() {
 		return id;

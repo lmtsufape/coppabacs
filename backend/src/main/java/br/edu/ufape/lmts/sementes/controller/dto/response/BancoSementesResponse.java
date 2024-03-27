@@ -1,5 +1,7 @@
 package br.edu.ufape.lmts.sementes.controller.dto.response;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
@@ -7,8 +9,6 @@ import br.edu.ufape.lmts.sementes.model.BancoSementes;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-
 
 @Getter @Setter @NoArgsConstructor
 public  class BancoSementesResponse  {
@@ -19,10 +19,11 @@ public  class BancoSementesResponse  {
 	private String historiaBanco;
 	private String variedadesTrabalhadas;
 	private EnderecoResponse endereco; 
+	private List<GerenteResponse> gerentes;
+	private ObjetosBancoSementesResponse objetos;
 
 	public BancoSementesResponse(BancoSementes obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		modelMapper.map(obj, this);	
 	}
-
 }

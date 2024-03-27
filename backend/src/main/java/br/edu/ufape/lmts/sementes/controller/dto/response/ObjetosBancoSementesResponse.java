@@ -12,7 +12,6 @@ import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor
 public  class ObjetosBancoSementesResponse  {
-	private Long id;
 	private int bombona;
 	private int peneiraSelecao;
 	private int balanca;
@@ -20,8 +19,6 @@ public  class ObjetosBancoSementesResponse  {
 	private int plantadeira;
 	private int lona;
 	private int batedeiraCereal;
-
-
 
 	public ObjetosBancoSementesResponse(ObjetosBancoSementes obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
