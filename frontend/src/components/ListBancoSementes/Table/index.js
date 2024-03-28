@@ -3,21 +3,20 @@ import style from "./table.module.scss";
 import Link from "next/link";
 
 
-export default function tableLayout({table1, table2, table3, table4, listBancos}){
-  
-  
-  return(
+export default function tableLayout({ table1, table2, table3, table4, listBancos }) {
+
+  return (
     <div className={style.content}>
       <table className={style.content__table}>
         <thead className={style.content__table__header}>
           <tr>
             <th>{table1}</th>
-            <th>{table2}</th>            
+            <th>{table2}</th>
 
             <th className={style.content__table__header_name3}>
               <div >
-              {table3}
-               <Image src="/assets/iconInformacao.svg" alt="Visualizar" width={27} height={26}/>
+                {table3}
+                <Image src="/assets/iconInformacao.svg" alt="Visualizar" width={27} height={26} />
 
               </div>
 
@@ -25,8 +24,8 @@ export default function tableLayout({table1, table2, table3, table4, listBancos}
           </tr>
         </thead>
         <tbody className={style.content__table__body}>
-        {listBancos.map((banco, index) => {
-            return(
+          {listBancos.map((banco, index) => {
+            return (
               <tr key={index}>
                 <td>{banco.nome}</td>
                 <td>{banco.responsavel}</td>
@@ -34,23 +33,25 @@ export default function tableLayout({table1, table2, table3, table4, listBancos}
                   <div className={style.content__table_container_buttons}>
                     <button>
                       <span>
-                        <Link href={`/bancos/${banco.id}`}>
-                          <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26}/>
+                        <Link href={`/bancoSementes/info/${banco.id}`}>
+                          <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
                         </Link>
                       </span>
                     </button>
                     <button>
                       <span>
-                        <Image src="/assets/iconLixeira.svg" alt="Desativar" width={27} height={26}/>
+                        <Image src="/assets/iconLixeira.svg" alt="Desativar" width={27} height={26} />
                       </span>
                     </button>
                   </div>
                 </td>
               </tr>
-            )}
+
+            )
+          }
           )
-        }
-        
+          }
+
         </tbody>
       </table>
     </div>
@@ -58,4 +59,4 @@ export default function tableLayout({table1, table2, table3, table4, listBancos}
 }
 
 
-    
+
