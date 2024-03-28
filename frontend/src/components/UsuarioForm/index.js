@@ -15,6 +15,7 @@ import DadosEndereco from "./DadosEndereco";
 import DadosAtividadesRurais from "./DadosAtividadesRurais";
 import Link from "next/link";
 import Footer from "../Home/Footer";
+import { postUsuario } from "@/api/usuarios/postUsuario";
 
 
 const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
@@ -78,7 +79,7 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   const { status, mutate } = useMutation(
     async (values) => {
       console.log("valores: ", values);
-      return postAgricultor(values);
+      return postUsuario(values);
     }, {
     onSuccess: (res) => {
 
@@ -123,7 +124,7 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
           onSubmit={(values, { setSubmitting }) => {
             mutate(values,{
               onSuccess: (res) => {
-                window.location.href = '/agricultores';
+                window.location.href = '/';
               }
             
             });

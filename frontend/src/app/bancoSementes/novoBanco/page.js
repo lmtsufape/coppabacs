@@ -9,7 +9,10 @@ export default function NewRegisterFarmer() {
         <div className={styles.pageContainer}>
             <Header hrefAnterior="/bancoSementes" />
             <div className={styles.pageContainer__content}>
-                <BancoForm diretorioAnterior="Home / Bancos Sementes /" diretorioAtual="Novo Banco de Semente" hrefAnterior="/bancoSementes" />
+                <BancoForm 
+                diretorioAnterior="Home / Bancos Sementes /" 
+                diretorioAtual="Novo Banco de Semente" 
+                hrefAnterior="/bancoSementes" />
             </div>
             <Footer />
 

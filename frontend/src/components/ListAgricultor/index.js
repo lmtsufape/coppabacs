@@ -1,19 +1,14 @@
 "use client"
 
-import Image from "next/image";
-import style from "./list.module.scss";
-
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 
-import Link from "next/link";
 import Header from "../HeaderNavegacao";
 import Table from "./Table";
-import { getAllAgricultores } from "@/api/usuarios/agricultor/getAllAgricultores";
 import { Search } from "../searchUsuario";
-import { getAllUsuarios } from "@/api/usuarios/getAllUsuarios";
+import { getAllAgricultores } from "@/api/usuarios/agricultor/getAllAgricultores";
 
-export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4 }) {
+export default function ListAgricultor({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4 }) {
 
   const [agricultores, setAgricultores] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -25,7 +20,8 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
 
   const { state, mutate } = useMutation(
     async () => {
-      return getAllUsuarios();
+      
+      return getAllAgricultores();
     }, {
     onSuccess: (res) => {
       console.log(res);

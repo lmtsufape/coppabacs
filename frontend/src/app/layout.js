@@ -25,7 +25,7 @@ export default function RootLayout({
   const pathName = usePathname();
   const isPublicPage = checkIsPublicRoute(pathName);
   return (
-    <html lang="en">
+    <html lang="pt-br">
       <body className={inter.className}>
           <ProviderQuery>
               <ProviderRedux>

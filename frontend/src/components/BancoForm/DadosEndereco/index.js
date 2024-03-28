@@ -62,19 +62,19 @@ export default function DadosEndereco({ formik }) {
       {formik.touched.bairro && formik.errors.bairro ? (
         <span className={style.form__error}>{formik.errors.endereco.bairro}</span>
       ) : null}
-      <label htmlFor="endereco.nome">Rua <span >*</span></label>
+      <label htmlFor="logradouro">Rua <span >*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
-        id="nomeEndereco"
-        name="endereco.nome"
+        id="logradouro"
+        name="logradouro"
         placeholder="Insira seu endereço"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
-        value={formik.values.endereco.nome}
+        value={formik.values.endereco.logradouro}
         required
       />
-      {formik.touched.nomeEndereco && formik.errors.endereco.nome ? (
-        <span className={style.form__error}>{formik.errors.endereco.nome}</span>
+      {formik.touched.logradouro && formik.errors.endereco.logradouro ? (
+        <span className={style.form__error}>{formik.errors.endereco.logradouro}</span>
       ) : null}
       <div className={style.container__ContainerForm_form_halfContainer}>
         <div>
