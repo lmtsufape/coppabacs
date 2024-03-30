@@ -12,8 +12,9 @@ export default function AssociadosPage() {
         diretorioAtual="Agricultores"
         hrefAnterior="/inicio"
         table1="nome"
-        table2="Função"
-        table3="Ação" />
+        table2="Contato"
+        table3="Função"
+        table4="Ação" />
 
       <Footer />
 
