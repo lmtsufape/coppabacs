@@ -8,6 +8,7 @@ export default function DadosForm({ formik }) {
 
   return (
     <>
+
       <label htmlFor="email">E-mail <span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
@@ -63,7 +64,7 @@ export default function DadosForm({ formik }) {
       {formik.touched.nome && formik.errors.nome ? (
         <span className={style.form__error}>{formik.errors.nome}</span>
       ) : null}
-      <label htmlFor="apelido">Apelido <span>*</span></label>
+      <label htmlFor="apelido">Nome Popular <span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="nomePopular"

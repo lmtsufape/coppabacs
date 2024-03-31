@@ -1,15 +1,15 @@
 
 import Header from "@/components/Home/Header";
 import Footer from "@/components/Home/Footer";
-import ListAgricultores from "@/components/ListAgricultores";
+import ListFuncionarios from "@/components/ListFuncionarios";
 export default function AssociadosPage() {
 
   return (
     <div>
       <Header hrefAnterior="/inicio" />
-      <ListAgricultores
+      <ListFuncionarios
         diretorioAnterior="Home /"
-        diretorioAtual="Agricultores"
+        diretorioAtual="Funcionarios"
         hrefAnterior="/inicio"
         table1="nome"
         table2="Contato"
