@@ -63,10 +63,10 @@ export default function DadosAtividadesRurais({ formik, editar }) {
       setFieldValue('atividadesRurais', novasAtividades);
     }
   };
- // fazer a logica de exibição dos checkboxs e depois fazer a alteração
+  // fazer a logica de exibição dos checkboxs e depois fazer a alteração
   return (
     <>
-      
+
       <div className={style.container__header_title}>
         <h1>Produção sementes</h1>
       </div>
@@ -118,7 +118,7 @@ export default function DadosAtividadesRurais({ formik, editar }) {
           <div>
             <label htmlFor="Cultura">Cultura</label>
             <input
-              className={style.container__ContainerForm_form_input}
+              className={style.container__ContainerForm_form_halfContainer_input}
               name="producaoSementes.cultura"
               placeHolder="Não informado"
               onChange={formik.handleChange}
@@ -129,7 +129,7 @@ export default function DadosAtividadesRurais({ formik, editar }) {
           <div>
             <label htmlFor="Variedade">Variedade</label>
             <input
-              className={style.container__ContainerForm_form_input}
+              className={style.container__ContainerForm_form_halfContainer_input}
               name="producaoSementes.variedade"
               placeHolder="Não informado"
               onChange={formik.handleChange}
@@ -140,7 +140,7 @@ export default function DadosAtividadesRurais({ formik, editar }) {
           <div>
             <label htmlFor="AreaPlantada">Área Plantada</label>
             <input
-              className={style.container__ContainerForm_form_input}
+              className={style.container__ContainerForm_form_halfContainer_input}
               name="producaoSementes.areaPlantada"
               placeHolder="Não informado"
               onChange={formik.handleChange}
@@ -151,7 +151,7 @@ export default function DadosAtividadesRurais({ formik, editar }) {
           <div>
             <label htmlFor="PrevisaoVenda">Previsão de Venda</label>
             <input
-              className={style.container__ContainerForm_form_input}
+              className={style.container__ContainerForm_form_halfContainer_input}
               name="producaoSementes.previsaoVenda"
               placeHolder="Não informado"
               onChange={formik.handleChange}

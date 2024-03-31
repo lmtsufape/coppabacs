@@ -12,10 +12,11 @@ import Table from "./Table";
 
 import { getAllUsuarios } from "@/api/usuarios/getAllUsuarios";
 import { Search, SearchUsuarios } from "../searchUsuario";
+import { getAllCoordenadores } from "@/api/usuarios/coordenador/getAllCoordenadores";
 
-export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3 }) {
+export default function ListCoordenadores({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3 }) {
 
-  const [usuarios, setUsuarios] = useState([]);
+  const [coordenadores, setCoordenadores] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
 
@@ -25,10 +26,10 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
 
   const { status, mutate } = useMutation(
     async () => {
-      return getAllUsuarios();
+      //return getAllCoordenadores();
     }, {
     onSuccess: (res) => {
-      setUsuarios(res.data);
+      setCoordenadores(res.data);
     },
     onError: (error) => {
       console.error(error);
@@ -37,8 +38,8 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
   );
 
 
-  const listUsuarios = usuarios.filter((usuarios) =>
-    usuarios.nome.toLowerCase().includes(searchTerm.toLowerCase())
+  const listCoordenadores = coordenadores.filter((coordenadores) =>
+    coordenadores.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
   return (
     <div>
@@ -49,24 +50,16 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
       />
       <div className={style.header}>
         <div className={style.header__container}>
-          <button >
-            <Link className={style.header__container_link} href="agricultores/solicitacoes">
-              <h1>
-                Solicitações de Cadastro
-              </h1>
-            </Link>
-            <Image src="/assets/iconSinoGray.svg" alt="Adicionar Agricultor" width={27} height={24} />
 
-          </button>
           <button>
 
-            <Link className={style.header__container_link} href="agricultores/novoAgricultor">
+            <Link className={style.header__container_link} href="coordenadores/novoCoordenador">
               <h1>
-                Adicionar Agricultor
+                Adicionar Novo Coordenador
               </h1>
             </Link>
 
-            <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Agricultor" width={27} height={24} />
+            <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Novo Coordenador" width={27} height={24} />
           </button>
           <div className={style.header__container_buttons}>
 
@@ -76,12 +69,12 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
       </div>
 
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      {listUsuarios && (
+      {listCoordenadores && (
         <Table
           table1={table1}
           table2={table2}
           table3={table3}
-          listUsuarios={listUsuarios}
+          listCoordenadores={listCoordenadores}
         />
       )}
     </div>
