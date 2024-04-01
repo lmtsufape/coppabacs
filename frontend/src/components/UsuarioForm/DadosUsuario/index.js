@@ -13,7 +13,7 @@ export default function DadosForm({ formik }) {
         id="email"
         name="email"
         type="email"
-        placeholder="Insira seu email"
+        placeholder="Insira seu e-mail"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.email}
@@ -62,7 +62,7 @@ export default function DadosForm({ formik }) {
       {formik.touched.nome && formik.errors.nome ? (
         <span className={style.form__error}>{formik.errors.nome}</span>
       ) : null}
-      <label htmlFor="apelido">Apelido <span>*</span></label>
+      <label htmlFor="nomePopular">Nome Popular <span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="nomePopular"
@@ -119,7 +119,7 @@ export default function DadosForm({ formik }) {
             id="dataNascimento"
             name="dataNascimento"
             type="date"
-            format="dd/MM/yyyy"
+            format="dd/mm/yyyy"
             placeholder="Insira sua data de nascimento"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -158,7 +158,7 @@ export default function DadosForm({ formik }) {
             className={style.container__ContainerForm_form_halfContainer_input}
             id="conjugeNome"
             name="conjuge.nome"
-            placeholder="Insira o nome do seu conjuge"
+            placeholder="Insira o nome do seu cônjuge"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.conjuge.nome}
@@ -174,7 +174,7 @@ export default function DadosForm({ formik }) {
             className={style.container__ContainerForm_form_halfContainer_select}
             id="conjugueSexo"
             name="conjuge.sexo" // Ajuste aqui para refletir a estrutura aninhada
-            placeholder="Escolha o sexo do seu conjugue"
+            placeholder="Escolha o sexo do seu cônjuge"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.conjuge.sexo} // Corretamente ajustado
