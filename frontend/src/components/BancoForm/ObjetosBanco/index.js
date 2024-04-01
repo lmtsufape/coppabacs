@@ -23,13 +23,13 @@ export default function objetosBanco({ formik }) {
 
         </div>
         <div>
-          <label htmlFor="peneiraSelecao">Poneiras de seleção <span>*</span></label>
+          <label htmlFor="peneiraSelecao">Peneiras de seleção <span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="peneiraSelecao"
             name="objetos.peneiraSelecao"
             type="number"
-            placeholder="Insira seu poneiraSelecao"
+            placeholder="Insira a quantidade de peneiras de seleção"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.objetos.peneiraSelecao}
@@ -46,7 +46,7 @@ export default function objetosBanco({ formik }) {
             id="balanca"
             name="objetos.balanca"
             type="number"
-            placeholder="Insira seu balancas"
+            placeholder="Insira a quantidade de balanças"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.objetos.balanca}
@@ -63,7 +63,7 @@ export default function objetosBanco({ formik }) {
             id="armario"
             name="objetos.armario"
             type="number"
-            placeholder="Insira seu armario"
+            placeholder="Insira a quantidade de armario"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.objetos.armario}
@@ -80,7 +80,7 @@ export default function objetosBanco({ formik }) {
             id="plantadeira"
             name="objetos.plantadeira"
             type="number"
-            placeholder="Insira seu plantadeiras"
+            placeholder="Insira a quantidade de plantadeiras"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.objetos.plantadeira}
@@ -97,7 +97,7 @@ export default function objetosBanco({ formik }) {
             id="lona"
             name="objetos.lona"
             type="number"
-            placeholder="Insira seu lona"
+            placeholder="Insira a quantidade de Lona"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.objetos.lona}
@@ -114,7 +114,7 @@ export default function objetosBanco({ formik }) {
             id="batedeiraCereal"
             name="objetos.batedeiraCereal"
             type="number"
-            placeholder="Insira seu batedeirasCereal"
+            placeholder="Insira a quantidade de Batederias de cereais"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.objetos.batedeiraCereal}

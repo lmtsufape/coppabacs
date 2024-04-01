@@ -29,7 +29,7 @@ export default function Header({ fundacao, responsavel, contato }) {
               <div>
                 <p className={style.header__table_title}>
 
-                  Responsavel:
+                  Responsável:
                 </p>
                 <p>
                   {responsavel}
