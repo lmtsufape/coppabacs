@@ -17,7 +17,6 @@ export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, h
   const [bancos, setBancos] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
-
   useEffect(() => {
     mutate();
   }, [])
@@ -27,8 +26,6 @@ export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, h
       return getAllBancos();
     }, {
     onSuccess: (res) => {
-      console.log(res);
-      console.log(res.data)
       setBancos(res.data);
     },
     onError: (error) => {
@@ -39,8 +36,7 @@ export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, h
   const filteredBancos = bancos.filter((banco) =>
     banco.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  console.log(diretorioAnterior, diretorioAtual, hrefAnterior)
-
+ 
   return (
     <div>
       <Header
@@ -74,6 +70,7 @@ export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, h
         table3={table3}
         listBancos={filteredBancos}
       />
+      
     </div>
   );
 }

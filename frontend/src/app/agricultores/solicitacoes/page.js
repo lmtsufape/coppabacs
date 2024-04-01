@@ -1,14 +1,14 @@
 import Header from "@/components/Home/Header";
 import Footer from "@/components/Home/Footer";
-import ListAgricultor from "@/components/ListAgricultor";
+import ListSolicitacoes from "@/components/ListSolicitacoes";
 
 export default function SolicitacoesPage() {
 
   return (
     <>
       <Header hrefAnterior="/agricultores" />
-        <ListAgricultor
-          class="content"
+        <ListSolicitacoes
+          className="content"
           diretorioAnterior="Home / Agricultores /"
           diretorioAtual="Solicitações"
           hrefAnterior="/agricultores"

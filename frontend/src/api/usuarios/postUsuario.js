@@ -4,7 +4,6 @@ export async function postUsuario(novoUsuario = {
 
   email: "",
   senha: "",
-  confirmarSenha: "",
   nome: "",
   apelido: "",
   contato: "",
