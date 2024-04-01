@@ -1,7 +1,7 @@
 package br.edu.ufape.lmts.sementes.facade;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +15,6 @@ import br.edu.ufape.lmts.sementes.model.BancoSementes;
 import br.edu.ufape.lmts.sementes.model.CaracteristicasAgronomicas;
 import br.edu.ufape.lmts.sementes.model.Conjuge;
 import br.edu.ufape.lmts.sementes.model.Coppabacs;
-import br.edu.ufape.lmts.sementes.model.Cor;
 import br.edu.ufape.lmts.sementes.model.Cultura;
 import br.edu.ufape.lmts.sementes.model.DoacaoUsuario;
 import br.edu.ufape.lmts.sementes.model.Doenca;
@@ -25,7 +24,7 @@ import br.edu.ufape.lmts.sementes.model.Finalidade;
 import br.edu.ufape.lmts.sementes.model.Gerente;
 import br.edu.ufape.lmts.sementes.model.InfraestruturaComunidade;
 import br.edu.ufape.lmts.sementes.model.Item;
-import br.edu.ufape.lmts.sementes.model.ObjetosBancoSementes;
+//import br.edu.ufape.lmts.sementes.model.ObjetosBancoSementes;
 import br.edu.ufape.lmts.sementes.model.Post;
 import br.edu.ufape.lmts.sementes.model.ProducaoSementes;
 import br.edu.ufape.lmts.sementes.model.RegioesAdaptacaoCultivo;
@@ -47,14 +46,13 @@ import br.edu.ufape.lmts.sementes.service.BancoSementesServiceInterface;
 import br.edu.ufape.lmts.sementes.service.CaracteristicasAgronomicasService;
 import br.edu.ufape.lmts.sementes.service.ConjugeService;
 import br.edu.ufape.lmts.sementes.service.CoppabacsService;
-import br.edu.ufape.lmts.sementes.service.CorService;
 import br.edu.ufape.lmts.sementes.service.CulturaService;
 import br.edu.ufape.lmts.sementes.service.DoacaoUsuarioService;
 import br.edu.ufape.lmts.sementes.service.DoencaService;
 import br.edu.ufape.lmts.sementes.service.EmpalhamentoService;
 import br.edu.ufape.lmts.sementes.service.EnderecoService;
 import br.edu.ufape.lmts.sementes.service.FinalidadeService;
-import br.edu.ufape.lmts.sementes.service.GerenteService;
+//import br.edu.ufape.lmts.sementes.service.GerenteService;
 import br.edu.ufape.lmts.sementes.service.GerenteServiceInterface;
 import br.edu.ufape.lmts.sementes.service.InfraestruturaComunidadeService;
 import br.edu.ufape.lmts.sementes.service.ItemService;
@@ -501,6 +499,10 @@ public class Facade {
 		return culturaService.findCulturaById(id);
 	}
 
+	public Cultura findCulturaByCultura(String cultura) {
+		return culturaService.findCulturaByCultura(cultura);
+	}
+
 	public List<Cultura> getAllCultura() {
 		return culturaService.getAllCultura();
 	}
@@ -604,26 +606,31 @@ public class Facade {
 	private SementesService sementesService;
 
 	public Sementes saveSementes(Sementes newInstance) {
-
-		try {
-			String cpf = newInstance.getResponsavelTecnico().getCpf();
-			ResponsavelTecnico responsavelTecnico;
-			responsavelTecnico = findResponsavelTecnicoByCpf(cpf);
-			newInstance.setResponsavelTecnico(responsavelTecnico);
-		} catch (ObjectNotFoundException e) {
-		}
+		saveResponsavelTecnicoToSementes(newInstance);
+		newInstance.setFinalidades(newInstance.getFinalidades().stream().map(x -> saveFinalidade(x)).toList());
+		newInstance.setCultura(saveCultura(newInstance.getCultura()));
 		return sementesService.saveSementes(newInstance);
 	}
 
-	public Sementes updateSementes(Sementes transientObject) {
+	private void saveResponsavelTecnicoToSementes(Sementes sementes) {
 		try {
-			String cpf = transientObject.getResponsavelTecnico().getCpf();
+			String cpf = sementes.getResponsavelTecnico().getCpf();
 			ResponsavelTecnico responsavelTecnico;
 			responsavelTecnico = findResponsavelTecnicoByCpf(cpf);
-			transientObject.setResponsavelTecnico(responsavelTecnico);
+			sementes.setResponsavelTecnico(responsavelTecnico);
 		} catch (ObjectNotFoundException e) {
+			sementes.setResponsavelTecnico(saveResponsavelTecnico(sementes.getResponsavelTecnico()));
 		}
+	}
+
+	public Sementes updateSementes(Sementes transientObject) {
+		saveResponsavelTecnicoToSementes(transientObject);
+		transientObject.setFinalidades(transientObject.getFinalidades().stream().map(x -> saveFinalidade(x)).toList());
+		//transientObject.setCultura(saveCultura(transientObject.getCultura()));
+		System.out.println(transientObject.getCultura());
+		System.out.println(transientObject);
 		return sementesService.updateSementes(transientObject);
+
 	}
 
 	public Sementes findSementesById(long id) {
@@ -744,34 +751,6 @@ public class Facade {
 
 	public void deleteDoenca(long id) {
 		doencaService.deleteDoenca(id);
-	}
-
-	// Cor--------------------------------------------------------------
-	@Autowired
-	private CorService corService;
-
-	public Cor saveCor(Cor newInstance) {
-		return corService.saveCor(newInstance);
-	}
-
-	public Cor updateCor(Cor transientObject) {
-		return corService.updateCor(transientObject);
-	}
-
-	public Cor findCorById(long id) {
-		return corService.findCorById(id);
-	}
-
-	public List<Cor> getAllCor() {
-		return corService.getAllCor();
-	}
-
-	public void deleteCor(Cor persistentObject) {
-		corService.deleteCor(persistentObject);
-	}
-
-	public void deleteCor(long id) {
-		corService.deleteCor(id);
 	}
 
 	// ToleranciaAdversidades--------------------------------------------------------------
@@ -1071,6 +1050,10 @@ public class Facade {
 
 	public Finalidade findFinalidadeById(long id) {
 		return finalidadeService.findFinalidadeById(id);
+	}
+
+	public Finalidade findFinalidadeByNome(String nome) {
+		return finalidadeService.findFinalidadeByNome(nome);
 	}
 
 	public List<Finalidade> getAllFinalidade() {

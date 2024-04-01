@@ -16,7 +16,14 @@ public class CulturaService implements CulturaServiceInterface {
 
 
 	public Cultura saveCultura(Cultura newInstance) {
-		return repository.save(newInstance);
+		Cultura cultura;
+		try {
+			cultura = findCulturaByCultura(newInstance.getCultura());
+		}
+		catch (ObjectNotFoundException e) {
+			cultura = repository.save(newInstance);
+		}
+		return cultura;
 	}
 
 	public Cultura updateCultura(Cultura transientObject) {
@@ -25,6 +32,10 @@ public class CulturaService implements CulturaServiceInterface {
 
 	public Cultura findCulturaById(long id) {
 		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Cultura with id = " + id));
+	}
+	
+	public Cultura findCulturaByCultura(String cultura) {
+		return repository.findByCultura(cultura).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Cultura with cultura = " + cultura));
 	}
 
 	public List<Cultura> getAllCultura(){

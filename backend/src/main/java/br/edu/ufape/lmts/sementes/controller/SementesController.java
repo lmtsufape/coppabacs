@@ -72,11 +72,16 @@ public class SementesController {
 
 			TypeMap<SementesRequest, Sementes> typeMapper = modelMapper
 													.typeMap(SementesRequest.class, Sementes.class)
-													.addMappings(mapper -> mapper.skip(Sementes::setId));			
-			
+													.addMappings(mapper -> mapper.skip(Sementes::setId));
+			oldObject.setResponsavelTecnico(null);
+			oldObject.setFinalidades(null);
+			//oldObject.setCultura(null);
 			typeMapper.map(obj, oldObject);	
+			//oldObject.setCultura(obj.getCultura().convertToEntity());
+			oldObject.setResponsavelTecnico(obj.getResponsavelTecnico().convertToEntity());
 			return new SementesResponse(facade.updateSementes(oldObject));
 		} catch (RuntimeException e) {
+			
 			if (!(e instanceof ObjectNotFoundException))
 				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
 			else

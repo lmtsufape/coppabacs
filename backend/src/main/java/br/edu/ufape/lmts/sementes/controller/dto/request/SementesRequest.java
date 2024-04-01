@@ -1,6 +1,7 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 
@@ -27,6 +28,11 @@ public class SementesRequest {
 	private String caracteristicasPositiva;
 	private String caracteristicasNegativas;
 	private ToleranciaAdversidadesRequest toleranciaAdversidades;
+	private CaracteristicasAgronomicasRequest caracteristicasAgronomicas;
+	private List<FinalidadeRequest> finalidades;
+	private List<RegioesAdaptacaoCultivoRequest> regioesAdaptacaoCultivo;
+	private CulturaRequest cultura;
+	
 	@Valid
 	private ResponsavelTecnicoRequest responsavelTecnico;
 
