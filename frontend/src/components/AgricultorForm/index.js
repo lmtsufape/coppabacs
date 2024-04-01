@@ -80,48 +80,6 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
       .required('Required'),
   })
 
-  const { statusCoppabacs, mutateCoppabacs } = useMutation(
-    async (values) => {
-      return postCoppabacs(values);
-    }, {
-    onSuccess: (res) => {
-      window.location.href = '/agricultores';
-
-    },
-    onError: (error) => {
-      console.log(error);
-
-    }
-  }
-  );
-  const { statusAdmin, mutateAdmin } = useMutation(
-    async (values) => {
-      return postAdmin(values);
-    }, {
-    onSuccess: (res) => {
-      window.location.href = '/agricultores';
-
-    },
-    onError: (error) => {
-      console.log(error);
-
-    }
-  }
-  );
-  const { statusGerente, mutateGerente } = useMutation(
-    async (values) => {
-      return postCoordenador(values);
-    }, {
-    onSuccess: (res) => {
-      window.location.href = '/agricultores';
-
-    },
-    onError: (error) => {
-      console.log(error);
-
-    }
-  }
-  );
   const { statusAgricultor, mutateAgricultor } = useMutation(
     async (values) => {
       return postAgricultor(values);
@@ -137,21 +95,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
   }
   );
   
-  function tipoUsuario(values) {
 
-
-    if (values.tipo === "coppabacs") {
-      mutateCoppabacs(values)
-    } else if (values.tipo === "admin") {
-      mutateAdmin(values)
-
-    } else if (values.tipo === "gerente") {
-      mutateGerente(values)
-
-    } else if (values.tipo === "agricultor") {
-      mutateAgricultor(values)
-    }
-  }
   const [etapas, setEtapas] = useState(0);
   return (
     <div id="header" className={style.container}>

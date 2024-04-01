@@ -35,25 +35,25 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
     },
     bancoId: usuario?.bancoId,
     atividadeRural: {
-      caprino: false,
-      fruticultura: false,
-      avicultura: false,
-      agriculturaMilho: false,
-      suinoCultura: false,
-      aquiCultura: false,
-      apicultura: false,
-      agriculturaFeijao: false,
-      pecuaria: false,
-      pescaArtesanal: false,
-      agriculturaSequeira: false,
-      outra: false,
-      outraAtividade: 'Outra Atividade',
+      caprino: usuario?.atividadeRural?.caprino,
+      fruticultura: usuario?.atividadeRural?.fruticultura,
+      avicultura: usuario?.atividadeRural?.avicultura,
+      agriculturaMilho: usuario?.atividadeRural?.agriculturaMilho,
+      suinoCultura: usuario?.atividadeRural?.suinoCultura,
+      aquiCultura: usuario?.atividadeRural?.aquiCultura,
+      apicultura: usuario?.atividadeRural?.apicultura,
+      agriculturaFeijao: usuario?.atividadeRural?.agriculturaFeijao,
+      pecuaria: usuario?.atividadeRural?.pecuaria,
+      pescaArtesanal: usuario?.atividadeRural?.pescaArtesanal,
+      agriculturaSequeira: usuario?.atividadeRural?.agriculturaSequeira,
+      outra: usuario?.atividadeRural?.outra,
+      outraAtividade: usuario?.atividadeRural?.outraAtividade,
     },
     producaoSementes: {
-      cultura: '',
-      variedade: '',
-      areaPlantada: '',
-      previsaoVenda: '',
+      cultura: usuario?.producaoSementes?.cultura,
+      variedade: usuario?.producaoSementes?.variedade,
+      areaPlantada: usuario?.producaoSementes?.areaPlantada,
+      previsaoVenda: usuario?.producaoSementes?.previsaoVenda,
     }
   }
 
@@ -108,7 +108,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
                     <button
                       onClick={() => setEditar(false)}
                       className={style.container__profile_button}>
-
+                      
                       <span>Salvar</span>
                       <Image src="/assets/iconLapis.svg" alt="editar perfil" width={25} height={25} />
                     </button >
