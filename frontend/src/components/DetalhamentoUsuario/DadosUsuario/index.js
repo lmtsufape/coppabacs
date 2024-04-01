@@ -1,11 +1,41 @@
+"use client"
 import style from "../detalhamentoUsuario.module.scss";
 import { telefoneMask } from "@/utils/Masks/telefoneMask";
 import { cpfMask } from "@/utils/Masks/cpfMask";
+import { useEffect, useState } from "react";
+import { useMutation } from "react-query";
+import { getBanco } from "@/api/bancoSementes/getBanco";
+import { getAllBancos } from "@/api/bancoSementes/getAllBancos";
 
 
 export default function DadosForm({ formik, editar }) {
 
+  const [bancos, setBancos] = useState([]);
 
+  useEffect(() => {
+    mutate();
+  }, [])
+
+  const { state, mutate } = useMutation(
+    async () => {
+      return getAllBancos();
+    }, {
+    onSuccess: (res) => {
+      console.log(res.data)
+      setBancos(res.data);
+    },
+    onError: (error) => {
+      console.log(error)
+    }
+  }
+  );
+  console.log(formik.values)
+  const bancoAtual = () =>{
+    {bancos.map((banco, index)=>{
+      if(formik.values.bancoId === banco.bancoId )
+        return banco.name
+    })}
+  }
   return (
     <>
       <div className={style.container__header_title}>
@@ -78,18 +108,6 @@ export default function DadosForm({ formik, editar }) {
             </div>
 
             <div>
-              <label htmlFor="bancoSementes">Banco sementes </label>
-              <input
-                className={style.container__ContainerForm_form_input}
-                name="BancoSementes"
-                placeholder="Não informado"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.BancoSementes}
-                disabled
-              />
-            </div>
-            <div>
               <label htmlFor="sexo">Sexo </label>
               <input
                 className={style.container__ContainerForm_form_input}
@@ -97,6 +115,18 @@ export default function DadosForm({ formik, editar }) {
                 placeholder="Não informado"
                 value={formik.values.sexo}
 
+              />
+            </div>
+            <div>
+              <label htmlFor="bancoSementes">Banco sementes </label>
+              <input
+                className={style.container__ContainerForm_form_input}
+                name="BancoSementes"
+                placeholder="Não informado"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={bancoAtual}
+                disabled
               />
             </div>
           </>
@@ -192,21 +222,6 @@ export default function DadosForm({ formik, editar }) {
               ) : null}
             </div>
             <div>
-              <label htmlFor="bancoSementes">Banco sementes </label>
-              <input
-                className={style.container__ContainerForm_form_halfContainer_input}
-                id="bancoId"
-                name="bancoId"
-                placeholder="Insira o banco de sementes"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.bancoId}
-              />
-              {formik.touched.bancoId && formik.errors.bancoId ? (
-                <span className={style.form__error}>{formik.errors.bancoId}</span>
-              ) : null}
-            </div>
-            <div>
 
               <label htmlFor="sexo">Sexo </label>
               <select
@@ -226,6 +241,31 @@ export default function DadosForm({ formik, editar }) {
               </select>
               {formik.touched.sexo && formik.errors.sexo ? (
                 <span className={style.form__error}>{formik.errors.sexo}</span>
+              ) : null}
+            </div>
+
+            <div>
+              <label htmlFor="bancoSementes">Banco sementes </label>
+              <select
+                className={style.container__ContainerForm_form_halfContainer_select}
+                id="bancoId"
+                name="bancoId"
+                placeholder="Insira o banco de sementes"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.bancoId}
+                required
+              >
+                <option value="" >Selecione...</option>
+                {bancos.map((bancos, index) => {
+                  return (
+                    <option key={index} value={bancos.id}>{bancos.nome}</option>
+
+                  )
+                })}
+              </select>
+              {formik.touched.bancoId && formik.errors.bancoId ? (
+                <span className={style.form__error}>{formik.errors.bancoId}</span>
               ) : null}
             </div>
           </>

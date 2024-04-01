@@ -4,6 +4,7 @@ import { cpfMask } from "@/utils/Masks/cpfMask";
 
 
 export default function DadosForm({ formik }) {
+  console.log('values', formik.values)
 
   return (
     <>
@@ -191,7 +192,7 @@ export default function DadosForm({ formik }) {
 
       </div>
 
-        
+
     </>
   );
 }
