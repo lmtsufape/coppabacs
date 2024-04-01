@@ -38,9 +38,7 @@ public class BancoSementes  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
 	private long id;
-	@NotBlank
 	private String nome;
-	@NotBlank
 	private String comunidade;
 	private String anoFundacao;
 	private String historiaBanco;

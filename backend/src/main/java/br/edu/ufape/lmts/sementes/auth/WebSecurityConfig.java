@@ -26,8 +26,6 @@ public class WebSecurityConfig {
 	
 	@Autowired
 	private SecurityFilter securityFilter;
-//	@Autowired
-//	private WebMvcConfigurer webMvcConfigurer;
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -40,14 +38,14 @@ public class WebSecurityConfig {
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.authorizeHttpRequests(authz -> authz
 					.requestMatchers(HttpMethod.POST, "/api/v1/agricultor/**").permitAll()
-					.requestMatchers("/api/v1/gerente/**").hasRole("GERENTE")
-					.requestMatchers(HttpMethod.PATCH, "/api/v1/agricultor/**").hasRole("GERENTE")
-					.requestMatchers("/api/v1/agricultor/**").hasAnyRole("AGRICULTOR", "GERENTE")
+					.requestMatchers("/api/v1/gerente/**").hasAnyRole("GERENTE", "COPPABACS")
+					.requestMatchers(HttpMethod.PATCH, "/api/v1/agricultor/**").hasAnyRole("GERENTE", "COPPABACS")
+					.requestMatchers("/api/v1/agricultor/**").hasAnyRole("AGRICULTOR", "GERENTE", "COPPABACS")
 					.requestMatchers("/api/v1/sementes/**").hasRole("COPPABACS")
 					.requestMatchers("/security/**").permitAll()
 					.requestMatchers("/api/**").permitAll()
 					.requestMatchers(HttpMethod.POST, "api/v1/banco-semente/**").hasAnyRole("GERENTE", "COPPABACS")
-					.requestMatchers(HttpMethod.PATCH, "api/v1/banco-semente/**").hasAnyRole("GERENTE", "COPPABACS")
+					.requestMatchers(HttpMethod.PATCH, "api/v1/banco-sementes/**").hasAnyRole("GERENTE", "COPPABACS")
 					.requestMatchers(HttpMethod.DELETE, "api/v1/banco-semente/**").hasAnyRole("GERENTE", "COPPABACS")
 					.requestMatchers(HttpMethod.PATCH, "api/v1/banco-sementes").permitAll()
 					.requestMatchers(HttpMethod.POST,"/api/v1/login").permitAll()

@@ -10,7 +10,7 @@ import lombok.Setter;
 
 
 @Getter @Setter @NoArgsConstructor 
-public  class GerenteRequest extends UsuarioRequest {
+public  class GerenteRequestUpdate extends UsuarioRequestUpdate {
 	
 	private long bancoId;
 

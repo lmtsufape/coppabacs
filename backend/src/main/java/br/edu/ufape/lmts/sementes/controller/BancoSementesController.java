@@ -73,9 +73,16 @@ public class BancoSementesController {
 				throw e;
 		}
 	}
+	
 	@PatchMapping("/banco-sementes/{bancoSementeId}/adicionar-gerente/{gerenteId}")
-    public BancoSementesResponse adicionarGerenteAoBancoSemente(@PathVariable long bancoSementeId, @PathVariable long gerenteId) {
-		return new BancoSementesResponse(facade.adicionarGerenteAoBancoSemente(bancoSementeId, gerenteId)); 
+    public BancoSementesResponse adicionarGerenteBancoSemente(@PathVariable long bancoSementeId, @PathVariable long gerenteId) {
+		return new BancoSementesResponse(facade.adicionarGerenteBancoSemente(bancoSementeId, gerenteId)); 
+	}
+	
+	@PatchMapping("/banco-sementes/{bancoSementesId}/remover-gerente/{gerenteId}")
+	public String removerGerenteBancoSemente(@PathVariable long bancoSementesId, @PathVariable long gerenteId) {
+		facade.removerGerenteBancoSemente(bancoSementesId, gerenteId);
+		return "";
 	}
 	
 	@DeleteMapping("banco-sementes/{id}")

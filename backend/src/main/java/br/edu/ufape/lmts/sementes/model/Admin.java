@@ -17,18 +17,12 @@ public class Admin extends Usuario {
 
 	public Admin() {
 		super();
-		this.addRole(TipoUsuario.ADMIN);
-		this.addRole(TipoUsuario.AGRICULTOR);
 		this.addRole(TipoUsuario.COPPABACS);
-		this.addRole(TipoUsuario.GERENTE);
 	}
 
 	public Admin(Long id, String nome, String nomePopular, String email, String senha, Endereco endereco, String cpf, Date dataNascimento,
 			String contato, String imagem, String sexo, Conjuge conjuge) {
 		super(id, nome, nomePopular, email, senha, endereco, cpf, dataNascimento, contato, imagem, sexo, conjuge);
-		this.addRole(TipoUsuario.ADMIN);
-		this.addRole(TipoUsuario.AGRICULTOR);
 		this.addRole(TipoUsuario.COPPABACS);
-		this.addRole(TipoUsuario.GERENTE);
 	}
 }
