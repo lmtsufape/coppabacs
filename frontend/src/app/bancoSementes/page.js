@@ -13,8 +13,8 @@ export default function bancoSementesPage() {
         diretorioAnterior="Home /"
         diretorioAtual="Bancos de Sementes"
         hrefAnterior="/inicio"
-        table1="nome"
-        table2="Responsavel"
+        table1="Nome"
+        table2="Responsável"
         table3="Ação"
       />
 

@@ -11,7 +11,7 @@ export default function DadosEndereco({ formik }) {
         className={style.container__ContainerForm_form_input}
         id="cep"
         name="endereco.cep"
-        placeholder="Insira seu estado"
+        placeholder="Insira seu cep"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.endereco.cep}
@@ -67,7 +67,7 @@ export default function DadosEndereco({ formik }) {
         className={style.container__ContainerForm_form_input}
         id="nomeEndereco"
         name="endereco.nome"
-        placeholder="Insira seu endereço"
+        placeholder="Insira seu logradouro"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.endereco.nome}
@@ -82,7 +82,7 @@ export default function DadosEndereco({ formik }) {
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             name="endereco.numero"
-            placeholder="Insira o número"
+            placeholder="Insira o número da sua residência"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.endereco.numero}
@@ -98,7 +98,7 @@ export default function DadosEndereco({ formik }) {
             className={style.container__ContainerForm_form_halfContainer_input}
             id="complemento"
             name="endereco.referencia"
-            placeholder="Insira uma complemento"
+            placeholder="Insira um complemento"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.endereco.referencia}
