@@ -19,4 +19,12 @@ public  class GerenteRequest extends UsuarioRequest {
 		Gerente obj = modelMapper.map(this, Gerente.class);
 		return obj;
 	}
+
+	public long getBancoId() {
+		return this.bancoId;
+	}
+	
+	public void setBancoId(long bancoId) {
+		this.bancoId = bancoId;
+	}
 }

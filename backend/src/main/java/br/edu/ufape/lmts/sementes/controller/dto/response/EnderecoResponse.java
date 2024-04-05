@@ -13,8 +13,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class EnderecoResponse {
 	private Long id;
-	private String nome;
+	private String logradouro;
 	private String referencia;
+	private String complemento;
 	private String cidade;
 	private String estado;
 	private String cep;

@@ -25,10 +25,7 @@ public  class AgricultorRequestUpdate extends UsuarioRequestUpdate {
 		BancoSementes banco = new BancoSementes();
 		banco.setId(bancoId);
 		obj.setBancoSementes(banco);
-		System.out.println("atividades rurais:" +  atividadesRurais);
-
 		obj.setAtividadeRural(atividadesRurais.stream().map(n -> new AtividadeRural(n)).toList());
-		System.out.println(obj.toString());
 		return obj;
 	}
 }

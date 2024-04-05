@@ -3,6 +3,7 @@ package br.edu.ufape.lmts.sementes.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,9 +61,8 @@ public class UsuarioController {
 	@PatchMapping("usuario/{id}")
 	public UsuarioResponse updateUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioRequest obj) {
 		try {
-			//Usuario o = obj.convertToEntity();
 			Usuario oldObject = facade.findUsuarioById(id);
-
+			modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
 			TypeMap<UsuarioRequest, Usuario> typeMapper = modelMapper
 													.typeMap(UsuarioRequest.class, Usuario.class)
 													.addMappings(mapper -> mapper.skip(Usuario::setId));			

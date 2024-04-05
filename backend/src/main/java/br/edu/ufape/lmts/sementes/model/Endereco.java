@@ -25,6 +25,7 @@ public  class Endereco  {
 	private long id;
 	private String logradouro;
 	private String referencia;
+	private String complemento;
 	private String cidade;
 	private String estado;
 	private String cep;
