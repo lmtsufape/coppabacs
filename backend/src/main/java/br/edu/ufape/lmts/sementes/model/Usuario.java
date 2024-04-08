@@ -39,24 +39,20 @@ public abstract class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
 	private long id;
-	@Column(nullable = false)
 	private String nome;
-	@Column(unique = true, nullable = false)
+	@Column(unique = true)
 	private String email;
-	@Column(nullable = false)
 	private String senha;
 	private String nomePopular;
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
 	private Endereco endereco;
-	@Column(nullable = false, unique = true)
+	@Column(unique = true)
 	private String cpf;
-	@Column(nullable = false)
 	private Date dataNascimento;
-	@Column(nullable = false, unique = true)
+	@Column(unique = true)
 	private String contato;
 	private String imagem;
-	@Column(nullable = false)
 	private String sexo;
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude

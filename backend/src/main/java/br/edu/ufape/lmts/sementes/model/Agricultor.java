@@ -25,7 +25,6 @@ public class Agricultor extends Usuario {
 	@OneToMany
 	@JoinColumn(name = "agricultor_id")
 	@ToString.Exclude
-	@Column(nullable = true)
 	private List<AtividadeRural> atividadeRural;
 	private List<String> sementes;
 	

@@ -74,10 +74,10 @@ export default function DadosSementes({ formik, editar }) {
                             <label htmlFor="cultura">Cultura</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
-                                name="Cultura"
+                                name="cultura"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.Cultura}
+                                value={formik.values.cultura}
                                 disabled
                             />
                         </div>
@@ -115,13 +115,13 @@ export default function DadosSementes({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="nome">Cultivar de Polinização Aberta Melhorada</label>
+                            <label htmlFor="polinizaacaoAbertaMelhorada">Cultivar de Polinização Aberta Melhorada</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
-                                name="nome"
+                                name="polinizaacaoAbertaMelhorada"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.nome}
+                                value={formik.values.polinizaacaoAbertaMelhorada}
                                 disabled
                             />
                         </div>
@@ -137,17 +137,6 @@ export default function DadosSementes({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="altitudeMaxima">Altitude Máxima</label>
-                            <input
-                                className={styles.container__ContainerForm_form_input}
-                                name="altitudeMaxima"
-                                placeholder="Não informado"
-                                onBlur={formik.handleBlur}
-                                value={formik.values.altitudeMaxima}
-                                disabled
-                            />
-                        </div>
-                        <div>
                             <label htmlFor="altitudeMinima">Altitude Mínima</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
@@ -155,6 +144,17 @@ export default function DadosSementes({ formik, editar }) {
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
                                 value={formik.values.altitudeMinima}
+                                disabled
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="altitudeMaxima">Altitude Máxima</label>
+                            <input
+                                className={styles.container__ContainerForm_form_input}
+                                name="altitudeMaxima"
+                                placeholder="Não informado"
+                                onBlur={formik.handleBlur}
+                                value={formik.values.altitudeMaxima}
                                 disabled
                             />
                         </div>
@@ -330,22 +330,6 @@ export default function DadosSementes({ formik, editar }) {
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="altitudeMaxima">Altitude máxima</label>
-                            <input
-                                className={styles.container__ContainerForm_form_halfContainer_input}
-                                type="number"
-                                id="altitudeMaxima"
-                                name="altitudeMaxima"
-                                placeholder="Insira a altitude máxima"
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.altitudeMaxima}
-                                required />
-                            {formik.touched.altitudeMaxima && formik.errors.altitudeMaxima ? (
-                                <span className={styles.form__error}>{formik.errors.altitudeMaxima}</span>
-                            ) : null}
-                        </div>
-                        <div>
                             <label htmlFor="altitudeMinima">Altitude mínima </label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
@@ -359,6 +343,22 @@ export default function DadosSementes({ formik, editar }) {
                                 required />
                             {formik.touched.altitudeMinima && formik.errors.altitudeMinima ? (
                                 <span className={styles.form__error}>{formik.errors.altitudeMinima}</span>
+                            ) : null}
+                        </div>
+                        <div>
+                            <label htmlFor="altitudeMaxima">Altitude máxima</label>
+                            <input
+                                className={styles.container__ContainerForm_form_halfContainer_input}
+                                type="number"
+                                id="altitudeMaxima"
+                                name="altitudeMaxima"
+                                placeholder="Insira a altitude máxima"
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.altitudeMaxima}
+                                required />
+                            {formik.touched.altitudeMaxima && formik.errors.altitudeMaxima ? (
+                                <span className={styles.form__error}>{formik.errors.altitudeMaxima}</span>
                             ) : null}
                         </div>
                         <div>

@@ -14,15 +14,15 @@ import lombok.Setter;
 @NoArgsConstructor
 public class EnderecoRequest {
 	@NotEmpty(message = "Preenchimento obrigatório")
-	private String nome;
+	private String logradouro;
 	private String referencia;
+	private String complemento;
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String cidade;
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String estado;
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String cep;
-	@NotEmpty(message = "Preenchimento obrigatório")
 	private String numero;
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String bairro;
