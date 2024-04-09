@@ -21,12 +21,12 @@ export default function DadosBanco({ formik }) {
       ) : null}
       <div className={style.container__ContainerForm_form_halfContainer}>
         <div>
-          <label htmlFor="responsavel">Responsavel <span>*</span></label>
+          <label htmlFor="responsavel">Responsável <span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="responsavel"
             name="responsavel"
-            placeholder="Insira o responsavel do banco"
+            placeholder="Insira o responsável do banco"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.responsavel}
@@ -60,7 +60,7 @@ export default function DadosBanco({ formik }) {
             className={style.container__ContainerForm_form_halfContainer_input}
             id="comunidade"
             name="comunidade"
-            placeholder="Insira comunidade"
+            placeholder="Insira sua comunidade"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.comunidade}
@@ -71,7 +71,7 @@ export default function DadosBanco({ formik }) {
 
         </div>
         <div>
-          <label htmlFor="anoFundacao">data Fundacao <span>*</span></label>
+          <label htmlFor="anoFundacao">Data da Fundação <span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="anoFundacao"
@@ -89,12 +89,12 @@ export default function DadosBanco({ formik }) {
 
         </div>
       </div>
-      <label htmlFor="historiaBanco">Historia do Banco <span>*</span></label>
+      <label htmlFor="historiaBanco">História do Banco <span>*</span></label>
       <textarea
         className={style.container__ContainerForm_form_input}
         id="historiaBanco"
         name="historiaBanco"
-        placeholder="Insira a historia do banco"
+        placeholder="Insira a história do banco"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.historiaBanco}

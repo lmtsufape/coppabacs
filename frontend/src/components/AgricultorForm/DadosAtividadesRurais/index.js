@@ -14,7 +14,7 @@ export default function DadosAtividadesRurais({ formik }) {
     { name: "avicultura", label: "Avicultura" },
     { name: "agriculturaMilho", label: "Agricultura de Milho" },
     { name: "suinoCultura", label: "Suinocultura" },
-    { name: "aquiCultura", label: "AquiCultura" },
+    { name: "aquicultura", label: "Aquicultura" },
     { name: "apicultura", label: "Apicultura" },
     { name: "agriculturaFeijao", label: "Agricultura de Feijão" },
     { name: "pecuaria", label: "Pecuária" },
