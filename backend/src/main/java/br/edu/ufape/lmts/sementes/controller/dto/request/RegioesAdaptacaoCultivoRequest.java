@@ -12,8 +12,6 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor 
 public  class RegioesAdaptacaoCultivoRequest  {
 	private String regiao;
-	private SementesRequest sementes; 
-
 
 	public RegioesAdaptacaoCultivo convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

@@ -3,8 +3,11 @@ package br.edu.ufape.lmts.sementes.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.lmts.sementes.model.ResponsavelTecnico;
 import br.edu.ufape.lmts.sementes.model.Sementes;
 import br.edu.ufape.lmts.sementes.repository.SementesRepository;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
@@ -39,8 +42,18 @@ public class SementesService implements SementesServiceInterface {
 	public void deleteSementes(long id){
 		Sementes obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Sementes with id = " + id));
 		repository.delete(obj);
+	}
+
+	public List<Sementes> findSementesByResponsavelTecnico(ResponsavelTecnico responsavelTecnico) {
+		return repository.findByResponsavelTecnico(responsavelTecnico);
+	}
+
+	public List<Sementes> searchSementes(String string) {
+		return repository.findByNomeContainingOrDescricaoContaining(string, string);
+	}
+
+	public Page<Sementes> searchPageSementes(String string, Pageable pageRequest) {
+		return repository.findByNomeContainingOrDescricaoContaining(string, string, pageRequest);
 	}	
-	
-	
 	
 }
