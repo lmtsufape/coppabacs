@@ -3,6 +3,7 @@ package br.edu.ufape.lmts.sementes.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ import jakarta.validation.Valid;
 
 @CrossOrigin (origins = "http://localhost:8081" )
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/")
 public class CoppabacsController {
 	@Autowired
 	private Facade facade;
@@ -38,6 +39,7 @@ public class CoppabacsController {
 	
 	@GetMapping("coppabacs")
 	public List<CoppabacsResponse> getAllCoppabacs() {
+		System.out.println("oi");
 		return facade.getAllCoppabacs()
 				.stream()
 				.filter(coppabacs -> coppabacs.getRoles().contains(TipoUsuario.COPPABACS))
@@ -63,7 +65,7 @@ public class CoppabacsController {
 	public CoppabacsResponse updateCoppabacs(@PathVariable long id, @Valid @RequestBody CoppabacsRequest obj) {
 		try {
 			Coppabacs oldObject = facade.findCoppabacsById(id);
-			
+			modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
 			TypeMap<CoppabacsRequest, Coppabacs> typeMapper = modelMapper
 													.typeMap(CoppabacsRequest.class, Coppabacs.class)
 													.addMappings(mapper -> mapper.skip(Coppabacs::setId));

@@ -6,7 +6,8 @@ import { Form, Formik } from "formik";
 import { useState } from "react";
 import * as Yup from 'yup';
 import HeaderNavegacao from "@/components/HeaderNavegacao";
-import DadosSementes from "./DadosSementes"
+import DadosTecnicos from "./DadosTecnico";
+import DadosSementes from "./DadosSementes";
 import DadosToleranciaAdversidades from "./DadosToleranciaAdversidades";
 import InformacoesColeta from "./InformacoesColeta";
 import styles from "@/components/DetalhamentoSementes/detalhamentoSementes.module.scss";
@@ -124,6 +125,7 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
                                     )}
 
                                 </div>
+                                <DadosTecnicos formik={formik} editar={editar} />
                                 <DadosSementes formik={formik} editar={editar} />
                                 <DadosCaracteristicasAgronomicas formik={formik} editar={editar}/>
                                 <DadosToleranciaAdversidades formik={formik} editar={editar} />

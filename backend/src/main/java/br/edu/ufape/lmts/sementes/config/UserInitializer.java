@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.model.Admin;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.model.Coppabacs;
@@ -82,6 +83,7 @@ public class UserInitializer  implements CommandLineRunner {
 			agricultor.setDataNascimento(new Date(18, 10, 2001));
 			
 			userRepository.save(agricultor);
+			agricultor.addRole(TipoUsuario.AGRICULTOR);
 			agricultorRepository.save(agricultor);
 			
 			Coppabacs coppabacs = new Coppabacs();

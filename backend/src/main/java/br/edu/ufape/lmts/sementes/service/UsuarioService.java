@@ -34,6 +34,9 @@ public class UsuarioService implements UsuarioServiceInterface {
 	}
 
 	public Usuario updateUsuario(Usuario transientObject) {
+		if(transientObject.getSenha() != null) {
+			transientObject.setSenha(passwordEncoder.encode(transientObject.getSenha()));			
+		}
 		return repository.save(transientObject);
 	}
 

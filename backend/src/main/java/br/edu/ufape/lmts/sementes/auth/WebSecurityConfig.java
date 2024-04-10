@@ -26,32 +26,43 @@ public class WebSecurityConfig {
 	
 	@Autowired
 	private SecurityFilter securityFilter;
-//	@Autowired
-//	private WebMvcConfigurer webMvcConfigurer;
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		
 		http
 			.cors((cors) -> cors
-					.configurationSource(corsConfigurationSource())
-					)
+					.configurationSource(corsConfigurationSource()))
 			.csrf(csrf -> csrf.disable())
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.authorizeHttpRequests(authz -> authz
-					.requestMatchers(HttpMethod.POST, "/api/v1/agricultor/**").permitAll()
-					.requestMatchers("/api/v1/gerente/**").hasRole("GERENTE")
-					.requestMatchers(HttpMethod.PATCH, "/api/v1/agricultor/**").hasRole("GERENTE")
-					.requestMatchers("/api/v1/agricultor/**").hasAnyRole("AGRICULTOR", "GERENTE")
+					// Rotas públicas
+					.requestMatchers(HttpMethod.POST,"/api/v1/login").permitAll()
+					.requestMatchers(HttpMethod.POST, "/api/v1/agricultor").permitAll()
+					.requestMatchers(HttpMethod.GET, "/api/v1/banco-sementes/**").permitAll()
+					.requestMatchers(HttpMethod.GET, "/api/v1/sementes/**").permitAll()
+					.requestMatchers(HttpMethod.GET, "/api/v1/posts/**").permitAll()
+					
+					// rotas de agricultor
+					.requestMatchers("/api/v1/agricultor/**").hasAnyRole("AGRICULTOR", "GERENTE", "COPPABACS")
+					.requestMatchers(HttpMethod.PATCH, "/api/v1/agricultor/**").hasAnyRole("GERENTE", "COPPABACS")
+					.requestMatchers(HttpMethod.GET, "/api/v1/agricultor/**").hasAnyRole("GERENTE", "COPPABACS")
+
+					// rotas do banco de sementes
+					.requestMatchers(HttpMethod.POST, "/api/v1/banco-sementes/**").hasRole("COPPABACS")
+					.requestMatchers(HttpMethod.PUT, "/api/v1/banco-sementes/**").hasRole("COPPABACS")
+					.requestMatchers(HttpMethod.PATCH, "/api/v1/banco-sementes/**").hasAnyRole("GERENTE", "COPPABACS")
+					.requestMatchers(HttpMethod.DELETE, "/api/v1/banco-semente/**").hasRole("COPPABACS")
+					
+					// rotas de coordenador
+					.requestMatchers(HttpMethod.POST, "/api/v1/gerente").hasRole("COPPABACS")
+					.requestMatchers("/api/v1/gerente/**").hasAnyRole("GERENTE", "COPPABACS")
+					
 					.requestMatchers("/api/v1/sementes/**").hasRole("COPPABACS")
 					.requestMatchers("/api/v1/responsavel-tecnico/**").hasRole("COPPABACS")
 					.requestMatchers("/security/**").permitAll()
-					.requestMatchers("/api/**").permitAll()
-					.requestMatchers(HttpMethod.POST, "api/v1/banco-semente/**").hasAnyRole("GERENTE", "COPPABACS")
-					.requestMatchers(HttpMethod.PATCH, "api/v1/banco-semente/**").hasAnyRole("GERENTE", "COPPABACS")
-					.requestMatchers(HttpMethod.DELETE, "api/v1/banco-semente/**").hasAnyRole("GERENTE", "COPPABACS")
-					.requestMatchers(HttpMethod.PATCH, "api/v1/banco-sementes").permitAll()
-					.requestMatchers(HttpMethod.POST,"/api/v1/login").permitAll()
+					//.requestMatchers("/api/**").permitAll()
+					.requestMatchers("/api/v1/coppabacs/**").hasRole("COPPABACS")
 					.anyRequest().authenticated()
 			)
 			.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
@@ -63,7 +74,7 @@ public class WebSecurityConfig {
 	CorsConfigurationSource corsConfigurationSource() {
 	    CorsConfiguration configuration = new CorsConfiguration();
 	    
-	    configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+	    configuration.setAllowedOrigins(Arrays.asList("*"));
 	    configuration.setAllowedMethods(Arrays.asList("*"));
 	    configuration.setAllowedHeaders(Arrays.asList("*"));
 	    

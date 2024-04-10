@@ -10,7 +10,7 @@ import lombok.Setter;
 
 
 @Getter @Setter @NoArgsConstructor 
-public  class GerenteRequest extends UsuarioRequest {
+public  class GerenteRequestUpdate extends UsuarioRequestUpdate {
 	
 	private long bancoId;
 
@@ -18,13 +18,5 @@ public  class GerenteRequest extends UsuarioRequest {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		Gerente obj = modelMapper.map(this, Gerente.class);
 		return obj;
-	}
-
-	public long getBancoId() {
-		return this.bancoId;
-	}
-	
-	public void setBancoId(long bancoId) {
-		this.bancoId = bancoId;
 	}
 }

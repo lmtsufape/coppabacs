@@ -329,14 +329,27 @@ public class Facade {
 		}
 	}
 
-	public BancoSementes adicionarGerenteAoBancoSemente(long bancoId, long gerenteId) {
-		BancoSementes banco = bancoSementesService.findBancoSementesById(bancoId);
-
+  public BancoSementes adicionarGerenteBancoSemente(long bancoId, long gerenteId) {
+    BancoSementes banco = bancoSementesService.findBancoSementesById(bancoId);
 		Gerente gerente = gerenteService.findGerenteById(gerenteId);
-
 		banco.adicionarGerente(gerente);
-
 		return bancoSementesService.saveBancoSementes(banco);
+	}
+	
+	public void removerGerenteBancoSemente(long bancoId, long gerenteId) {
+	    BancoSementes banco = bancoSementesService.findBancoSementesById(bancoId);
+	    
+	    Gerente gerenteRemover = banco.getGerentes().stream()
+                .filter(gerente -> gerente.getId() == gerenteId)
+                .findFirst()
+                .orElse(null);
+	    
+//	    if(gerenteRemover != null) {
+//	    	banco.getGerentes().remove(gerenteRemover);
+//	    }
+//    	gerenteService.deleteGerente(gerenteRemover);
+	    
+	    bancoSementesService.saveBancoSementes(banco);
 	}
 
 	// RetiradaUsuario--------------------------------------------------------------
@@ -436,6 +449,7 @@ public class Facade {
 	}
 
 	public Gerente updateGerente(Gerente transientObject) {
+		usuarioService.updateUsuario(transientObject);
 		return gerenteService.updateGerente(transientObject);
 	}
 

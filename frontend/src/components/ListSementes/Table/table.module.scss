@@ -3,67 +3,55 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 2em;
 
+  padding: 2em;
+  
   &__table {
     font-weight: 400;
     min-width: 260px;
     width: 100%;
     margin-bottom: 10em;
-
-    thead {
+    
+    &__header {
       display: table-header-group;
       color: #EAEAEA;
       background-color: #245501;
       height: 3em;
       text-align: center;
-
       th {
         display: table-cell;
         vertical-align: middle;
+        align-items: center;
         padding: 10px;
-
-        span {
+        div{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 0.5em;
+        }
+        span{
           position: absolute;
           margin: -0.3em 0 0 0.5em;
         }
       }
 
       th:first-child {
+        -moz-border-radius: 1em;
         border-radius: 1em 0 0 0;
       }
-
       th:last-child {
         border-radius: 0 1em 0 0;
       }
     }
 
-    &_buttons {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      gap: 1em;
-    }
-
-    &_buttons:first-child {
-      padding: 10px 15px;
-      position: initial;
-      transform: translate(0);
-      width: auto;
-    }
-
-    tbody {
+    
+    &__body{
       font-size: .875em;
-
+      
       tr {
         display: table-row;
         border: 1px solid #dad6eb;
-
-        &:nth-child(odd) {
-          background: #fff;
-        }
-
+        
         td {
           display: table-cell;
           vertical-align: middle;
@@ -72,37 +60,54 @@
           padding: 10px;
           text-align: center;
 
-          button {
-            display: table-cell;
+          &_container_buttons{
+            width: 100%;
+      
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            
+      
+            gap: 1em;
+          }
+          &_container_buttons:first-child{
+            padding: 10px 15px;
             position: initial;
             transform: translate(0);
-            width: auto;
-            border: none;
-            border-radius: 20px;
-            background-color: #fff;
-            
+            width: auto;  
           }
 
-          &:before {
-            display: none;
-          }
-
-          &:last-child {
-            text-align: right;
-          }
         }
+      }
+    }
+    button {
+      border: none;
+      background: none;
+      &:focus {
+        cursor: pointer;
+      }
+      &:last-child{
+        display: none;
       }
     }
   }
 }
+.imagemSemente{
+  border-radius: 5em;
+}
 
 @media all and (min-width: 768px) {
   .content {
-    &__table {
-      border-collapse: collapse;
-      max-width: 992px;
-      text-align: left;
-      width: 100%;
+
+    button {
+
+      &:focus {
+        cursor: pointer;
+      }
+      &:last-child{
+        display: inline;
+      }
     }
   }
 }

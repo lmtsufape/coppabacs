@@ -2,6 +2,7 @@ package br.edu.ufape.lmts.sementes.controller;
 
 import java.util.List;
 
+import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,6 @@ public class AgricultorController {
 	@Autowired
 	private ModelMapper modelMapper;
 
-	@PreAuthorize("hasRole('GERENTE')")
 	@GetMapping("agricultor")
 	public List<AgricultorResponse> getAllAgricultor() {
 		return facade.getAllAgricultor()
@@ -64,7 +64,7 @@ public class AgricultorController {
 	public AgricultorResponse updateAgricultor(@PathVariable Long id, @Valid @RequestBody AgricultorRequest obj) {
 		try {
 			Agricultor oldObject = facade.findAgricultorById(id);
-
+			modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
 			TypeMap<AgricultorRequest, Agricultor> typeMapper = modelMapper
 													.typeMap(AgricultorRequest.class, Agricultor.class)
 													.addMappings(mapper -> mapper.skip(Agricultor::setId));
@@ -94,7 +94,7 @@ public class AgricultorController {
 		}
 
 	}
-	
+
 	@PreAuthorize("hasRole('COPPABACS')")
 	@PatchMapping("agricultor/validar/{id}")
 	public ResponseEntity validateAgricultor(@PathVariable long id) {
