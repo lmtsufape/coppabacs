@@ -13,9 +13,39 @@ import Table from "./Table";
 import { getAllUsuarios } from "@/api/usuarios/getAllUsuarios";
 import { Search, SearchUsuarios } from "../searchUsuario";
 import { getAllCoordenadores } from "@/api/usuarios/coordenador/getAllCoordenadores";
+import { getStorageItem } from "@/utils/localStore";
 
 export default function ListCoordenadores({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4 }) {
 
+  const [role, setRole] = useState(getStorageItem("userRole"));
+
+
+  function whatIsTypeUser() {
+    if (role == "ROLE_ADMIN" || role == "ROLE_COPPABACS") {
+      return <LayoutAdmin
+        table1={table1}
+        table2={table2}
+        table3={table3}
+        table4={table4}
+
+      />
+    }
+  }
+  return (
+    <>
+      <Header
+        diretorioAnterior={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
+        hrefAnterior={hrefAnterior}
+      />
+      {whatIsTypeUser()}
+
+
+    </>
+  );
+}
+
+const LayoutAdmin = ({table1, table2, table3, table4 }) => {
   const [coordenadores, setCoordenadores] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -43,11 +73,7 @@ export default function ListCoordenadores({ diretorioAnterior, diretorioAtual, h
   );
   return (
     <div>
-      <Header
-        diretorioAnterior={diretorioAnterior}
-        diretorioAtual={diretorioAtual}
-        hrefAnterior={hrefAnterior}
-      />
+
       <div className={style.header}>
         <div className={style.header__container}>
 
@@ -79,5 +105,5 @@ export default function ListCoordenadores({ diretorioAnterior, diretorioAtual, h
         />
       )}
     </div>
-  );
+  )
 }
