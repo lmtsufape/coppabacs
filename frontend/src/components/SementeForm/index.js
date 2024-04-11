@@ -19,6 +19,7 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
         tecnico:"",
         cpf: "",
         numConselho: "",
+        conselho:"",
         cultura:"",
         nome: "",
         finalidadeSemente:[],

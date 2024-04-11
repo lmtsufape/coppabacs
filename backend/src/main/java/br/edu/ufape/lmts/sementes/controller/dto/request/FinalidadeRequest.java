@@ -12,8 +12,6 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor 
 public  class FinalidadeRequest  {
 	private String nome;
-	private SementesRequest sementes; 
-
 
 	public Finalidade convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

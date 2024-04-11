@@ -4,7 +4,6 @@ import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
 import br.edu.ufape.lmts.sementes.model.CaracteristicasAgronomicas;
-import br.edu.ufape.lmts.sementes.model.Cor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,12 +16,12 @@ public  class CaracteristicasAgronomicasRequest  {
 	private int produtividade;
 	private double altitudePlanta;
 	private String tipoGrão;
-	private Cor corGrao;
-	private Cor corCaule;
-	private Cor corFolha;
-	private Cor corFLor;
+	private String corGrao;
+	private String corCaule;
+	private String corFolha;
+	private String corFLor;
 	private String habitoCrescimento;
-	private SementesRequest sementes;
+	private EmpalhamentoRequest empalhamento;
 
 	public CaracteristicasAgronomicas convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

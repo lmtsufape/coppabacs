@@ -6,20 +6,24 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.BancoSementesRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.ObjetosBancoSementesRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.AgricultorResponse;
 import br.edu.ufape.lmts.sementes.controller.dto.response.BancoSementesResponse;
+import br.edu.ufape.lmts.sementes.controller.dto.response.SementesResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.BancoSementes;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
@@ -53,7 +57,7 @@ public class BancoSementesController {
 		return new BancoSementesResponse(facade.findBancoSementesById(id));
 	}
 	
-	@PatchMapping("banco-sementes/{id}")
+	@PutMapping("banco-sementes/{id}")
 	public BancoSementesResponse updateBancoSementes(@PathVariable Long id, @Valid @RequestBody BancoSementesRequest obj) {
 		try {
 			//BancoSementes o = obj.convertToEntity();
@@ -73,9 +77,10 @@ public class BancoSementesController {
 				throw e;
 		}
 	}
+	
 	@PatchMapping("/banco-sementes/{bancoSementeId}/adicionar-gerente/{gerenteId}")
-    public BancoSementesResponse adicionarGerenteAoBancoSemente(@PathVariable long bancoSementeId, @PathVariable long gerenteId) {
-		return new BancoSementesResponse(facade.adicionarGerenteAoBancoSemente(bancoSementeId, gerenteId)); 
+    public BancoSementesResponse adicionarGerenteBancoSemente(@PathVariable long bancoSementeId, @PathVariable long gerenteId) {
+		return new BancoSementesResponse(facade.adicionarGerenteBancoSemente(bancoSementeId, gerenteId)); 
 	}
 	
 	@DeleteMapping("banco-sementes/{id}")
@@ -89,16 +94,33 @@ public class BancoSementesController {
 			else
 				throw e;
 		}
-		
 	}
 	
+	@PreAuthorize("hasAnyRole('GERENTE', 'COPPABACS')")
 	@GetMapping("banco-sementes/{id}/agricultores")
 	public List<AgricultorResponse> getAllAgricultor(@PathVariable long id) {
-		System.out.println(id);
 		return facade.getAllAgricultor(id)
 				.stream()
 				.map(AgricultorResponse::new)
 				.toList();
 		
 	}
+	
+//	public List<SementesResponse> getAllSementesBanco(@PathVariable long id) {
+//		return facade.getAllSementesBanco(id)
+//				.stream()
+//				.map(SementesResponse::new)
+//				.toList();
+//	}
+	
+	@PatchMapping
+	public BancoSementesResponse updateObjetosBanco(@PathVariable long bancoId, @RequestBody List<ObjetosBancoSementesRequest> objetos)   {
+		return null;
+	}
+	
+	@PatchMapping("banco-sementes/{id}/remover-agricultor/")
+	public void removerAgricultorBanco() {
+		
+	}
+
 }

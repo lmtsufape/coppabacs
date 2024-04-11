@@ -32,7 +32,7 @@ export default function DadosEndereco({ formik }) {
         className={style.container__ContainerForm_form_input}
         id="cep"
         name="endereco.cep"
-        placeholder="Insira seu estado"
+        placeholder="Insira seu cep"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.endereco.cep}
@@ -83,12 +83,12 @@ export default function DadosEndereco({ formik }) {
       {formik.touched.bairro && formik.errors.bairro ? (
         <span className={style.form__error}>{formik.errors.endereco.bairro}</span>
       ) : null}
-      <label htmlFor="endereco.logradouro">Rua <span >*</span></label>
+      <label htmlFor="endereco.logradouro">Logradouro <span >*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="nomeEndereco"
         name="endereco.logradouro"
-        placeholder="Insira seu endereço"
+        placeholder="Insira seu logradouro"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.endereco.logradouro}
@@ -103,7 +103,7 @@ export default function DadosEndereco({ formik }) {
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             name="endereco.numero"
-            placeholder="Insira o número"
+            placeholder="Insira o número da sua residência"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.endereco.numero}
@@ -119,7 +119,7 @@ export default function DadosEndereco({ formik }) {
             className={style.container__ContainerForm_form_halfContainer_input}
             id="complemento"
             name="endereco.referencia"
-            placeholder="Insira uma complemento"
+            placeholder="Insira o complemento"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.endereco.referencia}

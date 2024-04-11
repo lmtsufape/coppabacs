@@ -5,61 +5,63 @@ import styles from "./table.module.scss";
 import Link from "next/link";
 
 
-export default function tableLayout({ table1, table2, table3, table4, table5, listSementes }) {
+
+export default function tableLayout({ table1, table2, table3, table4, listSementes }) {
+
   const sementes = {
-    tecnico: "asdfasdf",
-    cpf: "asdfasdfasd",
-    numConselho: "asdfasdfasd",
-    cultura: "fasdfasdfasd",
-    variedade: "asdfasdf",
-    nome: "fasdfasdfasd",
+    imagem: "/assets/teste_quinoa.png",
+    tecnico: "Chico",
+    cpf: "111222333444",
+    numConselho: "111222333444",
+    cultura: "Milho",
+    nome: "MilhoJabatao",
     finalidadeSemente: [],
-    descricao: "asdfasdf",
-    doencas: "asdfasdfa",
-    pragas: "sdfasdfasd",
-    dominioPublico: "asdfasdfas",
-    polinizaacaoAbertaMelhorada: "asdfasdfa",
-    regAdaptCultivar: "sdfasdfasdfasd",
-    regiaoColetaDados: "fasdfasdf",
-    altitudeMaxima: "asdfa",
-    altitudeMinima: "sdfasdfffffasdf",
-    caracteristicasPositiva: "asdfasdf",
-    caracteristicasNegativas: "asdfasdfa",
-    avaliacaoSemente: "sdfasdf",
+    descricao: "Muito boa",
+    doencas: "febre",
+    pragas: "formiga",
+    dominioPublico: "",
+    polinizaacaoAbertaMelhorada: "",
+    regAdaptCultivar: "Pernambuco",
+    regiaoColetaDados: "Pernambuco",
+    altitudeMaxima: "22",
+    altitudeMinima: "11",
+    caracteristicasPositiva: "Milho bom ",
+    caracteristicasNegativas: "Milho ruim",
+    avaliacaoSemente: "eh muito bacana",
     caracteristicasAgronomicas: {
-      cicloFenologico: "asdfasdfasdf",
-      stand: "asdfasdfasdf",
-      produtividade: "asdfasdfasd",
-      alturaPlanta: "asdfasdfasd",
-      pesoMilGraos: "fasdfasdfasdfasd",
-      pesoHectolitro: "fasdfasdfa",
-      tipoGrao: "sdfasdfasdf",
-      corGrao: "asdfasdfasd",
-      corCaule: "fasdfasdfas",
-      corFolha: "dfasdfas",
-      corFlor: "asdfasdfasd",
-      empalhamento: "fasdfasdfasd",
-      habitoCrescimento: "fasdfasdfasdfasdfasdfa",
+      cicloFenologico: "2323",
+      stand: "asdasd",
+      produtividade: "asdasd",
+      alturaPlanta: "asdasdad",
+      pesoMilGraos: "asdasdad",
+      pesoHectolitro: "asdasdasd",
+      tipoGrao: "asdasd",
+      corGrao: "asdasd",
+      corCaule: "adsad",
+      corFolha: "asdasd",
+      corFlor: "asdasd",
+      empalhamento: "asdasd",
+      habitoCrescimento: "asdasd",
     },
     toleranciaAdversidades: {
-      altaTemperatura: "sdfasdfasdfa",
-      baixaTemperatura: "sdfasdfasdfasd",
-      geada: "fasdfasdfasd",
-      chuvaExcessiva: "fasdfasda",
-      seca: "sdfasdfa",
-      ventos: "asdfasdfasdf",
-      salinidade: "asdfadsf",
-      toxidadeAluminio: "asdfasdf",
-      soloArgiloso: "asdfasdf",
-      soloArenoso: "asdfasdf",
-      soloAcido: "asdfasdf",
-      soloBaixaFertilidade: "asdfadfasd",
+      altaTemperatura: "",
+      baixaTemperatura: "",
+      geada: "",
+      chuvaExcessiva: "",
+      seca: "",
+      ventos: "",
+      salinidade: "",
+      toxidadeAluminio: "",
+      soloArgiloso: "",
+      soloArenoso: "",
+      soloAcido: "",
+      soloBaixaFertilidade: "",
     }
   }
   return (
     <div className={styles.content}>
       <table className={styles.content__table}>
-        <thead className={styles.content__table_header}>
+        <thead className={styles.content__table__header}>
           <tr>
             <th>{table1}</th>
             <th>{table2}</th>
@@ -77,16 +79,19 @@ export default function tableLayout({ table1, table2, table3, table4, table5, li
         </thead>
         <tbody className={styles.content__table__body}>
           <tr>
-            <td>Imagem</td>
-            <td>{sementes.cultura}</td>
-            <td>{sementes.variedade}</td>
             <td>
               <div className={styles.content__table_container_buttons}>
                 <button>
                   <span>
-                    <Link href={`/sementes//${sementes.id}`}>
+
+                    <Link href={`/sementes/detalhamento/${sementes.id}`}>
                       <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
                     </Link>
+                  </span>
+                </button>
+                <button>
+                  <span>
+                    <Image src="/assets/iconLixeira.svg" alt="Desativar" width={27} height={26} />
                   </span>
                 </button>
               </div>
@@ -95,10 +100,9 @@ export default function tableLayout({ table1, table2, table3, table4, table5, li
           {listSementes.map((sementes, index) => {
             return (
               <tr key={index}>
-                <td>Imagem</td>
+                <td> <Image src={sementes.imagem} alt="Imagem da semente" width={100} height={100} /></td>
                 <td>{sementes.cultura}</td>
                 <td>{sementes.nome}</td>
-                <td>{sementes.pragas}</td>
                 <td>
                   <div className={styles.content__table_container_buttons}>
                     <button>
@@ -106,6 +110,11 @@ export default function tableLayout({ table1, table2, table3, table4, table5, li
                         <Link href={`/sementes/solicitacoes/${sementes.id}`}>
                           <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
                         </Link>
+                      </span>
+                    </button>
+                    <button>
+                      <span>
+                        <Image src="/assets/iconLixeira.svg" alt="Desativar" width={27} height={26} />
                       </span>
                     </button>
                   </div>

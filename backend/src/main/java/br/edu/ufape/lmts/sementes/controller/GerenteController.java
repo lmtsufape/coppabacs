@@ -3,6 +3,7 @@ package br.edu.ufape.lmts.sementes.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.GerenteRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.GerenteRequestUpdate;
 import br.edu.ufape.lmts.sementes.controller.dto.response.GerenteResponse;
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.facade.Facade;
@@ -27,7 +29,6 @@ import br.edu.ufape.lmts.sementes.model.BancoSementes;
 import br.edu.ufape.lmts.sementes.model.Gerente;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
-import jakarta.validation.Valid;
 
 
 @CrossOrigin (origins = "http://localhost:8081/" )
@@ -63,23 +64,23 @@ public class GerenteController {
 	}
 	
 	@PatchMapping("gerente/{id}")
-	public GerenteResponse updateGerente(@PathVariable Long id, @Valid @RequestBody GerenteRequest obj) {
-		try {
+	public GerenteResponse updateGerente(@PathVariable Long id, @RequestBody GerenteRequestUpdate obj) {
+	//	try {
 			Gerente oldObject = facade.findGerenteById(id);
+			modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
 
-			TypeMap<GerenteRequest, Gerente> typeMapper = modelMapper
-													.typeMap(GerenteRequest.class, Gerente.class)
-													.addMappings(mapper -> mapper.skip(Gerente::setId));			
-			
+			TypeMap<GerenteRequestUpdate, Gerente> typeMapper = modelMapper
+			        .typeMap(GerenteRequestUpdate.class, Gerente.class)
+			        .addMappings(mapper -> mapper.skip(Gerente::setId));
 			
 			typeMapper.map(obj, oldObject);	
 			return new GerenteResponse(facade.updateGerente(oldObject));
-		} catch (RuntimeException e) {
-			if (!(e instanceof ObjectNotFoundException))
-				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
-			else
-				throw e;
-		}
+//		} catch (RuntimeException e) {
+//			if (!(e instanceof ObjectNotFoundException))
+//				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+//			else
+//				throw e;
+//		}
 		
 	}
 	

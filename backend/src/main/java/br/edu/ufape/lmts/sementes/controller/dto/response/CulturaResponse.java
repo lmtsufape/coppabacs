@@ -1,7 +1,5 @@
 package br.edu.ufape.lmts.sementes.controller.dto.response;
 
-import java.util.List;
-
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
@@ -17,7 +15,6 @@ public  class CulturaResponse  {
 	private Long id;
 	private String cultura;
 	private String genero;
-	private List<SementesResponse> sementes; 
 
 
 

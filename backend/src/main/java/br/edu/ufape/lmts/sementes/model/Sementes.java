@@ -4,13 +4,16 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -49,4 +52,23 @@ public  class Sementes  {
 	@JoinColumn(name = "sementes_id")
 	@ToString.Exclude
 	private List<TabelaBancoSementes> tabelaBancoSementes;
+	@ManyToOne(targetEntity = ResponsavelTecnico.class)
+	@JoinColumn(name = "responsavel_tecnico_id")
+	@ToString.Exclude
+	private ResponsavelTecnico responsavelTecnico;
+	@OneToOne(cascade=CascadeType.PERSIST, orphanRemoval = true)
+	@ToString.Exclude
+	private CaracteristicasAgronomicas caracteristicasAgronomicas;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "sementes_finalidades", joinColumns = @JoinColumn(name = "sementes_id"), inverseJoinColumns = @JoinColumn(name = "finalidades_id"))
+	@ToString.Exclude
+	private List<Finalidade> finalidades;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cultura_id")
+	@ToString.Exclude
+	private Cultura cultura;
+	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.PERSIST)
+	@JoinColumn(name = "sementes_id")
+	@ToString.Exclude
+	private List<RegioesAdaptacaoCultivo> regioesAdaptacaoCultivo;
 }

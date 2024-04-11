@@ -20,6 +20,11 @@ public  class GerenteRequest extends UsuarioRequest {
 		return obj;
 	}
 
-
-
+	public long getBancoId() {
+		return this.bancoId;
+	}
+	
+	public void setBancoId(long bancoId) {
+		this.bancoId = bancoId;
+	}
 }

@@ -14,9 +14,6 @@ import lombok.Setter;
 public  class RegioesAdaptacaoCultivoResponse  {
 	private Long id;
 	private String regiao;
-	private SementesResponse sementes; 
-
-
 
 	public RegioesAdaptacaoCultivoResponse(RegioesAdaptacaoCultivo obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
