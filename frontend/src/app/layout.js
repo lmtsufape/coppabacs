@@ -7,8 +7,7 @@ import PrivateRoute from '@/components/PrivateRoute';
 import ProviderQuery from '@/components/ProviderQuery';
 import { usePathname } from 'next/navigation';
 import { checkIsPublicRoute } from '@/functions/checkIsPublicRoute';
-import { UserProvider } from '@/components/UserProvider';
-import Head from 'next/head';
+import ProviderRedux from '@/components/ProviderRedux';
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -19,22 +18,20 @@ const inter = Inter({ subsets: ['latin'] })
 //}
 //Substituir dentro do body
 
-export default function RootLayout({
-  children,
-}) {
+export default function RootLayout({ children}) {
 
   const pathName = usePathname();
   const isPublicPage = checkIsPublicRoute(pathName);
   return (
     <html lang="pt-br">
-      <Head>
+      <head>
         <title>Coppabacs - Bancos de Sementes</title>
         <meta name="description" content="Plataforma de gerenciamento do banco de sementes da Coppabacs." />
         <html lang="pt-br" />
-      </Head>
+      </head>
       <body className={inter.className}>
         <ProviderQuery>
-          <UserProvider>
+          <ProviderRedux>
             {isPublicPage && children}
             {!isPublicPage && (
               <PrivateRoute>
@@ -42,7 +39,7 @@ export default function RootLayout({
               </PrivateRoute>
             )}
 
-          </UserProvider>
+          </ProviderRedux>
         </ProviderQuery>
       </body>
     </html>

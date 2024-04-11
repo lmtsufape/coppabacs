@@ -57,7 +57,38 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
     }
   }
 
-
+  const agricultor = {
+    email: "testes@1234",
+    senha: "asdf",
+    confirmarSenha: "asdf",
+    nome: "Teste",
+    nomePopular: "Testinho",
+    contato: "contato",
+    cpf: "12531251",
+    dataNascimento: "31/10/1111",
+    sexo: "masculino",
+    endereco: {
+      cep: "55345000",
+      estado: "PE",
+      cidade: "Garanhuns",
+      bairro: "Centro",
+      nome: "Rua",
+      numero: "120",
+      referencia: "Perto do teste",
+    },
+    bancoId: "1",
+    conjuge: {
+      nome: "Testinha",
+      sexo: "Feminino",
+    },
+    atividadesRurais: [],
+    producaoSementes: {
+      cultura: "4",
+      variedade: "4",
+      areaPlantada: "4",
+      previsaoVenda: "4",
+    }
+  }
 
   const [etapas, setEtapas] = useState(0);
   console.log("Usuario ", usuario);
@@ -77,7 +108,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
 
       <div className={style.container__ContainerForm}>
         <Formik
-          initialValues={initialValues}
+          initialValues={agricultor}
 
 
           onSubmit={(values, { setSubmitting }) => {
@@ -119,8 +150,6 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
                 <DadosForm formik={formik} editar={editar} />
                 <DadosEndereco formik={formik} editar={editar}/>
                 <DadosAtividadesRurais formik={formik} editar={editar}/>
-
-
               </Form>
             )
           }

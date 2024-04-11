@@ -10,15 +10,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-
-@Getter @Setter @NoArgsConstructor
-public  class SementesResponse  {
-	private Long id;
+@Getter
+@Setter
+@NoArgsConstructor
+public class SementesResponse {
+	private long id;
 	private String nome;
 	private String nomePopular;
-	private String pragas;
 	private String descricao;
+	private String pragas;
 	private List<String> imagens;
 	private Boolean dominioPublico;
 	private Boolean polinizaacaoAbertaMelhorada;
@@ -27,15 +27,18 @@ public  class SementesResponse  {
 	private float altitudeMinima;
 	private String caracteristicasPositiva;
 	private String caracteristicasNegativas;
-	private ToleranciaAdversidadesResponse toleranciaAdversidades; 
-	private List<ProducaoSementesResponse> producaoSementes; 
-	private List<TabelaBancoSementesResponse> tabelaBancoSementes; 
-
-
+	private ToleranciaAdversidadesResponse toleranciaAdversidades;
+//	private List<ProducaoSementesResponse> producaoSementes; 
+//	private List<TabelaBancoSementesResponse> tabelaBancoSementes; 
+	private ResponsavelTecnicoResponse responsavelTecnico;
+	private CaracteristicasAgronomicasResponse caracteristicasAgronomicas;
+	private List<FinalidadeResponse> finalidades;
+	private List<RegioesAdaptacaoCultivoResponse> regioesAdaptacaoCultivo;
+	private CulturaResponse cultura;
 
 	public SementesResponse(Sementes obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
-		modelMapper.map(obj, this);	
+		modelMapper.map(obj, this);
 	}
 
 }

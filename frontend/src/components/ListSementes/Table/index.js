@@ -5,6 +5,7 @@ import styles from "./table.module.scss";
 import Link from "next/link";
 
 
+
 export default function tableLayout({ table1, table2, table3, table4, listSementes }) {
 
   const sementes = {
@@ -57,7 +58,6 @@ export default function tableLayout({ table1, table2, table3, table4, listSement
       soloBaixaFertilidade: "",
     }
   }
-
   return (
     <div className={styles.content}>
       <table className={styles.content__table}>
@@ -79,14 +79,11 @@ export default function tableLayout({ table1, table2, table3, table4, listSement
         </thead>
         <tbody className={styles.content__table__body}>
           <tr>
-            <td> <Image className={styles.imagemSemente} src={sementes.imagem} alt="Imagem da semente" width={80} height={80} /></td>
-            <td>{sementes.cultura}</td>
-            <td>{sementes.nome}</td>
-
             <td>
               <div className={styles.content__table_container_buttons}>
                 <button>
                   <span>
+
                     <Link href={`/sementes/detalhamento/${sementes.id}`}>
                       <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
                     </Link>

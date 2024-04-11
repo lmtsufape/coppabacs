@@ -38,13 +38,13 @@ export default function Info() {
 
   return (
     <>
-      <Header hrefAnterior={"/agricultores"} />
+      <Header hrefAnterior={"/funcionarios"} />
       { status === "success" && usuario &&
         <DetalhamentoUsuario 
         usuario={usuario}
-        diretorioAnterior={"Home / Agricultores / "}
-        diretorioAtual={"Informações do Agricultor"}
-        hrefAnterior={"/agricultores"}
+        diretorioAnterior={"Home / Funcionarios / "}
+        diretorioAtual={"Informações do Funcionario"}
+        hrefAnterior={"/funcionarios"}
         />
       }
       <Footer />
