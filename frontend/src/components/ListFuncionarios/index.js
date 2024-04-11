@@ -11,9 +11,38 @@ import Header from "../HeaderNavegacao";
 import Table from "./Table";
 
 import { Search, SearchUsuarios } from "../searchUsuario";
+import { getAllCoppabacs } from "@/api/usuarios/coppabacs/getAllCoppabacs";
+import { getStorageItem } from "@/utils/localStore";
 
 export default function ListFuncionarios({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4 }) {
 
+  const [role, setRole] = useState(getStorageItem("userRole"));
+
+  function whatIsTypeUser() {
+    if (role == "ROLE_ADMIN" || role == "ROLE_COPPABACS") {
+      return <LayoutAdmin
+        table1={table1}
+        table2={table2}
+        table3={table3}
+        table4={table4}
+
+      />
+    }
+  }
+  return (
+    <>
+      <Header
+        diretorioAnterior={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
+        hrefAnterior={hrefAnterior}
+      />
+      {whatIsTypeUser()}
+
+    </>
+  );
+}
+
+const LayoutAdmin = ({ table1, table2, table3, table4 }) => {
   const [funcionarios, setFuncionarios] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -37,15 +66,11 @@ export default function ListFuncionarios({ diretorioAnterior, diretorioAtual, hr
 
 
   const listFuncionarios = funcionarios.filter((funcionarios) =>
-  funcionarios.nome.toLowerCase().includes(searchTerm.toLowerCase())
+    funcionarios.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
   return (
     <div>
-      <Header
-        diretorioAnterior={diretorioAnterior}
-        diretorioAtual={diretorioAtual}
-        hrefAnterior={hrefAnterior}
-      />
+
       <div className={style.header}>
         <div className={style.header__container}>
 
@@ -77,5 +102,5 @@ export default function ListFuncionarios({ diretorioAnterior, diretorioAtual, hr
         />
       )}
     </div>
-  );
+  )
 }

@@ -6,7 +6,6 @@ import { setStorageItem } from "@/utils/localStore";
 import { useMutation } from "react-query";
 import { APP_ROUTES } from "@/constants/app-routes";
 import { postLogin } from "@/api/login/postLogin";
-import { RootState } from '@/redux/store'
 import { setUserLogin } from "@/redux/userLogin/userLoginSlice";
 
 
@@ -15,6 +14,7 @@ import api from "@/api/http-common";
 import style from "./home.module.scss";
 import Footer from "./Footer";
 import Link from "next/link";
+import { getCurrentUser } from "@/api/usuarios/getCurrentUser";
 
 
 const Home = () => {
@@ -23,7 +23,6 @@ const Home = () => {
   const [senha, setSenha] = useState("");
   const { push } = useRouter();
 
-  const userLogin = useSelector((state) => state.userLogin);
 
   const dispatch = useDispatch();
 
@@ -34,15 +33,26 @@ const Home = () => {
     onSuccess: (res) => {
       api.defaults.headers.authorization = `${res.headers.authorization}`;
       setStorageItem("token", res.headers.authorization)
-      push(APP_ROUTES.private.list.name);
       dispatch(setUserLogin(email));
       setStorageItem("userLogin", email);
+      userDetailsMutation.mutate();
     },
     onError: (error) => {
       console.log(error);
     },
   }
   );
+  const userDetailsMutation = useMutation(getCurrentUser, {
+    onSuccess: (res) => {
+      const userRole = res.data.authorities[0].authority; // Assumindo que a resposta inclui um campo 'role'
+      setStorageItem("userRole", userRole); // Armazenar a role no localStorage
+      // Redirecionamento pode ser feito aqui, se necessário
+      push(APP_ROUTES.private.list.name);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   const getEnter = (e) => {
     if (e.key === "Enter") {

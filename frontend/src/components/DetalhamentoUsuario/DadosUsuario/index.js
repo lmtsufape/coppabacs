@@ -4,7 +4,6 @@ import { telefoneMask } from "@/utils/Masks/telefoneMask";
 import { cpfMask } from "@/utils/Masks/cpfMask";
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
-import { getBanco } from "@/api/bancoSementes/getBanco";
 import { getAllBancos } from "@/api/bancoSementes/getAllBancos";
 
 
@@ -21,7 +20,6 @@ export default function DadosForm({ formik, editar }) {
       return getAllBancos();
     }, {
     onSuccess: (res) => {
-      console.log(res.data)
       setBancos(res.data);
     },
     onError: (error) => {
@@ -29,7 +27,6 @@ export default function DadosForm({ formik, editar }) {
     }
   }
   );
-  console.log(formik.values)
   const bancoAtual = () =>{
     {bancos.map((banco, index)=>{
       if(formik.values.bancoId === banco.bancoId )
@@ -83,13 +80,13 @@ export default function DadosForm({ formik, editar }) {
             </div>
             <div>
 
-              <label htmlFor="apelido">Apelido</label>
+              <label htmlFor="nomePopular">Nome Popular</label>
 
               <input
                 className={style.container__ContainerForm_form_input}
-                name="apelido"
+                name="nomePopular"
                 placeholder="Não informado"
-                value={formik.values.apelido}
+                value={formik.values.nomePopular}
                 disabled
               />
             </div>
