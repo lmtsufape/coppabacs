@@ -10,10 +10,11 @@ export default function SementesPage() {
         diretorioAnterior= "Home /" 
         diretorioAtual="Sementes" 
         hrefAnterior="/inicio" 
-        //table1="Imagem"
-        table1="Cultura" 
-        table2="Nome" 
-        table3="Ação"/>
+        table1="Imagem"
+        table2="Cultura" 
+        table3="Variedade" 
+        table4="Quantidade"
+        table5="Ação"/>
       <Footer />
 
     </div>

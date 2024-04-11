@@ -1,10 +1,14 @@
 import Image from "next/image";
 import style from "./card.module.scss";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 
 export default function CardDefault({title, icon, description, link}) {
+  const router = useRouter();
+
+
   return (
     <button className={style.card}>
       <Link className={style.card_link} href={`${link}`}>

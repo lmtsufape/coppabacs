@@ -7,9 +7,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState} from '@/redux/store';
 
 import api from "@/api/http-common";
+import UserType from "../UserType";
+import { getCurrentUser } from "@/api/usuarios/getCurrentUser";
 //verificar como vai funcionar o props utilizando o children:ReactNode
 const PrivateRoute = (props)  => {
-
+  const [authority, setAuthority] = useState(null);
   const [authorized, setAuthorized] = useState(false);
   const [token, setToken] = useState(getStorageItem("token"));
   //o state deveria ser do tipo RootState 
@@ -25,29 +27,6 @@ const PrivateRoute = (props)  => {
       push(APP_ROUTES.public.home);
     }
   }, [token, push]);
-
-/**
- * 
-const{ status, mutate } = useMutation(
-  async () => {
-    return postValidateToken(token);
-  },
-  {
-    onSuccess: (res) => {
-      if(res.data){
-        setAuthorized(true);
-      }else{
-        setAuthorized(false);
-        push(APP_ROUTES.public.home);
-      }
-    },
-    onError: (error) => {
-      console.log(error);
-    },
-  }
-)
- */
-
   return( 
     <>
       {authorized && props.children}

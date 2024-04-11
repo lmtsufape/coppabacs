@@ -10,10 +10,10 @@ export default function NewRegisterFarmer() {
         <div className={styles.pageContainer}>
             <Header hrefAnterior="/coordenadores" />
             <div className={styles.pageContainer__content}>
-                <CoordenadorForm 
-                diretorioAnterior="Home / Coordenadores /" 
-                diretorioAtual="Novo Coordenador" 
-                hrefAnterior="/coordenadores" />
+                <CoordenadorForm
+                    diretorioAnterior="Home / Coordenadores /"
+                    diretorioAtual="Novo Coordenador"
+                    hrefAnterior="/coordenadores" />
             </div>
             <Footer />
 

@@ -13,7 +13,8 @@ export default function AssociadosPage() {
         hrefAnterior="/inicio"
         table1="nome"
         table2="Contato"
-        table3="Ação" 
+        table3 ="Banco"
+        table4="Ação" 
         />
 
       <Footer />

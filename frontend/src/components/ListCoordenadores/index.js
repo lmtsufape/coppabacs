@@ -14,7 +14,7 @@ import { getAllUsuarios } from "@/api/usuarios/getAllUsuarios";
 import { Search, SearchUsuarios } from "../searchUsuario";
 import { getAllCoordenadores } from "@/api/usuarios/coordenador/getAllCoordenadores";
 
-export default function ListCoordenadores({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3 }) {
+export default function ListCoordenadores({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4 }) {
 
   const [coordenadores, setCoordenadores] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -74,6 +74,7 @@ export default function ListCoordenadores({ diretorioAnterior, diretorioAtual, h
           table1={table1}
           table2={table2}
           table3={table3}
+          table4={table4}
           listCoordenadores={listCoordenadores}
         />
       )}

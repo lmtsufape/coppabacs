@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import DetalhamentoUsuario from "@/components/DetalhamentoUsuario";
 
 export default function Info() {
-
+  
   const params = useParams();
 
   const [usuario, setUsuario] = useState();

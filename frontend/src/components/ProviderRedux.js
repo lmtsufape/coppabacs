@@ -1,4 +1,6 @@
-"use client"
+/**
+ * 
+ * "use client"
 
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
@@ -57,3 +59,18 @@ export const UserProvider = ({ children }) => {
 
 
 export const useUser = () => useContext(UserContext);
+
+
+ */
+import { Provider } from 'react-redux';
+import store from '@/redux/store';
+
+const ProviderRedux = ({ children }) => {
+  return (
+    <Provider store={store}>
+      {children}
+    </Provider>
+  )
+}
+
+export default ProviderRedux;
