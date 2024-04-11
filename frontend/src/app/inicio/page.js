@@ -6,14 +6,16 @@ import Card from "@/components/CardDefault";
 import style from "./inicio.module.scss";
 import { useState } from "react";
 import { getStorageItem } from "@/utils/localStore";
+import { APP_ROUTES } from "@/constants/app-routes";
+import { useRouter } from "next/navigation";
 
 
 
 export default function InicioPage() {
 
   const [role, setRole] = useState(getStorageItem("userRole"));
+  const { push } = useRouter();
 
-  console.log(role)
   function whatIsTypeUser() {
     if (role == "ROLE_ADMIN" || role == "ROLE_COPPABACS") {
       return <LayoutAdmin />
@@ -22,11 +24,7 @@ export default function InicioPage() {
     } else if (role == "ROLE_AGRICULTOR") {
       return <LayoutAgricultor />
     } else if (role == "ROLE_USUARIO") {
-      return(
-        <div>
-          Você ainda não tem permissão de acesso por favor entrar em contato com o responsavel da cooperativa.
-        </div>
-      )
+      push(APP_ROUTES.public.home);
     }
   }
 
@@ -34,10 +32,8 @@ export default function InicioPage() {
     <div>
       <Header hrefAnterior="invalid" />
       <div className={style.menu}>
-
         {whatIsTypeUser()}
       </div>
-
       <Footer />
     </div>
   )

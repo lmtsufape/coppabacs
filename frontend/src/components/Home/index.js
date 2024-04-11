@@ -6,7 +6,6 @@ import { setStorageItem } from "@/utils/localStore";
 import { useMutation } from "react-query";
 import { APP_ROUTES } from "@/constants/app-routes";
 import { postLogin } from "@/api/login/postLogin";
-import { RootState } from '@/redux/store'
 import { setUserLogin } from "@/redux/userLogin/userLoginSlice";
 
 
