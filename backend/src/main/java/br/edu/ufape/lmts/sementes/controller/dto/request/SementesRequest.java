@@ -1,11 +1,13 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
 import br.edu.ufape.lmts.sementes.model.Sementes;
+import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,6 +28,13 @@ public class SementesRequest {
 	private String caracteristicasPositiva;
 	private String caracteristicasNegativas;
 	private ToleranciaAdversidadesRequest toleranciaAdversidades;
+	private CaracteristicasAgronomicasRequest caracteristicasAgronomicas;
+	private List<FinalidadeRequest> finalidades;
+	private List<RegioesAdaptacaoCultivoRequest> regioesAdaptacaoCultivo;
+	private CulturaRequest cultura;
+	
+	@Valid
+	private ResponsavelTecnicoRequest responsavelTecnico;
 
 	public Sementes convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

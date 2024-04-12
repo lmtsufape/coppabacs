@@ -16,7 +16,14 @@ public class FinalidadeService implements FinalidadeServiceInterface {
 
 
 	public Finalidade saveFinalidade(Finalidade newInstance) {
-		return repository.save(newInstance);
+		Finalidade finalidade;
+		try {
+			
+			finalidade = findFinalidadeByNome(newInstance.getNome());
+		} catch (ObjectNotFoundException e) {
+			finalidade = repository.save(newInstance);
+		}
+		return finalidade;
 	}
 
 	public Finalidade updateFinalidade(Finalidade transientObject) {
@@ -25,6 +32,10 @@ public class FinalidadeService implements FinalidadeServiceInterface {
 
 	public Finalidade findFinalidadeById(long id) {
 		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Finalidade with id = " + id));
+	}
+	
+	public Finalidade findFinalidadeByNome(String nome) {
+		return repository.findByNome(nome).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Finalidade with nome = " + nome));
 	}
 
 	public List<Finalidade> getAllFinalidade(){
@@ -39,8 +50,6 @@ public class FinalidadeService implements FinalidadeServiceInterface {
 	public void deleteFinalidade(long id){
 		Finalidade obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Finalidade with id = " + id));
 		repository.delete(obj);
-	}	
-	
-	
-	
+	}
+
 }

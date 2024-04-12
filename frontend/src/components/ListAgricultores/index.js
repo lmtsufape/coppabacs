@@ -11,9 +11,55 @@ import Header from "../HeaderNavegacao";
 import Table from "./Table";
 
 import { Search, SearchUsuarios } from "../searchUsuario";
+import { getAllAgricultores } from "@/api/usuarios/agricultor/getAllAgricultores";
+import { getStorageItem } from "@/utils/localStore";
 
 export default function ListAgricultores({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4 }) {
 
+  const [role, setRole] = useState(getStorageItem("userRole"));
+
+  function whatIsTypeUser() {
+    if (role == "ROLE_ADMIN" || role == "ROLE_COPPABACS") {
+      return <LayoutAdmin
+        table1={table1}
+        table2={table2}
+        table3={table3}
+        table4={table4}
+      />
+    } else if (role == "ROLE_GERENTE") {
+      return <LayoutCoordenador
+        table1={table1}
+        table2={table2}
+        table3={table3}
+        table4={table4}
+      />
+    }
+  }
+
+  return (
+    <div>
+      <Header
+        diretorioAnterior={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
+        hrefAnterior={hrefAnterior}
+      />
+      {whatIsTypeUser()}
+
+    </div>
+
+  );
+}
+
+const LayoutCoordenador = () => {
+
+  return (
+    <div>
+      Em produção
+    </div>
+  )
+}
+
+const LayoutAdmin = ({ table1, table2, table3, table4 }) => {
   const [Agricultores, setAgricultores] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -24,7 +70,7 @@ export default function ListAgricultores({ diretorioAnterior, diretorioAtual, hr
 
   const { status, mutate } = useMutation(
     async () => {
-      //return getAllAgricultores();
+      return getAllAgricultores();
     }, {
     onSuccess: (res) => {
       setAgricultores(res.data);
@@ -35,17 +81,12 @@ export default function ListAgricultores({ diretorioAnterior, diretorioAtual, hr
   }
   );
 
-
   const listAgricultores = Agricultores.filter((Agricultores) =>
     Agricultores.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
   return (
     <div>
-      <Header
-        diretorioAnterior={diretorioAnterior}
-        diretorioAtual={diretorioAtual}
-        hrefAnterior={hrefAnterior}
-      />
+
       <div className={style.header}>
         <div className={style.header__container}>
           <button >
@@ -85,5 +126,5 @@ export default function ListAgricultores({ diretorioAnterior, diretorioAtual, hr
         />
       )}
     </div>
-  );
+  )
 }

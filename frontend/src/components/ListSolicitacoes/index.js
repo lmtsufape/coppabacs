@@ -21,7 +21,7 @@ export default function ListSolicitacoes({ diretorioAnterior, diretorioAtual, hr
   const { state, mutate } = useMutation(
     async () => {
 
-      //return getAllAgricultores();
+      return getAllAgricultores();
     }, {
     onSuccess: (res) => {
       console.log(res);

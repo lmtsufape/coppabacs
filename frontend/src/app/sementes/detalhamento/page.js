@@ -23,7 +23,7 @@ export default function Detalhamento() {
 
   const { status, mutate } = useMutation(
     async () => {
-      return getSementes(params.id);
+      //return getSementes(params.id);
     }, {
     onSuccess: (res) => {
       console.log(res);

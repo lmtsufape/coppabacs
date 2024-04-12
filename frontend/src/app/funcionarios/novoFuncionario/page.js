@@ -7,7 +7,7 @@ import FuncionarioForm from "@/components/FuncionarioForm";
 export default function NewRegisterFarmer() {
     return (
         <div className={styles.pageContainer}>
-            <Header hrefAnterior="/agricultores" />
+            <Header hrefAnterior="/funcionarios" />
             <div className={styles.pageContainer__content}>
                 <FuncionarioForm
                     diretorioAnterior="Home / Funcionarios /"

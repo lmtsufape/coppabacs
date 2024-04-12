@@ -14,7 +14,6 @@ public class RetiradaUsuarioService implements RetiradaUsuarioServiceInterface {
 	@Autowired
 	private RetiradaUsuarioRepository repository;
 
-
 	public RetiradaUsuario saveRetiradaUsuario(RetiradaUsuario newInstance) {
 		return repository.save(newInstance);
 	}
@@ -24,23 +23,22 @@ public class RetiradaUsuarioService implements RetiradaUsuarioServiceInterface {
 	}
 
 	public RetiradaUsuario findRetiradaUsuarioById(long id) {
-		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist RetiradaUsuario with id = " + id));
+		return repository.findById(id)
+				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist RetiradaUsuario with id = " + id));
 	}
 
-	public List<RetiradaUsuario> getAllRetiradaUsuario(){
+	public List<RetiradaUsuario> getAllRetiradaUsuario() {
 		return repository.findAll();
 	}
 
-	public void deleteRetiradaUsuario(RetiradaUsuario persistentObject){
+	public void deleteRetiradaUsuario(RetiradaUsuario persistentObject) {
 		this.deleteRetiradaUsuario(persistentObject.getId());
-		
 	}
-	
-	public void deleteRetiradaUsuario(long id){
-		RetiradaUsuario obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist RetiradaUsuario with id = " + id));
+
+	public void deleteRetiradaUsuario(long id) {
+		RetiradaUsuario obj = repository.findById(id)
+				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist RetiradaUsuario with id = " + id));
 		repository.delete(obj);
-	}	
-	
-	
-	
+	}
+
 }

@@ -1,7 +1,5 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
-import java.util.List;
-
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
@@ -15,8 +13,6 @@ import lombok.Setter;
 public  class CulturaRequest  {
 	private String cultura;
 	private String genero;
-	private List<SementesRequest> sementes; 
-
 
 	public Cultura convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

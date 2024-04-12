@@ -12,7 +12,7 @@ import Table from "./Table";
 import { getAllSementes } from "@/api/sementes/getAllSementes";
 import { Search } from "../searchSemente";
 
-export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4 }) {
+export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) {
 
   const [sementes, setSementes] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -24,7 +24,7 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
 
   const { state, mutate } = useMutation(
     async () => {
-      return getAllSementes();
+      //return getAllSementes();
     }, {
     onSuccess: (res) => {
       console.log(res);
@@ -66,6 +66,7 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
         table2={table2}
         table3={table3}
         table4={table4}
+        table5={table5}
         listSementes={filteredSementes}
       />
     </div>
