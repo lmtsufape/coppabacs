@@ -13,6 +13,8 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor @JsonPropertyOrder
 public class CoppabacsResponse extends UsuarioResponse {
 	
+	private String cargo;
+	
 	public CoppabacsResponse(Coppabacs obj) {
 		super(obj);
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

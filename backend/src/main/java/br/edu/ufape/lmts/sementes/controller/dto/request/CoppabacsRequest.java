@@ -11,6 +11,8 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor
 public class CoppabacsRequest extends UsuarioRequest {
 	
+	private String cargo;
+	
 	public Coppabacs convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		Coppabacs obj = modelMapper.map(this,  Coppabacs.class);
