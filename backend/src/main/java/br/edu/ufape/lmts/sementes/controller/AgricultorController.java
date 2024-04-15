@@ -44,11 +44,25 @@ public class AgricultorController {
 	public List<AgricultorResponse> getAllAgricultor() {
 		return facade.getAllAgricultor()
 			.stream()
-			.filter(agricultor -> agricultor.getRoles().contains(TipoUsuario.AGRICULTOR))
+			.map(AgricultorResponse::new)
+			.toList();
+	}
+	
+	@GetMapping("agricultor/usuarios")
+	public List<AgricultorResponse> getAllAgricultorUsuario() {
+		return facade.getAllAgricultorUsuario()
+			.stream()
 			.map(AgricultorResponse::new)
 			.toList();
 	}
 
+	@PostMapping("agricultor/usuario")
+	public AgricultorResponse createAgricultorUsuario(@Valid @RequestBody AgricultorRequest newObj) throws EmailExistsException {
+		Agricultor agricultor = newObj.convertToEntity();
+		return new AgricultorResponse(facade.saveAgricultorUsuario(agricultor));
+	}
+	
+	@PreAuthorize("hasRole('COPPABACS') or hasRole('GERENTE')")
 	@PostMapping("agricultor")
 	public AgricultorResponse createAgricultor(@Valid @RequestBody AgricultorRequest newObj) throws EmailExistsException {
 		Agricultor agricultor = newObj.convertToEntity();
@@ -97,8 +111,8 @@ public class AgricultorController {
 
 	@PreAuthorize("hasRole('COPPABACS')")
 	@PatchMapping("agricultor/validar/{id}")
-	public ResponseEntity validateAgricultor(@PathVariable long id) {
+	public ResponseEntity<Void> validateAgricultor(@PathVariable long id) {
 		facade.validateAgricultor(id);
-		return ResponseEntity.status(HttpStatus.OK).build();
+		return ResponseEntity.ok().build();
 	}
 }

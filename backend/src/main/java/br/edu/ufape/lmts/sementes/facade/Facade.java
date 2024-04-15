@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.model.Admin;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.model.AtividadeRural;
@@ -855,13 +856,22 @@ public class Facade {
 	// Agricultor--------------------------------------------------------------
 	@Autowired
 	private AgricultorService agricultorService;
-
-	public Agricultor saveAgricultor(Agricultor newInstance) throws EmailExistsException {
-		System.out.println("resultado:" + newInstance.getAtividadeRural());
+	
+	private Agricultor saveAgricultorA(Agricultor newInstance) throws EmailExistsException {
 		newInstance.setAtividadeRural(saveAtividadesRuraisFromAgricultor(newInstance.getAtividadeRural()));
 		bancoSementesService.findBancoSementesById(newInstance.getBancoSementes().getId());
 		usuarioService.saveUsuario(newInstance);
 		return agricultorService.saveAgricultor(newInstance);
+	}
+	
+	public Agricultor saveAgricultor(Agricultor newInstance) throws EmailExistsException {
+		newInstance.addRole(TipoUsuario.AGRICULTOR);
+		return saveAgricultorA(newInstance);
+	}
+	
+	public Agricultor saveAgricultorUsuario(Agricultor newInstance) throws EmailExistsException {
+		newInstance.addRole(TipoUsuario.USUARIO);
+		return saveAgricultorA(newInstance);
 	}
 
 	public Agricultor updateAgricultor(Agricultor transientObject) {
@@ -873,7 +883,11 @@ public class Facade {
 	}
 
 	public List<Agricultor> getAllAgricultor() {
-		return agricultorService.getAllAgricultor();
+		return agricultorService.getAllByRole(TipoUsuario.AGRICULTOR);
+	}
+	
+	public List<Agricultor> getAllAgricultorUsuario() {
+		return agricultorService.getAllByRole(TipoUsuario.USUARIO);
 	}
 
 	public void deleteAgricultor(Agricultor persistentObject) {

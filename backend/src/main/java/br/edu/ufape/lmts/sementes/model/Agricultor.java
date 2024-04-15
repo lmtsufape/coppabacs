@@ -40,7 +40,6 @@ public class Agricultor extends Usuario {
 			BancoSementes bancoSementes, List<AtividadeRural> atividadeRural) {
 		super(id, nome, nomePopular, email, senha, endereco, cpf, dataNascimento, contato, imagem, sexo, conjuge);
 		this.bancoSementes = bancoSementes;
-	    super.addRole(TipoUsuario.USUARIO);
 	    this.atividadeRural = atividadeRural;
 	}
 
