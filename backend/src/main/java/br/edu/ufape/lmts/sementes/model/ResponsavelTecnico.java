@@ -27,4 +27,6 @@ public class ResponsavelTecnico {
 	private String cpf;
 	@Column(nullable = true, unique = true)
 	private String numeroConselho;
+	@Column(nullable = false)
+	private String estadoConselho;
 }

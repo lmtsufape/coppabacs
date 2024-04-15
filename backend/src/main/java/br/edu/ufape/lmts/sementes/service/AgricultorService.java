@@ -34,6 +34,12 @@ public class AgricultorService implements AgricultorServiceInterface {
 	public List<Agricultor> getAllAgricultor(){
 		return repository.findAll();
 	}
+	
+	
+	
+	public List<Agricultor> getAllByRole(TipoUsuario tipoUsuario) {
+		return repository.findDistinctByRole(tipoUsuario);
+	}
 
 	@Transactional
 	public void deleteAgricultor(Agricultor persistentObject){

@@ -32,6 +32,8 @@ public class CaracteristicasAgronomicas {
 	private int standRecomendado;
 	private int produtividade;
 	private double altitudePlanta;
+	private double PesoMilgraos;
+	private double PesoHectolitro;
 	private String tipoGrão;
 	private String corCaule;
 	private String corGrao;

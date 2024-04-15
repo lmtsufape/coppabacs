@@ -38,10 +38,11 @@ public class WebSecurityConfig {
 			.authorizeHttpRequests(authz -> authz
 					// Rotas públicas
 					.requestMatchers(HttpMethod.POST,"/api/v1/login").permitAll()
-					.requestMatchers(HttpMethod.POST, "/api/v1/agricultor").permitAll()
+					.requestMatchers(HttpMethod.POST, "/api/v1/agricultor/usuario").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/banco-sementes/**").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/sementes/**").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/posts/**").permitAll()
+					.requestMatchers(HttpMethod.GET, "/api/v1/arquivos/**").permitAll()
 					
 					// rotas de agricultor
 					.requestMatchers("/api/v1/agricultor/**").hasAnyRole("AGRICULTOR", "GERENTE", "COPPABACS")
@@ -57,12 +58,16 @@ public class WebSecurityConfig {
 					// rotas de coordenador
 					.requestMatchers(HttpMethod.POST, "/api/v1/gerente").hasRole("COPPABACS")
 					.requestMatchers("/api/v1/gerente/**").hasAnyRole("GERENTE", "COPPABACS")
-					
+					.requestMatchers(HttpMethod.POST, "/api/v1/agricultor").hasAnyRole("GERENTE", "COPPABACS")
 					.requestMatchers("/api/v1/sementes/**").hasRole("COPPABACS")
 					.requestMatchers("/api/v1/responsavel-tecnico/**").hasRole("COPPABACS")
 					.requestMatchers("/security/**").permitAll()
 					//.requestMatchers("/api/**").permitAll()
 					.requestMatchers("/api/v1/coppabacs/**").hasRole("COPPABACS")
+					
+					// rotas de arquivos
+					.requestMatchers(HttpMethod.POST, "/api/v1/arquivos/**").hasAnyRole("AGRICULTOR", "GERENTE", "COPPABACS")
+					.requestMatchers(HttpMethod.DELETE, "/api/v1/arquivos/**").hasAnyRole("GERENTE", "COPPABACS")
 					.anyRequest().authenticated()
 			)
 			.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);

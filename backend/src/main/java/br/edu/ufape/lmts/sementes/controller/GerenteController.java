@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.GerenteRequest;
-import br.edu.ufape.lmts.sementes.controller.dto.request.GerenteRequestUpdate;
+import br.edu.ufape.lmts.sementes.controller.dto.request.GerenteUpdateRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.GerenteResponse;
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.facade.Facade;
@@ -64,23 +64,23 @@ public class GerenteController {
 	}
 	
 	@PatchMapping("gerente/{id}")
-	public GerenteResponse updateGerente(@PathVariable Long id, @RequestBody GerenteRequestUpdate obj) {
-	//	try {
+	public GerenteResponse updateGerente(@PathVariable Long id, @RequestBody GerenteUpdateRequest obj) {
+		try {
 			Gerente oldObject = facade.findGerenteById(id);
 			modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
 
-			TypeMap<GerenteRequestUpdate, Gerente> typeMapper = modelMapper
-			        .typeMap(GerenteRequestUpdate.class, Gerente.class)
+			TypeMap<GerenteUpdateRequest, Gerente> typeMapper = modelMapper
+			        .typeMap(GerenteUpdateRequest.class, Gerente.class)
 			        .addMappings(mapper -> mapper.skip(Gerente::setId));
 			
 			typeMapper.map(obj, oldObject);	
 			return new GerenteResponse(facade.updateGerente(oldObject));
-//		} catch (RuntimeException e) {
-//			if (!(e instanceof ObjectNotFoundException))
-//				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
-//			else
-//				throw e;
-//		}
+		} catch (RuntimeException e) {
+			if (!(e instanceof ObjectNotFoundException))
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+			else
+				throw e;
+		}
 		
 	}
 	

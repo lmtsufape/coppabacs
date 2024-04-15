@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.CoppabacsRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.CoppabacsUpdateRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.CoppabacsResponse;
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.facade.Facade;
@@ -62,12 +63,12 @@ public class CoppabacsController {
 	}
 	
 	@PatchMapping("coppabacs/{id}")
-	public CoppabacsResponse updateCoppabacs(@PathVariable long id, @Valid @RequestBody CoppabacsRequest obj) {
+	public CoppabacsResponse updateCoppabacs(@PathVariable long id, @Valid @RequestBody CoppabacsUpdateRequest obj) {
 		try {
 			Coppabacs oldObject = facade.findCoppabacsById(id);
 			modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
-			TypeMap<CoppabacsRequest, Coppabacs> typeMapper = modelMapper
-													.typeMap(CoppabacsRequest.class, Coppabacs.class)
+			TypeMap<CoppabacsUpdateRequest, Coppabacs> typeMapper = modelMapper
+													.typeMap(CoppabacsUpdateRequest.class, Coppabacs.class)
 													.addMappings(mapper -> mapper.skip(Coppabacs::setId));
 			typeMapper.map(obj, oldObject);
 			return new CoppabacsResponse(facade.updateCoppabacs(oldObject));

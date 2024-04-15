@@ -4,10 +4,15 @@ import java.util.Date;
 
 import org.modelmapper.ModelMapper;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
 import br.edu.ufape.lmts.sementes.model.Usuario;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,22 +21,24 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @JsonPropertyOrder
-public class UsuarioRequestUpdate {
+public class UsuarioUpdateRequest {
 
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private String nome;
+	@Email(message = "Email inválido")
 	private String email;
 	private String senha;
 	private String nomePopular;
-	private EnderecoRequest endereco;
+	private EnderecoUpdateRequest endereco;
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private Date dataNascimento;
 	private String contato;
 	private String sexo;
 	private ConjugeRequest conjuge;
 
 	public Usuario convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
-
 		Usuario obj = modelMapper.map(this, Usuario.class);
-
 		return obj;
 	}
 
