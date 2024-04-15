@@ -1,6 +1,7 @@
 package br.edu.ufape.lmts.sementes.facade;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,7 @@ import br.edu.ufape.lmts.sementes.service.DoacaoUsuarioService;
 import br.edu.ufape.lmts.sementes.service.DoencaService;
 import br.edu.ufape.lmts.sementes.service.EmpalhamentoService;
 import br.edu.ufape.lmts.sementes.service.EnderecoService;
+import br.edu.ufape.lmts.sementes.service.FileService;
 import br.edu.ufape.lmts.sementes.service.FinalidadeService;
 //import br.edu.ufape.lmts.sementes.service.GerenteService;
 import br.edu.ufape.lmts.sementes.service.GerenteServiceInterface;
@@ -329,27 +331,25 @@ public class Facade {
 		}
 	}
 
-  public BancoSementes adicionarGerenteBancoSemente(long bancoId, long gerenteId) {
-    BancoSementes banco = bancoSementesService.findBancoSementesById(bancoId);
+	public BancoSementes adicionarGerenteBancoSemente(long bancoId, long gerenteId) {
+		BancoSementes banco = bancoSementesService.findBancoSementesById(bancoId);
 		Gerente gerente = gerenteService.findGerenteById(gerenteId);
 		banco.adicionarGerente(gerente);
 		return bancoSementesService.saveBancoSementes(banco);
 	}
-	
+
 	public void removerGerenteBancoSemente(long bancoId, long gerenteId) {
-	    BancoSementes banco = bancoSementesService.findBancoSementesById(bancoId);
-	    
-	    Gerente gerenteRemover = banco.getGerentes().stream()
-                .filter(gerente -> gerente.getId() == gerenteId)
-                .findFirst()
-                .orElse(null);
-	    
+		BancoSementes banco = bancoSementesService.findBancoSementesById(bancoId);
+
+		Gerente gerenteRemover = banco.getGerentes().stream().filter(gerente -> gerente.getId() == gerenteId)
+				.findFirst().orElse(null);
+
 //	    if(gerenteRemover != null) {
 //	    	banco.getGerentes().remove(gerenteRemover);
 //	    }
 //    	gerenteService.deleteGerente(gerenteRemover);
-	    
-	    bancoSementesService.saveBancoSementes(banco);
+
+		bancoSementesService.saveBancoSementes(banco);
 	}
 
 	// RetiradaUsuario--------------------------------------------------------------
@@ -640,7 +640,7 @@ public class Facade {
 	public Sementes updateSementes(Sementes transientObject) {
 		saveResponsavelTecnicoToSementes(transientObject);
 		transientObject.setFinalidades(transientObject.getFinalidades().stream().map(x -> saveFinalidade(x)).toList());
-		//transientObject.setCultura(saveCultura(transientObject.getCultura()));
+		// transientObject.setCultura(saveCultura(transientObject.getCultura()));
 		System.out.println(transientObject.getCultura());
 		System.out.println(transientObject);
 		return sementesService.updateSementes(transientObject);
@@ -1080,6 +1080,22 @@ public class Facade {
 
 	public void deleteFinalidade(long id) {
 		finalidadeService.deleteFinalidade(id);
+	}
+
+	// Arquivos
+	@Autowired
+	private FileService fileService;
+
+	public File findFile(String fileName) {
+		return fileService.findFile(fileName);
+	}
+
+	public String storeFile(InputStream file, String fileName) {
+		return fileService.storeFile(file, fileName);
+	}
+
+	public void deleteFile(String fileName) {
+		fileService.deleteFile(fileName);
 	}
 
 }

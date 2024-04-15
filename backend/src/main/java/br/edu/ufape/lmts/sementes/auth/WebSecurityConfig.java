@@ -42,6 +42,7 @@ public class WebSecurityConfig {
 					.requestMatchers(HttpMethod.GET, "/api/v1/banco-sementes/**").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/sementes/**").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/posts/**").permitAll()
+					.requestMatchers(HttpMethod.GET, "/api/v1/arquivos/**").permitAll()
 					
 					// rotas de agricultor
 					.requestMatchers("/api/v1/agricultor/**").hasAnyRole("AGRICULTOR", "GERENTE", "COPPABACS")
@@ -63,6 +64,10 @@ public class WebSecurityConfig {
 					.requestMatchers("/security/**").permitAll()
 					//.requestMatchers("/api/**").permitAll()
 					.requestMatchers("/api/v1/coppabacs/**").hasRole("COPPABACS")
+					
+					// rotas de arquivos
+					.requestMatchers(HttpMethod.POST, "/api/v1/arquivos/**").hasAnyRole("AGRICULTOR", "GERENTE", "COPPABACS")
+					.requestMatchers(HttpMethod.DELETE, "/api/v1/arquivos/**").hasAnyRole("GERENTE", "COPPABACS")
 					.anyRequest().authenticated()
 			)
 			.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
