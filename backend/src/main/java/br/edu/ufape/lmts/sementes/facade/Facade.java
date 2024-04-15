@@ -438,6 +438,7 @@ public class Facade {
 	}
 
 	// Gerente--------------------------------------------------------------
+	@Autowired
 	private GerenteServiceInterface gerenteService;
 
 	public Gerente saveGerente(Gerente newInstance) throws EmailExistsException {
