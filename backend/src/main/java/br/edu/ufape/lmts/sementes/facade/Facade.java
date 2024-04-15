@@ -876,6 +876,8 @@ public class Facade {
 	}
 
 	public Agricultor updateAgricultor(Agricultor transientObject) {
+		//transientObject.setAtividadeRural(saveAtividadesRuraisFromAgricultor(transientObject.getAtividadeRural()));
+		//bancoSementesService.findBancoSementesById(transientObject.getBancoSementes().getId());
 		return agricultorService.updateAgricultor(transientObject);
 	}
 

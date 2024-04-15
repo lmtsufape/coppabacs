@@ -1,9 +1,9 @@
-package br.edu.ufape.lmts.sementes.controller.dto.response;
+package br.edu.ufape.lmts.sementes.controller.dto.request;
 
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
-import br.edu.ufape.lmts.sementes.model.AtividadeRural;
+import br.edu.ufape.lmts.sementes.model.Coppabacs;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,13 +11,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class AtividadeRuralResponse {
-	private Long id;
-	private String nome;
+public class CoppabacsUpdateRequest extends UsuarioUpdateRequest {
 
-	public AtividadeRuralResponse(AtividadeRural obj) {
+	private String cargo;
+
+	public Coppabacs convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
-		modelMapper.map(obj, this);
+		Coppabacs obj = modelMapper.map(this, Coppabacs.class);
+		return obj;
 	}
-
 }
