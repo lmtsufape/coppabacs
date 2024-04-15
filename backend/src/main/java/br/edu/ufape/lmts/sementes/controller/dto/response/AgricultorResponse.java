@@ -15,14 +15,8 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor
 public class AgricultorResponse extends UsuarioResponse {
 	private String nomePopular;
-	private String rendaFamiliar;
-	private String numeroPessoas;
-	private Double areaPropriedade;
-	private String comunidade;
-	private BancoSementesResponse bancoSementes; 
 	private List<AtividadeRuralResponse> atividadeRural; 
-	private List<infraestruturaHidricaResponse> infraestruturaHidrica; 
-	private List<UsoOcupacaoTerraResponse> usoOcupacaoTerra; 
+	private List<infraestruturaHidricaResponse> infraestruturaHidrica;
 	private List<InfraestruturaComunidadeResponse> infraestruturaComunidade; 
 
 	public AgricultorResponse(Agricultor obj) {

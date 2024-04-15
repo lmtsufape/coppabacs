@@ -8,15 +8,18 @@ import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.model.AtividadeRural;
 import br.edu.ufape.lmts.sementes.model.BancoSementes;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-@Getter @Setter @NoArgsConstructor 
-public  class AgricultorRequest extends UsuarioRequest {
+@Getter
+@Setter
+@NoArgsConstructor
+public class AgricultorRequest extends UsuarioRequest {
+	@Positive(message = "Id inválido")
 	private long bancoId;
-	private List<String> atividadesRurais; 
+	private List<String> atividadesRurais;
 	private List<String> sementes;
 
 	public Agricultor convertToEntity() {
@@ -25,7 +28,7 @@ public  class AgricultorRequest extends UsuarioRequest {
 		BancoSementes banco = new BancoSementes();
 		banco.setId(bancoId);
 		obj.setBancoSementes(banco);
-		System.out.println("atividades rurais:" +  atividadesRurais);
+		System.out.println("atividades rurais:" + atividadesRurais);
 
 		obj.setAtividadeRural(atividadesRurais.stream().map(n -> new AtividadeRural(n)).toList());
 		System.out.println(obj.toString());

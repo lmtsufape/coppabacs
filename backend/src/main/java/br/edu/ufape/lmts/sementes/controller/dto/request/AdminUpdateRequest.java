@@ -3,20 +3,20 @@ package br.edu.ufape.lmts.sementes.controller.dto.request;
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
-import br.edu.ufape.lmts.sementes.model.Gerente;
+import br.edu.ufape.lmts.sementes.model.Admin;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+public class AdminUpdateRequest extends UsuarioUpdateRequest {
 
-@Getter @Setter @NoArgsConstructor 
-public  class GerenteRequestUpdate extends UsuarioRequestUpdate {
-	
-	private long bancoId;
-
-	public Gerente convertToEntity() {
+	public Admin convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
-		Gerente obj = modelMapper.map(this, Gerente.class);
+		Admin obj = modelMapper.map(this, Admin.class);
 		return obj;
 	}
+
 }
