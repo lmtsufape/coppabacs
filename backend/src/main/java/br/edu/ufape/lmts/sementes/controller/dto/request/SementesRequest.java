@@ -20,6 +20,7 @@ public class SementesRequest {
 	private String nomePopular;
 	private String descricao;
 	private String pragas;
+	private String doencas;
 	private Boolean dominioPublico;
 	private Boolean polinizaacaoAbertaMelhorada;
 	private String regiaoColetaDados;

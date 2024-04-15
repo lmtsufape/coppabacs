@@ -16,6 +16,8 @@ public class ResponsavelTecnicoRequest {
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String cpf;
 	private String numeroConselho;
+	@NotEmpty(message = "Preenchimento obrigatório")
+	private String estadoConselho;
 	
 	public ResponsavelTecnico convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
