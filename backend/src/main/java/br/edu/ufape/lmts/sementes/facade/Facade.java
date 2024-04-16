@@ -1,6 +1,7 @@
 package br.edu.ufape.lmts.sementes.facade;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.model.Admin;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.model.AtividadeRural;
@@ -51,6 +53,7 @@ import br.edu.ufape.lmts.sementes.service.DoacaoUsuarioService;
 import br.edu.ufape.lmts.sementes.service.DoencaService;
 import br.edu.ufape.lmts.sementes.service.EmpalhamentoService;
 import br.edu.ufape.lmts.sementes.service.EnderecoService;
+import br.edu.ufape.lmts.sementes.service.FileService;
 import br.edu.ufape.lmts.sementes.service.FinalidadeService;
 //import br.edu.ufape.lmts.sementes.service.GerenteService;
 import br.edu.ufape.lmts.sementes.service.GerenteServiceInterface;
@@ -329,27 +332,25 @@ public class Facade {
 		}
 	}
 
-  public BancoSementes adicionarGerenteBancoSemente(long bancoId, long gerenteId) {
-    BancoSementes banco = bancoSementesService.findBancoSementesById(bancoId);
+	public BancoSementes adicionarGerenteBancoSemente(long bancoId, long gerenteId) {
+		BancoSementes banco = bancoSementesService.findBancoSementesById(bancoId);
 		Gerente gerente = gerenteService.findGerenteById(gerenteId);
 		banco.adicionarGerente(gerente);
 		return bancoSementesService.saveBancoSementes(banco);
 	}
-	
+
 	public void removerGerenteBancoSemente(long bancoId, long gerenteId) {
-	    BancoSementes banco = bancoSementesService.findBancoSementesById(bancoId);
-	    
-	    Gerente gerenteRemover = banco.getGerentes().stream()
-                .filter(gerente -> gerente.getId() == gerenteId)
-                .findFirst()
-                .orElse(null);
-	    
+		BancoSementes banco = bancoSementesService.findBancoSementesById(bancoId);
+
+		Gerente gerenteRemover = banco.getGerentes().stream().filter(gerente -> gerente.getId() == gerenteId)
+				.findFirst().orElse(null);
+
 //	    if(gerenteRemover != null) {
 //	    	banco.getGerentes().remove(gerenteRemover);
 //	    }
 //    	gerenteService.deleteGerente(gerenteRemover);
-	    
-	    bancoSementesService.saveBancoSementes(banco);
+
+		bancoSementesService.saveBancoSementes(banco);
 	}
 
 	// RetiradaUsuario--------------------------------------------------------------
@@ -437,6 +438,7 @@ public class Facade {
 	}
 
 	// Gerente--------------------------------------------------------------
+	@Autowired
 	private GerenteServiceInterface gerenteService;
 
 	public Gerente saveGerente(Gerente newInstance) throws EmailExistsException {
@@ -640,7 +642,7 @@ public class Facade {
 	public Sementes updateSementes(Sementes transientObject) {
 		saveResponsavelTecnicoToSementes(transientObject);
 		transientObject.setFinalidades(transientObject.getFinalidades().stream().map(x -> saveFinalidade(x)).toList());
-		//transientObject.setCultura(saveCultura(transientObject.getCultura()));
+		// transientObject.setCultura(saveCultura(transientObject.getCultura()));
 		System.out.println(transientObject.getCultura());
 		System.out.println(transientObject);
 		return sementesService.updateSementes(transientObject);
@@ -855,16 +857,27 @@ public class Facade {
 	// Agricultor--------------------------------------------------------------
 	@Autowired
 	private AgricultorService agricultorService;
-
-	public Agricultor saveAgricultor(Agricultor newInstance) throws EmailExistsException {
-		System.out.println("resultado:" + newInstance.getAtividadeRural());
+	
+	private Agricultor saveAgricultorA(Agricultor newInstance) throws EmailExistsException {
 		newInstance.setAtividadeRural(saveAtividadesRuraisFromAgricultor(newInstance.getAtividadeRural()));
 		bancoSementesService.findBancoSementesById(newInstance.getBancoSementes().getId());
 		usuarioService.saveUsuario(newInstance);
 		return agricultorService.saveAgricultor(newInstance);
 	}
+	
+	public Agricultor saveAgricultor(Agricultor newInstance) throws EmailExistsException {
+		newInstance.addRole(TipoUsuario.AGRICULTOR);
+		return saveAgricultorA(newInstance);
+	}
+	
+	public Agricultor saveAgricultorUsuario(Agricultor newInstance) throws EmailExistsException {
+		newInstance.addRole(TipoUsuario.USUARIO);
+		return saveAgricultorA(newInstance);
+	}
 
 	public Agricultor updateAgricultor(Agricultor transientObject) {
+		//transientObject.setAtividadeRural(saveAtividadesRuraisFromAgricultor(transientObject.getAtividadeRural()));
+		//bancoSementesService.findBancoSementesById(transientObject.getBancoSementes().getId());
 		return agricultorService.updateAgricultor(transientObject);
 	}
 
@@ -873,7 +886,11 @@ public class Facade {
 	}
 
 	public List<Agricultor> getAllAgricultor() {
-		return agricultorService.getAllAgricultor();
+		return agricultorService.getAllByRole(TipoUsuario.AGRICULTOR);
+	}
+	
+	public List<Agricultor> getAllAgricultorUsuario() {
+		return agricultorService.getAllByRole(TipoUsuario.USUARIO);
 	}
 
 	public void deleteAgricultor(Agricultor persistentObject) {
@@ -1080,6 +1097,22 @@ public class Facade {
 
 	public void deleteFinalidade(long id) {
 		finalidadeService.deleteFinalidade(id);
+	}
+
+	// Arquivos
+	@Autowired
+	private FileService fileService;
+
+	public File findFile(String fileName) {
+		return fileService.findFile(fileName);
+	}
+
+	public String storeFile(InputStream file, String fileName) {
+		return fileService.storeFile(file, fileName);
+	}
+
+	public void deleteFile(String fileName) {
+		fileService.deleteFile(fileName);
 	}
 
 }

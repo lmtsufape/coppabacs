@@ -14,7 +14,7 @@ import lombok.Setter;
 
 
 @Getter @Setter @NoArgsConstructor 
-public  class AgricultorRequestUpdate extends UsuarioRequestUpdate {
+public  class AgricultorUpdateRequest extends UsuarioUpdateRequest {
 	private long bancoId;
 	private List<String> atividadesRurais; 
 	private List<String> sementes;

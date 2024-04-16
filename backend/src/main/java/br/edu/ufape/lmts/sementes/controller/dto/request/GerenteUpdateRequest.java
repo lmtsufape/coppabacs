@@ -3,19 +3,20 @@ package br.edu.ufape.lmts.sementes.controller.dto.request;
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
-import br.edu.ufape.lmts.sementes.model.Coppabacs;
+import br.edu.ufape.lmts.sementes.model.Gerente;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
-public class CoppabacsRequest extends UsuarioRequest {
+
+@Getter @Setter @NoArgsConstructor 
+public  class GerenteUpdateRequest extends UsuarioUpdateRequest {
 	
-	private String cargo;
-	
-	public Coppabacs convertToEntity() {
+	private long bancoId;
+
+	public Gerente convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
-		Coppabacs obj = modelMapper.map(this,  Coppabacs.class);
+		Gerente obj = modelMapper.map(this, Gerente.class);
 		return obj;
 	}
 }

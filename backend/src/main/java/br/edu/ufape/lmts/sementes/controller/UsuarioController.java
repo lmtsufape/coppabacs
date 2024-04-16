@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.UsuarioRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.UsuarioUpdateRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.UsuarioResponse;
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.facade.Facade;
@@ -59,12 +60,12 @@ public class UsuarioController {
 	}
 	
 	@PatchMapping("usuario/{id}")
-	public UsuarioResponse updateUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioRequest obj) {
+	public UsuarioResponse updateUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioUpdateRequest obj) {
 		try {
 			Usuario oldObject = facade.findUsuarioById(id);
 			modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
-			TypeMap<UsuarioRequest, Usuario> typeMapper = modelMapper
-													.typeMap(UsuarioRequest.class, Usuario.class)
+			TypeMap<UsuarioUpdateRequest, Usuario> typeMapper = modelMapper
+													.typeMap(UsuarioUpdateRequest.class, Usuario.class)
 													.addMappings(mapper -> mapper.skip(Usuario::setId));			
 			
 			

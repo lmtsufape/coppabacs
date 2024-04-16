@@ -22,16 +22,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.AgricultorRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.AgricultorUpdateRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.AgricultorResponse;
-import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
-
-@CrossOrigin (origins = "http://localhost:8081/", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:8081/", allowCredentials = "true")
 @RestController
 @RequestMapping("/api/v1/")
 public class AgricultorController {
@@ -42,15 +41,25 @@ public class AgricultorController {
 
 	@GetMapping("agricultor")
 	public List<AgricultorResponse> getAllAgricultor() {
-		return facade.getAllAgricultor()
-			.stream()
-			.filter(agricultor -> agricultor.getRoles().contains(TipoUsuario.AGRICULTOR))
-			.map(AgricultorResponse::new)
-			.toList();
+		return facade.getAllAgricultor().stream().map(AgricultorResponse::new).toList();
 	}
 
+	@GetMapping("agricultor/usuarios")
+	public List<AgricultorResponse> getAllAgricultorUsuario() {
+		return facade.getAllAgricultorUsuario().stream().map(AgricultorResponse::new).toList();
+	}
+
+	@PostMapping("agricultor/usuario")
+	public AgricultorResponse createAgricultorUsuario(@Valid @RequestBody AgricultorRequest newObj)
+			throws EmailExistsException {
+		Agricultor agricultor = newObj.convertToEntity();
+		return new AgricultorResponse(facade.saveAgricultorUsuario(agricultor));
+	}
+
+	@PreAuthorize("hasRole('COPPABACS') or hasRole('GERENTE')")
 	@PostMapping("agricultor")
-	public AgricultorResponse createAgricultor(@Valid @RequestBody AgricultorRequest newObj) throws EmailExistsException {
+	public AgricultorResponse createAgricultor(@Valid @RequestBody AgricultorRequest newObj)
+			throws EmailExistsException {
 		Agricultor agricultor = newObj.convertToEntity();
 		return new AgricultorResponse(facade.saveAgricultor(agricultor));
 	}
@@ -61,14 +70,13 @@ public class AgricultorController {
 	}
 
 	@PutMapping("agricultor/{id}")
-	public AgricultorResponse updateAgricultor(@PathVariable Long id, @Valid @RequestBody AgricultorRequest obj) {
+	public AgricultorResponse updateAgricultor(@PathVariable Long id, @Valid @RequestBody AgricultorUpdateRequest obj) {
 		try {
 			Agricultor oldObject = facade.findAgricultorById(id);
 			modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
-			TypeMap<AgricultorRequest, Agricultor> typeMapper = modelMapper
-													.typeMap(AgricultorRequest.class, Agricultor.class)
-													.addMappings(mapper -> mapper.skip(Agricultor::setId));
-
+			TypeMap<AgricultorUpdateRequest, Agricultor> typeMapper = modelMapper
+					.typeMap(AgricultorUpdateRequest.class, Agricultor.class)
+					.addMappings(mapper -> mapper.skip(Agricultor::setId));
 
 			typeMapper.map(obj, oldObject);
 			return new AgricultorResponse(facade.updateAgricultor(oldObject));
@@ -97,8 +105,8 @@ public class AgricultorController {
 
 	@PreAuthorize("hasRole('COPPABACS')")
 	@PatchMapping("agricultor/validar/{id}")
-	public ResponseEntity validateAgricultor(@PathVariable long id) {
+	public ResponseEntity<Void> validateAgricultor(@PathVariable long id) {
 		facade.validateAgricultor(id);
-		return ResponseEntity.status(HttpStatus.OK).build();
+		return ResponseEntity.ok().build();
 	}
 }

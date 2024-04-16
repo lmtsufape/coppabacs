@@ -14,6 +14,7 @@ public class ResponsavelTecnicoResponse {
 	private String nome;
 	private String cpf;
 	private String numeroConselho;
+	private String estadoConselho;
 	
 	public ResponsavelTecnicoResponse(ResponsavelTecnico obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
