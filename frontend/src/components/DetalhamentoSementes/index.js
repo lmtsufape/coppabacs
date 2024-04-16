@@ -17,9 +17,34 @@ import DadosCaracteristicasAgronomicas from "./DadosCaracteristicasAgronomicas";
 const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior, sementes }) => {
 
     const initialValues = {
-        cultura: sementes?.cultura,
+        responsavelTecnico: {
+            nome: sementes?.responsavelTecnico?.nome,
+            cpf: sementes?.responsavelTecnico?.cpf,
+            numeroConselho: sementes?.responsavelTecnico?.numeroConselho,
+            conselho: sementes?.responsavelTecnico?.conselho,
+          },
+        cultura: {
+          cultura: sementes?.cultura?.cultura,
+          genero: sementes?.cultura?.genero,
+        },
         nome: sementes?.nome,
-        finalidadeSemente: {
+        nomePopular: sementes?.nomePopular,
+        descricao: sementes?.descricao,
+        pragas: sementes?.pragas,
+        dominioPublico: sementes?.dominioPublico,
+        polinizaacaoAbertaMelhorada: sementes?.polinizaacaoAbertaMelhorada,
+        regiaoColetaDados: sementes?.regiaoColetaDados,
+        altitudeMaxima: sementes?.altitudeMaxima,
+        altitudeMinima: sementes?.altitudeMinima,
+        caracteristicasPositiva: sementes?.caracteristicasPositiva,
+        caracteristicasNegativas: sementes?.caracteristicasNegativas,
+        
+        doencas: sementes?.doencas,    
+        
+        regioesAdaptacaoCultivo: sementes?.regioesAdaptacaoCultivo,
+
+
+        finalidades: {
             etilica: false,
             naoEtilica: false,
             inNatura: false,
@@ -27,34 +52,33 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
             processamento: false,
             outra: false,
             outraFinalidade: 'Outra Finalidade',
-        },
-        descricao: sementes?.descricao,
-        doencas: sementes?.doenca,
-        pragas: sementes?.pragas,
-        dominioPublico: sementes?.dominioPubllico,
-        polinizaacaoAbertaMelhorada: sementes?.polinizaacaoAbertaMelhorada,
-        regAdaptCultivar: sementes?.regAdaptCultivar,
-        regiaoColetaDados: sementes?.regiaoColetaDados,
-        altitudeMaxima: sementes?.altitudeMaxima,
-        altitudeMinima: sementes?.altitudeMinima,
-        caracteristicasPositiva: sementes?.caracteristicasPositiva,
-        caracteristicasNegativas: sementes?.caracteristicasNegativas,
-        avaliacaoSemente: sementes?.avaliacaoSemente,
+        },  
+        
         caracteristicasAgronomicas: {
             cicloFenologico: sementes?.caracteristicasAgronomicas?.cicloFenologico,
-            stand: sementes?.caracteristicasAgronomicas?.stand,
+            standRecomendado: sementes?.caracteristicasAgronomicas?.standRecomendado,
             produtividade: sementes?.caracteristicasAgronomicas?.produtividade,
-            alturaPlanta: sementes?.caracteristicasAgronomicas?.alturaPlanta,
+            
+            altitudePlanta: sementes?.caracteristicasAgronomicas?.altitudePlanta,
+            
             pesoMilGraos: sementes?.caracteristicasAgronomicas?.pesoMilGraos,
+
             pesoHectolitro: sementes?.caracteristicasAgronomicas?.pesoHectolitro,
+
             tipoGrao: sementes?.caracteristicasAgronomicas?.tipoGrao,
+
             corGrao: sementes?.caracteristicasAgronomicas?.corGrao,
+
             corCaule: sementes?.caracteristicasAgronomicas?.corCaule,
             corFolha: sementes?.caracteristicasAgronomicas?.corFolha,
             corFlor: sementes?.caracteristicasAgronomicas?.corFlor,
-            empalhamento: sementes?.caracteristicasAgronomicas?.empalhamento,
             habitoCrescimento: sementes?.caracteristicasAgronomicas?.habitoCrescimento,
         },
+        
+        empalhamento: {
+            tipo: sementes?.empalhamento?.tipo,
+        },
+
         toleranciaAdversidades: {
             altaTemperatura: sementes?.toleranciaAdversidades?.altaTemperatura,
             baixaTemperatura: sementes?.toleranciaAdversidades?.baixaTemperatura,
@@ -68,7 +92,7 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
             soloArenoso: sementes?.toleranciaAdversidades?.soloArenoso,
             soloAcido: sementes?.toleranciaAdversidades?.soloAcido,
             soloBaixaFertilidade: sementes?.toleranciaAdversidades?.soloBaixaFertilidade,
-        }
+        },
     }
 
     const [etapas, setEtapas] = useState(0);
@@ -104,9 +128,9 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
                             <Form className={styles.container__ContainerForm_form}>
                                 <div className={styles.container__profile}>
                                     <div className={styles.container__profile_img}>
-                                        <Image src="/assets/teste_quinoa.png" alt="Foto da semente" width={72} height={72} />
                                         <h1>{sementes?.nome}</h1>
                                     </div>
+                                    
                                     {editar === false ? (
                                         <button
                                             onClick={() => setEditar(true)}

@@ -8,9 +8,6 @@ export default function DadosSementesForm({ formik }) {
     const [outraFinalidade, setOutraFinalidade] = useState("");
     const [isOutraFinalidadeSelecionada, setIsOutraFinalidadeSelecionada] = useState(false);
 
-    // Verifica se values.finalidadeSemente está definido, caso contrário, define como um array vazio
-    const finalidadeSementeArray = values.finalidades.nome || [];
-
     const finalidades = [
         { name: "etilica", label: "Bebídas Etílicas" },
         { name: "naoEtilica", label: "Bebidas não Etílicas" },
@@ -21,7 +18,7 @@ export default function DadosSementesForm({ formik }) {
     ];
 
     const handleCheckboxChange = (finalidade, isChecked) => {
-        let novasFinalidades = [...finalidadeSementeArray];
+        let novasFinalidades = [...values.finalidades];
 
         if (isChecked) {
             // Para "Outra", verifica se já existe algum valor customizado antes de adicionar
@@ -47,21 +44,18 @@ export default function DadosSementesForm({ formik }) {
             }
         }
 
-        setFieldValue('finalidades.nome', novasFinalidades);
+        setFieldValue('finalidades', novasFinalidades);
     };
 
     const handleOutraFinalidadeChange = (e) => {
         const novoValor = e.target.value;
         setOutraFinalidade(novoValor);
 
-        // Verifica se values.finalidadeSemente está definido, caso contrário, define como um array vazio
-        const finalidadeSementeArray = values.finalidades.nome || [];
-
         // Atualiza imediatamente a lista de atividades se já estiver na lista
-        if (finalidadeSementeArray.includes(outraFinalidade) || isOutraFinalidadeSelecionada) {
-            const novasFinalidades = finalidadeSementeArray.filter(item => item !== outraFinalidade);
+        if (values.finalidades.includes(outraFinalidade) || isOutraFinalidadeSelecionada) {
+            const novasFinalidades = values.finalidades.filter(item => item !== outraFinalidade);
             novasFinalidades.push(novoValor);
-            setFieldValue('finalidades.nome', novasFinalidades);
+            setFieldValue('finalidades', novasFinalidades);
         }
     };
 
@@ -156,6 +150,21 @@ export default function DadosSementesForm({ formik }) {
                         ) : null}
                     </div>
                     <div>
+                        <label htmlFor="cultura.genero">Gênero <span>*</span></label>
+                        <input
+                            className={styles.sidedForm_input}
+                            id="genero"
+                            name="cultura.genero"
+                            placeholder="Insira o gênero"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.cultura.genero}
+                            required />
+                        {formik.touched.cultura?.genero && formik.errors.cultura?.genero ? (
+                            <span className={styles.form__error}>{formik.errors.cultura.genero}</span>
+                        ) : null}
+                    </div>
+                    <div>
                         <label htmlFor="nome">Nome da Cultivar <span>*</span></label>
                         <input
                             className={styles.sidedForm_input}
@@ -173,15 +182,15 @@ export default function DadosSementesForm({ formik }) {
                     </div>
                 </div>
                 <div className={styles.checkbox}>
-                    <label htmlFor="finalidades.nome" className={styles.checkbox__label}>Finalidade <span>*</span></label>
+                    <label htmlFor="finalidades" className={styles.checkbox__label}>Finalidade <span>*</span></label>
                     <div className={styles.checkbox__itens}>
                         {finalidades.map((finalidade) => (
                             <div key={finalidade.name}>
-                                <br/>
+                                <br />
                                 <input
                                     type="checkbox"
                                     name={finalidade.name}
-                                    checked={finalidadeSementeArray.includes(finalidade.name) || (finalidade.name === 'outra' && isOutraFinalidadeSelecionada)}
+                                    checked={values.finalidades.includes(finalidade.name) || (finalidade.name === 'outra' && isOutraFinalidadeSelecionada)}
                                     onChange={(e) => handleCheckboxChange(finalidade.name, e.target.checked)}
                                     required
                                 />
@@ -210,8 +219,8 @@ export default function DadosSementesForm({ formik }) {
                                 type="radio"
                                 id="sim"
                                 name="dominioPublico"
-                                value="sim"
-                                checked={values.dominioPublico === 'sim'}
+                                value="true"
+                                checked={values.dominioPublico === 'true'}
                                 onChange={formik.handleChange}
                             />
                             <label htmlFor="sim">Sim</label>
@@ -220,8 +229,8 @@ export default function DadosSementesForm({ formik }) {
                                 type="radio"
                                 id="nao"
                                 name="dominioPublico"
-                                value="nao"
-                                checked={values.dominioPublico === 'nao'}
+                                value="false"
+                                checked={values.dominioPublico === 'false'}
                                 onChange={formik.handleChange}
                             />
                             <label htmlFor="nao">Não</label>
@@ -234,8 +243,8 @@ export default function DadosSementesForm({ formik }) {
                                 type="radio"
                                 id="sim"
                                 name="polinizaacaoAbertaMelhorada"
-                                value="sim"
-                                checked={values.polinizaacaoAbertaMelhorada === 'sim'}
+                                value="true"
+                                checked={values.polinizaacaoAbertaMelhorada === 'true'}
                                 onChange={formik.handleChange}
                             />
                             <label htmlFor="sim">Sim</label>
@@ -244,8 +253,8 @@ export default function DadosSementesForm({ formik }) {
                                 type="radio"
                                 id="nao"
                                 name="polinizaacaoAbertaMelhorada"
-                                value="nao"
-                                checked={values.polinizaacaoAbertaMelhorada === 'nao'}
+                                value="false"
+                                checked={values.polinizaacaoAbertaMelhorada === 'false'}
                                 onChange={formik.handleChange}
                             />
                             <label htmlFor="nao">Não</label>
@@ -253,7 +262,7 @@ export default function DadosSementesForm({ formik }) {
                     </div>
                 </div>
                 <div className={styles.sidedForm}>
-                <div>
+                    <div>
                         <label htmlFor="nomePopular">Nome Popular da Cultivar <span>*</span></label>
                         <input
                             className={styles.sidedForm_input}
@@ -270,27 +279,28 @@ export default function DadosSementesForm({ formik }) {
 
                     </div>
                     <div>
-                        <label htmlFor="regAdaptCultivar">Região de Adaptação da Cultivar <span>*</span></label>
+                        <label htmlFor="regioesAdaptacaoCultivo">Região de Adaptação da Cultivar <span>*</span></label>
                         <input
                             className={styles.sidedForm_input}
-                            id="regAdaptCultivar"
-                            name="regAdaptCultivar"
+                            id="regioesAdaptacaoCultivo"
+                            name="regioesAdaptacaoCultivo"
                             placeholder="Insira a região de adaptação"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
-                            value={formik.values.regAdaptCultivar}
+                            value={formik.values.regioesAdaptacaoCultivo.regiao}
                             required />
-                        {formik.touched.regAdaptCultivar && formik.errors.regAdaptCultivar ? (
-                            <span className={styles.form__error}>{formik.errors.regAdaptCultivar}</span>
+                        {formik.touched.regioesAdaptacaoCultivo && formik.errors.regioesAdaptacaoCultivo ? (
+                            <span className={styles.form__error}>{formik.errors.regioesAdaptacaoCultivo}</span>
                         ) : null}
                     </div>
                     <div>
                         <div>
-                            <label htmlFor="altitudeMaxima">Altitude Máxima</label>
+                            <label htmlFor="altitudeMaxima">Altitude Máxima (cm)</label>
                             <input
                                 className={styles.sidedForm_input}
                                 id="altitudeMaxima"
                                 name="altitudeMaxima"
+                                type="number"
                                 placeholder="Insira a altitude máxima"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
@@ -302,11 +312,12 @@ export default function DadosSementesForm({ formik }) {
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="altitudeMinima">Altitude Mínima </label>
+                        <label htmlFor="altitudeMinima">Altitude Mínima (cm) </label>
                         <input
                             className={styles.sidedForm_input}
                             id="altitudeMinima"
                             name="altitudeMinima"
+                            type="number"
                             placeholder="Insira a altitude mínima"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}

@@ -8,11 +8,12 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
             <h1 className={styles.title}>Características Agronômicas</h1>
             <div className={styles.sidedForm}>
                 <div>
-                    <label htmlFor="caracteristicasAgronomicas.cicloFenologico">Ciclo Fenológico </label>
+                    <label htmlFor="caracteristicasAgronomicas.cicloFenologico">Ciclo Fenológico (Dias) </label>
                     <input
                         className={styles.sidedForm_input}
                         id="cicloFenologico"
                         name="caracteristicasAgronomicas.cicloFenologico"
+                        type = "number"
                         placeholder="Insira o ciclo Fenológico"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -29,6 +30,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         id="standRecomendado"
                         name="caracteristicasAgronomicas.standRecomendado"
                         placeholder="Insira o stand recomendado (Plantas/ha)"
+                        type = "number"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.caracteristicasAgronomicas.standRecomendado}
@@ -44,6 +46,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         id="produtividade"
                         name="caracteristicasAgronomicas.produtividade"
                         placeholder="Insira a produtividade(Kg/ha)"
+                        type = "number"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.caracteristicasAgronomicas.produtividade}
@@ -59,6 +62,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         id="altitudePlanta"
                         name="caracteristicasAgronomicas.altitudePlanta"
                         placeholder="Insira a altura da planta (Metro)"
+                        type = "number"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.caracteristicasAgronomicas.altitudePlanta}
@@ -68,27 +72,29 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="caracteristicasAgronomicas.pesoMilGraos">Peso de Mil Grãos (Gr)</label>
+                    <label htmlFor="caracteristicasAgronomicas.pesoMilGraos">Peso de Mil Grãos (Grama)</label>
                     <input
                        className={styles.sidedForm_input}
                         id="pesoMilGraos"
                         name="caracteristicasAgronomicas.pesoMilGraos"
                         placeholder="Insira o peso de mil grãos (Grama)"
+                        type = "number"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.caracteristicasAgronomicas.pesoMilGraos}
                         required />
                     {formik.touched.pesoMilGraos && formik.errors.pesoMilGraos ? (
-                        <span className={style.form__error}>{formik.errors.caracteristicasAgronomicas.pesoMilGraos}</span>
+                        <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.pesoMilGraos}</span>
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="caracteristicasAgronomicas.pesoHectolitro">Peso Hectolitro (Ph) </label>
+                    <label htmlFor="caracteristicasAgronomicas.pesoHectolitro">Peso Hectolitro (Hl) </label>
                     <input
                        className={styles.sidedForm_input}
                         id="pesoHectolitro"
                         name="caracteristicasAgronomicas.pesoHectolitro"
                         placeholder="Insira o peso em hectolitro"
+                        type = "number"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.caracteristicasAgronomicas.pesoHectolitro}

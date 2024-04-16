@@ -21,13 +21,13 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.stand">Stand Recomendado</label>
+                            <label htmlFor="caracteristicasAgronomicas.standRecomendado">Stand Recomendado</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
-                                name="caracteristicasAgronomicas.stand"
+                                name="caracteristicasAgronomicas.standRecomendado"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.stand}
+                                value={formik.values.caracteristicasAgronomicas.standRecomendado}
                                 disabled
                             />
                         </div>
@@ -43,13 +43,13 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.alturaPlanta">Altura da Planta</label>
+                            <label htmlFor="caracteristicasAgronomicas.altitudePlanta">Altura da Planta</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
-                                name="caracteristicasAgronomicas.alturaPlanta"
+                                name="caracteristicasAgronomicas.altitudePlanta"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.alturaPlanta}
+                                value={formik.values.caracteristicasAgronomicas.altitudePlanta}
                                 disabled
                             />
                         </div>
@@ -131,13 +131,13 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.empalhamento">Empalhamento</label>
+                            <label htmlFor="empalhamento.tipo">Empalhamento</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
-                                name="caracteristicasAgronomicas.empalhamento"
+                                name="empalhamento.tipo"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.empalhamento}
+                                value={formik.values.empalhamento.tipo}
                                 disabled
                             />
                         </div>
@@ -172,15 +172,15 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.stand"> Stand Recomendado</label>
+                            <label htmlFor="caracteristicasAgronomicas.standRecomendado"> Stand Recomendado</label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
                                 id="stand"
-                                name="caracteristicasAgronomicas.stand"
+                                name="caracteristicasAgronomicas.standRecomendado"
                                 placeholder="Insira o stand recomendado (Plantas/ha)"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.stand}
+                                value={formik.values.caracteristicasAgronomicas.standRecomendado}
                                 required />
                             {formik.touched.stand && formik.errors.stand ? (
                                 <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.stand}</span>
@@ -202,18 +202,18 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.alturaPlanta">Altura da Planta </label>
+                            <label htmlFor="caracteristicasAgronomicas.altitudePlanta">Altura da Planta </label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
                                 id="alturaPlanta"
-                                name="caracteristicasAgronomicas.alturaPlanta"
+                                name="caracteristicasAgronomicas.altitudePlanta"
                                 placeholder="Insira a altura da planta (Metro)"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.alturaPlanta}
+                                value={formik.values.caracteristicasAgronomicas.altitudePlanta}
                                 required />
-                            {formik.touched.alturaPlanta && formik.errors.alturaPlanta ? (
-                                <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.alturaPlanta}</span>
+                            {formik.touched.caracteristicasAgronomicas.altitudePlanta && formik.errors.caracteristicasAgronomicas.altitudePlanta ? (
+                                <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.caracteristicasAgronomicas.altitudePlanta}</span>
                             ) : null}
                         </div>
                         <div>
@@ -227,8 +227,8 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 onBlur={formik.handleBlur}
                                 value={formik.values.caracteristicasAgronomicas.pesoMilGraos}
                                 required />
-                            {formik.touched.pesoMilGraos && formik.errors.pesoMilGraos ? (
-                                <span className={style.form__error}>{formik.errors.caracteristicasAgronomicas.pesoMilGraos}</span>
+                            {formik.touched.caracteristicasAgronomicas.pesoMilGraos && formik.errors.caracteristicasAgronomicas.pesoMilGraos ? (
+                                <span className={style.form__error}>{formik.errors.caracteristicasAgronomicas.caracteristicasAgronomicas.pesoMilGraos}</span>
                             ) : null}
                         </div>
                         <div>
@@ -242,7 +242,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 onBlur={formik.handleBlur}
                                 value={formik.values.caracteristicasAgronomicas.pesoHectolitro}
                                 required />
-                            {formik.touched.pesoHectolitro && formik.errors.pesoHectolitro ? (
+                            {formik.touched.caracteristicasAgronomicas.pesoHectolitro && formik.errors.caracteristicasAgronomicas.pesoHectolitro ? (
                                 <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.pesoHectolitro}</span>
                             ) : null}
                         </div>
@@ -257,7 +257,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 onBlur={formik.handleBlur}
                                 value={formik.values.caracteristicasAgronomicas.tipoGrao}
                                 required />
-                            {formik.touched.tipoGrao && formik.errors.tipoGrao ? (
+                            {formik.touched.caracteristicasAgronomicas.tipoGrao && formik.errors.caracteristicasAgronomicas.tipoGrao ? (
                                 <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.tipoGrao}</span>
                             ) : null}
                         </div>
@@ -322,18 +322,18 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.empalhamento">Empalhamento </label>
+                            <label htmlFor="empalhamento.tipo">Empalhamento </label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
                                 id="empalhamento"
-                                name="caracteristicasAgronomicas.empalhamento"
+                                name="empalhamento.tipo"
                                 placeholder="Insira o empalhamento"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.empalhamento}
+                                value={formik.values.empalhamento.tipo}
                                 required />
-                            {formik.touched.empalhamento && formik.errors.empalhamento ? (
-                                <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.empalhamento}</span>
+                            {formik.touched.empalhamento.tipo && formik.errors.empalhamento.tipo ? (
+                                <span className={styles.form__error}>{formik.errors.empalhamento.tipo}</span>
                             ) : null}
                         </div>
                         <div>
