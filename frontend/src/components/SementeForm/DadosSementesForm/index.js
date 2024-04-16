@@ -160,11 +160,8 @@ export default function DadosSementesForm({ formik }) {
                             onBlur={formik.handleBlur}
                             value={formik.values.cultura.genero}
                             required />
-<<<<<<< HEAD
+
                         {formik.touched.genero && formik.errors.genero ? (
-=======
-                        {formik.touched.cultura?.genero && formik.errors.cultura?.genero ? (
->>>>>>> f68e85b (Alterações na parte de sementes)
                             <span className={styles.form__error}>{formik.errors.cultura.genero}</span>
                         ) : null}
                     </div>
