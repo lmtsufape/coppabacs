@@ -21,7 +21,7 @@ export default function DadosSementes({ formik, editar }) {
     ];
 
     const handleCheckboxChange = (finalidade, isChecked) => {
-        let novasFinalidades = [...finalidadeSementeArray];
+        let novasFinalidades = [...values.finalidades];
 
         if (isChecked) {
             // Para "Outra", verifica se já existe algum valor customizado antes de adicionar
@@ -47,37 +47,48 @@ export default function DadosSementes({ formik, editar }) {
             }
         }
 
-        setFieldValue('finalidadeSemente', novasFinalidades);
+        setFieldValue('finalidades', novasFinalidades);
     };
 
     const handleOutraFinalidadeChange = (e) => {
         const novoValor = e.target.value;
         setOutraFinalidade(novoValor);
 
-
         // Atualiza imediatamente a lista de atividades se já estiver na lista
-        if (finalidadeSementeArray.includes(outraFinalidade) || isOutraFinalidadeSelecionada) {
-            const novasFinalidades = finalidadeSementeArray.filter(item => item !== outraFinalidade);
+        if (values.finalidades.includes(outraFinalidade) || isOutraFinalidadeSelecionada) {
+            const novasFinalidades = values.finalidades.filter(item => item !== outraFinalidade);
             novasFinalidades.push(novoValor);
-            setFieldValue('finalidadeSemente', novasFinalidades);
+            setFieldValue('finalidades', novasFinalidades);
         }
     };
+
     return (
         <>
             <div className={styles.container__header_title}>
                 <h1>Dados da Semente</h1>
             </div>
             <div className={styles.container__ContainerForm_form_threePartsContainer}>
-            {editar === false ? (
+                {editar === false ? (
                     <>
                         <div>
-                            <label htmlFor="cultura">Cultura</label>
+                            <label htmlFor="cultura.cultura">Cultura</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
-                                name="cultura"
+                                name="cultura.cultura"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.cultura}
+                                value={formik.values.cultura.cultura}
+                                disabled
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="cultura.genero">Gênero da Cultivar</label>
+                            <input
+                                className={styles.container__ContainerForm_form_input}
+                                name="cultura.genero"
+                                placeholder="Não informado"
+                                onBlur={formik.handleBlur}
+                                value={formik.values.cultura.genero}
                                 disabled
                             />
                         </div>
@@ -93,13 +104,13 @@ export default function DadosSementes({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="descricao">Descrição</label>
+                            <label htmlFor="nomePopular">Nome Popular da Cultivar</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
-                                name="descricao"
+                                name="nomePopular"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.descricao}
+                                value={formik.values.nomePopular}
                                 disabled
                             />
                         </div>
@@ -126,13 +137,13 @@ export default function DadosSementes({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="regAdaptCultivar">Região de Adaptação da Cultivar</label>
+                            <label htmlFor="regioesAdaptacaoCultivo">Região de Adaptação da Cultivar</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
-                                name="regAdaptCultivar"
+                                name="regioesAdaptacaoCultivo"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.regAdaptCultivar}
+                                value={formik.values.regioesAdaptacaoCultivo}
                                 disabled
                             />
                         </div>
@@ -181,35 +192,13 @@ export default function DadosSementes({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasPositiva">Características Positivas</label>
+                            <label htmlFor="finalidades">Finalidade </label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
-                                name="caracteristicasPositiva"
+                                name="finalidades"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasPositiva}
-                                disabled
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="caracteristicasNegativas">Características Negativas</label>
-                            <input
-                                className={styles.container__ContainerForm_form_input}
-                                name="caracteristicasNegativas"
-                                placeholder="Não informado"
-                                onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasNegativas}
-                                disabled
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="finalidadeSemente">Finalidade </label>
-                            <input
-                                className={styles.container__ContainerForm_form_input}
-                                name="finalidadeSemente"
-                                placeholder="Não informado"
-                                onBlur={formik.handleBlur}
-                                value={formik.values.finalidadeSemente}
+                                value={formik.values.finalidades}
                                 disabled
                             />
                         </div>
@@ -218,18 +207,33 @@ export default function DadosSementes({ formik, editar }) {
                 ) : (
                     <>
                         <div>
-                            <label htmlFor="cultura">Cultura</label>
+                            <label htmlFor="cultura.cultura">Cultura</label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
                                 id="cultura"
-                                name="cultura"
+                                name="cultura.cultura"
                                 placeholder="Insira a cultura"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.cultura}
+                                value={formik.values.cultura.cultura}
                                 required />
-                            {formik.touched.cultura && formik.errors.cultura ? (
-                                <span className={styles.form__error}>{formik.errors.cultura}</span>
+                            {formik.touched.cultura.cultura && formik.errors.cultura.cultura ? (
+                                <span className={styles.form__error}>{formik.errors.cultura.cultura}</span>
+                            ) : null}
+                        </div>
+                        <div>
+                            <label htmlFor="cultura.genero">Gênero <span>*</span></label>
+                            <input
+                                className={styles.sidedForm_input}
+                                id="genero"
+                                name="cultura.genero"
+                                placeholder="Insira o gênero"
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.cultura.genero}
+                                required />
+                            {formik.touched.cultura?.genero && formik.errors.cultura?.genero ? (
+                                <span className={styles.form__error}>{formik.errors.cultura.genero}</span>
                             ) : null}
                         </div>
                         <div>
@@ -250,22 +254,21 @@ export default function DadosSementes({ formik, editar }) {
 
                         </div>
                         <div>
-                            <label htmlFor="descricao">Descrição </label>
-                            <input
-                                className={styles.container__ContainerForm_form_halfContainer_input}
-                                type="text"
-                                id="descricao"
-                                name="descricao"
-                                placeholder="Insira o nome da cultivar"
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.descricao}
-                                required />
-                            {formik.touched.descricao && formik.errors.descricao ? (
-                                <span className={styles.form__error}>{formik.errors.descricao}</span>
-                            ) : null}
+                        <label htmlFor="nomePopular">Nome Popular da Cultivar <span>*</span></label>
+                        <input
+                            className={styles.sidedForm_input}
+                            id="nomePopular"
+                            name="nomePopular"
+                            placeholder="Insira o nome popular da cultivar"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.nomePopular}
+                            required />
+                        {formik.touched.nomePopular && formik.errors.nomePopular ? (
+                            <span className={styles.form__error}>{formik.errors.nomePopular}</span>
+                        ) : null}
 
-                        </div>
+                    </div>
                         <div >
                             <label htmlFor="dominioPublico">Cultivar de Domínio Público </label>
                             <div className={styles.radio__itens}>
@@ -315,18 +318,18 @@ export default function DadosSementes({ formik, editar }) {
                             </div>
                         </div>
                         <div>
-                            <label htmlFor="regAdaptCultivar">Região de Adaptação da Cultivar </label>
+                            <label htmlFor="regioesAdaptacaoCultivo">Região de Adaptação da Cultivar </label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
-                                id="regAdaptCultivar"
-                                name="regAdaptCultivar"
+                                id="regioesAdaptacaoCultivo"
+                                name="regioesAdaptacaoCultivo"
                                 placeholder="Insira a região de adaptação"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.regAdaptCultivar}
+                                value={formik.values.regioesAdaptacaoCultivo}
                                 required />
-                            {formik.touched.tecnico && formik.errors.regAdaptCultivar ? (
-                                <span className={styles.form__error}>{formik.errors.regAdaptCultivar}</span>
+                            {formik.touched.regioesAdaptacaoCultivo && formik.errors.regioesAdaptacaoCultivo ? (
+                                <span className={styles.form__error}>{formik.errors.regioesAdaptacaoCultivo}</span>
                             ) : null}
                         </div>
                         <div>
@@ -392,47 +395,16 @@ export default function DadosSementes({ formik, editar }) {
                                 <span className={styles.form__error}>{formik.errors.pragas}</span>
                             ) : null}
                         </div>
-                        <div>
-                            <label htmlFor="caracteristicasPositiva">Características Positivas </label>
-                            <input
-                                type="text"
-                                className={styles.container__ContainerForm_form_halfContainer_input}
-                                id="caracteristicasPositiva"
-                                name="caracteristicasPositiva"
-                                placeholder="Insira quais caracteristicas positivas a planta possui"
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasPositiva}
-                                required />
-                            {formik.touched.caracteristicasPositiva && formik.errors.caracteristicasPositiva ? (
-                                <span className={styles.form__error}>{formik.errors.caracteristicasPositiva}</span>
-                            ) : null}
-                        </div>
-                        <div>
-                            <label htmlFor="caracteristicasNegativas">Características Negativas </label>
-                            <input
-                                className={styles.container__ContainerForm_form_halfContainer_input}
-                                type="text"
-                                id="caracteristicasNegativas"
-                                name="caracteristicasNegativas"
-                                placeholder="Insira quais caracteristicasNegativas a planta possui"
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasNegativas}
-                                required />
-                            {formik.touched.pragas && formik.errors.caracteristicasNegativas ? (
-                                <span className={styles.form__error}>{formik.errors.caracteristicasNegativas}</span>
-                            ) : null}
-                        </div>
                         <div className={styles.checkbox}>
-                            <label htmlFor="finalidadeSemente" className={styles.checkbox__label}>Finalidade</label>
+                            <label htmlFor="finalidades" className={styles.checkbox__label}>Finalidade <span>*</span></label>
                             <div className={styles.checkbox__itens}>
                                 {finalidades.map((finalidade) => (
                                     <div key={finalidade.name}>
+                                        <br />
                                         <input
                                             type="checkbox"
                                             name={finalidade.name}
-                                            checked={finalidadeSementeArray.includes(finalidade.name) || (finalidade.name === 'outra' && isOutraFinalidadeSelecionada)}
+                                            checked={values.finalidades.includes(finalidade.name) || (finalidade.name === 'outra' && isOutraFinalidadeSelecionada)}
                                             onChange={(e) => handleCheckboxChange(finalidade.name, e.target.checked)}
                                             required
                                         />
