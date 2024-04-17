@@ -32,13 +32,13 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="responsavelTecnico.conselho">Conselho/UF</label>
+                            <label htmlFor="responsavelTecnico.estadoConselho">Conselho/UF</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
-                                name="responsavelTecnico.conselho"
+                                name="responsavelTecnico.estadoConselho"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.responsavelTecnico.conselho}
+                                value={formik.values.responsavelTecnico.estadoConselho}
                                 disabled
                             />
                         </div>
@@ -57,7 +57,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 onBlur={formik.handleBlur}
                                 value={formik.values.responsavelTecnico.nome}
                                 required />
-                            {formik.touched.responsavelTecnico.nome && formik.errors.responsavelTecnico.nome ? (
+                            {formik.touched.nome && formik.errors.nome ? (
                                 <span className={styles.form__error}>{formik.errors.responsavelTecnico.nome}</span>
                             ) : null}
                         </div>
@@ -72,23 +72,24 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 onBlur={formik.handleBlur}
                                 value={formik.values.responsavelTecnico.numeroConselho}
                             />
-                            {formik.touched.responsavelTecnico.numeroConselho && formik.errors.responsavelTecnico.numeroConselho ? (
+
+                            {formik.touched.numeroConselho && formik.errors.numeroConselho ? 
                                 <span className={styles.form__error}>{formik.errors.responsavelTecnico.numeroConselho}</span>
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="responsavelTecnico.conselho"> Conselho/UF</label>
+                            <label htmlFor="responsavelTecnico.estadoConselho"> Conselho/UF</label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
-                                id="conselho"
-                                name="responsavelTecnico.conselho"
+                                id="estadoConselho"
+                                name="responsavelTecnico.estadoConselho"
                                 placeholder="Insira o Conselho/UF"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.responsavelTecnico.conselho}
+                                value={formik.values.responsavelTecnico.estadoConselho}
                             />
-                            {formik.touched.responsavelTecnico.conselho && formik.errors.responsavelTecnico.conselho ? (
-                                <span className={styles.form__error}>{formik.errors.responsavelTecnico.conselho}</span>
+                            {formik.touched.estadoConselho && formik.errors.estadoConselho ? (
+                                <span className={styles.form__error}>{formik.errors.responsavelTecnico.estadoConselho}</span>
                             ) : null}
                         </div>
                     </>

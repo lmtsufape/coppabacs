@@ -77,7 +77,7 @@ export default function DadosSementesForm({ formik }) {
                         onBlur={formik.handleBlur}
                         value={formik.values.responsavelTecnico.nome}
                         required />
-                    {formik.touched.responsavelTecnico?.nome && formik.errors.responsavelTecnico?.nome ? (
+                    {formik.touched.nome && formik.errors.nome ? (
                         <span className={styles.form__error}>{formik.errors.responsavelTecnico.nome}</span>
                     ) : null}
                 </div>
@@ -85,7 +85,7 @@ export default function DadosSementesForm({ formik }) {
                     <label htmlFor="responsavelTecnico.cpf">CPF <span>*</span></label>
                     <input
                         className={styles.sidedForm_input}
-                        id="responsavelTecnico.cpf"
+                        id="cpf"
                         name="responsavelTecnico.cpf"
                         placeholder="Insira seu CPF"
                         onChange={(e) => {
@@ -94,37 +94,37 @@ export default function DadosSementesForm({ formik }) {
                         onBlur={formik.handleBlur}
                         value={formik.values.responsavelTecnico.cpf}
                         required />
-                    {formik.touched.responsavelTecnico?.cpf && formik.errors.responsavelTecnico?.cpf ? (
+                    {formik.touched.cpf && formik.errors.cpf ? (
                         <span className={styles.form__error}>{formik.errors.responsavelTecnico.cpf}</span>
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="responsavelTecnico.conselho"> Conselho/UF</label>
+                    <label htmlFor="responsavelTecnico.estadoConselho"> Conselho/UF</label>
                     <input
                         className={styles.sidedForm_input}
-                        id="responsavelTecnico.conselho"
-                        name="responsavelTecnico.conselho"
+                        id="estadoConselho"
+                        name="responsavelTecnico.estadoConselho"
                         placeholder="Insira o Conselho/UF"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.responsavelTecnico.conselho}
+                        value={formik.values.responsavelTecnico.estadoConselho}
                     />
-                    {formik.touched.conselho && formik.errors.responsavelTecnico.conselho ? (
-                        <span className={styles.form__error}>{formik.errors.responsavelTecnico.conselho}</span>
+                    {formik.touched.estadoConselho && formik.errors.estadoConselho ? (
+                        <span className={styles.form__error}>{formik.errors.responsavelTecnico.estadoConselho}</span>
                     ) : null}
                 </div>
                 <div>
                     <label htmlFor="responsavelTecnico.numeroConselho"> Número de Registro</label>
                     <input
                         className={styles.sidedForm_input}
-                        id="responsavelTecnico.numeroConselho"
+                        id="numeroConselho"
                         name="responsavelTecnico.numeroConselho"
                         placeholder="Insira o número de Registro do Conselho"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.responsavelTecnico.numeroConselho}
                     />
-                    {formik.touched.numeroConselho && formik.errors.responsavelTecnico.numeroConselho ? (
+                    {formik.touched.numeroConselho && formik.errors.numeroConselho ? (
                         <span className={styles.form__error}>{formik.errors.responsavelTecnico.numeroConselho}</span>
                     ) : null}
                 </div>
@@ -138,14 +138,14 @@ export default function DadosSementesForm({ formik }) {
                         <label htmlFor="cultura.cultura">Cultura <span>*</span></label>
                         <input
                             className={styles.sidedForm_input}
-                            id="cultura.cultura"
+                            id="cultura"
                             name="cultura.cultura"
                             placeholder="Insira a cultura"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.cultura.cultura}
                             required />
-                        {formik.touched.cultura?.cultura && formik.errors.cultura?.cultura ? (
+                        {formik.touched.cultura?.cultura && formik.errors.cultura ? (
                             <span className={styles.form__error}>{formik.errors.cultura.cultura}</span>
                         ) : null}
                     </div>
@@ -160,7 +160,7 @@ export default function DadosSementesForm({ formik }) {
                             onBlur={formik.handleBlur}
                             value={formik.values.cultura.genero}
                             required />
-                        {formik.touched.cultura?.genero && formik.errors.cultura?.genero ? (
+                        {formik.touched.genero && formik.errors.genero ? (
                             <span className={styles.form__error}>{formik.errors.cultura.genero}</span>
                         ) : null}
                     </div>
@@ -333,7 +333,7 @@ export default function DadosSementesForm({ formik }) {
                             className={styles.sidedForm_input}
                             id="doencas"
                             name="doencas"
-                            placeholder="Insira quais doencas a planta possui resistência"
+                            placeholder="Insira quais doenças a planta possui resistência"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.doencas}

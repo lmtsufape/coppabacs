@@ -21,7 +21,7 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
             nome: sementes?.responsavelTecnico?.nome,
             cpf: sementes?.responsavelTecnico?.cpf,
             numeroConselho: sementes?.responsavelTecnico?.numeroConselho,
-            conselho: sementes?.responsavelTecnico?.conselho,
+            estadoConselho: sementes?.responsavelTecnico?.estadoConselho,
           },
         cultura: {
           cultura: sementes?.cultura?.cultura,
@@ -61,17 +61,19 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
             
             altitudePlanta: sementes?.caracteristicasAgronomicas?.altitudePlanta,
             
-            pesoMilGraos: sementes?.caracteristicasAgronomicas?.pesoMilGraos,
 
-            pesoHectolitro: sementes?.caracteristicasAgronomicas?.pesoHectolitro,
+            PesoMilgraos: sementes?.caracteristicasAgronomicas?.PesoMilgraos,
 
-            tipoGrao: sementes?.caracteristicasAgronomicas?.tipoGrao,
+            PesoHectolitro: sementes?.caracteristicasAgronomicas?.PesoHectolitro,
+
+            tipoGrão: sementes?.caracteristicasAgronomicas?.tipoGrão,
 
             corGrao: sementes?.caracteristicasAgronomicas?.corGrao,
 
             corCaule: sementes?.caracteristicasAgronomicas?.corCaule,
             corFolha: sementes?.caracteristicasAgronomicas?.corFolha,
-            corFlor: sementes?.caracteristicasAgronomicas?.corFlor,
+            corFLor: sementes?.caracteristicasAgronomicas?.corFLor,
+
             habitoCrescimento: sementes?.caracteristicasAgronomicas?.habitoCrescimento,
         },
         

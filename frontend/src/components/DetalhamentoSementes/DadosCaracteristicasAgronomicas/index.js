@@ -54,35 +54,35 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.pesoMilGraos">Peso de Mil Grãos</label>
+                            <label htmlFor="caracteristicasAgronomicas.PesoMilgraos">Peso de Mil Grãos</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
-                                name="caracteristicasAgronomicas.pesoMilGraos"
+                                name="caracteristicasAgronomicas.PesoMilgraos"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.pesoMilGraos}
+                                value={formik.values.caracteristicasAgronomicas.PesoMilgraos}
                                 disabled
                             />
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.pesoHectolitro">Peso Hectolitro</label>
+                            <label htmlFor="caracteristicasAgronomicas.PesoHectolitro">Peso Hectolitro</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
-                                name="caracteristicasAgronomicas.pesoHectolitro"
+                                name="caracteristicasAgronomicas.PesoHectolitro"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.pesoHectolitro}
+                                value={formik.values.caracteristicasAgronomicas.PesoHectolitro}
                                 disabled
                             />
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.tipoGrao">Tipo de Grão/ Fruto /Tubérculo/ Raiz</label>
+                            <label htmlFor="caracteristicasAgronomicas.tipoGrão">Tipo de Grão/ Fruto /Tubérculo/ Raiz</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
-                                name="caracteristicasAgronomicas.tipoGrao"
+                                name="caracteristicasAgronomicas.tipoGrão"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.tipoGrao}
+                                value={formik.values.caracteristicasAgronomicas.tipoGrão}
                                 disabled
                             />
                         </div>
@@ -120,13 +120,13 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.corFlor">Cor da Flor/Inflorência</label>
+                            <label htmlFor="caracteristicasAgronomicas.corFLor">Cor da Flor/Inflorência</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
-                                name="caracteristicasAgronomicas.corFlor"
+                                name="caracteristicasAgronomicas.corFLor"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.corFlor}
+                                value={formik.values.caracteristicasAgronomicas.corFLor}
                                 disabled
                             />
                         </div>
@@ -217,33 +217,33 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.pesoMilGraos">Peso de Mil Grãos </label>
+                            <label htmlFor="caracteristicasAgronomicas.PesoMilgraos">Peso de Mil Grãos </label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
-                                id="pesoMilGraos"
-                                name="caracteristicasAgronomicas.pesoMilGraos"
+                                id="PesoMilgraos"
+                                name="caracteristicasAgronomicas.PesoMilgraos"
                                 placeholder="Insira o peso de mil grãos (Grama)"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.pesoMilGraos}
+                                value={formik.values.caracteristicasAgronomicas.PesoMilgraos}
                                 required />
-                            {formik.touched.caracteristicasAgronomicas.pesoMilGraos && formik.errors.caracteristicasAgronomicas.pesoMilGraos ? (
-                                <span className={style.form__error}>{formik.errors.caracteristicasAgronomicas.caracteristicasAgronomicas.pesoMilGraos}</span>
+                            {formik.touched.PesoMilgraos && formik.errors.PesoMilgraos ? (
+                                <span className={style.form__error}>{formik.errors.caracteristicasAgronomicas.PesoMilgraos}</span>
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.pesoHectolitro">Peso Hectolitro </label>
+                            <label htmlFor="caracteristicasAgronomicas.PesoHectolitro">Peso Hectolitro </label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
-                                id="pesoHectolitro"
-                                name="caracteristicasAgronomicas.pesoHectolitro"
+                                id="PesoHectolitro"
+                                name="caracteristicasAgronomicas.PesoHectolitro"
                                 placeholder="Insira o técnico responsável"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.pesoHectolitro}
+                                value={formik.values.caracteristicasAgronomicas.PesoHectolitro}
                                 required />
-                            {formik.touched.caracteristicasAgronomicas.pesoHectolitro && formik.errors.caracteristicasAgronomicas.pesoHectolitro ? (
-                                <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.pesoHectolitro}</span>
+                            {formik.touched.PesoHectolitro && formik.errors.PesoHectolitro ? (
+                                <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.PesoHectolitro}</span>
                             ) : null}
                         </div>
                         <div>
@@ -307,18 +307,18 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.corFlor">Cor da Flor/Inflorência </label>
+                            <label htmlFor="caracteristicasAgronomicas.corFLor">Cor da Flor/Inflorência </label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
-                                id="corFlor"
-                                name="caracteristicasAgronomicas.corFlor"
+                                id="corFLor"
+                                name="caracteristicasAgronomicas.corFLor"
                                 placeholder="Insira a cor da flor/inflorencia"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.corFlor}
+                                value={formik.values.caracteristicasAgronomicas.corFLor}
                                 required />
-                            {formik.touched.corFlor && formik.errors.corFlor ? (
-                                <span className={style.form__error}>{formik.errors.caracteristicasAgronomicas.corFlor}</span>
+                            {formik.touched.corFLor && formik.errors.corFLor ? (
+                                <span className={style.form__error}>{formik.errors.caracteristicasAgronomicas.corFLor}</span>
                             ) : null}
                         </div>
                         <div>

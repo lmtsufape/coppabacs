@@ -21,7 +21,7 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       nome: "",
       cpf: "",
       numeroConselho: "",
-      conselho: "",
+      estadoConselho: "",
     },
 
     cultura: {
@@ -71,25 +71,27 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       standRecomendado: "",
       produtividade: "",
       altitudePlanta: "",
-      pesoMilGraos: "",
-      pesoHectolitro: "",
-      tipoGrao: "",
+
+      PesoMilgraos: "",
+      PesoHectolitro: "",
+      tipoGrão: "",
       corGrao: "",
+
       corCaule: "",
       corFolha: "",
-      corFlor: "",
+
+      corFLor: "",
       habitoCrescimento: "",
 
-      empalhamento: {
-        tipo: "",
-      }
+      empalhamento: "",
     },
 
   }
 
-  const validateSchema = Yup.object().shape({
-    responsavelTecnico: Yup.object().shape({
+  /*const validateSchema = Yup.object().shape({
+  responsavelTecnico: Yup.object().shape({
       nome: Yup.string().required('O nome do responsável técnico é obrigatório'),
+      cpf: Yup.string().required('O cpf do responsável técnico é obrigatório'),
     }),
     cultura: Yup.object().shape({
       cultura: Yup.string().required('A cultura é obrigatória'),
@@ -124,6 +126,7 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
   })
 
+  */
   const { status, mutate } = useMutation(
     async (values) => {
       return postSemente(values);
