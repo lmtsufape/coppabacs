@@ -1,5 +1,4 @@
 import React from "react";
-import Footer from "@/components/Footer";
 import styles from "@/app/agricultores/novoAgricultor/index.module.scss"
 import CoordenadorForm from "@/components/CoordenadorForm";
 
@@ -12,7 +11,6 @@ export default function NewRegisterFarmer() {
                     diretorioAtual="Novo Coordenador"
                     hrefAnterior="/coordenadores" />
             </div>
-
         </div>
     );
 }

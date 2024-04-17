@@ -1,7 +1,4 @@
 
-
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import ListCoordenadores from "@/components/ListCoordenadores";
 export default function AssociadosPage() {
 

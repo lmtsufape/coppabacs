@@ -6,10 +6,7 @@ import BancoForm from "@/components/BancoForm";
 export default function NewRegisterFarmer() {
     return (
         <div className={styles.pageContainer}>
-            {
-                //<Header hrefAnterior="/bancoSementes" />
 
-            }
             <div className={styles.pageContainer__content}>
                 <BancoForm 
                 diretorioAnterior="Home / Bancos Sementes /" 
