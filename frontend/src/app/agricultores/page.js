@@ -1,5 +1,7 @@
 
-import Footer from "@/components/Footer";
+import Header from "@/components/Home/Header";
+import Footer from "@/components/Home/Footer";
+import ListTransacoes from "@/components/ListTransacoes";
 import ListAgricultores from "@/components/ListAgricultores";
 export default function AssociadosPage() {
 
