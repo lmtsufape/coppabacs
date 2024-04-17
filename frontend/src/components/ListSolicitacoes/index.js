@@ -7,6 +7,8 @@ import Header from "../HeaderNavegacao";
 import Table from "./Table";
 import { Search } from "../searchUsuario";
 import { getAllAgricultores } from "@/api/usuarios/agricultor/getAllAgricultores";
+import { getAllUsuarios } from "@/api/usuarios/getAllUsuarios";
+import { getAllSolicitacoes } from "@/api/usuarios/agricultor/getAllSolicitacoes";
 
 export default function ListSolicitacoes({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4 }) {
 
@@ -21,10 +23,9 @@ export default function ListSolicitacoes({ diretorioAnterior, diretorioAtual, hr
   const { state, mutate } = useMutation(
     async () => {
 
-      return getAllAgricultores();
+      return getAllSolicitacoes();
     }, {
     onSuccess: (res) => {
-      console.log(res);
       setSolicitacoes(res.data);
     },
     onError: (error) => {

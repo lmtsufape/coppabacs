@@ -44,9 +44,9 @@ const LayoutCoordenador = () => {
 
   return (
     <>
-      <Card title="Agricultores" icon="/assets/iconAssociates.svg" description="Agricultores" link="/agricultores" />
+      <Card title="Agricultores do banco" icon="/assets/iconAssociates.svg" description="Agricultores do banco" link="/agricultores" />
       <Card title="Bancos de Sementes" icon="/assets/iconBancoSementes.svg" description="Banco Sementes" link="/bancoSementes" />
-      <Card title="Transações Banco de Sementes" icon="/assets/iconMovimentacaoBancoSementes.svg" description="Movimentação Sementes" link="#" />
+      <Card title="Transações do Banco de Sementes" icon="/assets/iconMovimentacaoBancoSementes.svg" description="Movimentação Sementes" link="/transacoes" />
       <Card title="Sementes" icon="/assets/iconSeedGreen.svg" description="Sementes" link="/sementes" />
       <Card title="Mural" icon="/assets/iconMural.svg" description="Mural" link="/mural" />
     </>
@@ -57,9 +57,9 @@ const LayoutAgricultor = () => {
 
   return (
     <>
-      <Card title="Bancos de Sementes" icon="/assets/iconBancoSementes.svg" description="Banco Sementes" link="/bancoSementes" />
+      <Card title="Banco de Sementes" icon="/assets/iconBancoSementes.svg" description="Banco Sementes" link="/bancoSementes" />
       <Card title="Sementes" icon="/assets/iconSeedGreen.svg" description="Sementes" link="/sementes" />
-      <Card title="Transações Banco de Sementes" icon="/assets/iconMovimentacaoBancoSementes.svg" description="Movimentação Sementes" link="#" />
+      <Card title="Histórico de Transações de Sementes" icon="/assets/iconMovimentacaoBancoSementes.svg" description="Histórico de Transações de Sementes" link="#" />
       <Card title="Mural" icon="/assets/iconMural.svg" description="Mural" link="/mural" />
     </>
   )
@@ -72,8 +72,7 @@ const LayoutAdmin = () => {
       <Card title="Agricultores" icon="/assets/iconAssociates.svg" description="Agricultores" link="/agricultores" />
       <Card title="Coordenadores" icon="/assets/iconAssociates.svg" description="Coordenadores" link="/coordenadores" />
       <Card title="Funcionarios" icon="/assets/iconAssociates.svg" description="Funcionarios" link="/funcionarios" />
-      <Card title="Transações Banco de Sementes" icon="/assets/iconMovimentacaoBancoSementes.svg" description="Movimentação Sementes" link="#" />
-      <Card title="Bancos de Sementes" icon="/assets/iconBancoSementes.svg" description="Banco Sementes" link="/bancoSementes" />
+      <Card title="Bancos de Sementes" icon="/assets/iconBancoSementes.svg" description="Bancos Sementes" link="/bancoSementes" />
       <Card title="Sementes" icon="/assets/iconSeedGreen.svg" description="Sementes" link="/sementes" />
       <Card title="Mural" icon="/assets/iconMural.svg" description="Mural" link="/mural" />
     </>

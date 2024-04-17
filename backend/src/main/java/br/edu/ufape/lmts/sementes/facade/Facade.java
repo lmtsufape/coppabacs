@@ -458,7 +458,9 @@ public class Facade {
 	public Gerente findGerenteById(long id) {
 		return gerenteService.findGerenteById(id);
 	}
-
+	public Gerente findGerenteByEmail(String email) {
+		return gerenteService.findGerenteByEmail(email);
+	}
 	public List<Gerente> getAllGerente() {
 		return gerenteService.getAllGerente();
 	}

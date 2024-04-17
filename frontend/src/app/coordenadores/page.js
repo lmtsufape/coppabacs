@@ -11,10 +11,10 @@ export default function AssociadosPage() {
         diretorioAnterior="Home /"
         diretorioAtual="Coordenadores"
         hrefAnterior="/inicio"
-        table1="nome"
+        table1="Nome"
         table2="Contato"
         table3 ="Banco"
-        table4="Ação" 
+        table4="Ações" 
         />
 
       <Footer />

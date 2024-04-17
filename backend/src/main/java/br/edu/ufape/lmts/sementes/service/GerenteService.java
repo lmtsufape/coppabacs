@@ -28,7 +28,9 @@ public class GerenteService implements GerenteServiceInterface {
 	public Gerente findGerenteById(long id) {
 		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Gerente with id = " + id));
 	}
-
+	public Gerente findGerenteByEmail(String email) {
+		return repository.findGerenteByEmail(email).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Finalidade with email = " + email));
+	}
 	public List<Gerente> getAllGerente(){
 		return repository.findAll();
 	}

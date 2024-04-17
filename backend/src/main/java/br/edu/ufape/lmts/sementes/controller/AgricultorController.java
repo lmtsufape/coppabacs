@@ -41,12 +41,20 @@ public class AgricultorController {
 
 	@GetMapping("agricultor")
 	public List<AgricultorResponse> getAllAgricultor() {
-		return facade.getAllAgricultor().stream().map(AgricultorResponse::new).toList();
+		return facade.getAllAgricultor()
+			.stream()
+			.map(AgricultorResponse::new)
+			.toList();
+
 	}
 
 	@GetMapping("agricultor/usuarios")
 	public List<AgricultorResponse> getAllAgricultorUsuario() {
-		return facade.getAllAgricultorUsuario().stream().map(AgricultorResponse::new).toList();
+		return facade.getAllAgricultorUsuario()
+		.stream()
+		.map(AgricultorResponse::new)
+		.toList();
+
 	}
 
 	@PostMapping("agricultor/usuario")
@@ -56,7 +64,6 @@ public class AgricultorController {
 		return new AgricultorResponse(facade.saveAgricultorUsuario(agricultor));
 	}
 
-	@PreAuthorize("hasRole('COPPABACS') or hasRole('GERENTE')")
 	@PostMapping("agricultor")
 	public AgricultorResponse createAgricultor(@Valid @RequestBody AgricultorRequest newObj)
 			throws EmailExistsException {

@@ -12,7 +12,7 @@ api.interceptors.response.use(
   error => {
     if (error.response && (error.response.status === 401 || error.response.status === 403)) {
       removeStorageItem('token');
-      window.location.href = '/';
+      removeStorageItem('role');
     }
     return Promise.reject(error);
   }

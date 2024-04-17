@@ -62,6 +62,10 @@ public class GerenteController {
 	public GerenteResponse getGerenteById(@PathVariable Long id) {
 		return new GerenteResponse(facade.findGerenteById(id));
 	}
+	@GetMapping("gerente/e/{email}")
+	public GerenteResponse getGerenteByEmail(@PathVariable String email) {
+		return new GerenteResponse(facade.findGerenteByEmail(email));
+	}
 	
 	@PatchMapping("gerente/{id}")
 	public GerenteResponse updateGerente(@PathVariable Long id, @RequestBody GerenteUpdateRequest obj) {

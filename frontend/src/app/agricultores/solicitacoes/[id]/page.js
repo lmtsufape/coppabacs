@@ -23,11 +23,11 @@ export default function AssociadosPage() {
       return getUsuario(params.id);
     }, {
     onSuccess: (res) => {
-      console.log(res);
       setUsuario(res.data);
+      console.log('Solicitações carregadas com sucesso!');
     },
     onError: (error) => {
-      console.log("error: ", error);
+      console.log("Error ao carregar solicitações.", error);
     }
   }
   );

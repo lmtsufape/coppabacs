@@ -34,7 +34,7 @@ export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, h
   }
   );
   const filteredBancos = bancos.filter((banco) =>
-    banco.nome.toLowerCase().includes(searchTerm.toLowerCase())
+    banco?.nome?.toLowerCase().includes(searchTerm.toLowerCase())
   );
  
   return (

@@ -10,6 +10,8 @@ public interface GerenteServiceInterface {
 
 	Gerente findGerenteById(long id);
 
+	Gerente findGerenteByEmail(String email);
+	
 	Gerente updateGerente(Gerente u);
 
 	void deleteGerente(Gerente u);

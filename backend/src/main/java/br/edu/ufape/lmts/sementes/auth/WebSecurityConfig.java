@@ -47,12 +47,14 @@ public class WebSecurityConfig {
 					// rotas de agricultor
 					.requestMatchers("/api/v1/agricultor/**").hasAnyRole("AGRICULTOR", "GERENTE", "COPPABACS")
 					.requestMatchers(HttpMethod.PATCH, "/api/v1/agricultor/**").hasAnyRole("GERENTE", "COPPABACS")
+					.requestMatchers(HttpMethod.PATCH, "/api/v1/agricultor/validar/**").hasAnyRole("GERENTE", "COPPABACS")
 					.requestMatchers(HttpMethod.GET, "/api/v1/agricultor/**").hasAnyRole("GERENTE", "COPPABACS")
 
 					// rotas do banco de sementes
 					.requestMatchers(HttpMethod.POST, "/api/v1/banco-sementes/**").hasRole("COPPABACS")
 					.requestMatchers(HttpMethod.PUT, "/api/v1/banco-sementes/**").hasRole("COPPABACS")
 					.requestMatchers(HttpMethod.PATCH, "/api/v1/banco-sementes/**").hasAnyRole("GERENTE", "COPPABACS")
+					.requestMatchers(HttpMethod.GET, "/api/v1/banco-sementes/**").hasAnyRole("GERENTE", "COPPABACS")
 					.requestMatchers(HttpMethod.DELETE, "/api/v1/banco-semente/**").hasRole("COPPABACS")
 					
 					// rotas de coordenador
@@ -62,7 +64,7 @@ public class WebSecurityConfig {
 					.requestMatchers("/api/v1/sementes/**").hasRole("COPPABACS")
 					.requestMatchers("/api/v1/responsavel-tecnico/**").hasRole("COPPABACS")
 					.requestMatchers("/security/**").permitAll()
-					//.requestMatchers("/api/**").permitAll()
+					.requestMatchers("/api/**").permitAll()
 					.requestMatchers("/api/v1/coppabacs/**").hasRole("COPPABACS")
 					
 					// rotas de arquivos
