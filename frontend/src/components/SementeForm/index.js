@@ -127,7 +127,6 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   })
 
   */
-
   const { status, mutate } = useMutation(
     async (values) => {
       return postSemente(values);

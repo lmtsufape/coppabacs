@@ -61,6 +61,7 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
             
             altitudePlanta: sementes?.caracteristicasAgronomicas?.altitudePlanta,
             
+
             PesoMilgraos: sementes?.caracteristicasAgronomicas?.PesoMilgraos,
 
             PesoHectolitro: sementes?.caracteristicasAgronomicas?.PesoHectolitro,
@@ -72,6 +73,7 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
             corCaule: sementes?.caracteristicasAgronomicas?.corCaule,
             corFolha: sementes?.caracteristicasAgronomicas?.corFolha,
             corFLor: sementes?.caracteristicasAgronomicas?.corFLor,
+
             habitoCrescimento: sementes?.caracteristicasAgronomicas?.habitoCrescimento,
         },
         

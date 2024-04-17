@@ -72,7 +72,8 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 onBlur={formik.handleBlur}
                                 value={formik.values.responsavelTecnico.numeroConselho}
                             />
-                            {formik.touched.numeroConselho && formik.errors.numeroConselho ? (
+
+                            {formik.touched.numeroConselho && formik.errors.numeroConselho ? 
                                 <span className={styles.form__error}>{formik.errors.responsavelTecnico.numeroConselho}</span>
                             ) : null}
                         </div>
