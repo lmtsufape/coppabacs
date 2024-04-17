@@ -77,6 +77,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
 
   const { status, mutate } = useMutation(
     async (values) => {
+      console.log(entrou);
       return postAgricultor(values);
     }, {
     onSuccess: () => {
