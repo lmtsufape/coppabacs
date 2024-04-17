@@ -112,6 +112,12 @@
       
       margin: 2em 1em 1em 0em;
       font-size: 1em;
+      label{
+        margin: 0 0 0.5em 0;
+        font-size: 0.9em;
+        font-weight: bold;
+
+      }
       &_input {
         width: 100%;
         background-color: #fff;
@@ -173,12 +179,7 @@
         column-gap: 2em;
         margin: 0 0 1em 0;
 
-        label{
-          margin: 0 0 0.5em 0;
-          font-size: 0.9em;
-          font-weight: bold;
-
-        }
+        
         &_input{
           width: 100%;
           padding: 0.5em;

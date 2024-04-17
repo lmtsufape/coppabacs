@@ -75,9 +75,10 @@ export default function DadosAtividadesRurais({ formik, editar }) {
           <div>
             <label htmlFor="Cultura">Cultura</label>
             <input
+              id="Cultura"
               className={style.container__ContainerForm_form_input}
               name="producaoSementes.cultura"
-              placeHolder="Não informado"
+              placeholder="Não informado"
               value={formik.values.producaoSementes.cultura}
               disabled
             />
@@ -85,9 +86,10 @@ export default function DadosAtividadesRurais({ formik, editar }) {
           <div>
             <label htmlFor="Variedade">Variedade</label>
             <input
+              id="Variedade"
               className={style.container__ContainerForm_form_input}
               name="producaoSementes.variedade"
-              placeHolder="Não informado"
+              placeholder="Não informado"
               value={formik.values.producaoSementes.variedade}
               disabled
             />
@@ -95,9 +97,10 @@ export default function DadosAtividadesRurais({ formik, editar }) {
           <div>
             <label htmlFor="AreaPlantada">Área Plantada</label>
             <input
+              id="AreaPlantada"
               className={style.container__ContainerForm_form_input}
               name="producaoSementes.areaPlantada"
-              placeHolder="Não informado"
+              placeholder="Não informado"
               value={formik.values.producaoSementes.areaPlantada}
               disabled
             />
@@ -105,9 +108,10 @@ export default function DadosAtividadesRurais({ formik, editar }) {
           <div>
             <label htmlFor="PrevisaoVenda">Previsão de Venda</label>
             <input
+              id="PrevisaoVenda"
               className={style.container__ContainerForm_form_input}
               name="producaoSementes.previsaoVenda"
-              placeHolder="Não informado"
+              placeholder="Não informado"
               value={formik.values.producaoSementes.previsaoVenda}
               disabled
             />
@@ -118,9 +122,10 @@ export default function DadosAtividadesRurais({ formik, editar }) {
           <div>
             <label htmlFor="Cultura">Cultura</label>
             <input
+              id="Cultura"
               className={style.container__ContainerForm_form_halfContainer_input}
               name="producaoSementes.cultura"
-              placeHolder="Não informado"
+              placeholder="Não informado"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.producaoSementes.cultura}
@@ -129,9 +134,10 @@ export default function DadosAtividadesRurais({ formik, editar }) {
           <div>
             <label htmlFor="Variedade">Variedade</label>
             <input
+              id="Variedade"
               className={style.container__ContainerForm_form_halfContainer_input}
               name="producaoSementes.variedade"
-              placeHolder="Não informado"
+              placeholder="Não informado"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.producaoSementes.variedade}
@@ -140,9 +146,10 @@ export default function DadosAtividadesRurais({ formik, editar }) {
           <div>
             <label htmlFor="AreaPlantada">Área Plantada</label>
             <input
+              id="AreaPlantada"
               className={style.container__ContainerForm_form_halfContainer_input}
               name="producaoSementes.areaPlantada"
-              placeHolder="Não informado"
+              placeholder="Não informado"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.producaoSementes.areaPlantada}
@@ -151,9 +158,10 @@ export default function DadosAtividadesRurais({ formik, editar }) {
           <div>
             <label htmlFor="PrevisaoVenda">Previsão de Venda</label>
             <input
+              id="PrevisaoVenda"
               className={style.container__ContainerForm_form_halfContainer_input}
               name="producaoSementes.previsaoVenda"
-              placeHolder="Não informado"
+              placeholder="Não informado"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.producaoSementes.previsaoVenda}

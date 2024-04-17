@@ -27,7 +27,6 @@ export default function Info() {
       return getBanco(params.id);
     }, {
     onSuccess: (res) => {
-      console.log(res);
       setBanco(res.data);
     },
     onError: (error) => {

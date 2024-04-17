@@ -13,7 +13,7 @@ export default function SolicitacoesPage() {
           diretorioAtual="Solicitações"
           hrefAnterior="/agricultores"
           table1="Nome"
-          table2="Apelido"
+          table2="Nome Popular"
           table3="Contato"
           table4="Ação"
         />

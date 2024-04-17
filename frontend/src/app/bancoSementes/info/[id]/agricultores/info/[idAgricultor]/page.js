@@ -10,6 +10,7 @@ import Footer from '@/components/Home/Footer';
 import { getUsuario } from "@/api/usuarios/getUsuario ";
 import { useEffect, useState } from "react";
 import DetalhamentoUsuario from "@/components/DetalhamentoUsuario";
+import { getAllAgricultoresBanco } from "@/api/bancoSementes/getAgricultoresBanco";
 
 export default function Info() {
 
@@ -23,7 +24,7 @@ export default function Info() {
 
   const { status, mutate } = useMutation(
     async () => {
-      return getUsuario(params.id);
+      return getAllAgricultoresBanco(params.id);
     }, {
     onSuccess: (res) => {
       console.log(res);

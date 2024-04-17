@@ -5,7 +5,8 @@ import style from "../agricultorForm.module.scss";
 import { useMutation } from "react-query";
 import { getAllBancos } from "@/api/bancoSementes/getAllBancos";
 
-export default function DadosEndereco({ formik }) {
+export default function DadosEndereco({ formik, hrefAnterior }) {
+
 
   const [bancos, setBancos] = useState([]);
   useEffect(() => {
@@ -17,7 +18,6 @@ export default function DadosEndereco({ formik }) {
       return getAllBancos();
     }, {
     onSuccess: (res) => {
-      console.log(res)
       setBancos(res.data);
     },
     onError: (error) => {
@@ -83,21 +83,23 @@ export default function DadosEndereco({ formik }) {
       {formik.touched.bairro && formik.errors.bairro ? (
         <span className={style.form__error}>{formik.errors.endereco.bairro}</span>
       ) : null}
-      <label htmlFor="endereco.logradouro">Rua <span >*</span></label>
-      <input
-        className={style.container__ContainerForm_form_input}
-        id="nomeEndereco"
-        name="endereco.logradouro"
-        placeholder="Insira seu endereço"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.endereco.logradouro}
-        required
-      />
-      {formik.touched.nomeEndereco && formik.errors.endereco.logradouro ? (
-        <span className={style.form__error}>{formik.errors.endereco.logradouro}</span>
-      ) : null}
+
       <div className={style.container__ContainerForm_form_halfContainer}>
+        <div>
+          <label htmlFor="endereco.logradouro">Logradouro <span >*</span></label>
+          <input
+            className={style.container__ContainerForm_form_halfContainer_input}
+            id="logradouro"
+            name="endereco.logradouro"
+            placeholder="Insira o logradouro"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.endereco.logradouro}
+          />
+          {formik.touched.logradouro && formik.errors.endereco.logradouro ? (
+            <span className={style.form__error}>{formik.errors.endereco.logradouro}</span>
+          ) : null}
+        </div>
         <div>
           <label htmlFor="endereco.numero">Número <span >*</span></label>
           <input
@@ -118,8 +120,24 @@ export default function DadosEndereco({ formik }) {
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="complemento"
+            name="endereco.complemento"
+            placeholder="Insira o complemento"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.endereco.complemento}
+            required
+          />
+          {formik.touched.complemento && formik.errors.endereco.complemento ? (
+            <span className={style.form__error}>{formik.errors.endereco.complemento}</span>
+          ) : null}
+        </div>
+        <div>
+          <label htmlFor="endereco.referencia">Referência <span >*</span></label>
+          <input
+            className={style.container__ContainerForm_form_halfContainer_input}
+            id="referencia"
             name="endereco.referencia"
-            placeholder="Insira uma complemento"
+            placeholder="Insira uma referencia"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.endereco.referencia}
@@ -129,29 +147,35 @@ export default function DadosEndereco({ formik }) {
           ) : null}
         </div>
       </div>
-      <label htmlFor="">Banco de sementes</label>
+      {hrefAnterior !== "/funcionarios" && (
 
-      <select
-        className={style.container__ContainerForm_form_halfContainer_input}
-        id="bancoId"
-        name="bancoId"
-        placeholder="Insira o banco de sementes"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.bancoId}
-        required
-      >
-        <option value="" >Selecione...</option>
-        {bancos.map((bancos, index) => {
-          return (
-            <option key={index} value={bancos.id}>{bancos.nome}</option>
+        <>
 
-          )
-        })}
-      </select>
-      {formik.touched.bancoId && formik.errors.bancoId ? (
-        <span className={style.form__error}>{formik.errors.bancoId}</span>
-      ) : null}
+          <label htmlFor="">Banco de sementes</label>
+
+          <select
+            className={style.container__ContainerForm_form_halfContainer_input}
+            id="bancoId"
+            name="bancoId"
+            placeholder="Insira o banco de sementes"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.bancoId}
+
+          >
+            <option value="" >Selecione...</option>
+            {bancos.map((bancos, index) => {
+              return (
+                <option key={index} value={bancos.id}>{bancos.nome}</option>
+
+              )
+            })}
+          </select>
+          {formik.touched.bancoId && formik.errors.bancoId ? (
+            <span className={style.form__error}>{formik.errors.bancoId}</span>
+          ) : null}
+        </>
+      )}
 
 
     </>

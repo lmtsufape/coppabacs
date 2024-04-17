@@ -21,6 +21,8 @@ public  class UsuarioResponse  {
 	private Long id;
 	private String nome;
 	private String email;
+	private String nomePopular;
+	
 	private EnderecoResponse endereco;
 	private String cpf;
 	@JsonFormat(pattern = "dd-MM-yyyy")
