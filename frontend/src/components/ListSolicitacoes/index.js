@@ -6,7 +6,6 @@ import { useMutation } from "react-query";
 import Header from "../HeaderNavegacao";
 import Table from "./Table";
 import { Search } from "../searchUsuario";
-
 import { getAllSolicitacoes } from "@/api/usuarios/agricultor/getAllSolicitacoes";
 
 export default function ListSolicitacoes({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4 }) {
