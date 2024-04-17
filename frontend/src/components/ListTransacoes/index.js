@@ -115,7 +115,8 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5 }) => {
       return getAllTransacoesBanco(Number(coordenador.bancoSementeId));
     }, {
     onSuccess: (res) => {
-      setAgricultores(res.data);
+      console.log("Transações carregadas com sucesso!")
+      setTransacoes(res.data);
     },
     onError: (error) => {
       console.error(error);
