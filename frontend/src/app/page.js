@@ -86,6 +86,7 @@ const LayoutAdmin = () => {
 const LayoutUsuario = () =>{
   return (
     <>
+      <Card title="Transações Banco de Sementes" icon="/assets/iconMovimentacaoBancoSementes.svg" description="Movimentação Sementes" link="#" />
       <Card title="Bancos de Sementes" icon="/assets/iconBancoSementes.svg" description="Banco Sementes" link="/bancoSementes" />
       <Card title="Sementes" icon="/assets/iconSeedGreen.svg" description="Sementes" link="/sementes" />
       <Card title="Mural" icon="/assets/iconMural.svg" description="Mural" link="/mural" />
