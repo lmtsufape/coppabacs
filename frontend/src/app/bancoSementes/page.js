@@ -1,5 +1,4 @@
-import Footer from "@/components/Home/Footer";
-import Header from "@/components/Home/Header";
+import Footer from "@/components/Footer";
 import ListBancoSementes from "@/components/ListBancoSementes";
 
 export default function bancoSementesPage() {

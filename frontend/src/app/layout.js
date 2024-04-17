@@ -8,6 +8,8 @@ import ProviderQuery from '@/components/ProviderQuery';
 import { usePathname } from 'next/navigation';
 import { checkIsPublicRoute } from '@/functions/checkIsPublicRoute';
 import ProviderRedux from '@/components/ProviderRedux';
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -32,13 +34,14 @@ export default function RootLayout({ children}) {
       <body className={inter.className}>
         <ProviderQuery>
           <ProviderRedux>
+            <Header/>
             {isPublicPage && children}
             {!isPublicPage && (
               <PrivateRoute>
                 {children}
               </PrivateRoute>
             )}
-
+            <Footer />
           </ProviderRedux>
         </ProviderQuery>
       </body>

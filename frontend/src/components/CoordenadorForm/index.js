@@ -13,7 +13,7 @@ import HeaderNavegacao from "../HeaderNavegacao";
 import DadosForm from "./DadosUsuario/index";
 import DadosEndereco from "./DadosEndereco";
 import Link from "next/link";
-import Footer from "../Home/Footer";
+import Footer from "../Footer";
 import { postCoordenador } from "@/api/usuarios/coordenador/postCoordenador";
 
 

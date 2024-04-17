@@ -1,6 +1,6 @@
 "use client"
 import Header from "@/components/Home/Header";
-import Footer from "@/components/Home/Footer";
+import Footer from "@/components/Footer";
 
 import { useParams } from "next/navigation";
 import ListAgricultoresBanco from "@/components/ListAgricultoresBanco";

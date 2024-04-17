@@ -14,7 +14,7 @@ import DadosForm from "./DadosUsuario/index";
 import DadosEndereco from "./DadosEndereco";
 import DadosAtividadesRurais from "./DadosAtividadesRurais";
 import Link from "next/link";
-import Footer from "../Home/Footer";
+import Footer from "../Footer";
 import { postAdmin } from "@/api/usuarios/admin/postAdmin";
 import { postCoordenador } from "@/api/usuarios/coordenador/postCoordenador";
 import { postCoppabacs } from "@/api/usuarios/coppabacs/postCoppabacs";

@@ -1,6 +1,6 @@
 import React from "react";
 import SementeForm from "@/components/SementeForm/index";
-import Footer from "@/components/Home/Footer";
+import Footer from "@/components/Footer";
 import Header from "@/components/Home/Header";
 
 
