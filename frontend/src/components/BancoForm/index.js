@@ -28,6 +28,7 @@ const BancoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
     endereco: {
       logradouro: "",
       referencia: "",
+      complemento: "",
       cidade: "",
       estado: "",
       cep: "",
@@ -47,7 +48,7 @@ const BancoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
 
   }
-
+  const { push } = nextNav
 
   const validateSchema = Yup.object().shape({
     nome: Yup.string()
@@ -64,7 +65,7 @@ const BancoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       .required('Required'),
     dataNascimento: Yup.date()
       .max(new Date(), "A data de nascimento não pode ser maior que a data atual")
-      .min(new Date(1, 1, 1900), "A data de nascimento não pode ser menor que 01/01/1900")
+      .min(new Date(30, 1, 1900), "A data de nascimento não pode ser menor que 01/01/1900")
       .required('Required'),
   })
   const { status, mutate } = useMutation(
@@ -113,10 +114,9 @@ const BancoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
             mutate(values,{
               onSuccess: (res) => {
                 console.log("enviou");
-                window.location.href = '/bancoSementes';
+                //window.location.href = '/bancoSementes';
               },
               onError: (error) => {
-                console.log(teste)
                 console.log(error)
               }
             

@@ -7,7 +7,7 @@ import { useMutation } from "react-query";
 import { getAllBancos } from "@/api/bancoSementes/getAllBancos";
 
 
-export default function DadosForm({ formik, editar }) {
+export default function DadosForm({ formik, editar, hrefAnterior }) {
 
   const [bancos, setBancos] = useState([]);
 
@@ -27,12 +27,14 @@ export default function DadosForm({ formik, editar }) {
     }
   }
   );
-  const bancoAtual = () =>{
-    {bancos.map((banco, index)=>{
-      if(formik.values.bancoId === banco.bancoId )
-        return banco.name
-    })}
+
+  function bancoAtual(bancos, bancoId) {
+    // Encontra o banco com base no ID fornecido
+    const banco = bancos.find(b => b.bancoId === bancoId);
+    // Retorna o nome do banco se encontrado, caso contrário, retorna undefined ou uma string vazia
+    return banco ? banco.name : 'Banco não encontrado';
   }
+  const nomeDoBanco = bancoAtual(bancos, formik.values.bancoId);
   return (
     <>
       <div className={style.container__header_title}>
@@ -46,6 +48,7 @@ export default function DadosForm({ formik, editar }) {
             <div>
               <label htmlFor="nome">Nome</label>
               <input
+                id="nome"
                 className={style.container__ContainerForm_form_input}
                 name="nome"
                 placeholder="Não informado"
@@ -57,6 +60,8 @@ export default function DadosForm({ formik, editar }) {
             <div>
               <label htmlFor="contato">Telefone</label>
               <input
+                id="contato"
+
                 className={style.container__ContainerForm_form_input}
                 name="contato"
                 placeholder="Não informado"
@@ -70,12 +75,13 @@ export default function DadosForm({ formik, editar }) {
 
 
               <input
+                id="cpf"
                 className={style.container__ContainerForm_form_input}
                 name="cpf"
                 placeholder="Não informado"
                 onBlur={formik.handleBlur}
                 value={formik.values.cpf}
-
+                disabled
               />
             </div>
             <div>
@@ -83,6 +89,7 @@ export default function DadosForm({ formik, editar }) {
               <label htmlFor="nomePopular">Nome Popular</label>
 
               <input
+                id="nomePopular"
                 className={style.container__ContainerForm_form_input}
                 name="nomePopular"
                 placeholder="Não informado"
@@ -94,6 +101,7 @@ export default function DadosForm({ formik, editar }) {
             <div>
               <label htmlFor="dataNascimento">Data de nascimento </label>
               <input
+                id="dataNascimento"
                 className={style.container__ContainerForm_form_input}
                 name="dataNascimento"
                 placeholder="Não informado"
@@ -107,25 +115,29 @@ export default function DadosForm({ formik, editar }) {
             <div>
               <label htmlFor="sexo">Sexo </label>
               <input
+                id="sexo"
                 className={style.container__ContainerForm_form_input}
                 name="sexo"
                 placeholder="Não informado"
                 value={formik.values.sexo}
-
-              />
-            </div>
-            <div>
-              <label htmlFor="bancoSementes">Banco sementes </label>
-              <input
-                className={style.container__ContainerForm_form_input}
-                name="BancoSementes"
-                placeholder="Não informado"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={bancoAtual}
                 disabled
               />
             </div>
+            {hrefAnterior !== "/funcionarios" && (
+              <div>
+                <label htmlFor="bancoSementes">Banco sementes </label>
+                <input
+                  id="bancoSementes"
+                  className={style.container__ContainerForm_form_input}
+                  name="BancoSementes"
+                  placeholder="Não informado"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={nomeDoBanco}
+                  disabled
+                />
+              </div>
+            )}
           </>
         ) : (
           <>
@@ -183,20 +195,20 @@ export default function DadosForm({ formik, editar }) {
             </div>
 
             <div>
-              <label htmlFor="apelido">Apelido</label>
+              <label htmlFor="nomePopular">Nome Popular</label>
 
               <input
                 className={style.container__ContainerForm_form_halfContainer_input}
-                id="apelido"
-                name="apelido"
-                placeholder="Insira seu apelido"
+                id="nomePopular"
+                name="nomePopular"
+                placeholder="Insira seu nome popular"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.apelido}
+                value={formik.values.nomePopular}
                 required
               />
-              {formik.touched.apelido && formik.errors.apelido ? (
-                <span className={style.form__error}>{formik.errors.apelido}</span>
+              {formik.touched.nomePopular && formik.errors.nomePopular ? (
+                <span className={style.form__error}>{formik.errors.nomePopular}</span>
               ) : null}
             </div>
             <div>
@@ -207,14 +219,13 @@ export default function DadosForm({ formik, editar }) {
                 id="dataNascimento"
                 name="dataNascimento"
                 type="date"
-                placeholder="Insira sua data de nascimento"
+                placeholder={formik.values.dataNascimento}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.dataNascimento}
                 required
               />
               {formik.touched.dataNascimento && formik.errors.dataNascimento ? (
-
                 <span className={style.form__error}>{formik.errors.dataNascimento}</span>
               ) : null}
             </div>
@@ -240,31 +251,33 @@ export default function DadosForm({ formik, editar }) {
                 <span className={style.form__error}>{formik.errors.sexo}</span>
               ) : null}
             </div>
+            {hrefAnterior !== "/funcionarios" && (
 
-            <div>
-              <label htmlFor="bancoSementes">Banco sementes </label>
-              <select
-                className={style.container__ContainerForm_form_halfContainer_select}
-                id="bancoId"
-                name="bancoId"
-                placeholder="Insira o banco de sementes"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.bancoId}
-                required
-              >
-                <option value="" >Selecione...</option>
-                {bancos.map((bancos, index) => {
-                  return (
-                    <option key={index} value={bancos.id}>{bancos.nome}</option>
+              <div>
+                <label htmlFor="bancoId">Banco sementes </label>
+                <select
+                  className={style.container__ContainerForm_form_halfContainer_select}
+                  id="bancoId"
+                  name="bancoId"
+                  placeholder="Insira o banco de sementes"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.bancoId}
+                  required
+                >
+                  <option value="" >Selecione...</option>
+                  {bancos.map((bancos, index) => {
+                    return (
+                      <option key={index} value={bancos.id}>{bancos.nome}</option>
 
-                  )
-                })}
-              </select>
-              {formik.touched.bancoId && formik.errors.bancoId ? (
-                <span className={style.form__error}>{formik.errors.bancoId}</span>
-              ) : null}
-            </div>
+                    )
+                  })}
+                </select>
+                {formik.touched.bancoId && formik.errors.bancoId ? (
+                  <span className={style.form__error}>{formik.errors.bancoId}</span>
+                ) : null}
+              </div>
+            )}
           </>
         )}
 

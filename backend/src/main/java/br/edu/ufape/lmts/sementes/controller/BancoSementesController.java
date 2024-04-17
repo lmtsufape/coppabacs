@@ -96,7 +96,6 @@ public class BancoSementesController {
 		}
 	}
 	
-	@PreAuthorize("hasAnyRole('GERENTE', 'COPPABACS')")
 	@GetMapping("banco-sementes/{id}/agricultores")
 	public List<AgricultorResponse> getAllAgricultor(@PathVariable long id) {
 		return facade.getAllAgricultor(id)

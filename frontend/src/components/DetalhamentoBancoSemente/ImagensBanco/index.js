@@ -88,22 +88,20 @@ export default function ImagensBanco() {
         modules={[FreeMode, Pagination, Navigation]}
         className="mySwiper"
       >
-        {mockImg.map((imagem, index) => {
+        {mockImg.map((imagem) => {
           return (
-            <div key={index}>
-              <SwiperSlide>
-                <div className="deletarImg">
-                  <button onClick={()=>{
-
-                  }}>
-                    Deletar
-                    <Image src="/assets/iconLixeira.svg" alt="Visualizar" width={18} height={18} />
-                  </button>
-                </div>
-                <Image src={imagem.url} alt="Visualizar" width={18} height={18} />
-              </SwiperSlide>
-            </div>
-          )
+            <SwiperSlide key={imagem.id}>
+              <div className="deletarImg">
+                <button onClick={() => {
+                  // Implemente a lógica de deletar aqui
+                }}>
+                  Deletar
+                  <Image src="/assets/iconLixeira.svg" alt="Deletar" width={18} height={18} />
+                </button>
+              </div>
+              <Image src={imagem.url} alt="Visualizar" width={180} height={180} />
+            </SwiperSlide>
+          );
         })}
 
       </Swiper>

@@ -30,7 +30,6 @@ public class Agricultor extends Usuario {
 	public Agricultor() {
 		super();
 		this.atividadeRural = new ArrayList<>();
-		super.addRole(TipoUsuario.USUARIO);
 	}
 
 	public Agricultor(Long id, String nome, String email, String senha, Endereco endereco, String cpf,
@@ -38,8 +37,10 @@ public class Agricultor extends Usuario {
 			BancoSementes bancoSementes, List<AtividadeRural> atividadeRural) {
 		super(id, nome, nomePopular, email, senha, endereco, cpf, dataNascimento, contato, imagem, sexo, conjuge);
 		this.bancoSementes = bancoSementes;
-		this.atividadeRural = atividadeRural;
+	  this.atividadeRural = atividadeRural;
+
 	}
+	
 
 	public BancoSementes getBancoSementes() {
 		return bancoSementes;

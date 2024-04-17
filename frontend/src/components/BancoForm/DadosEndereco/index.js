@@ -1,17 +1,21 @@
 "use client"
 
+import { useEffect, useState } from "react";
 import style from "../agricultorForm.module.scss";
+import { useMutation } from "react-query";
+import { getAllBancos } from "@/api/bancoSementes/getAllBancos";
 
 export default function DadosEndereco({ formik }) {
 
+  console.log(formik.values)
   return (
     <>
-    <label htmlFor="endereco.cep">Cep <span >*</span></label>
+      <label htmlFor="endereco.cep">Cep <span >*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="cep"
         name="endereco.cep"
-        placeholder="Insira seu cep"
+        placeholder="Insira seu estado"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.endereco.cep}
@@ -62,27 +66,29 @@ export default function DadosEndereco({ formik }) {
       {formik.touched.bairro && formik.errors.bairro ? (
         <span className={style.form__error}>{formik.errors.endereco.bairro}</span>
       ) : null}
-      <label htmlFor="logradouro">Logradouro <span >*</span></label>
-      <input
-        className={style.container__ContainerForm_form_input}
-        id="logradouro"
-        name="logradouro"
-        placeholder="Insira seu logradouro"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.endereco.logradouro}
-        required
-      />
-      {formik.touched.logradouro && formik.errors.endereco.logradouro ? (
-        <span className={style.form__error}>{formik.errors.endereco.logradouro}</span>
-      ) : null}
+
       <div className={style.container__ContainerForm_form_halfContainer}>
+        <div>
+          <label htmlFor="endereco.logradouro">Logradouro <span >*</span></label>
+          <input
+            className={style.container__ContainerForm_form_halfContainer_input}
+            id="logradouro"
+            name="endereco.logradouro"
+            placeholder="Insira o logradouro"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.endereco.logradouro}
+          />
+          {formik.touched.logradouro && formik.errors.endereco.logradouro ? (
+            <span className={style.form__error}>{formik.errors.endereco.logradouro}</span>
+          ) : null}
+        </div>
         <div>
           <label htmlFor="endereco.numero">Número <span >*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             name="endereco.numero"
-            placeholder="Insira o número da sua residência"
+            placeholder="Insira o número"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.endereco.numero}
@@ -97,8 +103,24 @@ export default function DadosEndereco({ formik }) {
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="complemento"
-            name="endereco.referencia"
+            name="endereco.complemento"
             placeholder="Insira o complemento"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.endereco.complemento}
+            required
+          />
+          {formik.touched.complemento && formik.errors.endereco.complemento ? (
+            <span className={style.form__error}>{formik.errors.endereco.complemento}</span>
+          ) : null}
+        </div>
+        <div>
+          <label htmlFor="endereco.referencia">Referência <span >*</span></label>
+          <input
+            className={style.container__ContainerForm_form_halfContainer_input}
+            id="referencia"
+            name="endereco.referencia"
+            placeholder="Insira uma referencia"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.endereco.referencia}

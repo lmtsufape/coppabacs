@@ -2,10 +2,8 @@ import { useFormikContext } from "formik";
 import { useState } from "react";
 import style from '../detalhamentoBanco.module.scss'
 export default function Dadosobjetos({ formik, editar }) {
-  console.log(formik.values)
   return (
     <>
-
       {editar === false ? (
         <>
           <div className={style.container__ContainerForm_form_threePartsContainer}>
@@ -13,8 +11,6 @@ export default function Dadosobjetos({ formik, editar }) {
               <label htmlFor="bombonas">Bombonas </label>
               <input
                 className={style.container__ContainerForm_form_input}
-                id="bombonas"
-                name="objetos.bombonas"
                 placeholder="Não informado"
                 onBlur={formik.handleBlur}
                 value={formik.values?.objetos?.bombona}
@@ -27,8 +23,6 @@ export default function Dadosobjetos({ formik, editar }) {
               <label htmlFor="peneirasSelecao">Poneiras de seleção </label>
               <input
                 className={style.container__ContainerForm_form_input}
-                id="peneirasSelecao"
-                name="objetos.peneirasSelecao"
                 placeholder="Não informado"
                 onBlur={formik.handleBlur}
                 value={formik.values?.objetos?.peneiraSelecao}
@@ -39,8 +33,6 @@ export default function Dadosobjetos({ formik, editar }) {
               <label htmlFor="balanca">Balança </label>
               <input
                 className={style.container__ContainerForm_form_input}
-                id="balanca"
-                name="objetos.balanca"
                 placeholder="Não informado"
                 onBlur={formik.handleBlur}
                 value={formik.values?.objetos?.balanca}
@@ -51,8 +43,6 @@ export default function Dadosobjetos({ formik, editar }) {
               <label htmlFor="armarios">Armários </label>
               <input
                 className={style.container__ContainerForm_form_input}
-                id="armarios"
-                name="objetos.armarios"
                 placeholder="Não informado"
                 onBlur={formik.handleBlur}
                 value={formik.values?.objetos?.armario}
@@ -64,8 +54,6 @@ export default function Dadosobjetos({ formik, editar }) {
               <label htmlFor="plantadeiras">Plantadeiras </label>
               <input
                 className={style.container__ContainerForm_form_input}
-                id="plantadeiras"
-                name="objetos.plantadeiras"
                 placeholder="Não informado"
                 onBlur={formik.handleBlur}
                 value={formik.values?.objetos?.plantadeira}
@@ -89,8 +77,6 @@ export default function Dadosobjetos({ formik, editar }) {
               <label htmlFor="batedeirasCereais">Batedeiras de cereais </label>
               <input
                 className={style.container__ContainerForm_form_input}
-                id="batedeirasCereais"
-                name="objetos.batedeirasCereais"
                 placeholder="Não informado"
                 onBlur={formik.handleBlur}
                 value={formik.values?.objetos?.batedeiraCereal}
@@ -99,53 +85,51 @@ export default function Dadosobjetos({ formik, editar }) {
 
             </div>
           </div>
-          <div>
-            <label htmlFor="historiaBanco">Historia Banco</label>
-            <textarea
-              className={style.container__ContainerForm_form_input}
-              id="historiaBanco"
-              name="historiaBanco"
-              placeholder="Não informado"
-              value={formik.values.historiaBanco}
-              disabled
-              style={{ height: '10em', resize: 'none' }}
-            />
+          <div className={style.container__ContainerForm_form}>
+              <label htmlFor="historiaBanco">Historia Banco</label>
+              <textarea
+                className={style.container__ContainerForm_form_input}
+                placeholder="Não informado"
+                value={formik.values.historiaBanco}
+                disabled
+                style={{ height: '10em', resize: 'none' }}
+              />
           </div>
         </>
       ) : (
         <>
           <div className={style.container__ContainerForm_form_threePartsContainer}>
             <div>
-              <label htmlFor="bombonas">Bombonas </label>
-              <input
+              <label htmlFor="bombona">Bombonas </label>
+                <input
                 className={style.container__ContainerForm_form_halfContainer_input}
-                id="bombonas"
-                name="objetos.bombonas"
+                id="bombona"
+                name="objetos.bombona"
                 type="number"
-                placeholder="Insira a quantidade de bombonas"
+                placeholder="Insira seu bombona"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values?.objetos?.bombona}
                 required />
-              {formik.touched.bombonas && formik.errors.objetos.bombonas ? (
-                <span className={style.form__error}>{formik.errors.objetos.bombonas}</span>
+              {formik.touched.bombona && formik.errors.objetos.bombona ? (
+                <span className={style.form__error}>{formik.errors.objetos.bombona}</span>
               ) : null}
 
             </div>
             <div>
-              <label htmlFor="peneirasSelecao">Poneiras de seleção </label>
+              <label htmlFor="peneiraSelecao">Poneiras de seleção </label>
               <input
                 className={style.container__ContainerForm_form_halfContainer_input}
-                id="peneirasSelecao"
-                name="objetos.peneirasSelecao"
+                id="peneiraSelecao"
+                name="objetos.peneiraSelecao"
                 type="number"
                 placeholder="Insira seu poneirasSelecao"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values?.objetos?.peneirasSelecao}
+                value={formik.values?.objetos?.peneiraSelecao}
                 required />
-              {formik.touched.peneirasSelecao && formik.errors.objetos.peneirasSelecao ? (
-                <span className={style.form__error}>{formik.errors.objetos.peneirasSelecao}</span>
+              {formik.touched.peneiraSelecao && formik.errors.objetos.peneiraSelecao ? (
+                <span className={style.form__error}>{formik.errors.objetos.peneiraSelecao}</span>
               ) : null}
 
             </div>
@@ -167,36 +151,36 @@ export default function Dadosobjetos({ formik, editar }) {
 
             </div>
             <div>
-              <label htmlFor="armarios">Armários </label>
+              <label htmlFor="armario">Armários </label>
               <input
                 className={style.container__ContainerForm_form_halfContainer_input}
-                id="armarios"
-                name="objetos.armarios"
+                id="armario"
+                name="objetos.armario"
                 type="number"
                 placeholder="Insira seu armarios"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values?.objetos?.armario}
                 required />
-              {formik.touched.armarios && formik.errors.objetos.armarios ? (
-                <span className={style.form__error}>{formik.errors.objetos.armarios}</span>
+              {formik.touched.armario && formik.errors.objetos.armario ? (
+                <span className={style.form__error}>{formik.errors.objetos.armario}</span>
               ) : null}
 
             </div>
             <div>
-              <label htmlFor="plantadeiras">Plantadeiras </label>
+              <label htmlFor="plantadeira">Plantadeiras </label>
               <input
                 className={style.container__ContainerForm_form_halfContainer_input}
-                id="plantadeiras"
-                name="objetos.plantadeiras"
+                id="plantadeira"
+                name="objetos.plantadeira"
                 type="number"
-                placeholder="Insira seu plantadeiras"
+                placeholder="Insira seu plantadeira"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values?.objetos?.plantadeira}
                 required />
-              {formik.touched.plantadeiras && formik.errors.objetos.plantadeiras ? (
-                <span className={style.form__error}>{formik.errors.objetos.plantadeiras}</span>
+              {formik.touched.plantadeira && formik.errors.objetos.plantadeira ? (
+                <span className={style.form__error}>{formik.errors.objetos.plantadeira}</span>
               ) : null}
 
             </div>
@@ -218,25 +202,25 @@ export default function Dadosobjetos({ formik, editar }) {
 
             </div>
             <div>
-              <label htmlFor="batedeirasCereais">Batedeiras de cereais </label>
+              <label htmlFor="batedeiraCereal">Batedeiras de cereais </label>
               <input
                 className={style.container__ContainerForm_form_halfContainer_input}
-                id="batedeirasCereais"
-                name="objetos.batedeirasCereais"
+                id="batedeiraCereal"
+                name="objetos.batedeiraCereal"
                 type="number"
-                placeholder="Insira seu batedeirasCereais"
+                placeholder="Insira seu batedeiraCereal"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values?.objetos?.batedeirasCereal}
+                value={formik.values?.objetos?.batedeiraCereal}
                 required />
-              {formik.touched.batedeirasCereais && formik.errors.objetos.batedeirasCereais ? (
-                <span className={style.form__error}>{formik.errors.objetos.batedeirasCereais}</span>
+              {formik.touched.batedeiraCereal && formik.errors.objetos.batedeiraCereal ? (
+                <span className={style.form__error}>{formik.errors.objetos.batedeiraCereal}</span>
               ) : null}
 
             </div>
           </div>
-          <div>
-            <label htmlFor="historiaBanco">Historia do Banco </label>
+          <div >
+            <label htmlFor="historiaBanco" >Historia do Banco </label>
             <textarea
               className={style.container__ContainerForm_form_halfContainer_input}
               id="historiaBanco"

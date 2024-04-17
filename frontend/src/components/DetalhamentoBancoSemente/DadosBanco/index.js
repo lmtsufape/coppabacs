@@ -4,7 +4,6 @@ import { telefoneMask } from "@/utils/Masks/telefoneMask";
 
 export default function DadosBanco({ formik, editar }) {
 
-
   return (
     <>
 
@@ -16,7 +15,6 @@ export default function DadosBanco({ formik, editar }) {
               <label htmlFor="nome">Nome Banco</label>
               <input
                 className={style.container__ContainerForm_form_input}
-                name="nome"
                 placeholder="Não informado"
                 onBlur={formik.h1andleBlur}
                 value={formik.values.nome}
@@ -27,7 +25,6 @@ export default function DadosBanco({ formik, editar }) {
               <label htmlFor="responsavel">Responsavel</label>
               <input
                 className={style.container__ContainerForm_form_input}
-                name="responsavel"
                 placeholder="Não informado"
                 onBlur={formik.handleBlur}
                 value={formik.values.responsavel}
@@ -40,7 +37,6 @@ export default function DadosBanco({ formik, editar }) {
 
               <input
                 className={style.container__ContainerForm_form_input}
-                name="contato"
                 placeholder="Não informado"
                 onBlur={formik.handleBlur}
                 value={formik.values.contato}
@@ -83,7 +79,6 @@ export default function DadosBanco({ formik, editar }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.responsavel}
-                required
               />
               {formik.touched.responsavel && formik.errors.responsavel ? (
                 <span className={style.form__error}>{formik.errors.responsavel}</span>
@@ -102,7 +97,6 @@ export default function DadosBanco({ formik, editar }) {
                 }}
                 onBlur={formik.handleBlur}
                 value={formik.values.contato}
-                required
               />
               {formik.touched.contato && formik.errors.contato ? (
                 <span className={style.form__error}>{formik.errors.contato}</span>

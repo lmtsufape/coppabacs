@@ -30,22 +30,24 @@ const FuncionarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
     sexo: "",
     tipo: "",
     endereco: {
-      cep: "",
-      estado: "",
-      cidade: "",
-      bairro: "",
-      nome: "",
-      numero: "",
-      referencia: "",
+      logradouro: '',
+      referencia: '',
+      complemento: '',
+      cidade: '',
+      estado: '',
+      cep: '',
+      numero: '',
+      bairro: ''
     },
+    bancoId: "",
     conjuge: {
       nome: "",
       sexo: "",
     },
-
-
-
   }
+
+
+
 
 
   const validateSchema = Yup.object().shape({
@@ -72,6 +74,7 @@ const FuncionarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
       return postCoppabacs(values);
     }, {
     onSuccess: (res) => {
+      console.log('Cadastro realizado com sucesso!');
       window.location.href = '/funcionarios';
 
     },
@@ -118,7 +121,7 @@ const FuncionarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
               >
 
                 {etapas === 0 && <DadosForm formik={formik} />}
-                {etapas === 1 && <DadosEndereco formik={formik} />}
+                {etapas === 1 && <DadosEndereco formik={formik} hrefAnterior={hrefAnterior}/>}
                 {etapas === 0 && (
                   <div className={style.container__ContainerForm_buttons}>
                     <button>
