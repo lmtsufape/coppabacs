@@ -24,10 +24,9 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
 
   const { state, mutate } = useMutation(
     async () => {
-      //return getAllSementes();
+      return getAllSementes();
     }, {
     onSuccess: (res) => {
-      console.log(res);
       setSementes(res.data);
     },
     onError: (error) => {

@@ -21,13 +21,35 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="avaliacaoSemente">Avaliação Geral da Semente</label>
-                            <textarea
-                                className={styles.container__ContainerForm_form_textarea}
-                                name="avaliacaoSemente"
+                            <label htmlFor="caracteristicasPositiva">Características Positivas</label>
+                            <input
+                                className={styles.container__ContainerForm_form_input}
+                                name="regiaoColetaDados"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.avaliacaoSemente}
+                                value={formik.values.caracteristicasPositiva}
+                                disabled
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="caracteristicasNegativas">Características Negativas</label>
+                            <input
+                                className={styles.container__ContainerForm_form_input}
+                                name="regiaoColetaDados"
+                                placeholder="Não informado"
+                                onBlur={formik.handleBlur}
+                                value={formik.values.caracteristicasNegativas}
+                                disabled
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="descricao">Breve Descrição</label>
+                            <input
+                                className={styles.container__ContainerForm_form_input}
+                                name="regiaoColetaDados"
+                                placeholder="Não informado"
+                                onBlur={formik.handleBlur}
+                                value={formik.values.descricao}
                                 disabled
                             />
                         </div>
@@ -52,21 +74,52 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
 
                         </div>
                         <div>
-                            <label htmlFor="avaliacaoSemente">Avaliação Geral da Semente </label>
-                            <textarea
-                                className={styles.container__ContainerForm_form_halfContainer_textarea}
-                                id="avaliacaoSemente"
-                                name="avaliacaoSemente"
-                                placeholder="Insira avaliação geral da semente"
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.avaliacaoSemente}
-                                required />
-                            {formik.touched.avaliacaoSemente && formik.errors.avaliacaoSemente ? (
-                                <span className={styles.form__error}>{formik.errors.avaliacaoSemente}</span>
-                            ) : null}
+                    <label htmlFor="caracteristicasPositiva">Características Positivas</label>
+                    <input
+                        className={styles.sidedForm_input}
+                        id="caracteristicasPositiva"
+                        name="caracteristicasPositiva"
+                        placeholder="Insira as características positivas da semente"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.caracteristicasPositiva}
+                        required />
+                    {formik.touched.caracteristicasPositiva && formik.errors.caracteristicasPositiva ? (
+                        <span className={styles.form__error}>{formik.errors.caracteristicasPositiva}</span>
+                    ) : null}
 
-                        </div>
+                </div>
+                <div>
+                    <label htmlFor="caracteristicasNegativas">Características Negativas</label>
+                    <input
+                        className={styles.sidedForm_input}
+                        id="caracteristicasNegativas"
+                        name="caracteristicasNegativas"
+                        placeholder="Insira a região de coleta dos dados"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.caracteristicasNegativas}
+                        required />
+                    {formik.touched.caracteristicasNegativas && formik.errors.caracteristicasNegativas ? (
+                        <span className={styles.form__error}>{formik.errors.caracteristicasNegativas}</span>
+                    ) : null}
+                </div>
+                <div>
+                    <label htmlFor="descricao">Breve Descrição</label>
+                    <input
+                        className={styles.sidedForm_input}
+                        id="descricao"
+                        name="descricao"
+                        placeholder="Insira uma breve descrição"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.descricao}
+                        required />
+                    {formik.touched.descricao && formik.errors.descricao ? (
+                        <span className={styles.form__error}>{formik.errors.descricao}</span>
+                    ) : null}
+
+                </div>
                     </>
                 )}
             </div>

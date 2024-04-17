@@ -11,7 +11,7 @@ import { getSementes } from "@/api/sementes/getSemente";
 import { useEffect, useState } from "react";
 import DetalhamentoSementes from "@/components/DetalhamentoSementes";
 
-export default function Detalhamento() {
+export default function Info() {
 
   const params = useParams();
 
@@ -23,7 +23,7 @@ export default function Detalhamento() {
 
   const { status, mutate } = useMutation(
     async () => {
-      //return getSementes(params.id);
+      return getSementes(params.id);
     }, {
     onSuccess: (res) => {
       console.log(res);
@@ -39,15 +39,11 @@ export default function Detalhamento() {
   return (
     <>
       <Header hrefAnterior={"/sementes"} />
-      <DetalhamentoSementes
-        diretorioAnterior={"Home / Sementes / "}
-        diretorioAtual={"Detalhamento da Semente"}
-        hrefAnterior={"/sementes"}/>
       { status === "success" && sementes &&
         <DetalhamentoSementes 
         sementes={sementes}
         diretorioAnterior={"Home / Sementes / "}
-        diretorioAtual={"Detalhamento da Semente"}
+        diretorioAtual={"Informações da Semente"}
         hrefAnterior={"/sementes"}
         />
       }
