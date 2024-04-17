@@ -3,7 +3,7 @@
 import { getUsuario } from "@/api/usuarios/getUsuario ";
 import DetalhamentoUsuario from "@/components/DetalhamentoUsuario";
 import Header from "@/components/Header";
-import Footer from "@/components/Home/Footer";
+import Footer from "@/components/Footer";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";

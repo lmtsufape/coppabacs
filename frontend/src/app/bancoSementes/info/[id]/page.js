@@ -5,7 +5,7 @@ import { useMutation } from "react-query";
 
 
 import Header from '@/components/Home/Header';
-import Footer from '@/components/Home/Footer';
+import Footer from '@/components/Footer';
 
 import { useEffect, useState } from "react";
 import { getBanco } from "@/api/bancoSementes/getBanco";

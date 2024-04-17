@@ -1,5 +1,4 @@
-import Header from "@/components/Home/Header";
-import Footer from "@/components/Home/Footer";
+import Footer from "@/components/Footer";
 import ListSolicitacoes from "@/components/ListSolicitacoes";
 
 export default function SolicitacoesPage() {

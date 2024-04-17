@@ -44,4 +44,62 @@
       }
 
   }
+
+  padding: 1em; // Reduzido para melhor ajuste em dispositivos móveis
+  display: flex;
+  flex-direction: row; // Muda a direção para coluna em dispositivos móveis
+  align-items: center; // Centraliza o logo e outros elementos no modo mobile
+  justify-content: space-between; // Ajuste adicional para centralizar verticalmente, se necessário
+  border: 1px solid rgba(0, 0, 0, 0.3);
+
+  &__logo {
+      width: 120px;
+  }
+
+  &__button_perfil {
+      display: none; // Esconde o botão no modo mobile
+  }
+
+  &__button_sistem {
+      display: none; // Esconde o botão no modo mobile
+
+      &:hover {
+          background-color: #245501;
+          border-radius: 5em;
+          color: #FFFF;
+          transition: all .4s;
+      }
+  }
+
+  // Media query para estilos de telas maiores (por exemplo, tablets e desktops)
+  @media (min-width: 768px) {
+
+      padding: 1em 4em;
+      flex-direction: row; // Restaura a direção da linha para telas maiores
+      justify-content: space-between; // Alinha os elementos nas extremidades para telas maiores
+      box-shadow: 0 0 0.8em rgba(0, 0, 0, 0.1);
+
+      &__button_perfil {
+          display: block;
+          border: 0;
+          background-color: #FFFF;
+      }
+
+      &__voltar {
+          display: none;
+      }
+
+      &__button_sistem {
+          display: block;
+          background-color: #FFFF;
+
+          &:hover {
+              background-color: #245501;
+              border-radius: 5em;
+              color: #FFFF;
+              transition: all .4s;
+          }
+
+      }
+  }
 }

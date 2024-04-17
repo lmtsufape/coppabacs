@@ -1,6 +1,6 @@
 
 import Header from "@/components/Home/Header";
-import Footer from "@/components/Home/Footer";
+import Footer from "@/components/Footer";
 import ListFuncionarios from "@/components/ListFuncionarios";
 export default function AssociadosPage() {
 
