@@ -1,8 +1,7 @@
 "use client"
 import { useParams } from "next/navigation";
 import { useMutation } from "react-query";
-import Header from '@/components/Home/Header';
-import Footer from '@/components/Footer';
+
 import { getUsuario } from "@/api/usuarios/getUsuario ";
 import { useEffect, useState } from "react";
 import DetalhamentoUsuario from "@/components/DetalhamentoUsuario";
@@ -35,7 +34,6 @@ export default function Info() {
 
   return (
     <>
-      <Header hrefAnterior={`/bancoSementes/info/${params.id}/agricultores`}  />
       { status === "success" && usuario &&
         <DetalhamentoUsuario 
         usuario={usuario}
@@ -44,7 +42,6 @@ export default function Info() {
         hrefAnterior={`/bancoSementes/info/${params.id}/agricultores`} 
         />
       }
-      <Footer />
     </>
   )
 }
