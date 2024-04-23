@@ -1,7 +1,9 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import br.edu.ufape.lmts.sementes.model.BancoSementes;
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
@@ -14,15 +16,20 @@ import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor 
 public  class DoacaoUsuarioRequest  {
-	private Double quantidadeDoada;
+
 	private LocalDate dataDoacao;
 	private String descricao;
-	private Usuario doador;
+	private UsuarioRequest usuario;
+	private List<ItemRequest> itens;
+	private long bancoSementesId;
 
 
 	public DoacaoUsuario convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		DoacaoUsuario obj = modelMapper.map(this, DoacaoUsuario.class);
+		BancoSementes bancoSementes = new BancoSementes();
+		bancoSementes.setId(bancoSementesId);
+		obj.setBancoSementes(bancoSementes);
 		return obj;
 	}
 

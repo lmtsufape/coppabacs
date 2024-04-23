@@ -1,5 +1,6 @@
 package br.edu.ufape.lmts.sementes.controller.dto.response;
 
+import br.edu.ufape.lmts.sementes.controller.dto.request.TabelaBancoSementesRequest;
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
@@ -13,11 +14,9 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor
 public  class ItemResponse  {
 	private Long id;
-	private Double quantidade;
-	private DoacaoUsuarioResponse doacaoUsuario; 
-	private RetiradaUsuarioResponse retiradaUsuario; 
-	private TransacaoGenericaResponse transacaoGenerica; 
-	private SementesResponse sementes; 
+	private Double peso;
+	private SementesResponse sementes;
+	private TabelaBancoSementesResponse tabelaBancoSementes;
 
 
 

@@ -25,8 +25,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@NoArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -100,9 +102,7 @@ public abstract class Usuario implements Serializable {
 	    this.posts = new ArrayList<>();
 	    }
 
-	public Usuario() {
-		this.roles = new HashSet<>();
-	}
+	
 
 	public void addRole(TipoUsuario role) {
 		if (this.roles == null) {

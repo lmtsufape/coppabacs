@@ -28,22 +28,14 @@ public  class Item  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
 	private long id;
-	private Double quantidade;
-    	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "doacaoUsuario_id")
+	private Double peso;
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@ToString.Exclude
-	private DoacaoUsuario doacaoUsuario; 
-    	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "retiradaUsuario_id")
+	private Sementes sementes;
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@ToString.Exclude
-	private RetiradaUsuario retiradaUsuario; 
-    	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "transacaoGenerica_id")
-	@ToString.Exclude
-	private TransacaoGenerica transacaoGenerica; 
-    	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "sementes_id")
-	@ToString.Exclude
-	private Sementes sementes; 
+	private TabelaBancoSementes tabelaBancoSementes;
 
 }

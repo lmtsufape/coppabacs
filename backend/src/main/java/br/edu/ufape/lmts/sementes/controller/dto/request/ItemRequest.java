@@ -1,5 +1,6 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
+import br.edu.ufape.lmts.sementes.model.TabelaBancoSementes;
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
@@ -11,11 +12,9 @@ import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor 
 public  class ItemRequest  {
-	private Double quantidade;
-	private DoacaoUsuarioRequest doacaoUsuario; 
-	private RetiradaUsuarioRequest retiradaUsuario; 
-	private TransacaoGenericaRequest transacaoGenerica; 
-	private SementesRequest sementes; 
+	private Double peso;
+	private SementesRequest sementes;
+	private TabelaBancoSementesRequest tabelaBancoSementes;
 
 
 	public Item convertToEntity() {
