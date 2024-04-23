@@ -13,9 +13,14 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor 
 public  class ItemRequest  {
 	private Double peso;
+<<<<<<< HEAD
 	private long sementesId;
 	private long tabelaBancoSementesId;
 	private long id;
+=======
+	private SementesRequest sementes;
+	private TabelaBancoSementesRequest tabelaBancoSementes;
+>>>>>>> f5d4ef6 (consertando problemas e fazendo alteracoes de acordo com o diagrama)
 
 
 	public Item convertToEntity() {
