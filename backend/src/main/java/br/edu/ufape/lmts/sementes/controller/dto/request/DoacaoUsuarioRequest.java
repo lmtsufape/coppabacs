@@ -30,8 +30,7 @@ public  class DoacaoUsuarioRequest  {
 		BancoSementes bancoSementes = new BancoSementes();
 		bancoSementes.setId(bancoSementesId);
 		obj.setBancoSementes(bancoSementes);
-
-		return obj;
+				return obj;
 	}
 
 
