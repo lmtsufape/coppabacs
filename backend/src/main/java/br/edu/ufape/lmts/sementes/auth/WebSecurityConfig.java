@@ -64,7 +64,7 @@ public class WebSecurityConfig {
 					.requestMatchers("/api/v1/sementes/**").hasRole("COPPABACS")
 					.requestMatchers("/api/v1/responsavel-tecnico/**").hasRole("COPPABACS")
 					.requestMatchers("/security/**").permitAll()
-					.requestMatchers("/api/**").permitAll()
+					.requestMatchers("/api-doc/**").permitAll()
 					.requestMatchers("/api/v1/coppabacs/**").hasRole("COPPABACS")
 					
 					// rotas de arquivos

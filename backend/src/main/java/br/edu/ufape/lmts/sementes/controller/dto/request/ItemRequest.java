@@ -13,8 +13,8 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor 
 public  class ItemRequest  {
 	private Double peso;
-	private SementesRequest sementes;
-	private TabelaBancoSementesRequest tabelaBancoSementes;
+	private long sementesId;
+	private long tabelaBancoSementesId;
 
 
 	public Item convertToEntity() {

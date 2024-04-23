@@ -19,7 +19,7 @@ public  class DoacaoUsuarioRequest  {
 
 	private LocalDate dataDoacao;
 	private String descricao;
-	private UsuarioRequest usuario;
+	private long agricultorId;
 	private List<ItemRequest> itens;
 	private long bancoSementesId;
 
@@ -30,6 +30,7 @@ public  class DoacaoUsuarioRequest  {
 		BancoSementes bancoSementes = new BancoSementes();
 		bancoSementes.setId(bancoSementesId);
 		obj.setBancoSementes(bancoSementes);
+
 		return obj;
 	}
 

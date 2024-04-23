@@ -19,7 +19,7 @@ public  class DoacaoUsuarioResponse  {
 	private Long id;
 	private LocalDate dataDoacao;
 	private String descricao;
-	private UsuarioResponse usuario;
+	private AgricultorResponse usuario;
 	private List<ItemResponse> itens;
 	private BancoSementesResponse bancoSementes;
 
