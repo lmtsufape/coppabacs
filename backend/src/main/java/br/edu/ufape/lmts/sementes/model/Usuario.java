@@ -102,6 +102,8 @@ public abstract class Usuario implements Serializable {
 	    this.posts = new ArrayList<>();
 	    }
 
+
+
 	
 
 	public void addRole(TipoUsuario role) {
@@ -231,6 +233,9 @@ public abstract class Usuario implements Serializable {
 	}
 
 	public Set<TipoUsuario> getRoles() {
+		if (this.roles == null) {
+			roles = new HashSet<>();
+		}
 		return roles;
 	}
 

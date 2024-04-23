@@ -27,7 +27,7 @@ public  class DoacaoUsuario  {
 	private String descricao;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@ToString.Exclude
-	private Usuario usuario;
+	private Agricultor agricultor;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@ToString.Exclude
 	private BancoSementes bancoSementes;
