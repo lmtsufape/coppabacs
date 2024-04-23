@@ -1,6 +1,7 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 
@@ -17,6 +18,8 @@ public  class RetiradaUsuarioRequest  {
 	private Usuario usuario;
 	private String descricao;
 	private LocalDate dataRetirada;
+	private List<ItemRequest> itens;
+	private BancoSementesRequest bancoSementes;
 
 
 	public RetiradaUsuario convertToEntity() {

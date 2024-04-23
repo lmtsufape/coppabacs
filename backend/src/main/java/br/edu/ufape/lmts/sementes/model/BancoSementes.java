@@ -60,15 +60,15 @@ public class BancoSementes  {
 	@Embedded
 	private ObjetosBancoSementes objetosBancoSementes;
 	@OneToMany
-	@JoinColumn(name = "bancoSementes_id")
+	@JoinColumn(name = "banco_sementes_id")
 	@ToString.Exclude
 	private List<DoacaoUsuario> doacaoUsuario;
 	@OneToMany
-	@JoinColumn(name = "bancoSementes_id")
+	@JoinColumn(name = "banco_sementes_id")
 	@ToString.Exclude
 	private List<RetiradaUsuario> retiradaUsuario;
 	@OneToMany
-	@JoinColumn(name = "bancoSementes_id")
+	@JoinColumn(name = "banco_sementes_id")
 	@ToString.Exclude
 	private List<TransacaoGenerica> transacaoGenerica;
 	
