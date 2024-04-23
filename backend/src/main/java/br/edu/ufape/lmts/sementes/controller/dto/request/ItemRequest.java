@@ -16,8 +16,7 @@ public  class ItemRequest  {
 	private long sementesId;
 	private long tabelaBancoSementesId;
 	private long id;
-	private long sementesId;
-	private long tabelaBancoSementesId;
+
 
 
 	public Item convertToEntity() {
