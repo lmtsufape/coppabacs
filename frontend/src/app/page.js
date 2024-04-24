@@ -11,6 +11,8 @@ import { useSelector } from "react-redux";
 export default function InicioPage() {
 
   const [role, setRole] = useState(getStorageItem("userRole"));
+  
+  const userLogin = useSelector((state) => state.userLogin);
 
   const userLogin = useSelector((state) => state.userLogin);
 
