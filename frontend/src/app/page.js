@@ -3,12 +3,16 @@ import Card from "@/components/CardDefault";
 import style from "./home.module.scss";
 import { useState } from "react";
 import { getStorageItem } from "@/utils/localStore";
+import Image from "next/image";
+import { useSelector } from "react-redux";
 
 
 
 export default function InicioPage() {
 
   const [role, setRole] = useState(getStorageItem("userRole"));
+  
+  const userLogin = useSelector((state) => state.userLogin);
 
   function whatIsTypeUser() {
     if(role){
@@ -29,7 +33,8 @@ export default function InicioPage() {
 
   return (
     <div>
-      <div className={style.menu}>
+      {!userLogin ? <div className={style.mapa}><img className={style.mapa__img}  src="/assets/Group 12.png " alt="menu burguer" /></div> : false }
+      <div className={style.menu} style={!userLogin ? { paddingTop: '0px' } : {}}>
         {whatIsTypeUser()}
       </div>
     </div>

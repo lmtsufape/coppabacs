@@ -12,6 +12,7 @@ import { getCurrentUser } from "@/api/usuarios/getCurrentUser";
 
 import style from "./login.module.scss";
 import Link from "next/link";
+import api from "@/api/http-common";
 
 const Login = () => {
     const [email, setEmail] = useState("");

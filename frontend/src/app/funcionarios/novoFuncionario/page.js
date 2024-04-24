@@ -1,6 +1,5 @@
 import React from "react";
 import Footer from "@/components/Footer";
-import Header from "@/components/Home/Header";
 import styles from "@/app/agricultores/novoAgricultor/index.module.scss"
 import FuncionarioForm from "@/components/FuncionarioForm";
 
