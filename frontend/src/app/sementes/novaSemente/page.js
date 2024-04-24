@@ -1,6 +1,5 @@
 import React from "react";
 import SementeForm from "@/components/SementeForm/index";
-import Footer from "@/components/Footer";
 
 export default function NovaSementeFormPage() {
     return (
