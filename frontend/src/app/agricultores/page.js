@@ -5,11 +5,11 @@ export default function AssociadosPage() {
 
   return (
     <div>
-      <Header hrefAnterior="/inicio" />
+      <Header hrefAnterior="/" />
       <ListAgricultores
         diretorioAnterior="Home /"
         diretorioAtual="Agricultores"
-        hrefAnterior="/inicio"
+        hrefAnterior="/"
         table1="nome"
         table2="Contato"
         table3="Função"

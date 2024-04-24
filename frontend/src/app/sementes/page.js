@@ -7,7 +7,7 @@ export default function SementesPage() {
       <ListSementes
         diretorioAnterior= "Home /" 
         diretorioAtual="Sementes" 
-        hrefAnterior="/inicio" 
+        hrefAnterior="/" 
         table1="Imagem"
         table2="Cultura" 
 

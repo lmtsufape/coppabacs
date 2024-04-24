@@ -1,16 +1,16 @@
 
-import Header from "@/components/Home/Header";
+
 import Footer from "@/components/Footer";
 import ListCoordenadores from "@/components/ListCoordenadores";
 export default function AssociadosPage() {
 
   return (
     <div>
-      <Header hrefAnterior="/inicio" />
+      <Header hrefAnterior="/" />
       <ListCoordenadores
         diretorioAnterior="Home /"
         diretorioAtual="Coordenadores"
-        hrefAnterior="/inicio"
+        hrefAnterior="/"
         table1="nome"
         table2="Contato"
         table3 ="Banco"
