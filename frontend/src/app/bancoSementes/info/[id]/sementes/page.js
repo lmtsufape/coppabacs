@@ -6,7 +6,6 @@ export default function AssociadosPage() {
   const params = useParams();
   return (
     <div>
-
       <ListAgricultoresBanco
         diretorioAnterior={`Home / Bancos Sementes / Banco Semente /`}
         diretorioAtual="Agricultores"
