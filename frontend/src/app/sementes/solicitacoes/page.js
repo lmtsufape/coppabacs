@@ -6,7 +6,10 @@ export default function SolicitacoesPage() {
 
   return (
     <>
-      <Header />
+    {
+     // <Header />
+    }
+      
         <ListSementes
           class="content"
           diretorioAnterior="Home / Sementes /"

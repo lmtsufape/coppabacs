@@ -8,8 +8,9 @@ export default function AssociadosPage({ banco }) {
 
   return (
     <div>
-      <Header hrefAnterior={`/bancoSementes/info/${params.id}`} />
-      <ListAgricultoresBanco
+      {
+      //<Header hrefAnterior={`/bancoSementes/info/${params.id}`} />
+      }<ListAgricultoresBanco
         diretorioAnterior={`Home / Bancos Sementes / Banco Semente /`}
         diretorioAtual="Agricultores"
         hrefAnterior={`/bancoSementes/info/${params.id}/`}
