@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Field, useFormikContext } from 'formik';
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
 import styles from "@/components/SementeForm/sementeForm.module.scss"
-
-
 
 export default function DadosCaracteristicasAgronomicas({ formik }) {
     const [imagePreviewUrls, setImagePreviewUrls] = useState([]);
