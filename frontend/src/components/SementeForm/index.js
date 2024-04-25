@@ -101,7 +101,7 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       genero: Yup.string().required('O gênero é obrigatório'),
     }),
 
-  nome: Yup.string().required('O nome da cultivar é obrigatório'),
+  
   nomePopular: Yup.string().required('O nome popular é obrigatório'),
   descricao: Yup.string().required('A descrição é obrigatória'),
   dominioPublico: Yup.string().required('O domínio público é obrigatório'),
