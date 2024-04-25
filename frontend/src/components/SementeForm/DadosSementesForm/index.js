@@ -162,6 +162,7 @@ export default function DadosSementesForm({ formik }) {
                             required />
 
                         {formik.touched.genero && formik.errors.genero ? (
+
                             <span className={styles.form__error}>{formik.errors.cultura.genero}</span>
                         ) : null}
                     </div>
