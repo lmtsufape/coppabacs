@@ -3,6 +3,8 @@ package br.edu.ufape.lmts.sementes.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.TransacaoGenerica;
@@ -39,8 +41,9 @@ public class TransacaoGenericaService implements TransacaoGenericaServiceInterfa
 	public void deleteTransacaoGenerica(long id){
 		TransacaoGenerica obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist TransacaoGenerica with id = " + id));
 		repository.delete(obj);
-	}	
-	
-	
-	
+	}
+
+	public Page<TransacaoGenerica> findPageTransacaoGenerica(Pageable pageRequest) {
+		return repository.findAll(pageRequest);
+	}
 }
