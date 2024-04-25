@@ -5,7 +5,6 @@ export default function SolicitacoesPage() {
 
   return (
     <>
-      <Header hrefAnterior="/agricultores" />
         <ListSolicitacoes
           className="content"
           diretorioAnterior="Home / Agricultores /"
@@ -16,8 +15,6 @@ export default function SolicitacoesPage() {
           table3="Contato"
           table4="Ação"
         />
-
-        <Footer class="footer" />
 
     </>
   )

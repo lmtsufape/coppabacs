@@ -5,7 +5,6 @@ export default function AssociadosPage() {
 
   return (
     <div>
-      <Header hrefAnterior="/" />
       <ListFuncionarios
         diretorioAnterior="Home /"
         diretorioAtual="Funcionarios"
@@ -14,9 +13,6 @@ export default function AssociadosPage() {
         table2="Contato"
         table3="Função"
         table4="Ação" />
-
-      <Footer />
-
     </div>
   )
 }

@@ -11,8 +11,11 @@ import Table from "./Table";
 import { Search } from "../searchUsuario";
 import { getAllBancos } from "@/api/bancoSementes/getAllBancos";
 import Link from "next/link";
+import { getStorageItem } from "@/utils/localStore";
 
 export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3 }) {
+
+  const [role, setRole] = useState(getStorageItem("userRole"));
 
   const [bancos, setBancos] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -36,7 +39,7 @@ export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, h
   const filteredBancos = bancos.filter((banco) =>
     banco?.nome?.toLowerCase().includes(searchTerm.toLowerCase())
   );
- 
+
   return (
     <div>
       <Header
@@ -46,17 +49,19 @@ export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, h
       />
       <div className={style.header}>
         <div className={style.header__container}>
+          {role === "COPPABSCS" && (
 
-          <button>
+            <button>
 
-            <Link className={style.header__container_link} href="bancoSementes/novoBanco">
-              <h1>
-                Adicionar Banco
-              </h1>
-            </Link>
+              <Link className={style.header__container_link} href="bancoSementes/novoBanco">
+                <h1>
+                  Adicionar Banco
+                </h1>
+              </Link>
 
-            <Image src="/assets/iconDatabasePlus.svg" alt="Adicionar Agricultor" width={27} height={24} />
-          </button>
+              <Image src="/assets/iconDatabasePlus.svg" alt="Adicionar Agricultor" width={27} height={24} />
+            </button>
+          )}
           <div className={style.header__container_buttons}>
 
           </div>
@@ -70,7 +75,7 @@ export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, h
         table3={table3}
         listBancos={filteredBancos}
       />
-      
+
     </div>
   );
 }

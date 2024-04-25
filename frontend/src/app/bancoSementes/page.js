@@ -1,4 +1,3 @@
-import Footer from "@/components/Footer";
 import ListBancoSementes from "@/components/ListBancoSementes";
 
 export default function bancoSementesPage() {
@@ -13,9 +12,6 @@ export default function bancoSementesPage() {
         table2="Responsável"
         table3="Ação"
       />
-
-
-      <Footer />
 
     </div>
   )

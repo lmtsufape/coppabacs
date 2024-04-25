@@ -10,14 +10,13 @@ export default function AssociadosPage() {
       <ListCoordenadores
         diretorioAnterior="Home /"
         diretorioAtual="Coordenadores"
-        hrefAnterior="/inicio"
+        hrefAnterior="/"
         table1="Nome"
         table2="Contato"
         table3 ="Banco"
         table4="Ações" 
         />
 
-      <Footer />
 
     </div>
   )
