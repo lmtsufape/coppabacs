@@ -31,7 +31,8 @@ public  class DoacaoUsuario  {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@ToString.Exclude
 	private BancoSementes bancoSementes;
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL,
+			orphanRemoval = true)
 	@ToString.Exclude
 	private List<Item> itens;
 
