@@ -260,3 +260,67 @@ const LayoutPublic = ({ table1, table2, table3 }) => {
     </div>
   );
 }
+
+
+const LayoutCoordenador = ({ table1, table2, table3 }) => {
+
+  const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
+  const [coordenador, setCoordenador] = useState([]);
+
+  const [banco, setBanco] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
+
+  useEffect(() => {
+    mutationCoordenador.mutate(coordenadorEmail);
+    if(coordenador.bancoSementeId){
+      mutate();
+    }
+  }, [coordenador.bancoSementeId]);
+
+  const mutationCoordenador = useMutation(coordenadorEmail => getCoordenadorEmail(coordenadorEmail), {
+    onSuccess: (res) => {
+      setCoordenador(res.data);
+      console.log('Coordenador carregado com sucesso');
+    },
+    onError: (error) => {
+      console.error('Erro ao recuperar as informações do coordenador:', error);
+    }
+  });
+
+  const { state, mutate } = useMutation(
+    async () => {
+      console.log(coordenador.bancoSementeId)
+      return getBanco(Number(coordenador.bancoSementeId));
+    }, {
+    onSuccess: (res) => {
+      console.log("banco")
+      setBanco(res.data);
+    },
+    onError: (error) => {
+      console.log(error)
+    }
+  }
+  );
+  return (
+    <>
+      {banco &&(
+        <DetalhamentoBanco
+        banco={banco}
+        diretorioAnterior={"Home / "}
+        diretorioAtual={"Informações do Banco de Semente"}
+        hrefAnterior={"/inicio"}
+      />
+      )}
+    </>
+  )
+}
+
+const LayoutAgricultor = () => {
+
+  return (
+    <>
+
+    </>
+  )
+}
