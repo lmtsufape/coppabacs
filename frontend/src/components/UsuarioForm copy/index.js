@@ -14,31 +14,33 @@ import DadosForm from "./DadosUsuario/index";
 import DadosEndereco from "./DadosEndereco";
 import DadosAtividadesRurais from "./DadosAtividadesRurais";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import Footer from "../Home/Footer";
+import { postUsuario } from "@/api/usuarios/postUsuario";
 
-const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
-  const router = useRouter();
+
+const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
+  
 
   const initialValues = {
-    nome: "",
     email: "",
     senha: "",
     confirmarSenha: "",
+    nome: "",
     nomePopular: "",
-    endereco: {
-      cep: "",
-      cidade: "",
-      estado: "",
-      bairro: "",
-      logradouro: "",
-      numero: "",
-      complemento: "",
-      referencia: ""
-    },
+    contato: "",
     cpf: "",
     dataNascimento: "",
-    contato: "",
     sexo: "",
+    endereco: {
+      cep: "",
+      estado: "",
+      cidade: "",
+      bairro: "",
+      nome: "",
+      numero: "",
+      referencia: "",
+    },
+    bancoId: "",
     conjuge: {
       nome: "",
       sexo: "",
@@ -47,10 +49,12 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
     atividadesRurais: [],
     producaoSementes: {
       cultura: "",
-      variedade: "", 
+      variedade: "",
+      areaPlantada: "",
       previsaoVenda: "",
-      areaPlantada: ""
     }
+
+
   }
 
 
@@ -68,20 +72,16 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
       .min(11, "O contato deve ter no mínimo 11 caracteres")
       .required('Required'),
     dataNascimento: Yup.date()
-      .max(new Date(31,12, 2024) , "A data de nascimento não pode ser maior que a data atual")
+      .max(new Date(), "A data de nascimento não pode ser maior que a data atual")
       .min(new Date(1, 1, 1900), "A data de nascimento não pode ser menor que 01/01/1900")
       .required('Required'),
   })
-
-
-
   const { status, mutate } = useMutation(
     async (values) => {
-      return postAgricultor(values);
+      console.log("valores: ", values);
+      return postUsuario(values);
     }, {
-    onSuccess: () => {
-      console.log('Cadastro realizado com sucesso!');
-      window.location.href = '/agricultores';
+    onSuccess: (res) => {
 
     },
     onError: (error) => {
@@ -91,9 +91,8 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
   }
   );
 
-
-
   const [etapas, setEtapas] = useState(0);
+  
   return (
     <div id="header" className={style.container}>
       <HeaderNavegacao
@@ -109,7 +108,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
         {etapas >= 1 && etapas <= 2 && <h1 className={style.container__header_current}>1. Dados do agricultor</h1>}
 
         {etapas === 1 && <h1 className={style.container__header_currentNav}>2. Endereço do Endereço</h1>}
-        {etapas != 1 && <h1 className={style.container__header_current}>2. Dados do Endereço</h1>}
+        {etapas != 1 && <h1 className={style.container__header_current}>2. Endereço do Endereço</h1>}
 
         {etapas === 2 && <h1 className={style.container__header_currentNav}>3. Atvidades rurais</h1>}
         {etapas >= 0 && etapas < 2 && <h1 className={style.container__header_current}>3. Atvidades rurais</h1>}
@@ -123,9 +122,13 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
           validationSchema={validateSchema}
 
           onSubmit={(values, { setSubmitting }) => {
-            mutate(values);
-            setSubmitting(false);   
-         
+            mutate(values,{
+              onSuccess: (res) => {
+                window.location.href = '/';
+              }
+            
+            });
+
           }}
         >
           {(formik) => {
@@ -172,10 +175,8 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
                         <h1>Voltar</h1>
                       </Link>
                     </button>
-                    <button
-                      type="submit"
-                      className={style.container__ContainerForm_buttons_linkWhite}>
-                      <h1>Finalizar</h1>
+                    <button type="submit" className={style.container__ContainerForm_buttons_linkWhite}>
+                        <h1>Finalizar</h1>
                     </button>
                   </div>
                 )}
@@ -190,4 +191,4 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
 }
 
 
-export default AgricultorForm;
+export default UsuarioForm;

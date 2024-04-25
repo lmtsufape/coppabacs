@@ -47,10 +47,10 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       .required('Required'),
   })
 
-  const mutationCoordenador = useMutation(newCoordenador => postCoordenador(newCoordenador), {
+  const mutationCoordenador = useMutation(newTransacao => postTransacao(newTransacao), {
     onSuccess: () => {
       console.log('Cadastro realizado com sucesso!')
-      router.push('/coordenadores')
+      router.push('/transacoes')
 
     },
     onError: (error) => {

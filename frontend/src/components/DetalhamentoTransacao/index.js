@@ -9,18 +9,18 @@ import * as Yup from 'yup';
 import style from "./detalhamentoUsuario.module.scss";
 
 import HeaderNavegacao from "../HeaderNavegacao";
-import DadosForm from "./DadosUsuario";
-import DadosEndereco from "./DadosEndereco";
-import DadosAtividadesRurais from "./DadosAtividadesRurais";
+
 import Image from "next/image";
 import { validarAgricultor } from "@/api/usuarios/agricultor/validarAgricultor";
 import { useRouter } from "next/navigation";
 import { patchAgricultor } from "@/api/usuarios/agricultor/patchAgricultor";
 import { patchCoppabacs } from "@/api/usuarios/coppabacs/patchCoppabacs";
 import { patchCoordenador } from "@/api/usuarios/coordenador/patchCoordenador";
+import DadosTransacao from "../TransacaoForm/DadosTransacao";
+import Link from "next/link";
 
 
-const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuario }) => {
+const DetalhamentoTransacao = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuario }) => {
 
   const router = useRouter();
   const [etapas, setEtapas] = useState(0);
@@ -142,7 +142,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
             if (hrefAnterior === "/funcionarios") {
               mutationUpdateFuncionario.mutate(values)
             } else if (hrefAnterior === "/gerentes") {
-              mutationUpdateCoordenador.mutate(values)
+
             } else if (hrefAnterior === "/agricultores") {
               mutationUpdateAgricultor.mutate(values);
             }
@@ -156,62 +156,43 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
                 className={style.container__ContainerForm_form}
               >
                 <div className={style.container__profile}>
-                  <div className={style.container__profile_img}>
-                    <Image src="/assets/profile.jpeg" alt="Foto do usuário" width={72} height={72} />
-                    <h1>{usuario?.nome}</h1>
-                  </div>
-                  {hrefAnterior === "/agricultores" || hrefAnterior === "/funcionarios" && (
-                    <>
-                      {editar === false ? (
-                        <button
-                          onClick={() => setEditar(true)}
-                          className={style.container__profile_button}>
+                <div className={style.container__profile_img}>
+                </div>
+                  {editar === false ? (
+                    <div className={style.container__profile_containerButton}>
 
-                          <span>Editar</span>
-                          <Image src="/assets/iconLapis.svg" alt="editar perfil" width={25} height={25} />
-                        </button >
-                      ) : (
+                      <button
+                        onClick={() => setEditar(true)}
+                        className={style.container__profile_button}>
+
+                        <span>Editar</span>
+                        <Image src="/assets/iconLapis.svg" alt="editar perfil" width={25} height={25} />
+                      </button >
+
+                    </div>
+                  ) : (
+                    <>
+                      <div className={style.container__profile_containerButton}>
                         <button
                           onClick={() => setEditar(false)}
-                          className={style.container__profile_button}>
 
-                          <span>Salvar</span>
-                          <Image src="/assets/iconLapis.svg" alt="editar perfil" width={25} height={25} />
+                          className={style.container__profile_buttonDesativar}>
+
+                          <span>Cancelar</span>
                         </button >
-                      )}
+                        <button
+                          type="submit"
+                          className={style.container__profile_button}>
+                          <span>Salvar</span>
+                        </button >
+                      </div>
                     </>
                   )}
 
                 </div>
 
-                <DadosForm formik={formik} editar={editar} hrefAnterior={hrefAnterior} />
-                <DadosEndereco formik={formik} editar={editar} />
-                {
-                  hrefAnterior === "/agricultores" && (
-                    <DadosAtividadesRurais formik={formik} editar={editar} />
-                  )
-                }
-                {
-                  hrefAnterior === "/agricultores/solicitacoes" && (
-                    <div className={style.container__profile}>
-                      <button
-                        onClick={() => setEditar(true)}
-                        className={style.container__profile_button}>
+                <DadosTransacao formik={formik} editar={editar} hrefAnterior={hrefAnterior} />
 
-                        <span>Recusar Solicitação</span>
-                        <Image src="/assets/iconLapis.svg" alt="Recusar" width={25} height={25} />
-                      </button >
-                      <button
-                        onClick={() => mutationAprovacao.mutate(usuario.id)}
-                        className={style.container__profile_button}>
-
-                        <span>Aprovar Solicitação</span>
-                        <Image src="/assets/iconLapis.svg" alt="Aprovar" width={25} height={25} />
-                      </button >
-
-                    </div>
-                  )
-                }
               </Form >
             )
           }
@@ -224,4 +205,4 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
 }
 
 
-export default AgricultorForm;
+export default DetalhamentoTransacao;
