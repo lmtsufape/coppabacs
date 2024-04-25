@@ -96,17 +96,19 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
       />
       <div className={style.header}>
         <div className={style.header__container}>
+          {role === "COPPABSCS" && (
 
-          <button>
+            <button>
 
-            <Link className={style.header__container_link} href="bancoSementes/novoBanco">
-              <h1>
-                Adicionar Banco
-              </h1>
-            </Link>
+              <Link className={style.header__container_link} href="bancoSementes/novoBanco">
+                <h1>
+                  Adicionar Banco
+                </h1>
+              </Link>
 
-            <Image src="/assets/iconDatabasePlus.svg" alt="Adicionar Agricultor" width={27} height={24} />
-          </button>
+              <Image src="/assets/iconDatabasePlus.svg" alt="Adicionar Agricultor" width={27} height={24} />
+            </button>
+          )}
           <div className={style.header__container_buttons}>
 
           </div>
