@@ -116,42 +116,6 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
                   )}
                 </div>
 
-                 
-                {editar === false ? (
-                  <div className={style.container__profile_containerButton}>
-                    <button
-                      onClick={() => setEditar(true)}
-                      className={style.container__profile_button}>
-
-                      <span>Editar</span>
-                      <Image src="/assets/iconLapis.svg" alt="editar perfil" width={25} height={25} />
-                    </button >
-                    <button
-                      className={style.container__profile_buttonDesativar}>
-
-                      <span>Desativar Banco</span>
-                    </button >
-
-                  </div>
-                ) : (
-                  <>
-                    <div className={style.container__profile_containerButton}>
-                      <button
-                        onClick={() => setEditar(false)}
-
-                        className={style.container__profile_buttonDesativar}>
-
-                        <span>Cancelar</span>
-                      </button >
-                      <button
-                        type="submit"
-                        className={style.container__profile_button}>
-                        <span>Salvar</span>
-                      </button >
-                    </div>
-                  </>
-                )}
-
               </div>
               <DadosBanco formik={formik} editar={editar} />
               <DadosEndereco formik={formik} editar={editar} />
@@ -192,7 +156,6 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
                   </div>
                 </>
               )}
-
             </Form>
           )}
         </Formik>
