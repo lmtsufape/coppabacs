@@ -52,4 +52,8 @@ public class BancoSementesService implements BancoSementesServiceInterface {
 	public Page<BancoSementes> findPageBancoSementes(Pageable pageRequest) {
 		return repository.findAll(pageRequest);
 	}
+
+	public Page<BancoSementes> findPageBancoSementes(Pageable pageRequest) {
+		return repository.findAll(pageRequest);
+	}
 }
