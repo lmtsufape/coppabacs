@@ -13,6 +13,7 @@ import InformacoesColeta from "./InformacoesColeta";
 import styles from "@/components/DetalhamentoSementes/detalhamentoSementes.module.scss";
 import Image from "next/image";
 import DadosCaracteristicasAgronomicas from "./DadosCaracteristicasAgronomicas";
+import ImagensSementes from "./ImagensSementes";
 
 const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior, sementes }) => {
 
@@ -154,6 +155,7 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
                                 <DadosCaracteristicasAgronomicas formik={formik} editar={editar}/>
                                 <DadosToleranciaAdversidades formik={formik} editar={editar} />
                                 <InformacoesColeta formik={formik} editar={editar} />
+                                <ImagensSementes/>
 
                             </Form>
                         )

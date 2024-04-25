@@ -48,14 +48,11 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
         <div className={styles.header__container}>
           <button>
             <Link className={styles.header__container_link} href="sementes/novaSemente">
-              <h1>
-                Adicionar Semente
-                </h1>
+              <h1>Adicionar Semente</h1>
             </Link>
             <Image src="/assets/iconSeedGrey+.svg" width={20} height={20} />
           </button>
           <div className={styles.header__container_buttons}>
-
           </div>
         </div>
       </div>

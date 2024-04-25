@@ -16,7 +16,7 @@ import ToleranciaAdversidades from "@/components/SementeForm/DadosToleranciaAdve
 const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
   const initialValues = {
-
+    imagens: [],
     responsavelTecnico: {
       nome: "",
       cpf: "",
@@ -90,8 +90,9 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
   }
 
-  /*const validateSchema = Yup.object().shape({
-  responsavelTecnico: Yup.object().shape({
+  const validateSchema = Yup.object().shape({
+    nome: Yup.string().required('O nome da cultivar é obrigatório'),
+  /*  responsavelTecnico: Yup.object().shape({
       nome: Yup.string().required('O nome do responsável técnico é obrigatório'),
       cpf: Yup.string().required('O cpf do responsável técnico é obrigatório'),
     }),
@@ -100,7 +101,7 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       genero: Yup.string().required('O gênero é obrigatório'),
     }),
 
-  nome: Yup.string().required('O nome da cultivar é obrigatório'),
+  
   nomePopular: Yup.string().required('O nome popular é obrigatório'),
   descricao: Yup.string().required('A descrição é obrigatória'),
   dominioPublico: Yup.string().required('O domínio público é obrigatório'),
@@ -124,11 +125,11 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
     soloBaixaFertilidade: Yup.string().required('A tolerância à baixa fertilidade do solo é obrigatória'),
   }),
   
-  regAdaptCultivar: Yup.string().required('A região adaptativa da cultivar é obrigatória'),
+  regAdaptCultivar: Yup.string().required('A região adaptativa da cultivar é obrigatória'),*/
 
   })
 
-  */
+  
   const { status, mutate } = useMutation(
     async (values) => {
       return postSemente(values);
