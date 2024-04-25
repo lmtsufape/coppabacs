@@ -5,7 +5,9 @@ import styles from "@/components/SementeForm/sementeForm.module.scss"
 export default function DadosCaracteristicasAgronomicas({ formik }) {
     return (
         <>
+            <br />
             <h1 className={styles.title}>Características Agronômicas</h1>
+            <br />
             <div className={styles.sidedForm}>
                 <div>
                     <label htmlFor="caracteristicasAgronomicas.cicloFenologico">Ciclo Fenológico (Dias) </label>
@@ -175,7 +177,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         value={formik.values.caracteristicasAgronomicas.corFLor}
                         required />
                     {formik.touched.corFLor && formik.errors.corFLor ? (
-                        <span className={style.form__error}>{formik.errors.caracteristicasAgronomicas.corFLor}</span>
+                        <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.corFLor}</span>
                     ) : null}
                 </div>
                 <div>

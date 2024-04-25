@@ -45,10 +45,7 @@ export async function postSemente(novaSemente = {
 
   finalidades: [],
 
-  regioesAdaptacaoCultivo: [
-    { regiao: "Pindorama" },
-    { regiao: "Casa do Cacete" }
-  ],
+  regioesAdaptacaoCultivo: [],
 
   caracteristicasAgronomicas: {
     cicloFenologico: "",

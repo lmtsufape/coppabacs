@@ -14,8 +14,14 @@
   border: 1px solid rgba(0, 0, 0, 0.10);
   border-radius: 1em;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.10);
+  &:hover{
+    box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);
+  }
   &_link{
+    width: 95%;
     text-decoration: none;
+    padding: 2.1em 1.5em 2.1em 1.5em;
+    margin: -2.1em -1.5em -2.1em -1.5em;
   }
   &__img{
     width: 70px;
@@ -26,5 +32,29 @@
     font-size: 1em;
     font-weight: 500;
     color: #245501;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .card{
+  width: 12.5em;
+  height: 12.5em;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;  
+  text-align: center;
+  padding: 1em;
+
+  background-color: #fff;
+
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  border-radius: 1em;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.10);
+    &_link{
+      padding: 1.8em 1.5em 1.8em 1.5em;
+      margin: -1.8em -1.5em -1.8em -1.5em;
+    }
   }
 }
