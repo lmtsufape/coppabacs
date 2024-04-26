@@ -105,15 +105,14 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
       />
       <div className={style.header}>
         <div className={style.header__container}>
-          {role === "COPPABSCS" && (
 
-            <button>
+          <button>
 
-              <Link className={style.header__container_link} href="bancoSementes/novoBanco">
-                <h1>
-                  Adicionar Banco
-                </h1>
-              </Link>
+            <Link className={style.header__container_link} href="bancoSementes/novoBanco">
+              <h1>
+                Adicionar Banco
+              </h1>
+            </Link>
 
             <Image src="/assets/iconDatabasePlus.svg" alt="Adicionar Agricultor" width={27} height={24} />
           </button>
@@ -266,7 +265,7 @@ const LayoutCoordenador = ({ table1, table2, table3 }) => {
 
   useEffect(() => {
     mutationCoordenador.mutate(coordenadorEmail);
-    if(coordenador.bancoSementeId){
+    if (coordenador.bancoSementeId) {
       mutate();
     }
   }, [coordenador.bancoSementeId]);
@@ -297,13 +296,13 @@ const LayoutCoordenador = ({ table1, table2, table3 }) => {
   );
   return (
     <>
-      {banco &&(
+      {banco && (
         <DetalhamentoBanco
-        banco={banco}
-        diretorioAnterior={"Home / "}
-        diretorioAtual={"Informações do Banco de Semente"}
-        hrefAnterior={"/inicio"}
-      />
+          banco={banco}
+          diretorioAnterior={"Home / "}
+          diretorioAtual={"Informações do Banco de Semente"}
+          hrefAnterior={"/"}
+        />
       )}
     </>
   )
@@ -313,7 +312,7 @@ const LayoutAgricultor = () => {
 
   return (
     <>
-
+      <h1>asdf</h1>
     </>
   )
 }
