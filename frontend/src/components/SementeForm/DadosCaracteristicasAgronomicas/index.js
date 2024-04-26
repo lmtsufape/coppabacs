@@ -211,6 +211,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
             </div>
+            
         </>
     )
 }
