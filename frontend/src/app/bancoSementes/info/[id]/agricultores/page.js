@@ -1,6 +1,5 @@
 "use client"
-import Header from "@/components/Home/Header";
-import Footer from "@/components/Home/Footer";
+import Footer from "@/components/Footer";
 import { useParams } from "next/navigation";
 import ListAgricultoresBanco from "@/components/ListAgricultoresBanco";
 export default function AssociadosPage({ banco }) {
@@ -9,8 +8,9 @@ export default function AssociadosPage({ banco }) {
 
   return (
     <div>
-      <Header hrefAnterior={`/bancoSementes/info/${params.id}`} />
-      <ListAgricultoresBanco
+      {
+      //<Header hrefAnterior={`/bancoSementes/info/${params.id}`} />
+      }<ListAgricultoresBanco
         diretorioAnterior={`Home / Bancos Sementes / Banco Semente /`}
         diretorioAtual="Agricultores"
         hrefAnterior={`/bancoSementes/info/${params.id}/`}

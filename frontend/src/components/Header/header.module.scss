@@ -1,47 +1,233 @@
-.header{
-  padding: 1em 4em;
-  
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.header {
+    padding: 1em 4em;
 
-  border: 1px solid rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-  &__logo{
-      width: 120px;
-  }
+    border: 1px solid rgba(0, 0, 0, 0.3);
 
-  &__button_mural, &__button_home{
-      color: #245501;
-      font-weight: bold;
-      font-size: 1em;
+    &__logo {
+        width: 120px;
+    }
 
-      border: none;
-      padding: 14px 34px;
-  }
+    &__button_mural,
+    &__button_home {
+        color: #245501;
+        font-weight: bold;
+        font-size: 1em;
 
-  &__button_mural{
-      background-color: #FFFF;
-      margin-right: 0.8em;
+        border: none;
+        padding: 14px 34px;
+    }
 
-      &:hover{
-        background-color: #245501;
-        border-radius: 0.5em;
-        color: #FFFF;
-        transition: all .4s;
-      }
+    &__button_mural {
+        background-color: #FFFF;
+        margin-right: 0.8em;
 
-  }
+        &:hover {
+            background-color: #245501;
+            border-radius: 0.5em;
+            color: #FFFF;
+            transition: all .4s;
+        }
 
-  &__button_home{
-      background-color: #FFFF;
+    }
 
-      &:hover{
-        background-color: #245501;
-        border-radius: 0.5em;
-        color: #FFFF;
-        transition: all .4s;
-      }
+    &__button_home {
+        background-color: #FFFF;
 
-  }
+        &:hover {
+            background-color: #245501;
+            border-radius: 0.5em;
+            color: #FFFF;
+            transition: all .4s;
+        }
+
+    }
+
+    &__button_burguer {
+        display: block;
+        border: none;
+        background-color: transparent;
+        position: absolute;
+        left: 11px;
+    }
+
+    &__side_menu{
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(204, 204, 204, 0.6);
+        width: 100vw;
+        height: 100vh;
+        z-index: 1;
+        display: flex;
+
+        &__content{
+            width: 281.95px;
+            height: 100%;
+
+            &__header{
+                height: 184.06px;
+                background-color: #245501;
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                
+                div{
+                    padding-top: 20px;
+                    padding-left: 20px;
+                }
+
+                h3{
+                    margin-top: 12px;
+                    color: #FFF;
+                }
+
+                &__button_back{
+                    padding-top: 15px;
+                    background-color: transparent;
+                    border: none;
+                }
+            }
+
+            &__main{
+                height: 100%;
+                background-color: #FFF;
+
+                &__exit{
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    border: none;
+                    background-color: transparent;
+                    position: absolute;
+                    bottom: 25px;
+                    left: 10px;
+
+                    p{
+                        color:#970B0B;
+                        font-size: 17px;
+                    }
+                }
+            }
+        }
+
+        &__space{
+            width: calc(100% - 281.95px);
+            height: 100%;
+            cursor: pointer;
+        }
+        
+    }
+
+    &__dropdown{
+        background-color: #FFF;
+        width: 228.65px;
+        height: 101.01px;
+        position: fixed;
+        top: 79px;
+        right: 54px;
+        padding: 22.1px 22.2px 3.1px 22.2px;
+        border-radius: 9.88px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 19px;
+
+        &__perfil{
+            border: none;
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+
+            p{
+                color:#838383;
+            }
+        }
+
+        &__exit{
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            border: none;
+            background-color: transparent;
+
+            p{
+                color:#970B0B;
+                font-size: 17px;
+            }
+        }
+
+    }
+
+    &__button_link {
+        border: none;
+        background-color: transparent;
+    }
+
+    padding: 1em; // Reduzido para melhor ajuste em dispositivos móveis
+    display: flex;
+    flex-direction: row; // Muda a direção para coluna em dispositivos móveis
+    align-items: center; // Centraliza o logo e outros elementos no modo mobile
+    justify-content: center; // Ajuste adicional para centralizar verticalmente, se necessário
+    border: 1px solid rgba(0, 0, 0, 0.3);
+
+    &__logo {
+        width: 120px;
+    }
+
+    &__button_perfil {
+        display: none; // Esconde o botão no modo mobile
+    }
+
+    &__button_sistem {
+        display: none; // Esconde o botão no modo mobile
+
+        &:hover {
+            background-color: #245501;
+            border-radius: 5em;
+            color: #FFFF;
+            transition: all .4s;
+        }
+    }
+
+    // Media query para estilos de telas maiores (por exemplo, tablets e desktops)
+    @media (min-width: 768px) {
+
+        padding: 1em 4em;
+        flex-direction: row; // Restaura a direção da linha para telas maiores
+        justify-content: space-between; // Alinha os elementos nas extremidades para telas maiores
+        box-shadow: 0 0 0.8em rgba(0, 0, 0, 0.1);
+        
+        &__button_burguer {
+            display: none;
+        }        
+
+        &__button_perfil {
+            display: block;
+            border: 0;
+            background-color: #FFFF;
+        }
+
+        &__voltar {
+            display: none;
+        }
+
+        &__button_sistem {
+            display: block;
+            background-color: #FFFF;
+
+            &:hover {
+                background-color: #245501;
+                border-radius: 5em;
+                color: #FFFF;
+                transition: all .4s;
+            }
+
+        }
+    }
 }

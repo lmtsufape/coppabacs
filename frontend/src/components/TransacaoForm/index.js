@@ -47,10 +47,10 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       .required('Required'),
   })
 
-  const mutationCoordenador = useMutation(newCoordenador => postCoordenador(newCoordenador), {
+  const mutationCoordenador = useMutation(newTransacao => postTransacao(newTransacao), {
     onSuccess: () => {
       console.log('Cadastro realizado com sucesso!')
-      router.push('/coordenadores')
+      router.push('/transacoes')
 
     },
     onError: (error) => {
@@ -91,14 +91,14 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
                 <DadosTransacao formik={formik} />
                 <div className={style.container__ContainerForm_buttons}>
                   <button onClick={() => setEtapas(etapas - 1)}>
-                    <Link href="#header" className={style.container__ContainerForm_buttons_link}>
-                      <h1>Voltar</h1>
+                    <Link href="/transacoes" className={style.container__ContainerForm_buttons_link}>
+                      <h1>Cancelar</h1>
                     </Link>
                   </button>
                   <button
                     type="submit"
                     className={style.container__ContainerForm_buttons_linkWhite}>
-                    <h1>Finalizar</h1>
+                    <h1>Concluir</h1>
                   </button>
                 </div>
               </Form>

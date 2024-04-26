@@ -2,36 +2,56 @@ import style from "../agricultorForm.module.scss";
 import { telefoneMask } from "@/utils/Masks/telefoneMask";
 import { cpfMask } from "@/utils/Masks/cpfMask";
 import { useEffect, useState } from "react";
-import { getAllBancos } from "@/api/bancoSementes/getAllBancos";
 import { useMutation } from "react-query";
+import { getAllAgricultoresBanco } from "@/api/bancoSementes/getAgricultoresBanco";
+import { getStorageItem } from "@/utils/localStore";
+import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
 
 
-export default function DadosTransacao({ formik }) {
-  const [bancos, setBancos] = useState([]);
+export default function DadosTransacao({ formik, editar }) {
+
+  const [agricultoresBanco, setAgricultoresBanco] = useState([]);
+  const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
+  const [coordenador, setCoordenador] = useState([]);
+
   useEffect(() => {
-    mutate();
-  }, [])
+    mutationCoordenador.mutate(coordenadorEmail);
+    if (coordenador.bancoSementeId) {
+      mutate();
+    }
+  }, [coordenador.bancoSementeId])
+
+  const mutationCoordenador = useMutation(coordenadorEmail => getCoordenadorEmail(coordenadorEmail), {
+    onSuccess: (res) => {
+      setCoordenador(res.data);
+    },
+    onError: (error) => {
+      console.error('Erro ao recuperar as informações do coordenador:', error);
+    }
+  });
 
   const { state, mutate } = useMutation(
     async () => {
-      return getAllBancos();
+      return getAllAgricultoresBanco(Number(coordenador.bancoSementeId));
     }, {
     onSuccess: (res) => {
-      console.log(res)
-      setBancos(res.data);
+      setAgricultoresBanco(res.data);
     },
     onError: (error) => {
       console.log(error)
     }
   }
   );
+
   return (
+
     <>
 
 
-      <div>
+      {editar === false ? (
+        <>
+<div>
         <label htmlFor="">Agricultor</label>
-
         <select
           className={style.container__ContainerForm_form_halfContainer_input}
           id="bancoId"
@@ -40,12 +60,12 @@ export default function DadosTransacao({ formik }) {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.bancoId}
-          required
+          disabled
         >
           <option value="" >Selecione...</option>
-          {bancos.map((bancos, index) => {
+          {agricultoresBanco.map((agricultores, index) => {
             return (
-              <option key={index} value={bancos.id}>{bancos.nome}</option>
+              <option key={index} value={agricultores.id}>{agricultores.nomePopular}</option>
             )
           })}
         </select>
@@ -57,48 +77,51 @@ export default function DadosTransacao({ formik }) {
       </div>
       <div className={style.container__ContainerForm_form_halfContainer}>
         <div>
-          <label htmlFor="semente">Semente <span>*</span></label>
+          <label htmlFor="">Semente</label>
           <select
             className={style.container__ContainerForm_form_halfContainer_input}
-            id="semente"
-            name="semente"
-            placeholder="Insira a semente"
+            id="bancoId"
+            name="bancoId"
+            placeholder="Insira o banco de sementes"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.semente}
-            required >
+            value={formik.values.bancoId}
+            disabled
+          >
             <option value="" >Selecione...</option>
-            {bancos.map((bancos, index) => {
+            {agricultoresBanco.map((agricultores, index) => {
               return (
-                <option key={index} value={bancos.id}>{bancos.nome}</option>
+                <option key={index} value={agricultores.id}>{agricultores.nomePopular}</option>
               )
             })}
           </select>
-          {formik.touched.semente && formik.errors.semente ? (
-            <span className={style.form__error}>{formik.errors.semente}</span>
+
+          {formik.touched.bancoId && formik.errors.bancoId ? (
+            <span className={style.form__error}>{formik.errors.bancoId}</span>
           ) : null}
 
-        </div>
-        <div>
-          <label htmlFor="variedade">Variedade <span>*</span></label>
+        </div>      <div>
+          <label htmlFor="">Variedade</label>
           <select
             className={style.container__ContainerForm_form_halfContainer_input}
-            id="variedade"
-            name="variedade"
-            placeholder="Insira a variedade"
+            id="bancoId"
+            name="bancoId"
+            placeholder="Insira o banco de sementes"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.variedade}
-            required >
+            value={formik.values.bancoId}
+            disabled
+          >
             <option value="" >Selecione...</option>
-            {bancos.map((bancos, index) => {
+            {agricultoresBanco.map((agricultores, index) => {
               return (
-                <option key={index} value={bancos.id}>{bancos.nome}</option>
+                <option key={index} value={agricultores.id}>{agricultores.nomePopular}</option>
               )
             })}
           </select>
-          {formik.touched.variedade && formik.errors.variedade ? (
-            <span className={style.form__error}>{formik.errors.variedade}</span>
+
+          {formik.touched.bancoId && formik.errors.bancoId ? (
+            <span className={style.form__error}>{formik.errors.bancoId}</span>
           ) : null}
 
         </div>
@@ -112,36 +135,148 @@ export default function DadosTransacao({ formik }) {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.semente}
-            required />
+            disabled />
           {formik.touched.quantidade && formik.errors.quantidade ? (
             <span className={style.form__error}>{formik.errors.quantidade}</span>
           ) : null}
 
         </div>
         <div>
-          <label htmlFor="tipo">Tipo <span>*</span></label>
-          <select
+          <label htmlFor="quantidade">Tipo <span>*</span></label>
+          <input
             className={style.container__ContainerForm_form_halfContainer_input}
-            id="tipo"
-            name="tipo"
-            placeholder="Insira a tipo"
+            id="quantidade"
+            name="quantidade"
+            placeholder="Insira a quantidade"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.variedade}
-            required >
-            <option value="" >Selecione...</option>
-            {bancos.map((bancos, index) => {
-              return (
-                <option key={index} value={bancos.id}>{bancos.nome}</option>
-              )
-            })}
-          </select>
-          {formik.touched.tipo && formik.errors.tipo ? (
-            <span className={style.form__error}>{formik.errors.tipo}</span>
+            value={formik.values.semente}
+            disabled />
+          {formik.touched.quantidade && formik.errors.quantidade ? (
+            <span className={style.form__error}>{formik.errors.quantidade}</span>
           ) : null}
 
         </div>
+
       </div>
+
+
+        </>
+      ) : (
+        <>
+          <div>
+            <label htmlFor="">Agricultor</label>
+            <select
+              className={style.container__ContainerForm_form_halfContainer_input}
+              id="bancoId"
+              name="bancoId"
+              placeholder="Insira o banco de sementes"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.bancoId}
+              required
+            >
+              <option value="" >Selecione...</option>
+              {agricultoresBanco.map((agricultores, index) => {
+                return (
+                  <option key={index} value={agricultores.id}>{agricultores.nomePopular}</option>
+                )
+              })}
+            </select>
+
+            {formik.touched.bancoId && formik.errors.bancoId ? (
+              <span className={style.form__error}>{formik.errors.bancoId}</span>
+            ) : null}
+
+          </div>
+          <div className={style.container__ContainerForm_form_halfContainer}>
+            <div>
+              <label htmlFor="">Semente</label>
+              <select
+                className={style.container__ContainerForm_form_halfContainer_input}
+                id="bancoId"
+                name="bancoId"
+                placeholder="Insira o banco de sementes"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.bancoId}
+                required
+              >
+                <option value="" >Selecione...</option>
+                {agricultoresBanco.map((agricultores, index) => {
+                  return (
+                    <option key={index} value={agricultores.id}>{agricultores.nomePopular}</option>
+                  )
+                })}
+              </select>
+
+              {formik.touched.bancoId && formik.errors.bancoId ? (
+                <span className={style.form__error}>{formik.errors.bancoId}</span>
+              ) : null}
+
+            </div>      <div>
+              <label htmlFor="">Variedade</label>
+              <select
+                className={style.container__ContainerForm_form_halfContainer_input}
+                id="bancoId"
+                name="bancoId"
+                placeholder="Insira o banco de sementes"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.bancoId}
+                required
+              >
+                <option value="" >Selecione...</option>
+                {agricultoresBanco.map((agricultores, index) => {
+                  return (
+                    <option key={index} value={agricultores.id}>{agricultores.nomePopular}</option>
+                  )
+                })}
+              </select>
+
+              {formik.touched.bancoId && formik.errors.bancoId ? (
+                <span className={style.form__error}>{formik.errors.bancoId}</span>
+              ) : null}
+
+            </div>
+            <div>
+              <label htmlFor="quantidade">Quantidade <span>*</span></label>
+              <input
+                className={style.container__ContainerForm_form_halfContainer_input}
+                id="quantidade"
+                name="quantidade"
+                placeholder="Insira a quantidade"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.semente}
+                required />
+              {formik.touched.quantidade && formik.errors.quantidade ? (
+                <span className={style.form__error}>{formik.errors.quantidade}</span>
+              ) : null}
+
+            </div>
+            <div>
+              <label htmlFor="quantidade">Tipo <span>*</span></label>
+              <input
+                className={style.container__ContainerForm_form_halfContainer_input}
+                id="quantidade"
+                name="quantidade"
+                placeholder="Insira a quantidade"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.semente}
+                required />
+              {formik.touched.quantidade && formik.errors.quantidade ? (
+                <span className={style.form__error}>{formik.errors.quantidade}</span>
+              ) : null}
+
+            </div>
+
+          </div>
+
+        </>
+      )}
+
 
 
     </>

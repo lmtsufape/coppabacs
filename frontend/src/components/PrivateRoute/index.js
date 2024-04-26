@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState} from '@/redux/store';
 
 import api from "@/api/http-common";
-import UserType from "../UserType";
 import { getCurrentUser } from "@/api/usuarios/getCurrentUser";
 //verificar como vai funcionar o props utilizando o children:ReactNode
 const PrivateRoute = (props)  => {
