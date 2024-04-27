@@ -83,7 +83,9 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       corFLor: "",
       habitoCrescimento: "",
 
-      empalhamento: "",
+      empalhamento: {
+        tipo: "",
+      }
     },
 
   }

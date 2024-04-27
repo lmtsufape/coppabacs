@@ -4,7 +4,6 @@ import style from "../detalhamentoBanco.module.scss";
 
 export default function DadosEndereco({ formik, editar }) {
 
-  console.log(formik.values)
   return (
     <>
 

@@ -53,7 +53,7 @@ const LayoutAdmin = ({ table1, table2, table3, table4 }) => {
 
   const { status, mutate } = useMutation(
     async () => {
-      //return getAllCoppabacs();
+      return getAllCoppabacs();
     }, {
     onSuccess: (res) => {
       setFuncionarios(res.data);

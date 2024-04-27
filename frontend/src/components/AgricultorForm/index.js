@@ -14,36 +14,31 @@ import DadosForm from "./DadosUsuario/index";
 import DadosEndereco from "./DadosEndereco";
 import DadosAtividadesRurais from "./DadosAtividadesRurais";
 import Link from "next/link";
-import Footer from "../Home/Footer";
-import { postAdmin } from "@/api/usuarios/admin/postAdmin";
-import { postCoordenador } from "@/api/usuarios/coordenador/postCoordenador";
-import { postCoppabacs } from "@/api/usuarios/coppabacs/postCoppabacs";
-
+import { useRouter } from "next/navigation";
 
 const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
-
+  const router = useRouter();
 
   const initialValues = {
+    nome: "",
     email: "",
     senha: "",
     confirmarSenha: "",
-    nome: "",
     nomePopular: "",
-    contato: "",
-    cpf: "",
-    dataNascimento: "",
-    sexo: "",
-    tipo:"",
     endereco: {
       cep: "",
-      estado: "",
       cidade: "",
+      estado: "",
       bairro: "",
-      nome: "",
+      logradouro: "",
       numero: "",
-      referencia: "",
+      complemento: "",
+      referencia: ""
     },
-    bancoId: "",
+    cpf: "",
+    dataNascimento: "",
+    contato: "",
+    sexo: "",
     conjuge: {
       nome: "",
       sexo: "",
@@ -52,12 +47,10 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
     atividadesRurais: [],
     producaoSementes: {
       cultura: "",
-      variedade: "",
-      areaPlantada: "",
+      variedade: "", 
       previsaoVenda: "",
+      areaPlantada: ""
     }
-
-
   }
 
 
@@ -75,16 +68,19 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
       .min(11, "O contato deve ter no mínimo 11 caracteres")
       .required('Required'),
     dataNascimento: Yup.date()
-      .max(new Date(), "A data de nascimento não pode ser maior que a data atual")
-      .min(new Date(1, 1, 1900), "A data de nascimento não pode ser menor que 01/01/1900")
+      .max(new Date(2024,11, 31) , "A data de nascimento não pode ser maior que a data atual")
+      .min(new Date(1900, 0, 1), "A data de nascimento não pode ser menor que 01/01/1900")
       .required('Required'),
   })
 
-  const { statusAgricultor, mutateAgricultor } = useMutation(
+
+
+  const { status, mutate } = useMutation(
     async (values) => {
       return postAgricultor(values);
     }, {
-    onSuccess: (res) => {
+    onSuccess: () => {
+      console.log('Cadastro realizado com sucesso!');
       window.location.href = '/agricultores';
 
     },
@@ -94,7 +90,8 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
     }
   }
   );
-  
+
+
 
   const [etapas, setEtapas] = useState(0);
   return (
@@ -126,7 +123,9 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
           validationSchema={validateSchema}
 
           onSubmit={(values, { setSubmitting }) => {
-            tipoUsuario(values)
+            mutate(values);
+            setSubmitting(false);   
+         
           }}
         >
           {(formik) => {
@@ -173,12 +172,9 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
                         <h1>Voltar</h1>
                       </Link>
                     </button>
-                    <button 
-                    onClick={()=>{
-                      tipoUsuario(formik.values)
-                    }}
-                    type="submit" 
-                    className={style.container__ContainerForm_buttons_linkWhite}>
+                    <button
+                      type="submit"
+                      className={style.container__ContainerForm_buttons_linkWhite}>
                       <h1>Finalizar</h1>
                     </button>
                   </div>

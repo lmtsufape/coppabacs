@@ -1,0 +1,38 @@
+
+
+.menu{
+    width: auto;
+    padding: 10em 10em 10em 10em;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    
+    gap: 1em;
+
+
+    
+}
+
+.mapa{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5em 0;
+
+    &__img{
+        width: 53%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .menu{
+        text-align: center;
+        align-items: center;
+        align-content: center;
+        padding: 3em 0.3em 1em 0.3em;
+    }
+}

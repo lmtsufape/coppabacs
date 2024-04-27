@@ -3,13 +3,13 @@ package br.edu.ufape.lmts.sementes.model;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.builder.ToStringExclude;
+
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 @Entity
@@ -18,6 +18,7 @@ import lombok.ToString;
 public class Gerente extends Usuario {
 
 	@ManyToOne
+	@ToString.Exclude
 	@JoinColumn(name = "bancoSementes_id")
 	private BancoSementes bancoSementes;
 

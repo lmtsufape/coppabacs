@@ -4,8 +4,6 @@ import { useParams } from "next/navigation";
 import { useMutation } from "react-query";
 
 
-import Header from '@/components/Home/Header';
-import Footer from '@/components/Home/Footer';
 
 import { useEffect, useState } from "react";
 import { getBanco } from "@/api/bancoSementes/getBanco";
@@ -27,7 +25,6 @@ export default function Info() {
       return getBanco(params.id);
     }, {
     onSuccess: (res) => {
-      console.log(res);
       setBanco(res.data);
     },
     onError: (error) => {
@@ -39,7 +36,6 @@ export default function Info() {
 
   return (
     <>
-      <Header hrefAnterior={"/bancoSementes"} />
       {status === "success" && banco &&
         <DetalhamentoBanco
           banco={banco}
@@ -49,7 +45,6 @@ export default function Info() {
         />
       }
 
-      <Footer />
     </>
   )
 }

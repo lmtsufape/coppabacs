@@ -74,7 +74,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="caracteristicasAgronomicas.PesoMilgraos">Peso de Mil Grãos (Grama)</label>
+                    <label htmlFor="caracteristicasAgronomicas.pesoMilGraos">Peso de Mil Grãos (Grama)</label>
                     <input
                        className={styles.sidedForm_input}
                         id="PesoMilgraos"
@@ -85,12 +85,12 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         onBlur={formik.handleBlur}
                         value={formik.values.caracteristicasAgronomicas.PesoMilgraos}
                         required />
-                    {formik.touched.PesoMilgraos && formik.errors.PesoMilgraos ? (
-                        <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.PesoMilgraos}</span>
+                    {formik.touched.pesoMilGraos && formik.errors.pesoMilGraos ? (
+                        <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.pesoMilGraos}</span>
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="caracteristicasAgronomicas.PesoHectolitro">Peso Hectolitro (Hl) </label>
+                    <label htmlFor="caracteristicasAgronomicas.pesoHectolitro">Peso Hectolitro (Hl) </label>
                     <input
                        className={styles.sidedForm_input}
                         id="PesoHectolitro"

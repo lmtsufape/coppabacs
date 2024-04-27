@@ -3,7 +3,7 @@
 import { getUsuario } from "@/api/usuarios/getUsuario ";
 import DetalhamentoUsuario from "@/components/DetalhamentoUsuario";
 import Header from "@/components/Header";
-import Footer from "@/components/Home/Footer";
+import Footer from "@/components/Footer";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
@@ -23,11 +23,11 @@ export default function AssociadosPage() {
       return getUsuario(params.id);
     }, {
     onSuccess: (res) => {
-      console.log(res);
       setUsuario(res.data);
+      console.log('Solicitações carregadas com sucesso!');
     },
     onError: (error) => {
-      console.log("error: ", error);
+      console.log("Error ao carregar solicitações.", error);
     }
   }
   );
