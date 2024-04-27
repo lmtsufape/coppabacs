@@ -6,12 +6,12 @@ import UsuarioForm from "@/components/UsuarioForm";
 export default function NewRegisterFarmer() {
     return (
         <div className={styles.pageContainer}>
-            <Header hrefAnterior="/" />
             <div className={styles.pageContainer__content}>
-                <UsuarioForm diretorioAnterior="Login / " diretorioAtual="Novo Usuario" hrefAnterior="/" />
+                <UsuarioForm 
+                diretorioAnterior="Login / " 
+                diretorioAtual="Novo Usuario" 
+                hrefAnterior="/" />
             </div>
-            <Footer />
-
         </div>
     );
 }

@@ -12,10 +12,8 @@ import { Search } from "../searchUsuario";
 import { getAllBancos } from "@/api/bancoSementes/getAllBancos";
 import Link from "next/link";
 import { getStorageItem } from "@/utils/localStore";
-import Footer from "@/components/Footer";
 import { useRouter } from "next/navigation";
 import DetalhamentoBanco from "../DetalhamentoBancoSemente";
-import { getCurrentUser } from "@/api/usuarios/getCurrentUser";
 import { getBanco } from "@/api/bancoSementes/getBanco";
 import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
 
@@ -35,13 +33,13 @@ export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, h
         table2={table2}
         table3={table3}
         diretorioAnterior={diretorioAnterior}
-        diretorioAtual={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
         hrefAnterior={hrefAnterior}
       />
     } else if (role == "ROLE_GERENTE") {
       return <LayoutCoordenador
         diretorioAnterior={diretorioAnterior}
-        diretorioAtual={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
         hrefAnterior={hrefAnterior}
         table1={table1}
         table2={table2}
@@ -98,19 +96,17 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
       />
       <div className={style.header}>
         <div className={style.header__container}>
-          {role === "COPPABACS" && (
 
-            <button>
+          <button>
 
-              <Link className={style.header__container_link} href="bancoSementes/novoBanco">
-                <h1>
-                  Adicionar Banco
-                </h1>
-              </Link>
+            <Link className={style.header__container_link} href="bancoSementes/novoBanco">
+              <h1>
+                Adicionar Banco
+              </h1>
+            </Link>
 
-              <Image src="/assets/iconDatabasePlus.svg" alt="Adicionar Agricultor" width={27} height={24} />
-            </button>
-          )}
+            <Image src="/assets/iconDatabasePlus.svg" alt="Adicionar Agricultor" width={27} height={24} />
+          </button>
           <div className={style.header__container_buttons}>
 
           </div>
@@ -141,7 +137,7 @@ const LayoutCoordenador = ({ table1, table2, table3 }) => {
 
   useEffect(() => {
     mutationCoordenador.mutate(coordenadorEmail);
-    if(coordenador.bancoSementeId){
+    if (coordenador.bancoSementeId) {
       mutate();
     }
   }, [coordenador.bancoSementeId]);
@@ -172,13 +168,13 @@ const LayoutCoordenador = ({ table1, table2, table3 }) => {
   );
   return (
     <>
-      {banco &&(
+      {banco && (
         <DetalhamentoBanco
-        banco={banco}
-        diretorioAnterior={"Home / "}
-        diretorioAtual={"Informações do Banco de Semente"}
-        hrefAnterior={"/inicio"}
-      />
+          banco={banco}
+          diretorioAnterior={"Home / "}
+          diretorioAtual={"Informações do Banco de Semente"}
+          hrefAnterior={"/"}
+        />
       )}
     </>
   )
@@ -188,7 +184,7 @@ const LayoutAgricultor = () => {
 
   return (
     <>
-
+      <h1>asdf</h1>
     </>
   )
 }

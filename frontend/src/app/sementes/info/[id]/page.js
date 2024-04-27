@@ -38,7 +38,6 @@ export default function Info() {
 
   return (
     <>
-      <Header hrefAnterior={"/sementes"} />
       { status === "success" && sementes &&
         <DetalhamentoSementes 
         sementes={sementes}
@@ -47,7 +46,6 @@ export default function Info() {
         hrefAnterior={"/sementes"}
         />
       }
-      <Footer />
     </>
   )
 }

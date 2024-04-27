@@ -6,14 +6,11 @@ import Footer from "@/components/Footer";
 export default function NovaSementeFormPage() {
     return (
         <div>
-            {
-                //<Header hrefAnterior="/sementes"/>
-
-            }
-            <SementeForm diretorioAnterior="Home / Sementes /" diretorioAtual="Nova Semente" hrefAnterior="/sementes"/>
-            {
-                //<Footer />
-            }
+            <SementeForm 
+            diretorioAnterior="Home / Sementes /" 
+            diretorioAtual="Nova Semente" 
+            hrefAnterior="/sementes"/>
+            <Footer />
         </div>
     );
 }

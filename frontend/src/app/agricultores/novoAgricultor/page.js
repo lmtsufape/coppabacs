@@ -7,7 +7,10 @@ export default function NewRegisterFarmer() {
     return (
         <div className={styles.pageContainer}>
             <div className={styles.pageContainer__content}>
-                <AgricultorForm diretorioAnterior="Home / Agricultores /" diretorioAtual="Novo Agricultor" hrefAnterior="/agricultores" />
+                <AgricultorForm 
+                diretorioAnterior="Home / Agricultores /" 
+                diretorioAtual="Novo Agricultor" 
+                hrefAnterior="/agricultores" />
             </div>
         </div>
     );
