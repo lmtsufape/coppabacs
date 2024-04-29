@@ -7,6 +7,9 @@ import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,11 +19,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.UsuarioRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.request.UsuarioUpdateRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.response.SementesResponse;
 import br.edu.ufape.lmts.sementes.controller.dto.response.UsuarioResponse;
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.facade.Facade;
@@ -30,8 +35,7 @@ import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 
-
-@CrossOrigin (origins = "http://localhost:8081" )
+@CrossOrigin(origins = "http://localhost:8081")
 @Hidden
 @RestController
 @RequestMapping("/api/v1/")
@@ -40,36 +44,43 @@ public class UsuarioController {
 	private Facade facade;
 	@Autowired
 	private ModelMapper modelMapper;
+
+	@GetMapping("usuario")
+	public List<UsuarioResponse> getAllUsuario() {
+		return facade.getAllUsuario().stream().map(UsuarioResponse::new).toList();
+	}
 	
-		@GetMapping("usuario")
-		public List<UsuarioResponse> getAllUsuario() {
-			return facade.getAllUsuario()
-				.stream()
-				.map(UsuarioResponse::new)
-				.toList();
-		}
-	
+	@GetMapping(value = "usuario/page")
+	public Page<UsuarioResponse> getPage(
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
+			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
+			@RequestParam(value = "direction", defaultValue = "DESC") String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		Page<Usuario> list = facade.findPageUsuario(pageRequest);
+		return list.map(UsuarioResponse::new);
+	}
+
 	@PostMapping("usuario")
 	public UsuarioResponse createUsuario(@Valid @RequestBody UsuarioRequest newObj) throws EmailExistsException {
 		return new UsuarioResponse(facade.saveUsuario(newObj.convertToEntity()));
 	}
-	
+
 	@GetMapping("usuario/{id}")
 	public UsuarioResponse getUsuarioById(@PathVariable Long id) {
 		return new UsuarioResponse(facade.findUsuarioById(id));
 	}
-	
+
 	@PatchMapping("usuario/{id}")
 	public UsuarioResponse updateUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioUpdateRequest obj) {
 		try {
 			Usuario oldObject = facade.findUsuarioById(id);
 			modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
 			TypeMap<UsuarioUpdateRequest, Usuario> typeMapper = modelMapper
-													.typeMap(UsuarioUpdateRequest.class, Usuario.class)
-													.addMappings(mapper -> mapper.skip(Usuario::setId));			
-			
-			
-			typeMapper.map(obj, oldObject);	
+					.typeMap(UsuarioUpdateRequest.class, Usuario.class)
+					.addMappings(mapper -> mapper.skip(Usuario::setId));
+
+			typeMapper.map(obj, oldObject);
 			return new UsuarioResponse(facade.updateUsuario(oldObject));
 		} catch (RuntimeException e) {
 			if (!(e instanceof ObjectNotFoundException))
@@ -77,9 +88,9 @@ public class UsuarioController {
 			else
 				throw e;
 		}
-		
+
 	}
-	
+
 	@DeleteMapping("usuario/{id}")
 	public String deleteUsuario(@PathVariable Long id) {
 		try {
@@ -91,16 +102,13 @@ public class UsuarioController {
 			else
 				throw e;
 		}
-		
+
 	}
-	
-	@GetMapping("usuarios/solicitacoes")
+
+	@GetMapping("usuario/solicitacoes")
 	public List<UsuarioResponse> filterUsuariosComRoleUsuario() {
-	    return facade.getAllUsuario()
-	            .stream()
-	            .filter(usuario -> usuario.getRoles().contains(TipoUsuario.USUARIO))
-	            .map(UsuarioResponse::new)
-	            .collect(Collectors.toList());
+		return facade.getAllUsuario().stream().filter(usuario -> usuario.getRoles().contains(TipoUsuario.USUARIO))
+				.map(UsuarioResponse::new).collect(Collectors.toList());
 	}
 
 }

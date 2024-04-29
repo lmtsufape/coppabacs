@@ -3,6 +3,8 @@ package br.edu.ufape.lmts.sementes.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.ResponsavelTecnico;
@@ -28,7 +30,7 @@ public class ResponsavelTecnicoService implements ResponsavelTecnicoServiceInter
 		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist ResponsavelTecnico with id = " + id));
 	}
 	
-	@Override
+	
 	public ResponsavelTecnico findResponsavelTecnicoByCpf(String cpf) {
 		return repository.findByCpf(cpf).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist ResponsavelTecnico with CPF = " + cpf));
 	}
@@ -46,5 +48,9 @@ public class ResponsavelTecnicoService implements ResponsavelTecnicoServiceInter
 	public void deleteResponsavelTecnico(long id){
 		ResponsavelTecnico obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist ResponsavelTecnico with id = " + id));
 		repository.delete(obj);
+	}
+
+	public Page<ResponsavelTecnico> findPageResponsavelTecnico(Pageable pageRequest) {
+		return repository.findAll(pageRequest);
 	}
 }

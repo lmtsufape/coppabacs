@@ -3,6 +3,8 @@ package br.edu.ufape.lmts.sementes.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.Agricultor;
@@ -15,7 +17,6 @@ public class BancoSementesService implements BancoSementesServiceInterface {
 	@Autowired
 	private BancoSementesRepository repository;
 
-
 	public BancoSementes saveBancoSementes(BancoSementes newInstance) {
 		return repository.save(newInstance);
 	}
@@ -25,20 +26,25 @@ public class BancoSementesService implements BancoSementesServiceInterface {
 	}
 
 	public BancoSementes findBancoSementesById(long id) {
-		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist BancoSementes with id = " + id));
+		return repository.findById(id)
+				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist BancoSementes with id = " + id));
 	}
 
-	public List<BancoSementes> getAllBancoSementes(){
+	public List<BancoSementes> getAllBancoSementes() {
 		return repository.findAll();
 	}
 
-	public void deleteBancoSementes(BancoSementes persistentObject){
+	public void deleteBancoSementes(BancoSementes persistentObject) {
 		this.deleteBancoSementes(persistentObject.getId());
-		
 	}
-	
-	public void deleteBancoSementes(long id){
-		BancoSementes obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist BancoSementes with id = " + id));
+
+	public void deleteBancoSementes(long id) {
+		BancoSementes obj = repository.findById(id)
+				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist BancoSementes with id = " + id));
 		repository.delete(obj);
+	}
+
+	public Page<BancoSementes> findPageBancoSementes(Pageable pageRequest) {
+		return repository.findAll(pageRequest);
 	}
 }

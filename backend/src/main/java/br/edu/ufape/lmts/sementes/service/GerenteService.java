@@ -3,6 +3,8 @@ package br.edu.ufape.lmts.sementes.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.Gerente;
@@ -44,5 +46,9 @@ public class GerenteService implements GerenteServiceInterface {
 	public void deleteGerente(long id){
 		Gerente obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Gerente with id = " + id));
 		repository.delete(obj);
+	}
+
+	public Page<Gerente> findPageGerente(Pageable pageRequest) {
+		return repository.findAll(pageRequest);
 	}
 }
