@@ -12,7 +12,7 @@ export default function BancoSementes({ fundacao, responsavel, contato, table1, 
       <Header fundacao={fundacao} responsavel={responsavel} contato={contato} />
         <div className={style.body}>
             <div className={style.body__title}>
-              <h1>Descriçao de Sementes</h1>
+              <h1>Descrição de Sementes</h1>
               <div className={style.body__title_div}>
                 <button className={style.body__title_div_button}>
                   <span>
