@@ -25,14 +25,15 @@ public  class RetiradaUsuario  {
 	private long id;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@ToString.Exclude
-	private Usuario usuario;
+	private Agricultor agricultor;
 	private String descricao;
 	private LocalDate dataRetirada;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@ToString.Exclude
 	private BancoSementes bancoSementes;
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL,
+			orphanRemoval = true)
 	@ToString.Exclude
 	private List<Item> itens;
 

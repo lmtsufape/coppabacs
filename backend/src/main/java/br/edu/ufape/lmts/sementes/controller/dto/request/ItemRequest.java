@@ -15,11 +15,13 @@ public  class ItemRequest  {
 	private Double peso;
 	private long sementesId;
 	private long tabelaBancoSementesId;
+	private long id;
 
 
 	public Item convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		Item obj = modelMapper.map(this, Item.class);
+
 		return obj;
 	}
 

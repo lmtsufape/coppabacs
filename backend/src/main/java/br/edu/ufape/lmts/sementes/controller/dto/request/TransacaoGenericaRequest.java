@@ -16,9 +16,9 @@ import lombok.Setter;
 public  class TransacaoGenericaRequest  {
 	private String descricao;
 	private String tipo;
-	private LocalDate data;
+	private LocalDate data = LocalDate.now();
 	private List<ItemRequest> itens;
-	private BancoSementesRequest bancoSementes;
+	private long bancoSementesId;
 
 
 	public TransacaoGenerica convertToEntity() {

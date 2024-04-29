@@ -15,11 +15,11 @@ import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor 
 public  class RetiradaUsuarioRequest  {
-	private Usuario usuario;
+	private long agricultorId;
 	private String descricao;
-	private LocalDate dataRetirada;
+	private LocalDate dataRetirada = LocalDate.now();
 	private List<ItemRequest> itens;
-	private BancoSementesRequest bancoSementes;
+	private long bancoSementesId;
 
 
 	public RetiradaUsuario convertToEntity() {

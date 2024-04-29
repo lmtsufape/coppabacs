@@ -17,7 +17,7 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor
 public  class RetiradaUsuarioResponse  {
 	private Long id;
-	private Usuario usuario;
+	private AgricultorResponse usuario;
 	private String descricao;
 	private LocalDate dataRetirada;
 	private List<ItemResponse> itens;

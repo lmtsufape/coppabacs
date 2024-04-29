@@ -17,7 +17,7 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor 
 public  class DoacaoUsuarioRequest  {
 
-	private LocalDate dataDoacao;
+	private LocalDate dataDoacao = LocalDate.now();
 	private String descricao;
 	private long agricultorId;
 	private List<ItemRequest> itens;
