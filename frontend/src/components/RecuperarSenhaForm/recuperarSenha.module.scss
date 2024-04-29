@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.containerForm{
+  justify-content: center;
+  align-items: center;
+  width: calc(100% - 10em);
+  max-width: none;
+  min-width: none;
+  height: auto;
+  background-color: white;
+  padding: 3em;
+  margin-left: auto; 
+  margin-right:auto; 
+  font-family: 'Inter', sans-serif;
+  border-radius: 16px;
+  box-shadow: -4px 5px 12px 0px #00000026;
+  border: 0.5px solid #B1B1B1;
+  margin-top: 2em;
+  margin-bottom: 5em;
+
+
+  
+
+  label{
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+
+  span{
+    color: red;
+        font-size: 0.8em;
+        margin: -1em 0 0.5em 0;
+  }
+
+}
+
+
+.containerForm > * {
+  width: 100%;
+}
+
+.title{
+  font-weight: bold;
+      color: 
+      #245501;
+      margin-bottom: 1em;
+      font-size: 20px;
+}
+
+
+.container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  color: black;
+  margin: 0 0 2em 0;
+
+
+  &__header{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    margin: 0 2em 2em 2em;
+    font-size: 1em;
+    font-weight: normal;
+    gap: 1em;
+
+    &_current{
+      width: 98%;
+      color: #A7A7A7;
+      border-bottom: 3px solid #A7A7A7;
+      padding-bottom: 0.5em;
+    }
+    &_currentNav{
+
+      color: #245501;
+      font-weight: bolder;
+      border-bottom: 5px solid #245501;
+      padding-bottom: 0.5em;
+
+    }
+
+  }
+}
+
+.buttons{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-right: -1em;
+  gap: 1em;
+  color: #FFF;
+  
+  link{
+    text-decoration: none;
+    color: #FFF;
+  }
+  button{
+    width: 8em;
+
+    padding: 0.5em 1em;
+    margin: 1em 0 -1em 0;
+    font-size: 1em;
+    font-weight: normal;
+
+    background-color: #FFF;
+    
+    border: 1px solid rgba(0,0,0, 0.10);
+    border-radius: 5px;
+    cursor: pointer;
+    color: #FFF;
+
+    &:hover{
+      box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+  button:last-child{
+    background-color: #245501;
+  }
+  
+}
+
+.sidedForm{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  row-gap: 1em;
+  column-gap: 2em;
+  margin: 0 0 1em 0;
+  align-items:flex-start;
+  
+  
+  &_input{
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #A7A7A7;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-top: 0.8em;
+    margin-bottom: 0.8em;
+    
+  }
+  
+  &_textarea{
+      width: 100%;
+      padding: 0.5em;
+      border: 1px solid #A7A7A7;
+      border-radius: 5px;
+      font-size: 1em;
+      margin-top: 0.8em;
+      margin-bottom: 0.8em;
+      font-family: 'Inter', sans-serif;
+      height: 6em;
+  }
+
+  &_select{
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #A7A7A7;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-top: 0.8em;
+    margin-bottom: 0.8em;
+  }
+}
+
+.checkbox{
+  &__itens{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  row-gap: 1em;
+  column-gap: 2em;
+  margin: 0 0 1em 0;
+  label{
+    margin: 0 0 0.5em 0;
+    font-size: 1em;
+    font-weight: normal;
+
+  }
+  }
+     
+}
+
+.inputCheckbox{
+  width: 70%;
+  padding: 0.5em;
+  border: 1px solid #A7A7A7;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+
+
+.radio{
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+  &__itens{
+  margin-top: 0.6em;
+  label{
+    font-weight: normal;
+  }
+  
+  }
+}
+.previewImg{
+  width: 30%;
+  height: 30%;
+  margin: 0.5em;
+}
+
+.buttonImagens{
+  display: flex;
+  margin: 1em 0 0.8em 0;
+  font-size: 0.9em;
+  font-weight: normal;
+  border-radius: 5px;
+  width: 100%;
+  padding: 0.5em;
+}
+
+.esqueciSenha{
+    padding: 0 1em 1em 0;
+    margin: 1em 0 1em 0;
+    width: 100%;
+
+    &__titleGreen{
+        color:#245501;
+        font-weight:bolder;
+        font-size: 1.5em;
+        margin-bottom: 0.7em;
+     }
+     
+     &__textoEsqueci{
+         font-weight: 400;
+         justify-content: center;
+         align-items: center;
+     }
+
+}
+
+
+
+
+@media only screen and (max-width: 700px) {
+  .containerForm{
+    display: flex;
+    flex-direction: column;
+  }
+.sidedForm{
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+
+
+
+
+
+
+
