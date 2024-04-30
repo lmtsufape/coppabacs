@@ -1,13 +1,15 @@
 .login {
-  .login {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  margin: 1em;
+  justify-content: center;
 
-    .login__content {
-      width: 34em;
-      text-align: left;
-      margin: 6em 2em 6em 6em;
+  .login__content {
+    text-align: left;
+    margin: 0;
+    padding: 0 2em;
+    width: 100%; 
+    max-width: 35em;
 
       &_title {
         padding: 0em 0em 1em 0em;
@@ -35,13 +37,12 @@
       border: 1px solid rgba(0, 0, 0, 0.15);
       box-shadow: inset;
 
-      &_title {
-        text-align: center;
-        font-size: 1.5em;
-        font-weight: bold;
-        padding: 2.5em;
-
-      }
+    &_title {
+      text-align: center;
+      font-size: 1.5em;
+      font-weight: bold;
+      padding: 2.5em;
+    }
 
       &_label {
         width: 100%;
@@ -109,10 +110,25 @@
         margin-left: 10%;
         margin-right: 10%;
 
-        &_button {
-          margin-right: 10%;
-        }
-      }
-    }
+  &_button {
+    margin-right: 10%;
   }
 }
+  
+
+  @media screen and (max-width: 1025px) {
+    .login__content {
+      max-width: 30em;
+    }
+  }
+  @media screen and (max-width: 950px) {
+    .login__content {
+      display: none; /* Hide on smaller screens */
+    }
+
+    .login__login {
+      width: auto;
+      margin: 6em auto; /* Centralizar na horizontal */
+    }
+  }
+
