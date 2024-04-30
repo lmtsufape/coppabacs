@@ -58,4 +58,8 @@ public class GerenteService implements GerenteServiceInterface {
 	public Page<Gerente> findPageGerente(Pageable pageRequest) {
 		return repository.findByAtivoTrue(pageRequest);
 	}
+
+	public Page<Gerente> findPageGerente(Pageable pageRequest) {
+		return repository.findAll(pageRequest);
+	}
 }
