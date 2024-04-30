@@ -91,7 +91,6 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
                 </div>
 
                 <div className={style.container__header_containerButton}>
-<<<<<<< HEAD
                   {hrefAnterior !== "/inicio" && (
                     <>
                       <Link className={style.container__header_link} href={`/bancoSementes/info/${banco.id}/agricultores`}>
@@ -116,22 +115,8 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
                     </>
                   )}
                 </div>
-=======
 
-                  <Link className={style.container__header_link} href={`/bancoSementes/info/${banco.id}/sementes`}>
-                    <button className={style.container__header_containerButton_button}>
-                      <Image src="/assets/iconSeedGreen.svg" alt="Seed" width={27} height={26} />
-                      Sementes
-                    </button>
-                  </Link>
-                  <Link className={style.container__header_link} href={`/bancoSementes/info/${banco.id}/agricultores`}>
-
-                    <button className={style.container__header_containerButton_button}>
-                      <Image src="/assets/iconAssociates.svg" alt="Agricultores" width={27} height={26} />
-                      Agricultores
-                    </button>
-                  </Link>
-                </div>
+                 
                 {editar === false ? (
                   <div className={style.container__profile_containerButton}>
                     <button
@@ -166,7 +151,6 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
                     </div>
                   </>
                 )}
->>>>>>> 1f6286d (fix: correcoes)
 
               </div>
               <DadosBanco formik={formik} editar={editar} />
@@ -174,7 +158,6 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
               <DadosObjetosBanco formik={formik} editar={editar} />
               <ImagensBanco />
 
-<<<<<<< HEAD
               {editar === false ? (
                 <div className={style.container__profile_containerButton}>
                   <button
@@ -209,8 +192,7 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
                   </div>
                 </>
               )}
-=======
->>>>>>> 1f6286d (fix: correcoes)
+
             </Form>
           )}
         </Formik>
