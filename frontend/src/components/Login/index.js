@@ -66,12 +66,12 @@ const Login = () => {
               met velit platea. Enim nullam senectus.backgroundDro turpis lacus volutpat magnis morbi pellentesque.
               Blandit justo dolor auctor eu pellentesque augue molestie vitae odio.</p>
           </div>
-          <div className={style.login__login}>
           <form onSubmit={(e) => { e.preventDefault(); mutate(); }}>
+            <div className={style.login__login}>
               <h1 className={style.login__login_title}>Entrar</h1>
               <label htmlFor="email" className={style.login__login_label}>
-                <p>E-mail</p>
-                <input type="email" name="email" placeholder="Digite seu e-mail" value={email} onChange={(e) => setEmail(e.target.value)}  />
+                <p>Email</p>
+                <input type="email" name="email" placeholder="Digite seu email" value={email} onChange={(e) => setEmail(e.target.value)}  />
               </label>
               <label htmlFor="senha" className={style.login__login_label}>
                 <p>Senha</p>
@@ -89,9 +89,8 @@ const Login = () => {
                   </span>
                 </Link>
               </h2>
-            
+            </div>
           </form>
-          </div>
         </div>
       </div>
     )
