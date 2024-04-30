@@ -106,6 +106,10 @@ public class Facade {
 		return sementeDoencaService.getAllsementeDoenca();
 	}
 
+	public Page<sementeDoenca> findPageSementeDoenca(Pageable pageRequest) {
+		return sementeDoencaService.findPagesementeDoenca(pageRequest);
+	}
+
 	public void deletesementeDoenca(sementeDoenca persistentObject) {
 		sementeDoencaService.deletesementeDoenca(persistentObject);
 	}
@@ -140,6 +144,10 @@ public class Facade {
 		return usuarioService.getAllUsuario();
 	}
 
+	public Page<Usuario> findPageUsuario(Pageable pageRequest) {
+		return usuarioService.findPageUsuario(pageRequest);
+	}
+
 	public void deleteUsuario(Usuario persistentObject) {
 		usuarioService.deleteUsuario(persistentObject);
 	}
@@ -172,6 +180,10 @@ public class Facade {
 	public Coppabacs findCoppabacsById(long id) {
 		return coppabacsService.findCoppabacsById(id);
 	}
+	
+	public Page<Coppabacs> findPageCoppabacs(Pageable pageRequest) {
+		return coppabacsService.findPageCoppabacs(pageRequest);
+	}
 
 	public void deleteCoppabacs(Coppabacs coppabacs) {
 		coppabacsService.deleteCoppabacs(coppabacs);
@@ -199,6 +211,10 @@ public class Facade {
 
 	public List<SementePraga> getAllSementePraga() {
 		return sementePragaService.getAllSementePraga();
+	}
+
+	public Page<SementePraga> findPageSementePraga(Pageable pageRequest) {
+		return sementePragaService.findPageSementePraga(pageRequest);
 	}
 
 	public void deleteSementePraga(SementePraga persistentObject) {
@@ -229,6 +245,10 @@ public class Facade {
 		return empalhamentoService.getAllEmpalhamento();
 	}
 
+	public Page<Empalhamento> findPageEmpalhamento(Pageable pageRequest) {
+		return empalhamentoService.findPageEmpalhamento(pageRequest);
+	}
+
 	public void deleteEmpalhamento(Empalhamento persistentObject) {
 		empalhamentoService.deleteEmpalhamento(persistentObject);
 	}
@@ -255,6 +275,10 @@ public class Facade {
 
 	public List<InfraestruturaComunidade> getAllInfraestruturaComunidade() {
 		return infraestruturaComunidadeService.getAllInfraestruturaComunidade();
+	}
+
+	public Page<InfraestruturaComunidade> findPageInfraestruturaComunidade(Pageable pageRequest) {
+		return infraestruturaComunidadeService.findPageInfraestruturaComunidade(pageRequest);
 	}
 
 	public void deleteInfraestruturaComunidade(InfraestruturaComunidade persistentObject) {
@@ -285,6 +309,10 @@ public class Facade {
 		return usoOcupacaoTerraService.getAllUsoOcupacaoTerra();
 	}
 
+	public Page<UsoOcupacaoTerra> findPageUsoOcupacaoTerra(Pageable pageRequest) {
+		return usoOcupacaoTerraService.findPageUsoOcupacaoTerra(pageRequest);
+	}
+
 	public void deleteUsoOcupacaoTerra(UsoOcupacaoTerra persistentObject) {
 		usoOcupacaoTerraService.deleteUsoOcupacaoTerra(persistentObject);
 	}
@@ -311,6 +339,10 @@ public class Facade {
 
 	public List<BancoSementes> getAllBancoSementes() {
 		return bancoSementesService.getAllBancoSementes();
+	}
+
+	public Page<BancoSementes> findPageBancoSementes(Pageable pageRequest) {
+		return bancoSementesService.findPageBancoSementes(pageRequest);
 	}
 
 	public void deleteBancoSementes(BancoSementes persistentObject) {
@@ -373,6 +405,10 @@ public class Facade {
 		return retiradaUsuarioService.getAllRetiradaUsuario();
 	}
 
+	public Page<RetiradaUsuario> findPageRetiradaUsuario(Pageable pageRequest) {
+		return retiradaUsuarioService.findPageRetiradaUsuario(pageRequest);
+	}
+
 	public void deleteRetiradaUsuario(RetiradaUsuario persistentObject) {
 		retiradaUsuarioService.deleteRetiradaUsuario(persistentObject);
 	}
@@ -401,6 +437,10 @@ public class Facade {
 		return tabelaBancoSementesService.getAllTabelaBancoSementes();
 	}
 
+	public Page<TabelaBancoSementes> findPageTabelaBancoSementes(Pageable pageRequest) {
+		return tabelaBancoSementesService.findPageTabelaBancoSementes(pageRequest);
+	}
+
 	public void deleteTabelaBancoSementes(TabelaBancoSementes persistentObject) {
 		tabelaBancoSementesService.deleteTabelaBancoSementes(persistentObject);
 	}
@@ -427,6 +467,10 @@ public class Facade {
 
 	public List<Item> getAllItem() {
 		return itemService.getAllItem();
+	}
+
+	public Page<Item> findPageItem(Pageable pageRequest) {
+		return itemService.findPageItem(pageRequest);
 	}
 
 	public void deleteItem(Item persistentObject) {
@@ -463,6 +507,10 @@ public class Facade {
 	}
 	public List<Gerente> getAllGerente() {
 		return gerenteService.getAllGerente();
+	}
+
+	public Page<Gerente> findPageGerente(Pageable pageRequest) {
+		return gerenteService.findPageGerente(pageRequest);
 	}
 
 	public void deleteGerente(Gerente persistentObject) {
@@ -525,6 +573,10 @@ public class Facade {
 		return culturaService.getAllCultura();
 	}
 
+	public Page<Cultura> findPageCultura(Pageable pageRequest) {
+		return culturaService.findPageCultura(pageRequest);
+	}
+
 	public void deleteCultura(Cultura persistentObject) {
 		culturaService.deleteCultura(persistentObject);
 	}
@@ -551,6 +603,10 @@ public class Facade {
 
 	public List<Conjuge> getAllConjuge() {
 		return conjugeService.getAllConjuge();
+	}
+
+	public Page<Conjuge> findPageConjuge(Pageable pageRequest) {
+		return conjugeService.findPageConjuge(pageRequest);
 	}
 
 	public void deleteConjuge(Conjuge persistentObject) {
@@ -581,6 +637,10 @@ public class Facade {
 		return transacaoGenericaService.getAllTransacaoGenerica();
 	}
 
+	public Page<TransacaoGenerica> findPageTransacaoGenerica(Pageable pageRequest) {
+		return transacaoGenericaService.findPageTransacaoGenerica(pageRequest);
+	}
+
 	public void deleteTransacaoGenerica(TransacaoGenerica persistentObject) {
 		transacaoGenericaService.deleteTransacaoGenerica(persistentObject);
 	}
@@ -609,6 +669,10 @@ public class Facade {
 
 	public List<Post> getAllPost() {
 		return postService.getAllPost();
+	}
+
+	public Page<Post> findPagePost(Pageable pageRequest) {
+		return postService.findPagePost(pageRequest);
 	}
 
 	public void deletePost(Post persistentObject) {
@@ -663,6 +727,10 @@ public class Facade {
 		return sementesService.getAllSementes();
 	}
 
+	public Page<Sementes> findPageSementes(Pageable pageRequest) {
+		return sementesService.findPageSementes(pageRequest);
+	}
+
 	public void deleteSementes(Sementes persistentObject) {
 		sementesService.deleteSementes(persistentObject);
 	}
@@ -707,6 +775,10 @@ public class Facade {
 		return responsavelTecnicoService.getAllResponsavelTecnico();
 	}
 
+	public Page<ResponsavelTecnico> findPageResponsavelTecnico(Pageable pageRequest) {
+		return responsavelTecnicoService.findPageResponsavelTecnico(pageRequest);
+	}
+
 	public void deleteResponsavelTecnico(ResponsavelTecnico persistentObject) {
 		responsavelTecnicoService.deleteResponsavelTecnico(persistentObject);
 	}
@@ -733,6 +805,10 @@ public class Facade {
 
 	public List<RegioesAdaptacaoCultivo> getAllRegioesAdaptacaoCultivo() {
 		return regioesAdaptacaoCultivoService.getAllRegioesAdaptacaoCultivo();
+	}
+
+	public Page<RegioesAdaptacaoCultivo> findPageRegioesAdaptacaoCultivo(Pageable pageRequest) {
+		return regioesAdaptacaoCultivoService.findPageRegioesAdaptacaoCultivo(pageRequest);
 	}
 
 	public void deleteRegioesAdaptacaoCultivo(RegioesAdaptacaoCultivo persistentObject) {
@@ -763,6 +839,10 @@ public class Facade {
 		return doencaService.getAllDoenca();
 	}
 
+	public Page<Doenca> findPageDoenca(Pageable pageRequest) {
+		return doencaService.findPageDoenca(pageRequest);
+	}
+
 	public void deleteDoenca(Doenca persistentObject) {
 		doencaService.deleteDoenca(persistentObject);
 	}
@@ -789,6 +869,10 @@ public class Facade {
 
 	public List<ToleranciaAdversidades> getAllToleranciaAdversidades() {
 		return toleranciaAdversidadesService.getAllToleranciaAdversidades();
+	}
+
+	public Page<ToleranciaAdversidades> findPageToleranciaAdversidades(Pageable pageRequest) {
+		return toleranciaAdversidadesService.findPageToleranciaAdversidades(pageRequest);
 	}
 
 	public void deleteToleranciaAdversidades(ToleranciaAdversidades persistentObject) {
@@ -819,6 +903,10 @@ public class Facade {
 		return infraestruturaHidricaService.getAllinfraestruturaHidrica();
 	}
 
+	public Page<infraestruturaHidrica> findPageInfraestruturaHidrica(Pageable pageRequest) {
+		return infraestruturaHidricaService.findPageInfraestruturaHidrica(pageRequest);
+	}
+
 	public void deleteinfraestruturaHidrica(infraestruturaHidrica persistentObject) {
 		infraestruturaHidricaService.deleteinfraestruturaHidrica(persistentObject);
 	}
@@ -846,6 +934,10 @@ public class Facade {
 
 	public List<Admin> getAllAdmin() {
 		return adminService.getAllAdmin();
+	}
+
+	public Page<Admin> findPageAdmin(Pageable pageRequest) {
+		return adminService.findPageAdmin(pageRequest);
 	}
 
 	public void deleteAdmin(Admin persistentObject) {
@@ -891,6 +983,10 @@ public class Facade {
 		return agricultorService.getAllByRole(TipoUsuario.AGRICULTOR);
 	}
 	
+	public Page<Agricultor> findPageAgricultor(Pageable pageRequest) {
+		return agricultorService.findPageAgricultor(pageRequest);
+	}
+	
 	public List<Agricultor> getAllAgricultorUsuario() {
 		return agricultorService.getAllByRole(TipoUsuario.USUARIO);
 	}
@@ -929,6 +1025,10 @@ public class Facade {
 		return producaoSementesService.getAllProducaoSementes();
 	}
 
+	public Page<ProducaoSementes> findPageProducaoSementes(Pageable pageRequest) {
+		return producaoSementesService.findPageProducaoSementes(pageRequest);
+	}
+
 	public void deleteProducaoSementes(ProducaoSementes persistentObject) {
 		producaoSementesService.deleteProducaoSementes(persistentObject);
 	}
@@ -955,6 +1055,10 @@ public class Facade {
 
 	public List<Endereco> getAllEndereco() {
 		return enderecoService.getAllEndereco();
+	}
+
+	public Page<Endereco> findPageEndereco(Pageable pageRequest) {
+		return enderecoService.findPageEndereco(pageRequest);
 	}
 
 	public void deleteEndereco(Endereco persistentObject) {
@@ -985,6 +1089,10 @@ public class Facade {
 		return doacaoUsuarioService.getAllDoacaoUsuario();
 	}
 
+	public Page<DoacaoUsuario> findPageDoacaoUsuario(Pageable pageRequest) {
+		return doacaoUsuarioService.findPageDoacaoUsuario(pageRequest);
+	}
+
 	public void deleteDoacaoUsuario(DoacaoUsuario persistentObject) {
 		doacaoUsuarioService.deleteDoacaoUsuario(persistentObject);
 	}
@@ -1011,6 +1119,10 @@ public class Facade {
 
 	public List<CaracteristicasAgronomicas> getAllCaracteristicasAgronomicas() {
 		return caracteristicasAgronomicasService.getAllCaracteristicasAgronomicas();
+	}
+
+	public Page<CaracteristicasAgronomicas> findPageCaracteristicasAgronomicas(Pageable pageRequest) {
+		return caracteristicasAgronomicasService.findPageCaracteristicasAgronomicas(pageRequest);
 	}
 
 	public void deleteCaracteristicasAgronomicas(CaracteristicasAgronomicas persistentObject) {
@@ -1061,6 +1173,10 @@ public class Facade {
 		return atividadeRuralService.getAllAtividadeRural();
 	}
 
+	public Page<AtividadeRural> findPageAtividadeRural(Pageable pageRequest) {
+		return atividadeRuralService.findPageAtividadeRural(pageRequest);
+	}
+
 	public void deleteAtividadeRural(AtividadeRural persistentObject) {
 		atividadeRuralService.deleteAtividadeRural(persistentObject);
 	}
@@ -1091,6 +1207,10 @@ public class Facade {
 
 	public List<Finalidade> getAllFinalidade() {
 		return finalidadeService.getAllFinalidade();
+	}
+
+	public Page<Finalidade> findPageFinalidade(Pageable pageRequest) {
+		return finalidadeService.findPageFinalidade(pageRequest);
 	}
 
 	public void deleteFinalidade(Finalidade persistentObject) {

@@ -14,7 +14,7 @@ import DadosForm from "./DadosUsuario/index";
 import DadosEndereco from "./DadosEndereco";
 import DadosAtividadesRurais from "./DadosAtividadesRurais";
 import Link from "next/link";
-import Footer from "../Home/Footer";
+import Footer from "../Footer";
 import { postUsuario } from "@/api/usuarios/postUsuario";
 
 
@@ -22,25 +22,25 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   
 
   const initialValues = {
+    nome: "",
     email: "",
     senha: "",
     confirmarSenha: "",
-    nome: "",
     nomePopular: "",
-    contato: "",
-    cpf: "",
-    dataNascimento: "",
-    sexo: "",
     endereco: {
       cep: "",
-      estado: "",
       cidade: "",
+      estado: "",
       bairro: "",
-      nome: "",
+      logradouro: "",
       numero: "",
-      referencia: "",
+      complemento: "",
+      referencia: ""
     },
-    bancoId: "",
+    cpf: "",
+    dataNascimento: "",
+    contato: "",
+    sexo: "",
     conjuge: {
       nome: "",
       sexo: "",
@@ -49,13 +49,12 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
     atividadesRurais: [],
     producaoSementes: {
       cultura: "",
-      variedade: "",
-      areaPlantada: "",
+      variedade: "", 
       previsaoVenda: "",
+      areaPlantada: ""
     }
-
-
   }
+
 
 
   const validateSchema = Yup.object().shape({

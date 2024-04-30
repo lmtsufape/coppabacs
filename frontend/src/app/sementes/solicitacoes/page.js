@@ -1,12 +1,15 @@
-import Header from "@/components/Home/Header";
-import Footer from "@/components/Home/Footer";
+
+import Footer from "@/components/Footer";
 import ListSementes from "@/components/ListSementes"
 
 export default function SolicitacoesPage() {
 
   return (
     <>
-      <Header />
+    {
+     // <Header />
+    }
+      
         <ListSementes
           class="content"
           diretorioAnterior="Home / Sementes /"

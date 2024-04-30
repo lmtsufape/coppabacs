@@ -11,7 +11,7 @@ export default function mural() {
                 <div className={style.list_header__title}>
                     <div className={style.list_header__title_voltar}>
                         <Image src="/assets/iconMenorQue.svg" alt="Visualizar" width={27} height={26} />
-                        <a className={style.list_header__title_voltar_link} href='/inicio'>
+                        <a className={style.list_header__title_voltar_link} href='/'>
                             <h1>Voltar</h1>
                         </a>
                     </div>

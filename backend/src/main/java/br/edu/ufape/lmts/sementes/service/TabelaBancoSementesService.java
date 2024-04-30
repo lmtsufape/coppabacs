@@ -3,6 +3,8 @@ package br.edu.ufape.lmts.sementes.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.TabelaBancoSementes;
@@ -14,7 +16,6 @@ public class TabelaBancoSementesService implements TabelaBancoSementesServiceInt
 	@Autowired
 	private TabelaBancoSementesRepository repository;
 
-
 	public TabelaBancoSementes saveTabelaBancoSementes(TabelaBancoSementes newInstance) {
 		return repository.save(newInstance);
 	}
@@ -24,23 +25,25 @@ public class TabelaBancoSementesService implements TabelaBancoSementesServiceInt
 	}
 
 	public TabelaBancoSementes findTabelaBancoSementesById(long id) {
-		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist TabelaBancoSementes with id = " + id));
+		return repository.findById(id)
+				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist TabelaBancoSementes with id = " + id));
 	}
 
-	public List<TabelaBancoSementes> getAllTabelaBancoSementes(){
+	public List<TabelaBancoSementes> getAllTabelaBancoSementes() {
 		return repository.findAll();
 	}
 
-	public void deleteTabelaBancoSementes(TabelaBancoSementes persistentObject){
+	public void deleteTabelaBancoSementes(TabelaBancoSementes persistentObject) {
 		this.deleteTabelaBancoSementes(persistentObject.getId());
-		
 	}
-	
-	public void deleteTabelaBancoSementes(long id){
-		TabelaBancoSementes obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist TabelaBancoSementes with id = " + id));
+
+	public void deleteTabelaBancoSementes(long id) {
+		TabelaBancoSementes obj = repository.findById(id)
+				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist TabelaBancoSementes with id = " + id));
 		repository.delete(obj);
-	}	
-	
-	
-	
+	}
+
+	public Page<TabelaBancoSementes> findPageTabelaBancoSementes(Pageable pageRequest) {
+		return repository.findAll(pageRequest);
+	}
 }

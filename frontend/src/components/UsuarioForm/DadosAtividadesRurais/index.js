@@ -14,7 +14,7 @@ export default function DadosAtividadesRurais({ formik }) {
     { name: "avicultura", label: "Avicultura" },
     { name: "agriculturaMilho", label: "Agricultura de Milho" },
     { name: "suinoCultura", label: "Suinocultura" },
-    { name: "aquiCultura", label: "AquiCultura" },
+    { name: "aquicultura", label: "Aquicultura" },
     { name: "apicultura", label: "Apicultura" },
     { name: "agriculturaFeijao", label: "Agricultura de Feijão" },
     { name: "pecuaria", label: "Pecuária" },
@@ -23,35 +23,37 @@ export default function DadosAtividadesRurais({ formik }) {
     { name: "outra", label: "Outra Atividade" },
   ];
 
+  const sementes = []
+
   const handleCheckboxChange = (atividade, isChecked) => {
     let novasAtividades = [...values.atividadesRurais];
 
     if (isChecked) {
-        // Para "Outra", verifica se já existe algum valor customizado antes de adicionar
-        if (atividade === 'outra') {
-            setIsOutraAtividadeSelecionada(true);
-            if (outraAtividade && !novasAtividades.includes(outraAtividade)) {
-                novasAtividades.push(outraAtividade);
-            }
-        } else if (!novasAtividades.includes(atividade)) {
-            novasAtividades.push(atividade);
+      // Para "Outra", verifica se já existe algum valor customizado antes de adicionar
+      if (atividade === 'outra') {
+        setIsOutraAtividadeSelecionada(true);
+        if (outraAtividade && !novasAtividades.includes(outraAtividade)) {
+          novasAtividades.push(outraAtividade);
         }
+      } else if (!novasAtividades.includes(atividade)) {
+        novasAtividades.push(atividade);
+      }
     } else {
-        // Se desmarcado, remove a atividade ou a última atividade customizada "Outra"
-        if (atividade === 'outra') {
-            setIsOutraAtividadeSelecionada(false);
-            // Remove a última entrada de "Outra" se houver
-            if (outraAtividade) {
-                novasAtividades = novasAtividades.filter(item => item !== outraAtividade);
-                setOutraAtividade(''); // Limpa o valor de outra atividade após remoção
-            }
-        } else {
-            novasAtividades = novasAtividades.filter(item => item !== atividade);
+      // Se desmarcado, remove a atividade ou a última atividade customizada "Outra"
+      if (atividade === 'outra') {
+        setIsOutraAtividadeSelecionada(false);
+        // Remove a última entrada de "Outra" se houver
+        if (outraAtividade) {
+          novasAtividades = novasAtividades.filter(item => item !== outraAtividade);
+          setOutraAtividade(''); // Limpa o valor de outra atividade após remoção
         }
+      } else {
+        novasAtividades = novasAtividades.filter(item => item !== atividade);
+      }
     }
 
     setFieldValue('atividadesRurais', novasAtividades);
-};
+  };
 
   const handleOutraAtividadeChange = (e) => {
     const novoValor = e.target.value;
@@ -66,11 +68,12 @@ export default function DadosAtividadesRurais({ formik }) {
   };
   return (
     <>
-      <label htmlFor="AtividadeRural">Atividades Rurais</label>
+      <label htmlFor="atividadeRural">Atividades Rurais</label>
       <div className={style.container__ContainerForm_form_threePartsContainer}>
         {atividades.map((atividade) => (
           <div key={atividade.name}>
             <input
+              id="atividadeRural"
               type="checkbox"
               name={atividade.name}
               checked={values.atividadesRurais.includes(atividade.name) || (atividade.name === 'outra' && isOutraAtividadeSelecionada)}
@@ -95,6 +98,7 @@ export default function DadosAtividadesRurais({ formik }) {
         <div>
           <label htmlFor="Cultura">Cultura</label>
           <input
+            id="ProducaoSementes"
             className={style.container__ContainerForm_form_input}
             name="producaoSementes.cultura"
             placeholder="Cultura"
@@ -110,6 +114,7 @@ export default function DadosAtividadesRurais({ formik }) {
         <div>
           <label htmlFor="Variedade">Variedade</label>
           <input
+            id="Variedade"
             className={style.container__ContainerForm_form_input}
             name="producaoSementes.variedade"
             placeholder="Variedade"
@@ -124,6 +129,7 @@ export default function DadosAtividadesRurais({ formik }) {
         <div>
           <label htmlFor="AreaPlantada">Área Plantada</label>
           <input
+            id="AreaPlantada"
             className={style.container__ContainerForm_form_input}
             name="producaoSementes.areaPlantada"
             placeholder="Área Plantada"
@@ -138,6 +144,7 @@ export default function DadosAtividadesRurais({ formik }) {
         <div>
           <label htmlFor="PrevisaoVenda">Previsão de Venda</label>
           <input
+            id="PrevisaoVenda"
             className={style.container__ContainerForm_form_input}
             name="producaoSementes.previsaoVenda"
             placeholder="Previsão de Venda"
