@@ -44,7 +44,7 @@ export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, h
     } else if (role == "ROLE_AGRICULTOR") {
       return <LayoutAgricultor />
     } else if (role == "ROLE_USUARIO") {
-      return <LayoutAgricultor />
+      push(APP_ROUTES.public.home);
     }
   }
 
