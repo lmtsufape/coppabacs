@@ -68,8 +68,8 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
       .min(11, "O contato deve ter no mínimo 11 caracteres")
       .required('Required'),
     dataNascimento: Yup.date()
-      .max(new Date(2024,11, 31) , "A data de nascimento não pode ser maior que a data atual")
-      .min(new Date(1900, 0, 1), "A data de nascimento não pode ser menor que 01/01/1900")
+      .max(new Date(31,12, 2024) , "A data de nascimento não pode ser maior que a data atual")
+      .min(new Date(1, 1, 1900), "A data de nascimento não pode ser menor que 01/01/1900")
       .required('Required'),
   })
 

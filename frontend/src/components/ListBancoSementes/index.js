@@ -14,8 +14,15 @@ import { useRouter } from "next/navigation";
 import DetalhamentoBanco from "../DetalhamentoBancoSemente";
 import { getBanco } from "@/api/bancoSementes/getBanco";
 import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
+import { getStorageItem } from "@/utils/localStore";
+import { useRouter } from "next/navigation";
+import DetalhamentoBanco from "../DetalhamentoBancoSemente";
+import { getBanco } from "@/api/bancoSementes/getBanco";
+import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
 
 export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3 }) {
+
+
 
   const [role, setRole] = useState(getStorageItem("userRole"));
   const { push } = useRouter();
@@ -44,7 +51,7 @@ export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, h
     } else if (role == "ROLE_AGRICULTOR") {
       return <LayoutAgricultor />
     } else if (role == "ROLE_USUARIO") {
-      return <LayoutAgricultor />
+      push(APP_ROUTES.public.home);
     }
   }
 
@@ -83,6 +90,7 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
     banco?.nome?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+
   return (
     <div>
       <Header
@@ -116,6 +124,7 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
         table3={table3}
         listBancos={filteredBancos}
       />
+
 
     </div>
   );
@@ -180,7 +189,7 @@ const LayoutAgricultor = () => {
 
   return (
     <>
-      <h1>Possível tela de agricultor</h1>
+      <h1>asdf</h1>
     </>
   )
 }
