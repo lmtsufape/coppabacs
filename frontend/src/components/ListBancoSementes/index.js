@@ -17,8 +17,6 @@ import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEm
 
 export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3 }) {
 
-
-
   const [role, setRole] = useState(getStorageItem("userRole"));
   const { push } = useRouter();
 
