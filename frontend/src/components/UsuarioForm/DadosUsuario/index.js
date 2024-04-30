@@ -12,7 +12,7 @@ export default function DadosForm({ formik }) {
         id="email"
         name="email"
         type="email"
-        placeholder="Insira seu e-mail"
+        placeholder="Insira seu email"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.email}
