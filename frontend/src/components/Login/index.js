@@ -76,11 +76,10 @@ const Login = () => {
                 <p>Senha</p>
                 <input type="password" name="senha" placeholder="Digite sua senha" value={senha}  onChange={(e) => setSenha(e.target.value)} />
               </label>
-              <Link href="/recuperarSenha">
+              <Link href="/recuperarSenha"/>
               <h2 className={style.login__login_subtitle}>Esqueceu a senha?</h2>
-              </Link>
-              
-              {status === "error" ? <p className={style.senhaErrada}>E-mail ou senha incorretos</p> : null}
+              {/* {status} é por isso que aparece o idle na página de login */}
+              {status === "error" ? <p className={style.login__login_error}>E-mail ou senha incorretos</p> : null}
               <button className={`${style.login__login_button} ${status === "loading" || status === "success" ? style.active : ""}`}>Entrar</button>
               <h2 className={style.login__login_subtitle1}>Não possui conta? &nbsp;
                 <Link href="/novoUsuario">
