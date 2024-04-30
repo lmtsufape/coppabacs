@@ -1,12 +1,8 @@
 "use client"
 import { useParams } from "next/navigation";
-
 import { useMutation } from "react-query";
-
-
 import Header from '@/components/Home/Header';
 import Footer from '@/components/Footer';
-
 import { getUsuario } from "@/api/usuarios/getUsuario ";
 import { useEffect, useState } from "react";
 import DetalhamentoUsuario from "@/components/DetalhamentoUsuario";
@@ -38,13 +34,13 @@ export default function Info() {
 
   return (
     <>
-      <Header hrefAnterior={"/funcionarios"} />
+      <Header hrefAnterior={"/funcionários"} />
       { status === "success" && usuario &&
         <DetalhamentoUsuario 
         usuario={usuario}
-        diretorioAnterior={"Home / Funcionarios / "}
-        diretorioAtual={"Informações do Funcionario"}
-        hrefAnterior={"/funcionarios"}
+        diretorioAnterior={"Home / Funcionários / "}
+        diretorioAtual={"Informações do Funcionário"}
+        hrefAnterior={"/funcionários"}
         />
       }
       <Footer />

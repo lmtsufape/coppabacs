@@ -2,10 +2,8 @@
 
 import Image from "next/image";
 import styles from "./list.module.scss";
-
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
-
 import Link from "next/link";
 import Header from "../HeaderNavegacao";
 import Table from "./Table";
