@@ -9,7 +9,6 @@ import { APP_ROUTES } from "@/constants/app-routes";
 import { postLogin } from "@/api/login/postLogin";
 import { setUserLogin } from "@/redux/userLogin/userLoginSlice";
 import { getCurrentUser } from "@/api/usuarios/getCurrentUser";
-
 import style from "./login.module.scss";
 import Link from "next/link";
 import api from "@/api/http-common";

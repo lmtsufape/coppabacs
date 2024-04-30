@@ -1,3 +1,4 @@
+// Tela inicial
 "use client"
 import Card from "@/components/CardDefault";
 import style from "./home.module.scss";

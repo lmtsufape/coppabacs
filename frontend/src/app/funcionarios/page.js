@@ -6,9 +6,9 @@ export default function AssociadosPage() {
     <div>
       <ListFuncionarios
         diretorioAnterior="Home /"
-        diretorioAtual="Funcionarios"
+        diretorioAtual="Funcionários"
         hrefAnterior="/"
-        table1="nome"
+        table1="Nome"
         table2="Contato"
         table3="Função"
         table4="Ação" />

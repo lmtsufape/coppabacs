@@ -12,7 +12,7 @@ export default function DadosForm({ formik }) {
         id="email"
         name="email"
         type="email"
-        placeholder="Insira seu email"
+        placeholder="Insira seu e-mail"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.email}
@@ -148,9 +148,9 @@ export default function DadosForm({ formik }) {
           {formik.touched.sexo && formik.errors.sexo ? (
             <span className={style.form__error}>{formik.errors.sexo}</span>
           ) : null}
-
-
         </div>
+
+
         <div>
           <label >Conjuge <span>*</span></label>
           <input
