@@ -1,6 +1,6 @@
 "use client"
 import { useParams } from "next/navigation";
-import ListAgricultoresBanco from "@/components/ListAgricultoresBanco";
+import ListAgricultoresBanco from "@/components/ListAgricultores";
 export default function AssociadosPage({ banco }) {
 
   const params = useParams();
@@ -14,7 +14,6 @@ export default function AssociadosPage({ banco }) {
         table1="nome"
         table2="Função"
         table3="Ação" />
-
 
     </div>
   )

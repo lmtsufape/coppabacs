@@ -1,6 +1,5 @@
 import React from "react";
 import AgricultorForm from "@/components/AgricultorForm";
-import Footer from "@/components/Footer";
 import styles from "@/app/agricultores/novoAgricultor/index.module.scss"
 
 export default function NewRegisterFarmer() {

@@ -1,4 +1,3 @@
-import Footer from "@/components/Footer";
 import ListSolicitacoes from "@/components/ListSolicitacoes";
 
 export default function SolicitacoesPage() {
