@@ -19,6 +19,7 @@ public  class TransacaoGenericaRequest  {
 	private LocalDate data = LocalDate.now();
 	private List<ItemRequest> itens;
 	private long bancoSementesId;
+	private long tabelaBancoSementesId;
 
 
 	public TransacaoGenerica convertToEntity() {

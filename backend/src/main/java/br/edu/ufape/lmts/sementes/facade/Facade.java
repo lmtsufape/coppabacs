@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.InputStream;
 import java.util.List;
 
+import br.edu.ufape.lmts.sementes.service.exception.CustomDatabaseException;
+import br.edu.ufape.lmts.sementes.service.exception.InvalidItemStateException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -390,8 +393,16 @@ public class Facade {
 	private RetiradaUsuarioService retiradaUsuarioService;
 
 	public RetiradaUsuario saveRetiradaUsuario(RetiradaUsuario newInstance) {
-		return retiradaUsuarioService.saveRetiradaUsuario(newInstance);
+		try {
+			validateAndProcessItens(newInstance.getItens(), false);
+			return retiradaUsuarioService.saveRetiradaUsuario(newInstance);
+		} catch (DataIntegrityViolationException e) {
+			throw new CustomDatabaseException("Erro ao salvar retirada de usuário", e);
+		}
 	}
+
+
+
 
 	public RetiradaUsuario updateRetiradaUsuario(RetiradaUsuario transientObject) {
 		return retiradaUsuarioService.updateRetiradaUsuario(transientObject);
@@ -452,6 +463,34 @@ public class Facade {
 	// Item--------------------------------------------------------------
 	@Autowired
 	private ItemService itemService;
+
+	private void validateAndProcessItens(List<Item> itens, boolean isDoacao) {
+		List<Item> itensComErro = itens.stream()
+				.filter(item -> !updateItemAndTabelaBancoSementes(item, isDoacao))
+				.toList();
+
+		if (!itensComErro.isEmpty()) {
+			throw new InvalidItemStateException("Itens com erro: " + itensComErro);
+		}
+	}
+
+	private boolean updateItemAndTabelaBancoSementes(Item item, boolean isDoacao) {
+		TabelaBancoSementes tabelaBancoSementes = findTabelaBancoSementesById(item.getTabelaBancoSementes().getId());
+		if (tabelaBancoSementes != null) {
+			double newPeso = isDoacao ? tabelaBancoSementes.getPeso() + item.getPeso() : tabelaBancoSementes.getPeso() - item.getPeso();
+			if (newPeso < 0) {
+				return false;
+			}
+			try {
+				tabelaBancoSementes.setPeso(newPeso);
+				tabelaBancoSementesService.saveTabelaBancoSementes(tabelaBancoSementes);
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
+		}
+		return false;
+	}
 
 	public Item saveItem(Item newInstance) {
 		return itemService.saveItem(newInstance);
@@ -621,8 +660,30 @@ public class Facade {
 	@Autowired
 	private TransacaoGenericaService transacaoGenericaService;
 
-	public TransacaoGenerica saveTransacaoGenerica(TransacaoGenerica newInstance) {
-		return transacaoGenericaService.saveTransacaoGenerica(newInstance);
+	public TransacaoGenerica saveTransacaoGenerica(TransacaoGenerica transacao) {
+		if (transacao.getItens() == null || transacao.getTabelaBancoSementes() == null) {
+			throw new IllegalArgumentException("Informações da transação incompletas.");
+		}
+
+		transacao.getItens().forEach(item -> {
+			TabelaBancoSementes origem = findTabelaBancoSementesById(item.getTabelaBancoSementes().getId()) ;
+			TabelaBancoSementes destino = findTabelaBancoSementesById(transacao.getTabelaBancoSementes().getId());
+			if (!origem.equals(destino)) {
+				double peso = item.getPeso();
+				origem.setPeso(origem.getPeso() - peso);
+				destino.setPeso(destino.getPeso() + peso);
+
+				if (origem.getPeso() < peso) {
+					throw new IllegalArgumentException("Peso insuficiente na tabela de origem para transferir " + peso + " unidades.");
+				}
+
+				tabelaBancoSementesService.saveTabelaBancoSementes(origem);
+				destino = tabelaBancoSementesService.saveTabelaBancoSementes(destino);
+
+				item.setTabelaBancoSementes(destino);
+			}
+		});
+		return transacaoGenericaService.saveTransacaoGenerica(transacao);
 	}
 
 	public TransacaoGenerica updateTransacaoGenerica(TransacaoGenerica transientObject) {
@@ -1074,7 +1135,12 @@ public class Facade {
 	private DoacaoUsuarioService doacaoUsuarioService;
 
 	public DoacaoUsuario saveDoacaoUsuario(DoacaoUsuario newInstance) {
-		return doacaoUsuarioService.saveDoacaoUsuario(newInstance);
+		try {
+			validateAndProcessItens(newInstance.getItens(), true);
+			return doacaoUsuarioService.saveDoacaoUsuario(newInstance);
+		} catch (DataIntegrityViolationException e) {
+			throw new CustomDatabaseException("Erro ao salvar doação de usuário", e);
+		}
 	}
 
 	public DoacaoUsuario updateDoacaoUsuario(DoacaoUsuario transientObject) {
