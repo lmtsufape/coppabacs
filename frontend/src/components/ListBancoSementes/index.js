@@ -2,10 +2,8 @@
 
 import Image from "next/image";
 import style from "./list.module.scss";
-
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
-
 import Header from "../HeaderNavegacao";
 import Table from "./Table";
 import { Search } from "../searchUsuario";
@@ -18,8 +16,6 @@ import { getBanco } from "@/api/bancoSementes/getBanco";
 import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
 
 export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3 }) {
-
-
 
   const [role, setRole] = useState(getStorageItem("userRole"));
   const { push } = useRouter();
@@ -48,7 +44,7 @@ export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, h
     } else if (role == "ROLE_AGRICULTOR") {
       return <LayoutAgricultor />
     } else if (role == "ROLE_USUARIO") {
-      push(APP_ROUTES.public.home);
+      return <LayoutAgricultor />
     }
   }
 
@@ -184,7 +180,7 @@ const LayoutAgricultor = () => {
 
   return (
     <>
-      <h1>asdf</h1>
+      <h1>Possível tela de agricultor</h1>
     </>
   )
 }

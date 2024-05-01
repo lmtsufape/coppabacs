@@ -2,13 +2,10 @@
 
 import { useMutation } from "react-query";
 import { postAgricultor } from "@/api/usuarios/agricultor/postAgricultor";
-
 import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import * as Yup from 'yup';
-
 import style from "./agricultorForm.module.scss";
-
 import HeaderNavegacao from "../HeaderNavegacao";
 import DadosForm from "./DadosUsuario/index";
 import DadosEndereco from "./DadosEndereco";
@@ -106,11 +103,11 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
         {etapas === 0 && <h1 className={style.container__header_currentNav}>1. Dados do agricultor</h1>}
         {etapas >= 1 && etapas <= 2 && <h1 className={style.container__header_current}>1. Dados do agricultor</h1>}
 
-        {etapas === 1 && <h1 className={style.container__header_currentNav}>2. Endereço do Endereço</h1>}
-        {etapas != 1 && <h1 className={style.container__header_current}>2. Endereço do Endereço</h1>}
+        {etapas === 1 && <h1 className={style.container__header_currentNav}>2. Dados do Endereço</h1>}
+        {etapas != 1 && <h1 className={style.container__header_current}>2. Dados do Endereço</h1>}
 
-        {etapas === 2 && <h1 className={style.container__header_currentNav}>3. Atvidades rurais</h1>}
-        {etapas >= 0 && etapas < 2 && <h1 className={style.container__header_current}>3. Atvidades rurais</h1>}
+        {etapas === 2 && <h1 className={style.container__header_currentNav}>3. Atividades rurais</h1>}
+        {etapas >= 0 && etapas < 2 && <h1 className={style.container__header_current}>3. Atividades rurais</h1>}
 
       </div>
 

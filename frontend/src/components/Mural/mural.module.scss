@@ -156,11 +156,17 @@
     line-height: normal;
 }
 
-.card_publicacao__image{
-    width: 343.482px;
-    height: 207px;
-    flex-shrink: 0;
+.card_publicacao__image {
+    width: 100%;
+    height: auto;
+    max-width: 343px;
     border-radius: 8px;
-    background: url(/assets/muralWalle.svg), lightgray 50% / cover no-repeat;
 }
 
+
+@media (max-width: 901px){
+    .card_publicacao{
+       flex-direction: column-reverse;
+    }
+    
+}

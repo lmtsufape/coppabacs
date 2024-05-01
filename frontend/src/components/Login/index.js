@@ -9,7 +9,6 @@ import { APP_ROUTES } from "@/constants/app-routes";
 import { postLogin } from "@/api/login/postLogin";
 import { setUserLogin } from "@/redux/userLogin/userLoginSlice";
 import { getCurrentUser } from "@/api/usuarios/getCurrentUser";
-
 import style from "./login.module.scss";
 import Link from "next/link";
 import api from "@/api/http-common";
@@ -82,8 +81,7 @@ const Login = () => {
               <h2 className={style.login__login_subtitle}>Esqueceu a senha?</h2>
               </Link>
               
-              {status}
-              {status === "error" ? <p className={style.login__login_error}>Email ou senha incorretos</p> : null}
+              {status === "error" ? <p className={style.senhaErrada}>Email ou senha incorretos</p> : null}
               <button className={`${style.login__login_button} ${status === "loading" || status === "success" ? style.active : ""}`}>Entrar</button>
               <h2 className={style.login__login_subtitle1}>Não possui conta? &nbsp;
                 <Link href="/novoUsuario">

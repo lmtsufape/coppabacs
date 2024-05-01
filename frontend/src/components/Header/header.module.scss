@@ -16,7 +16,6 @@
         color: #245501;
         font-weight: bold;
         font-size: 1em;
-
         border: none;
         padding: 14px 34px;
     }
@@ -167,13 +166,14 @@
     &__button_link {
         border: none;
         background-color: transparent;
+        margin-left: 9em;
+
     }
 
     padding: 1em; // Reduzido para melhor ajuste em dispositivos móveis
     display: flex;
     flex-direction: row; // Muda a direção para coluna em dispositivos móveis
     align-items: center; // Centraliza o logo e outros elementos no modo mobile
-    justify-content: center; // Ajuste adicional para centralizar verticalmente, se necessário
     border: 1px solid rgba(0, 0, 0, 0.3);
 
     &__logo {
@@ -195,7 +195,14 @@
         }
     }
 
+    @media (max-width: 361px) {
+        &__button_link{
+            margin-left: 7em;
+        }
+    }
+
     // Media query para estilos de telas maiores (por exemplo, tablets e desktops)
+    
     @media (min-width: 768px) {
 
         padding: 1em 4em;
@@ -230,4 +237,5 @@
 
         }
     }
+
 }
