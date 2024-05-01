@@ -10,7 +10,9 @@ export default function NovaSementeFormPage() {
             diretorioAnterior="Home / Sementes /" 
             diretorioAtual="Nova Semente" 
             hrefAnterior="/sementes"/>
-            <Footer />
+            {
+            //<Footer />
+            }
         </div>
     );
 }
