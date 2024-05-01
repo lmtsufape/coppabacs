@@ -1,6 +1,7 @@
 package br.edu.ufape.lmts.sementes.controller.dto.response;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 
@@ -16,9 +17,11 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor
 public  class RetiradaUsuarioResponse  {
 	private Long id;
-	private Usuario usuario;
+	private AgricultorResponse usuario;
 	private String descricao;
 	private LocalDate dataRetirada;
+	private List<ItemResponse> itens;
+	private BancoSementesResponse bancoSementes;
 
 
 

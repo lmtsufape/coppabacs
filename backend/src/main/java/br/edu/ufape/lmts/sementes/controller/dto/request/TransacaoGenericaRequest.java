@@ -1,6 +1,7 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 
@@ -14,9 +15,11 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor 
 public  class TransacaoGenericaRequest  {
 	private String descricao;
-	private Double quantidade;
 	private String tipo;
-	private LocalDate data;
+	private LocalDate data = LocalDate.now();
+	private List<ItemRequest> itens;
+	private long bancoSementesId;
+	private long tabelaBancoSementesId;
 
 
 	public TransacaoGenerica convertToEntity() {

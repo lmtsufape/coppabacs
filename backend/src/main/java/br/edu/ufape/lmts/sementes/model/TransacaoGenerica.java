@@ -1,13 +1,9 @@
 package br.edu.ufape.lmts.sementes.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -28,8 +24,21 @@ public  class TransacaoGenerica  {
 	@EqualsAndHashCode.Include
 	private long id;
 	private String descricao;
-	private Double quantidade;
 	private String tipo;
 	private LocalDate data;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@ToString.Exclude
+	private BancoSementes bancoSementes;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@ToString.Exclude
+	private TabelaBancoSementes tabelaBancoSementes;
+
+
+	@OneToMany(cascade = CascadeType.ALL,
+			orphanRemoval = true)
+	@ToString.Exclude
+	private List<Item> itens;
 
 }

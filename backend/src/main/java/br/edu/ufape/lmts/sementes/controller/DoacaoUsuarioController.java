@@ -31,7 +31,6 @@ import jakarta.validation.Valid;
 
 
 @CrossOrigin (origins = "http://localhost:8081/" )
-@Hidden
 @RestController
 @RequestMapping("/api/v1/")
 public class DoacaoUsuarioController {
@@ -60,7 +59,7 @@ public class DoacaoUsuarioController {
 	}
 	
 	@PostMapping("doacaoUsuario")
-	public DoacaoUsuarioResponse createDoacaoUsuario(@Valid @RequestBody DoacaoUsuarioRequest newObj) {
+	public DoacaoUsuarioResponse createDoacaoUsuario(@Valid @RequestBody DoacaoUsuarioRequest newObj) throws Exception {
 		return new DoacaoUsuarioResponse(facade.saveDoacaoUsuario(newObj.convertToEntity()));
 	}
 	

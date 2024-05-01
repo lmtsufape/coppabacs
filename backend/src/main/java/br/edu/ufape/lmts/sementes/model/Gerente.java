@@ -19,7 +19,7 @@ public class Gerente extends Usuario {
 
 	@ManyToOne
 	@ToString.Exclude
-	@JoinColumn(name = "bancoSementes_id")
+	@JoinColumn(name = "banco_sementes_id")
 	private BancoSementes bancoSementes;
 
 	public Gerente(Long id, String nome, String nomePopular, String email, String senha, Endereco endereco, String cpf,

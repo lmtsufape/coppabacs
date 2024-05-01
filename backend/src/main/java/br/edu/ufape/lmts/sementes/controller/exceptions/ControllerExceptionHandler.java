@@ -1,5 +1,7 @@
 package br.edu.ufape.lmts.sementes.controller.exceptions;
 
+import br.edu.ufape.lmts.sementes.service.exception.CustomDatabaseException;
+import br.edu.ufape.lmts.sementes.service.exception.InvalidItemStateException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -49,6 +51,20 @@ public class ControllerExceptionHandler {
 		for (FieldError x : e.getBindingResult().getFieldErrors()) {
 			err.addError(x.getField(), x.getDefaultMessage());
 		}
+		return ResponseEntity.status(httpStatus).body(err);
+	}
+
+	@ExceptionHandler(CustomDatabaseException.class)
+	public ResponseEntity<StandardError> handleCustomDatabaseException(CustomDatabaseException e, HttpServletRequest request) {
+		int httpStatus = HttpStatus.INTERNAL_SERVER_ERROR.value();
+		StandardError err = new StandardError(httpStatus, "Erro na Base de Dados", e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(httpStatus).body(err);
+	}
+
+	@ExceptionHandler(InvalidItemStateException.class)
+	public ResponseEntity<StandardError> handleInvalidItemStateException(InvalidItemStateException e, HttpServletRequest request) {
+		int httpStatus = HttpStatus.BAD_REQUEST.value();
+		StandardError err = new StandardError(httpStatus, "Erro nos Itens", e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(httpStatus).body(err);
 	}
 }

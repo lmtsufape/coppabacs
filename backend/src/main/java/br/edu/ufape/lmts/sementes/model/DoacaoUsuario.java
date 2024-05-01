@@ -1,13 +1,9 @@
 package br.edu.ufape.lmts.sementes.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,9 +23,17 @@ public  class DoacaoUsuario  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
 	private long id;
-	private Double quantidadeDoada;
 	private LocalDate dataDoacao;
 	private String descricao;
-	private Usuario doador;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@ToString.Exclude
+	private Agricultor agricultor;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@ToString.Exclude
+	private BancoSementes bancoSementes;
+	@OneToMany(cascade = CascadeType.ALL,
+			orphanRemoval = true)
+	@ToString.Exclude
+	private List<Item> itens;
 
 }
