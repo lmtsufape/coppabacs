@@ -12,7 +12,9 @@ export default function criarPostagemPage() {
                 diretorioAnterior="Home / Mural / "
                 diretorioAtual="Criar Postagem"
                 hrefAnterior="/mural" />
-            <Footer />
+            {
+            //<Footer />
+            }
         </div>
     )
 }

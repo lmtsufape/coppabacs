@@ -138,7 +138,7 @@
     height: 48px;
     font-weight: bold;
     color: white;
-    background: var(--Foundation-Green-G500, #2C5537);
+    background: var(--Foundation-Green-G500, #245501);
     border: none;
     border-radius: 8px;
     transition: transform 0.3s ease;
@@ -148,7 +148,7 @@
 }
 
 .botao__finalizar:not(:active):hover {
-    background-color: #2C5537;
+    background-color: #245501;
     border: none;
 }
 

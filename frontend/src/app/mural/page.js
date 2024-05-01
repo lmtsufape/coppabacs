@@ -9,7 +9,9 @@ export default function muralPage() {
                 diretorioAnterior="Home  "
                 diretorioAtual="/ Mural"
                 hrefAnterior="/ inicio" />
-            <Footer />
+                {
+            //<Footer />
+                }
         </div>
     )
 }

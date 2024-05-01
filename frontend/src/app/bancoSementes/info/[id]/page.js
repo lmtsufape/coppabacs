@@ -1,10 +1,7 @@
 "use client"
+
 import { useParams } from "next/navigation";
-
 import { useMutation } from "react-query";
-
-
-
 import { useEffect, useState } from "react";
 import { getBanco } from "@/api/bancoSementes/getBanco";
 import DetalhamentoBanco from "@/components/DetalhamentoBancoSemente";

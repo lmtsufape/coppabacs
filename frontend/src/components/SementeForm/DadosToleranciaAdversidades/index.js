@@ -1,9 +1,29 @@
-import { Field, useFormikContext } from "formik";
-import { useState } from "react";
+import React, { useState } from 'react';
+import { Field, useFormikContext } from 'formik';
 import styles from "@/components/SementeForm/sementeForm.module.scss"
 
-export default function DadosCaracteristicasAgronomicas({ formik }) {
 
+
+export default function DadosCaracteristicasAgronomicas({ formik }) {
+    const [imagePreviewUrls, setImagePreviewUrls] = useState([]);
+
+    const handleImageChange = (e) => {
+        let files = Array.from(e.target.files);
+        let urls = [];
+
+        files.forEach(file => {
+            let reader = new FileReader();
+
+            reader.onloadend = () => {
+                urls.push(reader.result);
+                setImagePreviewUrls([...urls]);
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
+    }
     return (
         <>
             <h1 className={styles.title}>Tolerância à adversidades</h1>
@@ -272,7 +292,9 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
             </div>
+            <br />
             <h1 className={styles.title}>Informações de Coleta e Avaliação</h1>
+            <br />
             <div className={styles.sidedForm}>
                 <div>
                     <label htmlFor="regiaoColetaDados">Região de Coleta dos Dados <span>*</span></label>
@@ -322,7 +344,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="descricao">Breve Descrição</label>
+                    <label htmlFor="descricao">Descrição</label>
                     <input
                         className={styles.sidedForm_input}
                         id="descricao"
@@ -337,7 +359,24 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
 
                 </div>
-                
+                <div >
+                    <label htmlFor="imagens">Imagens <span>*</span></label>
+                    <input
+                        className={styles.buttonImagens}
+                        type="file"
+                        id="imagens"
+                        name="imagens"
+                        multiple
+                        onChange={handleImageChange}
+                        required
+                    />
+                    {formik.touched.imagens && formik.errors.imagens ? (
+                        <span className={styles.form__error}>{formik.errors.imagens}</span>
+                    ) : null}
+                    <div>
+                        {imagePreviewUrls.map((url, index) => <img key={index} src={url} alt="Preview" className={styles.previewImg} />)}
+                    </div>
+                </div>
             </div>
         </>
     )

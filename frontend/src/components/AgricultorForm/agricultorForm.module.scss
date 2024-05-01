@@ -94,7 +94,8 @@
           font-size: 1em;
         }   
         &_select{
-          width: 102%;
+          box-sizing: border-box;
+          width: 103%;
           margin-top: 0.5em;
 
           background-color: #fff;
@@ -166,6 +167,9 @@
         border: 1px solid rgba(0,0,0, 0.10);
         border-radius: 5px;
         cursor: pointer;
+        &:hover{
+          box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);
+        }
       }
       button:last-child{
         background-color: #245501;
@@ -180,6 +184,57 @@
       }
       
     }
+    
+  }
+}
+
+@media only screen and (min-width: 414px) and (max-width: 700px) {
+  .container {
+      flex-direction: column;
+      &__ContainerForm {
+        padding: 1em 1em 2em 0.5em;
+        margin: 0;
+        &_form {
+          margin: 0;
+          &_halfContainer {
+            grid-template-columns: 1fr;
+            margin: 0;
+            &_select{
+              box-sizing: border-box;
+              width: 103%;
+            }
+          }
+          &_threePartsContainer {
+            grid-template-columns: 1fr;
+            margin: 0;
+          }
+        }
+      }
+    
+  }
+}
+@media only screen and (max-width: 415px) {
+  .container {
+      flex-direction: column;
+      &__ContainerForm {
+        padding: 1em 1em 2em 0.5em;
+        margin: 0;
+        &_form {
+          margin: 0;
+          &_halfContainer {
+            grid-template-columns: 1fr;
+            margin: 0;
+            &_select{
+              box-sizing: border-box;
+              width: 105%;
+            }
+          }
+          &_threePartsContainer {
+            grid-template-columns: 1fr;
+            margin: 0;
+          }
+        }
+      }
     
   }
 }

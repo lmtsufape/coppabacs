@@ -9,7 +9,6 @@ import { APP_ROUTES } from "@/constants/app-routes";
 import { postLogin } from "@/api/login/postLogin";
 import { setUserLogin } from "@/redux/userLogin/userLoginSlice";
 import { getCurrentUser } from "@/api/usuarios/getCurrentUser";
-
 import style from "./login.module.scss";
 import Link from "next/link";
 import api from "@/api/http-common";
@@ -67,20 +66,22 @@ const Login = () => {
               met velit platea. Enim nullam senectus.backgroundDro turpis lacus volutpat magnis morbi pellentesque.
               Blandit justo dolor auctor eu pellentesque augue molestie vitae odio.</p>
           </div>
+          <div className={style.login__login}>
           <form onSubmit={(e) => { e.preventDefault(); mutate(); }}>
-            <div className={style.login__login}>
               <h1 className={style.login__login_title}>Entrar</h1>
               <label htmlFor="email" className={style.login__login_label}>
-                <p>Email</p>
-                <input type="email" name="email" placeholder="Digite seu email" value={email} onChange={(e) => setEmail(e.target.value)}  />
+                <p>E-mail</p>
+                <input type="email" name="email" placeholder="Digite seu e-mail" value={email} onChange={(e) => setEmail(e.target.value)}  />
               </label>
               <label htmlFor="senha" className={style.login__login_label}>
                 <p>Senha</p>
                 <input type="password" name="senha" placeholder="Digite sua senha" value={senha}  onChange={(e) => setSenha(e.target.value)} />
               </label>
+              <Link href="/recuperarSenha">
               <h2 className={style.login__login_subtitle}>Esqueceu a senha?</h2>
-              {status}
-              {status === "error" ? <p className={style.login__login_error}>Email ou senha incorretos</p> : null}
+              </Link>
+              
+              {status === "error" ? <p className={style.senhaErrada}>Email ou senha incorretos</p> : null}
               <button className={`${style.login__login_button} ${status === "loading" || status === "success" ? style.active : ""}`}>Entrar</button>
               <h2 className={style.login__login_subtitle1}>Não possui conta? &nbsp;
                 <Link href="/novoUsuario">
@@ -89,8 +90,9 @@ const Login = () => {
                   </span>
                 </Link>
               </h2>
-            </div>
+            
           </form>
+          </div>
         </div>
         {/* <Footer /> */}
       </div>

@@ -27,3 +27,12 @@
         width: 53%;
     }
 }
+
+@media only screen and (max-width: 480px) {
+    .menu{
+        text-align: center;
+        align-items: center;
+        align-content: center;
+        padding: 3em 0.3em 1em 0.3em;
+    }
+}
