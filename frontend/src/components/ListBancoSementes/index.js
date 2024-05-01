@@ -44,7 +44,7 @@ export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, h
     } else if (role == "ROLE_AGRICULTOR") {
       return <LayoutAgricultor />
     } else if (role == "ROLE_USUARIO") {
-      push(APP_ROUTES.public.home);
+      return <LayoutAgricultor />
     }
   }
 
@@ -180,7 +180,7 @@ const LayoutAgricultor = () => {
 
   return (
     <>
-      <h1>asdf</h1> {/* ?? */}
+      <h1>Possível tela de agricultor</h1>
     </>
   )
 }
