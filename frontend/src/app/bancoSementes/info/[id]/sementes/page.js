@@ -1,6 +1,5 @@
 "use client"
 import Footer from "@/components/Footer";
-
 import { useParams } from "next/navigation";
 import ListAgricultoresBanco from "@/components/ListAgricultoresBanco";
 export default function AssociadosPage() {

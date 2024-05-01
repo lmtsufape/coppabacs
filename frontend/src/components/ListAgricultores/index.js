@@ -2,14 +2,11 @@
 
 import Image from "next/image";
 import style from "./list.module.scss";
-
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
-
 import Link from "next/link";
 import Header from "../HeaderNavegacao";
 import Table from "./Table";
-
 import { Search, SearchUsuarios } from "../searchUsuario";
 import { getAllAgricultores } from "@/api/usuarios/agricultor/getAllAgricultores";
 import { getStorageItem } from "@/utils/localStore";

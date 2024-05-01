@@ -2,6 +2,9 @@ package br.edu.ufape.lmts.sementes.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import br.edu.ufape.lmts.sementes.model.Post;
 
 public interface PostServiceInterface {
@@ -11,8 +14,6 @@ public interface PostServiceInterface {
 	void deletePost(Post u);
 	void deletePost(long id);
 	List<Post> getAllPost();
-
-
-
+	Page<Post> findPagePost(Pageable pageRequest);
 
 }

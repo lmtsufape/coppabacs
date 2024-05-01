@@ -2,14 +2,11 @@
 
 import Image from "next/image";
 import style from "./list.module.scss";
-
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
-
 import Link from "next/link";
 import Header from "../HeaderNavegacao";
 import Table from "./Table";
-
 import { getAllUsuarios } from "@/api/usuarios/getAllUsuarios";
 import { Search, SearchUsuarios } from "../searchUsuario";
 import { getAllCoordenadores } from "@/api/usuarios/coordenador/getAllCoordenadores";

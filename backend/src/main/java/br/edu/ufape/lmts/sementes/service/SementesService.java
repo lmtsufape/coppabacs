@@ -17,7 +17,6 @@ public class SementesService implements SementesServiceInterface {
 	@Autowired
 	private SementesRepository repository;
 
-
 	public Sementes saveSementes(Sementes newInstance) {
 		return repository.save(newInstance);
 	}
@@ -27,20 +26,21 @@ public class SementesService implements SementesServiceInterface {
 	}
 
 	public Sementes findSementesById(long id) {
-		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Sementes with id = " + id));
+		return repository.findById(id)
+				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist Sementes with id = " + id));
 	}
 
-	public List<Sementes> getAllSementes(){
+	public List<Sementes> getAllSementes() {
 		return repository.findAll();
 	}
 
-	public void deleteSementes(Sementes persistentObject){
+	public void deleteSementes(Sementes persistentObject) {
 		this.deleteSementes(persistentObject.getId());
-		
 	}
-	
-	public void deleteSementes(long id){
-		Sementes obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Sementes with id = " + id));
+
+	public void deleteSementes(long id) {
+		Sementes obj = repository.findById(id)
+				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist Sementes with id = " + id));
 		repository.delete(obj);
 	}
 
@@ -54,6 +54,10 @@ public class SementesService implements SementesServiceInterface {
 
 	public Page<Sementes> searchPageSementes(String string, Pageable pageRequest) {
 		return repository.findByNomeContainingOrDescricaoContaining(string, string, pageRequest);
-	}	
-	
+	}
+
+	public Page<Sementes> findPageSementes(Pageable pageRequest) {
+		return repository.findAll(pageRequest);
+	}
+
 }

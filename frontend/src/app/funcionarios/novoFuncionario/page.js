@@ -7,8 +7,8 @@ export default function NewRegisterFarmer() {
         <div className={styles.pageContainer}>
             <div className={styles.pageContainer__content}>
                 <FuncionarioForm
-                    diretorioAnterior="Home / Funcionarios /"
-                    diretorioAtual="Novo Funcionario"
+                    diretorioAnterior="Home / Funcionários /"
+                    diretorioAtual="Novo Funcionário"
                     hrefAnterior="/funcionarios" />
             </div>
         </div>
