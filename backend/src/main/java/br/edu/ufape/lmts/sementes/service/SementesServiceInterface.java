@@ -18,4 +18,5 @@ public interface SementesServiceInterface {
 	List<Sementes> findSementesByResponsavelTecnico(ResponsavelTecnico responsavelTecnico);
 	List<Sementes> searchSementes(String string);
 	Page<Sementes> searchPageSementes(String string, Pageable pageRequest);
+	Page<Sementes> findPageSementes(Pageable pageRequest);
 }

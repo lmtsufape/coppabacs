@@ -5,7 +5,7 @@ import { useMutation } from "react-query";
 
 
 import Header from '@/components/Home/Header';
-import Footer from '@/components/Home/Footer';
+import Footer from '@/components/Footer';
 
 import { getSementes } from "@/api/sementes/getSemente"; 
 import { useEffect, useState } from "react";
@@ -38,7 +38,6 @@ export default function Info() {
 
   return (
     <>
-      <Header hrefAnterior={"/sementes"} />
       { status === "success" && sementes &&
         <DetalhamentoSementes 
         sementes={sementes}
@@ -47,7 +46,6 @@ export default function Info() {
         hrefAnterior={"/sementes"}
         />
       }
-      <Footer />
     </>
   )
 }

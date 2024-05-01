@@ -5,17 +5,8 @@ import ListSementes from '../ListSementes';
 import ListAgricultor from '../ListAgricultores';
 
 
-export default function BancoSementes({ 
-  fundacao, 
-  responsavel, 
-  contato, 
-  table1, 
-  table2, 
-  table3, 
-  table4, 
-  content1, 
-  content2, 
-  content3  }) {
+export default function BancoSementes({ fundacao, responsavel, contato, table1, table2, table3, table4, content1, content2, content3  }) {
+  
   return (
     <div>
       <Header fundacao={fundacao} responsavel={responsavel} contato={contato} />

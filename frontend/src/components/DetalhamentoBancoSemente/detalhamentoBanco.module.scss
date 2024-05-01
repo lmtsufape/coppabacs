@@ -63,6 +63,8 @@
     &_containerButton{
       display: flex;
       flex-direction: row;
+      margin-top: 2em;
+      justify-content: space-between;
       gap: 0.5em;
     }
     &_buttonDesativar{

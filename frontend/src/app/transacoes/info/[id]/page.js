@@ -3,13 +3,9 @@ import { useParams } from "next/navigation";
 
 import { useMutation } from "react-query";
 
-
-import Header from '@/components/Home/Header';
-import Footer from '@/components/Home/Footer';
-
 import { getUsuario } from "@/api/usuarios/getUsuario ";
 import { useEffect, useState } from "react";
-import DetalhamentoUsuario from "@/components/DetalhamentoUsuario";
+import DetalhamentoTransacao from "@/components/DetalhamentoTransacao";
 
 export default function Info() {
 
@@ -38,16 +34,14 @@ export default function Info() {
 
   return (
     <>
-      <Header hrefAnterior={"/coordenadores"} />
       { status === "success" && usuario &&
-        <DetalhamentoUsuario 
+        <DetalhamentoTransacao 
         usuario={usuario}
-        diretorioAnterior={"Home / Coordenadores / "}
-        diretorioAtual={"Informações do Coordenador"}
-        hrefAnterior={"/coordenadores"}
+        diretorioAnterior={"Inicio / Transações / "}
+        diretorioAtual={"Informações da transação"}
+        hrefAnterior={"/transacoes"}
         />
       }
-      <Footer />
     </>
   )
 }

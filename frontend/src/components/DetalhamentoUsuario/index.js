@@ -142,7 +142,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
             if (hrefAnterior === "/funcionarios") {
               mutationUpdateFuncionario.mutate(values)
             } else if (hrefAnterior === "/gerentes") {
-
+              mutationUpdateCoordenador.mutate(values)
             } else if (hrefAnterior === "/agricultores") {
               mutationUpdateAgricultor.mutate(values);
             }

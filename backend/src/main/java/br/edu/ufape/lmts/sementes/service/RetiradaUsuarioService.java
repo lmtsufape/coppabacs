@@ -3,6 +3,8 @@ package br.edu.ufape.lmts.sementes.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.RetiradaUsuario;
@@ -39,6 +41,10 @@ public class RetiradaUsuarioService implements RetiradaUsuarioServiceInterface {
 		RetiradaUsuario obj = repository.findById(id)
 				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist RetiradaUsuario with id = " + id));
 		repository.delete(obj);
+	}
+
+	public Page<RetiradaUsuario> findPageRetiradaUsuario(Pageable pageRequest) {
+		return repository.findAll(pageRequest);
 	}
 
 }

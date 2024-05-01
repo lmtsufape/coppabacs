@@ -22,7 +22,8 @@ export default function ListAgricultores({ diretorioAnterior, diretorioAtual, hr
   const [role, setRole] = useState(getStorageItem("userRole"));
   const [banco, setBanco] = useState(null);
   useEffect(() => {
-  });
+    userDetailsMutation.mutate()
+  },[]);
   const userDetailsMutation = useMutation(getCurrentUser, {
     onSuccess: (res) => {
       console.log(res.data)

@@ -3,6 +3,8 @@ package br.edu.ufape.lmts.sementes.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.model.infraestruturaHidrica;
@@ -14,7 +16,6 @@ public class infraestruturaHidricaService implements infraestruturaHidricaServic
 	@Autowired
 	private infraestruturaHidricaRepository repository;
 
-
 	public infraestruturaHidrica saveinfraestruturaHidrica(infraestruturaHidrica newInstance) {
 		return repository.save(newInstance);
 	}
@@ -24,23 +25,27 @@ public class infraestruturaHidricaService implements infraestruturaHidricaServic
 	}
 
 	public infraestruturaHidrica findinfraestruturaHidricaById(long id) {
-		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist infraestruturaHidrica with id = " + id));
+		return repository.findById(id).orElseThrow(
+				() -> new ObjectNotFoundException("It doesn't exist infraestruturaHidrica with id = " + id));
 	}
 
-	public List<infraestruturaHidrica> getAllinfraestruturaHidrica(){
+	public List<infraestruturaHidrica> getAllinfraestruturaHidrica() {
 		return repository.findAll();
 	}
 
-	public void deleteinfraestruturaHidrica(infraestruturaHidrica persistentObject){
+	public void deleteinfraestruturaHidrica(infraestruturaHidrica persistentObject) {
 		this.deleteinfraestruturaHidrica(persistentObject.getId());
-		
+
 	}
-	
-	public void deleteinfraestruturaHidrica(long id){
-		infraestruturaHidrica obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist infraestruturaHidrica with id = " + id));
+
+	public void deleteinfraestruturaHidrica(long id) {
+		infraestruturaHidrica obj = repository.findById(id).orElseThrow(
+				() -> new ObjectNotFoundException("It doesn't exist infraestruturaHidrica with id = " + id));
 		repository.delete(obj);
-	}	
-	
-	
-	
+	}
+
+	public Page<infraestruturaHidrica> findPageInfraestruturaHidrica(Pageable pageRequest) {
+		return repository.findAll(pageRequest);
+	}
+
 }

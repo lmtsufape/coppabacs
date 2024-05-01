@@ -72,24 +72,23 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 onBlur={formik.handleBlur}
                                 value={formik.values.responsavelTecnico.numeroConselho}
                             />
-
-                            {formik.touched.numeroConselho && formik.errors.numeroConselho ? 
+                            {formik.touched.responsavelTecnico.numeroConselho && formik.errors.responsavelTecnico.numeroConselho ? (
                                 <span className={styles.form__error}>{formik.errors.responsavelTecnico.numeroConselho}</span>
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="responsavelTecnico.estadoConselho"> Conselho/UF</label>
+                            <label htmlFor="responsavelTecnico.conselho"> Conselho/UF</label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
-                                id="estadoConselho"
-                                name="responsavelTecnico.estadoConselho"
+                                id="conselho"
+                                name="responsavelTecnico.conselho"
                                 placeholder="Insira o Conselho/UF"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.responsavelTecnico.estadoConselho}
+                                value={formik.values.responsavelTecnico.conselho}
                             />
-                            {formik.touched.estadoConselho && formik.errors.estadoConselho ? (
-                                <span className={styles.form__error}>{formik.errors.responsavelTecnico.estadoConselho}</span>
+                            {formik.touched.responsavelTecnico.conselho && formik.errors.responsavelTecnico.conselho ? (
+                                <span className={styles.form__error}>{formik.errors.responsavelTecnico.conselho}</span>
                             ) : null}
                         </div>
                     </>
