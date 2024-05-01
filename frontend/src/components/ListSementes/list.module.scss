@@ -36,7 +36,9 @@
   &_link{
     color: #68655C;
     text-decoration: none;
-    display: block; /* Adicione esta linha para ocupar todo o espaço horizontal */
+    display: block;
+    padding: 1.5em 3.5em 1.5em 1.3em;
+    margin: -1.5em -3.5em -1.5em -1.3em;
     
   }
 

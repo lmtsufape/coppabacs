@@ -12,7 +12,6 @@ export default function NewRegisterFarmer() {
                     diretorioAtual="Novo Coordenador"
                     hrefAnterior="/coordenadores" />
             </div>
-            <Footer />
 
         </div>
     );

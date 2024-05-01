@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import { useMutation } from "react-query";
 
 
-import Header from '@/components/Home/Header';
+import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 import { getUsuario } from "@/api/usuarios/getUsuario ";
@@ -38,7 +38,6 @@ export default function Info() {
 
   return (
     <>
-      <Header hrefAnterior={"/funcionarios"} />
       { status === "success" && usuario &&
         <DetalhamentoUsuario 
         usuario={usuario}
@@ -47,7 +46,6 @@ export default function Info() {
         hrefAnterior={"/funcionarios"}
         />
       }
-      <Footer />
     </>
   )
 }
