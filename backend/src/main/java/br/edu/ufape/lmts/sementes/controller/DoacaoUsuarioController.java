@@ -44,7 +44,7 @@ public class DoacaoUsuarioController {
 	}
 	
 	@PostMapping("doacaoUsuario")
-	public DoacaoUsuarioResponse createDoacaoUsuario(@Valid @RequestBody DoacaoUsuarioRequest newObj) {
+	public DoacaoUsuarioResponse createDoacaoUsuario(@Valid @RequestBody DoacaoUsuarioRequest newObj) throws Exception {
 		return new DoacaoUsuarioResponse(facade.saveDoacaoUsuario(newObj.convertToEntity()));
 	}
 	

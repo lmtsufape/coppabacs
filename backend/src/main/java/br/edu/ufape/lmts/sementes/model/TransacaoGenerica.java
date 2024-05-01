@@ -30,6 +30,12 @@ public  class TransacaoGenerica  {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@ToString.Exclude
 	private BancoSementes bancoSementes;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@ToString.Exclude
+	private TabelaBancoSementes tabelaBancoSementes;
+
+
 	@OneToMany(cascade = CascadeType.ALL,
 			orphanRemoval = true)
 	@ToString.Exclude

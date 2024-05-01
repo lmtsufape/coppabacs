@@ -23,6 +23,7 @@ public  class TransacaoGenericaResponse  {
 	private LocalDate data;
 	private List<ItemResponse> itens;
 	private BancoSementesResponse bancoSementes;
+	private TabelaBancoSementesResponse tabelaBancoSementes;
 
 
 
