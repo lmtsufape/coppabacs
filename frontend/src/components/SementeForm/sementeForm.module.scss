@@ -161,7 +161,7 @@
   }
 
   &_select{
-    width: 100%;
+    width: 101.5%;
     padding: 0.5em;
     border: 1px solid #A7A7A7;
     border-radius: 5px;
@@ -227,7 +227,7 @@
   padding: 0.5em;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (min-width: 414px) and (max-width: 700px) {
   .containerForm{
     display: flex;
     flex-direction: column;
@@ -239,9 +239,31 @@
 
   .sidedForm{
     grid-template-columns: 1fr !important;
+
+    &_select{
+      width: 103%;
+    }
   }
 }
 
+@media only screen and (max-width: 415px){
+  .containerForm{
+    display: flex;
+    flex-direction: column;
+  }
+  .checkbox{
+    .checkbox__itens{
+      grid-template-columns: 1fr !important;}
+  }
+
+  .sidedForm{
+    grid-template-columns: 1fr !important;
+
+    &_select{
+      width: 107%;
+    }
+  }
+}
 
 
 
