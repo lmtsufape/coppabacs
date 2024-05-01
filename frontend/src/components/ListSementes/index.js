@@ -9,13 +9,15 @@ import Header from "../HeaderNavegacao";
 import Table from "./Table";
 import { getAllSementes } from "@/api/sementes/getAllSementes";
 import { Search } from "../searchSemente";
+import { getStorageItem } from "@/utils/localStore";
 
 export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) {
 
   const [sementes, setSementes] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [role, setRole] = useState(getStorageItem("userRole"));
 
-
+  console.log(role)
   useEffect(() => {
     mutate();
   }, [])
@@ -44,12 +46,12 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
       />
       <div className={styles.header}>
         <div className={styles.header__container}>
-          <button>
+          {role ? <button>
             <Link className={styles.header__container_link} href="sementes/novaSemente">
               <h1>Adicionar Semente</h1>
             </Link>
             <Image src="/assets/iconSeedGrey+.svg" width={20} height={20} />
-          </button>
+          </button> : ""}
           <div className={styles.header__container_buttons}>
           </div>
         </div>
