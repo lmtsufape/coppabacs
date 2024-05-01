@@ -1,12 +1,10 @@
 
-import Footer from "@/components/Footer";
 import ListSementes from "@/components/ListSementes"
 
 export default function SolicitacoesPage() {
 
   return (
     <>
-      <Header />
         <ListSementes
           class="content"
           diretorioAnterior="Home / Sementes /"
@@ -17,8 +15,6 @@ export default function SolicitacoesPage() {
           table3="Contato"
           table4="Ação"
         />
-
-        <Footer class="footer" />
 
     </>
   )

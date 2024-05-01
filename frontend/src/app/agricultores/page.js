@@ -1,11 +1,9 @@
 
-import Footer from "@/components/Footer";
 import ListAgricultores from "@/components/ListAgricultores";
 export default function AssociadosPage() {
 
   return (
     <div>
-      <Header hrefAnterior="/" />
       <ListAgricultores
         diretorioAnterior="Home /"
         diretorioAtual="Agricultores"
@@ -14,8 +12,6 @@ export default function AssociadosPage() {
         table2="Contato"
         table3="Função"
         table4="Ação" />
-
-      <Footer />
 
     </div>
   )
