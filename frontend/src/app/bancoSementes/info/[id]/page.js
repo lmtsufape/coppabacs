@@ -41,7 +41,6 @@ export default function Info() {
           hrefAnterior={"/bancoSementes"}
         />
       }
-
     </>
   )
 }

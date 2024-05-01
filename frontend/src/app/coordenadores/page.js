@@ -14,7 +14,6 @@ export default function AssociadosPage() {
         table4="Ações" 
         />
 
-
     </div>
   )
 }
