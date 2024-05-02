@@ -71,17 +71,6 @@ public class SementesController {
 		return list.map(SementesResponse::new);
 	}
 	
-	@GetMapping(value = "sementes/page")
-	public Page<SementesResponse> getPageSementePraga(
-			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
-			@RequestParam(value = "direction", defaultValue = "DESC") String direction) {
-		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		Page<Sementes> list = facade.findPageSementes(pageRequest);
-		return list.map(SementesResponse::new);
-	}
-	
 	@PostMapping("sementes")
 	public SementesResponse createSementes(@Valid @RequestBody SementesRequest newObj) {
 		return new SementesResponse(facade.saveSementes(newObj.convertToEntity()));
