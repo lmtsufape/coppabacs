@@ -11,6 +11,7 @@ import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 public interface UsuarioServiceInterface {
 	Usuario saveUsuario(Usuario o) throws EmailExistsException;
 	Usuario findUsuarioById(long id);
+	Usuario findUsuarioByEmail(String email);
 	Usuario updateUsuario(Usuario u);
 	void deleteUsuario(Usuario u);
 	void deleteUsuario(long id);

@@ -2,6 +2,7 @@ package br.edu.ufape.lmts.sementes.facade;
 
 import java.io.File;
 import java.io.InputStream;
+import java.time.LocalTime;
 import java.util.List;
 
 import br.edu.ufape.lmts.sementes.service.exception.CustomDatabaseException;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.lmts.sementes.auth.UserDetailsServiceImpl;
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.model.Admin;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
@@ -84,11 +86,8 @@ import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 @Service
 public class Facade {
 
-//	//Login
-//	@Autowired
-//	private AuthController authController;
-//
-//	public
+	@Autowired
+	private UserDetailsServiceImpl userDetailsServiceImpl;
 
 	// sementeDoenca--------------------------------------------------------------
 	@Autowired
@@ -142,6 +141,10 @@ public class Facade {
 
 	public Usuario findUsuarioById(long id) {
 		return usuarioService.findUsuarioById(id);
+	}
+	
+	public Usuario findUsuarioByEmail(String email) {
+		return usuarioService.findUsuarioByEmail(email);
 	}
 
 	public List<Usuario> getAllUsuario() {
@@ -1351,7 +1354,9 @@ public class Facade {
 	}
 
 	public String storeFile(InputStream file, String fileName) {
-		return fileService.storeFile(file, fileName);
+		Usuario logado = findUsuarioByEmail(userDetailsServiceImpl.authenticated().getEmail());
+		String fn = logado.getId() + "-" + System.currentTimeMillis() + "-" + fileName;
+		return fileService.storeFile(file, fn.replace(" ", ""));
 	}
 
 	public void deleteFile(String fileName) {
