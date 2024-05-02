@@ -801,6 +801,11 @@ public class Facade {
 		return sementesService.getAllSementes();
 	}
 
+	public List<Sementes> getAllSementesByBanco(long id) {
+		BancoSementes banco = findBancoSementesById(id);
+		return sementesService.getAllSementesByBanco(banco);
+	}
+
 	public Page<Sementes> findPageSementes(Pageable pageRequest) {
 		return sementesService.findPageSementes(pageRequest);
 	}
