@@ -61,7 +61,7 @@ public class TabelaBancoSementesController {
 	
 	@PostMapping("tabelaBancoSementes")
 	public TabelaBancoSementesResponse createTabelaBancoSementes(@Valid @RequestBody TabelaBancoSementesRequest newObj) {
-		return new TabelaBancoSementesResponse(facade.saveTabelaBancoSementes(newObj.convertToEntity()));
+		return new TabelaBancoSementesResponse(facade.saveTabelaBancoSementes(newObj.convertToEntity(), newObj.getSementeId()));
 	}
 	
 	@GetMapping("tabelaBancoSementes/{id}")

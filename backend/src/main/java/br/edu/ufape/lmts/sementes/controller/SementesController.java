@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,13 +41,23 @@ public class SementesController {
 	private Facade facade;
 	@Autowired
 	private ModelMapper modelMapper;
-	
+
+	@PreAuthorize("permitAll()")
 	@GetMapping("sementes")
 	public List<SementesResponse> getAllSementes() {
 		return facade.getAllSementes()
 			.stream()
 			.map(SementesResponse::new)
 			.toList();
+	}
+
+	@PreAuthorize("permitAll()")
+	@GetMapping("sementes/banco/{bancoId}")
+	public List<SementesResponse> getAllSementesByBanco(@PathVariable("bancoId") long bancoId) {
+		return facade.getAllSementesByBanco(bancoId)
+				.stream()
+				.map(SementesResponse::new)
+				.toList();
 	}
 	
 	@GetMapping(value = "sementes/page")
@@ -64,7 +75,8 @@ public class SementesController {
 	public SementesResponse createSementes(@Valid @RequestBody SementesRequest newObj) {
 		return new SementesResponse(facade.saveSementes(newObj.convertToEntity()));
 	}
-	
+
+	@PreAuthorize("permitAll()")
 	@GetMapping("sementes/{id}")
 	public SementesResponse getSementesById(@PathVariable Long id) {
 		return new SementesResponse(facade.findSementesById(id));

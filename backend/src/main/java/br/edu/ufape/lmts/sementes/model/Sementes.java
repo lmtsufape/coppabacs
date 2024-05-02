@@ -72,4 +72,8 @@ public  class Sementes  {
 	@JoinColumn(name = "sementes_id")
 	@ToString.Exclude
 	private List<RegioesAdaptacaoCultivo> regioesAdaptacaoCultivo;
+
+	public boolean addTabelaSementes(TabelaBancoSementes tabelaBancoSementes){
+		return this.tabelaBancoSementes.add(tabelaBancoSementes);
+	}
 }
