@@ -1,5 +1,6 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
@@ -8,7 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor 
+@Getter @Setter @NoArgsConstructor  @AllArgsConstructor
 public  class BancoSementesRequest  {
 	private String nome;
 	private String comunidade;
