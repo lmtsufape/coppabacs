@@ -31,7 +31,6 @@ import jakarta.validation.Valid;
 
 
 @CrossOrigin (origins = "http://localhost:8081/" )
-@Hidden
 @RestController
 @RequestMapping("/api/v1/")
 public class RetiradaUsuarioController {

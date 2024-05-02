@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +41,9 @@ public class BancoSementesController {
 	private Facade facade;
 	@Autowired
 	private ModelMapper modelMapper;
-	
+
+
+	@PreAuthorize("permitAll()")
 	@GetMapping("banco-sementes")
 	public List<BancoSementesResponse> getAllBancoSementes() {
 		return facade.getAllBancoSementes()
@@ -64,7 +67,8 @@ public class BancoSementesController {
 	public BancoSementesResponse createBancoSementes(@Valid @RequestBody BancoSementesRequest newObj) {
 		return new BancoSementesResponse(facade.saveBancoSementes(newObj.convertToEntity()));
 	}
-	
+
+	@PreAuthorize("permitAll()")
 	@GetMapping("banco-sementes/{id}")
 	public BancoSementesResponse getBancoSementesById(@PathVariable Long id) {
 		return new BancoSementesResponse(facade.findBancoSementesById(id));
