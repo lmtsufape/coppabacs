@@ -2,6 +2,7 @@ package br.edu.ufape.lmts.sementes.repository;
 
 import java.util.List;
 
+import br.edu.ufape.lmts.sementes.model.BancoSementes;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,4 +23,7 @@ public interface SementesRepository extends JpaRepository<Sementes, Long> {
 	
 	@Transactional(readOnly = true)
 	List<Sementes> findByNomeContainingOrDescricaoContaining(String nome, String descricao);
+
+	@Transactional(readOnly = true)
+	public List<Sementes> findAllByTabelaBancoSementesBancoSementes(BancoSementes bancoSementes);
 }

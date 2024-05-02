@@ -3,27 +3,20 @@ package br.edu.ufape.lmts.sementes.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.validator.constraints.UniqueElements;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 
@@ -77,6 +70,19 @@ public class BancoSementes  {
 	        this.gerentes = new ArrayList<>();
 	    }
 	    this.gerentes.add(gerente);
+	}
+
+
+	public void addDoacaoUsuario(DoacaoUsuario doacaoUsuario){
+		this.doacaoUsuario.add(doacaoUsuario);
+	}
+
+	public void addRetiradaUsuario(RetiradaUsuario retiradaUsuario){
+		this.retiradaUsuario.add(retiradaUsuario);
+	}
+
+	public void addTransacaoGenerica(TransacaoGenerica transacaoGenerica){
+		this.transacaoGenerica.add(transacaoGenerica);
 	}
 
 

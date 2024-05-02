@@ -395,7 +395,11 @@ public class Facade {
 	public RetiradaUsuario saveRetiradaUsuario(RetiradaUsuario newInstance) {
 		try {
 			validateAndProcessItens(newInstance.getItens(), false);
-			return retiradaUsuarioService.saveRetiradaUsuario(newInstance);
+			RetiradaUsuario retiradaUsuario = retiradaUsuarioService.saveRetiradaUsuario(newInstance);
+			BancoSementes bancoSementes = findBancoSementesById(retiradaUsuario.getBancoSementes().getId());
+			bancoSementes.addRetiradaUsuario(retiradaUsuario);
+			updateBancoSementes(bancoSementes);
+			return retiradaUsuario;
 		} catch (DataIntegrityViolationException e) {
 			throw new CustomDatabaseException("Erro ao salvar retirada de usuário", e);
 		}
@@ -432,8 +436,12 @@ public class Facade {
 	@Autowired
 	private TabelaBancoSementesService tabelaBancoSementesService;
 
-	public TabelaBancoSementes saveTabelaBancoSementes(TabelaBancoSementes newInstance) {
-		return tabelaBancoSementesService.saveTabelaBancoSementes(newInstance);
+	public TabelaBancoSementes saveTabelaBancoSementes(TabelaBancoSementes newInstance, long sementeId) {
+		TabelaBancoSementes tabelaBancoSementes = tabelaBancoSementesService.saveTabelaBancoSementes(newInstance);
+		Sementes sementes = findSementesById(sementeId);
+		sementes.addTabelaSementes(tabelaBancoSementes);
+		updateSementes(sementes);
+		return tabelaBancoSementes;
 	}
 
 	public TabelaBancoSementes updateTabelaBancoSementes(TabelaBancoSementes transientObject) {
@@ -683,7 +691,12 @@ public class Facade {
 				item.setTabelaBancoSementes(destino);
 			}
 		});
-		return transacaoGenericaService.saveTransacaoGenerica(transacao);
+
+		TransacaoGenerica transacaoGenerica = transacaoGenericaService.saveTransacaoGenerica(transacao);
+		BancoSementes bancoSementes = findBancoSementesById(transacao.getBancoSementes().getId());
+		bancoSementes.addTransacaoGenerica(transacaoGenerica);
+		updateBancoSementes(bancoSementes);
+		return transacaoGenerica;
 	}
 
 	public TransacaoGenerica updateTransacaoGenerica(TransacaoGenerica transientObject) {
@@ -786,6 +799,11 @@ public class Facade {
 
 	public List<Sementes> getAllSementes() {
 		return sementesService.getAllSementes();
+	}
+
+	public List<Sementes> getAllSementesByBanco(long id) {
+		BancoSementes banco = findBancoSementesById(id);
+		return sementesService.getAllSementesByBanco(banco);
 	}
 
 	public Page<Sementes> findPageSementes(Pageable pageRequest) {
@@ -1137,7 +1155,11 @@ public class Facade {
 	public DoacaoUsuario saveDoacaoUsuario(DoacaoUsuario newInstance) {
 		try {
 			validateAndProcessItens(newInstance.getItens(), true);
-			return doacaoUsuarioService.saveDoacaoUsuario(newInstance);
+			DoacaoUsuario doacaoUsuario =doacaoUsuarioService.saveDoacaoUsuario(newInstance);
+			BancoSementes bancoSementes = findBancoSementesById(doacaoUsuario.getId());
+			bancoSementes.addDoacaoUsuario(doacaoUsuario);
+			updateBancoSementes(bancoSementes);
+			return doacaoUsuario;
 		} catch (DataIntegrityViolationException e) {
 			throw new CustomDatabaseException("Erro ao salvar doação de usuário", e);
 		}
