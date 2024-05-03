@@ -61,7 +61,7 @@ export default function ImagensBanco() {
   return (
 
     <>
-      <label htmlFor="">Imagens do banco</label>
+      <label className="label" htmlFor="">Imagens do banco</label>
       <Swiper
         slidesPerView={1}
         spaceBetween={30}
@@ -95,7 +95,6 @@ export default function ImagensBanco() {
                 <button onClick={() => {
                   // Implemente a lógica de deletar aqui
                 }}>
-                  Deletar
                   <Image src="/assets/iconLixeira.svg" alt="Deletar" width={18} height={18} />
                 </button>
               </div>

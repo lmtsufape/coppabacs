@@ -11,7 +11,6 @@ import style from "./detalhamentoUsuario.module.scss";
 import HeaderNavegacao from "../HeaderNavegacao";
 import DadosForm from "./DadosUsuario";
 import DadosEndereco from "./DadosEndereco";
-import DadosAtividadesRurais from "./DadosAtividadesRurais";
 import Image from "next/image";
 import { validarAgricultor } from "@/api/usuarios/agricultor/validarAgricultor";
 import { useRouter } from "next/navigation";
@@ -157,7 +156,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
               >
                 <div className={style.container__profile}>
                   <div className={style.container__profile_img}>
-                    <Image src="/assets/agricultorteste.png" alt="Foto do usuário" width={72} height={72} />
+                    <Image src="/assets/funcionarioteste.png" alt="Foto do usuário" width={72} height={72} />
                     <h1>{usuario?.nome}</h1>
                   </div>
                   {hrefAnterior === "/agricultores" || hrefAnterior === "/funcionarios" && (
@@ -186,10 +185,10 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
 
                 <DadosForm formik={formik} editar={editar} hrefAnterior={hrefAnterior} />
                 <DadosEndereco formik={formik} editar={editar} />
-                {
+                {/*
                   hrefAnterior === "/agricultores" && (
                     <DadosAtividadesRurais formik={formik} editar={editar} />
-                  )
+                  )*/
                 }
                 {
                   hrefAnterior === "/agricultores/solicitacoes" && (

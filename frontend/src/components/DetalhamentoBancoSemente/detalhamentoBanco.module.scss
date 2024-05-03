@@ -94,6 +94,8 @@
       background-color: #fff;
       border: #050504 1px solid;
       border-radius: 0.8em;
+      width: auto;
+      height: 3em;
     }
     
   }
@@ -292,12 +294,115 @@
   }
 }
 
-@media all and (max-width: 768px) {
+@media all and (min-width: 459px) and (max-width: 880px) {
   .container{
+    &__profile{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+    
     &__header {
       display: flex;
       align-items: center;
       flex-direction: column;
+
+      &_containerButton{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: -1em;
+
+        &_button{
+          &_text{
+
+          }
+          &_shorttext{
+            display: none;
+          }
+ 
+        }
+      
+      }
+    }
+    &__ContainerForm {
+      flex-direction: column;
+      &_form {
+        &_textarea{
+          display: flex;
+          width: 100%;
+        }
+        &_halfContainer {
+          grid-template-columns: 1fr 1fr;
+          &_input{
+            display: flex;
+            flex: 1;
+          }
+
+        }
+
+        &_threePartsContainer {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    }
+  }
+
+}
+
+@media all and (max-width: 460px) {
+  .container{
+    &__profile{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+    
+    &__header {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      &_containerButton{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: -1em;
+
+        &_button{
+          &_text{
+            display: none;
+          }
+          &_shorttext{
+            display: inline;
+          }
+ 
+        }
+      
+      }
+    }
+    &__ContainerForm {
+      flex-direction: column;
+      &_form {
+        &_textarea{
+          display: flex;
+          width: 100%;
+        }
+        &_halfContainer {
+          grid-template-columns: 1fr;
+          &_input{
+            display: flex;
+            flex: 1;
+          }
+
+        }
+
+        &_threePartsContainer {
+          grid-template-columns: 1fr;
+        }
+      }
     }
   }
 

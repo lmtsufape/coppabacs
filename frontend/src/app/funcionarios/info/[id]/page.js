@@ -7,7 +7,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { getUsuario } from "@/api/usuarios/getUsuario ";
 import { useEffect, useState } from "react";
-import DetalhamentoUsuario from "@/components/DetalhamentoUsuario";
+import DetalhamentoFuncionario from "@/components/DetalhamentoFuncionario";
 
 export default function Info() {
 
@@ -36,9 +36,11 @@ export default function Info() {
 
   return (
     <>
-      <Header hrefAnterior={"/funcionarios"} />
+      {
+        //<Header hrefAnterior={"/funcionarios"} />
+      }
       { status === "success" && usuario &&
-        <DetalhamentoUsuario 
+        <DetalhamentoFuncionario 
         usuario={usuario}
         diretorioAnterior={"Home / Funcionários / "}
         diretorioAtual={"Informações do(a) Funcionário(a)"}
