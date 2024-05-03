@@ -108,7 +108,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
         {etapas === 0 && <h1 className={style.container__header_currentNav}>1. Dados do agricultor</h1>}
         {etapas >= 1 && etapas <= 2 && <h1 className={style.container__header_current}>1. Dados do agricultor</h1>}
 
-        {etapas === 1 && <h1 className={style.container__header_currentNav}>2. Endereço do Endereço</h1>}
+        {etapas === 1 && <h1 className={style.container__header_currentNav}>2. Dados do Endereço</h1>}
         {etapas != 1 && <h1 className={style.container__header_current}>2. Dados do Endereço</h1>}
 
         {etapas === 2 && <h1 className={style.container__header_currentNav}>3. Atvidades rurais</h1>}

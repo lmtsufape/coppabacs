@@ -31,7 +31,7 @@ export default function DadosEndereco({ formik }) {
         className={style.container__ContainerForm_form_input}
         id="cep"
         name="endereco.cep"
-        placeholder="Insira seu estado"
+        placeholder="Insira seu CEP"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.endereco.cep}
@@ -136,7 +136,7 @@ export default function DadosEndereco({ formik }) {
             className={style.container__ContainerForm_form_halfContainer_input}
             id="referencia"
             name="endereco.referencia"
-            placeholder="Insira uma referencia"
+            placeholder="Insira uma referência"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.endereco.referencia}

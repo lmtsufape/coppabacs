@@ -68,7 +68,7 @@ const Login = () => {
           <form onSubmit={(e) => { e.preventDefault(); mutate(); }}>
             <div className={style.login__login}>
               <h1 className={style.login__login_title}>Entrar</h1>
-              <label htmlFor="e-mail" className={style.login__login_label}>
+              <label htmlFor="email" className={style.login__login_label}>
                 <p>E-mail</p>
                 <input type="email" name="e-mail" placeholder="Digite seu e-mail" value={email} onChange={(e) => setEmail(e.target.value)}  />
               </label>
