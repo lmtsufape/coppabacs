@@ -9,10 +9,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
 import br.edu.ufape.lmts.sementes.model.Usuario;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,6 +33,7 @@ public class UsuarioUpdateRequest {
 	private String contato;
 	private String sexo;
 	private ConjugeRequest conjuge;
+	private String imagem;
 
 	public Usuario convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
