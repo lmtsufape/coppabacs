@@ -1,5 +1,6 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
@@ -10,8 +11,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@Getter @Setter @NoArgsConstructor 
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public  class TabelaBancoSementesRequest  {
+	private long id;
 	private double peso;
 	private String safra;
 	private long bancoSementesId;
@@ -22,6 +24,7 @@ public  class TabelaBancoSementesRequest  {
 		TabelaBancoSementes obj = modelMapper.map(this, TabelaBancoSementes.class);
 		BancoSementes bancoSementes = new BancoSementes();
 		bancoSementes.setId(bancoSementesId);
+		this.id = 0;
 		obj.setBancoSementes(bancoSementes);
 		return obj;
 	}

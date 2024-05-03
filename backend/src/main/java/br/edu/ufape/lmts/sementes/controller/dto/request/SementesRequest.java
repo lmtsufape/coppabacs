@@ -18,6 +18,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SementesRequest {
+	private long id = 0;
 	private String nome;
 	private String nomePopular;
 	private String descricao;
