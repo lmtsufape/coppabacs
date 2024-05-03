@@ -19,6 +19,7 @@ const PrivateRoute = (props)  => {
 
   useEffect(() => {
     api.defaults.headers.authorization = `${token}`;
+    console.log("token:", token )
     if(token != undefined){
     //  mutate();
     setAuthorized(true);
