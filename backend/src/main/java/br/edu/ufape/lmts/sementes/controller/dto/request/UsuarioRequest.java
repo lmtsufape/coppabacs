@@ -43,6 +43,7 @@ public class UsuarioRequest {
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String sexo;
 	private ConjugeRequest conjuge;
+	private String imagem;
 
 	public Usuario convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
