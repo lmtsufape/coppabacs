@@ -12,8 +12,6 @@ import { useSelector } from "react-redux";
 export default function InicioPage() {
 
   const [role, setRole] = useState(getStorageItem("userRole"));
-  
-  const userLogin = useSelector((state) => state.userLogin);
 
   const userLogin = useSelector((state) => state.userLogin);
 
@@ -45,32 +43,6 @@ export default function InicioPage() {
 
 }
 
-const LayoutCoordenador = () => {
-
-  return (
-    <>
-
-      <Card title="Agricultores" icon="/assets/iconAssociates.svg" description="Agricultores" link="/agricultores" />
-      <Card title="Bancos de Sementes" icon="/assets/iconBancoSementes.svg" description="Banco Sementes" link="/bancoSementes" />
-      <Card title="Transações Banco de Sementes" icon="/assets/iconMovimentacaoBancoSementes.svg" description="Movimentação Sementes" link="/transacoes" />
-      <Card title="Sementes" icon="/assets/iconSeedGreen.svg" description="Sementes" link="/sementes" />
-      <Card title="Mural" icon="/assets/iconMural.svg" description="Mural" link="/mural" />
-    </>
-  )
-}
-
-const LayoutAgricultor = () => {
-
-  return (
-    <>
-      <Card title="Bancos de Sementes" icon="/assets/iconBancoSementes.svg" description="Banco Sementes" link="/bancoSementes" />
-      <Card title="Sementes" icon="/assets/iconSeedGreen.svg" description="Sementes" link="/sementes" />
-      <Card title="Transações Banco de Sementes" icon="/assets/iconMovimentacaoBancoSementes.svg" description="Movimentação Sementes" link="/transacoes" />
-      <Card title="Mural" icon="/assets/iconMural.svg" description="Mural" link="/mural" />
-    </>
-  )
-}
-
 const LayoutAdmin = () => {
 
   return (
@@ -80,7 +52,6 @@ const LayoutAdmin = () => {
         <Card title="Agricultores" icon="/assets/iconAssociates.svg" description="Agricultores" link="/agricultores" />
         <Card title="Coordenadores" icon="/assets/iconAssociates.svg" description="Coordenadores" link="/coordenadores" />
         <Card title="Funcionarios" icon="/assets/iconAssociates.svg" description="Funcionarios" link="/funcionarios" />
-
         <Card title="Bancos de Sementes" icon="/assets/iconBancoSementes.svg" description="Banco Sementes" link="/bancoSementes" />
         <Card title="Sementes" icon="/assets/iconSeedGreen.svg" description="Sementes" link="/sementes" />
         <Card title="Mural" icon="/assets/iconMural.svg" description="Mural" link="/mural" />
@@ -88,6 +59,38 @@ const LayoutAdmin = () => {
     </>
   )
 }
+
+const LayoutCoordenador = () => {
+
+  return (
+    <>
+      <div className={style.menu_container}>
+
+        <Card title="Agricultores" icon="/assets/iconAssociates.svg" description="Agricultores" link="/agricultores" />
+        <Card title="Bancos de Sementes" icon="/assets/iconBancoSementes.svg" description="Banco Sementes" link="/bancoSementes" />
+        <Card title="Transações Banco de Sementes" icon="/assets/iconMovimentacaoBancoSementes.svg" description="Movimentação Sementes" link="/transacoes" />
+        <Card title="Sementes" icon="/assets/iconSeedGreen.svg" description="Sementes" link="/sementes" />
+        <Card title="Mural" icon="/assets/iconMural.svg" description="Mural" link="/mural" />
+      </div>
+    </>
+  )
+}
+
+const LayoutAgricultor = () => {
+
+  return (
+    <>
+      <div className={style.menu_container}>
+
+        <Card title="Bancos de Sementes" icon="/assets/iconBancoSementes.svg" description="Banco Sementes" link="/bancoSementes" />
+        <Card title="Sementes" icon="/assets/iconSeedGreen.svg" description="Sementes" link="/sementes" />
+        <Card title="Transações Banco de Sementes" icon="/assets/iconMovimentacaoBancoSementes.svg" description="Movimentação Sementes" link="/transacoes" />
+        <Card title="Mural" icon="/assets/iconMural.svg" description="Mural" link="/mural" />
+      </div>
+    </>
+  )
+}
+
 
 const LayoutUsuario = () => {
   return (
