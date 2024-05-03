@@ -3,8 +3,8 @@ import style from "./table.module.scss";
 import Link from "next/link";
 
 
-export default function tableLayout({ table1, table2, table3, table4, listCoordenadores }) {
-  
+export default function tableLayout({ table1, table2, table3, table4, listAgricultores }) {
+
   return (
     <div className={style.content}>
       <table className={style.content__table}>
@@ -12,7 +12,6 @@ export default function tableLayout({ table1, table2, table3, table4, listCoorde
           <tr>
             <th>{table1}</th>
             <th>{table2}</th>
-
             <th>{table3}</th>
 
             <th className={style.content__table__header_name3}>
@@ -26,19 +25,17 @@ export default function tableLayout({ table1, table2, table3, table4, listCoorde
           </tr>
         </thead>
         <tbody className={style.content__table__body}>
-          
-          {listCoordenadores.map((coordenador, index) => {
+          {listAgricultores.map((agricultor, index) => {
             return (
               <tr key={index}>
-                <td>{coordenador.nome}</td>
-                <td>{coordenador.contato}</td>
-                <td>{coordenador.bancoName}</td>
-
+                <td>{agricultor.nome}</td>
+                <td>{agricultor.nomePopular}</td>
+                <td>{agricultor.contato}</td>
                 <td>
                   <div className={style.content__table_container_buttons}>
                     <button>
                       <span>
-                        <Link href={`/coordenadores/info/${coordenador.id}`}>
+                        <Link href={`/agricultores/info/${agricultor.id}`}>
                           <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
                         </Link>
                       </span>

@@ -91,14 +91,7 @@ export default function ImagensBanco() {
         {mockImg.map((imagem) => {
           return (
             <SwiperSlide key={imagem.id}>
-              <div className="deletarImg">
-                <button onClick={() => {
-                  // Implemente a lógica de deletar aqui
-                }}>
-                  Deletar
-                  <Image src="/assets/iconLixeira.svg" alt="Deletar" width={18} height={18} />
-                </button>
-              </div>
+              
               <Image src={imagem.url} alt="Visualizar" width={180} height={180} />
             </SwiperSlide>
           );

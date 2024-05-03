@@ -1,17 +1,23 @@
 .menu {
     width: auto;
-    padding: 10em 10em 10em 10em;
+    padding: 4em 4em 4em 4em;
     display: flex;
     text-align: center;
     align-items: center;
     align-content: center;
     justify-content: space-around;
-    flex-wrap: wrap;
-
-    gap: 1em;
 
 
+    &_container{
+        display: flex;
+        width: 650px;
 
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 1em;
+
+    }
+    
 }
 
 .mapa {
@@ -25,7 +31,6 @@
         width: 53%;
     }
 }
-
 @media only screen and (max-width: 480px) {
     .menu {
         text-align: center;
