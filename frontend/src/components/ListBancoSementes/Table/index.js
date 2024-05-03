@@ -25,10 +25,11 @@ export default function tableLayout({ table1, table2, table3, table4, listBancos
         </thead>
         <tbody className={style.content__table__body}>
           {listBancos.map((banco, index) => {
+            console.log(banco)
             return (
               <tr key={index}>
                 <td>{banco.nome}</td>
-                <td>{banco.responsavel}</td>
+                <td>{banco.gerentes[0].nome}</td>
                 <td>
                   <div className={style.content__table_container_buttons}>
                     <button>

@@ -15,8 +15,6 @@ export default function InicioPage() {
   
   const userLogin = useSelector((state) => state.userLogin);
 
-  const userLogin = useSelector((state) => state.userLogin);
-
   function whatIsTypeUser() {
     if (role) {
       if (role == "ROLE_ADMIN" || role == "ROLE_COPPABACS") {
@@ -25,11 +23,9 @@ export default function InicioPage() {
         return <LayoutCoordenador />
       } else if (role == "ROLE_AGRICULTOR") {
         return <LayoutAgricultor />
-      } else if (role == "ROLE_USUARIO") {
-        return <LayoutUsuario />
-      }
+      } 
     } else {
-      return <LayoutUsuario />
+      return <LayoutPublic />
     }
 
   }
@@ -94,7 +90,7 @@ const LayoutAgricultor = () => {
 }
 
 
-const LayoutUsuario = () => {
+const LayoutPublic = () => {
   return (
     <>
       <Card title="Bancos de Sementes" icon="/assets/iconBancoSementes.svg" description="Banco Sementes" link="/bancoSementes" />

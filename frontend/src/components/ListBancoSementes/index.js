@@ -27,30 +27,43 @@ export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, h
 
 
   function whatIsTypeUser() {
-    if (role == "ROLE_ADMIN" || role == "ROLE_COPPABACS") {
-      return <LayoutAdmin
+    if (role) {
+      if (role == "ROLE_ADMIN" || role == "ROLE_COPPABACS") {
+        return <LayoutAdmin
 
-        table1={table1}
-        table2={table2}
-        table3={table3}
-        diretorioAnterior={diretorioAnterior}
-        diretorioAtual={diretorioAtual}
-        hrefAnterior={hrefAnterior}
-      />
-    } else if (role == "ROLE_GERENTE") {
-      return <LayoutCoordenador
-        diretorioAnterior={diretorioAnterior}
-        diretorioAtual={diretorioAtual}
-        hrefAnterior={hrefAnterior}
-        table1={table1}
-        table2={table2}
-        table3={table3}
-      />
-    } else if (role == "ROLE_AGRICULTOR") {
-      return <LayoutAgricultor />
-    } else if (role == "ROLE_USUARIO") {
-      push(APP_ROUTES.public.home);
+          diretorioAnterior={diretorioAnterior}
+          diretorioAtual={diretorioAtual}
+          hrefAnterior={hrefAnterior}
+          table1={table1}
+          table2={table2}
+          table3={table3}
+        />
+      } else if (role == "ROLE_GERENTE") {
+        return <LayoutCoordenador
+          diretorioAnterior={diretorioAnterior}
+          diretorioAtual={diretorioAtual}
+          hrefAnterior={hrefAnterior}
+          table1={table1}
+          table2={table2}
+          table3={table3}
+        />
+      } else if (role == "ROLE_AGRICULTOR") {
+        return <LayoutAgricultor />
+      } else if (role == "ROLE_USUARIO") {
+        push(APP_ROUTES.public.home);
+      }
+    } else {
+      return<LayoutAdmin
+
+      diretorioAnterior={diretorioAnterior}
+      diretorioAtual={diretorioAtual}
+      hrefAnterior={hrefAnterior}
+      table1={table1}
+      table2={table2}
+      table3={table3}
+    />
     }
+
   }
 
   return (
@@ -190,4 +203,59 @@ const LayoutAgricultor = () => {
       <h1>asdf</h1> {/* ?? */}
     </>
   )
+}
+
+const LayoutPublic = ({ table1, table2, table3 }) => {
+  const [bancos, setBancos] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    mutate();
+  }, [])
+
+  const { state, mutate } = useMutation(
+    async () => {
+      return getAllBancos();
+    }, {
+    onSuccess: (res) => {
+      setBancos(res.data);
+    },
+    onError: (error) => {
+      console.log(error)
+    }
+  }
+  );
+  const filteredBancos = bancos.filter((banco) =>
+    banco?.nome?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <div>
+      <Header
+        diretorioAnterior="Publico /"
+        diretorioAtual="Bancos de Sementes"
+        hrefAnterior="/"
+      />
+      <div className={style.header}>
+        <div className={style.header__container}>
+
+          <button>
+            <Image src="/assets/iconDatabasePlus.svg" alt="Adicionar Agricultor" width={27} height={24} />
+          </button>
+          <div className={style.header__container_buttons}>
+
+          </div>
+
+        </div>
+      </div>
+      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <Table
+        table1={table1}
+        table2={table2}
+        table3={table3}
+        listBancos={filteredBancos}
+      />
+
+    </div>
+  );
 }

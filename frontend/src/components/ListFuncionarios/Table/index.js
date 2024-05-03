@@ -31,7 +31,7 @@ export default function tableLayout({ table1, table2, table3, table4, listFuncio
               <tr key={index}>
                 <td>{funcionario.nome}</td>
                 <td>{funcionario.contato}</td>
-                <td>{funcionario.funcao}</td>
+                <td>{funcionario.cargo}</td>
 
                 <td>
                   <div className={style.content__table_container_buttons}>
