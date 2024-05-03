@@ -79,7 +79,7 @@ export default function DadosBanco({ formik }) {
             name="anoFundacao"
             type="date"
             format="dd/MM/yyyy"
-            placeholder="Insira seu dataFundacao"
+            placeholder="Insira a data de fundação"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.anoFundacao}

@@ -5,7 +5,6 @@
   color: black;
   margin: 0 0 2em 0;
 
-
   &__header{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -29,7 +28,6 @@
       padding-bottom: 0.5em;
 
     }
-
 
   }
   &__ContainerForm{
@@ -61,11 +59,12 @@
       &_input{
         width: 100%;
         padding: 0.5em;
-        margin: 0.1em 0 1em 0;
+        margin: 0.1em 0 1em 0; // margin: 0.1em 0 1em 0;
         border: 1px solid #A7A7A7;
         border-radius: 5px;
         font-size: 1em;
         font-weight: normal;
+        box-sizing: border-box;
       }
       &_halfContainer{
         width: 100%;
@@ -104,8 +103,7 @@
           border-radius: 5px;
           font-size: 1em;        
           option {
-            background-color: #245501; // Cor do fundo dos options
-            color: #fff; // Cor do texto dos options
+            background-color: #A7A7A7; // Cor do fundo dos options
         
             // Quando selecionado
             &:checked, &:selected { 

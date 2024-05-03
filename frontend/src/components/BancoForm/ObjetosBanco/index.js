@@ -63,7 +63,7 @@ export default function objetosBanco({ formik }) {
             id="armario"
             name="objetos.armario"
             type="number"
-            placeholder="Insira a quantidade de armario"
+            placeholder="Insira a quantidade de armários"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.objetos.armario}
@@ -91,13 +91,13 @@ export default function objetosBanco({ formik }) {
 
         </div>
         <div>
-          <label htmlFor="lona">Lona <span>*</span></label>
+          <label htmlFor="Lonas">Lona <span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="lona"
             name="objetos.lona"
             type="number"
-            placeholder="Insira a quantidade de Lona"
+            placeholder="Insira a quantidade de lonas"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.objetos.lona}
