@@ -3,10 +3,11 @@ package br.edu.ufape.lmts.sementes.controller.dto.request;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.ufape.lmts.sementes.model.*;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
-import br.edu.ufape.lmts.sementes.model.Sementes;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class SementesRequest {
 	private String nome;
 	private String nomePopular;
@@ -36,6 +38,8 @@ public class SementesRequest {
 	
 	@Valid
 	private ResponsavelTecnicoRequest responsavelTecnico;
+
+
 
 	public Sementes convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

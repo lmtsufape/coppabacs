@@ -1,5 +1,6 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
@@ -11,6 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class EmpalhamentoRequest {
 	private String tipo;
 
