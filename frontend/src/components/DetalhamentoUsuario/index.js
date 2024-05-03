@@ -160,7 +160,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
                     <Image src="/assets/profile.jpeg" alt="Foto do usuário" width={72} height={72} />
                     <h1>{usuario?.nome}</h1>
                   </div>
-                  {hrefAnterior === "/agricultores" || hrefAnterior === "/funcionarios" && (
+                  {hrefAnterior === "/agricultores" | hrefAnterior === "/funcionarios" && (
                     <>
                       {editar === false ? (
                         <button
