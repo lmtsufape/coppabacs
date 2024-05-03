@@ -60,18 +60,17 @@ const Login = () => {
         <div className={style.login}>
           <div className={style.login__content}>
             <h1 className={style.login__content_title}>Sobre o sistema</h1>
-            <p className={style.login__content_subtitle}>Lorem ipsum dolor sit amet consectetur.
-              Cursus donec lectus vel diam gravida mauris nisi erat. Pellentesque tortor ac ac
-              nibh hendrerit risus viverra. Enim consectetur tristique turpis volutpat non egestas a
-              met velit platea. Enim nullam senectus.backgroundDro turpis lacus volutpat magnis morbi pellentesque.
-              Blandit justo dolor auctor eu pellentesque augue molestie vitae odio.</p>
+            <p className={style.login__content_subtitle}>Bem-vindo ao Software de Armazenamento de Sementes da COPPABACS!
+            Facilitamos o armazenamento coletivo de sementes para a agricultura familiar no semiárido alagoano. 
+            Desde 1996, apoiamos mais de 1500 trabalhadores em 13 comunidades, promovendo educação, armazenamento e 
+            sustentabilidade.</p>
           </div>
           <div className={style.login__login}>
           <form onSubmit={(e) => { e.preventDefault(); mutate(); }}>
               <h1 className={style.login__login_title}>Entrar</h1>
-              <label htmlFor="email" className={style.login__login_label}>
+              <label htmlFor="e-mail" className={style.login__login_label}>
                 <p>E-mail</p>
-                <input type="email" name="email" placeholder="Digite seu e-mail" value={email} onChange={(e) => setEmail(e.target.value)}  />
+                <input type="email" name="e-mail" placeholder="Digite seu e-mail" value={email} onChange={(e) => setEmail(e.target.value)}  />
               </label>
               <label htmlFor="senha" className={style.login__login_label}>
                 <p>Senha</p>
@@ -81,7 +80,7 @@ const Login = () => {
               <h2 className={style.login__login_subtitle}>Esqueceu a senha?</h2>
               </Link>
               
-              {status === "error" ? <p className={style.senhaErrada}>Email ou senha incorretos</p> : null}
+              {status === "error" ? <p className={style.senhaErrada}>E-mail ou senha incorretos</p> : null}
               <button className={`${style.login__login_button} ${status === "loading" || status === "success" ? style.active : ""}`}>Entrar</button>
               <h2 className={style.login__login_subtitle1}>Não possui conta? &nbsp;
                 <Link href="/novoUsuario">
