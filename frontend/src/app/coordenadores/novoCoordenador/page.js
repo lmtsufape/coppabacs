@@ -9,7 +9,7 @@ export default function NewRegisterFarmer() {
             <div className={styles.pageContainer__content}>
                 <CoordenadorForm
                     diretorioAnterior="Home / Coordenadores /"
-                    diretorioAtual="Novo Coordenador"
+                    diretorioAtual="Novo(a) Coordenador(a)"
                     hrefAnterior="/coordenadores" />
             </div>
 

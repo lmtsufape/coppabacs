@@ -39,7 +39,7 @@ export default function Info() {
         <DetalhamentoUsuario 
         usuario={usuario}
         diretorioAnterior={"Home / Coordenadores / "}
-        diretorioAtual={"Informações do Coordenador"}
+        diretorioAtual={"Informações do(a) Coordenador(a)"}
         hrefAnterior={"/coordenadores"}
         />
       }

@@ -36,7 +36,7 @@ export default function AssociadosPage() {
       <DetalhamentoUsuario
         usuario={usuario}
         diretorioAnterior={"Home / Agricultores / Solicitações / "}
-        diretorioAtual={"Informações do Solicitante"}
+        diretorioAtual={"Informações do(a) Solicitante"}
         hrefAnterior={"/agricultores/solicitacoes"}
       />
     </div>
