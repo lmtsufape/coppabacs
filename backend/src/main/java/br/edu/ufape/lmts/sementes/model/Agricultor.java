@@ -10,51 +10,39 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import jakarta.transaction.Transactional;
+import lombok.*;
 
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @ToString
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Agricultor extends Usuario {
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "banco_sementes_id")
 	@ToString.Exclude
 	private BancoSementes bancoSementes;
 	@OneToMany
-	@JoinColumn(name = "agricultor_id")
 	@ToString.Exclude
-	private List<AtividadeRural> atividadeRural;
-	private List<String> sementes;
+	private List<AtividadeRural> atividadeRural = new ArrayList<>();
+	@OneToMany
+	@ToString.Exclude
+	private List<Sementes> sementes = new ArrayList<>();
 
-	public Agricultor() {
-		super();
-		this.atividadeRural = new ArrayList<>();
+	@Transactional
+	public void addSementes(Sementes semente){
+		this.sementes.add(semente);
 	}
 
-	public Agricultor(Long id, String nome, String email, String senha, Endereco endereco, String cpf,
-			Date dataNascimento, String contato, String imagem, String sexo, Conjuge conjuge, String nomePopular,
-			BancoSementes bancoSementes, List<AtividadeRural> atividadeRural) {
-		super(id, nome, nomePopular, email, senha, endereco, cpf, dataNascimento, contato, imagem, sexo, conjuge);
-		this.bancoSementes = bancoSementes;
-	  this.atividadeRural = atividadeRural;
-
+	@Transactional
+	public void removeSementes(Sementes semente){
+		this.sementes.remove(semente);
 	}
+
+
 	
 
-	public BancoSementes getBancoSementes() {
-		return bancoSementes;
-	}
 
-	public void setBancoSementes(BancoSementes bancoSementes) {
-		this.bancoSementes = bancoSementes;
-	}
-
-	public List<AtividadeRural> getAtividadeRural() {
-		return atividadeRural;
-	}
-
-	public void setAtividadeRural(List<AtividadeRural> atividadeRural) {
-		this.atividadeRural = atividadeRural;
-	}
 }

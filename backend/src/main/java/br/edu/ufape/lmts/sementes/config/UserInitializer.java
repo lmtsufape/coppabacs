@@ -1,9 +1,6 @@
 package br.edu.ufape.lmts.sementes.config;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.*;
 import br.edu.ufape.lmts.sementes.enums.Resistencia;
@@ -44,7 +41,40 @@ public class UserInitializer  implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
+		if (bancoSementesRepository.count() == 0){
+			BancoSementes banco = createBancoSementesRequest().convertToEntity();
+			facade.saveBancoSementes(banco);
+		}
+
+		if (sementesRepository.count() == 0) {
+
+			List<SementesRequest> sementesList = prepareAllSementes();
+			sementesList.forEach(sementesRequest -> {
+				Sementes sementes = sementesRequest.convertToEntity();
+				facade.saveSementes(sementes);
+			});
+			TabelaBancoSementesRequest tabelaBancoSementesRequest = new TabelaBancoSementesRequest(0,200,"05/2024",1,1);
+			facade.saveTabelaBancoSementes(tabelaBancoSementesRequest.convertToEntity(),1);
+
+		}
+
 		if (userRepository.count() == 0) {
+
+			Agricultor usuario = new Agricultor();
+            usuario.setNome("Usuario");
+			usuario.setConjuge(null);
+			usuario.setEmail("usuario@usuario.com");
+			usuario.setSenha(passwordEncoder.encode("12345678"));
+			usuario.setEndereco(null);
+			usuario.setNomePopular("Junior");
+			usuario.setCpf("333333333");
+			usuario.setContato("87 333333333");
+			usuario.setDataNascimento(new Date());
+			usuario.setSexo("Macho");
+
+            facade.saveUsuario(usuario);
+
+
 			Admin admin = new Admin();
 			admin.setNome("Admin");
 			admin.setConjuge(null);
@@ -60,6 +90,8 @@ public class UserInitializer  implements CommandLineRunner {
 			userRepository.save(admin);
 			adminRepository.save(admin);
 
+			BancoSementes banco = facade.findBancoSementesById(1);
+
 			Gerente gerente = new Gerente();
 			gerente.setNome("Gerente");
 			gerente.setCpf("11111111111");
@@ -71,12 +103,16 @@ public class UserInitializer  implements CommandLineRunner {
 			gerente.setSexo("gerente");
 			gerente.setSenha(passwordEncoder.encode("12345678"));
 			gerente.setDataNascimento(new Date(18, 10, 2001));
+			gerente.setBancoSementes(banco);
+			gerente.setNomePopular("Seu João");
 
 			userRepository.save(gerente);
-			gerenteRepository.save(gerente);
+			gerente = gerenteRepository.save(gerente);
+			banco.setGerentes(Collections.singletonList(gerente));
 
 			Agricultor agricultor = new Agricultor();
 			agricultor.setNome("Agricultor");
+			agricultor.setNomePopular("Seu Zé");
 			agricultor.setCpf("22222222222");
 			agricultor.setContato("AgricultorContato");
 			agricultor.setConjuge(null);
@@ -102,24 +138,16 @@ public class UserInitializer  implements CommandLineRunner {
 			coppabacs.setSexo("coppabacs");
 			coppabacs.setSenha(passwordEncoder.encode("12345678"));
 			coppabacs.setDataNascimento(new Date(18, 10, 2001));
+			coppabacs.setCargo("Funcionário");
+			coppabacs.setNomePopular("Seu Marcos");
 
 			userRepository.save(coppabacs);
 			coppabacsRepository.save(coppabacs);
 		}
 
-		if (sementesRepository.count() == 0) {
 
-			List<SementesRequest> sementesList = prepareAllSementes();
-			sementesList.forEach(sementesRequest -> {
-				Sementes sementes = sementesRequest.convertToEntity(); // Supondo que você tenha um método para converter de SementesRequest para Sementes.
-				facade.saveSementes(sementes); // Supondo que seu serviço tenha um método para salvar Sementes.
-			});
-		}
 
-		if (bancoSementesRepository.count() == 0){
-			BancoSementesRequest banco = createBancoSementesRequest();
-			facade.saveBancoSementes(banco.convertToEntity());
-		}
+
 	}
 
 	public static BancoSementesRequest createBancoSementesRequest() {
@@ -141,7 +169,7 @@ public class UserInitializer  implements CommandLineRunner {
 	private static List<SementesRequest> prepareAllSementes() {
 		List<SementesRequest> sementes = new ArrayList<>();
 
-		sementes.add(new SementesRequest(
+		sementes.add(new SementesRequest(0,
 				"Coffea arabica", "Café Arábica",
 				"Uma das espécies de café mais cultivadas e apreciadas mundialmente, conhecida por seu aroma suave e sabor delicado.",
 				"Broca-do-café, Bicho-mineiro", "Ferrugem do cafeeiro, Mancha de Phoma", true, true,
@@ -156,7 +184,7 @@ public class UserInitializer  implements CommandLineRunner {
 				new CulturaRequest("Café", "Coffea"),
 				new ResponsavelTecnicoRequest("João Silva", "123.456.789-00", "002134", "MG")
 		));
-		sementes.add(new SementesRequest(
+		sementes.add(new SementesRequest(0,
 				"Glycine max", "Soja",
 				"Principal cultura de leguminosa para produção de óleo e proteína vegetal, com ampla adaptação climática.",
 				"Lagarta-da-soja, Percevejo-verde", "Podridão radicular, Antracnose", true, false,
@@ -171,7 +199,7 @@ public class UserInitializer  implements CommandLineRunner {
 				new CulturaRequest("Soja", "Glycine max"),
 				new ResponsavelTecnicoRequest("Maria Pereira", "987.654.321-00", "001234", "PR")
 		));
-		sementes.add(new SementesRequest(
+		sementes.add(new SementesRequest(0,
 				"Zea mays", "Milho",
 				"Cultura de grande importância econômica para cereais e produção de etanol.",
 				"Lagarta-do-cartucho, Pulgão", "Fusariose, Mancha branca", true, true,
