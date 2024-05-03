@@ -12,7 +12,7 @@ export default function DadosEndereco({ formik, editar }) {
           <div className={style.container__ContainerForm_form_threePartsContainer}>
 
             <div>
-              <label htmlFor="endereco.estado">Estado</label>
+              <label htmlFor="endereco.estado">Estado </label>
               <input
                 className={style.container__ContainerForm_form_input}
                 id="estado"
@@ -23,7 +23,7 @@ export default function DadosEndereco({ formik, editar }) {
               />
             </div>
             <div>
-              <label htmlFor="endereco.cidade">Cidade</label>
+              <label htmlFor="endereco.cidade">Cidade </label>
               <input
                 className={style.container__ContainerForm_form_input}
                 id="cidade"
@@ -34,7 +34,7 @@ export default function DadosEndereco({ formik, editar }) {
               />
             </div>
             <div>
-              <label htmlFor="endereco.bairro">Bairro</label>
+              <label htmlFor="endereco.bairro">Bairro </label>
               <input
                 className={style.container__ContainerForm_form_input}
                 id="bairro"
@@ -45,7 +45,7 @@ export default function DadosEndereco({ formik, editar }) {
               />
             </div>
             <div>
-              <label htmlFor="endereco.logradouro">Rua</label>
+              <label htmlFor="endereco.logradouro">Rua </label>
               <input
                 className={style.container__ContainerForm_form_input}
                 id="logradouro"
@@ -57,7 +57,7 @@ export default function DadosEndereco({ formik, editar }) {
             </div>
 
             <div>
-              <label htmlFor="endereco.numero">Número</label>
+              <label htmlFor="endereco.numero">Número </label>
               <input
                 className={style.container__ContainerForm_form_input}
                 name="endereco.numero"
@@ -86,12 +86,12 @@ export default function DadosEndereco({ formik, editar }) {
           <div className={style.container__ContainerForm_form_threePartsContainer}>
 
             <div>
-              <label htmlFor="endereco.estado">Estado</label>
+              <label htmlFor="endereco.estado">Estado </label>
               <input
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="estado"
                 name="endereco.estado"
-                placeholder="Insira seu estado"
+                placeholder="Insira seu Estado"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.endereco.estado}
@@ -104,7 +104,7 @@ export default function DadosEndereco({ formik, editar }) {
             </div>
             <div>
 
-              <label htmlFor="endereco.cidade">Cidade</label>
+              <label htmlFor="endereco.cidade">Cidade </label>
               <input
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="cidade"
@@ -121,7 +121,7 @@ export default function DadosEndereco({ formik, editar }) {
 
             </div>
             <div>
-              <label htmlFor="endereco.bairro">Bairro</label>
+              <label htmlFor="endereco.bairro">Bairro </label>
 
               <input
                 className={style.container__ContainerForm_form_halfContainer_input}
@@ -139,12 +139,12 @@ export default function DadosEndereco({ formik, editar }) {
 
             </div>
             <div>
-              <label htmlFor="endereco.logradouro">Rua</label>
+              <label htmlFor="endereco.logradouro">Rua </label>
               <input
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="logradouro"
                 name="endereco.logradouro"
-                placeholder="Insira seu endereço"
+                placeholder="Insira o nome da rua"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.endereco.logradouro}
@@ -155,7 +155,7 @@ export default function DadosEndereco({ formik, editar }) {
               ) : null}
             </div>
             <div>
-              <label htmlFor="endereco.numero">Número</label>
+              <label htmlFor="endereco.numero">Número </label>
               <input
                 className={style.container__ContainerForm_form_halfContainer_input}
                 name="endereco.numero"
@@ -176,7 +176,7 @@ export default function DadosEndereco({ formik, editar }) {
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="complemento"
                 name="endereco.referencia"
-                placeholder="Insira uma complemento"
+                placeholder="Insira um complemento"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.endereco.referencia}
