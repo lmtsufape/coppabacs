@@ -24,31 +24,38 @@ public class GerenteService implements GerenteServiceInterface {
 	}
 
 	public Gerente updateGerente(Gerente transientObject) {
+		findGerenteById(transientObject.getId());
 		return repository.save(transientObject);
 	}
 
 	public Gerente findGerenteById(long id) {
-		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Gerente with id = " + id));
+		return repository.findByAtivoTrueAndId(id)
+				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist Gerente with id = " + id));
 	}
+
 	public Gerente findGerenteByEmail(String email) {
-		return repository.findGerenteByEmail(email).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Finalidade with email = " + email));
+		return repository.findByAtivoTrueAndEmail(email)
+				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist Gerente with email = " + email));
 	}
-	public List<Gerente> getAllGerente(){
-		return repository.findAll();
+
+	public List<Gerente> getAllGerente() {
+		return repository.findByAtivoTrue();
 	}
-	
+
 	@Transactional
-	public void deleteGerente(Gerente persistentObject){
+	public void deleteGerente(Gerente persistentObject) {
 		this.deleteGerente(persistentObject.getId());
-		
+
 	}
+
 	@Transactional
-	public void deleteGerente(long id){
-		Gerente obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Gerente with id = " + id));
-		repository.delete(obj);
+	public void deleteGerente(long id) {
+		Gerente obj = findGerenteById(id);
+		obj.setAtivo(false);
+		repository.save(obj);
 	}
 
 	public Page<Gerente> findPageGerente(Pageable pageRequest) {
-		return repository.findAll(pageRequest);
+		return repository.findByAtivoTrue(pageRequest);
 	}
 }

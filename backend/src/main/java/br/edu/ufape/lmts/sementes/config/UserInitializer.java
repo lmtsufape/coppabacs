@@ -44,6 +44,14 @@ public class UserInitializer  implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
+		
+		BancoSementes banco = new BancoSementes();
+		banco.setId(1);
+		if (bancoSementesRepository.count() == 0){
+			BancoSementesRequest banco1 = createBancoSementesRequest();
+			banco = facade.saveBancoSementes(banco1.convertToEntity());
+		}
+		
 		if (userRepository.count() == 0) {
 			Admin admin = new Admin();
 			admin.setNome("Admin");
@@ -71,7 +79,7 @@ public class UserInitializer  implements CommandLineRunner {
 			gerente.setSexo("gerente");
 			gerente.setSenha(passwordEncoder.encode("12345678"));
 			gerente.setDataNascimento(new Date(18, 10, 2001));
-
+			gerente.setBancoSementes(banco);
 			userRepository.save(gerente);
 			gerenteRepository.save(gerente);
 
@@ -86,7 +94,8 @@ public class UserInitializer  implements CommandLineRunner {
 			agricultor.setSexo("agricultor");
 			agricultor.setSenha(passwordEncoder.encode("12345678"));
 			agricultor.setDataNascimento(new Date(18, 10, 2001));
-
+			agricultor.setBancoSementes(banco);
+			
 			userRepository.save(agricultor);
 			agricultor.addRole(TipoUsuario.AGRICULTOR);
 			agricultorRepository.save(agricultor);
@@ -102,7 +111,7 @@ public class UserInitializer  implements CommandLineRunner {
 			coppabacs.setSexo("coppabacs");
 			coppabacs.setSenha(passwordEncoder.encode("12345678"));
 			coppabacs.setDataNascimento(new Date(18, 10, 2001));
-
+			
 			userRepository.save(coppabacs);
 			coppabacsRepository.save(coppabacs);
 		}
@@ -115,11 +124,7 @@ public class UserInitializer  implements CommandLineRunner {
 				facade.saveSementes(sementes); // Supondo que seu serviço tenha um método para salvar Sementes.
 			});
 		}
-
-		if (bancoSementesRepository.count() == 0){
-			BancoSementesRequest banco = createBancoSementesRequest();
-			facade.saveBancoSementes(banco.convertToEntity());
-		}
+		
 	}
 
 	public static BancoSementesRequest createBancoSementesRequest() {

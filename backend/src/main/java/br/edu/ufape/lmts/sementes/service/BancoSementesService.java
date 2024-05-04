@@ -22,16 +22,17 @@ public class BancoSementesService implements BancoSementesServiceInterface {
 	}
 
 	public BancoSementes updateBancoSementes(BancoSementes transientObject) {
+		findBancoSementesById(transientObject.getId());
 		return repository.save(transientObject);
 	}
 
 	public BancoSementes findBancoSementesById(long id) {
-		return repository.findById(id)
+		return repository.findByAtivoTrueAndId(id)
 				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist BancoSementes with id = " + id));
 	}
 
 	public List<BancoSementes> getAllBancoSementes() {
-		return repository.findAll();
+		return repository.findByAtivoTrue();
 	}
 
 	public void deleteBancoSementes(BancoSementes persistentObject) {
@@ -39,12 +40,12 @@ public class BancoSementesService implements BancoSementesServiceInterface {
 	}
 
 	public void deleteBancoSementes(long id) {
-		BancoSementes obj = repository.findById(id)
-				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist BancoSementes with id = " + id));
-		repository.delete(obj);
+		BancoSementes obj = findBancoSementesById(id);
+		obj.setAtivo(false);
+		repository.save(obj);
 	}
 
 	public Page<BancoSementes> findPageBancoSementes(Pageable pageRequest) {
-		return repository.findAll(pageRequest);
+		return repository.findByAtivoTrue(pageRequest);
 	}
 }

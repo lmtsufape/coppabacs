@@ -171,12 +171,8 @@ public class Facade {
 	}
 
 	public Coppabacs saveCoppabacs(Coppabacs newInstance) throws EmailExistsException {
-		try {
-			usuarioService.saveUsuario(newInstance);
-			return coppabacsService.saveCoppabacs(newInstance);
-		} catch (Exception e) {
-			throw new RuntimeException("Erro ao salvar o usuário", e);
-		}
+		usuarioService.saveUsuario(newInstance);
+		return coppabacsService.saveCoppabacs(newInstance);
 	}
 
 	public Coppabacs updateCoppabacs(Coppabacs transientObject) {

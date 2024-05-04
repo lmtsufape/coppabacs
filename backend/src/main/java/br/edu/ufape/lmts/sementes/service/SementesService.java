@@ -2,12 +2,12 @@ package br.edu.ufape.lmts.sementes.service;
 
 import java.util.List;
 
-import br.edu.ufape.lmts.sementes.model.BancoSementes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.lmts.sementes.model.BancoSementes;
 import br.edu.ufape.lmts.sementes.model.ResponsavelTecnico;
 import br.edu.ufape.lmts.sementes.model.Sementes;
 import br.edu.ufape.lmts.sementes.repository.SementesRepository;
@@ -23,20 +23,21 @@ public class SementesService implements SementesServiceInterface {
 	}
 
 	public Sementes updateSementes(Sementes transientObject) {
+		findSementesById(transientObject.getId());
 		return repository.save(transientObject);
 	}
 
 	public Sementes findSementesById(long id) {
-		return repository.findById(id)
+		return repository.findByAtivoTrueAndId(id)
 				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist Sementes with id = " + id));
 	}
 
 	public List<Sementes> getAllSementes() {
-		return repository.findAll();
+		return repository.findByAtivoTrue();
 	}
 
 	public List<Sementes> getAllSementesByBanco(BancoSementes banco) {
-		return repository.findAllByTabelaBancoSementesBancoSementes(banco);
+		return repository.findAllByAtivoTrueAndTabelaBancoSementesBancoSementes(banco);
 	}
 
 	public void deleteSementes(Sementes persistentObject) {
@@ -44,25 +45,25 @@ public class SementesService implements SementesServiceInterface {
 	}
 
 	public void deleteSementes(long id) {
-		Sementes obj = repository.findById(id)
-				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist Sementes with id = " + id));
-		repository.delete(obj);
+		Sementes obj = findSementesById(id);
+		obj.setAtivo(false);
+		repository.save(obj);
 	}
 
 	public List<Sementes> findSementesByResponsavelTecnico(ResponsavelTecnico responsavelTecnico) {
-		return repository.findByResponsavelTecnico(responsavelTecnico);
+		return repository.findByAtivoTrueAndResponsavelTecnico(responsavelTecnico);
 	}
 
 	public List<Sementes> searchSementes(String string) {
-		return repository.findByNomeContainingOrDescricaoContaining(string, string);
+		return repository.findByAtivoTrueAndNomeContainingOrAtivoTrueAndDescricaoContaining(string, string);
 	}
 
 	public Page<Sementes> searchPageSementes(String string, Pageable pageRequest) {
-		return repository.findByNomeContainingOrDescricaoContaining(string, string, pageRequest);
+		return repository.findByAtivoTrueAndNomeContainingOrAtivoTrueAndDescricaoContaining(string, string, pageRequest);
 	}
 
 	public Page<Sementes> findPageSementes(Pageable pageRequest) {
-		return repository.findAll(pageRequest);
+		return repository.findByAtivoTrue(pageRequest);
 	}
 
 }
