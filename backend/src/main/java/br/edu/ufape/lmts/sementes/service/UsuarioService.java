@@ -50,10 +50,6 @@ public class UsuarioService implements UsuarioServiceInterface {
 	public Usuario findUsuarioByEmail(String email) {
 		return repository.findByAtivoTrueAndEmail(email).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Usuario with Email = " + email));
 	}
-	
-	public Usuario findUsuarioByEmail(String email) {
-		return repository.findByEmail(email).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Usuario with Email = " + email));
-	}
 
 	public List<Usuario> getAllUsuario(){
 		return repository.findByAtivoTrue();
