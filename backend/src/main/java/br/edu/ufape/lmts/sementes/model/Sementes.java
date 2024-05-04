@@ -3,6 +3,8 @@ package br.edu.ufape.lmts.sementes.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -48,6 +50,7 @@ public  class Sementes  {
 	private float altitudeMinima;
 	private String caracteristicasPositiva;
 	private String caracteristicasNegativas;
+	private boolean ativo = true;
 	@OneToOne(cascade=CascadeType.PERSIST, orphanRemoval = true)
 	@ToString.Exclude
 	private ToleranciaAdversidades toleranciaAdversidades;

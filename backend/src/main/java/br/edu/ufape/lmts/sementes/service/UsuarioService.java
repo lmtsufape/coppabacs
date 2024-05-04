@@ -36,6 +36,7 @@ public class UsuarioService implements UsuarioServiceInterface {
 	}
 
 	public Usuario updateUsuario(Usuario transientObject) {
+		findUsuarioById(transientObject.getId());
 		if(transientObject.getSenha() != null) {
 			transientObject.setSenha(passwordEncoder.encode(transientObject.getSenha()));			
 		}
@@ -43,27 +44,27 @@ public class UsuarioService implements UsuarioServiceInterface {
 	}
 
 	public Usuario findUsuarioById(long id) {
-		return repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Usuario with id = " + id));
+		return repository.findByAtivoTrueAndId(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Usuario with id = " + id));
 	}
 	
 	public Usuario findUsuarioByEmail(String email) {
-		return repository.findByEmail(email).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Usuario with Email = " + email));
+		return repository.findByAtivoTrueAndEmail(email).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Usuario with Email = " + email));
 	}
 
 	public List<Usuario> getAllUsuario(){
-		return repository.findAll();
+		return repository.findByAtivoTrue();
 	}
 
 	@Transactional
 	public void deleteUsuario(Usuario persistentObject){
 		this.deleteUsuario(persistentObject.getId());
-
 	}
 
 	@Transactional
 	public void deleteUsuario(long id){
-		Usuario obj = repository.findById(id).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Usuario with id = " + id));
-		repository.delete(obj);
+		Usuario obj = findUsuarioById(id);
+		obj.setAtivo(false);
+		repository.save(obj);
 	}
 
 	public boolean emailExists(String email) {
@@ -71,11 +72,12 @@ public class UsuarioService implements UsuarioServiceInterface {
 	}
 
 	public void addRoleToUser(Usuario usuario, TipoUsuario tipoUsuario) {
+		findUsuarioById(usuario.getId());
 	    usuario.addRole(tipoUsuario);
 	    updateUsuario(usuario);
 	}
 
 	public Page<Usuario> findPageUsuario(Pageable pageRequest) {
-		return repository.findAll(pageRequest);
+		return repository.findByAtivoTrue(pageRequest);
 	}
 }

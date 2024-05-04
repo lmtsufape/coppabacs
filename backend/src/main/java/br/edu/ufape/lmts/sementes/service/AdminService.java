@@ -21,16 +21,17 @@ public class AdminService implements AdminServiceInterface {
 	}
 
 	public Admin updateAdmin(Admin transientObject) {
+		findAdminById(transientObject.getId());
 		return repository.save(transientObject);
 	}
 
 	public Admin findAdminById(long id) {
-		return repository.findById(id)
+		return repository.findByAtivoTrueAndId(id)
 				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist Admin with id = " + id));
 	}
 
 	public List<Admin> getAllAdmin() {
-		return repository.findAll();
+		return repository.findByAtivoTrue();
 	}
 
 	public void deleteAdmin(Admin persistentObject) {
@@ -38,13 +39,13 @@ public class AdminService implements AdminServiceInterface {
 	}
 
 	public void deleteAdmin(long id) {
-		Admin obj = repository.findById(id)
-				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist Admin with id = " + id));
-		repository.delete(obj);
+		Admin obj = findAdminById(id);
+		obj.setAtivo(false);
+		repository.save(obj);
 	}
 
 	public Page<Admin> findPageAdmin(Pageable pageRequest) {
-		return repository.findAll(pageRequest);
+		return repository.findByAtivoTrue(pageRequest);
 	}
 
 }
