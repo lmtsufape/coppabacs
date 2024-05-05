@@ -20,20 +20,20 @@ public class CoppabacsService implements CoppabacsServiceInterface {
 
 	@Transactional
 	public Coppabacs saveCoppabacs(Coppabacs coppabacs) throws EmailExistsException {
-
 		return repository.save(coppabacs);
 	}
 
 	public Coppabacs updateCoppabacs(Coppabacs coppabacs) {
+		findCoppabacsById(coppabacs.getId());
 		return repository.save(coppabacs);
 	}
 
 	public List<Coppabacs> getAllCoppabacs() {
-		return repository.findAll();
+		return repository.findByAtivoTrue();
 	}
 
 	public Coppabacs findCoppabacsById(long id) {
-		return repository.findById(id)
+		return repository.findByAtivoTrueAndId(id)
 				.orElseThrow(() -> new RuntimeException("It doesn't exist Coppabacs with id = " + id));
 	}
 
@@ -44,14 +44,13 @@ public class CoppabacsService implements CoppabacsServiceInterface {
 
 	@Transactional
 	public void deleteCoppabacs(long id) {
-		Coppabacs obj = repository.findById(id)
-				.orElseThrow(() -> new RuntimeException("It doesn't exist user with id = " + id));
-		repository.delete(obj);
+		Coppabacs obj = findCoppabacsById(id);
+		obj.setAtivo(false);
+		repository.save(obj);
 	}
 
-	
 	public Page<Coppabacs> findPageCoppabacs(Pageable pageRequest) {
-		return repository.findAll(pageRequest);
+		return repository.findByAtivoTrue(pageRequest);
 	}
 
 }
