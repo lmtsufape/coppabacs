@@ -2,6 +2,7 @@ package br.edu.ufape.lmts.sementes.controller.dto.request;
 
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -20,6 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @JsonPropertyOrder
 public class UsuarioRequest {
 

@@ -17,7 +17,8 @@ public class AgricultorResponse extends UsuarioResponse {
 	private String nomePopular;
 	private List<AtividadeRuralResponse> atividadeRural; 
 	private List<infraestruturaHidricaResponse> infraestruturaHidrica;
-	private List<InfraestruturaComunidadeResponse> infraestruturaComunidade; 
+	private List<InfraestruturaComunidadeResponse> infraestruturaComunidade;
+	private List<SementesResponse> sementes;
 	private long bancoId;
 
 	public AgricultorResponse(Agricultor obj) {

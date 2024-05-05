@@ -7,6 +7,7 @@ import java.util.List;
 
 import br.edu.ufape.lmts.sementes.service.exception.CustomDatabaseException;
 import br.edu.ufape.lmts.sementes.service.exception.InvalidItemStateException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -393,11 +394,14 @@ public class Facade {
 
 	public RetiradaUsuario saveRetiradaUsuario(RetiradaUsuario newInstance) {
 		try {
-			validateAndProcessItens(newInstance.getItens(), false);
+			Agricultor agricultor = findAgricultorById(newInstance.getAgricultor().getId());
+			validateAndProcessItens(newInstance.getItens(), false, agricultor);
 			RetiradaUsuario retiradaUsuario = retiradaUsuarioService.saveRetiradaUsuario(newInstance);
 			BancoSementes bancoSementes = findBancoSementesById(retiradaUsuario.getBancoSementes().getId());
 			bancoSementes.addRetiradaUsuario(retiradaUsuario);
 			updateBancoSementes(bancoSementes);
+
+
 			return retiradaUsuario;
 		} catch (DataIntegrityViolationException e) {
 			throw new CustomDatabaseException("Erro ao salvar retirada de usuário", e);
@@ -435,11 +439,11 @@ public class Facade {
 	@Autowired
 	private TabelaBancoSementesService tabelaBancoSementesService;
 
+	@Transactional
 	public TabelaBancoSementes saveTabelaBancoSementes(TabelaBancoSementes newInstance, long sementeId) {
 		TabelaBancoSementes tabelaBancoSementes = tabelaBancoSementesService.saveTabelaBancoSementes(newInstance);
 		Sementes sementes = findSementesById(sementeId);
 		sementes.addTabelaSementes(tabelaBancoSementes);
-		updateSementes(sementes);
 		return tabelaBancoSementes;
 	}
 
@@ -471,9 +475,9 @@ public class Facade {
 	@Autowired
 	private ItemService itemService;
 
-	private void validateAndProcessItens(List<Item> itens, boolean isDoacao) {
+	private void validateAndProcessItens(List<Item> itens, boolean isDoacao, Agricultor agricultor ) {
 		List<Item> itensComErro = itens.stream()
-				.filter(item -> !updateItemAndTabelaBancoSementes(item, isDoacao))
+				.filter(item -> !updateItemAndTabelaBancoSementes(item, isDoacao, agricultor))
 				.toList();
 
 		if (!itensComErro.isEmpty()) {
@@ -481,16 +485,24 @@ public class Facade {
 		}
 	}
 
-	private boolean updateItemAndTabelaBancoSementes(Item item, boolean isDoacao) {
+	private boolean updateItemAndTabelaBancoSementes(Item item, boolean isDoacao, Agricultor agricultor) {
 		TabelaBancoSementes tabelaBancoSementes = findTabelaBancoSementesById(item.getTabelaBancoSementes().getId());
+		Sementes sementes = findSementesById(item.getSementes().getId());
 		if (tabelaBancoSementes != null) {
 			double newPeso = isDoacao ? tabelaBancoSementes.getPeso() + item.getPeso() : tabelaBancoSementes.getPeso() - item.getPeso();
 			if (newPeso < 0) {
 				return false;
 			}
 			try {
+				if(!isDoacao){
+					if(!agricultor.getSementes().contains(sementes)) {
+                        agricultor.addSementes(sementes);
+						updateAgricultor(agricultor);
+                    }
+				}
 				tabelaBancoSementes.setPeso(newPeso);
 				tabelaBancoSementesService.saveTabelaBancoSementes(tabelaBancoSementes);
+
 				return true;
 			} catch (Exception e) {
 				return false;
@@ -1036,6 +1048,27 @@ public class Facade {
 		usuarioService.saveUsuario(newInstance);
 		return agricultorService.saveAgricultor(newInstance);
 	}
+
+	public Agricultor addSementeAgricultor(List<Sementes> sementes, long agricultorId){
+		Agricultor agricultor = findAgricultorById(agricultorId);
+		sementes.forEach(semente-> {
+					if (!agricultor.getSementes().contains(semente)) {
+						agricultor.getSementes().add(semente);
+					}
+				}
+				);
+
+		return updateAgricultor(agricultor);
+	}
+
+	public Agricultor removeSementeAgricultor(List<Sementes> sementes, long agricultorId){
+		Agricultor agricultor = findAgricultorById(agricultorId);
+		sementes.forEach(semente-> {
+            agricultor.getSementes().remove(semente);
+		}
+		);
+		return updateAgricultor(agricultor);
+	}
 	
 	public Agricultor saveAgricultor(Agricultor newInstance) throws EmailExistsException {
 		newInstance.addRole(TipoUsuario.AGRICULTOR);
@@ -1153,7 +1186,7 @@ public class Facade {
 
 	public DoacaoUsuario saveDoacaoUsuario(DoacaoUsuario newInstance) {
 		try {
-			validateAndProcessItens(newInstance.getItens(), true);
+			validateAndProcessItens(newInstance.getItens(), true, null);
 			DoacaoUsuario doacaoUsuario =doacaoUsuarioService.saveDoacaoUsuario(newInstance);
 			BancoSementes bancoSementes = findBancoSementesById(doacaoUsuario.getId());
 			bancoSementes.addDoacaoUsuario(doacaoUsuario);

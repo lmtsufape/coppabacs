@@ -1,5 +1,6 @@
 package br.edu.ufape.lmts.sementes.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +19,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -51,11 +53,10 @@ public  class Sementes  {
 	private boolean ativo = true;
 	@OneToOne(cascade=CascadeType.PERSIST, orphanRemoval = true)
 	@ToString.Exclude
-	private ToleranciaAdversidades toleranciaAdversidades; 
-	@OneToMany(orphanRemoval = true)
+	private ToleranciaAdversidades toleranciaAdversidades;
+	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "sementes_id")
-	@ToString.Exclude
-	private List<TabelaBancoSementes> tabelaBancoSementes;
+	private List<TabelaBancoSementes> tabelaBancoSementes = new ArrayList<>();
 	@ManyToOne(targetEntity = ResponsavelTecnico.class)
 	@JoinColumn(name = "responsavel_tecnico_id")
 	@ToString.Exclude
@@ -66,7 +67,7 @@ public  class Sementes  {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "sementes_finalidades", joinColumns = @JoinColumn(name = "sementes_id"), inverseJoinColumns = @JoinColumn(name = "finalidades_id"))
 	@ToString.Exclude
-	private List<Finalidade> finalidades;
+	private List<Finalidade> finalidades = new ArrayList<>();
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cultura_id")
 	@ToString.Exclude
@@ -76,7 +77,8 @@ public  class Sementes  {
 	@ToString.Exclude
 	private List<RegioesAdaptacaoCultivo> regioesAdaptacaoCultivo;
 
-	public boolean addTabelaSementes(TabelaBancoSementes tabelaBancoSementes){
-		return this.tabelaBancoSementes.add(tabelaBancoSementes);
+	@Transactional
+	public void addTabelaSementes(TabelaBancoSementes tabelaBancoSementes){
+		this.tabelaBancoSementes.add(tabelaBancoSementes);
 	}
 }
