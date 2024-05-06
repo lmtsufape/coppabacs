@@ -123,11 +123,11 @@
 
     &__dropdown{
         background-color: #FFF;
-        width: 228.65px;
+        width: 150.65px;
         height: 101.01px;
-        position: fixed;
+        position:absolute;
         top: 79px;
-        right: 54px;
+        right: 50px;
         padding: 22.1px 22.2px 3.1px 22.2px;
         border-radius: 9.88px;
         box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -142,6 +142,13 @@
             display: flex;
             align-items: center;
             gap: 7px;
+            width: 11em;
+
+            &:hover{
+                background-color: #f0f0f0d7;
+                width: 11em;
+                height: auto;
+              }
 
             p{
                 color:#838383;
@@ -154,10 +161,16 @@
             gap: 5px;
             border: none;
             background-color: transparent;
+            width: 11em;
+            &:hover{
+                background-color: #f0f0f0d7;
+                width: 11em;
+                height: auto;
+              }
 
             p{
                 color:#970B0B;
-                font-size: 17px;
+                font-size: 14px;
             }
         }
 

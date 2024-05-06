@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import DetalhamentoUsuario from "@/components/DetalhamentoUsuario";
 import { getCoordenador } from "@/api/usuarios/coordenador/getCoordenador";
 
+
 export default function Info() {
 
   const params = useParams();
@@ -32,11 +33,12 @@ export default function Info() {
 
   return (
     <>
+
       { status === "success" && usuario &&
-        <DetalhamentoUsuario 
+        <DetalhamentoCoordenador 
         usuario={usuario}
         diretorioAnterior={"Home / Coordenadores / "}
-        diretorioAtual={"Informações do Coordenador"}
+        diretorioAtual={"Informações do(a) Coordenador(a)"}
         hrefAnterior={"/coordenadores"}
         />
       }

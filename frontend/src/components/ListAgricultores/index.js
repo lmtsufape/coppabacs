@@ -183,7 +183,7 @@ const LayoutAdmin = ({ table1, table2, table3, table4 }) => {
 
             <Link className={style.header__container_link} href="agricultores/novoAgricultor">
               <h1>
-                Adicionar Agricultor
+                Adicionar Agricultor(a)
               </h1>
             </Link>
 

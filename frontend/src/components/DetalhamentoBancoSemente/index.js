@@ -83,10 +83,12 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
             setSubmitting(false);
           }}
         >
+          
           {formik => (
             <Form className={style.container__ContainerForm_form}>
               <div className={style.container__profile}>
                 <div className={style.container__profile_img}>
+                <Image src="/assets/bancoteste.png" alt="Foto do usuário" width={72} height={72} />
                   <h1>{banco?.nome}</h1>
                 </div>
 
@@ -97,19 +99,22 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
 
                         <button className={style.container__header_containerButton_button}>
                           <Image src="/assets/iconAssociates.svg" alt="Agricultores" width={27} height={26} />
-                          Agricultores
+                          <span className={style.container__header_containerButton_button_text}>Agricultores</span>
+                          <span className={style.container__header_containerButton_button_shorttext}>Agric.</span>
                         </button>
                       </Link>
                       <Link className={style.container__header_link} href={`/bancoSementes/info/${banco.id}/sementes`}>
                         <button className={style.container__header_containerButton_button}>
                           <Image src="/assets/iconSeedGreen.svg" alt="Seed" width={27} height={26} />
-                          Sementes
+                          <span className={style.container__header_containerButton_button_text}>Sementes</span>
+                          <span className={style.container__header_containerButton_button_shorttext}>Sem.</span>
                         </button>
                       </Link>
                       <Link className={style.container__header_link} href={`/transacoes`}>
                         <button className={style.container__header_containerButton_button}>
                           <Image src="/assets/iconAssociates.svg" alt="Agricultores" width={27} height={26} />
-                          Transações
+                          <span className={style.container__header_containerButton_button_text}>Transações</span>
+                          <span className={style.container__header_containerButton_button_shorttext}>Tran.</span>
                         </button>
                       </Link>
                     </>
@@ -129,7 +134,7 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
                     className={style.container__profile_button}>
 
                     <span>Editar</span>
-                    <Image src="/assets/iconLapis.svg" alt="editar perfil" width={25} height={25} />
+                    <Image src="/assets/iconLapis.svg" alt="editar perfil" width={15} height={15} />
                   </button >
                   <button
                     className={style.container__profile_buttonDesativar}>

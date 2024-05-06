@@ -3,7 +3,7 @@ import { useParams } from "next/navigation";
 import { useMutation } from "react-query";
 import { getUsuario } from "@/api/usuarios/getUsuario ";
 import { useEffect, useState } from "react";
-import DetalhamentoUsuario from "@/components/DetalhamentoUsuario";
+import DetalhamentoFuncionario from "@/components/DetalhamentoFuncionario";
 
 export default function Info() {
 
@@ -32,10 +32,10 @@ export default function Info() {
   return (
     <>
       { status === "success" && usuario &&
-        <DetalhamentoUsuario 
+        <DetalhamentoFuncionario 
         usuario={usuario}
         diretorioAnterior={"Home / Funcionários / "}
-        diretorioAtual={"Informações do Funcionário"}
+        diretorioAtual={"Informações do(a) Funcionário(a)"}
         hrefAnterior={"/funcionarios"}
         />
       }

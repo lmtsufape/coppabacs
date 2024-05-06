@@ -209,6 +209,15 @@
         display: flex;
         align-items: center;
         flex-direction: column;
+
+        &_button{
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
+          margin-top: 1em;
+        
+        }
       }
     
     &__header {
@@ -266,6 +275,15 @@
         display: flex;
         align-items: center;
         flex-direction: column;
+
+        &_button{
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
+          margin-top: 1em;
+        
+        }
       }
     
     &__header {
@@ -273,24 +291,6 @@
       align-items: center;
       flex-direction: column;
 
-      &_containerButton{
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: -1em;
-
-        &_button{
-          &_text{
-            display: none;
-          }
-          &_shorttext{
-            display: inline;
-          }
- 
-        }
-      
-      }
     }
     &__ContainerForm {
       flex-direction: column;

@@ -1,6 +1,6 @@
 .menu {
     width: auto;
-    padding: 4em 4em 4em 4em;
+    padding: 4em 10em 4em 10em;
     display: flex;
     text-align: center;
     align-items: center;
@@ -20,7 +20,16 @@
     
 }
 
-.mapa {
+
+.conjuntoCards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 60em;
+    
+}
+
+.mapa{
     width: 100%;
     display: flex;
     align-items: center;
@@ -36,6 +45,7 @@
         text-align: center;
         align-items: center;
         align-content: center;
-        padding: 1em 0.3em 1em 0.3em;
+        padding: 3em 0.3em 3em 0.3em;
+
     }
 }
