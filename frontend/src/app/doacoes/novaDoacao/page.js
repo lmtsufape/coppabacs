@@ -7,9 +7,9 @@ export default function NewTrasacao() {
         <div className={styles.pageContainer}>
             <div className={styles.pageContainer__content}>
                 <TransacaoForm
-                    diretorioAnterior="Inicio / Transacoes /"
-                    diretorioAtual="Nova Transacao"
-                    hrefAnterior="/transacoes"
+                    diretorioAnterior="Home / Doações /"
+                    diretorioAtual="Nova Doação"
+                    hrefAnterior="/doacoes"
                 />
             </div>
 

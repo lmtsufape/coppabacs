@@ -368,7 +368,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         name="imagens"
                         multiple
                         onChange={handleImageChange}
-                        required
+                        
                     />
                     {formik.touched.imagens && formik.errors.imagens ? (
                         <span className={styles.form__error}>{formik.errors.imagens}</span>
