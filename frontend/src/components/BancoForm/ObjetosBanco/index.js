@@ -1,7 +1,6 @@
 import style from "../agricultorForm.module.scss";
 
 export default function objetosBanco({ formik }) {
-  console.log(formik.values)
   return (
     <>
       <div className={style.container__ContainerForm_form_halfContainer}>

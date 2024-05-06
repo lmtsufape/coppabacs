@@ -4,7 +4,6 @@ import { cpfMask } from "@/utils/Masks/cpfMask";
 
 
 export default function DadosBanco({ formik }) {
-  console.log(formik.values)
   return (
     <>
       <label htmlFor="nome">Nome do Banco <span>*</span></label>

@@ -171,14 +171,11 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
           initialValues={initialValues}
           validationSchema={validateSchema}
           onSubmit={(values, { setSubmitting }) => {
-            console.log(values)
             mutate(values, {
               onSuccess: (res) => {
-                console.log("enviou")
                 window.location.href = '/sementes';
               },
               onError:(error) => {
-                console.log(teste)
                 console.log(error)
               }
             });
@@ -228,11 +225,9 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
                     <button onClick={()=>{
                       mutate(formik.values,{
                         onSucess: (res) => {
-                          console.log("enviou");
                           window.location.href = '/sementes';
                         },
                         onError: (error) => {
-                          console.log(teste)
                           console.log(error)
                         }
                       });

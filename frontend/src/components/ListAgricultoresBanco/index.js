@@ -23,7 +23,6 @@ export default function ListAgricultores({ diretorioAnterior, diretorioAtual, hr
   },[]);
   const userDetailsMutation = useMutation(getCurrentUser, {
     onSuccess: (res) => {
-      console.log(res.data)
       setBanco(res.data.bancoId)
     },
     onError: (error) => {

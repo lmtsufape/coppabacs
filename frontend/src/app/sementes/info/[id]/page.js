@@ -22,7 +22,6 @@ export default function Info() {
       return getSementes(params.id);
     }, {
     onSuccess: (res) => {
-      console.log(res);
       setSementes(res.data);
     },
     onError: (error) => {

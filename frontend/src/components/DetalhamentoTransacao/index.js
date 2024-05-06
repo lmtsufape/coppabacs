@@ -121,7 +121,6 @@ const DetalhamentoTransacao = ({ diretorioAnterior, diretorioAtual, hrefAnterior
       console.error('Erro ao tentar atualizar os dados', error)
     }
   })
-  console.log(usuario)
   return (
     <div id="header" className={style.container}>
       <HeaderNavegacao

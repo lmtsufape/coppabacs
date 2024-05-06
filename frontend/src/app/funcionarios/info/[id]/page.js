@@ -20,7 +20,6 @@ export default function Info() {
       return getUsuario(params.id);
     }, {
     onSuccess: (res) => {
-      console.log(res);
       setUsuario(res.data);
     },
     onError: (error) => {

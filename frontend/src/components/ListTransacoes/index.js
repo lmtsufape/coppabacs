@@ -25,7 +25,6 @@ export default function ListTransacoes({ diretorioAnterior, diretorioAtual, href
   });
   const userDetailsMutation = useMutation(getCurrentUser, {
     onSuccess: (res) => {
-      console.log(res.data)
       setBanco(res.data.bancoId)
     },
     onError: (error) => {

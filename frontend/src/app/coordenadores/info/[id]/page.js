@@ -21,7 +21,6 @@ export default function Info() {
       return getCoordenador(params.id);
     }, {
     onSuccess: (res) => {
-      console.log(res);
       setUsuario(res.data);
     },
     onError: (error) => {

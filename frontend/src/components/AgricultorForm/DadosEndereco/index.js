@@ -85,7 +85,8 @@ export default function DadosEndereco({ formik }) {
 
       <div className={style.container__ContainerForm_form_halfContainer}>
         <div>
-          <label htmlFor="logradouro">Logradouro <span >*</span></label>
+          <label 
+          htmlFor="logradouro">Logradouro <span >*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="logradouro"
@@ -146,11 +147,11 @@ export default function DadosEndereco({ formik }) {
           ) : null}
         </div>
       </div>
-      <label htmlFor="bancoId">Banco de sementes</label>
+      <label htmlFor="bancoId">Banco de sementes <span >*</span></label>
 
       <select
-        className={style.container__ContainerForm_form_halfContainer_input}
-        id="bancoId"
+            className={style.container__ContainerForm_form_halfContainer_input}
+            id="bancoId"
         name="bancoId"
         placeholder="Insira o banco de sementes"
         onChange={formik.handleChange}

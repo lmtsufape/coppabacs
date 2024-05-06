@@ -59,14 +59,14 @@ const Login = () => {
       <div>
         <div className={style.login}>
           <div className={style.login__content}>
-            <h1 className={style.login__content_title}>Sobre o sistema</h1>
-            <p className={style.login__content_subtitle}>Bem-vindo ao Software de Armazenamento de Sementes da COPPABACS!
-            Facilitamos o armazenamento coletivo de sementes para a agricultura familiar no semiárido alagoano. 
-            Desde 1996, apoiamos mais de 1500 trabalhadores em 13 comunidades, promovendo educação, armazenamento e 
-            sustentabilidade.</p>
+            <h1 className={style.login__content_title}>Sementes Crioulas</h1>
+            <p className={style.login__content_subtitle}>O Sementes Crioulas é uma plataforma desenvolvida pela Universidade Federal do Agreste de Pernambuco por meio do Laboratório
+            Multidisciplinar de Tecnologias Sociais (LMTS), em parceria com a Cooperativa de Pequenos Produtores
+            Agrícolas dos Bancos Comunitários de Sementes (COPPABACS), tendo como objetivo, auxiliar a eficiência da gestão da cooperativa. A ferramenta visa contribuir no processo de gestão
+            das sementes, dos agricultores e dos bancos de sementes.</p>
           </div>
+          <div className={style.login__login}>
           <form onSubmit={(e) => { e.preventDefault(); mutate(); }}>
-            <div className={style.login__login}>
               <h1 className={style.login__login_title}>Entrar</h1>
               <label htmlFor="email" className={style.login__login_label}>
                 <p>E-mail</p>
@@ -76,10 +76,11 @@ const Login = () => {
                 <p>Senha</p>
                 <input type="password" name="senha" placeholder="Digite sua senha" value={senha}  onChange={(e) => setSenha(e.target.value)} />
               </label>
-              <Link href="/recuperarSenha"/>
+              <Link href="/recuperarSenha">
               <h2 className={style.login__login_subtitle}>Esqueceu a senha?</h2>
-              {/* {status} é por isso que aparece o idle na página de login */}
-              {status === "error" ? <p className={style.login__login_error}>E-mail ou senha incorretos</p> : null}
+              </Link>
+              
+              {status === "error" ? <p className={style.senhaErrada}>Email ou senha incorretos</p> : null}
               <button className={`${style.login__login_button} ${status === "loading" || status === "success" ? style.active : ""}`}>Entrar</button>
               <h2 className={style.login__login_subtitle1}>Não possui conta? &nbsp;
                 <Link href="/novoUsuario">
@@ -88,8 +89,9 @@ const Login = () => {
                   </span>
                 </Link>
               </h2>
-            </div>
+            
           </form>
+          </div>
         </div>
       </div>
     )

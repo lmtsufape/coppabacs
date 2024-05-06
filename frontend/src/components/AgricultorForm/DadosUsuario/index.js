@@ -6,7 +6,6 @@ import { useState } from "react";
 
 export default function DadosForm({ formik }) {
   const [estadoCivil, setEstadoCivil] = useState(''); // Estado para controlar o estado civil
-  console.log(estadoCivil);
 
   return (
     <>
@@ -86,7 +85,7 @@ export default function DadosForm({ formik }) {
 
       <label >CPF <span>*</span></label>
       <input
-        className={style.container__ContainerForm_form_halfContainer_input}
+        className={style.container__ContainerForm_form_input}
         id="cpf"
         name="cpf"
         placeholder="Insira seu CPF"
@@ -145,7 +144,7 @@ export default function DadosForm({ formik }) {
         <div>
           <label >Sexo <span>*</span></label>
           <select
-            className={style.container__ContainerForm_form_halfContainer_select}
+            className={style.container__ContainerForm_form_halfContainer_input}
             id="sexo"
             name="sexo"
             placeholder="Escolha seu sexo"
@@ -166,7 +165,7 @@ export default function DadosForm({ formik }) {
         <div>
           <label >Estado Civil <span>*</span></label>
           <select
-            className={style.container__ContainerForm_form_halfContainer_select}
+            className={style.container__ContainerForm_form_halfContainer_input}
             id="estadoCivil"
             name="estadoCivil"
             placeholder="Selecione..."
@@ -191,8 +190,9 @@ export default function DadosForm({ formik }) {
 
 
       {estadoCivil === '1' && (
-        <div>
-          <label >Nome do Cônjuge <span>*</span></label>
+      <div className={style.container__ContainerForm_form_halfContainer}>
+      <div>
+        <label >Nome do Cônjuge <span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="conjugeNome"
@@ -206,25 +206,28 @@ export default function DadosForm({ formik }) {
           {formik.touched['conjuge.nome'] && formik.errors['conjuge.nome'] ? (
             <span className={style.form__error}>{formik.errors['conjuge.nome']}</span>
           ) : null}
+      </div>
+          <div>
 
-          <label>Sexo do Cônjuge <span>*</span></label>
-          <select
-            className={style.container__ContainerForm_form_halfContainer_select}
+            <label>Sexo do Cônjuge <span>*</span></label>
+            <select
+            className={style.container__ContainerForm_form_halfContainer_input}
             id="conjugeSexo"
-            name="conjuge.sexo"
-            placeholder="Escolha o sexo do seu cônjuge"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.conjuge.sexo}
-            required
-          >
-            <option value="">Selecione...</option>
-            <option value="Masculino">Masculino</option>
-            <option value="Feminino">Feminino</option>
-          </select>
-          {formik.touched['conjuge.sexo'] && formik.errors['conjuge.sexo'] ? (
-            <span className={style.form__error}>{formik.errors['conjuge.sexo']}</span>
-          ) : null}
+              name="conjuge.sexo"
+              placeholder="Escolha o sexo do seu cônjuge"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.conjuge.sexo}
+              required
+            >
+              <option value="">Selecione...</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Feminino">Feminino</option>
+            </select>
+            {formik.touched['conjuge.sexo'] && formik.errors['conjuge.sexo'] ? (
+              <span className={style.form__error}>{formik.errors['conjuge.sexo']}</span>
+            ) : null}
+          </div>
         </div>
       )}
 

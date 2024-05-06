@@ -27,12 +27,10 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     // Assumindo que você armazena um token no localStorage após o login
     const token = getStorageItem("token")
-    console.log(token)
     if (token) {
       const fetchUser = async () => {
         try {
           const response = await getCurrentUser(); // Use o token para buscar as informações do usuário
-          console.log(response.data)
           updateUser(response.data);
           
         } catch (error) {
