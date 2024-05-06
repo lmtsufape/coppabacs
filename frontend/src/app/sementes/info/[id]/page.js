@@ -3,10 +3,6 @@ import { useParams } from "next/navigation";
 
 import { useMutation } from "react-query";
 
-
-import Header from '@/components/Home/Header';
-import Footer from '@/components/Footer';
-
 import { getSementes } from "@/api/sementes/getSemente"; 
 import { useEffect, useState } from "react";
 import DetalhamentoSementes from "@/components/DetalhamentoSementes";
@@ -26,7 +22,6 @@ export default function Info() {
       return getSementes(params.id);
     }, {
     onSuccess: (res) => {
-      console.log(res);
       setSementes(res.data);
     },
     onError: (error) => {

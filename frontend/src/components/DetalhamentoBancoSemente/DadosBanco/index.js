@@ -22,7 +22,7 @@ export default function DadosBanco({ formik, editar }) {
               />
             </div>
             <div>
-              <label htmlFor="responsavel">Responsavel</label>
+              <label htmlFor="responsavel">Responsável </label>
               <input
                 className={style.container__ContainerForm_form_input}
                 placeholder="Não informado"
@@ -33,8 +33,6 @@ export default function DadosBanco({ formik, editar }) {
             </div>
             <div>
               <label htmlFor="contato">Telefone </label>
-
-
               <input
                 className={style.container__ContainerForm_form_input}
                 placeholder="Não informado"
@@ -57,7 +55,7 @@ export default function DadosBanco({ formik, editar }) {
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="nome"
                 name="nome"
-                placeholder="Insira seu nome"
+                placeholder="Insira o nome do banco"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.nome}
@@ -69,13 +67,13 @@ export default function DadosBanco({ formik, editar }) {
             </div>
 
             <div>
-              <label htmlFor="responsavel">Responsavel </label>
+              <label htmlFor="responsavel">Responsável </label>
 
               <input
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="responsavel"
                 name="responsavel"
-                placeholder="Insira o responsavel do banco"
+                placeholder="Insira o responsável pelo banco"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.responsavel}

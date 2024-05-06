@@ -1,11 +1,11 @@
 "use client"
 import { useParams } from "next/navigation";
 import { useMutation } from "react-query";
-import Header from '@/components/Home/Header';
-import Footer from '@/components/Footer';
 import { getUsuario } from "@/api/usuarios/getUsuario ";
 import { useEffect, useState } from "react";
-import DetalhamentoCoordenador from "@/components/DetalhamentoCoordenador";
+import DetalhamentoUsuario from "@/components/DetalhamentoUsuario";
+import { getCoordenador } from "@/api/usuarios/coordenador/getCoordenador";
+
 
 export default function Info() {
 
@@ -19,10 +19,9 @@ export default function Info() {
 
   const { status, mutate } = useMutation(
     async () => {
-      return getUsuario(params.id);
+      return getCoordenador(params.id);
     }, {
     onSuccess: (res) => {
-      console.log(res);
       setUsuario(res.data);
     },
     onError: (error) => {
@@ -34,8 +33,7 @@ export default function Info() {
 
   return (
     <>
-      {//<Header hrefAnterior={"/coordenadores"} />
-      }
+
       { status === "success" && usuario &&
         <DetalhamentoCoordenador 
         usuario={usuario}
@@ -44,7 +42,6 @@ export default function Info() {
         hrefAnterior={"/coordenadores"}
         />
       }
-      <Footer />
     </>
   )
 }

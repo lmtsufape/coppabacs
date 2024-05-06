@@ -1,5 +1,4 @@
 import React from "react";
-import Footer from "@/components/Footer";
 import styles from "@/app/agricultores/novoAgricultor/index.module.scss"
 import UsuarioForm from "@/components/UsuarioForm";
 

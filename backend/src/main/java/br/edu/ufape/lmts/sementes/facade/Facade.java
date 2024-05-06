@@ -2,16 +2,19 @@ package br.edu.ufape.lmts.sementes.facade;
 
 import java.io.File;
 import java.io.InputStream;
+import java.time.LocalTime;
 import java.util.List;
 
 import br.edu.ufape.lmts.sementes.service.exception.CustomDatabaseException;
 import br.edu.ufape.lmts.sementes.service.exception.InvalidItemStateException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.lmts.sementes.auth.UserDetailsServiceImpl;
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.model.Admin;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
@@ -83,11 +86,8 @@ import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 @Service
 public class Facade {
 
-//	//Login
-//	@Autowired
-//	private AuthController authController;
-//
-//	public
+	@Autowired
+	private UserDetailsServiceImpl userDetailsServiceImpl;
 
 	// sementeDoenca--------------------------------------------------------------
 	@Autowired
@@ -142,6 +142,10 @@ public class Facade {
 	public Usuario findUsuarioById(long id) {
 		return usuarioService.findUsuarioById(id);
 	}
+	
+	public Usuario findUsuarioByEmail(String email) {
+		return usuarioService.findUsuarioByEmail(email);
+	}
 
 	public List<Usuario> getAllUsuario() {
 		return usuarioService.getAllUsuario();
@@ -168,12 +172,8 @@ public class Facade {
 	}
 
 	public Coppabacs saveCoppabacs(Coppabacs newInstance) throws EmailExistsException {
-		try {
-			usuarioService.saveUsuario(newInstance);
-			return coppabacsService.saveCoppabacs(newInstance);
-		} catch (Exception e) {
-			throw new RuntimeException("Erro ao salvar o usuário", e);
-		}
+		usuarioService.saveUsuario(newInstance);
+		return coppabacsService.saveCoppabacs(newInstance);
 	}
 
 	public Coppabacs updateCoppabacs(Coppabacs transientObject) {
@@ -394,11 +394,14 @@ public class Facade {
 
 	public RetiradaUsuario saveRetiradaUsuario(RetiradaUsuario newInstance) {
 		try {
-			validateAndProcessItens(newInstance.getItens(), false);
+			Agricultor agricultor = findAgricultorById(newInstance.getAgricultor().getId());
+			validateAndProcessItens(newInstance.getItens(), false, agricultor);
 			RetiradaUsuario retiradaUsuario = retiradaUsuarioService.saveRetiradaUsuario(newInstance);
 			BancoSementes bancoSementes = findBancoSementesById(retiradaUsuario.getBancoSementes().getId());
 			bancoSementes.addRetiradaUsuario(retiradaUsuario);
 			updateBancoSementes(bancoSementes);
+
+
 			return retiradaUsuario;
 		} catch (DataIntegrityViolationException e) {
 			throw new CustomDatabaseException("Erro ao salvar retirada de usuário", e);
@@ -436,11 +439,11 @@ public class Facade {
 	@Autowired
 	private TabelaBancoSementesService tabelaBancoSementesService;
 
+	@Transactional
 	public TabelaBancoSementes saveTabelaBancoSementes(TabelaBancoSementes newInstance, long sementeId) {
 		TabelaBancoSementes tabelaBancoSementes = tabelaBancoSementesService.saveTabelaBancoSementes(newInstance);
 		Sementes sementes = findSementesById(sementeId);
 		sementes.addTabelaSementes(tabelaBancoSementes);
-		updateSementes(sementes);
 		return tabelaBancoSementes;
 	}
 
@@ -472,9 +475,9 @@ public class Facade {
 	@Autowired
 	private ItemService itemService;
 
-	private void validateAndProcessItens(List<Item> itens, boolean isDoacao) {
+	private void validateAndProcessItens(List<Item> itens, boolean isDoacao, Agricultor agricultor ) {
 		List<Item> itensComErro = itens.stream()
-				.filter(item -> !updateItemAndTabelaBancoSementes(item, isDoacao))
+				.filter(item -> !updateItemAndTabelaBancoSementes(item, isDoacao, agricultor))
 				.toList();
 
 		if (!itensComErro.isEmpty()) {
@@ -482,16 +485,24 @@ public class Facade {
 		}
 	}
 
-	private boolean updateItemAndTabelaBancoSementes(Item item, boolean isDoacao) {
+	private boolean updateItemAndTabelaBancoSementes(Item item, boolean isDoacao, Agricultor agricultor) {
 		TabelaBancoSementes tabelaBancoSementes = findTabelaBancoSementesById(item.getTabelaBancoSementes().getId());
+		Sementes sementes = findSementesById(item.getSementes().getId());
 		if (tabelaBancoSementes != null) {
 			double newPeso = isDoacao ? tabelaBancoSementes.getPeso() + item.getPeso() : tabelaBancoSementes.getPeso() - item.getPeso();
 			if (newPeso < 0) {
 				return false;
 			}
 			try {
+				if(!isDoacao){
+					if(!agricultor.getSementes().contains(sementes)) {
+                        agricultor.addSementes(sementes);
+						updateAgricultor(agricultor);
+                    }
+				}
 				tabelaBancoSementes.setPeso(newPeso);
 				tabelaBancoSementesService.saveTabelaBancoSementes(tabelaBancoSementes);
+
 				return true;
 			} catch (Exception e) {
 				return false;
@@ -1037,6 +1048,27 @@ public class Facade {
 		usuarioService.saveUsuario(newInstance);
 		return agricultorService.saveAgricultor(newInstance);
 	}
+
+	public Agricultor addSementeAgricultor(List<Sementes> sementes, long agricultorId){
+		Agricultor agricultor = findAgricultorById(agricultorId);
+		sementes.forEach(semente-> {
+					if (!agricultor.getSementes().contains(semente)) {
+						agricultor.getSementes().add(semente);
+					}
+				}
+				);
+
+		return updateAgricultor(agricultor);
+	}
+
+	public Agricultor removeSementeAgricultor(List<Sementes> sementes, long agricultorId){
+		Agricultor agricultor = findAgricultorById(agricultorId);
+		sementes.forEach(semente-> {
+            agricultor.getSementes().remove(semente);
+		}
+		);
+		return updateAgricultor(agricultor);
+	}
 	
 	public Agricultor saveAgricultor(Agricultor newInstance) throws EmailExistsException {
 		newInstance.addRole(TipoUsuario.AGRICULTOR);
@@ -1154,7 +1186,7 @@ public class Facade {
 
 	public DoacaoUsuario saveDoacaoUsuario(DoacaoUsuario newInstance) {
 		try {
-			validateAndProcessItens(newInstance.getItens(), true);
+			validateAndProcessItens(newInstance.getItens(), true, null);
 			DoacaoUsuario doacaoUsuario =doacaoUsuarioService.saveDoacaoUsuario(newInstance);
 			BancoSementes bancoSementes = findBancoSementesById(doacaoUsuario.getId());
 			bancoSementes.addDoacaoUsuario(doacaoUsuario);
@@ -1318,7 +1350,9 @@ public class Facade {
 	}
 
 	public String storeFile(InputStream file, String fileName) {
-		return fileService.storeFile(file, fileName);
+		Usuario logado = findUsuarioByEmail(userDetailsServiceImpl.authenticated().getEmail());
+		String fn = logado.getId() + "-" + System.currentTimeMillis() + "-" + fileName;
+		return fileService.storeFile(file, fn.replace(" ", ""));
 	}
 
 	public void deleteFile(String fileName) {

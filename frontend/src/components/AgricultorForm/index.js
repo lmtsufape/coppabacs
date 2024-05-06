@@ -68,8 +68,8 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
       .min(11, "O contato deve ter no mínimo 11 caracteres")
       .required('Required'),
     dataNascimento: Yup.date()
-      .max(new Date(2024,11, 31) , "A data de nascimento não pode ser maior que a data atual")
-      .min(new Date(1900, 0, 1), "A data de nascimento não pode ser menor que 01/01/1900")
+      .max(new Date() , "A data de nascimento não pode ser maior que a data atual")
+      .min(new Date(1, 1, 1900), "A data de nascimento não pode ser menor que 01/01/1900")
       .required('Required'),
   })
 
@@ -108,7 +108,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
         {etapas === 0 && <h1 className={style.container__header_currentNav}>1. Dados do Agricultor</h1>}
         {etapas >= 1 && etapas <= 2 && <h1 className={style.container__header_current}>1. Dados do(a) Agricultor(a)</h1>}
 
-        {etapas === 1 && <h1 className={style.container__header_currentNav}>2. Endereço do Endereço</h1>}
+        {etapas === 1 && <h1 className={style.container__header_currentNav}>2. Dados do Endereço</h1>}
         {etapas != 1 && <h1 className={style.container__header_current}>2. Dados do Endereço</h1>}
 
         {etapas === 2 && <h1 className={style.container__header_currentNav}>3. Atividades Rurais</h1>}

@@ -19,14 +19,13 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
-
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class BancoSementes  {
+public class BancoSementes {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
@@ -37,17 +36,15 @@ public class BancoSementes  {
 	private String historiaBanco;
 	private String variedadesTrabalhadas;
 	private List<String> imagens;
+	private boolean ativo = true;
 
 	@OneToMany(mappedBy = "bancoSementes")
 	private List<Agricultor> agricultores;
-	
-	
+
 	@OneToMany(mappedBy = "bancoSementes")
 	private List<Gerente> gerentes;
 
-	@OneToOne(cascade = CascadeType.ALL,
-		orphanRemoval = true
-	)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
 	private Endereco endereco;
 	@Embedded
@@ -64,13 +61,17 @@ public class BancoSementes  {
 	@JoinColumn(name = "banco_sementes_id")
 	@ToString.Exclude
 	private List<TransacaoGenerica> transacaoGenerica;
-	
+
 	public void adicionarGerente(Gerente gerente) {
-	    if (this.gerentes == null) {
-	        this.gerentes = new ArrayList<>();
-	    }
-	    this.gerentes.add(gerente);
+		if (this.gerentes == null) {
+			this.gerentes = new ArrayList<>();
+		}
+		this.gerentes.add(gerente);
 	}
+
+
+
+
 
 
 	public void addDoacaoUsuario(DoacaoUsuario doacaoUsuario){
@@ -188,6 +189,22 @@ public class BancoSementes  {
 
 	public void setAgricultores(List<Agricultor> agricultores) {
 		this.agricultores = agricultores;
+	}
+
+	public List<String> getImagens() {
+		return imagens;
+	}
+
+	public void setImagens(List<String> imagens) {
+		this.imagens = imagens;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 }

@@ -20,7 +20,8 @@ export const APP_ROUTES = {
     home: '/',
     novoUsuario: '/novoUsuario',
     login: '/login',
-    sementes: '/sementes'
+    sementes: '/sementes',
+    bancoSementes: '/bancoSementes'
     
   },
 }

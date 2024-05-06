@@ -4,7 +4,6 @@ import { cpfMask } from "@/utils/Masks/cpfMask";
 
 
 export default function DadosBanco({ formik }) {
-  console.log(formik.values)
   return (
     <>
       <label htmlFor="nome">Nome do Banco <span>*</span></label>
@@ -79,7 +78,7 @@ export default function DadosBanco({ formik }) {
             name="anoFundacao"
             type="date"
             format="dd/MM/yyyy"
-            placeholder="Insira seu dataFundacao"
+            placeholder="Insira a data de fundação"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.anoFundacao}

@@ -13,6 +13,7 @@ import DadosAtividadesRurais from "./DadosAtividadesRurais";
 import Link from "next/link";
 import Footer from "../Footer";
 import { postUsuario } from "@/api/usuarios/postUsuario";
+import { postSolicitacaoAgricultor } from "@/api/usuarios/agricultor/postSolicitacaoAgricultor";
 
 
 const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
@@ -74,8 +75,7 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   })
   const { status, mutate } = useMutation(
     async (values) => {
-      console.log("valores: ", values);
-      return postUsuario(values);
+      return postSolicitacaoAgricultor(values);
     }, {
     onSuccess: (res) => {
 

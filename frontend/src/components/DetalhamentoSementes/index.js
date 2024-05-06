@@ -97,12 +97,10 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
     }
 
     const [etapas, setEtapas] = useState(0);
-    console.log("Sementes", sementes);
     const [editar, setEditar] = useState(false);
 
     const { mutate } = useMutation((values) => {
         // Aqui você coloca a lógica de envio dos dados para o servidor ou outra operação de mutação
-        console.log("Values submetidos:", values);
     });
 
     return (

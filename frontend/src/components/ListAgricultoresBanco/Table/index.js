@@ -3,7 +3,7 @@ import style from "./table.module.scss";
 import Link from "next/link";
 
 
-export default function tableLayout({ table1, table2, table3, table4, listFuncionarios }) {
+export default function tableLayout({ table1, table2, table3, table4, listAgricultores }) {
 
   return (
     <div className={style.content}>
@@ -25,19 +25,17 @@ export default function tableLayout({ table1, table2, table3, table4, listFuncio
           </tr>
         </thead>
         <tbody className={style.content__table__body}>
-          
-          {listFuncionarios.map((funcionario, index) => {
+          {listAgricultores.map((agricultor, index) => {
             return (
               <tr key={index}>
-                <td>{funcionario.nome}</td>
-                <td>{funcionario.contato}</td>
-                <td>{funcionario.cargo}</td>
-
+                <td>{agricultor.nome}</td>
+                <td>{agricultor.nomePopular}</td>
+                <td>{agricultor.contato}</td>
                 <td>
                   <div className={style.content__table_container_buttons}>
                     <button>
                       <span>
-                        <Link href={`/funcionarios/info/${funcionario.id}`}>
+                        <Link href={`/agricultores/info/${agricultor.id}`}>
                           <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
                         </Link>
                       </span>

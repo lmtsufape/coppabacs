@@ -32,13 +32,13 @@ export default function tableLayout({ table1, table2, table3, table4, listCoorde
               <tr key={index}>
                 <td>{coordenador.nome}</td>
                 <td>{coordenador.contato}</td>
-                <td>{coordenador.bancoName}</td>
+                <td>{coordenador.bancoSementeId}</td>
 
                 <td>
                   <div className={style.content__table_container_buttons}>
                     <button>
                       <span>
-                        <Link href={`/coordenador/info/${coordenador.id}`}>
+                        <Link href={`/coordenadores/info/${coordenador.id}`}>
                           <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
                         </Link>
                       </span>

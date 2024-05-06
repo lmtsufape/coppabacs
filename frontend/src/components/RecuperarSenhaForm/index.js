@@ -18,7 +18,7 @@ const RecuperarSenhaForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior })
 
     const validateSchema = Yup.object().shape({
         email: Yup.string()
-            .email("Insira um email válido")
+            .email("Insira um e-mail válido")
             .required('Required'),
     });
 
@@ -72,7 +72,7 @@ const RecuperarSenhaForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior })
                                     id="email"
                                     name="email"
                                     type="email"
-                                    placeholder="Insira seu email"
+                                    placeholder="Insira seu e-mail"
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     value={formik.values.email}

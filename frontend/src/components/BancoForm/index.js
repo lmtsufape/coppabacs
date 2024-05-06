@@ -110,10 +110,8 @@ const BancoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
           validationSchema={validateSchema}
 
           onSubmit={(values, { setSubmitting }) => {
-            console.log(values)
             mutate(values,{
               onSuccess: (res) => {
-                console.log("enviou");
                 //window.location.href = '/bancoSementes';
               },
               onError: (error) => {
@@ -171,11 +169,9 @@ const BancoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
                     <button onClick={()=> {
                        mutate(formik.values,{
                         onSuccess: (res) => {
-                          console.log("enviou");
                           window.location.href = '/bancoSementes';
                         },
                         onError: (error) => {
-                          console.log(teste)
                           console.log(error)
                         }
                       

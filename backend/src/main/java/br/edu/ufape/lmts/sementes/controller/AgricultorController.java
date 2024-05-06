@@ -2,6 +2,8 @@ package br.edu.ufape.lmts.sementes.controller;
 
 import java.util.List;
 
+import br.edu.ufape.lmts.sementes.controller.dto.request.SementesRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.response.SementesResponse;
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
@@ -76,6 +78,16 @@ public class AgricultorController {
 			throws EmailExistsException {
 		Agricultor agricultor = newObj.convertToEntity();
 		return new AgricultorResponse(facade.saveAgricultorUsuario(agricultor));
+	}
+
+	@PostMapping("agricultor/{id}/adicionar-sementes")
+	public AgricultorResponse addSementesAgricultor(@Valid @RequestBody List<SementesRequest> sementes, @PathVariable Long id) {
+		return new AgricultorResponse(facade.addSementeAgricultor(sementes.stream().map(SementesRequest::convertToEntity).toList(), id));
+	}
+
+	@PostMapping("agricultor/{id}/remover-sementes")
+	public AgricultorResponse removeSementesAgricultor(@Valid @RequestBody List<SementesRequest> sementes, @PathVariable Long id) {
+		return new AgricultorResponse(facade.removeSementeAgricultor(sementes.stream().map(SementesRequest::convertToEntity).toList(), id));
 	}
 
 	@PostMapping("agricultor")

@@ -70,7 +70,7 @@ public class SementesController {
 		Page<Sementes> list = facade.findPageSementes(pageRequest);
 		return list.map(SementesResponse::new);
 	}
-	
+
 	@PostMapping("sementes")
 	public SementesResponse createSementes(@Valid @RequestBody SementesRequest newObj) {
 		return new SementesResponse(facade.saveSementes(newObj.convertToEntity()));

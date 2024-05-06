@@ -13,7 +13,6 @@ export default function AssociadosPage() {
         table3="Contato"
         table4="Ações" />
 
-
     </div>
   )
 }

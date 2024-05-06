@@ -78,7 +78,6 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   })
   const { status, mutate } = useMutation(
     async (values) => {
-      console.log("valores: ", values);
       return postUsuario(values);
     }, {
     onSuccess: (res) => {

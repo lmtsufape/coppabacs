@@ -20,7 +20,7 @@ public class AgricultorRequest extends UsuarioRequest {
 	@Positive(message = "Id inválido")
 	private long bancoId;
 	private List<String> atividadesRurais;
-	private List<String> sementes;
+
 
 	public Agricultor convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

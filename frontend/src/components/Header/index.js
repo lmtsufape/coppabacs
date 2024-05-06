@@ -30,6 +30,7 @@ const Header = () => {
     dispatch(setUserLogin(""));
     push("/login");
     setOpen(false)
+    setDropdow(false)
   }
 
   return (

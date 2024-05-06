@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
@@ -56,6 +58,7 @@ public abstract class Usuario implements Serializable {
 	private String contato;
 	private String imagem;
 	private String sexo;
+	private boolean ativo = true;
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
 	private Conjuge conjuge;
@@ -68,7 +71,7 @@ public abstract class Usuario implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role")
 	private Set<TipoUsuario> roles;
-
+	
 	public Usuario(Long id, String nome, String nomePopular, String email, String senha, Endereco endereco, String cpf,
 			Date dataNascimento, String contato, String imagem, String sexo, Conjuge conjuge, List<Post> posts) {
 		this.id = id;
@@ -84,9 +87,11 @@ public abstract class Usuario implements Serializable {
 		this.sexo = sexo;
 		this.conjuge = conjuge;
 		this.posts = posts;
+		this.ativo = true;
 	}
+
 	public Usuario(Long id, String nome, String nomePopular, String email, String senha, Endereco endereco, String cpf,
-	        Date dataNascimento, String contato, String imagem, String sexo, Conjuge conjuge) {     
+			Date dataNascimento, String contato, String imagem, String sexo, Conjuge conjuge) {
 		this.id = id;
 		this.nome = nome;
 		this.nomePopular = nomePopular;
@@ -99,12 +104,9 @@ public abstract class Usuario implements Serializable {
 		this.imagem = imagem;
 		this.sexo = sexo;
 		this.conjuge = conjuge;
-	    this.posts = new ArrayList<>();
-	    }
-
-
-
-	
+		this.posts = new ArrayList<>();
+		this.ativo = true;
+	}
 
 	public void addRole(TipoUsuario role) {
 		if (this.roles == null) {
@@ -117,11 +119,11 @@ public abstract class Usuario implements Serializable {
 		if (this.posts == null) {
 			this.posts = new ArrayList<>();
 		}
-        this.posts.add(post);
-    }
-	
+		this.posts.add(post);
+	}
+
 	public void removeRole(TipoUsuario role) {
-        roles.remove(role);
+		roles.remove(role);
 	}
 
 	public List<String> getAuthoritiesForUser(Usuario usuario) {
@@ -143,7 +145,7 @@ public abstract class Usuario implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public String getNomePopular() {
 		return nomePopular;
 	}
@@ -250,5 +252,21 @@ public abstract class Usuario implements Serializable {
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		return super.clone();
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 }

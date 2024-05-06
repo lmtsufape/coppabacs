@@ -32,13 +32,13 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="responsavelTecnico.estadoConselho">Conselho/UF</label>
+                            <label htmlFor="responsavelTecnico.conselho">Conselho/UF</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
-                                name="responsavelTecnico.estadoConselho"
+                                name="responsavelTecnico.conselho"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.responsavelTecnico.estadoConselho}
+                                value={formik.values.responsavelTecnico.conselho}
                                 disabled
                             />
                         </div>
@@ -57,7 +57,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 onBlur={formik.handleBlur}
                                 value={formik.values.responsavelTecnico.nome}
                                 required />
-                            {formik.touched.nome && formik.errors.nome ? (
+                            {formik.touched.responsavelTecnico.nome && formik.errors.responsavelTecnico.nome ? (
                                 <span className={styles.form__error}>{formik.errors.responsavelTecnico.nome}</span>
                             ) : null}
                         </div>

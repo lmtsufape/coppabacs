@@ -31,7 +31,7 @@ export default function DadosEndereco({ formik }) {
         className={style.container__ContainerForm_form_input}
         id="cep"
         name="endereco.cep"
-        placeholder="Insira seu estado"
+        placeholder="Insira seu CEP"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.endereco.cep}
@@ -85,7 +85,8 @@ export default function DadosEndereco({ formik }) {
 
       <div className={style.container__ContainerForm_form_halfContainer}>
         <div>
-          <label htmlFor="logradouro">Logradouro <span >*</span></label>
+          <label 
+          htmlFor="logradouro">Logradouro <span >*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="logradouro"
@@ -136,7 +137,7 @@ export default function DadosEndereco({ formik }) {
             className={style.container__ContainerForm_form_halfContainer_input}
             id="referencia"
             name="endereco.referencia"
-            placeholder="Insira uma referencia"
+            placeholder="Insira uma referência"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.endereco.referencia}
@@ -146,11 +147,11 @@ export default function DadosEndereco({ formik }) {
           ) : null}
         </div>
       </div>
-      <label htmlFor="bancoId">Banco de sementes</label>
+      <label htmlFor="bancoId">Banco de sementes <span >*</span></label>
 
       <select
-        className={style.container__ContainerForm_form_halfContainer_input}
-        id="bancoId"
+            className={style.container__ContainerForm_form_halfContainer_input}
+            id="bancoId"
         name="bancoId"
         placeholder="Insira o banco de sementes"
         onChange={formik.handleChange}

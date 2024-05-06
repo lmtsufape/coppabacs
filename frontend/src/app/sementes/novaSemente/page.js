@@ -1,7 +1,5 @@
 import React from "react";
 import SementeForm from "@/components/SementeForm/index";
-import Footer from "@/components/Footer";
-
 
 export default function NovaSementeFormPage() {
     return (
@@ -10,9 +8,6 @@ export default function NovaSementeFormPage() {
             diretorioAnterior="Home / Sementes /" 
             diretorioAtual="Nova Semente" 
             hrefAnterior="/sementes"/>
-            {
-            //<Footer />
-            }
         </div>
     );
 }

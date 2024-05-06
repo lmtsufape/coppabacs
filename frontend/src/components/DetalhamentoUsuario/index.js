@@ -1,13 +1,10 @@
-"use client"
+"use client";
 
 import { useMutation } from "react-query";
-
 import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import * as Yup from 'yup';
-
 import style from "./detalhamentoUsuario.module.scss";
-
 import HeaderNavegacao from "../HeaderNavegacao";
 import DadosForm from "./DadosUsuario";
 import DadosEndereco from "./DadosEndereco";
@@ -64,7 +61,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
       areaPlantada: '',
       previsaoVenda: '',
     }
-  })
+  });
 
   useEffect(() => {
     if (usuario) {
@@ -80,48 +77,47 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
         bancoId: usuario.bancoId || '',
         atividadeRural: usuario.atividadeRural || {},
         producaoSementes: usuario.producaoSementes || {}
-      })
+      });
     }
   }, [usuario]);
 
 
   const mutationAprovacao = useMutation(() => validarAgricultor(usuario.id), {
     onSuccess: () => {
-      console.log('Usuario aprovado com sucesso!');
+      console.log('Usuário aprovado com sucesso!');
       router.push(`${hrefAnterior}`);
     },
     onError: (error) => {
-      console.error('Erro ao aprovar usuario', error);
+      console.error('Erro ao aprovar usuário', error);
     }
-  })
+  });
   const mutationUpdateAgricultor = useMutation(newData => patchAgricultor(newData, usuario.id), {
     onSuccess: () => {
       console.log('Dados atualizados com sucesso');
       router.push('/agricultores');
     },
     onError: (error) => {
-      console.error('Erro ao tentar atualizar os dados', error)
+      console.error('Erro ao tentar atualizar os dados', error);
     }
-  })
+  });
   const mutationUpdateCoordenador = useMutation(newData => patchCoordenador(newData, usuario.id), {
     onSuccess: () => {
       console.log('Dados atualizados com sucesso');
       router.push('/coordenadores');
     },
     onError: (error) => {
-      console.error('Erro ao tentar atualizar os dados', error)
+      console.error('Erro ao tentar atualizar os dados', error);
     }
-  })
+  });
   const mutationUpdateFuncionario = useMutation(newData => patchCoppabacs(newData, usuario.id), {
     onSuccess: () => {
       console.log('Dados atualizados com sucesso');
-      router.push('/funcionarios');
+      router.push('/funcionários');
     },
     onError: (error) => {
-      console.error('Erro ao tentar atualizar os dados', error)
+      console.error('Erro ao tentar atualizar os dados', error);
     }
-  })
-  console.log(usuario)
+  });
   return (
     <div id="header" className={style.container}>
       <HeaderNavegacao
@@ -139,10 +135,10 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
           initialValues={formData}
           enableReinitialize
           onSubmit={(values, { setSubmitting }) => {
-            if (hrefAnterior === "/funcionarios") {
-              mutationUpdateFuncionario.mutate(values)
+            if (hrefAnterior === "/funcionários") {
+              mutationUpdateFuncionario.mutate(values);
             } else if (hrefAnterior === "/gerentes") {
-              mutationUpdateCoordenador.mutate(values)
+              mutationUpdateCoordenador.mutate(values);
             } else if (hrefAnterior === "/agricultores") {
               mutationUpdateAgricultor.mutate(values);
             }
@@ -160,7 +156,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
                     <Image src="/assets/agricultorteste.png" alt="Foto do usuário" width={72} height={72} />
                     <h1>{usuario?.nome}</h1>
                   </div>
-                  {hrefAnterior === "/agricultores" || hrefAnterior === "/funcionarios" && (
+                  {hrefAnterior === "/agricultores" | hrefAnterior === "/funcionarios" && (
                     <>
                       {editar === false ? (
                         <button
@@ -168,7 +164,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
                           className={style.container__profile_button}>
 
                           <span>Editar</span>
-                          <Image src="/assets/iconLapis.svg" alt="editar perfil" width={25} height={25} />
+                          <Image src="/assets/iconLapis.svg" alt="editar perfil" width={20} height={20} />
                         </button >
                       ) : (
                         <button
@@ -176,7 +172,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
                           className={style.container__profile_button}>
 
                           <span>Salvar</span>
-                          <Image src="/assets/iconLapis.svg" alt="editar perfil" width={25} height={25} />
+                          <Image src="/assets/iconLapis.svg" alt="editar perfil" width={20} height={20} />
                         </button >
                       )}
                     </>
@@ -192,7 +188,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
                   )
                 }
                 {
-                  hrefAnterior === "/agricultores/solicitacoes" && (
+                  hrefAnterior === "/agricultores/solicitações" && (
                     <div className={style.container__profile}>
                       <button
                         onClick={() => setEditar(true)}
@@ -221,7 +217,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
 
     </div >
   );
-}
+};
 
 
 export default AgricultorForm;

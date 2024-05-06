@@ -107,7 +107,9 @@ export default function DadosAtividadesRurais({ formik }) {
             value={formik.values.producaoSementes.cultura}
           />
           {formik.touched.cultura && formik.errors.producaoSementes.cultura ? (
+            // <span className={style.form__error}>{formik.errors.producaoSementes.producaoSementes.cultura}</span> //Parece haver duplicação de producaoSementes
             <span className={style.form__error}>{formik.errors.producaoSementes.producaoSementes.cultura}</span>
+
           ) : null}
         </div>
 

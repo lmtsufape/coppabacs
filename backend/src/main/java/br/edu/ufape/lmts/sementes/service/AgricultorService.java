@@ -25,16 +25,17 @@ public class AgricultorService implements AgricultorServiceInterface {
 	}
 
 	public Agricultor updateAgricultor(Agricultor transientObject) {
+		findAgricultorById(transientObject.getId());
 		return repository.save(transientObject);
 	}
 
 	public Agricultor findAgricultorById(long id) {
-		return repository.findById(id)
+		return repository.findByAtivoTrueAndId(id)
 				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist Agricultor with id = " + id));
 	}
 
 	public List<Agricultor> getAllAgricultor() {
-		return repository.findAll();
+		return repository.findByAtivoTrue();
 	}
 
 	public List<Agricultor> getAllByRole(TipoUsuario tipoUsuario) {
@@ -44,25 +45,24 @@ public class AgricultorService implements AgricultorServiceInterface {
 	@Transactional
 	public void deleteAgricultor(Agricultor persistentObject) {
 		this.deleteAgricultor(persistentObject.getId());
-
 	}
 
 	@Transactional
 	public void deleteAgricultor(long id) {
-		Agricultor obj = repository.findById(id)
-				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist Agricultor with id = " + id));
-		repository.delete(obj);
+		Agricultor obj = findAgricultorById(id);
+		obj.setAtivo(false);
+		System.out.println("Merda");
+		repository.save(obj);
 	}
 
 	public void validateAgricultor(long id) {
-		Agricultor obj = this.repository.findById(id)
-				.orElseThrow(() -> new RuntimeException("It doesn't exist Agricultor with id = " + id));
+		Agricultor obj = findAgricultorById(id);
 		obj.addRole(TipoUsuario.AGRICULTOR);
 		obj.removeRole(TipoUsuario.USUARIO);
 		repository.save(obj);
 	}
 
 	public Page<Agricultor> findPageAgricultor(Pageable pageRequest) {
-		return findPageAgricultor(pageRequest);
+		return repository.findByAtivoTrue(pageRequest);
 	}
 }

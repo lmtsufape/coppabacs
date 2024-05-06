@@ -1,21 +1,17 @@
 "use client"
 
-import { useEffect, useState } from "react";
 import style from "../agricultorForm.module.scss";
-import { useMutation } from "react-query";
-import { getAllBancos } from "@/api/bancoSementes/getAllBancos";
 
 export default function DadosEndereco({ formik }) {
 
-  console.log(formik.values)
   return (
     <>
-      <label htmlFor="endereco.cep">Cep <span >*</span></label>
+      <label htmlFor="cep">Cep <span >*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="cep"
         name="endereco.cep"
-        placeholder="Insira seu estado"
+        placeholder="Insira seu CEP"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.endereco.cep}
@@ -24,7 +20,7 @@ export default function DadosEndereco({ formik }) {
       {formik.touched.cep && formik.errors.cep ? (
         <span className={style.form__error}>{formik.errors.endereco.cep}</span>
       ) : null}
-      <label htmlFor="endereco.estado">Estado <span >*</span></label>
+      <label htmlFor="estado">Estado <span >*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="estado"
@@ -38,7 +34,7 @@ export default function DadosEndereco({ formik }) {
       {formik.touched.estado && formik.errors.estado ? (
         <span className={style.form__error}>{formik.errors.endereco.estado}</span>
       ) : null}
-      <label htmlFor="endereco.cidade">Cidade <span >*</span></label>
+      <label htmlFor="cidade">Cidade <span >*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="cidade"
@@ -52,7 +48,7 @@ export default function DadosEndereco({ formik }) {
       {formik.touched.cidade && formik.errors.cidade ? (
         <span className={style.form__error}>{formik.errors.endereco.cidade}</span>
       ) : null}
-      <label htmlFor="endereco.bairro">Bairro <span >*</span></label>
+      <label htmlFor="bairro">Bairro <span >*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="bairro"
@@ -69,7 +65,8 @@ export default function DadosEndereco({ formik }) {
 
       <div className={style.container__ContainerForm_form_halfContainer}>
         <div>
-          <label htmlFor="endereco.logradouro">Logradouro <span >*</span></label>
+          <label 
+          htmlFor="logradouro">Logradouro <span >*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="logradouro"
@@ -84,7 +81,7 @@ export default function DadosEndereco({ formik }) {
           ) : null}
         </div>
         <div>
-          <label htmlFor="endereco.numero">Número <span >*</span></label>
+          <label htmlFor="numero">Número <span >*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             name="endereco.numero"
@@ -99,7 +96,7 @@ export default function DadosEndereco({ formik }) {
           ) : null}
         </div>
         <div>
-          <label htmlFor="endereco.complemento">Complemento <span >*</span></label>
+          <label htmlFor="complemento">Complemento <span >*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="complemento"
@@ -115,12 +112,12 @@ export default function DadosEndereco({ formik }) {
           ) : null}
         </div>
         <div>
-          <label htmlFor="endereco.referencia">Referência <span >*</span></label>
+          <label htmlFor="referencia">Referência <span >*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="referencia"
             name="endereco.referencia"
-            placeholder="Insira uma referencia"
+            placeholder="Insira uma referência"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.endereco.referencia}

@@ -160,7 +160,9 @@ export default function DadosSementesForm({ formik }) {
                             onBlur={formik.handleBlur}
                             value={formik.values.cultura.genero}
                             required />
+
                         {formik.touched.genero && formik.errors.genero ? (
+
                             <span className={styles.form__error}>{formik.errors.cultura.genero}</span>
                         ) : null}
                     </div>

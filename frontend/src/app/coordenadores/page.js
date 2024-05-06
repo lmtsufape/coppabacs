@@ -1,7 +1,4 @@
 
-
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import ListCoordenadores from "@/components/ListCoordenadores";
 export default function AssociadosPage() {
 
@@ -16,7 +13,6 @@ export default function AssociadosPage() {
         table3 ="Banco"
         table4="Ações" 
         />
-
 
     </div>
   )
