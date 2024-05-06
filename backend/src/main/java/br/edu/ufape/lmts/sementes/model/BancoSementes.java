@@ -69,29 +69,9 @@ public class BancoSementes {
 		this.gerentes.add(gerente);
 	}
 
-	public void addDoacaoUsuario(DoacaoUsuario doacaoUsuario) {
-		this.doacaoUsuario.add(doacaoUsuario);
-	}
 
-	public void addRetiradaUsuario(RetiradaUsuario retiradaUsuario) {
-		this.retiradaUsuario.add(retiradaUsuario);
-	}
 
-	public void addTransacaoGenerica(TransacaoGenerica transacaoGenerica) {
-		this.transacaoGenerica.add(transacaoGenerica);
-	}
 
-	public void addDoacaoUsuario(DoacaoUsuario doacaoUsuario){
-		this.doacaoUsuario.add(doacaoUsuario);
-	}
-
-	public void addRetiradaUsuario(RetiradaUsuario retiradaUsuario){
-		this.retiradaUsuario.add(retiradaUsuario);
-	}
-
-	public void addTransacaoGenerica(TransacaoGenerica transacaoGenerica){
-		this.transacaoGenerica.add(transacaoGenerica);
-	}
 
 
 	public void addDoacaoUsuario(DoacaoUsuario doacaoUsuario){
