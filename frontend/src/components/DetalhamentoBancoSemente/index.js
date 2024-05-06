@@ -83,6 +83,7 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
             setSubmitting(false);
           }}
         >
+          
           {formik => (
             <Form className={style.container__ContainerForm_form}>
               <div className={style.container__profile}>
