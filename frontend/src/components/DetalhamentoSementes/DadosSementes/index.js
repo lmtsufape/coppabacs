@@ -217,14 +217,14 @@ export default function DadosSementes({ formik, editar }) {
                                 onBlur={formik.handleBlur}
                                 value={formik.values.cultura.cultura}
                                 required />
-                            {formik.touched.cultura.cultura && formik.errors.cultura.cultura ? (
+                            {formik.touched.cultura && formik.errors.cultura.cultura ? (
                                 <span className={styles.form__error}>{formik.errors.cultura.cultura}</span>
                             ) : null}
                         </div>
                         <div>
                             <label htmlFor="cultura.genero">Gênero <span>*</span></label>
                             <input
-                                className={styles.sidedForm_input}
+                                className={styles.container__ContainerForm_form_halfContainer_input}
                                 id="genero"
                                 name="cultura.genero"
                                 placeholder="Insira o gênero"
@@ -232,7 +232,7 @@ export default function DadosSementes({ formik, editar }) {
                                 onBlur={formik.handleBlur}
                                 value={formik.values.cultura.genero}
                                 required />
-                            {formik.touched.cultura?.genero && formik.errors.cultura?.genero ? (
+                            {formik.touched.genero && formik.errors.cultura?.genero ? (
                                 <span className={styles.form__error}>{formik.errors.cultura.genero}</span>
                             ) : null}
                         </div>
@@ -256,7 +256,7 @@ export default function DadosSementes({ formik, editar }) {
                         <div>
                         <label htmlFor="nomePopular">Nome Popular da Cultivar <span>*</span></label>
                         <input
-                            className={styles.sidedForm_input}
+                            className={styles.container__ContainerForm_form_halfContainer_input}
                             id="nomePopular"
                             name="nomePopular"
                             placeholder="Insira o nome popular da cultivar"
@@ -404,7 +404,7 @@ export default function DadosSementes({ formik, editar }) {
                                         <input
                                             type="checkbox"
                                             name={finalidade.name}
-                                            checked={values.finalidades.includes(finalidade.name) || (finalidade.name === 'outra' && isOutraFinalidadeSelecionada)}
+                                            checked={(Array.isArray(values.finalidades) && values.finalidades.includes(finalidade.name)) || (finalidade.name === 'outra' && isOutraFinalidadeSelecionada)}
                                             onChange={(e) => handleCheckboxChange(finalidade.name, e.target.checked)}
                                             required
                                         />

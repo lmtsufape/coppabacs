@@ -76,7 +76,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                         <div>
                     <label htmlFor="caracteristicasPositiva">Características Positivas</label>
                     <input
-                        className={styles.sidedForm_input}
+                        className={styles.container__ContainerForm_form_halfContainer_input}
                         id="caracteristicasPositiva"
                         name="caracteristicasPositiva"
                         placeholder="Insira as características positivas da semente"
@@ -92,7 +92,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                 <div>
                     <label htmlFor="caracteristicasNegativas">Características Negativas</label>
                     <input
-                        className={styles.sidedForm_input}
+                        className={styles.container__ContainerForm_form_halfContainer_input}
                         id="caracteristicasNegativas"
                         name="caracteristicasNegativas"
                         placeholder="Insira a região de coleta dos dados"
@@ -107,7 +107,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                 <div>
                     <label htmlFor="descricao">Breve Descrição</label>
                     <input
-                        className={styles.sidedForm_input}
+                        className={styles.container__ContainerForm_form_halfContainer_input}
                         id="descricao"
                         name="descricao"
                         placeholder="Insira uma breve descrição"

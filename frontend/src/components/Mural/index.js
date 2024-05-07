@@ -32,7 +32,7 @@ export default function mural({ diretorioAnterior, diretorioAtual, hrefAnterior}
             <div className={style.list_header__containerBotao}>
             {role ? <button className={style.botao__criarNovaPostagem}>
                     <a className={style.list_header__title_criar_link} href='/mural/criarPostagem'>
-                        <h1>Criar nova postagem</h1>
+                        <h1>Criar Novo Conteúdo</h1>
                     </a>
                     <Image src="/assets/iconPostagem.svg" alt="Visualizar" width={27} height={26} />
                 </button> : ""}

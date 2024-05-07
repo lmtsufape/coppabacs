@@ -1,4 +1,4 @@
-.menu {
+.menu{
     width: auto;
     padding: 4em 10em 4em 10em;
     display: flex;
@@ -6,28 +6,27 @@
     align-items: center;
     align-content: center;
     justify-content: space-around;
+    flex-wrap: wrap;
+    
+    gap: 1em;
 
 
-    &_container{
-        display: flex;
-        width: 650px;
-
-        justify-content: space-around;
-        flex-wrap: wrap;
-        gap: 1em;
-
-    }
     
 }
 
+.conjuntoCards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 45em;
+    
+}
 
 .conjuntoCards{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     width: 60em;
-    
-}
 
 .mapa{
     width: 100%;
@@ -36,12 +35,13 @@
     justify-content: center;
     margin: 5em 0;
 
-    &__img {
+    &__img{
         width: 53%;
     }
 }
+
 @media only screen and (max-width: 480px) {
-    .menu {
+    .menu{
         text-align: center;
         align-items: center;
         align-content: center;

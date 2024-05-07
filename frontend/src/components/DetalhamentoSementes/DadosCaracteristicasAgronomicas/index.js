@@ -212,7 +212,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 onBlur={formik.handleBlur}
                                 value={formik.values.caracteristicasAgronomicas.altitudePlanta}
                                 required />
-                            {formik.touched.caracteristicasAgronomicas.altitudePlanta && formik.errors.caracteristicasAgronomicas.altitudePlanta ? (
+                            {formik.touched.altitudePlanta && formik.errors.caracteristicasAgronomicas.altitudePlanta ? (
                                 <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.caracteristicasAgronomicas.altitudePlanta}</span>
                             ) : null}
                         </div>
@@ -257,7 +257,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 onBlur={formik.handleBlur}
                                 value={formik.values.caracteristicasAgronomicas.tipoGrao}
                                 required />
-                            {formik.touched.caracteristicasAgronomicas.tipoGrao && formik.errors.caracteristicasAgronomicas.tipoGrao ? (
+                            {formik.touched.tipoGrao && formik.errors.caracteristicasAgronomicas.tipoGrao ? (
                                 <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.tipoGrao}</span>
                             ) : null}
                         </div>
@@ -332,7 +332,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 onBlur={formik.handleBlur}
                                 value={formik.values.empalhamento.tipo}
                                 required />
-                            {formik.touched.empalhamento.tipo && formik.errors.empalhamento.tipo ? (
+                            {formik.touched.empalhamento && formik.errors.empalhamento.tipo ? (
                                 <span className={styles.form__error}>{formik.errors.empalhamento.tipo}</span>
                             ) : null}
                         </div>

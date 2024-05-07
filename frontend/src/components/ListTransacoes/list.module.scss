@@ -29,13 +29,18 @@
     background-color: #fff;
     border: #68655C 1px solid;
     border-radius: 0.8em;
+    &:hover{
+      box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);
+    }
   }
   &_link{
     color: #68655C;
 
     text-decoration: none;
+    padding: 1.5em 3.5em 1.5em 1.3em;
+    margin: -1.5em -3.5em -1.5em -1.3em;
+    
   }
-
 
 
     
