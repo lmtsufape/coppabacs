@@ -1,12 +1,12 @@
 
 import ListTransacoes from "@/components/ListTransacoes";
-export default function AssociadosPage() {
+export default function doacoesPage() {
 
   return (
     <div>
       <ListTransacoes
         diretorioAnterior="Home /"
-        diretorioAtual="Transacoes"
+        diretorioAtual="Doações"
         hrefAnterior="/"
         table1="Data"
         table2="Agricultor"

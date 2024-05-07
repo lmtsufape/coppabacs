@@ -11,8 +11,11 @@ import { useMutation } from 'react-query';
 import { putBancoId } from '@/api/bancoSementes/putBancoId';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { getStorageItem } from '@/utils/localStore';
 
 const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, banco }) => {
+  const [role, setRole] = useState(getStorageItem("userRole"));
+
   const router = useRouter();
   const [editar, setEditar] = useState(false);
   const [formData, setFormData] = useState({
@@ -59,6 +62,7 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
   const mutation = useMutation(newData => putBancoId(newData, banco.id), {
     onSuccess: () => {
       console.log('Dados atualizados com sucesso');
+      setEditar(false)
       router.push('/bancoSementes');
     },
     onError: (error) => {
@@ -93,10 +97,9 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
                 </div>
 
                 <div className={style.container__header_containerButton}>
-                  {hrefAnterior !== "/inicio" && (
+                  {role === "ROLE_COPPABACS" && (
                     <>
                       <Link className={style.container__header_link} href={`/bancoSementes/info/${banco.id}/agricultores`}>
-
                         <button className={style.container__header_containerButton_button}>
                           <Image src="/assets/iconAssociates.svg" alt="Agricultores" width={27} height={26} />
                           <span className={style.container__header_containerButton_button_text}>Agricultores</span>

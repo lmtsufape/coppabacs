@@ -16,6 +16,7 @@ import { getStorageItem } from "@/utils/localStore";
 import { getAllAgricultoresBanco } from "@/api/bancoSementes/getAgricultoresBanco";
 import { getCurrentUser } from "@/api/usuarios/getCurrentUser";
 import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
+import { getAllDoacoes } from "@/api/transacoes/doacoes/getAllDoacoes";
 
 export default function ListTransacoes({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) {
 
@@ -111,7 +112,7 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5 }) => {
   });
   const { status, mutate } = useMutation(
     async () => {
-      return getAllTransacoesBanco(Number(coordenador.bancoSementeId));
+      return getAllDoacoes(Number(coordenador.bancoSementeId));
     }, {
     onSuccess: (res) => {
       console.log("Transações carregadas com sucesso!")
@@ -135,9 +136,9 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5 }) => {
 
           <button>
 
-            <Link className={style.header__container_link} href="transacoes/novaTransacao">
+            <Link className={style.header__container_link} href="doacoes/novaDoacao">
               <h1>
-                Adicionar Nova Transação
+                Adicionar Doação  
               </h1>
             </Link>
 
