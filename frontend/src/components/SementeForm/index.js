@@ -61,10 +61,7 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
     finalidades: [],
 
-    regioesAdaptacaoCultivo: [
-      { regiao: "Pindorama" },
-      { regiao: "Casa do Cacete" }
-    ],
+    regioesAdaptacaoCultivo: "",
 
     caracteristicasAgronomicas: {
       cicloFenologico: "",
@@ -92,7 +89,7 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
   const validateSchema = Yup.object().shape({
     nome: Yup.string().required('O nome da cultivar é obrigatório'),
-  /*  responsavelTecnico: Yup.object().shape({
+    responsavelTecnico: Yup.object().shape({
       nome: Yup.string().required('O nome do responsável técnico é obrigatório'),
       cpf: Yup.string().required('O cpf do responsável técnico é obrigatório'),
     }),
@@ -101,40 +98,42 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       genero: Yup.string().required('O gênero é obrigatório'),
     }),
 
-  
-  nomePopular: Yup.string().required('O nome popular é obrigatório'),
-  descricao: Yup.string().required('A descrição é obrigatória'),
-  dominioPublico: Yup.string().required('O domínio público é obrigatório'),
-  polinizaacaoAbertaMelhorada: Yup.string().required('A polinização aberta melhorada é obrigatória'),
-  regiaoColetaDados: Yup.string().required('A região de coleta de dados é obrigatória'),
-  finalidades: Yup.object().shape({
-    nome: Yup.array().required('As finalidades são obrigatórias'),
-  }),
-  toleranciaAdversidades: Yup.object().shape({
-    altaTemperatura: Yup.string().required('A tolerância à alta temperatura é obrigatória'),
-    baixaTemperatura: Yup.string().required('A tolerância à baixa temperatura é obrigatória'),
-    geada: Yup.string().required('A tolerância à geada é obrigatória'),
-    chuvaExcessiva: Yup.string().required('A tolerância à chuva excessiva é obrigatória'),
-    seca: Yup.string().required('A tolerância à seca é obrigatória'),
-    ventos: Yup.string().required('A tolerância aos ventos é obrigatória'),
-    salinidade: Yup.string().required('A tolerância à salinidade é obrigatória'),
-    toxidadeAluminio: Yup.string().required('A tolerância à toxicidade do alumínio é obrigatória'),
-    soloArgiloso: Yup.string().required('A tolerância ao solo argiloso é obrigatória'),
-    soloArenoso: Yup.string().required('A tolerância ao solo arenoso é obrigatória'),
-    soloAcido: Yup.string().required('A tolerância ao solo ácido é obrigatória'),
-    soloBaixaFertilidade: Yup.string().required('A tolerância à baixa fertilidade do solo é obrigatória'),
-  }),
-  
-  regAdaptCultivar: Yup.string().required('A região adaptativa da cultivar é obrigatória'),*/
+
+    nomePopular: Yup.string().required('O nome popular é obrigatório'),
+    descricao: Yup.string().required('A descrição é obrigatória'),
+    dominioPublico: Yup.string().required('O domínio público é obrigatório'),
+    polinizaacaoAbertaMelhorada: Yup.string().required('A polinização aberta melhorada é obrigatória'),
+    regiaoColetaDados: Yup.string().required('A região de coleta de dados é obrigatória'),
+    finalidades: Yup.object().shape({
+      nome: Yup.array().required('As finalidades são obrigatórias'),
+    }),
+    toleranciaAdversidades: Yup.object().shape({
+      altaTemperatura: Yup.string().required('A tolerância à alta temperatura é obrigatória'),
+      baixaTemperatura: Yup.string().required('A tolerância à baixa temperatura é obrigatória'),
+      geada: Yup.string().required('A tolerância à geada é obrigatória'),
+      chuvaExcessiva: Yup.string().required('A tolerância à chuva excessiva é obrigatória'),
+      seca: Yup.string().required('A tolerância à seca é obrigatória'),
+      ventos: Yup.string().required('A tolerância aos ventos é obrigatória'),
+      salinidade: Yup.string().required('A tolerância à salinidade é obrigatória'),
+      toxidadeAluminio: Yup.string().required('A tolerância à toxicidade do alumínio é obrigatória'),
+      soloArgiloso: Yup.string().required('A tolerância ao solo argiloso é obrigatória'),
+      soloArenoso: Yup.string().required('A tolerância ao solo arenoso é obrigatória'),
+      soloAcido: Yup.string().required('A tolerância ao solo ácido é obrigatória'),
+      soloBaixaFertilidade: Yup.string().required('A tolerância à baixa fertilidade do solo é obrigatória'),
+    }),
+
+    regAdaptCultivar: Yup.string().required('A região adaptativa da cultivar é obrigatória'),
 
   })
 
-  
+
   const { status, mutate } = useMutation(
     async (values) => {
       return postSemente(values);
     }, {
     onSuccess: (res) => {
+      window.location.href = '/sementes';
+
     },
     onError: (error) => {
       console.log(error);
@@ -173,9 +172,8 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
           onSubmit={(values, { setSubmitting }) => {
             mutate(values, {
               onSuccess: (res) => {
-                window.location.href = '/sementes';
               },
-              onError:(error) => {
+              onError: (error) => {
                 console.log(error)
               }
             });
@@ -222,18 +220,11 @@ const SementesForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
                         <h1>Voltar</h1>
                       </Link>
                     </button>
-                    <button onClick={()=>{
-                      mutate(formik.values,{
-                        onSucess: (res) => {
-                          window.location.href = '/sementes';
-                        },
-                        onError: (error) => {
-                          console.log(error)
-                        }
-                      });
-                    }} 
-                    type = "submit"
-                    className={styles.buttons_linkWhite}>
+                    <button onClick={() => {
+                      mutate(formik.values);
+                    }}
+                      type="submit"
+                      className={styles.buttons_linkWhite}>
                       <h1>Finalizar</h1>
                     </button>
                   </div>

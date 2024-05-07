@@ -5,6 +5,7 @@ import styles from "@/components/SementeForm/sementeForm.module.scss"
 
 
 export default function DadosCaracteristicasAgronomicas({ formik }) {
+
     const [imagePreviewUrls, setImagePreviewUrls] = useState([]);
 
     const handleImageChange = (e) => {

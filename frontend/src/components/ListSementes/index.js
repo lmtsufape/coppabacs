@@ -10,14 +10,79 @@ import Table from "./Table";
 import { getAllSementes } from "@/api/sementes/getAllSementes";
 import { Search } from "../searchSemente";
 import { getStorageItem } from "@/utils/localStore";
+import { useSelector } from "react-redux";
 
 export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) {
+  const [role, setRole] = useState(getStorageItem("userRole"));
+
+  const userLogin = useSelector((state) => state.userLogin);
+
+  function whatIsTypeUser() {
+    if (role) {
+      if (role == "ROLE_ADMIN" || role == "ROLE_COPPABACS") {
+        return <LayoutAdmin
+          table1={table1}
+          table2={table2}
+          table3={table3}
+          table4={table4}
+          table5={table5}
+          diretorioAnterior={diretorioAnterior}
+          diretorioAtual={diretorioAtual}
+          hrefAnterior={hrefAnterior}
+        />
+      } else if (role == "ROLE_GERENTE") {
+        return <LayoutCoordenador
+          table1={table1}
+          table2={table2}
+          table3={table3}
+          table4={table4}
+          table5={table5}
+          diretorioAnterior={diretorioAnterior}
+          diretorioAtual={diretorioAtual}
+          hrefAnterior={hrefAnterior} />
+      } else if (role == "ROLE_AGRICULTOR") {
+        return <LayoutAgricultor
+          table1={table1}
+          table2={table2}
+          table3={table3}
+          table4={table4}
+          table5={table5}
+          diretorioAnterior={diretorioAnterior}
+          diretorioAtual={diretorioAtual}
+          hrefAnterior={hrefAnterior} />
+      }
+    } else {
+      return <LayoutPublic
+        table1={table1}
+        table2={table2}
+        table3={table3}
+        table4={table4}
+        table5={table5}
+        diretorioAnterior={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
+        hrefAnterior={hrefAnterior} />
+    }
+
+  }
+
+  return (
+    <div>
+      <div className={styles.menu} style={!userLogin ? { paddingTop: '0px' } : {}}>
+        {whatIsTypeUser()}
+      </div>
+    </div>
+  )
+
+}
+
+
+const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) => {
 
   const [sementes, setSementes] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [role, setRole] = useState(getStorageItem("userRole"));
 
-  console.log(role)
+
   useEffect(() => {
     mutate();
   }, [])
@@ -38,35 +103,157 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
     sementes.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
   return (
-    <div>
-      <Header
-        diretorioAnterior={diretorioAnterior}
-        diretorioAtual={diretorioAtual}
-        hrefAnterior={hrefAnterior}
-      />
-      <div className={styles.header}>
-        <div className={styles.header__container}>
-          {role ? <button>
-            <Link className={styles.header__container_link} href="sementes/novaSemente">
-              <h1>
-                Adicionar Sementes
+    <>
+      <div>
+        <Header
+          diretorioAnterior={diretorioAnterior}
+          diretorioAtual={diretorioAtual}
+          hrefAnterior={hrefAnterior}
+        />
+        <div className={styles.header}>
+          <div className={styles.header__container}>
+            {role ? <button>
+              <Link className={styles.header__container_link} href="sementes/novaSemente">
+                <h1>
+                  Adicionar Sementes
                 </h1>
-            </Link>
-            <Image src="/assets/iconSeedGrey+.svg" width={20} height={20} />
-          </button> : ""}
-          <div className={styles.header__container_buttons}>
+              </Link>
+              <Image src="/assets/iconSeedGrey+.svg" alt="semente verde" width={20} height={20} />
+            </button> : ""}
+            <div className={styles.header__container_buttons}>
+            </div>
           </div>
         </div>
+        <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <Table
+          table1={table1}
+          table2={table2}
+          table3={table3}
+          table4={table4}
+          table5={table5}
+          listSementes={filteredSementes}
+        />
       </div>
-     <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <Table
-        table1={table1}
-        table2={table2}
-        table3={table3}
-        table4={table4}
-        table5={table5}
-        listSementes={filteredSementes}
-      />
-    </div>
+    </>
   );
+
 }
+
+const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) => {
+  const [sementes, setSementes] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [role, setRole] = useState(getStorageItem("userRole"));
+
+
+  useEffect(() => {
+    mutate();
+  }, [])
+
+  const { state, mutate } = useMutation(
+    async () => {
+      return getAllSementes();
+    }, {
+    onSuccess: (res) => {
+      setSementes(res.data);
+    },
+    onError: (error) => {
+      console.log(error)
+    }
+  }
+  );
+  const filteredSementes = sementes.filter((sementes) =>
+    sementes.nome.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  return (
+    <>
+      <div>
+        <Header
+          diretorioAnterior={diretorioAnterior}
+          diretorioAtual={diretorioAtual}
+          hrefAnterior={hrefAnterior}
+        />
+        <div className={styles.header}>
+          <div className={styles.header__container}>
+            {role ? <button>
+              <Link className={styles.header__container_link} href="sementes/novaSemente">
+                <h1>
+                  Adicionar Sementes
+                </h1>
+              </Link>
+              <Image src="/assets/iconSeedGrey+.svg" alt="semente verde" width={20} height={20} />
+            </button> : ""}
+            <div className={styles.header__container_buttons}>
+            </div>
+          </div>
+        </div>
+        <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <Table
+          table1={table1}
+          table2={table2}
+          table3={table3}
+          table4={table4}
+          table5={table5}
+          listSementes={filteredSementes}
+        />
+      </div>
+    </>
+  )
+}
+
+const LayoutAgricultor = () => {
+
+  return (
+    <>
+    </>
+  )
+}
+
+
+const LayoutPublic = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) => {
+  const [sementes, setSementes] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [role, setRole] = useState(getStorageItem("userRole"));
+
+
+  useEffect(() => {
+    mutate();
+  }, [])
+
+  const { state, mutate } = useMutation(
+    async () => {
+      return getAllSementes();
+    }, {
+    onSuccess: (res) => {
+      setSementes(res.data);
+    },
+    onError: (error) => {
+      console.log(error)
+    }
+  }
+  );
+  const filteredSementes = sementes.filter((sementes) =>
+    sementes.nome.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  return (
+    <>
+      <div>
+        <Header
+          diretorioAnterior={diretorioAnterior}
+          diretorioAtual={diretorioAtual}
+          hrefAnterior={hrefAnterior}
+        />
+
+        <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <Table
+          table1={table1}
+          table2={table2}
+          table3={table3}
+          table4={table4}
+          table5={table5}
+          listSementes={filteredSementes}
+        />
+      </div>
+    </>
+  )
+}
+

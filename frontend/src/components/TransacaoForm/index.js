@@ -19,13 +19,18 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
   const router = useRouter();
   const initialValues = {
-    data: "",
-    agricultor: "",
-    semente: "",
-    variedade: "",
-    quantidade: "",
-    tipo: ""
+    dataDoacao: "2024-05-06",
+    descricao: "string",
+    agricultorId: 0,
+    itens: [
+      {
+        peso: 0,
+        sementesId: 0,
+        tabelaBancoSementesId: 0,
+      }
+    ]
   }
+
 
 
   const validateSchema = Yup.object().shape({
@@ -50,7 +55,7 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   const mutationCoordenador = useMutation(newTransacao => postTransacao(newTransacao), {
     onSuccess: () => {
       console.log('Cadastro realizado com sucesso!')
-      router.push('/transacoes')
+      router.push('/doacoes')
 
     },
     onError: (error) => {
@@ -70,8 +75,6 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
         etapas={etapas}
 
       />
-
-
       <div className={style.container__ContainerForm}>
         <Formik
           initialValues={initialValues}
@@ -91,7 +94,7 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
                 <DadosTransacao formik={formik} />
                 <div className={style.container__ContainerForm_buttons}>
                   <button onClick={() => setEtapas(etapas - 1)}>
-                    <Link href="/transacoes" className={style.container__ContainerForm_buttons_link}>
+                    <Link href="/doacoes" className={style.container__ContainerForm_buttons_link}>
                       <h1>Cancelar</h1>
                     </Link>
                   </button>
