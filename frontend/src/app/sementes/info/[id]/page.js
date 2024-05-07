@@ -36,7 +36,7 @@ export default function Info() {
       { status === "success" && sementes &&
         <DetalhamentoSementes 
         sementes={sementes}
-        diretorioAnterior={"Home / Sementes / "}
+        diretorioAnterior={"Home / Gestão de Sementes / "}
         diretorioAtual={"Informações da Semente"}
         hrefAnterior={"/sementes"}
         />

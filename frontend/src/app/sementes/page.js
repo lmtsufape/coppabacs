@@ -6,7 +6,7 @@ export default function SementesPage() {
     <div>
       <ListSementes
         diretorioAnterior= "Home /" 
-        diretorioAtual="Sementes" 
+        diretorioAtual="Gestão de Sementes" 
         hrefAnterior="/" 
         table1="Imagem"
         table2="Cultura" 

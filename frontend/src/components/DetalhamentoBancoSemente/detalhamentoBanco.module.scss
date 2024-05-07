@@ -274,7 +274,16 @@
         background-color: #fff;
         border: #050504 1px solid;
         border-radius: 0.8em;
+
+        &_text{
+          display: inline;
+        }
+        &_shorttext{
+          display: none;
+        }
+
       }
+      
     }
   }
 

@@ -16,7 +16,7 @@ export default function CriarPostagem() {
                     <div className={style.list_header__title_guia}>
                         <h2>Home /</h2>
                         <h2> Mural /</h2>
-                        <h3> Criar nova postagem</h3>
+                        <h3> Criar novo conteúdo</h3>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@ export default function CriarPostagem() {
 
                 <label className={style.criarPostagem__addImagem}>
                     <Image src="/assets/camera.svg" alt="Upload" width={93} height={93} />
-                    <span>Upload de imagem</span>
+                    <span>Envio de imagem</span>
                     <h6 className={style.criarPostagem__formatosSuportados}>PNG, JPG</h6>
                     <input
                         type="file"
