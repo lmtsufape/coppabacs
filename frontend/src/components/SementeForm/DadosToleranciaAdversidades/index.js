@@ -5,6 +5,7 @@ import styles from "@/components/SementeForm/sementeForm.module.scss"
 
 
 export default function DadosCaracteristicasAgronomicas({ formik }) {
+
     const [imagePreviewUrls, setImagePreviewUrls] = useState([]);
 
     const handleImageChange = (e) => {
@@ -368,7 +369,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         name="imagens"
                         multiple
                         onChange={handleImageChange}
-                        required
+                        
                     />
                     {formik.touched.imagens && formik.errors.imagens ? (
                         <span className={styles.form__error}>{formik.errors.imagens}</span>
