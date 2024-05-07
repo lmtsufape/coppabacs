@@ -31,6 +31,7 @@ export default function tableLayout({ table1, table2, table3, table4, listSement
           {listSementes.map((sementes, index) => {
             return (
               <tr key={index}>
+                {console.log(sementes)}
                 <td> <Image src={sementes.imagem} alt="Imagem da semente" width={100} height={100} /></td>
                 <td>{sementes.cultura.cultura}</td>
                 <td>{sementes.nome}</td>
@@ -55,7 +56,6 @@ export default function tableLayout({ table1, table2, table3, table4, listSement
           }
           )
           }
-
         </tbody>
       </table>
     </div>

@@ -19,8 +19,8 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
   const router = useRouter();
   const initialValues = {
-    dataDoacao: "2024-05-06",
-    descricao: "string",
+    dataDoacao: "",
+    descricao: "",
     agricultorId: 0,
     itens: [
       {

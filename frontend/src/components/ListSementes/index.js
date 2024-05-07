@@ -11,6 +11,8 @@ import { getAllSementes } from "@/api/sementes/getAllSementes";
 import { Search } from "../searchSemente";
 import { getStorageItem } from "@/utils/localStore";
 import { useSelector } from "react-redux";
+import { getSementesBanco } from "@/api/sementes/getSementeBanco";
+import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
 
 export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) {
   const [role, setRole] = useState(getStorageItem("userRole"));
@@ -140,18 +142,32 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
 }
 
 const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) => {
+  const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
+  const [coordenador, setCoordenador] = useState([]);
+
   const [sementes, setSementes] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [role, setRole] = useState(getStorageItem("userRole"));
 
-
   useEffect(() => {
-    mutate();
-  }, [])
+    mutationCoordenador.mutate(coordenadorEmail);
+    if(coordenador.bancoSementeId){
+      mutate();
+    }
+  }, [coordenador.bancoSementeId]);
 
+  const mutationCoordenador = useMutation(coordenadorEmail => getCoordenadorEmail(coordenadorEmail), {
+    onSuccess: (res) => {
+      setCoordenador(res.data);
+      console.log('Coordenador carregado com sucesso');
+    },
+    onError: (error) => {
+      console.error('Erro ao recuperar as informações do coordenador:', error);
+    }
+  });
   const { state, mutate } = useMutation(
     async () => {
-      return getAllSementes();
+      return getSementesBanco(Number(coordenador.bancoSementeId));
     }, {
     onSuccess: (res) => {
       setSementes(res.data);
@@ -177,7 +193,7 @@ const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ta
             {role ? <button>
               <Link className={styles.header__container_link} href="sementes/novaSemente">
                 <h1>
-                  Adicionar Sementes
+                  Adicionar Sementes ao Banco
                 </h1>
               </Link>
               <Image src="/assets/iconSeedGrey+.svg" alt="semente verde" width={20} height={20} />

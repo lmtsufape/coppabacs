@@ -110,7 +110,7 @@ export default function SelecionarSementesBanco({ formik }) {
                     </div>
                 </div>
             ))}
-            <button type="button" onClick={addSelector} className={styles.addButton}>Adicionar mais sementes</button>
+            <button type="button" onClick={addSelector} className={styles.container_button}>Adicionar mais sementes</button>
             {formik.errors.sementes && <span className={styles.form__error}>{formik.errors.sementes}</span>}
         </div>
     );
