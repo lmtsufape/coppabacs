@@ -95,7 +95,7 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
                 </div>
 
                 <div className={style.container__header_containerButton}>
-                  {role === "COPPABACS" && (
+                  {role === "ROLE_COPPABACS" && (
                     <>
                       <Link className={style.container__header_link} href={`/bancoSementes/info/${banco.id}/agricultores`}>
                         <button className={style.container__header_containerButton_button}>
