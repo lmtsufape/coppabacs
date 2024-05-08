@@ -33,14 +33,7 @@ export default function Info() {
 
   return (
     <>
-      { status === "success" && usuario &&
-        <DetalhamentoTransacao 
-        usuario={usuario}
-        diretorioAnterior={"Inicio / Transações / "}
-        diretorioAtual={"Informações da transação"}
-        hrefAnterior={"/transacoes"}
-        />
-      }
+
     </>
   )
 }
