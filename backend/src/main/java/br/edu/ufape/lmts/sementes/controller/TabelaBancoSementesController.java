@@ -78,7 +78,7 @@ public class TabelaBancoSementesController {
 	@PatchMapping("tabelaBancoSementes/{id}")
 	public TabelaBancoSementesResponse updateTabelaBancoSementes(@PathVariable Long id, @Valid @RequestBody TabelaBancoSementesRequest obj) {
 		try {
-			//TabelaBancoSementes o = obj.convertToEntity();
+			
 			TabelaBancoSementes oldObject = facade.findTabelaBancoSementesById(id);
 
 			TypeMap<TabelaBancoSementesRequest, TabelaBancoSementes> typeMapper = modelMapper
