@@ -7,12 +7,13 @@ import { getUsuario } from "@/api/usuarios/getUsuario ";
 import { useEffect, useState } from "react";
 import DetalhamentoDoacao from "@/components/DetalhamentoDoacao";
 import { getDoacaoId } from "@/api/transacoes/doacoes/getDoacaoId";
+import { getRetiradaId } from "@/api/transacoes/retiradas/getRetiradaId";
 
 export default function Info() {
 
   const params = useParams();
 
-  const [doacao, setDoacao] = useState();
+  const [retirada, setRetirada] = useState();
 
   useEffect(() => {
     mutate();
@@ -20,26 +21,26 @@ export default function Info() {
 
   const { status, mutate } = useMutation(
     async () => {
-      return getDoacaoId(params.id);
+      return getRetiradaId(params.id);
     }, {
     onSuccess: (res) => {
-      setDoacao(res.data);
+      console.log(res.data)
+      setRetirada(res.data);
     },
     onError: (error) => {
       console.log("error: ", error);
     }
   }
   );
-  
 
   return (
     <>
-      { status === "success" && doacao &&
+      { status === "success" && retirada &&
         <DetalhamentoDoacao 
-        doacao={doacao}
-        diretorioAnterior={"Inicio / Doações / "}
-        diretorioAtual={"Informações da doação"}
-        hrefAnterior={"/doacoes"}
+        doacao={retirada}
+        diretorioAnterior={"Inicio / Retiradas / "}
+        diretorioAtual={"Informações da retirada"}
+        hrefAnterior={"/retiradas"}
         />
       }
     </>

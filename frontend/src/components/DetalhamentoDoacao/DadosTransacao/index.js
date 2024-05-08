@@ -9,7 +9,7 @@ import { getAllAgricultoresBanco } from "@/api/bancoSementes/getAgricultoresBanc
 import { getStorageItem } from "@/utils/localStore";
 import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
 
-export default function DadosTransacao({ formik }) {
+export default function DadosTransacao({ formik, hrefAnterior }) {
     const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
     const [coordenador, setCoordenador] = useState([]);
 
@@ -74,12 +74,9 @@ export default function DadosTransacao({ formik }) {
         // Suponha que cada semente tenha um campo 'tabelaBancoSementesId' que precisa ser definido
         if (sementeSelecionada) {
             formik.setFieldValue(`itens[${index}].tabelaBancoSementesId`, sementeSelecionada.tabelaBancoSementes[0].id);
-            console.log("validação campo", sementeSelecionada.tabelaBancoSementes)
         }
 
     };
-
-    console.log(formik.values)
     return (
         <div>
             <div className={styles.container__ContainerForm_form}>
@@ -125,9 +122,9 @@ export default function DadosTransacao({ formik }) {
 
 
                 <div>
-                    <label>Data Doação</label>
+                    {hrefAnterior === "/doacoes" ? <label>Data Doação</label>:<label>Data Retirada</label>}
                     <input
-                        name="dataDoacao"
+                        name="dataRetirada"
                         onChange={formik.handleChange}
                         placeholder={formik.values.dataDoacao}
                         className={styles.container__ContainerForm_form_input}

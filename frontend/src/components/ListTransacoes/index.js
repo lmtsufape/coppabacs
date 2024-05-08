@@ -17,6 +17,7 @@ import { getAllAgricultoresBanco } from "@/api/bancoSementes/getAgricultoresBanc
 import { getCurrentUser } from "@/api/usuarios/getCurrentUser";
 import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
 import { getAllDoacoes } from "@/api/transacoes/doacoes/getAllDoacoes";
+import { getAllRetiradas } from "@/api/transacoes/retiradas/getAllRetiradas";
 
 export default function ListTransacoes({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) {
 
@@ -48,6 +49,7 @@ export default function ListTransacoes({ diretorioAnterior, diretorioAtual, href
         table3={table3}
         table4={table4}
         table5={table5}
+        diretorioAtual={diretorioAtual}
 
       />
     }
@@ -67,11 +69,11 @@ export default function ListTransacoes({ diretorioAnterior, diretorioAtual, href
   );
 }
 
-const LayoutCoordenador = ({ table1, table2, table3, table4, table5 }) => {
+const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAtual,hrefAnterior }) => {
 
   const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
 
-  const [doacoes, setDoacoes] = useState([]);
+  const [transacao, setTransacao] = useState([]);
 
   const [coordenador, setCoordenador] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -80,7 +82,11 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5 }) => {
   useEffect(() => {
     mutationCoordenador.mutate(coordenadorEmail);
     if(coordenador.bancoSementeId){
-      mutate();
+      if(diretorioAtual === "Doações"){
+        mutateDoacoes.mutate();
+      }else if(diretorioAtual ==="Retiradas"){
+        mutateRetiradas.mutate();
+      }
     }
   }, [coordenador.bancoSementeId]);
 
@@ -93,13 +99,27 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5 }) => {
       console.error('Erro ao recuperar as informações do coordenador:', error);
     }
   });
-  const { status, mutate } = useMutation(
+  const mutateDoacoes = useMutation(
     async () => {
       return getAllDoacoes(Number(coordenador.bancoSementeId));
     }, {
     onSuccess: (res) => {
       console.log("Transações carregadas com sucesso!")
-      setDoacoes(res.data);
+      setTransacao(res.data);
+    },
+    onError: (error) => {
+      console.error(error);
+    }
+  }
+  );
+  const mutateRetiradas = useMutation(
+    async () => {
+      return getAllRetiradas(Number(coordenador.bancoSementeId));
+    }, {
+    onSuccess: (res) => {
+      console.log(res.data)
+      console.log("Transações carregadas com sucesso!")
+      setTransacao(res.data);
     },
     onError: (error) => {
       console.error(error);
@@ -111,7 +131,7 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5 }) => {
     return `${year}-${month}-${day}`; // Converte para formato ISO
 };
 
-  const listDoacoes = doacoes.sort((a, b) => 
+  const listTransacoes = transacao.sort((a, b) => 
   new Date(formatDate(a.dataDoacao)) - new Date(formatDate(b.dataDoacao))
 );
   return (
@@ -121,12 +141,20 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5 }) => {
         <div className={style.header__container}>
 
           <button>
-
-            <Link className={style.header__container_link} href="doacoes/novaDoacao">
+            {diretorioAtual === "Doações" ? (
+              <Link className={style.header__container_link} href="doacoes/novaDoacao">
               <h1>
                 Adicionar Doação  
               </h1>
             </Link>
+            ): (
+              <Link className={style.header__container_link} href="retiradas/novaRetirada">
+              <h1>
+                Adicionar Retirada  
+              </h1>
+            </Link>
+            ) }
+            
 
             <Image src="/assets/iconAddTransacao.svg" alt="Adicionar Agricultor" width={27} height={24} />
           </button>
@@ -138,15 +166,15 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5 }) => {
       </div>
 
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      {listDoacoes && (
+      {listTransacoes && (
         <Table
           table1={table1}
           table2={table2}
           table3={table3}
           table4={table4}
           table5={table5}
-
-          listDoacoes={listDoacoes}
+          diretorioAtual={diretorioAtual}
+          listTrasacoes={listTransacoes}
         />
       )}
     </div>

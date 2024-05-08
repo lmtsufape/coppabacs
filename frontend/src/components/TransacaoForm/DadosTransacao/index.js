@@ -9,7 +9,7 @@ import { getAllAgricultoresBanco } from "@/api/bancoSementes/getAgricultoresBanc
 import { getStorageItem } from "@/utils/localStore";
 import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
 
-export default function DadosTransacao({ formik }) {
+export default function DadosTransacao({ formik, hrefAnterior }) {
     const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
     const [coordenador, setCoordenador] = useState([]);
 
@@ -74,12 +74,10 @@ export default function DadosTransacao({ formik }) {
         // Suponha que cada semente tenha um campo 'tabelaBancoSementesId' que precisa ser definido
         if (sementeSelecionada) {
             formik.setFieldValue(`itens[${index}].tabelaBancoSementesId`, sementeSelecionada.tabelaBancoSementes[0].id);
-            console.log("validação campo", sementeSelecionada.tabelaBancoSementes)
         }
 
     };
 
-    console.log(formik.values)
     return (
         <div>
             <div className={styles.container__ContainerForm_form}>
@@ -139,18 +137,36 @@ export default function DadosTransacao({ formik }) {
 
                 </div>
             ))}
-            <button type="button" onClick={() => formik.setFieldValue("itens", [...formik.values.itens, { peso: 0, sementesId: 0, tabelaBancoSementesId: 0 }])} className={styles.addButton}>
-                Adicionar mais sementes
-            </button>
-            <input
-                type="date"
-                name="dataDoacao"
-                onChange={formik.handleChange}
-                value={formik.values.dataDoacao}
-                className={styles.container__ContainerForm_form_input}
-            />
-            <label>Descrição <span>*</span> </label>
+            <div>
+                <button  type="button" className={styles.container_button} onClick={() => formik.setFieldValue("itens", [...formik.values.itens, { peso: 0, sementesId: 0, tabelaBancoSementesId: 0 }])}>
+                    Adicionar mais sementes
+                </button>
+            </div>
+            {hrefAnterior === "/doacoes" ? (
+                <>
+                    <label>Data da doação <span>*</span> </label>
+                    <input
+                        type="date"
+                        name="dataDoacao"
+                        onChange={formik.handleChange}
+                        value={formik.values.dataDoacao}
+                        className={styles.container__ContainerForm_form_input}
+                    />
+                </>
+            ) : (
+                <>
+                    <label>Data da retirada <span>*</span> </label>
+                    <input
+                        type="date"
+                        name="dataRetirada"
+                        onChange={formik.handleChange}
+                        value={formik.values.dataRetirada}
+                        className={styles.container__ContainerForm_form_input}
+                    />
+                </>
+            )}
 
+            <label>Descrição <span>*</span> </label>
             <textarea
                 type="text"
                 name="descricao"
