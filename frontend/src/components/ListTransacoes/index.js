@@ -71,24 +71,7 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5 }) => {
 
   const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
 
-  const [transacoes, setTransacoes] = useState([{
-    id: "1",
-    data:"02/07/2022",
-    agricultor:" asdfasdfasedf",
-    semente: "asdfasdfasdf",
-    variedade: "asdfasdf",
-    quantidade: "aasdfasdf",
-    tipo:"asdfasd"
-  },
-  {
-    id:"2",
-    data:"02/07/2023",
-    agricultor:" asdfasdfasedf",
-    semente: "asdfasdfasdf",
-    variedade: "asdfasdf",
-    quantidade: "aasdfasdf",
-    tipo:"asdfasd"
-  }]);
+  const [doacoes, setDoacoes] = useState([]);
 
   const [coordenador, setCoordenador] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -116,17 +99,20 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5 }) => {
     }, {
     onSuccess: (res) => {
       console.log("Transações carregadas com sucesso!")
-      setTransacoes(res.data);
+      setDoacoes(res.data);
     },
     onError: (error) => {
       console.error(error);
     }
   }
   );
+  const formatDate = (dateStr) => {
+    const [day, month, year] = dateStr.split("-");
+    return `${year}-${month}-${day}`; // Converte para formato ISO
+};
 
-
-  const listTransacoes = transacoes.filter((transacoes) =>
-  transacoes.data.toLowerCase().includes(searchTerm.toLowerCase())
+  const listDoacoes = doacoes.sort((a, b) => 
+  new Date(formatDate(a.dataDoacao)) - new Date(formatDate(b.dataDoacao))
 );
   return (
     <div>
@@ -152,7 +138,7 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5 }) => {
       </div>
 
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      {listTransacoes && (
+      {listDoacoes && (
         <Table
           table1={table1}
           table2={table2}
@@ -160,7 +146,7 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5 }) => {
           table4={table4}
           table5={table5}
 
-          listTransacoes={listTransacoes}
+          listDoacoes={listDoacoes}
         />
       )}
     </div>

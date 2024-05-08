@@ -10,9 +10,9 @@ import style from "./agricultorForm.module.scss";
 
 import HeaderNavegacao from "../HeaderNavegacao";
 import Link from "next/link";
-import { postCoordenador } from "@/api/usuarios/coordenador/postCoordenador";
 import { useRouter } from "next/navigation";
 import DadosTransacao from "./DadosTransacao/index";
+import { postDoacao } from "@/api/transacoes/doacoes/posttDoacao";
 
 
 const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
@@ -21,14 +21,15 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   const initialValues = {
     dataDoacao: "",
     descricao: "",
-    agricultorId: 0,
+    agricultorId: "",
     itens: [
       {
-        peso: 0,
-        sementesId: 0,
-        tabelaBancoSementesId: 0,
-      }
-    ]
+        peso: "",
+        sementesId: "",
+        tabelaBancoSementesId: ""
+      },
+    ],
+    bancoSementesId: "",
   }
 
 
@@ -52,7 +53,7 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       .required('Required'),
   })
 
-  const mutationCoordenador = useMutation(newTransacao => postTransacao(newTransacao), {
+  const mutationDoacao = useMutation(newDoacao => postDoacao(newDoacao), {
     onSuccess: () => {
       console.log('Cadastro realizado com sucesso!')
       router.push('/doacoes')
@@ -82,7 +83,8 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
           validationSchema={validateSchema}
 
           onSubmit={(values, { setSubmitting }) => {
-            mutationCoordenador.mutate(values)
+            console.log(values)
+            mutationDoacao.mutate(values)
             setSubmitting(false)
           }}
         >
@@ -100,6 +102,7 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
                   </button>
                   <button
                     type="submit"
+                    onClick={() => mutationDoacao.mutate(formik.values)}
                     className={style.container__ContainerForm_buttons_linkWhite}>
                     <h1>Concluir</h1>
                   </button>
