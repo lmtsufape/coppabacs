@@ -127,6 +127,7 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
                             <Form className={styles.container__ContainerForm_form}>
                                 <div className={styles.container__profile}>
                                     <div className={styles.container__profile_img}>
+                                    <Image src="/assets/sementeteste.png" alt="Foto do usuário" width={72} height={72} />
                                         <h1>{sementes?.nome}</h1>
                                     </div>
                                     
@@ -153,7 +154,8 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
                                 <DadosCaracteristicasAgronomicas formik={formik} editar={editar}/>
                                 <DadosToleranciaAdversidades formik={formik} editar={editar} />
                                 <InformacoesColeta formik={formik} editar={editar} />
-                                <ImagensSementes/>
+                                {//<ImagensSementes/>
+                    }
 
                             </Form>
                         )

@@ -61,7 +61,7 @@ export default function ImagensBanco() {
   return (
 
     <>
-      <label htmlFor="">Imagens do banco</label>
+      <label className="label" htmlFor="">Imagens do banco</label>
       <Swiper
         slidesPerView={1}
         spaceBetween={30}
@@ -91,7 +91,7 @@ export default function ImagensBanco() {
         {mockImg.map((imagem) => {
           return (
             <SwiperSlide key={imagem.id}>
-              
+
               <Image src={imagem.url} alt="Visualizar" width={180} height={180} />
             </SwiperSlide>
           );

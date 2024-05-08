@@ -32,7 +32,7 @@ export default function tableLayout({ table1, table2, table3, table4, listSement
             return (
               <tr key={index}>
                 {console.log(sementes)}
-                <td> <Image src={sementes.imagem} alt="Imagem da semente" width={100} height={100} /></td>
+                <td> <Image src="/assets/sementeteste.png" alt="Foto do usuário" width={72} height={72} /></td>
                 <td>{sementes.cultura.cultura}</td>
                 <td>{sementes.nome}</td>
                 <td>

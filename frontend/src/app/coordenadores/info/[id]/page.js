@@ -3,8 +3,9 @@ import { useParams } from "next/navigation";
 import { useMutation } from "react-query";
 import { getUsuario } from "@/api/usuarios/getUsuario ";
 import { useEffect, useState } from "react";
-import DetalhamentoUsuario from "@/components/DetalhamentoUsuario";
+import DetalhamentoCoordenador from "@/components/DetalhamentoCoordenador";
 import { getCoordenador } from "@/api/usuarios/coordenador/getCoordenador";
+
 
 export default function Info() {
 
@@ -32,11 +33,12 @@ export default function Info() {
 
   return (
     <>
+
       { status === "success" && usuario &&
-        <DetalhamentoUsuario 
+        <DetalhamentoCoordenador 
         usuario={usuario}
         diretorioAnterior={"Home / Coordenadores / "}
-        diretorioAtual={"Informações do Coordenador"}
+        diretorioAtual={"Informações do(a) Coordenador(a)"}
         hrefAnterior={"/coordenadores"}
         />
       }
