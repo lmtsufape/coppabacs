@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.InputStream;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import br.edu.ufape.lmts.sementes.controller.dto.request.TabelaBancoSementesRequest;
 import br.edu.ufape.lmts.sementes.service.exception.CustomDatabaseException;
 import br.edu.ufape.lmts.sementes.service.exception.InvalidItemStateException;
 import jakarta.transaction.Transactional;
@@ -445,6 +447,17 @@ public class Facade {
 		Sementes sementes = findSementesById(sementeId);
 		sementes.addTabelaSementes(tabelaBancoSementes);
 		return tabelaBancoSementes;
+	}
+
+	@Transactional
+	public List<TabelaBancoSementes> saveAllTabelaBancoSementes(List<TabelaBancoSementesRequest> requests) {
+		return requests.stream()
+				.map(request -> {
+					TabelaBancoSementes tabelaBancoSementes = request.convertToEntity();
+					long sementeId = request.getSementeId();
+					return saveTabelaBancoSementes(tabelaBancoSementes, sementeId);
+				})
+				.collect(Collectors.toList());
 	}
 
 	public TabelaBancoSementes updateTabelaBancoSementes(TabelaBancoSementes transientObject) {

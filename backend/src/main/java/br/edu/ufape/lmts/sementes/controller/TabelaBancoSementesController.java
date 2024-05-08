@@ -62,6 +62,13 @@ public class TabelaBancoSementesController {
 	public TabelaBancoSementesResponse createTabelaBancoSementes(@Valid @RequestBody TabelaBancoSementesRequest newObj) {
 		return new TabelaBancoSementesResponse(facade.saveTabelaBancoSementes(newObj.convertToEntity(), newObj.getSementeId()));
 	}
+
+	@PostMapping("tabelaBancoSementes/all")
+	public List<TabelaBancoSementesResponse> createAllTabelaBancoSementes(@Valid @RequestBody List<TabelaBancoSementesRequest> newObj) {
+		return facade.saveAllTabelaBancoSementes(newObj).stream()
+				.map(TabelaBancoSementesResponse::new)
+				.toList();
+	}
 	
 	@GetMapping("tabelaBancoSementes/{id}")
 	public TabelaBancoSementesResponse getTabelaBancoSementesById(@PathVariable Long id) {
