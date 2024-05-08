@@ -5,22 +5,24 @@
   color: black;
   margin: 0 0 2em 0;
 
-  &_button{
+  &_button {
     display: flex;
     align-items: center;
 
     gap: 0.5em;
     padding: 1em;
-
+    margin-bottom: 1em;
     font-weight: bold;
     color: #68655C;
     background-color: #fff;
     border: #68655C 1px solid;
     border-radius: 0.8em;
-    &:hover{
+
+    &:hover {
       box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);
     }
   }
+
   &__header {
     display: grid;
     grid-template-columns: 1fr 1fr;

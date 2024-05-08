@@ -18,13 +18,13 @@ import { getDoacaoId } from "@/api/transacoes/doacoes/getDoacaoId";
 const DetalhamentoDoacao = ({ diretorioAnterior, diretorioAtual, hrefAnterior, doacao }) => {
   const router = useRouter();
   const formData = {
-    dataDoacao: doacao.dataDoacao || "",
-    descricao: doacao.descricao || "",
+    data: hrefAnterior === "/doacoes" ? doacao.dataDoacao : doacao.dataRetirada || "",
+    descricao: doacao.descricao || "" ,
     agricultorId: doacao.agricultor || "",
     itens: doacao.itens || {},
-    bancoSementesId: doacao.bancoSementesId|| "",
+    bancoSementesId: doacao.bancoSementesId || "",
   }
-  console.log(formData)
+    
 
   const [etapas, setEtapas] = useState(0);
   return (
@@ -45,13 +45,13 @@ const DetalhamentoDoacao = ({ diretorioAnterior, diretorioAtual, hrefAnterior, d
               <Form
                 className={style.container__ContainerForm_form}
               >
-                <DadosTransacao formik={formik} />
+                <DadosTransacao formik={formik} hrefAnterior={hrefAnterior} />
                 <div className={style.container__ContainerForm_buttons}>
                   <button className={style.container__ContainerForm_buttons_link} onClick={() => setEtapas(etapas - 1)}>
                   </button>
                   <button
                     className={style.container__ContainerForm_buttons_linkWhite}>
-                    <Link href="/doacoes" className={style.container__ContainerForm_buttons_linkWhite}>
+                    <Link href={hrefAnterior} className={style.container__ContainerForm_buttons_linkWhite}>
                       <h1>Voltar</h1>
                     </Link>
 

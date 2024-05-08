@@ -12,13 +12,14 @@ import HeaderNavegacao from "../HeaderNavegacao";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import DadosTransacao from "./DadosTransacao/index";
-import { postDoacao } from "@/api/transacoes/doacoes/posttDoacao";
+import { postDoacao } from "@/api/transacoes/doacoes/postDoacao";
+import { postRetirada } from "@/api/transacoes/retiradas/postRetirada";
 
 
 const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
   const router = useRouter();
-  const initialValues = {
+  const initialValuesDoacoes = {
     dataDoacao: "",
     descricao: "",
     agricultorId: "",
@@ -31,6 +32,24 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
     ],
     bancoSementesId: "",
   }
+
+  const initialValuesRetirada = {
+    dataRetirada: "",
+    descricao: "",
+    agricultorId: "",
+    itens: [
+      {
+        peso: "",
+        sementesId: "",
+        tabelaBancoSementesId: ""
+      },
+    ],
+    bancoSementesId: "",
+  }
+
+  const initialValues = hrefAnterior === "/doacoes" ? initialValuesDoacoes
+    : hrefAnterior === "/retiradas" ? initialValuesRetirada
+      : {}; // Default initial values if none match
 
 
 
@@ -65,6 +84,20 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
     }
   }
   );
+  const mutationRetirada = useMutation(newRetirada => postRetirada(newRetirada), {
+
+    onSuccess: () => {
+
+      console.log('Cadastro realizado com sucesso!')
+      router.push('/retiradas')
+
+    },
+    onError: (error) => {
+      console.log("Erro ao cadastrar novo coordenador", error);
+
+    }
+  }
+  );
 
   const [etapas, setEtapas] = useState(0);
   return (
@@ -84,7 +117,7 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
           onSubmit={(values, { setSubmitting }) => {
             console.log(values)
-            mutationDoacao.mutate(values)
+
             setSubmitting(false)
           }}
         >
@@ -93,7 +126,7 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
               <Form
                 className={style.container__ContainerForm_form}
               >
-                <DadosTransacao formik={formik} />
+                <DadosTransacao formik={formik} hrefAnterior={hrefAnterior} />
                 <div className={style.container__ContainerForm_buttons}>
                   <button onClick={() => setEtapas(etapas - 1)}>
                     <Link href="/doacoes" className={style.container__ContainerForm_buttons_link}>
@@ -102,7 +135,13 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
                   </button>
                   <button
                     type="submit"
-                    onClick={() => mutationDoacao.mutate(formik.values)}
+                    onClick={() => {
+                      if (hrefAnterior === "/doacoes") {
+                        mutationDoacao.mutate(formik.values)
+                      } else if (hrefAnterior === "/retiradas") {
+                        mutationRetirada.mutate(formik.values)
+                      }
+                    }}
                     className={style.container__ContainerForm_buttons_linkWhite}>
                     <h1>Concluir</h1>
                   </button>

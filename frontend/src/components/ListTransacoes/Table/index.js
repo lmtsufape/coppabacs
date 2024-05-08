@@ -6,7 +6,7 @@ import { getAgricultor } from "@/api/usuarios/agricultor/getAgricultor";
 import { useMutation } from "react-query";
 
 
-export default function tableLayout({ table1, table2, table3, table4, table5, listDoacoes }) {
+export default function tableLayout({ table1, table2, table3, table4, table5, listTrasacoes, diretorioAtual }) {
 
   return (
     <div className={style.content}>
@@ -29,22 +29,27 @@ export default function tableLayout({ table1, table2, table3, table4, table5, li
           </tr>
         </thead>
         <tbody className={style.content__table__body}>
-          {listDoacoes.map((doacao, index) => {
-  
-            console.log(doacao.itens[0].sementes.nome)
+          {listTrasacoes.map((transacao, index) => {
             return (
               <tr key={index}>
-                <td>{doacao.dataDoacao}</td>
-                <td>{doacao.agricultor.nomePopular}</td>
-                <td>{doacao.itens[0].sementes.nome}</td>
-                <td>{doacao.itens[0].sementes.nomePopular}</td>
+                {diretorioAtual === "Doações" ? <td>{transacao.dataDoacao}</td> : <td>{transacao.dataRetirada}</td>}
+                <td>{transacao.agricultor.nomePopular}</td>
+                <td>{transacao.itens[0].sementes.nome}</td>
+                <td>{transacao.itens[0].sementes.nomePopular}</td>
                 <td>
                   <div className={style.content__table_container_buttons}>
                     <button>
                       <span>
-                        <Link href={`/doacoes/info/${doacao.id}`}>
-                          <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
-                        </Link>
+                        {diretorioAtual === "Doações" ? (
+                          <Link href={`/doacoes/info/${transacao.id}`}>
+                            <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
+                          </Link>
+
+                        ) : (
+                          <Link href={`/retiradas/info/${transacao.id}`}>
+                            <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
+                          </Link>
+                        )}
                       </span>
                     </button>
                     <button className={style.content__table_container_content__table_container_buttons_lastButton}>
