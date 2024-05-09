@@ -1,9 +1,17 @@
 import Image from "next/image";
 import style from "./table.module.scss";
 import Link from "next/link";
+import { deleteCoppabacs } from "@/api/usuarios/coppabacs/deleteCoppabacs";
+import ExcluirButton from "@/components/ExcluirButton";
 
 
-export default function tableLayout({ table1, table2, table3, table4, listFuncionarios }) {
+export default function tableLayout({ table1, table2, table3, table4, listFuncionarios, setFuncionarios }) {
+
+
+  const handleDeleteFuncionario = async (funcionarioId) => {
+    await deleteCoppabacs(funcionarioId);
+    setFuncionarios(listFuncionarios.filter(funcionario => funcionario.id !== funcionarioId))
+  }
 
   return (
     <div className={style.content}>
@@ -34,19 +42,16 @@ export default function tableLayout({ table1, table2, table3, table4, listFuncio
                 <td>{funcionario.cargo}</td>
 
                 <td>
-                  <div className={style.content__table_container_buttons}>
-                    <button>
+                  <div >
+                    <button className={style.no_border}>
                       <span>
                         <Link href={`/funcionarios/info/${funcionario.id}`}>
                           <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
                         </Link>
                       </span>
                     </button>
-                    <button className={style.content__table_container_content__table_container_buttons_lastButton}>
-                      <span>
-                        <Image src="/assets/iconLixeira.svg" alt="Desativar" width={27} height={26} />
-                      </span>
-                    </button>
+                    <ExcluirButton  itemId={funcionario.id} onDelete={handleDeleteFuncionario}/>
+
                   </div>
                 </td>
               </tr>

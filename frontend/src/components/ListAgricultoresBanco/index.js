@@ -134,6 +134,7 @@ const LayoutCoordenador = ({ table1, table2, table3, table4 }) => {
           table3={table3}
           table4={table4}
           listAgricultores={listAgricultores}
+          setAgricultores={setAgricultores}
         />
       )}
     </div>
@@ -204,6 +205,7 @@ const LayoutAdmin = ({ table1, table2, table3, table4 }) => {
           table3={table3}
           table4={table4}
           listAgricultores={listAgricultores}
+          setAgricultores={setAgricultores}
         />
       )}
     </div>

@@ -247,6 +247,7 @@ const LayoutPublic = ({ table1, table2, table3 }) => {
         table2={table2}
         table3={table3}
         listBancos={filteredBancos}
+        setBancos={setBancos}
       />
 
     </div>

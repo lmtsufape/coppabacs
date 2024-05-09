@@ -1,11 +1,22 @@
 import Image from "next/image";
 import style from "./table.module.scss";
 import Link from "next/link";
+import ExcluirButton from "@/components/ExcluirButton";
+import { deleteAgricultor } from "@/api/usuarios/agricultor/deleteAgricultor";
+import { useState } from "react";
 
 
-export default function tableLayout({ table1, table2, table3, table4, listAgricultores }) {
+export default function tableLayout({ table1, table2, table3, table4, listAgricultores, setAgricultores }) {
+  
+  const handleDeleteAgricultor = async (agricultorId) => {
+    await deleteAgricultor(agricultorId);
+    setAgricultores( listAgricultores.filter(agricultori => agricultori.id !== agricultorId) )
+  }
 
+
+   
   return (
+    
     <div className={style.content}>
       <table className={style.content__table}>
         <thead className={style.content__table__header}>
@@ -32,19 +43,16 @@ export default function tableLayout({ table1, table2, table3, table4, listAgricu
                 <td>{agricultor.nomePopular}</td>
                 <td>{agricultor.contato}</td>
                 <td>
-                  <div className={style.content__table_container_buttons}>
-                    <button>
-                      <span>
-                        <Link href={`/agricultores/info/${agricultor.id}`}>
-                          <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
+                  <div >
+                    <button className={style.noborder}>
+                      <span >
+                        <Link href={`/agricultores/info/${agricultor.id}`} >
+                          <Image  src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
                         </Link>
                       </span>
                     </button>
-                    <button className={style.content__table_container_content__table_container_buttons_lastButton}>
-                      <span>
-                        <Image src="/assets/iconLixeira.svg" alt="Desativar" width={27} height={26} />
-                      </span>
-                    </button>
+                    <ExcluirButton  itemId={agricultor.id} onDelete={handleDeleteAgricultor}/>
+                    
                   </div>
                 </td>
               </tr>
