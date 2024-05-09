@@ -36,7 +36,6 @@
       }
 
       th:first-child {
-        -moz-border-radius: 1em;
         border-radius: 1em 0 0 0;
       }
       th:last-child {
@@ -76,14 +75,15 @@
             position: initial;
             transform: translate(0);
             width: auto;  
+            background: none;
           }
+          
 
         }
       }
     }
     button {
-      border: none;
-      background: none;
+      
       &:focus {
         cursor: pointer;
       }
@@ -93,8 +93,10 @@
     }
   }
 }
-.imagemSemente{
-  border-radius: 5em;
+
+.no_border{
+  border: none;
+  background: none;
 }
 
 @media all and (min-width: 768px) {

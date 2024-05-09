@@ -134,6 +134,7 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
           table4={table4}
           table5={table5}
           listSementes={filteredSementes}
+          setSementes={setSementes}
         />
       </div>
     </>
@@ -210,6 +211,7 @@ const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ta
           table4={table4}
           table5={table5}
           listSementes={filteredSementes}
+          setSementes={setSementes}
         />
       </div>
     </>

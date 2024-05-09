@@ -32,8 +32,8 @@ export default function tableLayout({ table1, table2, table3, table4, listSolici
                 <td>{agricultor.nomePopular}</td>
                 <td>{agricultor.contato}</td>
                 <td>
-                  <div className={style.content__table_container_buttons}>
-                    <button>
+                  <div >
+                    <button className={style.no_border}>
                       <span>
                         <Link href={`/agricultores/solicitacoes/${agricultor.id}`}>
                           <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />

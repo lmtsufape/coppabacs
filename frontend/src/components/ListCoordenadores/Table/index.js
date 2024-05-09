@@ -1,10 +1,17 @@
 import Image from "next/image";
 import style from "./table.module.scss";
 import Link from "next/link";
+import { deleteCoordenador } from "@/api/usuarios/coordenador/deleteCoordenador";
+import ExcluirButton from "@/components/ExcluirButton";
 
 
-export default function tableLayout({ table1, table2, table3, table4, listCoordenadores }) {
+export default function tableLayout({ table1, table2, table3, table4, listCoordenadores, setCoordenador}) {
   
+  const handleDeleteCoordenador = async (id) => {
+    await deleteCoordenador(id);
+    setCoordenador( listCoordenadores.filter(objeto => objeto.id !== id) )
+  }
+
   return (
     <div className={style.content}>
       <table className={style.content__table}>
@@ -35,19 +42,16 @@ export default function tableLayout({ table1, table2, table3, table4, listCoorde
                 <td>{coordenador.bancoSementeId}</td>
 
                 <td>
-                  <div className={style.content__table_container_buttons}>
-                    <button>
+                  <div >
+                    <button className={style.no_border}>
                       <span>
                         <Link href={`/coordenadores/info/${coordenador.id}`}>
                           <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
                         </Link>
                       </span>
                     </button>
-                    <button className={style.content__table_container_content__table_container_buttons_lastButton}>
-                      <span>
-                        <Image src="/assets/iconLixeira.svg" alt="Desativar" width={27} height={26} />
-                      </span>
-                    </button>
+                    <ExcluirButton  itemId={coordenador.id} onDelete={handleDeleteCoordenador}/>
+
                   </div>
                 </td>
               </tr>
