@@ -99,6 +99,7 @@ const LayoutAdmin = ({ table1, table2, table3, table4 }) => {
           table3={table3}
           table4={table4}
           listFuncionarios={listFuncionarios}
+          setFuncionarios={setFuncionarios}
         />
       )}
     </div>

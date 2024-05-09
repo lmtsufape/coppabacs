@@ -37,8 +37,8 @@ export default function tableLayout({ table1, table2, table3, table4, table5, li
                 <td>{transacao.itens[0].sementes.nome}</td>
                 <td>{transacao.itens[0].sementes.nomePopular}</td>
                 <td>
-                  <div className={style.content__table_container_buttons}>
-                    <button>
+                  <div >
+                    <button className={style.no_border}>
                       <span>
                         {diretorioAtual === "Doações" ? (
                           <Link href={`/doacoes/info/${transacao.id}`}>
@@ -52,11 +52,7 @@ export default function tableLayout({ table1, table2, table3, table4, table5, li
                         )}
                       </span>
                     </button>
-                    <button className={style.content__table_container_content__table_container_buttons_lastButton}>
-                      <span>
-                        <Image src="/assets/iconLixeira.svg" alt="Desativar" width={27} height={26} />
-                      </span>
-                    </button>
+                   
                   </div>
                 </td>
               </tr>

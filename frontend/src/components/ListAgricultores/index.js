@@ -191,9 +191,7 @@ const LayoutAdmin = ({ table1, table2, table3, table4 }) => {
 
             <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Agricultor" width={27} height={24} />
           </button>
-          <div className={style.header__container_buttons}>
-
-          </div>
+          
 
         </div>
       </div>
@@ -206,6 +204,7 @@ const LayoutAdmin = ({ table1, table2, table3, table4 }) => {
           table3={table3}
           table4={table4}
           listAgricultores={listAgricultores}
+          setAgricultores={setAgricultores}
         />
       )}
     </div>

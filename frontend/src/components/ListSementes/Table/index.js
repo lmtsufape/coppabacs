@@ -3,10 +3,17 @@
 import Image from "next/image";
 import styles from "./table.module.scss";
 import Link from "next/link";
+import { deleteSemente } from "@/api/sementes/deleteSemente";
+import ExcluirButton from "@/components/ExcluirButton";
 
 
 
-export default function tableLayout({ table1, table2, table3, table4, listSementes }) {
+export default function tableLayout({ table1, table2, table3, table4, listSementes, setSementes }) {
+
+  const handleDeleteSementes = async (sementesId) => {
+    await deleteSemente(sementesId);
+    setSementes(listSementes.filter(sementes => sementes.id !== sementesId))
+  }
 
   return (
     <div className={styles.content}>
@@ -36,19 +43,16 @@ export default function tableLayout({ table1, table2, table3, table4, listSement
                 <td>{sementes.cultura.cultura}</td>
                 <td>{sementes.nome}</td>
                 <td>
-                  <div className={styles.content__table_container_buttons}>
-                    <button>
+                  <div >
+                    <button className={styles.no_border}>
                       <span>
                         <Link href={`/sementes/info/${sementes.id}`}>
                           <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
                         </Link>
                       </span>
                     </button>
-                    <button>
-                      <span>
-                        <Image src="/assets/iconLixeira.svg" alt="Desativar" width={27} height={26} />
-                      </span>
-                    </button>
+                    <ExcluirButton  itemId={sementes.id} onDelete={handleDeleteSementes}/>
+
                   </div>
                 </td>
               </tr>

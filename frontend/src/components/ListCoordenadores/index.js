@@ -34,6 +34,7 @@ export default function ListCoordenadores({ diretorioAnterior, diretorioAtual, h
         diretorioAnterior={diretorioAnterior}
         diretorioAtual={diretorioAtual}
         hrefAnterior={hrefAnterior}
+        
       />
       {whatIsTypeUser()}
 
@@ -99,6 +100,7 @@ const LayoutAdmin = ({table1, table2, table3, table4 }) => {
           table3={table3}
           table4={table4}
           listCoordenadores={listCoordenadores}
+          setCoordenadores={setCoordenadores}
         />
       )}
     </div>

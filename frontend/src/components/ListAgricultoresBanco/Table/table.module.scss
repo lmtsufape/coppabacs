@@ -75,14 +75,15 @@
             position: initial;
             transform: translate(0);
             width: auto;  
+            background: none;
           }
+          
 
         }
       }
     }
     button {
-      border: none;
-      background: none;
+      
       &:focus {
         cursor: pointer;
       }
@@ -91,6 +92,11 @@
       }
     }
   }
+}
+
+.noborder{
+  border: none;
+  background: none;
 }
 
 @media all and (min-width: 768px) {
