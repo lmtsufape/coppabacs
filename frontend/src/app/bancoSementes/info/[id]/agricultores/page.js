@@ -1,22 +1,18 @@
 "use client"
 import { useParams } from "next/navigation";
 import ListAgricultoresBanco from "@/components/ListAgricultores";
-import ListSementesBanco from "@/components/ListSementesBanco";
 export default function AssociadosPage() {
 
   const params = useParams();
   return (
     <div>
-      <ListSementesBanco
+      <ListAgricultoresBanco
         diretorioAnterior={`Home / Bancos Sementes / Banco Semente /`}
-        diretorioAtual="Sementes"
+        diretorioAtual="Agricultores"
         hrefAnterior={`/bancoSementes/info/${params.id}/`}
-        table1="Imagem"
-        table2="Cultura" 
-        table3="Nome da Cultivar" 
-        table4="Ação" 
-        idBanco={params.id}
-        />
+        table1="Nome"
+        table2="Função"
+        table3="Ação" />
 
     </div>
   )
