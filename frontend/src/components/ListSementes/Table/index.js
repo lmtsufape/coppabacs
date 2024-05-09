@@ -8,7 +8,7 @@ import ExcluirButton from "@/components/ExcluirButton";
 
 
 
-export default function tableLayout({ table1, table2, table3, table4, listSementes, setSementes }) {
+export default function tableLayout({ table1, table2, table3, table4, table5, listSementes, setSementes }) {
 
   const handleDeleteSementes = async (sementesId) => {
     await deleteSemente(sementesId);
@@ -23,10 +23,11 @@ export default function tableLayout({ table1, table2, table3, table4, listSement
             <th>{table1}</th>
             <th>{table2}</th>
             <th>{table3}</th>
+            <th>{table4}</th>
 
             <th className={styles.content__table__header_name3}>
               <div >
-                {table4}
+                {table5}
                 <Image src="/assets/iconInformacao.svg" alt="Visualizar" width={27} height={26} />
 
               </div>
@@ -38,10 +39,11 @@ export default function tableLayout({ table1, table2, table3, table4, listSement
           {listSementes.map((sementes, index) => {
             return (
               <tr key={index}>
-                {console.log(sementes)}
                 <td> <Image src="/assets/sementeteste.png" alt="Foto do usuário" width={72} height={72} /></td>
                 <td>{sementes.cultura.cultura}</td>
                 <td>{sementes.nome}</td>
+
+                <td>{sementes.tabelaBancoSementes[0].peso}</td>
                 <td>
                   <div >
                     <button className={styles.no_border}>

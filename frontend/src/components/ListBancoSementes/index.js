@@ -14,6 +14,8 @@ import { useRouter } from "next/navigation";
 import DetalhamentoBanco from "../DetalhamentoBancoSemente";
 import { getBanco } from "@/api/bancoSementes/getBanco";
 import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
+import { getCurrentUser } from "@/api/usuarios/getCurrentUser";
+import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
 
 export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3 }) {
 
@@ -183,6 +185,8 @@ const LayoutCoordenador = ({ table1, table2, table3 }) => {
           diretorioAnterior={"Home / "}
           diretorioAtual={"Informações do Banco de Semente"}
           hrefAnterior={"/"}
+          usuario="coordenador"
+
         />
       )}
     </>
@@ -190,11 +194,50 @@ const LayoutCoordenador = ({ table1, table2, table3 }) => {
 }
 
 const LayoutAgricultor = () => {
+  const [agricultorEmail, setAgricultorEmail] = useState(getStorageItem("userLogin"));
+  const [agricultor, setAgricultor] = useState([]);
 
+  const [banco, setBanco] = useState([]);
+  useEffect(() => {
+    mutationAgricultor.mutate(agricultorEmail);
+    if(agricultor.bancoId){
+      mutate();
+    }
+  },[agricultor.bancoId]);
+  const  mutationAgricultor= useMutation(agricultorEmail => getUsuarioEmail(agricultorEmail), {
+    onSuccess: (res) => {
+      setAgricultor(res.data);
+      console.log('Agricultor carregado com sucesso');
+    },
+    onError: (error) => {
+      console.error('Erro ao recuperar as informações do coordenador:', error);
+    }
+  });
+  const { state, mutate } = useMutation(
+    async () => {
+      return getBanco(Number(agricultor.bancoId));
+    }, {
+    onSuccess: (res) => {
+      console.log(res.data)
+      setBanco(res.data);
+    },
+    onError: (error) => {
+      console.log(error)
+    }
+  }
+  );
   return (
     <>
-      <h1>asdf</h1> {/* ?? */}
-    </>
+    {banco && (
+      <DetalhamentoBanco
+        banco={banco}
+        diretorioAnterior={"Home / "}
+        diretorioAtual={"Informações do Banco de Semente"}
+        hrefAnterior={"/"}
+        usuario="agricultor"
+      />
+    )}
+  </>
   )
 }
 
