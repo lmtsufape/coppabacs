@@ -12,8 +12,9 @@ import { putBancoId } from '@/api/bancoSementes/putBancoId';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { getStorageItem } from '@/utils/localStore';
+import HeaderDetalhamento from '../HeaderDetalhamento';
 
-const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, banco, usuario }) => {
+const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, banco, usuario, backDetalhamento }) => {
   const [role, setRole] = useState(getStorageItem("userRole"));
 
   const router = useRouter();
@@ -72,11 +73,22 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
   console.log(usuario)
   return (
     <div id="header">
-      <HeaderNavegacao
-        diretorioAnterior={diretorioAnterior}
-        diretorioAtual={diretorioAtual}
-        hrefAnterior={hrefAnterior}
-      />
+      {usuario === "coordenador" || usuario === "agricultor" ? (
+          <HeaderNavegacao
+            diretorioAnterior={diretorioAnterior}
+            diretorioAtual={diretorioAtual}
+            hrefAnterior={hrefAnterior}
+          />
+      ) : (
+
+          <HeaderDetalhamento
+            hrefAnterior={backDetalhamento}
+            diretorioAnterior="Home / Bancos de Sementes /"
+            diretorioAtual=" Detalhamento"
+
+          />
+      )
+      }
 
       <div className={style.container__ContainerForm}>
         <Formik
@@ -172,7 +184,7 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
           )}
         </Formik>
       </div>
-    </div>
+    </div >
   );
 }
 
