@@ -15,8 +15,7 @@ export default function tableLayout({ table1, table2, table3, table4, table5, li
           <tr>
             <th>{table1}</th>
             <th>{table2}</th>
-            <th>{table3}</th>
-            <th>{table4}</th>
+
 
             <th className={style.content__table__header_name3}>
               <div >
@@ -34,17 +33,14 @@ export default function tableLayout({ table1, table2, table3, table4, table5, li
               <tr key={index}>
                 {diretorioAtual === "Doações" ? <td>{transacao.dataDoacao}</td> : <td>{transacao.dataRetirada}</td>}
                 <td>{transacao.agricultor.nomePopular}</td>
-                <td>{transacao.itens[0].sementes.nome}</td>
-                <td>{transacao.itens[0].sementes.nomePopular}</td>
                 <td>
                   <div >
-                    <button className={style.no_border}>
+                    <button >
                       <span>
                         {diretorioAtual === "Doações" ? (
                           <Link href={`/doacoes/info/${transacao.id}`}>
                             <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
                           </Link>
-
                         ) : (
                           <Link href={`/retiradas/info/${transacao.id}`}>
                             <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
@@ -52,7 +48,6 @@ export default function tableLayout({ table1, table2, table3, table4, table5, li
                         )}
                       </span>
                     </button>
-                   
                   </div>
                 </td>
               </tr>
