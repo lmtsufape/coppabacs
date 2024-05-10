@@ -18,6 +18,7 @@ import { getCurrentUser } from "@/api/usuarios/getCurrentUser";
 import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
 import { getAllDoacoes } from "@/api/transacoes/doacoes/getAllDoacoes";
 import { getAllRetiradas } from "@/api/transacoes/retiradas/getAllRetiradas";
+import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
 
 export default function ListTransacoes({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) {
 
@@ -52,6 +53,16 @@ export default function ListTransacoes({ diretorioAnterior, diretorioAtual, href
         diretorioAtual={diretorioAtual}
 
       />
+    } else if (role == "ROLE_AGRICULTOR") {
+      return <LayoutAgricultor
+        table1={table1}
+        table2={table2}
+        table3={table3}
+        table4={table4}
+        table5={table5}
+        diretorioAtual={diretorioAtual}
+
+      />
     }
   }
 
@@ -68,6 +79,91 @@ export default function ListTransacoes({ diretorioAnterior, diretorioAtual, href
 
   );
 }
+
+const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAtual,hrefAnterior }) => {
+
+
+  const [agricultorEmail, setAgricultorEmail] = useState(getStorageItem("userLogin"));
+  const [agricultor, setAgricultor] = useState([]);
+  const [transacao, setTransacao] = useState([]);
+
+  const [coordenador, setCoordenador] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
+
+  useEffect(() => {
+    mutationAgricultor.mutate(agricultorEmail);
+    if(agricultor.bancoId){
+      if(diretorioAtual === "Doações"){
+        mutateDoacoes.mutate();
+      }else if(diretorioAtual ==="Retiradas"){
+        mutateRetiradas.mutate();
+      }
+    }
+  }, [agricultor.bancoId]);
+
+  const mutationAgricultor = useMutation(agricultorEmail => getUsuarioEmail(agricultorEmail), {
+    onSuccess: (res) => {
+      setAgricultor(res.data);
+      console.log('Agricultor carregado com sucesso');
+    },
+    onError: (error) => {
+      console.error('Erro ao recuperar as informações do coordenador:', error);
+    }
+  });
+  const mutateDoacoes = useMutation(
+    async () => {
+      return getAllDoacoes(Number(agricultor.bancoSementeId));
+    }, {
+    onSuccess: (res) => {
+      console.log("Transações carregadas com sucesso!")
+      setTransacao(res.data);
+    },
+    onError: (error) => {
+      console.error(error);
+    }
+  }
+  );
+  const mutateRetiradas = useMutation(
+    async () => {
+      return getAllRetiradas(Number(agricultor.bancoSementeId));
+    }, {
+    onSuccess: (res) => {
+      console.log(res.data)
+      console.log("Transações carregadas com sucesso!")
+      setTransacao(res.data);
+    },
+    onError: (error) => {
+      console.error(error);
+    }
+  }
+  );
+  const formatDate = (dateStr) => {
+    const [day, month, year] = dateStr.split("-");
+    return `${year}-${month}-${day}`; // Converte para formato ISO
+};
+
+  const listTransacoes = transacao.sort((a, b) => 
+  new Date(formatDate(a.dataDoacao)) - new Date(formatDate(b.dataDoacao))
+);
+  return (
+    <div>
+      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      {listTransacoes && (
+        <Table
+          table1={table1}
+          table2={table2}
+          table3={table3}
+          table4={table4}
+          table5={table5}
+          diretorioAtual={diretorioAtual}
+          listTrasacoes={listTransacoes}
+        />
+      )}
+    </div>
+  )
+}
+
 
 const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAtual,hrefAnterior }) => {
 
