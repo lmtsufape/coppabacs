@@ -10,6 +10,7 @@ import ExcluirButton from "@/components/ExcluirButton";
 
 export default function tableLayout({ table1, table2, table3, table4, table5, listSementes, setSementes }) {
 
+
   const handleDeleteSementes = async (sementesId) => {
     await deleteSemente(sementesId);
     setSementes(listSementes.filter(sementes => sementes.id !== sementesId))

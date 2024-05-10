@@ -9,6 +9,11 @@ import { useState } from "react";
 import DetalhamentoBanco from "@/components/DetalhamentoBancoSemente";
 
 const Table = ({ listBancos, onSelectBanco, table1, table2, table3 }) => {
+
+  const handleDeleteBanco = async (id) => {
+    await deleteBanco(id);
+    setBancos( listBancos.filter(agricultori => agricultori.id !== id) )
+  }
   return (
     <div className={style.content}>
       <table className={style.content__table}>
@@ -26,6 +31,8 @@ const Table = ({ listBancos, onSelectBanco, table1, table2, table3 }) => {
               <td>{banco.gerentes[0].nome}</td>
               <td>
                 <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
+                <ExcluirButton  itemId={banco.id} onDelete={handleDeleteBanco}/>
+
               </td>
             </tr>
           ))}
