@@ -6,6 +6,7 @@ import { useState } from "react";
 
 export default function DadosForm({ formik }) {
   const [estadoCivil, setEstadoCivil] = useState(''); // Estado para controlar o estado civil
+  console.log(estadoCivil);
 
   return (
     <>
