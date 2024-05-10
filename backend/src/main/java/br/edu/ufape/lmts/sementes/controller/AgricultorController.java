@@ -4,6 +4,8 @@ import java.util.List;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.SementesRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.SementesResponse;
+import br.edu.ufape.lmts.sementes.controller.dto.response.UsuarioResponse;
+
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
@@ -48,20 +50,20 @@ public class AgricultorController {
 	@GetMapping("agricultor")
 	public List<AgricultorResponse> getAllAgricultor() {
 		return facade.getAllAgricultor()
-			.stream()
-			.map(AgricultorResponse::new)
-			.toList();
+				.stream()
+				.map(AgricultorResponse::new)
+				.toList();
 
 	}
 
 	@GetMapping("agricultor/usuarios")
 	public List<AgricultorResponse> getAllAgricultorUsuario() {
 		return facade.getAllAgricultorUsuario()
-		.stream()
-		.map(AgricultorResponse::new)
-		.toList();
+				.stream()
+				.map(AgricultorResponse::new)
+				.toList();
 	}
-	
+
 	@GetMapping(value = "agricultor/page")
 	public Page<AgricultorResponse> getPageAgricultor(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -81,13 +83,17 @@ public class AgricultorController {
 	}
 
 	@PostMapping("agricultor/{id}/adicionar-sementes")
-	public AgricultorResponse addSementesAgricultor(@Valid @RequestBody List<SementesRequest> sementes, @PathVariable Long id) {
-		return new AgricultorResponse(facade.addSementeAgricultor(sementes.stream().map(SementesRequest::convertToEntity).toList(), id));
+	public AgricultorResponse addSementesAgricultor(@Valid @RequestBody List<SementesRequest> sementes,
+			@PathVariable Long id) {
+		return new AgricultorResponse(
+				facade.addSementeAgricultor(sementes.stream().map(SementesRequest::convertToEntity).toList(), id));
 	}
 
 	@PostMapping("agricultor/{id}/remover-sementes")
-	public AgricultorResponse removeSementesAgricultor(@Valid @RequestBody List<SementesRequest> sementes, @PathVariable Long id) {
-		return new AgricultorResponse(facade.removeSementeAgricultor(sementes.stream().map(SementesRequest::convertToEntity).toList(), id));
+	public AgricultorResponse removeSementesAgricultor(@Valid @RequestBody List<SementesRequest> sementes,
+			@PathVariable Long id) {
+		return new AgricultorResponse(
+				facade.removeSementeAgricultor(sementes.stream().map(SementesRequest::convertToEntity).toList(), id));
 	}
 
 	@PostMapping("agricultor")
@@ -100,6 +106,11 @@ public class AgricultorController {
 	@GetMapping("agricultor/{id}")
 	public AgricultorResponse getAgricultorById(@PathVariable Long id) {
 		return new AgricultorResponse(facade.findAgricultorById(id));
+	}
+
+	@GetMapping("agricultor/e/{email}")
+	public AgricultorResponse getAgricultorById(@PathVariable String email) {
+		return new AgricultorResponse(facade.findAgricultorByEmail(email));
 	}
 
 	@PutMapping("agricultor/{id}")

@@ -11,6 +11,7 @@ import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 public interface AgricultorServiceInterface {
 	Agricultor saveAgricultor(Agricultor o) throws EmailExistsException;
 	Agricultor findAgricultorById(long id);
+	Agricultor findAgricultorByEmail(String email);
 	Agricultor updateAgricultor(Agricultor u);
 	void deleteAgricultor(Agricultor u);
 	void deleteAgricultor(long id);

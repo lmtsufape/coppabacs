@@ -14,6 +14,8 @@ import { useRouter } from "next/navigation";
 import DetalhamentoBanco from "../DetalhamentoBancoSemente";
 import { getBanco } from "@/api/bancoSementes/getBanco";
 import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
+import { getCurrentUser } from "@/api/usuarios/getCurrentUser";
+import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
 
 export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3 }) {
 
@@ -48,7 +50,7 @@ export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, h
         push(APP_ROUTES.public.home);
       }
     } else {
-      return<LayoutAdmin
+      return<LayoutPublic
 
       diretorioAnterior={diretorioAnterior}
       diretorioAtual={diretorioAtual}
@@ -74,28 +76,42 @@ export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, h
 
 const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3 }) => {
   const [bancos, setBancos] = useState([]);
+  const [selectedBanco, setSelectedBanco] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
 
-  useEffect(() => {
-    mutate();
-  }, [])
-
-  const { state, mutate } = useMutation(
-    async () => {
-      return getAllBancos();
-    }, {
+  const { mutate } = useMutation(getAllBancos, {
     onSuccess: (res) => {
       setBancos(res.data);
     },
     onError: (error) => {
-      console.log(error)
+      console.error('Erro ao recuperar os bancos:', error);
     }
-  }
-  );
+  });
+
+  useEffect(() => {
+    mutate();
+  }, []);
+
   const filteredBancos = bancos.filter((banco) =>
     banco?.nome?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleSelectBanco = (banco) => {
+    setSelectedBanco(banco);
+  };
+
+  const handleBackToList = () => {
+    setSelectedBanco(null);
+  };
+
+  if (selectedBanco) {
+    return (
+      <DetalhamentoBanco
+        banco={selectedBanco}
+        backDetalhamento={handleBackToList}
+      />
+    );
+  }
 
   return (
     <div>
@@ -104,7 +120,7 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
         diretorioAtual={diretorioAtual}
         hrefAnterior={hrefAnterior}
       />
-      <div className={style.header}>
+            <div className={style.header}>
         <div className={style.header__container}>
 
           <button>
@@ -125,13 +141,12 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
       </div>
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <Table
+        listBancos={filteredBancos}
+        onSelectBanco={handleSelectBanco}
         table1={table1}
         table2={table2}
         table3={table3}
-        listBancos={filteredBancos}
       />
-
-
     </div>
   );
 }
@@ -175,6 +190,7 @@ const LayoutCoordenador = ({ table1, table2, table3 }) => {
     }
   }
   );
+
   return (
     <>
       {banco && (
@@ -183,6 +199,7 @@ const LayoutCoordenador = ({ table1, table2, table3 }) => {
           diretorioAnterior={"Home / "}
           diretorioAtual={"Informações do Banco de Semente"}
           hrefAnterior={"/"}
+          usuario="coordenador"
         />
       )}
     </>
@@ -190,66 +207,108 @@ const LayoutCoordenador = ({ table1, table2, table3 }) => {
 }
 
 const LayoutAgricultor = () => {
+  const [agricultorEmail, setAgricultorEmail] = useState(getStorageItem("userLogin"));
+  const [agricultor, setAgricultor] = useState([]);
 
-  return (
-    <>
-      <h1>asdf</h1> {/* ?? */}
-    </>
-  )
-}
-
-const LayoutPublic = ({ table1, table2, table3 }) => {
-  const [bancos, setBancos] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-
+  const [banco, setBanco] = useState([]);
   useEffect(() => {
-    mutate();
-  }, [])
-
+    mutationAgricultor.mutate(agricultorEmail);
+    if(agricultor.bancoId){
+      mutate();
+    }
+  },[agricultor.bancoId]);
+  const  mutationAgricultor= useMutation(agricultorEmail => getUsuarioEmail(agricultorEmail), {
+    onSuccess: (res) => {
+      setAgricultor(res.data);
+      console.log('Agricultor carregado com sucesso');
+    },
+    onError: (error) => {
+      console.error('Erro ao recuperar as informações do coordenador:', error);
+    }
+  });
   const { state, mutate } = useMutation(
     async () => {
-      return getAllBancos();
+      return getBanco(Number(agricultor.bancoId));
     }, {
     onSuccess: (res) => {
-      setBancos(res.data);
+      console.log(res.data)
+      setBanco(res.data);
     },
     onError: (error) => {
       console.log(error)
     }
   }
   );
+  return (
+    <>
+    {banco && (
+      <DetalhamentoBanco
+        banco={banco}
+        diretorioAnterior={"Home / "}
+        diretorioAtual={"Informações do Banco de Semente"}
+        hrefAnterior={"/"}
+        usuario="agricultor"
+      />
+    )}
+  </>
+  )
+}
+
+const LayoutPublic = ({table1, table2, table3 }) => {
+  const [bancos, setBancos] = useState([]);
+  const [selectedBanco, setSelectedBanco] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const { mutate } = useMutation(getAllBancos, {
+    onSuccess: (res) => {
+      setBancos(res.data);
+    },
+    onError: (error) => {
+      console.error('Erro ao recuperar os bancos:', error);
+    }
+  });
+
+  useEffect(() => {
+    mutate();
+  }, []);
+
   const filteredBancos = bancos.filter((banco) =>
     banco?.nome?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleSelectBanco = (banco) => {
+    setSelectedBanco(banco);
+  };
+
+  const handleBackToList = () => {
+    setSelectedBanco(null);
+  };
+
+  if (selectedBanco) {
+    return (
+      <DetalhamentoBanco
+        banco={selectedBanco}
+        backDetalhamento={handleBackToList}
+      />
+    );
+  }
+
   return (
     <div>
       <Header
-        diretorioAnterior="Publico /"
-        diretorioAtual="Bancos de Sementes"
-        hrefAnterior="/"
+        diretorioAnterior={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
+        hrefAnterior={hrefAnterior}
       />
-      <div className={style.header}>
-        <div className={style.header__container}>
-
-          <button>
-            <Image src="/assets/iconDatabasePlus.svg" alt="Adicionar Agricultor" width={27} height={24} />
-          </button>
-          <div className={style.header__container_buttons}>
-
-          </div>
-
-        </div>
-      </div>
+      
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <Table
+        listBancos={filteredBancos}
+        onSelectBanco={handleSelectBanco}
         table1={table1}
         table2={table2}
         table3={table3}
-        listBancos={filteredBancos}
-        setBancos={setBancos}
       />
-
     </div>
   );
 }

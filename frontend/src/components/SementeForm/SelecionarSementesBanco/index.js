@@ -4,12 +4,32 @@ import { useEffect, useState } from "react";
 import styles from "./sementes.module.scss";
 import { getAllSementes } from "@/api/sementes/getAllSementes";
 import { useMutation } from "react-query";
+import { getStorageItem } from "@/utils/localStore";
+import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
 
 export default function SelecionarSementesBanco({ formik }) {
+    const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
+    const [coordenador, setCoordenador] = useState([]);
+
     const [sementes, setSementes] = useState([]);
     const [seletores, setSeletores] = useState([]);
     const [filtro, setFiltro] = useState('');
 
+    const mutationCoordenador = useMutation(coordenadorEmail => getCoordenadorEmail(coordenadorEmail), {
+        onSuccess: (res) => {
+            setCoordenador(res.data);
+            console.log('Coordenador carregado com sucesso');
+        },
+        onError: (error) => {
+            console.error('Erro ao recuperar as informações do coordenador:', error);
+        }
+    });
+    useEffect(() => {
+        mutationCoordenador.mutate(coordenadorEmail);
+        if(coordenador.bancoSementeId){
+            mutate();
+        }
+    }, [coordenador.bancoSementeId]);
     const { state, mutate } = useMutation(
         async () => {
             return getAllSementes();
@@ -21,17 +41,12 @@ export default function SelecionarSementesBanco({ formik }) {
             console.log(error);
         }
     });
-
-    useEffect(() => {
-        mutate();
-    }, []);
-
     useEffect(() => {
         formik.setFieldValue("sementes", seletores.filter(Boolean));
     }, [seletores]);
 
     const addSelector = () => {
-        setSeletores([...seletores, { id: '', peso: '', safra: '' }]);
+        setSeletores([...seletores, { sementeId: '', peso: '', safra: '', bancoSementesId: `${coordenador.bancoSementeId}`}]);
     };
 
     const handleSelectChange = (index, field, value) => {
@@ -73,8 +88,8 @@ export default function SelecionarSementesBanco({ formik }) {
                                 className={styles.container__ContainerForm_form_input}
                                 id={`sementes-${index}`}
                                 name={`sementes[${index}].id`}
-                                onChange={(e) => handleSelectChange(index, 'id', e.target.value)}
-                                value={seletor.id || ''}
+                                onChange={(e) => handleSelectChange(index, 'sementeId', e.target.value)}
+                                value={seletor.sementeId || ''}
                                 required
                             >
                                 <option value="">Selecione...</option>

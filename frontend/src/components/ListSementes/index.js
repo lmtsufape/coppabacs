@@ -37,8 +37,8 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
           table1={table1}
           table2={table2}
           table3={table3}
-          table4={table4}
-          table5={table5}
+          table4="Quantidade"
+          table5="Ação"
           diretorioAnterior={diretorioAnterior}
           diretorioAtual={diretorioAtual}
           hrefAnterior={hrefAnterior} />

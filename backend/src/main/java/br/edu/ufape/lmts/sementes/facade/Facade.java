@@ -1102,7 +1102,9 @@ public class Facade {
 	public Agricultor findAgricultorById(long id) {
 		return agricultorService.findAgricultorById(id);
 	}
-
+	public Agricultor findAgricultorByEmail(String email) {
+		return agricultorService.findAgricultorByEmail(email);
+	}
 	public List<Agricultor> getAllAgricultor() {
 		return agricultorService.getAllByRole(TipoUsuario.AGRICULTOR);
 	}

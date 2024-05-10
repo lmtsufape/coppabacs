@@ -11,9 +11,7 @@ api.interceptors.response.use(
   response => response,
   error => {
     if (error.response && (error.response.status === 401 || error.response.status === 403)) {
-      setStorageItem("token", "");
-      setStorageItem("userLogin", "");
-      setStorageItem("userRole", "");
+
     }
     return Promise.reject(error);
   }

@@ -14,6 +14,7 @@ import ToleranciaAdversidades from "@/components/SementeForm/DadosToleranciaAdve
 import { getStorageItem } from "@/utils/localStore";
 import { useSelector } from "react-redux";
 import SelecionarSementesBanco from "./SelecionarSementesBanco";
+import { postTabelaBancoSemente } from "@/api/sementes/tabelaBancoSementes/postTabelaBancoSemente";
 
 
 export default function SementesForm({ diretorioAnterior, diretorioAtual, hrefAnterior }) {
@@ -33,7 +34,8 @@ export default function SementesForm({ diretorioAnterior, diretorioAtual, hrefAn
         return <LayoutCoordenador
           diretorioAnterior={diretorioAnterior}
           diretorioAtual={diretorioAtual}
-          hrefAnterior={hrefAnterior} />
+          hrefAnterior={hrefAnterior} 
+          />
       }
 
     }
@@ -281,7 +283,7 @@ const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) 
 
   const { status, mutate } = useMutation(
     async (values) => {
-      return postSemente(values);
+      return postTabelaBancoSemente(values);
     }, {
     onSuccess: (res) => {
       window.location.href = '/sementes';
