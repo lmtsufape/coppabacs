@@ -22,12 +22,13 @@ export default function tableLayout({ table1, table2, table3, table4, table5, ta
         <thead className={styles.content__table__header}>
           <tr>
             <th>{table1}</th>
-            <th>{table2}</th>
+            <th>{table3}</th>
             {/**
-            <th>{table3}</th> quantidade
-            <th>{table4}</th> safra
-             */}
-            <th>{table5}</th>
+            <th>{table2}</th>
+             * 
+            <th>{table4}</th>
+          */}
+          <th>{table5}</th>
 
             <th className={styles.content__table__header_name3}>
               <div >
@@ -45,12 +46,14 @@ export default function tableLayout({ table1, table2, table3, table4, table5, ta
               return (
                 <tr key={index}>
                   <td><Image src="/assets/sementeteste.png" alt="Foto do usuário" width={72} height={72} /></td>
-                  <td>{sementes.cultura.cultura}</td>
                   <td>{sementes.nome}</td>
                   {/**
-                   <td>{tabelaBancoSementes.peso}</td> quantidade
-                  <td>{tabelaBancoSementes.safra}</td> safra
-                   */}
+                   * 
+                   <td>{sementes.cultura.cultura}</td>
+                   <td>{tabelaBancoSementes.peso}</td>
+                  */}
+                  <td>{tabelaBancoSementes.safra}</td>
+
                   <td>
                     <div>
                       <button className={styles.no_border}>
