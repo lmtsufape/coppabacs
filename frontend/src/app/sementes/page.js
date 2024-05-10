@@ -10,8 +10,11 @@ export default function SementesPage() {
         hrefAnterior="/" 
         table1="Imagem"
         table2="Cultura" 
-        table3="Nome da Cultivar" 
-        table4="Ação"/>
+        table3="Cultivar" 
+        table4="Quantidade"
+        table5="Safra"
+        table6="Ação"
+        />
 
     </div>
   )

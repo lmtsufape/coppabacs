@@ -8,7 +8,7 @@ import ExcluirButton from "@/components/ExcluirButton";
 
 
 
-export default function tableLayout({ table1, table2, table3, table4, table5, listSementes, setSementes }) {
+export default function tableLayout({ table1, table2, table3, table4, table5, table6, listSementes, setSementes }) {
 
 
   const handleDeleteSementes = async (sementesId) => {
@@ -22,13 +22,17 @@ export default function tableLayout({ table1, table2, table3, table4, table5, li
         <thead className={styles.content__table__header}>
           <tr>
             <th>{table1}</th>
-            <th>{table2}</th>
             <th>{table3}</th>
+            {/**
+            <th>{table2}</th>
+             * 
             <th>{table4}</th>
+          */}
+          <th>{table5}</th>
 
             <th className={styles.content__table__header_name3}>
               <div >
-                {table5}
+                {table6}
                 <Image src="/assets/iconInformacao.svg" alt="Visualizar" width={27} height={26} />
 
               </div>
@@ -37,32 +41,38 @@ export default function tableLayout({ table1, table2, table3, table4, table5, li
           </tr>
         </thead>
         <tbody className={styles.content__table__body}>
-          {listSementes.map((sementes, index) => {
-            return (
-              <tr key={index}>
-                <td> <Image src="/assets/sementeteste.png" alt="Foto do usuário" width={72} height={72} /></td>
-                <td>{sementes.cultura.cultura}</td>
-                <td>{sementes.nome}</td>
+          {listSementes.map((sementes) => {
+            return sementes.tabelaBancoSementes.map((tabelaBancoSementes, index) => {
+              return (
+                <tr key={index}>
+                  <td><Image src="/assets/sementeteste.png" alt="Foto do usuário" width={72} height={72} /></td>
+                  <td>{sementes.nome}</td>
+                  {/**
+                   * 
+                   <td>{sementes.cultura.cultura}</td>
+                   <td>{tabelaBancoSementes.peso}</td>
+                  */}
+                  <td>{tabelaBancoSementes.safra}</td>
 
-                <td>{sementes.tabelaBancoSementes[0].peso}</td>
-                <td>
-                  <div >
-                    <button className={styles.no_border}>
-                      <span>
-                        <Link href={`/sementes/info/${sementes.id}`}>
-                          <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
-                        </Link>
-                      </span>
-                    </button>
-                    <ExcluirButton  itemId={sementes.id} onDelete={handleDeleteSementes}/>
+                  <td>
+                    <div>
+                      <button className={styles.no_border}>
+                        <span>
+                          <Link href={`/sementes/info/${sementes.id}`}>
+                            <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
+                          </Link>
+                        </span>
+                      </button>
+                      <ExcluirButton itemId={sementes.id} onDelete={handleDeleteSementes} />
+                    </div>
+                  </td>
+                </tr>
+              );
+            });
+          })}
 
-                  </div>
-                </td>
-              </tr>
-            )
-          }
-          )
-          }
+
+
         </tbody>
       </table>
     </div>

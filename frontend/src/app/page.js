@@ -32,7 +32,12 @@ export default function InicioPage() {
 
   return (
     <div>
+      {
+      /**
+       * 
       {!userLogin ? <div className={style.mapa}><img className={style.mapa__img} src="/assets/Group 12.png " alt="menu burguer" /></div> : false}
+       */
+      }
       <div className={style.menu} style={!userLogin ? { paddingTop: '0px' } : {}}>
         <div className={style.conjuntoCards}>
           {whatIsTypeUser()}

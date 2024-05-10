@@ -138,14 +138,13 @@ const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAtu
     }
   }
   );
-  const formatDate = (dateStr) => {
-    const [day, month, year] = dateStr.split("-");
-    return `${year}-${month}-${day}`; // Converte para formato ISO
-};
 
-  const listTransacoes = transacao.sort((a, b) => 
-  new Date(formatDate(a.dataDoacao)) - new Date(formatDate(b.dataDoacao))
-);
+
+  const listTransacoes = transacao
+    .filter((transacao) => transacao.agricultor.id === agricultor.id) // Filtra as transações pelo ID do agricultor logado
+    .sort((a, b) => new Date(a.dataDoacao) - new Date(b.dataDoacao)); // Ordena as transações filtradas por data
+  
+console.log(listTransacoes[0])
   return (
     <div>
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
@@ -222,13 +221,9 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAt
     }
   }
   );
-  const formatDate = (dateStr) => {
-    const [day, month, year] = dateStr.split("-");
-    return `${year}-${month}-${day}`; // Converte para formato ISO
-};
 
   const listTransacoes = transacao.sort((a, b) => 
-  new Date(formatDate(a.dataDoacao)) - new Date(formatDate(b.dataDoacao))
+  new Date(a.dataDoacao) - new Date(b.dataDoacao)
 );
   return (
     <div>
