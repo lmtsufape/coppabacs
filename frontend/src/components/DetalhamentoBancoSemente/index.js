@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import style from './detalhamentoBanco.module.scss';
+import styles from "../ListBancoSementes/list.module.scss";
+
 import HeaderNavegacao from '../HeaderNavegacao';
 import DadosBanco from './DadosBanco';
 import DadosEndereco from './DadosEndereco';
@@ -45,7 +47,7 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
       batedeiraCereal: ''
     }
   });
-
+  console.log(editar)
   useEffect(() => {
     if (banco) {
       setFormData({
@@ -64,32 +66,42 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
     onSuccess: () => {
       console.log('Dados atualizados com sucesso');
       setEditar(false)
-      router.push('/bancoSementes');
+      backDetalhamento();
     },
     onError: (error) => {
       console.error('Erro ao tentar atualizar os dados:', error);
     }
   });
-  console.log(usuario)
   return (
     <div id="header">
       {usuario === "coordenador" || usuario === "agricultor" ? (
-          <HeaderNavegacao
-            diretorioAnterior={diretorioAnterior}
-            diretorioAtual={diretorioAtual}
-            hrefAnterior={hrefAnterior}
-          />
+        <HeaderNavegacao
+          diretorioAnterior={diretorioAnterior}
+          diretorioAtual={diretorioAtual}
+          hrefAnterior={hrefAnterior}
+        />
       ) : (
 
-          <HeaderDetalhamento
-            hrefAnterior={backDetalhamento}
-            diretorioAnterior="Home / Bancos de Sementes /"
-            diretorioAtual=" Detalhamento"
+        <HeaderDetalhamento
+          hrefAnterior={backDetalhamento}
+          diretorioAnterior="Home / Bancos de Sementes /"
+          diretorioAtual=" Detalhamento"
 
-          />
+        />
       )
       }
 
+      <div className={styles.header}>
+        <div className={styles.header__container}>
+          <button>
+            <h1>
+              Adicionar Responsável
+            </h1>
+          </button>
+          <div className={styles.header__container_buttons}>
+          </div>
+        </div>
+      </div>
       <div className={style.container__ContainerForm}>
         <Formik
           initialValues={formData}
@@ -141,44 +153,43 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
               <DadosEndereco formik={formik} editar={editar} />
               <DadosObjetosBanco formik={formik} editar={editar} />
               <ImagensBanco />
-              {usuario === "coordenador" && (
-                <>
-                  {editar === false ? (
-                    <div className={style.container__profile_containerButton}>
-                      <button
-                        onClick={() => setEditar(true)}
-                        className={style.container__profile_button}>
-
-                        <span>Editar</span>
-                        <Image src="/assets/iconLapis.svg" alt="editar perfil" width={15} height={15} />
-                      </button >
-                      <button
-                        className={style.container__profile_buttonDesativar}>
-
-                        <span>Desativar Banco</span>
-                      </button >
-
-                    </div>
-                  ) : (
-                    <>
+              {
+                (usuario === "coordenador" || usuario === "admin") && (
+                  <div>
+                    {editar ? (
+                      // Bloco quando 'editar' é true
                       <div className={style.container__profile_containerButton}>
                         <button
+                          type="button"
                           onClick={() => setEditar(false)}
-
                           className={style.container__profile_buttonDesativar}>
-
                           <span>Cancelar</span>
-                        </button >
+                        </button>
                         <button
                           type="submit"
                           className={style.container__profile_button}>
                           <span>Salvar</span>
-                        </button >
+                        </button>
                       </div>
-                    </>
-                  )}
-                </>
-              )}
+                    ) : (
+                      // Bloco quando 'editar' é false
+                      <div className={style.container__profile_containerButton}>
+                        <button
+                          type="button"
+                          onClick={() => setEditar(true)}
+                          className={style.container__profile_button}>
+                          <span>Editar</span>
+                          <Image src="/assets/iconLapis.svg" alt="editar perfil" width={15} height={15} />
+                        </button>
+                        <button
+                          className={style.container__profile_buttonDesativar}>
+                          <span>Desativar Banco</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )
+              }
 
             </Form>
           )}

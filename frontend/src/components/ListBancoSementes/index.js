@@ -50,15 +50,15 @@ export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, h
         push(APP_ROUTES.public.home);
       }
     } else {
-      return<LayoutPublic
+      return <LayoutPublic
 
-      diretorioAnterior={diretorioAnterior}
-      diretorioAtual={diretorioAtual}
-      hrefAnterior={hrefAnterior}
-      table1={table1}
-      table2={table2}
-      table3={table3}
-    />
+        diretorioAnterior={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
+        hrefAnterior={hrefAnterior}
+        table1={table1}
+        table2={table2}
+        table3={table3}
+      />
     }
 
   }
@@ -109,6 +109,7 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
       <DetalhamentoBanco
         banco={selectedBanco}
         backDetalhamento={handleBackToList}
+        usuario="admin"
       />
     );
   }
@@ -120,28 +121,24 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
         diretorioAtual={diretorioAtual}
         hrefAnterior={hrefAnterior}
       />
-            <div className={style.header}>
+      <div className={style.header}>
         <div className={style.header__container}>
-
           <button>
-
             <Link className={style.header__container_link} href="bancoSementes/novoBanco">
               <h1>
                 Adicionar Banco
               </h1>
             </Link>
-
             <Image src="/assets/iconDatabasePlus.svg" alt="Adicionar Agricultor" width={27} height={24} />
           </button>
           <div className={style.header__container_buttons}>
-
           </div>
-
         </div>
       </div>
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <Table
         listBancos={filteredBancos}
+        setBancos={setBancos}
         onSelectBanco={handleSelectBanco}
         table1={table1}
         table2={table2}
@@ -213,11 +210,11 @@ const LayoutAgricultor = () => {
   const [banco, setBanco] = useState([]);
   useEffect(() => {
     mutationAgricultor.mutate(agricultorEmail);
-    if(agricultor.bancoId){
+    if (agricultor.bancoId) {
       mutate();
     }
-  },[agricultor.bancoId]);
-  const  mutationAgricultor= useMutation(agricultorEmail => getUsuarioEmail(agricultorEmail), {
+  }, [agricultor.bancoId]);
+  const mutationAgricultor = useMutation(agricultorEmail => getUsuarioEmail(agricultorEmail), {
     onSuccess: (res) => {
       setAgricultor(res.data);
       console.log('Agricultor carregado com sucesso');
@@ -241,20 +238,20 @@ const LayoutAgricultor = () => {
   );
   return (
     <>
-    {banco && (
-      <DetalhamentoBanco
-        banco={banco}
-        diretorioAnterior={"Home / "}
-        diretorioAtual={"Informações do Banco de Semente"}
-        hrefAnterior={"/"}
-        usuario="agricultor"
-      />
-    )}
-  </>
+      {banco && (
+        <DetalhamentoBanco
+          banco={banco}
+          diretorioAnterior={"Home / "}
+          diretorioAtual={"Informações do Banco de Semente"}
+          hrefAnterior={"/"}
+          usuario="agricultor"
+        />
+      )}
+    </>
   )
 }
 
-const LayoutPublic = ({table1, table2, table3 }) => {
+const LayoutPublic = ({ table1, table2, table3 }) => {
   const [bancos, setBancos] = useState([]);
   const [selectedBanco, setSelectedBanco] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -300,7 +297,7 @@ const LayoutPublic = ({table1, table2, table3 }) => {
         diretorioAtual={diretorioAtual}
         hrefAnterior={hrefAnterior}
       />
-      
+
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <Table
         listBancos={filteredBancos}
