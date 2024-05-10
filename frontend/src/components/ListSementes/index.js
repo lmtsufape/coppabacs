@@ -13,6 +13,7 @@ import { getStorageItem } from "@/utils/localStore";
 import { useSelector } from "react-redux";
 import { getSementesBanco } from "@/api/sementes/getSementeBanco";
 import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
+import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
 
 export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) {
   const [role, setRole] = useState(getStorageItem("userRole"));
@@ -152,7 +153,7 @@ const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ta
 
   useEffect(() => {
     mutationCoordenador.mutate(coordenadorEmail);
-    if(coordenador.bancoSementeId){
+    if (coordenador.bancoSementeId) {
       mutate();
     }
   }, [coordenador.bancoSementeId]);
@@ -218,10 +219,78 @@ const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ta
   )
 }
 
-const LayoutAgricultor = () => {
+const LayoutAgricultor = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) => {
+  const [sementes, setSementes] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [role, setRole] = useState(getStorageItem("userRole"));
+  const [agricultorEmail, setAgricultorEmail] = useState(getStorageItem("userLogin"));
+  const [agricultor, setAgricultor] = useState([]);
 
+  useEffect(() => {
+    mutationAgricultor.mutate(agricultorEmail);
+    if (agricultor.bancoId) {
+      mutate();
+    }
+  }, [agricultor.bancoId]);
+  const mutationAgricultor = useMutation(agricultorEmail => getUsuarioEmail(agricultorEmail), {
+    onSuccess: (res) => {
+      setAgricultor(res.data);
+      console.log('Agricultor carregado com sucesso');
+    },
+    onError: (error) => {
+      console.error('Erro ao recuperar as informações do coordenador:', error);
+    }
+  });
+  const { state, mutate } = useMutation(
+    async () => {
+      return getSementesBanco(Number(agricultor.bancoId));
+    }, {
+    onSuccess: (res) => {
+      setSementes(res.data);
+    },
+    onError: (error) => {
+      console.log(error)
+    }
+  }
+  );
+  const filteredSementes = sementes.filter((sementes) =>
+    sementes.nome.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return (
     <>
+      <>
+        <div>
+          <Header
+            diretorioAnterior={diretorioAnterior}
+            diretorioAtual={diretorioAtual}
+            hrefAnterior={hrefAnterior}
+          />
+          <div className={styles.header}>
+            <div className={styles.header__container}>
+              {role ? <button>
+                <Link className={styles.header__container_link} href="sementes/novaSemente">
+                  <h1>
+                    Adicionar Sementes ao Banco
+                  </h1>
+                </Link>
+                <Image src="/assets/iconSeedGrey+.svg" alt="semente verde" width={20} height={20} />
+              </button> : ""}
+              <div className={styles.header__container_buttons}>
+              </div>
+            </div>
+          </div>
+          <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          <Table
+            table1={table1}
+            table2={table2}
+            table3={table3}
+            table4={table4}
+            table5={table5}
+            listSementes={filteredSementes}
+            setSementes={setSementes}
+          />
+        </div>
+      </>
     </>
   )
 }

@@ -8,7 +8,7 @@ import ExcluirButton from "@/components/ExcluirButton";
 import { useState } from "react";
 import DetalhamentoBanco from "@/components/DetalhamentoBancoSemente";
 
-const Table = ({ listBancos, onSelectBanco, table1, table2, table3 }) => {
+const Table = ({ listBancos, onSelectBanco, setBancos, table1, table2, table3 }) => {
 
   const handleDeleteBanco = async (id) => {
     await deleteBanco(id);
@@ -26,13 +26,13 @@ const Table = ({ listBancos, onSelectBanco, table1, table2, table3 }) => {
         </thead>
         <tbody className={style.content__table__body}>
           {listBancos.map((banco, index) => (
-            <tr key={index} onClick={() => onSelectBanco(banco)}>
+            <tr key={index} >
               <td>{banco.nome}</td>
-              <td>{banco.gerentes[0].nome}</td>
+              <td>{banco?.gerentes[0]?.nome}</td>
               <td>
-                <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
-                <ExcluirButton  itemId={banco.id} onDelete={handleDeleteBanco}/>
+                <Image src="/assets/iconOlho.svg" onClick={() => onSelectBanco(banco)} alt="Visualizar" width={27} height={26} />
 
+                <ExcluirButton  itemId={banco.id} onDelete={handleDeleteBanco}/>
               </td>
             </tr>
           ))}
