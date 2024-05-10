@@ -49,7 +49,7 @@ public class UsuarioController {
 	public List<UsuarioResponse> getAllUsuario() {
 		return facade.getAllUsuario().stream().map(UsuarioResponse::new).toList();
 	}
-	
+
 	@GetMapping(value = "usuario/page")
 	public Page<UsuarioResponse> getPage(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -71,6 +71,10 @@ public class UsuarioController {
 		return new UsuarioResponse(facade.findUsuarioById(id));
 	}
 
+	@GetMapping("usuario/e/{email}")
+	public UsuarioResponse getUsuarioById(@PathVariable String email){
+		return new UsuarioResponse(facade.findUsuarioByEmail(email));
+	}
 	@PatchMapping("usuario/{id}")
 	public UsuarioResponse updateUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioUpdateRequest obj) {
 		try {

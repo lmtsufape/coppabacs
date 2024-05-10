@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
+import br.edu.ufape.lmts.sementes.model.Usuario;
 import br.edu.ufape.lmts.sementes.repository.AgricultorRepository;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
@@ -32,6 +33,9 @@ public class AgricultorService implements AgricultorServiceInterface {
 	public Agricultor findAgricultorById(long id) {
 		return repository.findByAtivoTrueAndId(id)
 				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist Agricultor with id = " + id));
+	}
+	public Agricultor findAgricultorByEmail(String email) {
+		return repository.findByAtivoTrueAndEmail(email).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Usuario with Email = " + email));
 	}
 
 	public List<Agricultor> getAllAgricultor() {

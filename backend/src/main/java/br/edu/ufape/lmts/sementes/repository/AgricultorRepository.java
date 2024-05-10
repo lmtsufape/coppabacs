@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
+import br.edu.ufape.lmts.sementes.model.Usuario;
 
 @Repository
 public interface AgricultorRepository extends JpaRepository<Agricultor, Long> {
@@ -22,6 +23,9 @@ public interface AgricultorRepository extends JpaRepository<Agricultor, Long> {
 
 	@Transactional(readOnly = true)
 	Optional<Agricultor> findByAtivoTrueAndId(long id);
+
+	@Transactional(readOnly = true)
+	Optional<Agricultor> findByAtivoTrueAndEmail(String email);
 
 	@Transactional(readOnly = true)
 	List<Agricultor> findByAtivoTrue();
