@@ -145,7 +145,7 @@ export default function DadosForm({ formik }) {
         <div>
           <label >Sexo <span>*</span></label>
           <select
-            className={style.container__ContainerForm_form_halfContainer_select}
+            className={style.container__ContainerForm_form_halfContainer_input}
             id="sexo"
             name="sexo"
             placeholder="Escolha seu sexo"
@@ -166,7 +166,7 @@ export default function DadosForm({ formik }) {
         <div>
           <label >Estado Civil <span>*</span></label>
           <select
-            className={style.container__ContainerForm_form_halfContainer_select}
+            className={style.container__ContainerForm_form_halfContainer_input}
             id="estadoCivil"
             name="estadoCivil"
             placeholder="Selecione..."
@@ -209,7 +209,7 @@ export default function DadosForm({ formik }) {
 
           <label>Sexo do Cônjuge <span>*</span></label>
           <select
-            className={style.container__ContainerForm_form_halfContainer_select}
+            className={style.container__ContainerForm_form_halfContainer_input}
             id="conjugeSexo"
             name="conjuge.sexo"
             placeholder="Escolha o sexo do seu cônjuge"
