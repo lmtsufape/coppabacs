@@ -47,7 +47,6 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
       batedeiraCereal: ''
     }
   });
-  console.log(editar)
   useEffect(() => {
     if (banco) {
       setFormData({
@@ -90,18 +89,22 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
         />
       )
       }
-
-      <div className={styles.header}>
-        <div className={styles.header__container}>
-          <button>
-            <h1>
-              Adicionar Responsável
-            </h1>
-          </button>
-          <div className={styles.header__container_buttons}>
+      {role === "ROLE_COPPABCS" && (
+        <>
+          <div className={styles.header}>
+            <div className={styles.header__container}>
+              <button>
+                <h1>
+                  Adicionar Responsável
+                </h1>
+              </button>
+              <div className={styles.header__container_buttons}>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+
+        </>
+      )}
       <div className={style.container__ContainerForm}>
         <Formik
           initialValues={formData}

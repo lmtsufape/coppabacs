@@ -15,7 +15,7 @@ import { getSementesBanco } from "@/api/sementes/getSementeBanco";
 import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
 import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
 
-export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) {
+export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5, table6 }) {
   const [role, setRole] = useState(getStorageItem("userRole"));
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -29,6 +29,7 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
           table3={table3}
           table4={table4}
           table5={table5}
+          table6={table6}
           diretorioAnterior={diretorioAnterior}
           diretorioAtual={diretorioAtual}
           hrefAnterior={hrefAnterior}
@@ -38,8 +39,10 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
           table1={table1}
           table2={table2}
           table3={table3}
-          table4="Quantidade"
-          table5="Ação"
+          table4={table4}
+          table5={table5}
+          table6={table6}
+
           diretorioAnterior={diretorioAnterior}
           diretorioAtual={diretorioAtual}
           hrefAnterior={hrefAnterior} />
@@ -50,6 +53,7 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
           table3={table3}
           table4={table4}
           table5={table5}
+          table6={table6}
           diretorioAnterior={diretorioAnterior}
           diretorioAtual={diretorioAtual}
           hrefAnterior={hrefAnterior} />
@@ -61,6 +65,7 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
         table3={table3}
         table4={table4}
         table5={table5}
+        table6={table6}
         diretorioAnterior={diretorioAnterior}
         diretorioAtual={diretorioAtual}
         hrefAnterior={hrefAnterior} />

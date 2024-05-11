@@ -163,7 +163,7 @@ const LayoutAdmin = ({ table1, table2, table3, table4 }) => {
     }
   }
   );
-
+console.log(Agricultores)
   const listAgricultores = Agricultores.filter((Agricultores) =>
     Agricultores.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
