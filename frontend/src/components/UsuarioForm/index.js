@@ -100,14 +100,14 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       />
 
       <div className={style.container__header}>
-        {etapas === 0 && <h1 className={style.container__header_currentNav}>1. Dados do agricultor</h1>}
-        {etapas >= 1 && etapas <= 2 && <h1 className={style.container__header_current}>1. Dados do agricultor</h1>}
+        {etapas === 0 && <h1 className={style.container__header_currentNav}>1. Dados do Agricultor</h1>}
+        {etapas >= 1 && etapas <= 2 && <h1 className={style.container__header_current}>1. Dados do Agricultor</h1>}
 
         {etapas === 1 && <h1 className={style.container__header_currentNav}>2. Dados do Endereço</h1>}
         {etapas != 1 && <h1 className={style.container__header_current}>2. Dados do Endereço</h1>}
 
-        {etapas === 2 && <h1 className={style.container__header_currentNav}>3. Atividades rurais</h1>}
-        {etapas >= 0 && etapas < 2 && <h1 className={style.container__header_current}>3. Atividades rurais</h1>}
+        {etapas === 2 && <h1 className={style.container__header_currentNav}>3. Atividades Rurais</h1>}
+        {etapas >= 0 && etapas < 2 && <h1 className={style.container__header_current}>3. Atividades Rurais</h1>}
 
       </div>
 
