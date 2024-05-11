@@ -14,8 +14,12 @@ import styles from "@/components/DetalhamentoSementes/detalhamentoSementes.modul
 import Image from "next/image";
 import DadosCaracteristicasAgronomicas from "./DadosCaracteristicasAgronomicas";
 import ImagensSementes from "./ImagensSementes";
+import { getStorageItem } from "@/utils/localStore";
+import HeaderDetalhamento from "../HeaderDetalhamento";
 
-const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior, sementes }) => {
+const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior, sementes, backDetalhamento }) => {
+
+    const [role, setRole] = useState(getStorageItem("userRole"));
 
     const initialValues = {
         responsavelTecnico: {
@@ -23,10 +27,10 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
             cpf: sementes?.responsavelTecnico?.cpf,
             numeroConselho: sementes?.responsavelTecnico?.numeroConselho,
             estadoConselho: sementes?.responsavelTecnico?.estadoConselho,
-          },
+        },
         cultura: {
-          cultura: sementes?.cultura?.cultura,
-          genero: sementes?.cultura?.genero,
+            cultura: sementes?.cultura?.cultura,
+            genero: sementes?.cultura?.genero,
         },
         nome: sementes?.nome,
         nomePopular: sementes?.nomePopular,
@@ -39,9 +43,9 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
         altitudeMinima: sementes?.altitudeMinima,
         caracteristicasPositiva: sementes?.caracteristicasPositiva,
         caracteristicasNegativas: sementes?.caracteristicasNegativas,
-        
-        doencas: sementes?.doencas,    
-        
+
+        doencas: sementes?.doencas,
+
         regioesAdaptacaoCultivo: sementes?.regioesAdaptacaoCultivo,
 
 
@@ -53,15 +57,15 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
             processamento: false,
             outra: false,
             outraFinalidade: 'Outra Finalidade',
-        },  
-        
+        },
+
         caracteristicasAgronomicas: {
             cicloFenologico: sementes?.caracteristicasAgronomicas?.cicloFenologico,
             standRecomendado: sementes?.caracteristicasAgronomicas?.standRecomendado,
             produtividade: sementes?.caracteristicasAgronomicas?.produtividade,
-            
+
             altitudePlanta: sementes?.caracteristicasAgronomicas?.altitudePlanta,
-            
+
             pesoMilGraos: sementes?.caracteristicasAgronomicas?.pesoMilGraos,
 
             pesoHectolitro: sementes?.caracteristicasAgronomicas?.pesoHectolitro,
@@ -75,7 +79,7 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
             corFlor: sementes?.caracteristicasAgronomicas?.corFlor,
             habitoCrescimento: sementes?.caracteristicasAgronomicas?.habitoCrescimento,
         },
-        
+
         empalhamento: {
             tipo: sementes?.empalhamento?.tipo,
         },
@@ -105,13 +109,25 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
 
     return (
         <div id="header" className={styles.container}>
-            <HeaderNavegacao
-                diretorioAnterior={diretorioAnterior}
-                diretorioAtual={diretorioAtual}
-                hrefAnterior={hrefAnterior}
-                etapas={etapas}
+            {role === "ROLE_GERENTE" || role === "ROLE_AGRICULTOR" ? (
 
-            />
+                <HeaderNavegacao
+                    diretorioAnterior={diretorioAnterior}
+                    diretorioAtual={diretorioAtual}
+                    hrefAnterior={hrefAnterior}
+                    etapas={etapas}
+
+                />
+
+            ) : (
+
+                <HeaderDetalhamento
+                    hrefAnterior={backDetalhamento}
+                    diretorioAnterior="Home / Sementes / "
+                    diretorioAtual="Detalhamento"
+                />
+            )}
+
 
             <div className={styles.container__ContainerForm}>
                 <Formik
@@ -127,35 +143,17 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
                             <Form className={styles.container__ContainerForm_form}>
                                 <div className={styles.container__profile}>
                                     <div className={styles.container__profile_img}>
-                                    <Image src="/assets/sementeteste.png" alt="Foto do usuário" width={72} height={72} />
+                                        <Image src="/assets/sementeteste.png" alt="Foto do usuário" width={72} height={72} />
                                         <h1>{sementes?.nome}</h1>
                                     </div>
-                                    
-                                    {editar === false ? (
-                                        <button
-                                            onClick={() => setEditar(true)}
-                                            className={styles.container__profile_button}>
-                                            <span>Editar</span>
-                                            <Image src="/assets/iconLapis.svg" alt="editar perfil" width={25} height={25} />
-                                        </button >
-                                    ) : (
-                                        <button
-                                            onClick={() => setEditar(false)}
-                                            className={styles.container__profile_button}>
-
-                                            <span>Salvar</span>
-                                            <Image src="/assets/iconLapis.svg" alt="editar perfil" width={25} height={25} />
-                                        </button >
-                                    )}
-
                                 </div>
                                 <DadosTecnicos formik={formik} editar={editar} />
                                 <DadosSementes formik={formik} editar={editar} />
-                                <DadosCaracteristicasAgronomicas formik={formik} editar={editar}/>
+                                <DadosCaracteristicasAgronomicas formik={formik} editar={editar} />
                                 <DadosToleranciaAdversidades formik={formik} editar={editar} />
                                 <InformacoesColeta formik={formik} editar={editar} />
                                 {//<ImagensSementes/>
-                    }
+                                }
 
                             </Form>
                         )

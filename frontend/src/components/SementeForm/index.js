@@ -320,7 +320,7 @@ const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) 
                 {etapas === 0 && <SelecionarSementesBanco formik={formik} />}
                 <div className={styles.buttons}>
                   <button onClick={() => setEtapas(etapas - 1)}>
-                    <Link href="#header" className={styles.buttons_link}>
+                    <Link href="/sementes" className={styles.buttons_link}>
                       <h1>Cancelar</h1>
                     </Link>
                   </button>
