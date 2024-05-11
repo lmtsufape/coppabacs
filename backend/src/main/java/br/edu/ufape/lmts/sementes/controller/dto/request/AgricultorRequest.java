@@ -1,7 +1,10 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import br.edu.ufape.lmts.sementes.facade.Facade;
+import br.edu.ufape.lmts.sementes.repository.AtividadeRuralRepository;
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
@@ -20,18 +23,26 @@ public class AgricultorRequest extends UsuarioRequest {
 	@Positive(message = "Id inválido")
 	private long bancoId;
 	private List<String> atividadesRurais;
+	private List<AtividadeRuralRequest> atividadesRuralRequests;
+
 
 
 	public Agricultor convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
+		if (atividadesRurais != null) {
+			List<AtividadeRuralRequest> atividades = atividadesRurais.stream()
+					.map(nome -> {
+						return  new AtividadeRuralRequest(nome);
+					})
+					.collect(Collectors.toList());
+			this.setAtividadesRuralRequests(atividades);
+		}
 		Agricultor obj = modelMapper.map(this, Agricultor.class);
 		BancoSementes banco = new BancoSementes();
 		banco.setId(bancoId);
 		obj.setBancoSementes(banco);
-		System.out.println("atividades rurais:" + atividadesRurais);
 
-		obj.setAtividadeRural(atividadesRurais.stream().map(n -> new AtividadeRural(n)).toList());
-		System.out.println(obj.toString());
+
 		return obj;
 	}
 }

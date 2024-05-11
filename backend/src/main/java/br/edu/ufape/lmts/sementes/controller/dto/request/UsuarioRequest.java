@@ -24,6 +24,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @JsonPropertyOrder
 public class UsuarioRequest {
+	private long id;
 
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String nome;

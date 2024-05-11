@@ -18,6 +18,7 @@ public  class BancoSementesRequest  {
 	private String variedadesTrabalhadas;
 	private EnderecoRequest endereco; 
 	private ObjetosBancoSementesRequest objetos;
+	private long id;
 
 	public BancoSementes convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
