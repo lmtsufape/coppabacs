@@ -5,7 +5,7 @@ import { deleteCoppabacs } from "@/api/usuarios/coppabacs/deleteCoppabacs";
 import ExcluirButton from "@/components/ExcluirButton";
 
 
-export default function tableLayout({ table1, table2, table3, table4, listFuncionarios, setFuncionarios }) {
+export default function tableLayout({ table1, table2, table3, table4, listFuncionarios, setFuncionarios, onSelectFuncionario }) {
 
 
   const handleDeleteFuncionario = async (funcionarioId) => {
@@ -33,7 +33,7 @@ export default function tableLayout({ table1, table2, table3, table4, listFuncio
           </tr>
         </thead>
         <tbody className={style.content__table__body}>
-          
+
           {listFuncionarios.map((funcionario, index) => {
             return (
               <tr key={index}>
@@ -43,14 +43,10 @@ export default function tableLayout({ table1, table2, table3, table4, listFuncio
 
                 <td>
                   <div >
-                    <button className={style.no_border}>
-                      <span>
-                        <Link href={`/funcionarios/info/${funcionario.id}`}>
-                          <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
-                        </Link>
-                      </span>
-                    </button>
-                    <ExcluirButton  itemId={funcionario.id} onDelete={handleDeleteFuncionario}/>
+
+                    <Image src="/assets/iconOlho.svg"onClick={()=>onSelectFuncionario(funcionario)} alt="Visualizar" width={27} height={26} />
+
+                    <ExcluirButton itemId={funcionario.id} onDelete={handleDeleteFuncionario} />
 
                   </div>
                 </td>
