@@ -11,42 +11,13 @@ import { getAllUsuarios } from "@/api/usuarios/getAllUsuarios";
 import { Search, SearchUsuarios } from "../searchUsuario";
 import { getAllCoordenadores } from "@/api/usuarios/coordenador/getAllCoordenadores";
 import { getStorageItem } from "@/utils/localStore";
+import DetalhamentoUsuario from "../DetalhamentoUsuario";
 
 export default function ListCoordenadores({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4 }) {
-
-  const [role, setRole] = useState(getStorageItem("userRole"));
-
-
-  function whatIsTypeUser() {
-    if (role == "ROLE_ADMIN" || role == "ROLE_COPPABACS") {
-      return <LayoutAdmin
-        table1={table1}
-        table2={table2}
-        table3={table3}
-        table4={table4}
-
-      />
-    }
-  }
-  return (
-    <>
-      <Header
-        diretorioAnterior={diretorioAnterior}
-        diretorioAtual={diretorioAtual}
-        hrefAnterior={hrefAnterior}
-        
-      />
-      {whatIsTypeUser()}
-
-
-    </>
-  );
-}
-
-const LayoutAdmin = ({table1, table2, table3, table4 }) => {
   const [coordenadores, setCoordenadores] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
+  const [selectedCoordenador, setSelectedCoordendor] = useState();
 
   useEffect(() => {
     mutate();
@@ -69,9 +40,32 @@ const LayoutAdmin = ({table1, table2, table3, table4 }) => {
   const listCoordenadores = coordenadores.filter((coordenadores) =>
     coordenadores.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleSelectCoordenador = (coordenador) => {
+    setSelectedCoordendor(coordenador);
+  }
+
+  const handleBackToList = () =>{
+    setSelectedCoordendor(null);
+  }
+
+  if(selectedCoordenador){
+    return(
+      <DetalhamentoUsuario 
+      usuario={selectedCoordenador}
+      backDetalhamento={handleBackToList}
+      hrefAnterior="/coordenadores"
+      />
+    )
+  }
   return (
     <div>
-
+      <Header
+        diretorioAnterior={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
+        hrefAnterior={hrefAnterior}
+        
+      />
       <div className={style.header}>
         <div className={style.header__container}>
 
@@ -101,6 +95,7 @@ const LayoutAdmin = ({table1, table2, table3, table4 }) => {
           table4={table4}
           listCoordenadores={listCoordenadores}
           setCoordenadores={setCoordenadores}
+          onSelectCoordenador={handleSelectCoordenador}
         />
       )}
     </div>

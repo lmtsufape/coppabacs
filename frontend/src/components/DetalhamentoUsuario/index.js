@@ -75,14 +75,14 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
         dataNascimento: usuario.dataNascimento || '',
         sexo: usuario.sexo || '',
         endereco: usuario.endereco || {},
-        bancoId: usuario.bancoId || '',
+        bancoId: usuario.bancoSementeId || '',
         atividadeRural: usuario.atividadeRural || {},
         producaoSementes: usuario.producaoSementes || {}
       });
     }
   }, [usuario]);
 
-
+console.log(usuario)
   const mutationAprovacao = useMutation(() => validarAgricultor(usuario.id), {
     onSuccess: () => {
       console.log('Usuário aprovado com sucesso!');

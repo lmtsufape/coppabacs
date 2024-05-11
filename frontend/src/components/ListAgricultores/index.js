@@ -196,12 +196,12 @@ const LayoutAdmin = ({ table1, table2, table3, table4, diretorioAnterior, direto
     Agricultores.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleSelectAgricultor = ((agricultor) => {
-    setSelectedAgricultor(agricultor)
-  })
+  const handleSelectAgricultor = (agricultor) => {
+    setSelectedAgricultor(agricultor);
+  }
 
   const handleBackToList = () => {
-    setSelectedAgricultor(null)
+    setSelectedAgricultor(null);
   }
 
   if (selectedAgricultor) {
