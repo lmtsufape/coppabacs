@@ -46,7 +46,9 @@
     
     &__body{
       font-size: .875em;
-      
+      &_click{
+        cursor: pointer;
+      }
       tr {
         display: table-row;
         border: 1px solid #dad6eb;

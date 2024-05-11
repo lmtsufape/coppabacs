@@ -14,14 +14,12 @@ import { useRouter } from "next/navigation";
 import DetalhamentoBanco from "../DetalhamentoBancoSemente";
 import { getBanco } from "@/api/bancoSementes/getBanco";
 import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
-import { getCurrentUser } from "@/api/usuarios/getCurrentUser";
 import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
 
 export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3 }) {
 
   const [role, setRole] = useState(getStorageItem("userRole"));
   const { push } = useRouter();
-
 
   function whatIsTypeUser() {
     if (role) {
@@ -149,7 +147,7 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
 }
 
 
-const LayoutCoordenador = ({ table1, table2, table3 }) => {
+const LayoutCoordenador = () => {
 
   const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
   const [coordenador, setCoordenador] = useState([]);
@@ -251,7 +249,7 @@ const LayoutAgricultor = () => {
   )
 }
 
-const LayoutPublic = ({ table1, table2, table3 }) => {
+const LayoutPublic = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3 }) => {
   const [bancos, setBancos] = useState([]);
   const [selectedBanco, setSelectedBanco] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -305,6 +303,7 @@ const LayoutPublic = ({ table1, table2, table3 }) => {
         table1={table1}
         table2={table2}
         table3={table3}
+        usuario="public"
       />
     </div>
   );
