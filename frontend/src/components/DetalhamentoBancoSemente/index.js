@@ -19,7 +19,6 @@ import HeaderDetalhamento from '../HeaderDetalhamento';
 const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, banco, usuario, backDetalhamento }) => {
   const [role, setRole] = useState(getStorageItem("userRole"));
 
-  const router = useRouter();
   const [editar, setEditar] = useState(false);
   const [formData, setFormData] = useState({
     nome: '',
@@ -83,8 +82,8 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
 
         <HeaderDetalhamento
           hrefAnterior={backDetalhamento}
-          diretorioAnterior="Home / Bancos de Sementes /"
-          diretorioAtual=" Detalhamento"
+          diretorioAnterior="Home / Bancos de Sementes / "
+          diretorioAtual="Detalhamento"
 
         />
       )
@@ -184,6 +183,7 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
                           <span>Editar</span>
                           <Image src="/assets/iconLapis.svg" alt="editar perfil" width={15} height={15} />
                         </button>
+                        
                         <button
                           className={style.container__profile_buttonDesativar}>
                           <span>Desativar Banco</span>

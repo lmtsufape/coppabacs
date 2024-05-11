@@ -10,7 +10,7 @@ export default function bancoSementesPage() {
         hrefAnterior="/"
         table1="Nome"
         table2="Responsável"
-        table3="Ação"
+        table3="Ações"
       />
 
     </div>

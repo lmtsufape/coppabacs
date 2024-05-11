@@ -62,7 +62,6 @@ export default function SelecionarSementesBanco({ formik }) {
     const filteredSementes = sementes.filter(semente =>
         semente.nomePopular.toLowerCase().includes(filtro)
     );
-    console.log(formik.values)
     return (
         <div>
             {seletores.map((seletor, index) => (

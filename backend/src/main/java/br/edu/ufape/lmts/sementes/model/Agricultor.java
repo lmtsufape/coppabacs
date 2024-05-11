@@ -5,11 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.*;
 
@@ -24,7 +20,7 @@ public class Agricultor extends Usuario {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@ToString.Exclude
 	private BancoSementes bancoSementes;
-	@OneToMany
+	@ManyToMany
 	@ToString.Exclude
 	private List<AtividadeRural> atividadeRural = new ArrayList<>();
 	@OneToMany

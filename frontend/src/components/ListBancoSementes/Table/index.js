@@ -8,11 +8,11 @@ import ExcluirButton from "@/components/ExcluirButton";
 import { useState } from "react";
 import DetalhamentoBanco from "@/components/DetalhamentoBancoSemente";
 
-const Table = ({ listBancos, onSelectBanco, setBancos, table1, table2, table3 }) => {
+const Table = ({ usuario, listBancos, onSelectBanco, setBancos, table1, table2, table3 }) => {
 
   const handleDeleteBanco = async (id) => {
     await deleteBanco(id);
-    setBancos( listBancos.filter(agricultori => agricultori.id !== id) )
+    setBancos(listBancos.filter(agricultori => agricultori.id !== id))
   }
   return (
     <div className={style.content}>
@@ -21,7 +21,14 @@ const Table = ({ listBancos, onSelectBanco, setBancos, table1, table2, table3 })
           <tr>
             <th>{table1}</th>
             <th>{table2}</th>
-            <th>{table3}</th>
+            <th className={style.content__table__header_name3}>
+              <div >
+                {table3}
+                <Image src="/assets/iconInformacao.svg" alt="Visualizar" width={27} height={26} />
+
+              </div>
+
+            </th>
           </tr>
         </thead>
         <tbody className={style.content__table__body}>
@@ -30,11 +37,12 @@ const Table = ({ listBancos, onSelectBanco, setBancos, table1, table2, table3 })
               <td>{banco.nome}</td>
               <td>{banco?.gerentes[0]?.nome}</td>
               <td>
-                <Image src="/assets/iconOlho.svg" onClick={() => onSelectBanco(banco)} alt="Visualizar" width={27} height={26} />
-
-                <ExcluirButton  itemId={banco.id} onDelete={handleDeleteBanco}/>
+                <Image src="/assets/iconOlho.svg" onClick={() => onSelectBanco(banco)} alt="Visualizar" width={27} height={26} className={style.content__table__body_click}/>
+                {usuario !== "public" ? (
+                  <ExcluirButton itemId={banco.id} onDelete={handleDeleteBanco} />
+                ) : ("")}
               </td>
-            </tr>
+            </tr> 
           ))}
         </tbody>
       </table>
