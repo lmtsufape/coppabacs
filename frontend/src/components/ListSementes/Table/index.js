@@ -100,7 +100,7 @@ const LayoutAdmin = ({ table1, table2, table3, table4, listSementes, onSelectSem
           {listSementes.map((semente, index) => {
             return (
               <tr key={index}>
-                <td><Image src="/assets/sementeteste.png" alt="Foto do usuário" width={72} height={72} /></td>
+                <td><Image className={styles.content__table__body_img} src="/assets/sementeteste.png" alt="Foto do usuário" width={72} height={72} /></td>
                 <td>{semente.cultura.cultura}</td>
                 <td>{semente.nome}</td>
                 <td>

@@ -29,14 +29,12 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
   );
 
   function bancoAtual(bancos, bancoId) {
-    const targetId = String(bancoId);
-    const banco = bancos.find(b => String(b.id) === targetId);
-  
-    return banco ? banco.nome : 'Banco não encontrado';
+    // Encontra o banco com base no ID fornecido
+    const banco = bancos.find(b => b.bancoId === bancoId);
+    // Retorna o nome do banco se encontrado, caso contrário, retorna undefined ou uma string vazia
+    return banco ? banco.name : 'Banco não encontrado';
   }
-  
-  const nomeBanco = bancoAtual(bancos, formik.values.bancoId);
-  
+  const nomeDoBanco = bancoAtual(bancos, formik.values.bancoId);
   return (
     <>
       <div className={style.container__header_title}>
@@ -135,7 +133,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                   placeholder="Não informado"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={nomeBanco}
+                  value={nomeDoBanco}
                   disabled
                 />
               </div>

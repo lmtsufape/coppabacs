@@ -126,7 +126,7 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
                     <input
                         name="dataRetirada"
                         onChange={formik.handleChange}
-                        placeholder={formik.values.data}
+                        placeholder={formik.values.dataDoacao}
                         className={styles.container__ContainerForm_form_input}
                         disabled
                     />

@@ -18,7 +18,7 @@ import HeaderDetalhamento from '../HeaderDetalhamento';
 
 const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, banco, usuario, backDetalhamento }) => {
   const [role, setRole] = useState(getStorageItem("userRole"));
-
+  const [open, setOpen] = useState(false);
   const [editar, setEditar] = useState(false);
   const [formData, setFormData] = useState({
     nome: '',
@@ -121,33 +121,71 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
                   <Image src="/assets/bancoteste.png" alt="Foto do usuário" width={72} height={72} />
                   <h1>{banco?.nome}</h1>
                 </div>
+                <div className={style.botoes}>
+                  <div className={style.container__header_containerButton}>
+                    {role === "ROLE_COPPABACS" && (
+                      <>
+                        <Link className={style.container__header_link} href={`/bancoSementes/info/${banco.id}/agricultores`}>
+                          <button className={style.container__header_containerButton_button}>
+                            <Image src="/assets/iconAssociates.svg" alt="Agricultores" width={27} height={26} />
+                            <span className={style.container__header_containerButton_button_text}>Agricultores</span>
+                            <span className={style.container__header_containerButton_button_shorttext}>Agric.</span>
+                          </button>
+                        </Link>
+                        <Link className={style.container__header_link} href={`/bancoSementes/info/${banco.id}/sementes`}>
+                          <button className={style.container__header_containerButton_button}>
+                            <Image src="/assets/iconSeedGreen.svg" alt="Seed" width={27} height={26} />
+                            <span className={style.container__header_containerButton_button_text}>Sementes</span>
+                            <span className={style.container__header_containerButton_button_shorttext}>Sem.</span>
+                          </button>
+                        </Link>
+                        <Link className={style.container__header_link} href={`/transacoes`}>
+                          <button className={style.container__header_containerButton_button}>
+                            <Image src="/assets/iconAssociates.svg" alt="Agricultores" width={27} height={26} />
+                            <span className={style.container__header_containerButton_button_text}>Transações</span>
+                            <span className={style.container__header_containerButton_button_shorttext}>Tran.</span>
+                          </button>
+                        </Link>
+                      </>
+                    )}
+                  </div>
+                </div>
 
-                <div className={style.container__header_containerButton}>
-                  {role === "ROLE_COPPABACS" && (
-                    <>
-                      <Link className={style.container__header_link} href={`/bancoSementes/agricultores`}>
-                        <button className={style.container__header_containerButton_button}>
-                          <Image src="/assets/iconAssociates.svg" alt="Agricultores" width={27} height={26} />
-                          <span className={style.container__header_containerButton_button_text}>Agricultores</span>
-                          <span className={style.container__header_containerButton_button_shorttext}>Agric.</span>
-                        </button>
-                      </Link>
-                      <Link className={style.container__header_link} href={`/bancoSementes/info/${banco.id}/sementes`}>
-                        <button className={style.container__header_containerButton_button}>
-                          <Image src="/assets/iconSeedGreen.svg" alt="Seed" width={27} height={26} />
-                          <span className={style.container__header_containerButton_button_text}>Sementes</span>
-                          <span className={style.container__header_containerButton_button_shorttext}>Sem.</span>
-                        </button>
-                      </Link>
-                      <Link className={style.container__header_link} href={`/transacoes`}>
-                        <button className={style.container__header_containerButton_button}>
-                          <Image src="/assets/iconAssociates.svg" alt="Agricultores" width={27} height={26} />
-                          <span className={style.container__header_containerButton_button_text}>Transações</span>
-                          <span className={style.container__header_containerButton_button_shorttext}>Tran.</span>
-                        </button>
-                      </Link>
-                    </>
-                  )}
+                <div>
+                  <div className={style.dropdown}>
+                    <div className={style.botaoDropdown}>
+                      <Image onClick={() => setOpen(!open)}
+                        src="/assets/dropdown.svg" alt="Dropdown" width={27} height={24} />
+                    </div>
+                    {open && (<div className={style.dropdown}>
+                      <ul className={style.botaoDropdown__lista}>
+                        <li>
+                          <div className={style.botaoDropdown__button}>
+                            <Link className={style.container__header_link} href={`/bancoSementes/info/${banco.id}/agricultores`}>
+                              <span className={style.botaoDropdown__button_text}>Agricultores</span>
+                            </Link>
+                            <Image src="/assets/iconAssociates.svg" alt="Agricultores" width={27} height={26} />
+                          </div>
+                        </li>
+                        <li>
+                          <div className={style.botaoDropdown__button}>
+                            <Link className={style.container__header_link} href={`/bancoSementes/info/${banco.id}/sementes`}>
+                              <span className={style.botaoDropdown__button_text}>Sementes</span>
+                            </Link>
+                            <Image src="/assets/iconSeedGreen.svg" alt="Seed" width={27} height={26} />
+                          </div>
+                        </li>
+                        <li>
+                          <div className={style.botaoDropdown__button}>
+                            <Link className={style.container__header_link} href={`/transacoes`}>
+                              <span className={style.botaoDropdown__button_text}>Transações</span>
+                            </Link>
+                            <Image src="/assets/iconAssociates.svg" alt="Agricultores" width={27} height={26} />
+                          </div>
+                        </li>
+                      </ul>
+                    </div>)}
+                  </div>
                 </div>
 
               </div>
@@ -183,7 +221,7 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
                           <span>Editar</span>
                           <Image src="/assets/iconLapis.svg" alt="editar perfil" width={15} height={15} />
                         </button>
-                        
+
                         <button
                           className={style.container__profile_buttonDesativar}>
                           <span>Desativar Banco</span>

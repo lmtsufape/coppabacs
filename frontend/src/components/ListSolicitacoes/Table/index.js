@@ -3,7 +3,7 @@ import style from "./table.module.scss";
 import Link from "next/link";
 
 
-export default function tableLayout({ table1, table2, table3, table4, listSolicitacoes, onSelectSolicitacao }) {
+export default function tableLayout({ table1, table2, table3, table4, listSolicitacoes }) {
 
   return (
     <div className={style.content}>
@@ -33,9 +33,13 @@ export default function tableLayout({ table1, table2, table3, table4, listSolici
                 <td>{agricultor.contato}</td>
                 <td>
                   <div >
-
-                    <Image src="/assets/iconOlho.svg" onClick={() => onSelectSolicitacao(agricultor)} alt="Visualizar" width={27} height={26} />
-
+                    <button className={style.no_border}>
+                      <span>
+                        <Link href={`/agricultores/solicitacoes/${agricultor.id}`}>
+                          <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
+                        </Link>
+                      </span>
+                    </button>
                   </div>
                 </td>
               </tr>

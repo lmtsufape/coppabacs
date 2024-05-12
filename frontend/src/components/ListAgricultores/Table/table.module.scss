@@ -93,13 +93,18 @@
     }
   }
 }
-
+.contentBigger{
+  display: inline;
+}
+.contentSmall{
+  display:none;
+}
 .noborder{
   border: none;
   background: none;
 }
 
-@media all and (min-width: 768px) {
+@media all and (min-width: 459px) and (max-width: 768px) {
   .content {
 
     button {
@@ -111,5 +116,14 @@
         display: inline;
       }
     }
+  }
+}
+
+@media all and (max-width: 460px) {
+  .contentBigger{
+    display: none;
+  }
+  .contentSmall{
+    display:inline;
   }
 }

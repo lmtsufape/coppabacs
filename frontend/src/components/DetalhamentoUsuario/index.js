@@ -15,10 +15,9 @@ import { useRouter } from "next/navigation";
 import { patchAgricultor } from "@/api/usuarios/agricultor/patchAgricultor";
 import { patchCoppabacs } from "@/api/usuarios/coppabacs/patchCoppabacs";
 import { patchCoordenador } from "@/api/usuarios/coordenador/patchCoordenador";
-import HeaderDetalhamento from "../HeaderDetalhamento";
 
 
-const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuario, backDetalhamento }) => {
+const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuario }) => {
 
   const router = useRouter();
   const [etapas, setEtapas] = useState(0);
@@ -75,14 +74,14 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
         dataNascimento: usuario.dataNascimento || '',
         sexo: usuario.sexo || '',
         endereco: usuario.endereco || {},
-        bancoId: usuario.bancoSementeId || '',
+        bancoId: usuario.bancoId || '',
         atividadeRural: usuario.atividadeRural || {},
         producaoSementes: usuario.producaoSementes || {}
       });
     }
   }, [usuario]);
 
-console.log(usuario)
+
   const mutationAprovacao = useMutation(() => validarAgricultor(usuario.id), {
     onSuccess: () => {
       console.log('Usuário aprovado com sucesso!');
@@ -121,10 +120,11 @@ console.log(usuario)
   });
   return (
     <div id="header" className={style.container}>
-      <HeaderDetalhamento
-        hrefAnterior={backDetalhamento}
-        diretorioAnterior="Home / Agricultores / "
-        diretorioAtual="Detalhamento agricultor"
+      <HeaderNavegacao
+        diretorioAnterior={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
+        hrefAnterior={hrefAnterior}
+        etapas={etapas}
 
       />
 
@@ -156,7 +156,7 @@ console.log(usuario)
                     <Image src="/assets/agricultorteste.png" alt="Foto do usuário" width={72} height={72} />
                     <h1>{usuario?.nome}</h1>
                   </div>
-                  {hrefAnterior === "/agricultores" || hrefAnterior === "/funcionarios" ? (
+                  {hrefAnterior === "/agricultores" | hrefAnterior === "/funcionarios" && (
                     <>
                       {editar === false ? (
                         <button
@@ -176,7 +176,7 @@ console.log(usuario)
                         </button >
                       )}
                     </>
-                  ):("")}
+                  )}
 
                 </div>
 
@@ -188,7 +188,7 @@ console.log(usuario)
                   )
                 }
                 {
-                  hrefAnterior === "/agricultores/solicitacoes" ? (
+                  hrefAnterior === "/agricultores/solicitações" && (
                     <div className={style.container__profile}>
                       <button
                         onClick={() => setEditar(true)}
@@ -206,7 +206,7 @@ console.log(usuario)
                       </button >
 
                     </div>
-                  ):("")
+                  )
                 }
               </Form >
             )
@@ -220,4 +220,4 @@ console.log(usuario)
 };
 
 
-export default DetalhamentoUsuario;
+export default AgricultorForm;
