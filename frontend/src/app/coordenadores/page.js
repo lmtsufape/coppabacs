@@ -1,6 +1,6 @@
 
 import ListCoordenadores from "@/components/ListCoordenadores";
-export default function AssociadosPage() {
+export default function coordenadoresPage() {
 
   return (
     <div>

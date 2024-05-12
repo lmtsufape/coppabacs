@@ -1,6 +1,6 @@
 import ListSolicitacoes from "@/components/ListSolicitacoes";
 
-export default function SolicitacoesPage() {
+export default function solicitacoesPage() {
 
   return (
     <>

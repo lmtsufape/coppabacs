@@ -1,20 +1,22 @@
 import Image from "next/image";
 import style from "./table.module.scss";
 import Link from "next/link";
-import { deleteAgricultor } from "@/api/agricultores/deleteAgricultor";
 import ExcluirButton from "@/components/ExcluirButton";
+import { deleteAgricultor } from "@/api/usuarios/agricultor/deleteAgricultor";
+import { useState } from "react";
 
 
-
-
-export default function tableLayout({ table1, table2, table3, table4, listAgricultores, setAgricultores }) {
+export default function tableLayout({ table1, table2, table3, table4, listAgricultores, setAgricultores, onSelectAgricultor }) {
 
   const handleDeleteAgricultor = async (agricultorId) => {
     await deleteAgricultor(agricultorId);
-    setAgricultores ( listAgricultores.filter(agricultori => agricultori.id !== agricultorId) )
+    setAgricultores(listAgricultores.filter(agricultori => agricultori.id !== agricultorId))
   }
 
+
+
   return (
+
     <div className={style.content}>
       <table className={style.content__table}>
         <thead className={style.content__table__header}>
@@ -42,14 +44,10 @@ export default function tableLayout({ table1, table2, table3, table4, listAgricu
                 <td>{agricultor.contato}</td>
                 <td>
                   <div >
-                    <button className={style.no_border}>
-                      <span>
-                        <Link href={`/agricultores/info/${agricultor.id}`}>
-                          <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
-                        </Link>
-                      </span>
-                    </button>
-                    <ExcluirButton  itemId={agricultor.id} onDelete={handleDeleteAgricultor}/>
+                    <Image src="/assets/iconOlho.svg" onClick={() => onSelectAgricultor(agricultor)}alt="Visualizar" width={27} height={26} />
+
+                    <ExcluirButton itemId={agricultor.id} onDelete={handleDeleteAgricultor} />
+
                   </div>
                 </td>
               </tr>

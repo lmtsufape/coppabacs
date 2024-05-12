@@ -129,7 +129,6 @@ const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAtu
       return getAllRetiradas(Number(agricultor.bancoSementeId));
     }, {
     onSuccess: (res) => {
-      console.log(res.data)
       console.log("Transações carregadas com sucesso!")
       setTransacao(res.data);
     },
@@ -144,7 +143,6 @@ const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAtu
     .filter((transacao) => transacao.agricultor.id === agricultor.id) // Filtra as transações pelo ID do agricultor logado
     .sort((a, b) => new Date(a.dataDoacao) - new Date(b.dataDoacao)); // Ordena as transações filtradas por data
   
-console.log(listTransacoes[0])
   return (
     <div>
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
@@ -212,7 +210,6 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAt
       return getAllRetiradas(Number(coordenador.bancoSementeId));
     }, {
     onSuccess: (res) => {
-      console.log(res.data)
       console.log("Transações carregadas com sucesso!")
       setTransacao(res.data);
     },

@@ -125,14 +125,14 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
                 <div className={style.container__header_containerButton}>
                   {role === "ROLE_COPPABACS" && (
                     <>
-                      <Link className={style.container__header_link} href={`/bancoSementes/agricultores`}>
+                      <Link className={style.container__header_link} href={`/bancoSementes/agricultoresBanco`}>
                         <button className={style.container__header_containerButton_button}>
                           <Image src="/assets/iconAssociates.svg" alt="Agricultores" width={27} height={26} />
                           <span className={style.container__header_containerButton_button_text}>Agricultores</span>
                           <span className={style.container__header_containerButton_button_shorttext}>Agric.</span>
                         </button>
                       </Link>
-                      <Link className={style.container__header_link} href={`/bancoSementes/info/${banco.id}/sementes`}>
+                      <Link className={style.container__header_link} href={`/bancoSementes/sementesBanco`}>
                         <button className={style.container__header_containerButton_button}>
                           <Image src="/assets/iconSeedGreen.svg" alt="Seed" width={27} height={26} />
                           <span className={style.container__header_containerButton_button_text}>Sementes</span>
