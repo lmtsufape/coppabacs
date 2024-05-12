@@ -226,7 +226,6 @@ const LayoutAgricultor = () => {
       return getBanco(Number(agricultor.bancoId));
     }, {
     onSuccess: (res) => {
-      console.log(res.data)
       setBanco(res.data);
     },
     onError: (error) => {

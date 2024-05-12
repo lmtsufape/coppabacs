@@ -1,7 +1,7 @@
 import React from "react";
 import SementeForm from "@/components/SementeForm/index";
 
-export default function NovaSementeFormPage() {
+export default function novaSementePage() {
     return (
         <div>
             <SementeForm 
