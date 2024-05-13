@@ -1,12 +1,11 @@
-.container{
+.container {
   width: 100%;
   display: flex;
   flex-direction: column;
   color: black;
   margin: 0 0 2em 0;
 
-
-  &__header{
+  &__header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
@@ -15,13 +14,14 @@
     font-weight: normal;
     gap: 1em;
 
-    &_current{
+    &_current {
       width: 98%;
       color: #A7A7A7;
       border-bottom: 3px solid #A7A7A7;
       padding-bottom: 0.5em;
     }
-    &_currentNav{
+
+    &_currentNav {
 
       color: #245501;
       font-weight: bolder;
@@ -30,90 +30,98 @@
 
     }
 
-
   }
-  &__ContainerForm{
+
+  &__ContainerForm {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 0 2em 0em 2em;
     padding: 0 0 2em 0;
-    border: 2px solid rgba(0,0,0, 0.10);
+    border: 2px solid rgba(0, 0, 0, 0.10);
     border-radius: 1em;
 
-    &_form{
+    &_form {
       width: 90%;
 
       display: flex;
       flex-direction: column;
-      
+
       margin: 2em 1em 1em 0em;
 
-      label{
+      label {
         margin: 0 0 0.5em 0;
         font-size: 1em;
         font-weight: normal;
-        &span{
+
+        &span {
           color: red;
         }
       }
-      &_input{
+      
+
+      &_input {
         width: 100%;
         padding: 0.5em;
-        margin: 0.1em 0 1em 0;
+        margin: 0.1em 0 1em 0; // margin: 0.1em 0 1em 0;
         border: 1px solid #A7A7A7;
         border-radius: 5px;
         font-size: 1em;
         font-weight: normal;
+        box-sizing: border-box;
+        background-color: #FFF;
+
+
       }
-      &_halfContainer{
+
+      &_halfContainer {
         width: 100%;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         align-items: center;
         row-gap: 1em;
         column-gap: 2em;
-        margin: 0 0 1em 0;
 
-        label{
-          margin: 0 0 0.5em 0;
+        &_input {
+          margin: 0.5em 0 0.5em 0;
+          background-color: #fff;
+          padding: 0.5em;
+          border: 1px solid #A7A7A7;
+          border-radius: 5px;
+          font-size: 1em;
+
+          width: 100%;
+          padding: 0.5em;
           font-size: 1em;
           font-weight: normal;
-          &span{
-            color: red;
-          }
-          }
-        &_input{
+          box-sizing: border-box;
+          background-color: #FFF;
+        }
+
+        &_select {
           width: 100%;
-          margin-top: 0.5em;
-          background-color: #fff;
-          padding: 0.5em;
-          border: 1px solid #A7A7A7;
-          border-radius: 5px;
-          font-size: 1em;
-        }   
-        &_select{
-          width: 104.9%;
           margin-top: 0.5em;
 
           background-color: #fff;
           padding: 0.5em;
           border: 1px solid #A7A7A7;
           border-radius: 5px;
-          font-size: 1em;        
+          font-size: 1em;
+
           option {
-            background-color: #245501; // Cor do fundo dos options
-            color: #fff; // Cor do texto dos options
-        
+            background-color: #A7A7A7; // Cor do fundo dos options
+
             // Quando selecionado
-            &:checked, &:selected { 
+            &:checked,
+            &:selected {
               background-color: darken(#245501, 10%); // Uma cor mais escura quando o option está selecionado
             }
           }
         }
       }
-      &_threePartsContainer{
+
+      &_threePartsContainer {
         width: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -121,39 +129,44 @@
         row-gap: 1em;
         column-gap: 2em;
         margin: 0 0 1em 0;
-        label{
+
+        label {
           margin: 0 0 0.5em 0;
           font-size: 0.8em;
           font-weight: normal;
 
         }
-        &_input{
-          width: 100%;
+
+        &_input {
+          width: 98.5%;
+
           padding: 0.5em;
           border: 1px solid #A7A7A7;
           border-radius: 5px;
           font-size: 1em;
-        }   
+        }
       }
-      span{
+
+      span {
         color: red;
         font-size: 0.8em;
         margin: -1em 0 0.5em 0;
       }
     }
 
-    &_buttons{
+    &_buttons {
       display: flex;
       justify-content: end;
       align-items: center;
       margin-right: -1em;
       gap: 1em;
-      
-      link{
+
+      link {
         text-decoration: none;
         color: #000;
       }
-      button{
+
+      button {
         width: 8em;
 
         padding: 0.5em 1em;
@@ -162,24 +175,91 @@
         font-weight: normal;
 
         background-color: #FFF;
-        
-        border: 1px solid rgba(0,0,0, 0.10);
+
+        border: 1px solid rgba(0, 0, 0, 0.10);
         border-radius: 5px;
         cursor: pointer;
+
+        &:hover {
+          box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);
+        }
       }
-      button:last-child{
+
+      button:last-child {
         background-color: #245501;
       }
-      &_link{
+
+      &_link {
         text-decoration: none;
         color: #000;
       }
-      &_linkWhite{
+
+      &_linkWhite {
         text-decoration: none;
         color: #FFF;
       }
-      
+
     }
-    
+
+  }
+}
+
+@media only screen and (min-width: 414px) and (max-width: 700px) {
+  .container {
+    flex-direction: column;
+
+    &__ContainerForm {
+      padding: 1em 1em 2em 0.5em;
+      margin: 0;
+
+      &_form {
+        margin: 0;
+
+        &_halfContainer {
+          grid-template-columns: 1fr;
+          margin: 0;
+
+        }
+
+
+
+        &_threePartsContainer {
+          grid-template-columns: 1fr;
+          margin: 0;
+        }
+      }
+    }
+
+  }
+}
+
+@media only screen and (max-width: 415px) {
+  .container {
+    flex-direction: column;
+
+    &__ContainerForm {
+      padding: 1em 1em 2em 0.5em;
+      margin: 0;
+
+      &_form {
+        margin: 0;
+
+        &_halfContainer {
+          grid-template-columns: 1fr;
+          margin: 0;
+
+          &_select {
+            box-sizing: border-box;
+            width: 105%;
+          }
+        }
+
+        &_threePartsContainer {
+          grid-template-columns: 1fr;
+          margin: 0;
+        }
+      }
+    }
+
   }
 }

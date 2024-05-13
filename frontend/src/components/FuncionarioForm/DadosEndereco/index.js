@@ -1,10 +1,29 @@
 "use client"
 
+import { useEffect, useState } from "react";
 import style from "../agricultorForm.module.scss";
+import { useMutation } from "react-query";
+import { getAllBancos } from "@/api/bancoSementes/getAllBancos";
 
 export default function DadosEndereco({ formik }) {
 
+  const [bancos, setBancos] = useState([]);
+  useEffect(() => {
+    mutate();
+  }, [])
 
+  const { state, mutate } = useMutation(
+    async () => {
+      return getAllBancos();
+    }, {
+    onSuccess: (res) => {
+      setBancos(res.data);
+    },
+    onError: (error) => {
+      console.log(error)
+    }
+  }
+  );
   return (
     <>
       <label htmlFor="cep">Cep <span >*</span></label>
@@ -66,8 +85,8 @@ export default function DadosEndereco({ formik }) {
 
       <div className={style.container__ContainerForm_form_halfContainer}>
         <div>
-          <label 
-          htmlFor="logradouro">Logradouro <span >*</span></label>
+          <label
+            htmlFor="logradouro">Logradouro <span >*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="logradouro"
@@ -128,7 +147,33 @@ export default function DadosEndereco({ formik }) {
           ) : null}
         </div>
       </div>
-    
+      <div>
+        <label htmlFor="bancoId">Banco de sementes <span >*</span></label>
+        <select
+          className={style.container__ContainerForm_form_halfContainer_input}
+          id="bancoId"
+          name="bancoId"
+          placeholder="Insira o banco de sementes"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.bancoId}
+          required
+        >
+          <option value="" >Selecione...</option>
+          {bancos.map((bancos, index) => {
+            return (
+              <option key={index} value={bancos.id}>{bancos.nome}</option>
+
+            )
+          })}
+        </select>
+        {formik.touched.bancoId && formik.errors.bancoId ? (
+          <span className={style.form__error}>{formik.errors.bancoId}</span>
+        ) : null}
+
+      </div>
+
+
     </>
   )
 }
