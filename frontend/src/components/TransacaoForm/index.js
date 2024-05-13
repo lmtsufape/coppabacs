@@ -74,7 +74,6 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
   const mutationDoacao = useMutation(newDoacao => postDoacao(newDoacao), {
     onSuccess: () => {
-      console.log('Cadastro realizado com sucesso!')
       router.push('/doacoes')
 
     },
@@ -87,8 +86,6 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   const mutationRetirada = useMutation(newRetirada => postRetirada(newRetirada), {
 
     onSuccess: () => {
-
-      console.log('Cadastro realizado com sucesso!')
       router.push('/retiradas')
 
     },

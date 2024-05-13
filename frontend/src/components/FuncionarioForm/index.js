@@ -74,12 +74,11 @@ const FuncionarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
       return postCoppabacs(values);
     }, {
     onSuccess: (res) => {
-      console.log('Cadastro realizado com sucesso!');
       window.location.href = '/funcionarios';
 
     },
     onError: (error) => {
-      console.log(error);
+      console.log("Erro ao cadastrar funcionario", error);
 
     }
   }

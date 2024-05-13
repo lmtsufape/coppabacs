@@ -166,7 +166,6 @@ const LayoutCoordenador = () => {
   const mutationCoordenador = useMutation(coordenadorEmail => getCoordenadorEmail(coordenadorEmail), {
     onSuccess: (res) => {
       setCoordenador(res.data);
-      console.log('Coordenador carregado com sucesso');
     },
     onError: (error) => {
       console.error('Erro ao recuperar as informações do coordenador:', error);
@@ -181,7 +180,7 @@ const LayoutCoordenador = () => {
       setBanco(res.data);
     },
     onError: (error) => {
-      console.log(error)
+      console.log("Erro ao recuperar as infomações do banco", error)
     }
   }
   );
@@ -215,7 +214,6 @@ const LayoutAgricultor = () => {
   const mutationAgricultor = useMutation(agricultorEmail => getUsuarioEmail(agricultorEmail), {
     onSuccess: (res) => {
       setAgricultor(res.data);
-      console.log('Agricultor carregado com sucesso');
     },
     onError: (error) => {
       console.error('Erro ao recuperar as informações do coordenador:', error);
@@ -229,7 +227,7 @@ const LayoutAgricultor = () => {
       setBanco(res.data);
     },
     onError: (error) => {
-      console.log(error)
+      console.log("Erro ao recuperar as infomações do banco", error)
     }
   }
   );

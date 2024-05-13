@@ -173,7 +173,7 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
     },
     onError: (error) => {
-      console.log(error);
+      console.log("Erro ao cadastrar nova sementes", error);
 
     }
   }
@@ -207,13 +207,7 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
           initialValues={initialValues}
           validationSchema={validateSchema}
           onSubmit={(values, { setSubmitting }) => {
-            mutate(values, {
-              onSuccess: (res) => {
-              },
-              onError: (error) => {
-                console.log(error)
-              }
-            });
+            mutate(values);
           }}
         >
           {(formik) => {
@@ -290,7 +284,7 @@ const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) 
 
     },
     onError: (error) => {
-      console.log(error);
+      console.log("Erro ao adicionar uma nova semente ao banco", error);
 
     }
   }

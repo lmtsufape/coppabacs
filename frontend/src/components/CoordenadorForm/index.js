@@ -71,7 +71,6 @@ const CoordenadorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
 
   const  mutationCoordenador = useMutation( newCoordenador => postCoordenador(newCoordenador), {
     onSuccess: () => {
-      console.log('Cadastro realizado com sucesso!')
       router.push('/coordenadores')
 
     },

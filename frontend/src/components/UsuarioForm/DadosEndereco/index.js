@@ -20,7 +20,7 @@ export default function DadosEndereco({ formik }) {
       setBancos(res.data);
     },
     onError: (error) => {
-      console.log(error)
+      console.log("Erro ao carregar as informações dos bancos de sementes", error)
     }
   }
   );
