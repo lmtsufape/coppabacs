@@ -106,7 +106,7 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
       setSementes(res.data);
     },
     onError: (error) => {
-      console.log(error)
+      console.log("Erro ao recuparar as informações das sementes", error)
     }
   }
   );
@@ -191,7 +191,6 @@ const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ta
   const mutationCoordenador = useMutation(coordenadorEmail => getCoordenadorEmail(coordenadorEmail), {
     onSuccess: (res) => {
       setCoordenador(res.data);
-      console.log('Coordenador carregado com sucesso');
     },
     onError: (error) => {
       console.error('Erro ao recuperar as informações do coordenador:', error);
@@ -205,7 +204,7 @@ const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ta
       setSementes(res.data);
     },
     onError: (error) => {
-      console.log(error)
+      console.log("Erro ao recuperar as infomações das sementes do banco",error)
     }
   }
   );
@@ -289,7 +288,6 @@ const LayoutAgricultor = ({ diretorioAnterior, diretorioAtual, hrefAnterior, tab
   const mutationAgricultor = useMutation(agricultorEmail => getUsuarioEmail(agricultorEmail), {
     onSuccess: (res) => {
       setAgricultor(res.data);
-      console.log('Agricultor carregado com sucesso');
     },
     onError: (error) => {
       console.error('Erro ao recuperar as informações do coordenador:', error);
@@ -303,7 +301,7 @@ const LayoutAgricultor = ({ diretorioAnterior, diretorioAtual, hrefAnterior, tab
       setSementes(res.data);
     },
     onError: (error) => {
-      console.log(error)
+      console.log("Erro ao recuperar as infomações das sementes do banco", error)
     }
   }
   );
@@ -374,7 +372,7 @@ const LayoutPublic = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1,
       setSementes(res.data);
     },
     onError: (error) => {
-      console.log(error)
+      console.log("Erro ao recuperar as infomações das sementes",error)
     }
   }
   );

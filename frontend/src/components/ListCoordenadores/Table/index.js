@@ -24,7 +24,7 @@ export default function TableLayout({ table1, table2, table3, table4, listCoorde
       setBancos(res.data);
     },
     onError: (error) => {
-      console.log(error)
+      console.log("Erro ao recuperar os bancos de sementes",error)
     }
   }
   );

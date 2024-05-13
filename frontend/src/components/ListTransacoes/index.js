@@ -31,7 +31,7 @@ export default function ListTransacoes({ diretorioAnterior, diretorioAtual, href
       setBanco(res.data.bancoId)
     },
     onError: (error) => {
-      console.log(error);
+      console.log("Erro ao recuperar as informações do usaurio da sessão", error);
     },
   });
   function whatIsTypeUser() {
@@ -105,7 +105,6 @@ const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAtu
   const mutationAgricultor = useMutation(agricultorEmail => getUsuarioEmail(agricultorEmail), {
     onSuccess: (res) => {
       setAgricultor(res.data);
-      console.log('Agricultor carregado com sucesso');
     },
     onError: (error) => {
       console.error('Erro ao recuperar as informações do coordenador:', error);
@@ -116,7 +115,6 @@ const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAtu
       return getAllDoacoes(Number(agricultor.bancoSementeId));
     }, {
     onSuccess: (res) => {
-      console.log("Transações carregadas com sucesso!")
       setTransacao(res.data);
     },
     onError: (error) => {
@@ -129,7 +127,6 @@ const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAtu
       return getAllRetiradas(Number(agricultor.bancoSementeId));
     }, {
     onSuccess: (res) => {
-      console.log("Transações carregadas com sucesso!")
       setTransacao(res.data);
     },
     onError: (error) => {
@@ -186,7 +183,6 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAt
   const mutationCoordenador = useMutation(coordenadorEmail => getCoordenadorEmail(coordenadorEmail), {
     onSuccess: (res) => {
       setCoordenador(res.data);
-      console.log('Coordenador carregado com sucesso');
     },
     onError: (error) => {
       console.error('Erro ao recuperar as informações do coordenador:', error);
@@ -197,7 +193,6 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAt
       return getAllDoacoes(Number(coordenador.bancoSementeId));
     }, {
     onSuccess: (res) => {
-      console.log("Transações carregadas com sucesso!")
       setTransacao(res.data);
     },
     onError: (error) => {
@@ -210,7 +205,6 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAt
       return getAllRetiradas(Number(coordenador.bancoSementeId));
     }, {
     onSuccess: (res) => {
-      console.log("Transações carregadas com sucesso!")
       setTransacao(res.data);
     },
     onError: (error) => {

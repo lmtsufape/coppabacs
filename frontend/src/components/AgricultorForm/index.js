@@ -80,12 +80,11 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
       return postAgricultor(values);
     }, {
     onSuccess: () => {
-      console.log('Cadastro realizado com sucesso!');
       window.location.href = '/agricultores';
 
     },
     onError: (error) => {
-      console.log(error);
+      console.log("Erro ao cadastrar novo agriculto", error);
 
     }
   }

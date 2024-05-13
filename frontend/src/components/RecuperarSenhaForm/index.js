@@ -27,7 +27,6 @@ const RecuperarSenhaForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior })
             return postAgricultor(values);
         },{
             onSucess: () => {
-                console.log('Recuperação de senha realizada com sucesso');
                 window.location.href= '/login'
             },
             onError: (error) => {

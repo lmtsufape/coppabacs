@@ -29,7 +29,6 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
     const mutationCoordenador = useMutation(coordenadorEmail => getCoordenadorEmail(coordenadorEmail), {
         onSuccess: (res) => {
             setCoordenador(res.data);
-            console.log('Coordenador carregado com sucesso');
         },
         onError: (error) => {
             console.error('Erro ao recuperar as informações do coordenador:', error);
@@ -44,7 +43,7 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
             setSementes(res.data);
         },
         onError: (error) => {
-            console.log(error);
+            console.log("Erro ao recuperar as informações das sementes do banco", error);
         }
     });
 
@@ -56,7 +55,7 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
             setAgricultores(res.data);
         },
         onError: (error) => {
-            console.log(error);
+            console.log("Errp ao recuperar as informações dos agricultores do banco", error);
         }
     });
 

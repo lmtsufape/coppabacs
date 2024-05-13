@@ -83,7 +83,7 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
         <HeaderDetalhamento
           hrefAnterior={backDetalhamento}
           diretorioAnterior="Home / Bancos de Sementes / "
-          diretorioAtual="Detalhamento"
+          diretorioAtual="Detalhes"
 
         />
       )
