@@ -28,7 +28,7 @@ export default function ListAgricultoresBanco({ diretorioAnterior, diretorioAtua
       setBanco(res.data.bancoId)
     },
     onError: (error) => {
-      console.log(error);
+      console.log("Erro ao recuperar o usuario da sessão", error);
     },
   });
   function whatIsTypeUser() {
@@ -86,7 +86,6 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, diretorioAnterior, 
   const mutationCoordenador = useMutation(coordenadorEmail => getCoordenadorEmail(coordenadorEmail), {
     onSuccess: (res) => {
       setCoordenador(res.data);
-      console.log('Coordenador carregado com sucesso');
     },
     onError: (error) => {
       console.error('Erro ao recuperar as informações do coordenador:', error);
@@ -97,8 +96,6 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, diretorioAnterior, 
       return getAllAgricultoresBanco(Number(coordenador.bancoSementeId));
     }, {
     onSuccess: (res) => {
-      console.log(res.data)
-
       setAgricultores(res.data);
     },
     onError: (error) => {

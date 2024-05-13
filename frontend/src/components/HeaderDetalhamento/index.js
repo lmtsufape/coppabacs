@@ -12,8 +12,7 @@ const HeaderDetalhamento = ({ diretorioAnterior, diretorioAtual, hrefAnterior })
           <a className={style.header__title_voltar_link} onClick={hrefAnterior}><h1>Voltar</h1></a>
         </div>
         <div className={style.header__title_guia}>
-          <h1>{diretorioAnterior}</h1>
-          <h1>{diretorioAtual}</h1>
+          <h1>{diretorioAnterior} <span>{diretorioAtual}</span></h1>
         </div>
       </div>
     </div>

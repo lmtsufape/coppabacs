@@ -75,7 +75,7 @@ const BancoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
     onSuccess: (res) => {
     },
     onError: (error) => {
-      console.log(error);
+      console.log("Erro ao cadastrar novo banco", error);
 
     }
   }
@@ -110,15 +110,7 @@ const BancoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
           validationSchema={validateSchema}
 
           onSubmit={(values, { setSubmitting }) => {
-            mutate(values,{
-              onSuccess: (res) => {
-                //window.location.href = '/bancoSementes';
-              },
-              onError: (error) => {
-                console.log(error)
-              }
-            
-            });
+            mutate(values);
 
           }}
         >
@@ -167,15 +159,7 @@ const BancoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
                       </Link>
                     </button>
                     <button onClick={()=> {
-                       mutate(formik.values,{
-                        onSuccess: (res) => {
-                          window.location.href = '/bancoSementes';
-                        },
-                        onError: (error) => {
-                          console.log(error)
-                        }
-                      
-                      });
+                       mutate(formik.values);
                     }}
                     className={style.container__ContainerForm_buttons_linkWhite}>
                         <h1>Finalizar</h1>

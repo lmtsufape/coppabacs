@@ -18,7 +18,6 @@ export default function SelecionarSementesBanco({ formik }) {
     const mutationCoordenador = useMutation(coordenadorEmail => getCoordenadorEmail(coordenadorEmail), {
         onSuccess: (res) => {
             setCoordenador(res.data);
-            console.log('Coordenador carregado com sucesso');
         },
         onError: (error) => {
             console.error('Erro ao recuperar as informações do coordenador:', error);
@@ -38,7 +37,7 @@ export default function SelecionarSementesBanco({ formik }) {
             setSementes(res.data);
         },
         onError: (error) => {
-            console.log(error);
+            console.log("Erro ao recuperar as informações das sementes", error);
         }
     });
     useEffect(() => {

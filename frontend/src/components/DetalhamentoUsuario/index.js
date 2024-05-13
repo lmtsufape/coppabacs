@@ -82,10 +82,8 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
     }
   }, [usuario]);
 
-console.log(usuario)
   const mutationAprovacao = useMutation(() => validarAgricultor(usuario.id), {
     onSuccess: () => {
-      console.log('Usuário aprovado com sucesso!');
       router.push(`${hrefAnterior}`);
     },
     onError: (error) => {
@@ -94,7 +92,6 @@ console.log(usuario)
   });
   const mutationUpdateAgricultor = useMutation(newData => patchAgricultor(newData, usuario.id), {
     onSuccess: () => {
-      console.log('Dados atualizados com sucesso');
       router.push('/agricultores');
     },
     onError: (error) => {
@@ -103,7 +100,6 @@ console.log(usuario)
   });
   const mutationUpdateCoordenador = useMutation(newData => patchCoordenador(newData, usuario.id), {
     onSuccess: () => {
-      console.log('Dados atualizados com sucesso');
       router.push('/coordenadores');
     },
     onError: (error) => {
@@ -112,7 +108,6 @@ console.log(usuario)
   });
   const mutationUpdateFuncionario = useMutation(newData => patchCoppabacs(newData, usuario.id), {
     onSuccess: () => {
-      console.log('Dados atualizados com sucesso');
       router.push('/funcionários');
     },
     onError: (error) => {
@@ -124,7 +119,7 @@ console.log(usuario)
       <HeaderDetalhamento
         hrefAnterior={backDetalhamento}
         diretorioAnterior="Home / Agricultores / "
-        diretorioAtual="Detalhamento agricultor"
+        diretorioAtual="Detalhes do Agricultor"
 
       />
 

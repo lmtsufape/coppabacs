@@ -81,7 +81,7 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
     },
     onError: (error) => {
-      console.log(error);
+      console.log("Erro ao cadastrar uma nova solicitação de cadastro de agricultor", error);
 
     }
   }

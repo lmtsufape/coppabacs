@@ -29,7 +29,7 @@ export default function ListSolicitacoes({ diretorioAnterior, diretorioAtual, hr
       setSolicitacoes(res.data);
     },
     onError: (error) => {
-      console.log(error)
+      console.log("Erro ao recuperar as informações das solicitações", error)
     }
   }
   );

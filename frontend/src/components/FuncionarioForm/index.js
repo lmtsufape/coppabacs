@@ -74,12 +74,11 @@ const FuncionarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
       return postCoppabacs(values);
     }, {
     onSuccess: (res) => {
-      console.log('Cadastro realizado com sucesso!');
       window.location.href = '/funcionarios';
 
     },
     onError: (error) => {
-      console.log(error);
+      console.log("Erro ao cadastrar funcionario", error);
 
     }
   }
@@ -96,11 +95,11 @@ const FuncionarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
       />
 
       <div className={style.container__header}>
-        {etapas === 0 && <h1 className={style.container__header_currentNav}>1. Dados do Funcionario</h1>}
-        {etapas >= 1 && etapas <= 2 && <h1 className={style.container__header_current}>1. Dados do Funcionario</h1>}
+        {etapas === 0 && <h1 className={style.container__header_currentNav}>1. Dados do(a) Funcionário(a)</h1>}
+        {etapas >= 1 && etapas <= 2 && <h1 className={style.container__header_current}>1. Dados do(a) Funcionário(a)</h1>}
 
-        {etapas === 1 && <h1 className={style.container__header_currentNav}>2. Endereço do Funcionario</h1>}
-        {etapas != 1 && <h1 className={style.container__header_current}>2. Endereço do Funcionario</h1>}
+        {etapas === 1 && <h1 className={style.container__header_currentNav}>2. Endereço do(a) Funcionário(a)</h1>}
+        {etapas != 1 && <h1 className={style.container__header_current}>2. Endereço do(a) Funcionário(a)</h1>}
 
       </div>
 

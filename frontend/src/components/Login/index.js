@@ -33,7 +33,7 @@ const Login = () => {
         userDetailsMutation.mutate();
       },
       onError: (error) => {
-        console.log(error);
+        console.log("Erro ao fazer o login de usuario", error);
       },
     });
 
@@ -45,7 +45,7 @@ const Login = () => {
         push("/");
       },
       onError: (error) => {
-        console.log(error);
+        console.log("Erro ao recuperar as informações do usaurio da sessão", error);
       },
     });
   
