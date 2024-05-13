@@ -69,6 +69,7 @@ const LayoutCoordenador = ({ table1, table2, table3, table4 }) => {
 
   const [coordenador, setCoordenador] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [open, setOpen] = useState(false);
 
 
   useEffect(() => {
@@ -110,17 +111,51 @@ const LayoutCoordenador = ({ table1, table2, table3, table4 }) => {
 
       <div className={style.header}>
         <div className={style.header__container}>
+          <div className={style.dropdown}>
+            <div className={style.botaoDropdown_coordenador}>
+              <Image onClick={() => setOpen(!open)}
+                src="/assets/dropdown.svg" alt="Dropdown" width={27} height={24} />
+            </div>
+            {open && (<div className={style.dropdown}>
+              <ul className={style.botaoDropdown__lista}>
+                <li>
+                  <div className={style.botaoDropdown__button}>
+                    <Link className={style.header__container_link} href="agricultores/solicitacoes">
+                      <h1>
+                        Solicitações de Cadastro
+                      </h1>
+                    </Link>
+                    <Image src="/assets/iconSinoGray.svg" alt="Adicionar Agricultor" width={20} height={20} />
 
-          <button>
+                  </div>
+                </li>
+                <li>
+                  <div className={style.botaoDropdown__button}>
 
-            <Link className={style.header__container_link} href="agricultores/novoAgricultor">
-              <h1>
-                Adicionar Agricultor(a)
-              </h1>
-            </Link>
+                    <Link className={style.header__container_link} href="agricultores/novoAgricultor">
+                      <h1>
+                        Adicionar Agricultor(a)
+                      </h1>
+                    </Link>
 
-            <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Agricultor" width={27} height={24} />
-          </button>
+                    <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Agricultor" width={20} height={20} />
+                  </div></li>
+              </ul>
+            </div>)}
+          </div>
+
+          <div className={style.botoes}>
+            <button>
+
+              <Link className={style.header__container_link} href="agricultores/novoAgricultor">
+                <h1>
+                  Adicionar Agricultor(a)
+                </h1>
+              </Link>
+
+              <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Agricultor" width={27} height={24} />
+            </button>
+          </div>
           <div className={style.header__container_buttons}>
 
           </div>

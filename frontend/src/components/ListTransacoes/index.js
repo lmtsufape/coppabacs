@@ -80,7 +80,7 @@ export default function ListTransacoes({ diretorioAnterior, diretorioAtual, href
   );
 }
 
-const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAtual,hrefAnterior }) => {
+const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAtual, hrefAnterior }) => {
 
 
   const [agricultorEmail, setAgricultorEmail] = useState(getStorageItem("userLogin"));
@@ -93,10 +93,10 @@ const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAtu
 
   useEffect(() => {
     mutationAgricultor.mutate(agricultorEmail);
-    if(agricultor.bancoId){
-      if(diretorioAtual === "Doações"){
+    if (agricultor.bancoId) {
+      if (diretorioAtual === "Doações") {
         mutateDoacoes.mutate();
-      }else if(diretorioAtual ==="Retiradas"){
+      } else if (diretorioAtual === "Retiradas") {
         mutateRetiradas.mutate();
       }
     }
@@ -143,8 +143,8 @@ const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAtu
   const listTransacoes = transacao
     .filter((transacao) => transacao.agricultor.id === agricultor.id) // Filtra as transações pelo ID do agricultor logado
     .sort((a, b) => new Date(a.dataDoacao) - new Date(b.dataDoacao)); // Ordena as transações filtradas por data
-  
-console.log(listTransacoes[0])
+
+  console.log(listTransacoes[0])
   return (
     <div>
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
@@ -164,7 +164,7 @@ console.log(listTransacoes[0])
 }
 
 
-const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAtual,hrefAnterior }) => {
+const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAtual, hrefAnterior }) => {
 
   const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
 
@@ -172,14 +172,15 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAt
 
   const [coordenador, setCoordenador] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [open, setOpen] = useState(false);
 
 
   useEffect(() => {
     mutationCoordenador.mutate(coordenadorEmail);
-    if(coordenador.bancoSementeId){
-      if(diretorioAtual === "Doações"){
+    if (coordenador.bancoSementeId) {
+      if (diretorioAtual === "Doações") {
         mutateDoacoes.mutate();
-      }else if(diretorioAtual ==="Retiradas"){
+      } else if (diretorioAtual === "Retiradas") {
         mutateRetiradas.mutate();
       }
     }
@@ -222,37 +223,67 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAt
   }
   );
 
-  const listTransacoes = transacao.sort((a, b) => 
-  new Date(a.dataDoacao) - new Date(b.dataDoacao)
-);
+  const listTransacoes = transacao.sort((a, b) =>
+    new Date(a.dataDoacao) - new Date(b.dataDoacao)
+  );
   return (
     <div>
 
       <div className={style.header}>
         <div className={style.header__container}>
+          <div className={style.dropdown}>
+            <div className={style.botaoDropdown}>
+              <Image onClick={() => setOpen(!open)}
+                src="/assets/dropdown.svg" alt="Dropdown" width={27} height={24} />
+            </div>
+            {open && (<div className={style.dropdown}>
+              <ul className={style.botaoDropdown__lista}>
+                <li>
+                  <div className={style.botaoDropdown__button}>
+                    {diretorioAtual === "Doações" ? (
+                      <Link className={style.header__container_link} href="doacoes/novaDoacao">
+                        <h1>
+                          Adicionar Doação
+                        </h1>
+                      </Link>
+                    ) : (
+                      <Link className={style.header__container_link} href="retiradas/novaRetirada">
+                        <h1>
+                          Adicionar Retirada
+                        </h1>
+                      </Link>
+                    )}
+                    <Image className={style.botaoDropdown_img}src="/assets/iconTransacao.svg" alt="Adicionar Agricultor" width={27} height={24} />
 
-          <button>
-            {diretorioAtual === "Doações" ? (
-              <Link className={style.header__container_link} href="doacoes/novaDoacao">
-              <h1>
-                Adicionar Doação  
-              </h1>
-            </Link>
-            ): (
-              <Link className={style.header__container_link} href="retiradas/novaRetirada">
-              <h1>
-                Adicionar Retirada  
-              </h1>
-            </Link>
-            ) }
-            
+                  </div>
+                </li>
+              </ul>
+            </div>)}
+          </div>
+          <div className={style.botoes}>
+            <button>
+              {diretorioAtual === "Doações" ? (
+                <Link className={style.header__container_link} href="doacoes/novaDoacao">
+                  <h1>
+                    Adicionar Doação
+                  </h1>
+                </Link>
+              ) : (
+                <Link className={style.header__container_link} href="retiradas/novaRetirada">
+                  <h1>
+                    Adicionar Retirada
+                  </h1>
+                </Link>
+              )}
 
-            <Image src="/assets/iconAddTransacao.svg" alt="Adicionar Agricultor" width={27} height={24} />
-          </button>
-          <div className={style.header__container_buttons}>
+
+              <Image src="/assets/iconAddTransacao.svg" alt="Adicionar Agricultor" width={27} height={24} />
+            </button>
+            <div className={style.header__container_buttons}>
+
+            </div>
 
           </div>
-
         </div>
       </div>
 

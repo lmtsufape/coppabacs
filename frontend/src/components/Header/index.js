@@ -10,6 +10,7 @@ import { setUserLogin } from "@/redux/userLogin/userLoginSlice";
 
 
 const Header = () => {
+
   const { push, back } = useRouter();
   const pathName = usePathname();
   const userLogin = useSelector((state) => state.userLogin);
@@ -62,17 +63,17 @@ const Header = () => {
         </div>
         : false}
       <button className={style.header__button_link} onClick={() => push("/")} >
-        <Image className={style.header__logo} src="/assets/logoSementesVerde.svg" alt="Logo App" width={150} height={40} />
+        <Image className={style.header__logo} src="/assets/logoCoppabacs.svg" alt="Logo App" width={60} height={60} />
       </button>
+      <div className={style.header__usuarioLogado}>
+      {userLogin ? <h3 className={style.header__usuarioLogado_h3}>Olá, {userLogin}</h3> : <h3 className={style.header__usuarioLogado_h3}>Visitante</h3>}
       {pathName != "/" && pathName != "/login" ? <button className={style.header__voltar} onClick={() => back()}>
         <Image src="/assets/IconMenorQue.svg" alt="Voltar" width={27} height={24} />
       </button> : false}
-
       {userLogin ? <button className={style.header__button_perfil} onClick={() => setDropdow(!dropdow)}>
         <Image src="/assets/iconLogado.svg" alt="Home" width={50} height={50} />
       </button> : <button className={style.header__button_home} onClick={() => push("/login")} >Login</button>
       }
-
       {dropdow && userLogin ? <div className={style.header__dropdown}>
         <button className={style.header__dropdown__perfil}>
           <Image src="/assets/iconLogadoGray.svg" alt="Voltar" width={27} height={24} />
@@ -83,7 +84,7 @@ const Header = () => {
           <p>Sair</p>
         </button>
       </div> : false}
-
+      </div>
     </header>
   )
 }

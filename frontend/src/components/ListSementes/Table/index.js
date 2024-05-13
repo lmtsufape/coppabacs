@@ -19,8 +19,8 @@ export default function TableLayout({ table1, table2, table3, table4, table5, ta
       if (role == "ROLE_ADMIN" || role == "ROLE_COPPABACS") {
         return <LayoutAdmin
           table1="Imagem"
-          table2="Nome"
-          table3="Cultivar"
+          table2="Cultura"
+          table3="Nome da Cultivar"
           table4="Ações"
           listSementes={listSementes}
           onSelectSemente={onSelectSemente}
