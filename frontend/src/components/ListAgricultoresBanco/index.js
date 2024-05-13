@@ -13,14 +13,16 @@ import { getStorageItem } from "@/utils/localStore";
 import { getAllAgricultoresBanco } from "@/api/bancoSementes/getAgricultoresBanco";
 import { getCurrentUser } from "@/api/usuarios/getCurrentUser";
 import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
+import DetalhamentoUsuario from "../DetalhamentoUsuario";
 
-export default function ListAgricultores({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4 }) {
+export default function ListAgricultoresBanco({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4 }) {
 
   const [role, setRole] = useState(getStorageItem("userRole"));
   const [banco, setBanco] = useState(null);
+
   useEffect(() => {
     userDetailsMutation.mutate()
-  },[]);
+  }, []);
   const userDetailsMutation = useMutation(getCurrentUser, {
     onSuccess: (res) => {
       setBanco(res.data.bancoId)
@@ -36,6 +38,9 @@ export default function ListAgricultores({ diretorioAnterior, diretorioAtual, hr
         table2={table2}
         table3={table3}
         table4={table4}
+        diretorioAnterior={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
+        hrefAnterior={hrefAnterior}
       />
     } else if (role == "ROLE_GERENTE") {
       return <LayoutCoordenador
@@ -43,17 +48,16 @@ export default function ListAgricultores({ diretorioAnterior, diretorioAtual, hr
         table2={table2}
         table3={table3}
         table4={table4}
+        diretorioAnterior={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
+        hrefAnterior={hrefAnterior}
       />
     }
   }
 
   return (
     <div>
-      <Header
-        diretorioAnterior={diretorioAnterior}
-        diretorioAtual={diretorioAtual}
-        hrefAnterior={hrefAnterior}
-      />
+
       {whatIsTypeUser()}
 
     </div>
@@ -61,7 +65,7 @@ export default function ListAgricultores({ diretorioAnterior, diretorioAtual, hr
   );
 }
 
-const LayoutCoordenador = ({ table1, table2, table3, table4 }) => {
+const LayoutCoordenador = ({ table1, table2, table3, table4, diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
   const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
 
@@ -70,10 +74,11 @@ const LayoutCoordenador = ({ table1, table2, table3, table4 }) => {
   const [coordenador, setCoordenador] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
+  const [selectedAgricultor, setSelectedAgricultor] = useState(null);
 
   useEffect(() => {
     mutationCoordenador.mutate(coordenadorEmail);
-    if(coordenador.bancoSementeId){
+    if (coordenador.bancoSementeId) {
       mutate();
     }
   }, [coordenador.bancoSementeId]);
@@ -92,6 +97,8 @@ const LayoutCoordenador = ({ table1, table2, table3, table4 }) => {
       return getAllAgricultoresBanco(Number(coordenador.bancoSementeId));
     }, {
     onSuccess: (res) => {
+      console.log(res.data)
+
       setAgricultores(res.data);
     },
     onError: (error) => {
@@ -103,9 +110,31 @@ const LayoutCoordenador = ({ table1, table2, table3, table4 }) => {
   const listAgricultores = Agricultores.filter((Agricultores) =>
     Agricultores.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleSelectAgricultor = (agricultor) => {
+    setSelectedAgricultor(agricultor)
+  }
+
+  const handleBackToList = () => {
+    setSelectedAgricultor(null)
+  }
+
+  if (selectedAgricultor) {
+    return (
+      <DetalhamentoUsuario
+        usuario={selectedAgricultor}
+        backDetalhamento={handleBackToList}
+        hrefAnterior="/agricultores"
+      />
+    )
+  }
   return (
     <div>
-
+      <Header
+        diretorioAnterior={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
+        hrefAnterior={hrefAnterior}
+      />
       <div className={style.header}>
         <div className={style.header__container}>
 
@@ -113,7 +142,7 @@ const LayoutCoordenador = ({ table1, table2, table3, table4 }) => {
 
             <Link className={style.header__container_link} href="agricultores/novoAgricultor">
               <h1>
-                Adicionar Agricultor
+                Adicionar Agricultor(a)
               </h1>
             </Link>
 
@@ -134,17 +163,18 @@ const LayoutCoordenador = ({ table1, table2, table3, table4 }) => {
           table3={table3}
           table4={table4}
           listAgricultores={listAgricultores}
-          setAgricultores={setAgricultores}
+          onSelectAgricultor={handleSelectAgricultor}
         />
       )}
     </div>
   )
 }
 
-const LayoutAdmin = ({ table1, table2, table3, table4 }) => {
+const LayoutAdmin = ({ table1, table2, table3, table4, diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   const [Agricultores, setAgricultores] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
+  const [selectedAgricultor, setSelectedAgricultor] = useState(null);
 
   useEffect(() => {
     mutate();
@@ -162,41 +192,35 @@ const LayoutAdmin = ({ table1, table2, table3, table4 }) => {
     }
   }
   );
-
   const listAgricultores = Agricultores.filter((Agricultores) =>
     Agricultores.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleSelectAgricultor = (agricultor) => {
+    setSelectedAgricultor(agricultor);
+  }
+
+  const handleBackToList = () => {
+    setSelectedAgricultor(null);
+  }
+
+  if (selectedAgricultor) {
+    return (
+      <DetalhamentoUsuario
+        usuario={selectedAgricultor}
+        backDetalhamento={handleBackToList}
+        hrefAnterior="/agricultores"
+      />
+    )
+  }
   return (
     <div>
-
-      <div className={style.header}>
-        <div className={style.header__container}>
-          <button >
-            <Link className={style.header__container_link} href="agricultores/solicitacoes">
-              <h1>
-                Solicitações de Cadastro
-              </h1>
-            </Link>
-            <Image src="/assets/iconSinoGray.svg" alt="Adicionar Agricultor" width={27} height={24} />
-
-          </button>
-          <button>
-
-            <Link className={style.header__container_link} href="agricultores/novoAgricultor">
-              <h1>
-                Adicionar Agricultor
-              </h1>
-            </Link>
-
-            <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Agricultor" width={27} height={24} />
-          </button>
-          <div className={style.header__container_buttons}>
-
-          </div>
-
-        </div>
-      </div>
-
+      <Header
+        diretorioAnterior={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
+        hrefAnterior={hrefAnterior}
+      />
+      
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       {listAgricultores && (
         <Table
@@ -206,6 +230,7 @@ const LayoutAdmin = ({ table1, table2, table3, table4 }) => {
           table4={table4}
           listAgricultores={listAgricultores}
           setAgricultores={setAgricultores}
+          onSelectAgricultor={handleSelectAgricultor}
         />
       )}
     </div>

@@ -2,7 +2,7 @@ import React from "react";
 import styles from "@/app/agricultores/novoAgricultor/index.module.scss"
 import BancoForm from "@/components/BancoForm";
 
-export default function NewRegisterFarmer() {
+export default function novoBancoPage() {
     return (
         <div className={styles.pageContainer}>
             <div className={styles.pageContainer__content}>

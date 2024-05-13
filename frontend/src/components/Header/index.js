@@ -15,13 +15,28 @@ const Header = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const [open, setOpen] = useState(false);
   const [dropdow, setDropdow] = useState(false);
-  const { width } = useWindowDimensions();
   const dispatch = useDispatch();
+  const [windowWidth, setWindowWidth] = useState(null);
   useEffect(() => {
-    if (width >= 768) {
+    // This function sets up the event listener and updates the state
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+
+    // Set width initially in case this is a client-side transition
+    if (typeof window !== "undefined") {
+      handleResize(); // Set the initial width
+      window.addEventListener('resize', handleResize);
+    }
+
+    // Cleanup function to remove event listener
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  useEffect(() => {
+    if (windowWidth >= 768) {
       setOpen(false);
     }
-  }, [width]);
+  }, [windowWidth]);
 
   function exitUser() {
     setStorageItem("token", "");

@@ -1,9 +1,8 @@
 import React from "react";
-import Footer from "@/components/Footer";
 import styles from "@/app/agricultores/novoAgricultor/index.module.scss"
 import RecuperarSenhaForm from "@/components/RecuperarSenhaForm";
 
-export default function RecuperarSenhaPage() {
+export default function recuperarSenhaPage() {
     return (
         <div className={styles.pageContainer}>
             <div className={styles.pageContainer__content}>

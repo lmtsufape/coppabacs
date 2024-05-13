@@ -1,6 +1,6 @@
 
 import ListAgricultores from "@/components/ListAgricultores";
-export default function AssociadosPage() {
+export default function agricultoresPage() {
 
   return (
     <div>

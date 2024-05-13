@@ -1,6 +1,6 @@
 
 import ListFuncionarios from "@/components/ListFuncionarios";
-export default function AssociadosPage() {
+export default function funcionariosPage() {
 
   return (
     <div>

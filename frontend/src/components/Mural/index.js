@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { getStorageItem } from "@/utils/localStore";
 
 
-export default function mural({ diretorioAnterior, diretorioAtual, hrefAnterior}) {
+export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior}) {
 
     const [role, setRole] = useState(getStorageItem("userRole"));
 

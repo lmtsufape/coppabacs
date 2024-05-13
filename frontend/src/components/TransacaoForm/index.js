@@ -116,7 +116,6 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
           validationSchema={validateSchema}
 
           onSubmit={(values, { setSubmitting }) => {
-            console.log(values)
 
             setSubmitting(false)
           }}

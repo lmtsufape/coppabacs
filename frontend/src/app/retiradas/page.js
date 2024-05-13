@@ -1,6 +1,6 @@
 
 import ListTransacoes from "@/components/ListTransacoes";
-export default function doacoesPage() {
+export default function retiradasPage() {
 
   return (
     <div>
