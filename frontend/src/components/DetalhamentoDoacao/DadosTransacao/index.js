@@ -80,7 +80,7 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
         <div>
             <div className={styles.container__ContainerForm_form}>
                 <div>
-                    <label>Agricultor</label>
+                    <label className={styles.container__ContainerForm_form}>Agricultor</label>
                     <input
                         name="agricultorId"
                         onChange={formik.handleChange}
@@ -125,7 +125,7 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
                     <input
                         name="dataRetirada"
                         onChange={formik.handleChange}
-                        placeholder={formik.values.data}
+                        placeholder={formik.values.dataDoacao}
                         className={styles.container__ContainerForm_form_input}
                         disabled
                     />
