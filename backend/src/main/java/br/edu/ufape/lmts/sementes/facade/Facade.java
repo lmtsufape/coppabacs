@@ -362,8 +362,7 @@ public class Facade {
 
 		try {
 			BancoSementes banco = bancoSementesService.findBancoSementesById(id);
-			System.out.println("agricultores do banco: " + banco.getAgricultores());
-			return banco.getAgricultores();
+			return banco.getAgricultores().stream().filter(x -> x.isAtivo()).toList();
 		} catch (Exception e) {
 			return null;
 		}
