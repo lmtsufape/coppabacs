@@ -21,7 +21,6 @@ const DetalhamentoDoacao = ({ hrefAnterior, dirAtual, dirAnt, hrefAtual, backDet
     bancoSementesId: doacao.bancoSementesId || "",
   }
     
-  console.log(doacao)
   const [etapas, setEtapas] = useState(0);
   return (
     <div id="header" className={style.container}>
