@@ -55,7 +55,7 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
             setAgricultores(res.data);
         },
         onError: (error) => {
-            console.log("Errp ao recuperar as informações dos agricultores do banco", error);
+            console.log("Erro ao recuperar as informações dos agricultores do banco", error);
         }
     });
 
