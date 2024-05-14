@@ -35,6 +35,7 @@ export default function DadosEndereco({ formik }) {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.endereco.cep}
+        maxLength={8} // Limita o número de caracteres
         required
       />
       {formik.touched.cep && formik.errors.cep ? (
