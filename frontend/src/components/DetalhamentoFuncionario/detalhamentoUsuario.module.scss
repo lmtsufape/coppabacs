@@ -208,7 +208,7 @@
     &__profile{
         display: flex;
         align-items: center;
-        flex-direction: column;
+        flex-direction: row;
 
         &_button{
           display: flex;
@@ -274,7 +274,25 @@
     &__profile{
         display: flex;
         align-items: center;
-        flex-direction: column;
+        flex-direction: row;
+        border: 1px solid;
+
+        &_img{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          img{
+            border-radius: 5em;
+            margin: 0 1em 0 0;
+          }
+          h1{
+            font-size: 1.5em;
+            font-weight: bold;
+          
+          }
+        }
+
 
         &_button{
           display: flex;

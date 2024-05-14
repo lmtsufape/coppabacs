@@ -1,0 +1,19 @@
+.table{
+    &__bigScreen{
+        display: inline;
+    }
+    &__smallScreen{
+        display: none;
+    }
+}
+
+@media all and (max-width: 460px) {
+    .table{
+        &__bigScreen{
+            display: none;
+        }
+        &__smallScreen{
+            display: inline;
+        }
+    }
+}

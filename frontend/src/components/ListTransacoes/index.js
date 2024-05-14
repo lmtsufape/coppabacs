@@ -21,7 +21,7 @@ import { getAllRetiradas } from "@/api/transacoes/retiradas/getAllRetiradas";
 import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
 import DetalhamentoDoacao from "../DetalhamentoDoacao";
 
-export default function ListTransacoes({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5,  backDetalhamento, bancoId}) {
+export default function ListTransacoes({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5, backDetalhamento, bancoId }) {
 
   const [role, setRole] = useState(getStorageItem("userRole"));
   const [banco, setBanco] = useState(null);
@@ -194,7 +194,7 @@ const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAnt
 const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAtual, diretorioAnterior, hrefAnterior }) => {
 
   const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
-
+  const [open, setOpen] = useState(false);
   const [transacao, setTransacao] = useState([]);
 
   const [coordenador, setCoordenador] = useState([]);
@@ -286,29 +286,61 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAt
       />
       <div className={style.header}>
         <div className={style.header__container}>
+          <div className={style.dropdown}>
+            <div className={style.botaoDropdown}>
+              <Image onClick={() => setOpen(!open)}
+                src="/assets/dropdown.svg" alt="Dropdown" width={27} height={24} />
+            </div>
+            {open && (<div className={style.dropdown}>
+              <ul className={style.botaoDropdown__lista}>
+                <li>
+                  <div className={style.botaoDropdown__button}>
+                  <Image className={style.botaoDropdown_img} src="/assets/iconTransacoes.svg" alt="Adicionar Agricultor" width={27} height={24} />
+                    {diretorioAtual === "Doações" ? (
+                      <Link className={style.header__container_link} href="doacoes/novaDoacao">
+                        <h1>
+                          Adicionar Doação
+                        </h1>
+                      </Link>
+                    ) : (
+                      <Link className={style.header__container_link} href="retiradas/novaRetirada">
+                        <h1>
+                          Adicionar Retirada
+                        </h1>
+                      </Link>
+                    )}
+                    
 
-          <button>
-            {diretorioAtual === "Doações" ? (
-              <Link className={style.header__container_link} href="doacoes/novaDoacao">
-                <h1>
-                  Adicionar Doação
-                </h1>
-              </Link>
-            ) : (
-              <Link className={style.header__container_link} href="retiradas/novaRetirada">
-                <h1>
-                  Adicionar Retirada
-                </h1>
-              </Link>
-            )}
+                  </div>
+                </li>
+              </ul>
+            </div>)}
+          </div>
+          <div className={style.botoes}>
+
+            <button>
+              {diretorioAtual === "Doações" ? (
+                <Link className={style.header__container_link} href="doacoes/novaDoacao">
+                  <h1>
+                    Adicionar Doação
+                  </h1>
+                </Link>
+              ) : (
+                <Link className={style.header__container_link} href="retiradas/novaRetirada">
+                  <h1>
+                    Adicionar Retirada
+                  </h1>
+                </Link>
+              )}
 
 
-            <Image src="/assets/iconAddTransacao.svg" alt="Adicionar Agricultor" width={27} height={24} />
-          </button>
-          <div className={style.header__container_buttons}>
+              <Image src="/assets/iconTransacoes.svg" alt="Adicionar Agricultor" width={27} height={24} />
+            </button>
+            <div className={style.header__container_buttons}>
+
+            </div>
 
           </div>
-
         </div>
       </div>
 
