@@ -90,8 +90,6 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
   }
   );
 
-
-
   const [etapas, setEtapas] = useState(0);
   return (
     <div id="header" className={style.container}>
@@ -138,12 +136,14 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
                 {etapas === 2 && <DadosAtividadesRurais formik={formik} />}
                 {etapas === 0 && (
                   <div className={style.container__ContainerForm_buttons}>
-                    <button>
+                    <button type="button">
                       <Link className={style.container__ContainerForm_buttons_link} href="/agricultores">
                         <h1>Voltar</h1>
                       </Link>
                     </button>
-                    <button onClick={() => setEtapas(etapas + 1)}>
+                    <button 
+                      type="button"
+                      onClick={() => setEtapas(etapas + 1)}>
                       <Link href="#header" className={style.container__ContainerForm_buttons_linkWhite}>
                         <h1>Continuar</h1>
                       </Link>
@@ -152,12 +152,16 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
                 )}
                 {etapas === 1 && (
                   <div className={style.container__ContainerForm_buttons}>
-                    <button onClick={() => setEtapas(etapas - 1)}>
+                    <button 
+                      type="button"
+                      onClick={() => setEtapas(etapas - 1)}>
                       <Link href="#header" className={style.container__ContainerForm_buttons_link}>
                         <h1>Voltar</h1>
                       </Link>
                     </button>
-                    <button onClick={() => setEtapas(etapas + 1)}>
+                    <button 
+                      type="button"
+                      onClick={() => setEtapas(etapas + 1)}>
                       <Link href="#header" className={style.container__ContainerForm_buttons_linkWhite}>
                         <h1>Continuar</h1>
                       </Link>
@@ -166,7 +170,9 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
                 )}
                 {etapas === 2 && (
                   <div className={style.container__ContainerForm_buttons}>
-                    <button onClick={() => setEtapas(etapas - 1)}>
+                    <button 
+                      type="button"
+                      onClick={() => setEtapas(etapas - 1)}>
                       <Link href="#header" className={style.container__ContainerForm_buttons_link}>
                         <h1>Voltar</h1>
                       </Link>

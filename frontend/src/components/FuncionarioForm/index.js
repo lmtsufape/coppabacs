@@ -123,12 +123,12 @@ const FuncionarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
                 {etapas === 1 && <DadosEndereco formik={formik} hrefAnterior={hrefAnterior}/>}
                 {etapas === 0 && (
                   <div className={style.container__ContainerForm_buttons}>
-                    <button>
+                    <button type="button">
                       <Link className={style.container__ContainerForm_buttons_link} href="/funcionarios">
                         <h1>Voltar</h1>
                       </Link>
                     </button>
-                    <button onClick={() => setEtapas(etapas + 1)}>
+                    <button type="button" onClick={() => setEtapas(etapas + 1)}>
                       <Link href="#header" className={style.container__ContainerForm_buttons_linkWhite}>
                         <h1>Continuar</h1>
                       </Link>
@@ -137,7 +137,7 @@ const FuncionarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
                 )}
                 {etapas === 1 && (
                   <div className={style.container__ContainerForm_buttons}>
-                    <button onClick={() => setEtapas(etapas - 1)}>
+                    <button type="button" onClick={() => setEtapas(etapas - 1)}>
                       <Link href="#header" className={style.container__ContainerForm_buttons_link}>
                         <h1>Voltar</h1>
                       </Link>
