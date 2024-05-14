@@ -9,7 +9,7 @@ import { getAllAgricultoresBanco } from "@/api/bancoSementes/getAgricultoresBanc
 import { getStorageItem } from "@/utils/localStore";
 import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
 
-export default function DadosTransacao({ formik, hrefAnterior }) {
+export default function DadosTransacao({ formik, hrefAtual }) {
     const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
     const [coordenador, setCoordenador] = useState([]);
 
@@ -121,7 +121,7 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
 
 
                 <div>
-                    {hrefAnterior === "/doacoes" ? <label>Data Doação</label>:<label>Data Retirada</label>}
+                    {hrefAtual === "/doacoes" ? <label>Data Doação</label>:<label>Data Retirada</label>}
                     <input
                         name="dataRetirada"
                         onChange={formik.handleChange}

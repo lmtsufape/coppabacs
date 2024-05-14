@@ -6,7 +6,7 @@ import { getAgricultor } from "@/api/usuarios/agricultor/getAgricultor";
 import { useMutation } from "react-query";
 
 
-export default function tableLayout({ table1, table2, table3, table4, table5, listTrasacoes, diretorioAtual }) {
+export default function tableLayout({ table1, table2, table3, table4, table5, listTrasacoes, diretorioAtual, onSelectTransacao }) {
 
   return (
     <div className={style.content}>
@@ -38,13 +38,9 @@ export default function tableLayout({ table1, table2, table3, table4, table5, li
                     <button >
                       <span>
                         {diretorioAtual === "Doações" ? (
-                          <Link href={`/doacoes/info/${transacao.id}`}>
-                            <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
-                          </Link>
+                            <Image src="/assets/iconOlho.svg" alt="Visualizar" onClick={() => onSelectTransacao(transacao)} width={27} height={26} />
                         ) : (
-                          <Link href={`/retiradas/info/${transacao.id}`}>
-                            <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
-                          </Link>
+                            <Image src="/assets/iconOlho.svg" alt="Visualizar" onClick={() => onSelectTransacao(transacao)} width={27} height={26} />
                         )}
                       </span>
                     </button>

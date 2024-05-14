@@ -19,21 +19,13 @@ import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEm
 import { getAllDoacoes } from "@/api/transacoes/doacoes/getAllDoacoes";
 import { getAllRetiradas } from "@/api/transacoes/retiradas/getAllRetiradas";
 import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
+import DetalhamentoDoacao from "../DetalhamentoDoacao";
 
-export default function ListTransacoes({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) {
+export default function ListTransacoes({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5,  backDetalhamento, bancoId}) {
 
   const [role, setRole] = useState(getStorageItem("userRole"));
   const [banco, setBanco] = useState(null);
-  useEffect(() => {
-  });
-  const userDetailsMutation = useMutation(getCurrentUser, {
-    onSuccess: (res) => {
-      setBanco(res.data.bancoId)
-    },
-    onError: (error) => {
-      console.log("Erro ao recuperar as informações do usaurio da sessão", error);
-    },
-  });
+
   function whatIsTypeUser() {
     if (role == "ROLE_ADMIN" || role == "ROLE_COPPABACS") {
       return <LayoutAdmin
@@ -42,6 +34,11 @@ export default function ListTransacoes({ diretorioAnterior, diretorioAtual, href
         table3={table3}
         table4={table4}
         table5={table5}
+        diretorioAtual={diretorioAtual}
+        diretorioAnterior={diretorioAnterior}
+        hrefAnterior={hrefAnterior}
+        backDetalhamento={backDetalhamento}
+        bancoId={bancoId}
       />
     } else if (role == "ROLE_GERENTE") {
       return <LayoutCoordenador
@@ -51,6 +48,8 @@ export default function ListTransacoes({ diretorioAnterior, diretorioAtual, href
         table4={table4}
         table5={table5}
         diretorioAtual={diretorioAtual}
+        diretorioAnterior={diretorioAnterior}
+        hrefAnterior={hrefAnterior}
 
       />
     } else if (role == "ROLE_AGRICULTOR") {
@@ -61,6 +60,8 @@ export default function ListTransacoes({ diretorioAnterior, diretorioAtual, href
         table4={table4}
         table5={table5}
         diretorioAtual={diretorioAtual}
+        diretorioAnterior={diretorioAnterior}
+        hrefAnterior={hrefAnterior}
 
       />
     }
@@ -68,11 +69,7 @@ export default function ListTransacoes({ diretorioAnterior, diretorioAtual, href
 
   return (
     <div>
-      <Header
-        diretorioAnterior={diretorioAnterior}
-        diretorioAtual={diretorioAtual}
-        hrefAnterior={hrefAnterior}
-      />
+
       {whatIsTypeUser()}
 
     </div>
@@ -80,7 +77,7 @@ export default function ListTransacoes({ diretorioAnterior, diretorioAtual, href
   );
 }
 
-const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAtual,hrefAnterior }) => {
+const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
 
   const [agricultorEmail, setAgricultorEmail] = useState(getStorageItem("userLogin"));
@@ -90,15 +87,27 @@ const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAtu
   const [coordenador, setCoordenador] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
+  const [selectTransacao, setSelectTransacao] = useState(null);
+  const [dirAtual, setDirAtual] = useState(null);
+  const [dirAnt, setDirAnt] = useState(null);
+  const [hrefAtual, setHrefAtual] = useState(null);
 
   useEffect(() => {
     mutationAgricultor.mutate(agricultorEmail);
-    if(agricultor.bancoId){
-      if(diretorioAtual === "Doações"){
+    if (agricultor.bancoId) {
+      if (diretorioAtual === "Doações") {
+        setDirAtual("Doação");
+        setDirAnt("Home / Doações / ");
+        setHrefAtual("/doacoes")
         mutateDoacoes.mutate();
-      }else if(diretorioAtual ==="Retiradas"){
+      } else if (diretorioAtual === "Retiradas") {
+        setDirAtual("Retirada");
+        setDirAnt("Home / Retiradas / ");
+        setHrefAtual("/retiradas")
+
         mutateRetiradas.mutate();
       }
+
     }
   }, [agricultor.bancoId]);
 
@@ -107,7 +116,7 @@ const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAtu
       setAgricultor(res.data);
     },
     onError: (error) => {
-      console.error('Erro ao recuperar as informações do coordenador:', error);
+      console.error('Erro ao recuperar as informações do agricultor:', error);
     }
   });
   const mutateDoacoes = useMutation(
@@ -139,9 +148,31 @@ const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAtu
   const listTransacoes = transacao
     .filter((transacao) => transacao.agricultor.id === agricultor.id) // Filtra as transações pelo ID do agricultor logado
     .sort((a, b) => new Date(a.dataDoacao) - new Date(b.dataDoacao)); // Ordena as transações filtradas por data
-  
+
+  const handleSelectTransacao = (transacao) => {
+    setSelectTransacao(transacao)
+  }
+  const handleBackList = () => {
+    setSelectTransacao(null)
+  }
+
+  if (selectTransacao) {
+
+    return <DetalhamentoDoacao
+      diretorioAtual={dirAtual}
+      hrefAnterior="/doacoes"
+      doacao={selectTransacao}
+      backDetalhamento={handleBackList}
+      hrefAtual={hrefAtual}
+    />
+  }
   return (
     <div>
+      <Header
+        diretorioAnterior={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
+        hrefAnterior={hrefAnterior}
+      />
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       {listTransacoes && (
         <Table
@@ -152,6 +183,7 @@ const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAtu
           table5={table5}
           diretorioAtual={diretorioAtual}
           listTrasacoes={listTransacoes}
+          onSelectTransacao={handleSelectTransacao}
         />
       )}
     </div>
@@ -159,7 +191,7 @@ const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAtu
 }
 
 
-const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAtual,hrefAnterior }) => {
+const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAtual, diretorioAnterior, hrefAnterior }) => {
 
   const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
 
@@ -168,13 +200,24 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAt
   const [coordenador, setCoordenador] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
+  const [selectTransacao, setSelectTransacao] = useState(null);
+  const [dirAtual, setDirAtual] = useState(null);
+  const [dirAnt, setDirAnt] = useState(null);
+  const [hrefAtual, setHrefAtual] = useState(null);
 
   useEffect(() => {
     mutationCoordenador.mutate(coordenadorEmail);
-    if(coordenador.bancoSementeId){
-      if(diretorioAtual === "Doações"){
+    if (coordenador.bancoSementeId) {
+      if (diretorioAtual === "Doações") {
+        setDirAtual("Doação");
+        setDirAnt("Home / Doações / ");
+        setHrefAtual("/doacoes")
         mutateDoacoes.mutate();
-      }else if(diretorioAtual ==="Retiradas"){
+      } else if (diretorioAtual === "Retiradas") {
+        setDirAtual("Retirada");
+        setDirAnt("Home / Retiradas / ");
+        setHrefAtual("/retiradas")
+
         mutateRetiradas.mutate();
       }
     }
@@ -213,30 +256,52 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAt
   }
   );
 
-  const listTransacoes = transacao.sort((a, b) => 
-  new Date(a.dataDoacao) - new Date(b.dataDoacao)
-);
+  const listTransacoes = transacao.sort((a, b) =>
+    new Date(a.dataDoacao) - new Date(b.dataDoacao)
+  );
+
+  const handleSelectTransacao = (transacao) => {
+    setSelectTransacao(transacao)
+  }
+  const handleBackList = () => {
+    setSelectTransacao(null)
+  }
+
+  if (selectTransacao) {
+
+    return <DetalhamentoDoacao
+      diretorioAtual={dirAtual}
+      hrefAnterior={dirAtual}
+      doacao={selectTransacao}
+      backDetalhamento={handleBackList}
+      hrefAtual={hrefAtual}
+    />
+  }
   return (
     <div>
-
+      <Header
+        diretorioAnterior={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
+        hrefAnterior={hrefAnterior}
+      />
       <div className={style.header}>
         <div className={style.header__container}>
 
           <button>
             {diretorioAtual === "Doações" ? (
               <Link className={style.header__container_link} href="doacoes/novaDoacao">
-              <h1>
-                Adicionar Doação  
-              </h1>
-            </Link>
-            ): (
+                <h1>
+                  Adicionar Doação
+                </h1>
+              </Link>
+            ) : (
               <Link className={style.header__container_link} href="retiradas/novaRetirada">
-              <h1>
-                Adicionar Retirada  
-              </h1>
-            </Link>
-            ) }
-            
+                <h1>
+                  Adicionar Retirada
+                </h1>
+              </Link>
+            )}
+
 
             <Image src="/assets/iconAddTransacao.svg" alt="Adicionar Agricultor" width={27} height={24} />
           </button>
@@ -257,27 +322,59 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAt
           table5={table5}
           diretorioAtual={diretorioAtual}
           listTrasacoes={listTransacoes}
+          onSelectTransacao={handleSelectTransacao}
         />
       )}
     </div>
   )
 }
 
-const LayoutAdmin = ({ table1, table2, table3, table4, table5 }) => {
-  const [Agricultores, setAgricultores] = useState([]);
+const LayoutAdmin = ({ table1, table2, table3, table4, table5, diretorioAtual, diretorioAnterior, hrefAnterior, backDetalhamento, bancoId }) => {
+
+  const [transacao, setTransacao] = useState([]);
+
   const [searchTerm, setSearchTerm] = useState('');
 
+  const [selectTransacao, setSelectTransacao] = useState(null);
+  const [dirAtual, setDirAtual] = useState(null);
+  const [dirAnt, setDirAnt] = useState(null);
+  const [hrefAtual, setHrefAtual] = useState(null);
 
   useEffect(() => {
-    mutate();
-  }, [])
+    if (bancoId) {
+      if (diretorioAtual === "Doações") {
+        setDirAtual("Doação");
+        setDirAnt("Home / Doações / ");
+        setHrefAtual("/doacoes")
+        mutateDoacoes.mutate();
+      } else if (diretorioAtual === "Retiradas") {
+        setDirAtual("Retirada");
+        setDirAnt("Home / Retiradas / ");
+        setHrefAtual("/retiradas")
 
-  const { status, mutate } = useMutation(
+        mutateRetiradas.mutate();
+      }
+    }
+  }, [bancoId]);
+
+  const mutateDoacoes = useMutation(
     async () => {
-      return getAllAgricultores();
+      return getAllDoacoes(Number(bancoId));
     }, {
     onSuccess: (res) => {
-      setAgricultores(res.data);
+      setTransacao(res.data);
+    },
+    onError: (error) => {
+      console.error(error);
+    }
+  }
+  );
+  const mutateRetiradas = useMutation(
+    async () => {
+      return getAllRetiradas(Number(bancoId));
+    }, {
+    onSuccess: (res) => {
+      setTransacao(res.data);
     },
     onError: (error) => {
       console.error(error);
@@ -285,32 +382,54 @@ const LayoutAdmin = ({ table1, table2, table3, table4, table5 }) => {
   }
   );
 
-  const listAgricultores = Agricultores.filter((Agricultores) =>
-    Agricultores.nome.toLowerCase().includes(searchTerm.toLowerCase())
+  const listTransacoes = transacao.sort((a, b) =>
+    new Date(a.dataDoacao) - new Date(b.dataDoacao)
   );
+
+  const handleSelectTransacao = (transacao) => {
+    setSelectTransacao(transacao)
+  }
+  const handleBackList = () => {
+    setSelectTransacao(null)
+  }
+
+  if (selectTransacao) {
+
+    return <DetalhamentoDoacao
+      diretorioAtual={dirAtual}
+      hrefAnterior="/doacoes"
+      doacao={selectTransacao}
+      backDetalhamento={handleBackList}
+      hrefAtual={hrefAtual}
+    />
+  }
   return (
     <div>
-
+      <Header
+        diretorioAnterior={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
+        hrefAnterior={hrefAnterior}
+      />
       <div className={style.header}>
         <div className={style.header__container}>
-          <button >
-            <Link className={style.header__container_link} href="agricultores/solicitacoes">
-              <h1>
-                Solicitações de Cadastro
-              </h1>
-            </Link>
-            <Image src="/assets/iconSinoGray.svg" alt="Adicionar Agricultor" width={27} height={24} />
 
-          </button>
           <button>
+            {diretorioAtual === "Doações" ? (
+              <Link className={style.header__container_link} href="doacoes/novaDoacao">
+                <h1>
+                  Adicionar Doação
+                </h1>
+              </Link>
+            ) : (
+              <Link className={style.header__container_link} href="retiradas/novaRetirada">
+                <h1>
+                  Adicionar Retirada
+                </h1>
+              </Link>
+            )}
 
-            <Link className={style.header__container_link} href="agricultores/novoAgricultor">
-              <h1>
-                Adicionar Agricultor
-              </h1>
-            </Link>
 
-            <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Agricultor" width={27} height={24} />
+            <Image src="/assets/iconAddTransacao.svg" alt="Adicionar Agricultor" width={27} height={24} />
           </button>
           <div className={style.header__container_buttons}>
 
@@ -320,15 +439,16 @@ const LayoutAdmin = ({ table1, table2, table3, table4, table5 }) => {
       </div>
 
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      {listAgricultores && (
+      {listTransacoes && (
         <Table
           table1={table1}
           table2={table2}
           table3={table3}
           table4={table4}
           table5={table5}
-
-          listAgricultores={listAgricultores}
+          diretorioAtual={diretorioAtual}
+          listTrasacoes={listTransacoes}
+          onSelectTransacao={handleSelectTransacao}
         />
       )}
     </div>
