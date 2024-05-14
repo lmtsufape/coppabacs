@@ -9,25 +9,26 @@ import style from "./agricultorForm.module.scss";
 import HeaderNavegacao from "../HeaderNavegacao";
 import Link from "next/link";
 import DadosTransacao from "./DadosTransacao/index";
+import HeaderDetalhamento from "../HeaderDetalhamento";
 
 
-const DetalhamentoDoacao = ({ diretorioAnterior, diretorioAtual, hrefAnterior, doacao }) => {
+const DetalhamentoDoacao = ({ hrefAnterior, dirAtual, dirAnt, hrefAtual, backDetalhamento, doacao }) => {
   const formData = {
-    data: hrefAnterior === "/doacoes" ? doacao.dataDoacao : doacao.dataRetirada || "",
+    data: hrefAtual === "/doacoes" ? doacao.dataDoacao : doacao.dataRetirada || "",
     descricao: doacao.descricao || "" ,
     agricultorId: doacao.agricultor || "",
     itens: doacao.itens || {},
     bancoSementesId: doacao.bancoSementesId || "",
   }
     
-
+  console.log(doacao)
   const [etapas, setEtapas] = useState(0);
   return (
     <div id="header" className={style.container}>
-      <HeaderNavegacao
-        diretorioAnterior={diretorioAnterior}
-        diretorioAtual={diretorioAtual}
-        hrefAnterior={hrefAnterior}
+      <HeaderDetalhamento
+        diretorioAnterior={dirAnt}
+        diretorioAtual={dirAtual}
+        hrefAnterior={backDetalhamento}
         etapas={etapas}
 
       />
@@ -40,16 +41,13 @@ const DetalhamentoDoacao = ({ diretorioAnterior, diretorioAtual, hrefAnterior, d
               <Form
                 className={style.container__ContainerForm_form}
               >
-                <DadosTransacao formik={formik} hrefAnterior={hrefAnterior} />
+                <DadosTransacao formik={formik} hrefAtual={hrefAtual} />
                 <div className={style.container__ContainerForm_buttons}>
                   <button className={style.container__ContainerForm_buttons_link} onClick={() => setEtapas(etapas - 1)}>
                   </button>
                   <button
-                    className={style.container__ContainerForm_buttons_linkWhite}>
-                    <Link href={hrefAnterior} className={style.container__ContainerForm_buttons_linkWhite}>
+                    className={style.container__ContainerForm_buttons_linkWhite} onClick={() => backDetalhamento()}>
                       <h1>Voltar</h1>
-                    </Link>
-
                   </button>
                 </div>
               </Form>
