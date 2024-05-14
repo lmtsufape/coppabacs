@@ -92,7 +92,6 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
   const [selectedSemente, setSelectedSemente] = useState(null)
   const [searchTerm, setSearchTerm] = useState('');
   const [role, setRole] = useState(getStorageItem("userRole"));
-  const [open, setOpen] = useState(false);
 
 
   useEffect(() => {
@@ -141,36 +140,14 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
         />
         <div className={styles.header}>
           <div className={styles.header__container}>
-            <div className={styles.dropdown}>
-              <div className={styles.botaoDropdown}>
-                <Image onClick={() => setOpen(!open)}
-                  src="/assets/dropdown.svg" alt="Dropdown" width={27} height={24} />
-              </div>
-              {open && (<div className={styles.dropdown}>
-                <ul className={styles.botaoDropdown__lista}>
-                  <li>
-                    <div className={styles.botaoDropdown__button}>
-                      <Link className={styles.header__container_link} href="sementes/novaSemente">
-                        <h1>
-                          Adicionar Sementes
-                        </h1>
-                      </Link>
-                      <Image src="/assets/iconSeedGrey+.svg" alt="semente verde" width={20} height={20} />
-                    </div>
-                  </li>
-                </ul>
-              </div>)}
-            </div>
-            <div className={styles.botoes}>
-              <button>
-                <Link className={styles.header__container_link} href="sementes/novaSemente">
-                  <h1>
-                    Adicionar Sementes
-                  </h1>
-                </Link>
-                <Image src="/assets/iconSeedGrey+.svg" alt="semente verde" width={20} height={20} />
-              </button>
-            </div>
+            <button>
+              <Link className={styles.header__container_link} href="sementes/novaSemente">
+                <h1>
+                  Adicionar Sementes
+                </h1>
+              </Link>
+              <Image src="/assets/iconSeedGrey+.svg" alt="semente verde" width={20} height={20} />
+            </button>
             <div className={styles.header__container_buttons}>
             </div>
           </div>
@@ -199,7 +176,6 @@ const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ta
   const [sementes, setSementes] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [role, setRole] = useState(getStorageItem("userRole"));
-  const [open, setOpen] = useState(false);
 
   const [selectedTabelaBancoSemente, setSelectedTabelaBancoSemente] = useState(null);
   const [nomeSemente, setNomeSemente] = useState(null);
@@ -264,37 +240,15 @@ const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ta
         />
         <div className={styles.header}>
           <div className={styles.header__container}>
-            <div className={styles.dropdown}>
-              <div className={styles.botaoDropdown_coordenador}>
-                <Image onClick={() => setOpen(!open)}
-                  src="/assets/dropdown.svg" alt="Dropdown" width={27} height={24} />
-              </div>
-              {open && (<div className={styles.dropdown}>
-                <ul className={styles.botaoDropdown__lista}>
-                  <li>
-                    <div className={styles.botaoDropdown__button}>
-                      <Link className={styles.header__container_link} href="sementes/novaSemente">
-                        <h1>
-                          Adicionar Sementes
-                        </h1>
-                      </Link>
-                      <Image src="/assets/iconSeedGrey+.svg" alt="semente verde" width={20} height={20} />
-                    </div>
-                  </li>
-                </ul>
-              </div>)}
-            </div>
-            <div className={styles.botoes}>
-              {role ? <button>
-                <Link className={styles.header__container_link} href="sementes/novaSemente">
-                  <h1>
-                    Adicionar Sementes ao Banco
-                  </h1>
-                </Link>
-                <Image src="/assets/iconSeedGrey+.svg" alt="semente verde" width={20} height={20} />
-              </button> : ""}
-              <div className={styles.header__container_buttons}>
-              </div>
+            {role ? <button>
+              <Link className={styles.header__container_link} href="sementes/novaSemente">
+                <h1>
+                  Adicionar Sementes ao Banco
+                </h1>
+              </Link>
+              <Image src="/assets/iconSeedGrey+.svg" alt="semente verde" width={20} height={20} />
+            </button> : ""}
+            <div className={styles.header__container_buttons}>
             </div>
           </div>
         </div>
@@ -324,7 +278,6 @@ const LayoutAgricultor = ({ diretorioAnterior, diretorioAtual, hrefAnterior, tab
   const [selectedTabelaBancoSemente, setSelectedTabelaBancoSemente] = useState(null);
   const [nomeSemente, setNomeSemente] = useState(null);
   const [variedadeSemente, setVariedadeSemente] = useState(null);
-  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     mutationAgricultor.mutate(agricultorEmail);
@@ -405,7 +358,6 @@ const LayoutPublic = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1,
   const [selectedSemente, setSelectedSemente] = useState(null)
   const [searchTerm, setSearchTerm] = useState('');
   const [role, setRole] = useState(getStorageItem("userRole"));
-  const [open, setOpen] = useState(false);
 
 
   useEffect(() => {

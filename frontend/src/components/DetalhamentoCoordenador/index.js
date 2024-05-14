@@ -151,7 +151,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
               >
                 <div className={style.container__profile}>
                   <div className={style.container__profile_img}>
-                    <Image src="/assets/coordenadorteste.png" alt="Foto do usuário" width={72} height={72} />
+                    <Image src="/assets/funcionarioteste.png" alt="Foto do usuário" width={72} height={72} />
                     <h1>{usuario?.nome}</h1>
                   </div>
                   {hrefAnterior === "/agricultores" || hrefAnterior === "/funcionarios" && (
