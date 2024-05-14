@@ -15,10 +15,16 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { getStorageItem } from '@/utils/localStore';
 import HeaderDetalhamento from '../HeaderDetalhamento';
+import ListAgricultoresBanco from '../ListAgricultoresBanco';
+import ListSementesBanco from "@/components/ListSementesBanco";
+import ListTransacoes from '../ListTransacoes';
 
 const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, banco, usuario, backDetalhamento }) => {
   const [role, setRole] = useState(getStorageItem("userRole"));
-
+  const [agricultoresBanco, setAgricultoresBanco] = useState(null);
+  const [sementesBanco, setSementesBanco] = useState(null);
+  const [doacoesBanco, setDoacoesBanco] = useState(null);
+  const [retiradasBanco, setRetiradasBanco] = useState(null);
   const [editar, setEditar] = useState(false);
   const [formData, setFormData] = useState({
     nome: '',
@@ -59,6 +65,12 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
       });
     }
   }, [banco]);
+  const handleBackToBank = () => {
+    setAgricultoresBanco(null);
+    setSementesBanco(null);
+    setRetiradasBanco(null);
+    setDoacoesBanco(null);
+  };
 
   const mutation = useMutation(newData => putBancoId(newData, banco.id), {
     onSuccess: () => {
@@ -70,6 +82,70 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
       console.error('Erro ao tentar atualizar os dados:', error);
     }
   });
+  if (agricultoresBanco) {
+    return (
+      <ListAgricultoresBanco
+        diretorioAnterior={`Home / Bancos Sementes / `}
+        diretorioAtual="Agricultores"
+        hrefAnterior="/bancoSementes"
+        table1="Nome"
+        table2="Função"
+        table3="Ação"
+        agricultoresBanco={handleBackToBank}
+        bancoId={banco.id}
+      />
+    )
+  }
+  if (sementesBanco) {
+    return (
+      <ListSementesBanco
+        diretorioAnterior={`Home / Bancos Sementes / `}
+        diretorioAtual="Sementes"
+        hrefAnterior={`/bancoSementes`}
+        table1="Imagem"
+        table2="Cultura"
+        table3="Nome da Cultivar"
+        table4="Ação"
+        table5="Safra"
+        sementesBanco={handleBackToBank}
+        bancoId={banco.id}
+      />
+    )
+  }
+  if (doacoesBanco) {
+    return (
+      <ListTransacoes
+        diretorioAnterior="Home /"
+        diretorioAtual="Doações"
+        hrefAnterior="/"
+        hrefAtual="/doacoes"
+        table1="Data"
+        table2="Agricultor"
+        table3="Semente"
+        table4="Variedade"
+        table5="Ações"
+        backDetalhamento={handleBackToBank}
+        bancoId={banco.id}
+      />
+    )
+  }
+  if (retiradasBanco) {
+    return (
+      <ListTransacoes
+        diretorioAnterior="Home /"
+        diretorioAtual="Retiradas"
+        hrefAnterior="/"
+        hrefAtual="/retiradas"
+        table1="Data"
+        table2="Agricultor"
+        table3="Semente"
+        table4="Variedade"
+        table5="Ações"
+        backDetalhamento={handleBackToBank}
+        bancoId={banco.id}
+      />
+    )
+  }
   return (
     <div id="header">
       {usuario === "coordenador" || usuario === "agricultor" ? (
@@ -125,27 +201,26 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
                 <div className={style.container__header_containerButton}>
                   {role === "ROLE_COPPABACS" && (
                     <>
-                      <Link className={style.container__header_link} href={`/bancoSementes/agricultoresBanco`}>
-                        <button className={style.container__header_containerButton_button}>
-                          <Image src="/assets/iconAssociates.svg" alt="Agricultores" width={27} height={26} />
-                          <span className={style.container__header_containerButton_button_text}>Agricultores</span>
-                          <span className={style.container__header_containerButton_button_shorttext}>Agric.</span>
-                        </button>
-                      </Link>
-                      <Link className={style.container__header_link} href={`/bancoSementes/sementesBanco`}>
-                        <button className={style.container__header_containerButton_button}>
-                          <Image src="/assets/iconSeedGreen.svg" alt="Seed" width={27} height={26} />
-                          <span className={style.container__header_containerButton_button_text}>Sementes</span>
-                          <span className={style.container__header_containerButton_button_shorttext}>Sem.</span>
-                        </button>
-                      </Link>
-                      <Link className={style.container__header_link} href={`/transacoes`}>
-                        <button className={style.container__header_containerButton_button}>
-                          <Image src="/assets/iconAssociates.svg" alt="Agricultores" width={27} height={26} />
-                          <span className={style.container__header_containerButton_button_text}>Transações</span>
-                          <span className={style.container__header_containerButton_button_shorttext}>Tran.</span>
-                        </button>
-                      </Link>
+                      <button className={style.container__header_containerButton_button} onClick={() => setAgricultoresBanco(true)}>
+                        <Image src="/assets/iconAssociates.svg" alt="Agricultores" width={27} height={26} />
+                        <span className={style.container__header_containerButton_button_text}>Agricultores</span>
+                        <span className={style.container__header_containerButton_button_shorttext}>Agric.</span>
+                      </button>
+                      <button className={style.container__header_containerButton_button} onClick={() => { setSementesBanco(true) }}>
+                        <Image src="/assets/iconSeedGreen.svg" alt="Seed" width={27} height={26} />
+                        <span className={style.container__header_containerButton_button_text}>Sementes</span>
+                        <span className={style.container__header_containerButton_button_shorttext}>Sem.</span>
+                      </button>
+                      <button className={style.container__header_containerButton_button} onClick={() => { setDoacoesBanco(true) }}>
+                        <Image src="/assets/iconAssociates.svg" alt="Agricultores" width={27} height={26} />
+                        <span className={style.container__header_containerButton_button_text}>Doações</span>
+                        <span className={style.container__header_containerButton_button_shorttext}>Doa..</span>
+                      </button>
+                      <button className={style.container__header_containerButton_button} onClick={() => { setRetiradasBanco(true) }}>
+                        <Image src="/assets/iconAssociates.svg" alt="Agricultores" width={27} height={26} />
+                        <span className={style.container__header_containerButton_button_text}>Retiradas</span>
+                        <span className={style.container__header_containerButton_button_shorttext}>Ret.</span>
+                      </button>
                     </>
                   )}
                 </div>
@@ -183,7 +258,7 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
                           <span>Editar</span>
                           <Image src="/assets/iconLapis.svg" alt="editar perfil" width={15} height={15} />
                         </button>
-                        
+
                         <button
                           className={style.container__profile_buttonDesativar}>
                           <span>Desativar Banco</span>

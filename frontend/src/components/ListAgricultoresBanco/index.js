@@ -14,23 +14,12 @@ import { getAllAgricultoresBanco } from "@/api/bancoSementes/getAgricultoresBanc
 import { getCurrentUser } from "@/api/usuarios/getCurrentUser";
 import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
 import DetalhamentoUsuario from "../DetalhamentoUsuario";
+import HeaderDetalhamento from "../HeaderDetalhamento";
 
-export default function ListAgricultoresBanco({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4 }) {
+export default function ListAgricultoresBanco({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, agricultoresBanco, bancoId }) {
 
   const [role, setRole] = useState(getStorageItem("userRole"));
-  const [banco, setBanco] = useState(null);
 
-  useEffect(() => {
-    userDetailsMutation.mutate()
-  }, []);
-  const userDetailsMutation = useMutation(getCurrentUser, {
-    onSuccess: (res) => {
-      setBanco(res.data.bancoId)
-    },
-    onError: (error) => {
-      console.log("Erro ao recuperar o usuario da sessão", error);
-    },
-  });
   function whatIsTypeUser() {
     if (role == "ROLE_ADMIN" || role == "ROLE_COPPABACS") {
       return <LayoutAdmin
@@ -41,6 +30,8 @@ export default function ListAgricultoresBanco({ diretorioAnterior, diretorioAtua
         diretorioAnterior={diretorioAnterior}
         diretorioAtual={diretorioAtual}
         hrefAnterior={hrefAnterior}
+        agricultoresBanco={agricultoresBanco}
+        bancoId={bancoId}
       />
     } else if (role == "ROLE_GERENTE") {
       return <LayoutCoordenador
@@ -167,7 +158,7 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, diretorioAnterior, 
   )
 }
 
-const LayoutAdmin = ({ table1, table2, table3, table4, diretorioAnterior, diretorioAtual, hrefAnterior }) => {
+const LayoutAdmin = ({ table1, table2, table3, table4, diretorioAnterior, diretorioAtual, hrefAnterior, bancoId, agricultoresBanco }) => {
   const [Agricultores, setAgricultores] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -179,7 +170,12 @@ const LayoutAdmin = ({ table1, table2, table3, table4, diretorioAnterior, direto
 
   const { status, mutate } = useMutation(
     async () => {
-      return getAllAgricultores();
+      if (bancoId) {
+        return getAllAgricultoresBanco(Number(bancoId));
+
+      } else {
+        return getAllAgricultores();
+      }
     }, {
     onSuccess: (res) => {
       setAgricultores(res.data);
@@ -212,12 +208,12 @@ const LayoutAdmin = ({ table1, table2, table3, table4, diretorioAnterior, direto
   }
   return (
     <div>
-      <Header
+      <HeaderDetalhamento
         diretorioAnterior={diretorioAnterior}
         diretorioAtual={diretorioAtual}
-        hrefAnterior={hrefAnterior}
+        hrefAnterior={agricultoresBanco}
       />
-      
+
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       {listAgricultores && (
         <Table
