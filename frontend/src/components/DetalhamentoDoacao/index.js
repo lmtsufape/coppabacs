@@ -1,22 +1,17 @@
 "use client"
 
-import { useMutation } from "react-query";
 
 import { Form, Formik } from "formik";
-import { useEffect, useState } from "react";
-import * as Yup from 'yup';
+import { useState } from "react";
 
 import style from "./agricultorForm.module.scss";
 
 import HeaderNavegacao from "../HeaderNavegacao";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import DadosTransacao from "./DadosTransacao/index";
-import { getDoacaoId } from "@/api/transacoes/doacoes/getDoacaoId";
 
 
 const DetalhamentoDoacao = ({ diretorioAnterior, diretorioAtual, hrefAnterior, doacao }) => {
-  const router = useRouter();
   const formData = {
     data: hrefAnterior === "/doacoes" ? doacao.dataDoacao : doacao.dataRetirada || "",
     descricao: doacao.descricao || "" ,

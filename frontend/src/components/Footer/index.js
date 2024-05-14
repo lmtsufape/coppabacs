@@ -7,7 +7,7 @@ function Footer() {
     return (
        <footer className={style.footer}>
             <div className={style.footer__logo_sementes}>
-                <Image src="/assets/logoCoppabacsBranca.svg" alt="Logo App" width={120} height={60}/>
+                <Image src="/assets/logoSementeBranco.svg" alt="Logo App" width={150} height={40}/>
             </div>
             <div className={style.footer__logo_lmts}>
                 <Image src="/assets/logoUfape.svg" alt="Logo App" width={58} height={58}/>
