@@ -46,6 +46,10 @@
     
     &__body{
       font-size: .875em;
+
+      &_img{
+        
+      }
       
       tr {
         display: table-row;
@@ -94,12 +98,19 @@
   }
 }
 
+.bigScreen{
+  display: none;
+}
+.smallScreen{
+  display: none;
+}
+
 .no_border{
   border: none;
   background: none;
 }
 
-@media all and (min-width: 768px) {
+@media all and (min-width: 459px) and (max-width: 768px) {
   .content {
 
     button {
@@ -112,4 +123,15 @@
       }
     }
   }
+}
+
+@media all and (max-width: 460px) {
+  .content{
+    &__table{
+      &__body{
+        &_img{
+          width: 4em;
+          height: 4em;
+        }}}}
+
 }

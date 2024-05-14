@@ -23,7 +23,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
       setBancos(res.data);
     },
     onError: (error) => {
-      console.log("Erro ao recuperar os bancos de sementes", error)
+      console.log(error)
     }
   }
   );

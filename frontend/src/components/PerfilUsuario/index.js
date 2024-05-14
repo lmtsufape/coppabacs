@@ -81,8 +81,10 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
     }
   }, [usuario]);
 
+
   const mutationAprovacao = useMutation(() => validarAgricultor(usuario.id), {
     onSuccess: () => {
+      console.log('Usuário aprovado com sucesso!');
       router.push(`${hrefAnterior}`);
     },
     onError: (error) => {
@@ -91,6 +93,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
   });
   const mutationUpdateAgricultor = useMutation(newData => patchAgricultor(newData, usuario.id), {
     onSuccess: () => {
+      console.log('Dados atualizados com sucesso');
       router.push('/agricultores');
     },
     onError: (error) => {
@@ -99,6 +102,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
   });
   const mutationUpdateCoordenador = useMutation(newData => patchCoordenador(newData, usuario.id), {
     onSuccess: () => {
+      console.log('Dados atualizados com sucesso');
       router.push('/coordenadores');
     },
     onError: (error) => {
@@ -107,6 +111,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
   });
   const mutationUpdateFuncionario = useMutation(newData => patchCoppabacs(newData, usuario.id), {
     onSuccess: () => {
+      console.log('Dados atualizados com sucesso');
       router.push('/funcionários');
     },
     onError: (error) => {
@@ -115,10 +120,11 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
   });
   return (
     <div id="header" className={style.container}>
-      <HeaderDetalhamento
-        hrefAnterior={backDetalhamento}
-        diretorioAnterior="Home / Agricultores / "
-        diretorioAtual="Detalhes do Agricultor"
+      <HeaderNavegacao
+        diretorioAnterior={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
+        hrefAnterior={hrefAnterior}
+        etapas={etapas}
 
       />
 

@@ -7,14 +7,19 @@ import { useEffect, useState } from "react";
 import useWindowDimensions from "use-window-dimensions";
 import { setStorageItem } from "@/utils/localStore";
 import { setUserLogin } from "@/redux/userLogin/userLoginSlice";
+import { useMutation } from 'react-query';
+import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
 
 
 const Header = () => {
+
   const { push, back } = useRouter();
   const pathName = usePathname();
   const userLogin = useSelector((state) => state.userLogin);
   const [open, setOpen] = useState(false);
   const [dropdow, setDropdow] = useState(false);
+  const { width } = useWindowDimensions();
+  const [ usuario, setUsuario ] = useState([]);
   const dispatch = useDispatch();
   const [windowWidth, setWindowWidth] = useState(null);
   useEffect(() => {
@@ -36,17 +41,32 @@ const Header = () => {
     if (windowWidth >= 768) {
       setOpen(false);
     }
-  }, [windowWidth]);
+    mutate ();
+  }, [width]);
 
   function exitUser() {
     setStorageItem("token", "");
     setStorageItem("userLogin", "");
     setStorageItem("userRole", "");
+    setUsuario([]);
     dispatch(setUserLogin(""));
     push("/login");
     setOpen(false)
     setDropdow(false)
   }
+
+  const { status, mutate } = useMutation(
+    async () => {
+      return getUsuarioEmail(userLogin);
+    }, {
+    onSuccess: (res) => {
+      setUsuario(res.data);
+    },
+    onError: (error) => {
+      console.error(error);
+    }
+  }
+  );
 
   return (
     <header className={style.header}>
@@ -59,7 +79,7 @@ const Header = () => {
             <header className={style.header__side_menu__content__header}>
               <div>
                 <Image src="/assets/iconLogadoBranco.svg" alt="Home" width={50} height={50} />
-                {userLogin ? <h3>{userLogin}</h3> : <h3>Visitante</h3>}
+                {userLogin ? <h3>{usuario.nome}</h3> : <h3>Olá, visitante</h3>}
               </div>
               <button className={style.header__side_menu__content__header__button_back} onClick={() => setOpen(!open)} >
                 <Image src="/assets/BackWhite.svg" alt="Voltar" width={27} height={24} />
@@ -77,17 +97,17 @@ const Header = () => {
         </div>
         : false}
       <button className={style.header__button_link} onClick={() => push("/")} >
-        <Image className={style.header__logo} src="/assets/logoSementesVerde.svg" alt="Logo App" width={150} height={40} />
+        <Image className={style.header__logo} src="/assets/logoCoppabacs.svg" alt="Logo App" width={60} height={60} />
       </button>
+      <div className={style.header__usuarioLogado}>
+      {userLogin ? <h3 className={style.header__usuarioLogado_h3}>Olá, {usuario.nome}</h3> : <h3 className={style.header__usuarioLogado_h3}>Olá, visitante</h3>}
       {pathName != "/" && pathName != "/login" ? <button className={style.header__voltar} onClick={() => back()}>
         <Image src="/assets/IconMenorQue.svg" alt="Voltar" width={27} height={24} />
       </button> : false}
-
       {userLogin ? <button className={style.header__button_perfil} onClick={() => setDropdow(!dropdow)}>
         <Image src="/assets/iconLogado.svg" alt="Home" width={50} height={50} />
       </button> : <button className={style.header__button_home} onClick={() => push("/login")} >Login</button>
       }
-
       {dropdow && userLogin ? <div className={style.header__dropdown}>
         <button className={style.header__dropdown__perfil}>
           <Image src="/assets/iconLogadoGray.svg" alt="Voltar" width={27} height={24} />
@@ -98,7 +118,7 @@ const Header = () => {
           <p>Sair</p>
         </button>
       </div> : false}
-
+      </div>
     </header>
   )
 }

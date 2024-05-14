@@ -6,7 +6,7 @@ import { deleteAgricultor } from "@/api/usuarios/agricultor/deleteAgricultor";
 import { useState } from "react";
 
 
-export default function tableLayout({ table1, table2, table3, table4, listAgricultores, setAgricultores, onSelectAgricultor }) {
+export default function tableLayout({ table1, table2, table3, table4, listAgricultores, setAgricultores }) {
 
   const handleDeleteAgricultor = async (agricultorId) => {
     await deleteAgricultor(agricultorId);
@@ -16,49 +16,102 @@ export default function tableLayout({ table1, table2, table3, table4, listAgricu
 
 
   return (
+    <>
+      <div className={style.contentBigger}>
+        <div className={style.content}>
+          <table className={style.content__table}>
+            <thead className={style.content__table__header}>
+              <tr>
+                <th>{table1}</th>
+                <th>{table2}</th>
+                <th>{table3}</th>
 
-    <div className={style.content}>
-      <table className={style.content__table}>
-        <thead className={style.content__table__header}>
-          <tr>
-            <th>{table1}</th>
-            <th>{table2}</th>
-            <th>{table3}</th>
-
-            <th className={style.content__table__header_name3}>
-              <div >
-                {table4}
-                <Image src="/assets/iconInformacao.svg" alt="Visualizar" width={27} height={26} />
-
-              </div>
-
-            </th>
-          </tr>
-        </thead>
-        <tbody className={style.content__table__body}>
-          {listAgricultores.map((agricultor, index) => {
-            return (
-              <tr key={index}>
-                <td>{agricultor.nome}</td>
-                <td>{agricultor.nomePopular}</td>
-                <td>{agricultor.contato}</td>
-                <td>
+                <th className={style.content__table__header_name3}>
                   <div >
-                    <Image src="/assets/iconOlho.svg" onClick={() => onSelectAgricultor(agricultor)}alt="Visualizar" width={27} height={26} />
-
-                    <ExcluirButton itemId={agricultor.id} onDelete={handleDeleteAgricultor} />
+                    {table4}
+                    <Image src="/assets/iconInformacao.svg" alt="Visualizar" width={27} height={26} />
 
                   </div>
-                </td>
-              </tr>
-            )
-          }
-          )
-          }
 
-        </tbody>
-      </table>
-    </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody className={style.content__table__body}>
+              {listAgricultores.map((agricultor, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{agricultor.nome}</td>
+                    <td>{agricultor.nomePopular}</td>
+                    <td>{agricultor.contato}</td>
+                    <td>
+                      <div >
+                        <button className={style.noborder}>
+                          <span >
+                            <Link href={`/agricultores/info/${agricultor.id}`} >
+                              <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
+                            </Link>
+                          </span>
+                        </button>
+                        <ExcluirButton itemId={agricultor.id} onDelete={handleDeleteAgricultor} />
+
+                      </div>
+                    </td>
+                  </tr>
+                )
+              }
+              )
+              }
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div className={style.contentSmall}>
+        <div className={style.content}>
+          <table className={style.content__table}>
+            <thead className={style.content__table__header}>
+              <tr>
+                <th>{table1}</th>
+                <th>{table2}</th>
+                <th className={style.content__table__header_name3}>
+                  <div >
+                    {table3}
+                    <Image src="/assets/iconInformacao.svg" alt="Visualizar" width={27} height={26} />
+
+                  </div>
+
+                </th>
+              </tr>
+            </thead>
+            <tbody className={style.content__table__body}>
+              {listAgricultores.map((agricultor, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{agricultor.nome}</td>
+                    <td>{agricultor.nomePopular}</td>
+                    <td>
+                      <div >
+                        <button className={style.noborder}>
+                          <span >
+                            <Link href={`/agricultores/info/${agricultor.id}`} >
+                              <Image src="/assets/iconOlho.svg" alt="Visualizar" width={27} height={26} />
+                            </Link>
+                          </span>
+                        </button>
+                        <ExcluirButton itemId={agricultor.id} onDelete={handleDeleteAgricultor} />
+                      </div>
+                    </td>
+                  </tr>
+                )
+              }
+              )
+              }
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </>
   );
 }
 
