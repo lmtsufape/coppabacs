@@ -1,26 +1,56 @@
-"use client"
+"use client";
 
+import { useEffect } from "react";
+import axios from "axios";
 import style from "../agricultorForm.module.scss";
 
 export default function DadosEndereco({ formik }) {
 
+  // Função para buscar dados do endereço com base no CEP
+  const fetchAddress = async (cep) => {
+    try {
+      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+      const data = response.data;
+      if (!data.erro) {
+        formik.setFieldValue("endereco.logradouro", data.logradouro);
+        formik.setFieldValue("endereco.bairro", data.bairro);
+        formik.setFieldValue("endereco.cidade", data.localidade);
+        formik.setFieldValue("endereco.estado", data.uf);
+      } else {
+        alert("CEP não encontrado.");
+      }
+    } catch (error) {
+      console.error("Erro ao buscar o endereço:", error);
+      alert("Erro ao buscar o endereço.");
+    }
+  };
+
+  // Função para lidar com a mudança no campo de CEP
+  const handleCepChange = (e) => {
+    formik.handleChange(e);
+    const cep = e.target.value;
+    if (cep.length === 8) {
+      fetchAddress(cep);
+    }
+  };
+
   return (
     <>
-      <label htmlFor="cep">Cep <span >*</span></label>
+      <label htmlFor="cep">Cep <span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="cep"
         name="endereco.cep"
         placeholder="Insira seu CEP"
-        onChange={formik.handleChange}
+        onChange={handleCepChange}
         onBlur={formik.handleBlur}
         value={formik.values.endereco.cep}
         required
       />
-      {formik.touched.cep && formik.errors.cep ? (
+      {formik.touched.cep && formik.errors.endereco.cep ? (
         <span className={style.form__error}>{formik.errors.endereco.cep}</span>
       ) : null}
-      <label htmlFor="estado">Estado <span >*</span></label>
+      <label htmlFor="estado">Estado <span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="estado"
@@ -31,10 +61,10 @@ export default function DadosEndereco({ formik }) {
         value={formik.values.endereco.estado}
         required
       />
-      {formik.touched.estado && formik.errors.estado ? (
+      {formik.touched.estado && formik.errors.endereco.estado ? (
         <span className={style.form__error}>{formik.errors.endereco.estado}</span>
       ) : null}
-      <label htmlFor="cidade">Cidade <span >*</span></label>
+      <label htmlFor="cidade">Cidade <span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="cidade"
@@ -45,10 +75,10 @@ export default function DadosEndereco({ formik }) {
         value={formik.values.endereco.cidade}
         required
       />
-      {formik.touched.cidade && formik.errors.cidade ? (
+      {formik.touched.cidade && formik.errors.endereco.cidade ? (
         <span className={style.form__error}>{formik.errors.endereco.cidade}</span>
       ) : null}
-      <label htmlFor="bairro">Bairro <span >*</span></label>
+      <label htmlFor="bairro">Bairro <span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="bairro"
@@ -59,14 +89,13 @@ export default function DadosEndereco({ formik }) {
         value={formik.values.endereco.bairro}
         required
       />
-      {formik.touched.bairro && formik.errors.bairro ? (
+      {formik.touched.bairro && formik.errors.endereco.bairro ? (
         <span className={style.form__error}>{formik.errors.endereco.bairro}</span>
       ) : null}
 
       <div className={style.container__ContainerForm_form_halfContainer}>
         <div>
-          <label 
-          htmlFor="logradouro">Logradouro <span >*</span></label>
+          <label htmlFor="logradouro">Logradouro <span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="logradouro"
@@ -75,13 +104,14 @@ export default function DadosEndereco({ formik }) {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.endereco.logradouro}
+            required
           />
           {formik.touched.logradouro && formik.errors.endereco.logradouro ? (
             <span className={style.form__error}>{formik.errors.endereco.logradouro}</span>
           ) : null}
         </div>
         <div>
-          <label htmlFor="numero">Número <span >*</span></label>
+          <label htmlFor="numero">Número <span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             name="endereco.numero"
@@ -96,7 +126,7 @@ export default function DadosEndereco({ formik }) {
           ) : null}
         </div>
         <div>
-          <label htmlFor="complemento">Complemento <span >*</span></label>
+          <label htmlFor="complemento">Complemento</label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="complemento"
@@ -105,14 +135,13 @@ export default function DadosEndereco({ formik }) {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.endereco.complemento}
-            required
           />
           {formik.touched.complemento && formik.errors.endereco.complemento ? (
             <span className={style.form__error}>{formik.errors.endereco.complemento}</span>
           ) : null}
         </div>
         <div>
-          <label htmlFor="referencia">Referência <span >*</span></label>
+          <label htmlFor="referencia">Referência</label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="referencia"
@@ -128,5 +157,5 @@ export default function DadosEndereco({ formik }) {
         </div>
       </div>
     </>
-  )
+  );
 }
