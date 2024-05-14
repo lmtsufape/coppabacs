@@ -76,6 +76,7 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
   const [bancos, setBancos] = useState([]);
   const [selectedBanco, setSelectedBanco] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [open, setOpen] = useState(false);
 
   const { mutate } = useMutation(getAllBancos, {
     onSuccess: (res) => {
@@ -121,15 +122,37 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
       />
       <div className={style.header}>
         <div className={style.header__container}>
-          <button>
-            <Link className={style.header__container_link} href="bancoSementes/novoBanco">
-              <h1>
-                Adicionar Banco
-              </h1>
-            </Link>
-            <Image src="/assets/iconDatabasePlus.svg" alt="Adicionar Agricultor" width={27} height={24} />
-          </button>
-          <div className={style.header__container_buttons}>
+          <div className={style.dropdown}>
+            <div className={style.botaoDropdown}>
+              <Image onClick={() => setOpen(!open)}
+                src="/assets/dropdown.svg" alt="Dropdown" width={27} height={24} />
+            </div>
+            {open && (<div className={style.dropdown}>
+              <ul className={style.botaoDropdown__lista}>
+                <li>
+                  <div className={style.botaoDropdown__button}>
+                  <Image src="/assets/iconDatabasePlus.svg" alt="Adicionar Agricultor" width={27} height={24} />
+                    <Link className={style.header__container_link} href="bancoSementes/novoBanco">
+                      <h1>
+                        Adicionar Banco
+                      </h1>
+                    </Link>
+                  </div>
+                </li>
+              </ul>
+            </div>)}
+          </div>
+          <div className={style.botoes}>
+            <button>
+              <Link className={style.header__container_link} href="bancoSementes/novoBanco">
+                <h1>
+                  Adicionar Banco
+                </h1>
+              </Link>
+              <Image src="/assets/iconDatabasePlus.svg" alt="Adicionar Agricultor" width={27} height={24} />
+            </button>
+            <div className={style.header__container_buttons}>
+            </div>
           </div>
         </div>
       </div>

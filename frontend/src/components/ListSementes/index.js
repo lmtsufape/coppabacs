@@ -92,7 +92,7 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
   const [selectedSemente, setSelectedSemente] = useState(null)
   const [searchTerm, setSearchTerm] = useState('');
   const [role, setRole] = useState(getStorageItem("userRole"));
-
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     mutate();
@@ -140,15 +140,37 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
         />
         <div className={styles.header}>
           <div className={styles.header__container}>
-            <button>
-              <Link className={styles.header__container_link} href="sementes/novaSemente">
-                <h1>
-                  Adicionar Sementes
-                </h1>
-              </Link>
-              <Image src="/assets/iconSeedGrey+.svg" alt="semente verde" width={20} height={20} />
-            </button>
-            <div className={styles.header__container_buttons}>
+            <div className={styles.dropdown}>
+              <div className={styles.botaoDropdown}>
+                <Image onClick={() => setOpen(!open)}
+                  src="/assets/dropdown.svg" alt="Dropdown" width={27} height={24} />
+              </div>
+              {open && (<div className={styles.dropdown}>
+                <ul className={styles.botaoDropdown__lista}>
+                  <li>
+                    <div className={styles.botaoDropdown__button}>
+                      <Image src="/assets/iconSeedGrey+.svg" alt="semente verde" width={20} height={20} />
+                      <Link className={styles.header__container_link} href="sementes/novaSemente">
+                        <h1>
+                          Adicionar Sementes
+                        </h1>
+                      </Link>
+                    </div>
+                  </li>
+                </ul>
+              </div>)}
+            </div>
+            <div className={styles.botoes}>
+              <button>
+                <Link className={styles.header__container_link} href="sementes/novaSemente">
+                  <h1>
+                    Adicionar Sementes
+                  </h1>
+                </Link>
+                <Image src="/assets/iconSeedGrey+.svg" alt="semente verde" width={20} height={20} />
+              </button>
+              <div className={styles.header__container_buttons}>
+              </div>
             </div>
           </div>
         </div>
@@ -172,7 +194,7 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
 const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) => {
   const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
   const [coordenador, setCoordenador] = useState([]);
-
+  const [open, setOpen] = useState(false);
   const [sementes, setSementes] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [role, setRole] = useState(getStorageItem("userRole"));
@@ -204,7 +226,7 @@ const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ta
       setSementes(res.data);
     },
     onError: (error) => {
-      console.log("Erro ao recuperar as infomações das sementes do banco",error)
+      console.log("Erro ao recuperar as infomações das sementes do banco", error)
     }
   }
   );
@@ -240,15 +262,38 @@ const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ta
         />
         <div className={styles.header}>
           <div className={styles.header__container}>
-            {role ? <button>
-              <Link className={styles.header__container_link} href="sementes/novaSemente">
-                <h1>
-                  Adicionar Sementes ao Banco
-                </h1>
-              </Link>
-              <Image src="/assets/iconSeedGrey+.svg" alt="semente verde" width={20} height={20} />
-            </button> : ""}
-            <div className={styles.header__container_buttons}>
+            <div className={styles.dropdown}>
+              <div className={styles.botaoDropdown_coordenador}>
+                <Image onClick={() => setOpen(!open)}
+                  src="/assets/dropdown.svg" alt="Dropdown" width={27} height={24} />
+              </div>
+              {open && (<div className={styles.dropdown}>
+                <ul className={styles.botaoDropdown__lista}>
+                  <li>
+                    <div className={styles.botaoDropdown__button}>
+                    <Image src="/assets/iconSeedGrey+.svg" alt="semente verde" width={20} height={20} />
+                      <Link className={styles.header__container_link} href="sementes/novaSemente">
+                        <h1>
+                          Adicionar Sementes
+                        </h1>
+                      </Link>
+                      
+                    </div>
+                  </li>
+                </ul>
+              </div>)}
+            </div>
+            <div className={styles.botoes}>
+              {role ? <button>
+                <Link className={styles.header__container_link} href="sementes/novaSemente">
+                  <h1>
+                    Adicionar Sementes ao Banco
+                  </h1>
+                </Link>
+                <Image src="/assets/iconSeedGrey+.svg" alt="semente verde" width={20} height={20} />
+              </button> : ""}
+              <div className={styles.header__container_buttons}>
+              </div>
             </div>
           </div>
         </div>
@@ -372,7 +417,7 @@ const LayoutPublic = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1,
       setSementes(res.data);
     },
     onError: (error) => {
-      console.log("Erro ao recuperar as infomações das sementes",error)
+      console.log("Erro ao recuperar as infomações das sementes", error)
     }
   }
   );
