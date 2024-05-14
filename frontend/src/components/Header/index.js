@@ -77,7 +77,7 @@ const Header = () => {
         </div>
         : false}
       <button className={style.header__button_link} onClick={() => push("/")} >
-        <Image className={style.header__logo} src="/assets/logoSementesVerde.svg" alt="Logo App" width={150} height={40} />
+        <Image className={style.header__logo} src="/assets/logoCoppabacs.svg" alt="Logo Coppabacs" width={250} height={0} />
       </button>
       {pathName != "/" && pathName != "/login" ? <button className={style.header__voltar} onClick={() => back()}>
         <Image src="/assets/IconMenorQue.svg" alt="Voltar" width={27} height={24} />
