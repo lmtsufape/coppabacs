@@ -7,6 +7,9 @@ import { useEffect, useState } from "react";
 import useWindowDimensions from "use-window-dimensions";
 import { setStorageItem } from "@/utils/localStore";
 import { setUserLogin } from "@/redux/userLogin/userLoginSlice";
+import { useMutation } from 'react-query';
+import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
+
 
 
 const Header = () => {
@@ -15,6 +18,8 @@ const Header = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const [open, setOpen] = useState(false);
   const [dropdow, setDropdow] = useState(false);
+  const { width } = useWindowDimensions();
+  const [ usuario, setUsuario ] = useState([]);
   const dispatch = useDispatch();
   const [windowWidth, setWindowWidth] = useState(null);
   useEffect(() => {
@@ -36,17 +41,34 @@ const Header = () => {
     if (windowWidth >= 768) {
       setOpen(false);
     }
+    mutate ();
   }, [windowWidth]);
+
+  
 
   function exitUser() {
     setStorageItem("token", "");
     setStorageItem("userLogin", "");
     setStorageItem("userRole", "");
+    setUsuario([]);
     dispatch(setUserLogin(""));
     push("/login");
     setOpen(false)
     setDropdow(false)
   }
+
+  const { status, mutate } = useMutation(
+    async () => {
+      return getUsuarioEmail(userLogin);
+    }, {
+    onSuccess: (res) => {
+      setUsuario(res.data);
+    },
+    onError: (error) => {
+      console.error(error);
+    }
+  }
+  );
 
   return (
     <header className={style.header}>
@@ -59,7 +81,7 @@ const Header = () => {
             <header className={style.header__side_menu__content__header}>
               <div>
                 <Image src="/assets/iconLogadoBranco.svg" alt="Home" width={50} height={50} />
-                {userLogin ? <h3>{userLogin}</h3> : <h3>Visitante</h3>}
+                {userLogin ? <h3>{usuario.nome}</h3> : <h3>Olá, visitante</h3>}
               </div>
               <button className={style.header__side_menu__content__header__button_back} onClick={() => setOpen(!open)} >
                 <Image src="/assets/BackWhite.svg" alt="Voltar" width={27} height={24} />
@@ -79,6 +101,8 @@ const Header = () => {
       <button className={style.header__button_link} onClick={() => push("/")} >
         <Image className={style.header__logo} src="/assets/logoCoppabacs.svg" alt="Logo Coppabacs" width={250} height={50} />
       </button>
+      <div className={style.header__usuarioLogado}>
+      {userLogin ? <h3 className={style.header__usuarioLogado_h3}>Olá, {usuario.nome}</h3> : <h3 className={style.header__usuarioLogado_h3}>Olá, visitante</h3>}
       {pathName != "/" && pathName != "/login" ? <button className={style.header__voltar} onClick={() => back()}>
         <Image src="/assets/IconMenorQue.svg" alt="Voltar" width={27} height={24} />
       </button> : false}
@@ -98,6 +122,7 @@ const Header = () => {
           <p>Sair</p>
         </button>
       </div> : false}
+      </div>
 
     </header>
   )

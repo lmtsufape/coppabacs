@@ -18,6 +18,8 @@ export default function ListFuncionarios({ diretorioAnterior, diretorioAtual, hr
 
   const [funcionarios, setFuncionarios] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [open, setOpen] = useState(false);
+
 
   const [selectedFuncionario, setSelectedFuncionario] = useState(null);
 
@@ -70,19 +72,41 @@ export default function ListFuncionarios({ diretorioAnterior, diretorioAtual, hr
       />
       <div className={style.header}>
         <div className={style.header__container}>
+          <div className={style.dropdown}>
+            <div className={style.botaoDropdown}>
+              <Image onClick={() => setOpen(!open)}
+                src="/assets/dropdown.svg" alt="Dropdown" width={27} height={24} />
+            </div>
+            {open && (<div className={style.dropdown}>
+              <ul className={style.botaoDropdown__lista}>
+                <li>
+                  <div className={style.botaoDropdown__button}>
+                  <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Novo Funcionario" width={27} height={24} />
+                    <Link className={style.header__container_link} href="funcionarios/novoFuncionario">
+                      <h1>
+                        Adicionar Funcionário(a)
+                      </h1>
+                    </Link>
+                    
+                  </div>
+                </li>
+              </ul>
+            </div>)}
+          </div>
+          <div className={style.botoes}>
+            <button>
 
-          <button>
+              <Link className={style.header__container_link} href="funcionarios/novoFuncionario">
+                <h1>
+                  Adicionar Funcionário(a)
+                </h1>
+              </Link>
 
-            <Link className={style.header__container_link} href="funcionarios/novoFuncionario">
-              <h1>
-                Adicionar Funcionário(a)
-              </h1>
-            </Link>
+              <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Novo Funcionario" width={27} height={24} />
+            </button>
+            <div className={style.header__container_buttons}>
 
-            <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Novo Funcionario" width={27} height={24} />
-          </button>
-          <div className={style.header__container_buttons}>
-
+            </div>
           </div>
 
         </div>
