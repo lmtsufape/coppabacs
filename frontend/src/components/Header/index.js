@@ -99,7 +99,7 @@ const Header = () => {
         </div>
         : false}
       <button className={style.header__button_link} onClick={() => push("/")} >
-      <Image className={style.header__logo} src="/assets/logoCoppabacs.svg" alt="Logo App" width={60} height={60} />
+        <Image className={style.header__logo} src="/assets/logoCoppabacs.svg" alt="Logo Coppabacs" width={250} height={50} />
       </button>
       <div className={style.header__usuarioLogado}>
       {userLogin ? <h3 className={style.header__usuarioLogado_h3}>Olá, {usuario.nome}</h3> : <h3 className={style.header__usuarioLogado_h3}>Olá, visitante</h3>}
