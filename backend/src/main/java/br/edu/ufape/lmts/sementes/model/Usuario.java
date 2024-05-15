@@ -48,6 +48,7 @@ public abstract class Usuario implements Serializable {
 	private String email;
 	private String senha;
 	private String nomePopular;
+	private String estadoCivil;
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
 	private Endereco endereco;
@@ -73,7 +74,7 @@ public abstract class Usuario implements Serializable {
 	private Set<TipoUsuario> roles;
 	
 	public Usuario(Long id, String nome, String nomePopular, String email, String senha, Endereco endereco, String cpf,
-			Date dataNascimento, String contato, String imagem, String sexo, Conjuge conjuge, List<Post> posts) {
+			Date dataNascimento, String contato, String imagem, String sexo,String estadoCivil, Conjuge conjuge, List<Post> posts) {
 		this.id = id;
 		this.nome = nome;
 		this.nomePopular = nomePopular;
@@ -87,6 +88,7 @@ public abstract class Usuario implements Serializable {
 		this.sexo = sexo;
 		this.conjuge = conjuge;
 		this.posts = posts;
+		this.estadoCivil = estadoCivil;
 		this.ativo = true;
 	}
 
@@ -268,5 +270,13 @@ public abstract class Usuario implements Serializable {
 
 	public void setPosts(List<Post> posts) {
 		this.posts = posts;
+	}
+
+	public String getEstadoCivil() {
+		return estadoCivil;
+	}
+
+	public void setEstadoCivil(String estadoCivil) {
+		this.estadoCivil = estadoCivil;
 	}
 }

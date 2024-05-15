@@ -12,9 +12,10 @@ import style from "./agricultorForm.module.scss";
 import HeaderNavegacao from "../HeaderNavegacao";
 import DadosForm from "./DadosUsuario/index";
 import DadosEndereco from "./DadosEndereco";
-import DadosAtividadesRurais from "./DadosAtividadesRurais";
+import DadosSementes from "./DadosSementes";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { addSementesAgricultor } from "@/api/usuarios/agricultor/addSementes";
 
 const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   const router = useRouter();
@@ -44,13 +45,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
       sexo: "",
     },
     bancoId: "",
-    atividadesRurais: [],
-    producaoSementes: {
-      cultura: "",
-      variedade: "", 
-      previsaoVenda: "",
-      areaPlantada: ""
-    }
+    sementes: [],
   }
 
 
@@ -77,7 +72,12 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
 
   const { status, mutate } = useMutation(
     async (values) => {
-      return postAgricultor(values);
+      const {sementes, ...rest} = values;
+      console.log( "sementes: "+ JSON.stringify(sementes) );
+      console.log("rest: "+ JSON.stringify(rest));
+      const agricultor = await postAgricultor(rest);
+      console.log(agricultor);
+      return addSementesAgricultor(agricultor.data.id, sementes);
     }, {
     onSuccess: () => {
       window.location.href = '/agricultores';
@@ -110,8 +110,8 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
         {etapas === 1 && <h1 className={style.container__header_currentNav}>2. Dados do Endereço</h1>}
         {etapas != 1 && <h1 className={style.container__header_current}>2. Dados do Endereço</h1>}
 
-        {etapas === 2 && <h1 className={style.container__header_currentNav}>3. Atividades Rurais</h1>}
-        {etapas >= 0 && etapas < 2 && <h1 className={style.container__header_current}>3. Atividades Rurais</h1>}
+        {etapas === 2 && <h1 className={style.container__header_currentNav}>3. Produção de Sementes</h1>}
+        {etapas >= 0 && etapas < 2 && <h1 className={style.container__header_current}>3. Produção de Sementes</h1>}
 
       </div>
 
@@ -135,7 +135,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
 
                 {etapas === 0 && <DadosForm formik={formik} />}
                 {etapas === 1 && <DadosEndereco formik={formik} />}
-                {etapas === 2 && <DadosAtividadesRurais formik={formik} />}
+                {etapas === 2 && <DadosSementes formik={formik} />}
                 {etapas === 0 && (
                   <div className={style.container__ContainerForm_buttons}>
                     <button>

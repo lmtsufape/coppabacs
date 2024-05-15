@@ -23,7 +23,7 @@ public class Agricultor extends Usuario {
 	@ManyToMany
 	@ToString.Exclude
 	private List<AtividadeRural> atividadeRural = new ArrayList<>();
-	@OneToMany
+	@ManyToMany
 	@ToString.Exclude
 	private List<Sementes> sementes = new ArrayList<>();
 

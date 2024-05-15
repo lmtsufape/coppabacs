@@ -1064,12 +1064,12 @@ public class Facade {
 	public Agricultor addSementeAgricultor(List<Sementes> sementes, long agricultorId){
 		Agricultor agricultor = findAgricultorById(agricultorId);
 		sementes.forEach(semente-> {
-					if (!agricultor.getSementes().contains(semente)) {
-						agricultor.getSementes().add(semente);
-					}
+			Sementes sementeSalvo = findSementesById(semente.getId());
+				if (!agricultor.getSementes().contains(sementeSalvo)) {
+					agricultor.addSementes(sementeSalvo);
 				}
-				);
-
+			}
+		);
 		return updateAgricultor(agricultor);
 	}
 
