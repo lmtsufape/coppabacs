@@ -16,6 +16,7 @@ import DetalhamentoUsuario from "../DetalhamentoUsuario";
 export default function ListCoordenadores({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4 }) {
   const [coordenadores, setCoordenadores] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [open, setOpen] = useState(false);
 
   const [selectedCoordenador, setSelectedCoordendor] = useState();
 
@@ -45,16 +46,16 @@ export default function ListCoordenadores({ diretorioAnterior, diretorioAtual, h
     setSelectedCoordendor(coordenador);
   }
 
-  const handleBackToList = () =>{
+  const handleBackToList = () => {
     setSelectedCoordendor(null);
   }
 
-  if(selectedCoordenador){
-    return(
-      <DetalhamentoUsuario 
-      usuario={selectedCoordenador}
-      backDetalhamento={handleBackToList}
-      hrefAnterior="/coordenadores"
+  if (selectedCoordenador) {
+    return (
+      <DetalhamentoUsuario
+        usuario={selectedCoordenador}
+        backDetalhamento={handleBackToList}
+        hrefAnterior="/coordenadores"
       />
     )
   }
@@ -64,25 +65,45 @@ export default function ListCoordenadores({ diretorioAnterior, diretorioAtual, h
         diretorioAnterior={diretorioAnterior}
         diretorioAtual={diretorioAtual}
         hrefAnterior={hrefAnterior}
-        
+
       />
       <div className={style.header}>
+
         <div className={style.header__container}>
+          <div className={style.dropdown}>
+            <div className={style.botaoDropdown}>
+              <Image onClick={() => setOpen(!open)}
+                src="/assets/dropdown.svg" alt="Dropdown" width={27} height={24} />
+            </div>
+            {open && (<div className={style.dropdown}>
+              <ul className={style.botaoDropdown__lista}>
+                <li>
+                  <div className={style.botaoDropdown__button}>
+                  <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Novo Coordenador" width={27} height={24} />
+                    <Link className={style.header__container_link} href="coordenadores/novoCoordenador">
+                      <h1>
+                        Adicionar Novo(a) Coordenador(a)
+                      </h1>
+                    </Link>
 
-          <button>
-
-            <Link className={style.header__container_link} href="coordenadores/novoCoordenador">
-              <h1>
-                Adicionar Novo(a) Coordenador(a)
-              </h1>
-            </Link>
-
-            <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Novo Coordenador" width={27} height={24} />
-          </button>
-          <div className={style.header__container_buttons}>
-
+                    
+                  </div>
+                </li>
+              </ul>
+            </div>)}
           </div>
-
+          <div className={style.botoes}>
+            <button>
+              <Link className={style.header__container_link} href="coordenadores/novoCoordenador">
+                <h1>
+                  Adicionar Novo(a) Coordenador(a)
+                </h1>
+              </Link>
+              <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Novo Coordenador" width={27} height={24} />
+            </button>
+            <div className={style.header__container_buttons}>
+            </div>
+          </div>
         </div>
       </div>
 
