@@ -31,6 +31,7 @@ public  class UsuarioResponse  {
 	private String imagem;
 	private String sexo;
 	private ConjugeResponse conjuge;
+	private String estadoCivil;
 	private List<PostResponse> posts;
 
 	public UsuarioResponse(Usuario obj) {
