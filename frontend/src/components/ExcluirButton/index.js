@@ -26,14 +26,15 @@ function ExcluirButton({ itemId, onDelete }) {
     }, []);
 
     return (
-       <>
-            <button className={styles.no_border} onClick={() => setShowModal(true)}>
-                      <span>
-                        <Image src="/assets/iconLixeira.svg" alt="Desativar" width={27} height={26} />
-                      </span>
-            </button>
-            
-            {showModal && (
+        <>
+        <button className={styles.no_border} onClick={() => setShowModal(true)}>
+            <span>
+                <Image src="/assets/iconLixeira.svg" alt="Desativar" width={27} height={26} />
+            </span>
+        </button>
+        
+        {showModal && (
+            <div className={styles.overlay}>
                 <div className={styles.modal} ref={modalRef}>
                     <div className={styles.box1}>
                         <div>Deseja realmente excluir?</div>
@@ -44,8 +45,9 @@ function ExcluirButton({ itemId, onDelete }) {
                         <button className={styles.excluir_button2} onClick={handleExcluirClick}>Excluir</button>
                     </div>
                 </div>
-            )}
-       </>
+            </div>
+        )}
+    </>
     );
 }
 

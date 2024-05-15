@@ -9,11 +9,21 @@
     background-color: #c94157;
 }
 
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
 .modal {
-    position: absolute;
-    z-index: 1000;
-    margin-top: 5px;
-    margin-left: -10%;
+    position: relative; /* Mudar de absolute para relative */
     width: 420px;
     height: 181px;
     border-radius: 20px;
@@ -61,7 +71,7 @@
     justify-content: center;
     align-items: center;
     background-color: #ECECEC;
-    border: 1px solid #000000;
+    border: none;
     color: #909090;
 }
 
@@ -91,7 +101,7 @@
     font-weight: bold;
     color: #ffffff;
     background-color: #cf2121;
-    border: #68655C 1px solid;
+    border: none;
     border-radius: 0.8em;
     &:hover{
       box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);

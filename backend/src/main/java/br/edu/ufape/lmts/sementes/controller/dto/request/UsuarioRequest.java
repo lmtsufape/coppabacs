@@ -1,6 +1,8 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -45,8 +47,10 @@ public class UsuarioRequest {
 	private String contato;
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String sexo;
+	private String estadoCivil;
 	private ConjugeRequest conjuge;
 	private String imagem;
+	private List<SementesRequest> sementes = new ArrayList<>();
 
 	public Usuario convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

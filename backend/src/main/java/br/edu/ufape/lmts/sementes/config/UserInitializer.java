@@ -154,7 +154,7 @@ public class UserInitializer implements CommandLineRunner {
 
 		return new BancoSementesRequest("Banco de Sementes do Alto Sertão", "Comunidade Agrícola Sertaneja", "1997",
 				"Fundado com o objetivo de preservar variedades locais de sementes e promover a agricultura sustentável na região...",
-				"Milho Crioulo, Feijão Macassa, Mandioca Mansa, Sorgo Nativo, Abóbora Seridó", endereco, objetos,0);
+				"Milho Crioulo, Feijão Macassa, Mandioca Mansa, Sorgo Nativo, Abóbora Seridó", endereco, objetos,0, "Dono da porra toda","0800");
 	}
 
 	private static List<SementesRequest> prepareAllSementes() {

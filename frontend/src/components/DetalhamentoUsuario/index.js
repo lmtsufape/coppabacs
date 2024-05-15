@@ -8,7 +8,7 @@ import style from "./detalhamentoUsuario.module.scss";
 import HeaderNavegacao from "../HeaderNavegacao";
 import DadosForm from "./DadosUsuario";
 import DadosEndereco from "./DadosEndereco";
-import DadosAtividadesRurais from "./DadosAtividadesRurais";
+import DadosSementes from "./DadosSementes";
 import Image from "next/image";
 import { validarAgricultor } from "@/api/usuarios/agricultor/validarAgricultor";
 import { useRouter } from "next/navigation";
@@ -16,6 +16,8 @@ import { patchAgricultor } from "@/api/usuarios/agricultor/patchAgricultor";
 import { patchCoppabacs } from "@/api/usuarios/coppabacs/patchCoppabacs";
 import { patchCoordenador } from "@/api/usuarios/coordenador/patchCoordenador";
 import HeaderDetalhamento from "../HeaderDetalhamento";
+import { addSementesAgricultor } from "@/api/usuarios/agricultor/addSementes";
+import { removeSementesAgricultor } from "@/api/usuarios/agricultor/removeSementes";
 
 
 const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuario, backDetalhamento }) => {
@@ -56,12 +58,9 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
       outra: '',
       outraAtividade: '',
     },
-    producaoSementes: {
-      cultura: '',
-      variedade: '',
-      areaPlantada: '',
-      previsaoVenda: '',
-    }
+    sementes: [],
+    sementesAdicionadas: [],
+    sementesRemovidas: [],  
   });
 
   useEffect(() => {
@@ -77,7 +76,7 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
         endereco: usuario.endereco || {},
         bancoId: usuario.bancoSementeId || '',
         atividadeRural: usuario.atividadeRural || {},
-        producaoSementes: usuario.producaoSementes || {}
+        sementes: usuario.sementes || {}
       });
     }
   }, [usuario]);
@@ -90,8 +89,20 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
       console.error('Erro ao aprovar usuário', error);
     }
   });
-  const mutationUpdateAgricultor = useMutation(newData => patchAgricultor(newData, usuario.id), {
+  const mutationUpdateAgricultor = useMutation(async newData =>{ 
+    
+    const {sementesAdicionadas,sementesRemovidas, sementes,...resto} = newData;
+   
+    patchAgricultor(resto, usuario.id)
+    if(sementesAdicionadas&& sementesAdicionadas.length > 0){
+      await addSementesAgricultor(usuario.id,sementesAdicionadas);
+    }
+    if(sementesRemovidas && sementesRemovidas.length > 0){
+      await removeSementesAgricultor(usuario.id,sementesRemovidas);
+    }
+  }, {
     onSuccess: () => {
+   
       router.push('/agricultores');
     },
     onError: (error) => {
@@ -179,7 +190,7 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
                 <DadosEndereco formik={formik} editar={editar} />
                 {
                   hrefAnterior === "/agricultores" && (
-                    <DadosAtividadesRurais formik={formik} editar={editar} />
+                    <DadosSementes formik={formik} editar={editar} />
                   )
                 }
                 {

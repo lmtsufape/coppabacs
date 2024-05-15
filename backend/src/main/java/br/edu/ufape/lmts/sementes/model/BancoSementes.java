@@ -37,13 +37,12 @@ public class BancoSementes {
 	private String variedadesTrabalhadas;
 	private List<String> imagens;
 	private boolean ativo = true;
-
+	private String responsavel;
+	private String contato;
 	@OneToMany(mappedBy = "bancoSementes")
 	private List<Agricultor> agricultores;
-
 	@OneToMany(mappedBy = "bancoSementes")
 	private List<Gerente> gerentes;
-
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
 	private Endereco endereco;

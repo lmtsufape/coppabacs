@@ -24,9 +24,9 @@ public class Gerente extends Usuario {
 
 	public Gerente(Long id, String nome, String nomePopular, String email, String senha, Endereco endereco, String cpf,
 			Date dataNascimento, String contato, String imagem, String sexo,
-			Conjuge conjuge, List<Post> posts) {
+			String estadoCivil,Conjuge conjuge, List<Post> posts) {
 		super(id, nome, nomePopular,email, senha, endereco, cpf, dataNascimento, contato, imagem, sexo,
-				conjuge, posts);
+				estadoCivil,conjuge, posts);
 		super.addRole(TipoUsuario.GERENTE);
 	}
 
