@@ -1,10 +1,31 @@
 "use client";
 
-import { useEffect } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
 import style from "../agricultorForm.module.scss";
+import { useMutation } from "react-query";
+import axios from "axios";
+import { getAllBancos } from "@/api/bancoSementes/getAllBancos";
 
 export default function DadosEndereco({ formik }) {
+  const [bancos, setBancos] = useState([]);
+
+  useEffect(() => {
+    mutate();
+  }, []);
+
+  const { state, mutate } = useMutation(
+    async () => {
+      return getAllBancos();
+    },
+    {
+      onSuccess: (res) => {
+        setBancos(res.data);
+      },
+      onError: (error) => {
+        console.log("Erro ao recuperar os bancos de sementes", error);
+      },
+    }
+  );
 
   // Função para buscar dados do endereço com base no CEP
   const fetchAddress = async (cep) => {
@@ -155,6 +176,27 @@ export default function DadosEndereco({ formik }) {
             <span className={style.form__error}>{formik.errors.endereco.referencia}</span>
           ) : null}
         </div>
+      </div>
+      <div>
+        <label htmlFor="bancoId">Banco de sementes <span>*</span></label>
+        <select
+          className={style.container__ContainerForm_form_halfContainer_input}
+          id="bancoId"
+          name="bancoId"
+          placeholder="Insira o banco de sementes"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.bancoId}
+          required
+        >
+          <option value="">Selecione...</option>
+          {bancos.map((banco, index) => (
+            <option key={index} value={banco.id}>{banco.nome}</option>
+          ))}
+        </select>
+        {formik.touched.bancoId && formik.errors.bancoId ? (
+          <span className={style.form__error}>{formik.errors.bancoId}</span>
+        ) : null}
       </div>
     </>
   );
