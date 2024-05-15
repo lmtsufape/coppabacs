@@ -70,7 +70,7 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, diretorioAnterior, 
   const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
 
   const [Agricultores, setAgricultores] = useState([]);
-
+  const [open, setOpen] = useState(false);
   const [coordenador, setCoordenador] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -135,20 +135,57 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, diretorioAnterior, 
       <div className={style.header}>
         <div className={style.header__container}>
 
-          <button>
+          <div className={style.dropdown}>
+            <div className={style.botaoDropdown_coordenador}>
+              <Image onClick={() => setOpen(!open)}
+                src="/assets/dropdown.svg" alt="Dropdown" width={27} height={24} />
+            </div>
+            {open && (<div className={style.dropdown}>
+              <ul className={style.botaoDropdown__lista}>
+                <li>
+                  <div className={style.botaoDropdown__button}>
+                  <Image src="/assets/iconSinoGray.svg" alt="Adicionar Agricultor" width={20} height={20} />
+                    <Link className={style.header__container_link} href="agricultores/solicitacoes">
+                      <h1>
+                        Solicitações de Cadastro
+                      </h1>
+                    </Link>
+                    
 
-            <Link className={style.header__container_link} href="agricultores/novoAgricultor">
-              <h1>
-                Adicionar Agricultor(a)
-              </h1>
-            </Link>
+                  </div>
+                </li>
+                <li>
+                  <div className={style.botaoDropdown__button}>
+                  <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Agricultor" width={20} height={20} />
+                    <Link className={style.header__container_link} href="agricultores/novoAgricultor">
+                      <h1>
+                        Adicionar Agricultor(a)
+                      </h1>
+                    </Link>
 
-            <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Agricultor" width={27} height={24} />
-          </button>
-          <div className={style.header__container_buttons}>
-
+                    
+                  </div></li>
+              </ul>
+            </div>)}
           </div>
 
+          <div className={style.botoes}>
+
+            <button>
+            <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Agricultor" width={27} height={24} />
+              <Link className={style.header__container_link} href="agricultores/novoAgricultor">
+                <h1>
+                  Adicionar Agricultor(a)
+                </h1>
+              </Link>
+
+              
+            </button>
+            <div className={style.header__container_buttons}>
+
+            </div>
+
+          </div>
         </div>
       </div>
 
@@ -170,7 +207,7 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, diretorioAnterior, 
 const LayoutAdmin = ({ table1, table2, table3, table4, diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   const [Agricultores, setAgricultores] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-
+  const [open, setOpen] = useState(false);
   const [selectedAgricultor, setSelectedAgricultor] = useState(null);
 
   useEffect(() => {
@@ -219,27 +256,62 @@ const LayoutAdmin = ({ table1, table2, table3, table4, diretorioAnterior, direto
       />
       <div className={style.header}>
         <div className={style.header__container}>
-          <button >
-            <Link className={style.header__container_link} href="agricultores/solicitacoes">
-              <h1>
-                Solicitações de Cadastro
-              </h1>
-            </Link>
-            <Image src="/assets/iconSinoGray.svg" alt="Adicionar Agricultor" width={27} height={24} />
+          <div className={style.dropdown}>
+            <div className={style.botaoDropdown}>
+              <Image onClick={() => setOpen(!open)}
+                src="/assets/dropdown.svg" alt="Dropdown" width={27} height={24} />
+            </div>
+            {open && (<div className={style.dropdown}>
+              <ul className={style.botaoDropdown__lista}>
+                <li>
+                  <div className={style.botaoDropdown__button}>
+                  <Image src="/assets/iconSinoGray.svg" alt="Adicionar Agricultor" width={20} height={20} />
+                    <Link className={style.header__container_link} href="agricultores/solicitacoes">
+                      <h1>
+                        Solicitações de Cadastro
+                      </h1>
+                    </Link>
+                    
 
-          </button>
-          <button>
+                  </div>
+                </li>
+                <li>
+                  <div className={style.botaoDropdown__button}>
+                  <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Agricultor" width={20} height={20} />
+                    <Link className={style.header__container_link} href="agricultores/novoAgricultor">
+                      <h1>
+                        Adicionar Agricultor(a)
+                      </h1>
+                    </Link>
 
-            <Link className={style.header__container_link} href="agricultores/novoAgricultor">
-              <h1>
-                Adicionar Agricultor(a)
-              </h1>
-            </Link>
+                    
+                  </div></li>
+              </ul>
+            </div>)}
+          </div>
+          <div className={style.botoes}>
+            <button >
+              <Link className={style.header__container_link} href="agricultores/solicitacoes">
+                <h1>
+                  Solicitações de Cadastro
+                </h1>
+              </Link>
+              <Image src="/assets/iconSinoGray.svg" alt="Adicionar Agricultor" width={27} height={24} />
 
-            <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Agricultor" width={27} height={24} />
-          </button>
+            </button>
+            <button>
+
+              <Link className={style.header__container_link} href="agricultores/novoAgricultor">
+                <h1>
+                  Adicionar Agricultor(a)
+                </h1>
+              </Link>
+
+              <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Agricultor" width={27} height={24} />
+            </button>
 
 
+          </div>
         </div>
       </div>
 

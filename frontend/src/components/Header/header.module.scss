@@ -7,8 +7,44 @@
 
     border: 1px solid rgba(0, 0, 0, 0.3);
 
+    &__usuarioLogado{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &_h3{
+            font-weight: bold;
+            display: flex;
+            margin-right: 1em;           
+        }
+
+    }
+
+    &__voltar{
+        display: flex;
+        background-color: white;
+        border: #68655C 1px solid;
+        border-radius: 0.8em;
+        width: 3em;
+        height: 3em;
+        justify-content: center;
+        align-items: center;
+        padding-left: 1em;
+        margin-right: 0.4em;
+
+        &:hover {
+            box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);
+          }
+    }
+    
+
+
     &__logo {
         width: 120px;
+        margin-left: -10em;
+
+
+
     }
 
     &__button_mural,
@@ -124,7 +160,7 @@
     &__dropdown{
         background-color: #FFF;
         width: 150.65px;
-        height: 101.01px;
+        height: 90.01px;
         position:absolute;
         top: 79px;
         right: 50px;
@@ -251,4 +287,25 @@
         }
     }
 
+}
+
+
+@media all and (max-width: 475px) {
+    .header {
+        display: flex;
+        justify-content: space-between;
+        &__usuarioLogado{
+    
+            &_h3{
+                display: none;  
+            }
+    
+        }
+
+        &__logo {
+            width: 120px;
+            margin-left: 0;
+    
+        }
+    }
 }
