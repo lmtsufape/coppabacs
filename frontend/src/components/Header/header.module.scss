@@ -7,6 +7,7 @@
 
     border: 1px solid rgba(0, 0, 0, 0.3);
 
+
     &__usuarioLogado{
         display: flex;
         align-items: center;
@@ -41,10 +42,6 @@
 
     &__logo {
         width: 120px;
-        margin-left: -10em;
-
-
-
     }
 
     &__button_mural,
@@ -86,18 +83,60 @@
         border: none;
         background-color: transparent;
         position: absolute;
-        left: 11px;
+        right: 15px;
     }
 
     &__side_menu{
         position: fixed;
         top: 0;
-        left: 0;
+        left: 131px;
         background-color: rgba(204, 204, 204, 0.6);
         width: 100vw;
         height: 100vh;
         z-index: 1;
         display: flex;
+        box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);
+
+
+        &__conj{
+            padding: 0em 1.2em;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        &__conjBotoes{
+            flex-direction: column;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1em;
+            margin-bottom: 190px;
+
+            &__botoesNav{
+                display: flex;
+                justify-content: start;
+                align-items: center;
+                margin-left: -1em;
+                width: 20em;
+                height: 3.5em;
+                padding-left: 0.3em;
+
+                
+              }
+              &__link{
+                color: #68655C;
+                text-decoration: none;
+                font-size: 0.9em;
+                font-weight: bold;
+                padding: 1.5em 14em 1.5em 2.8em;
+                margin: -1.5em -14em -1.5em -2.4em;
+              }
+        }
+
+        
+
+        
 
         &__content{
             width: 281.95px;
@@ -125,11 +164,42 @@
                     background-color: transparent;
                     border: none;
                 }
+                &_iconLogin{
+                    top: 20px;
+                    right: 20px;
+                    position: fixed;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: end;
+
+                    &_nome{
+                        font-size:0.8em;
+                    }
+                    &_email{
+                        font-size: 0.7em;
+                    }
+                }
             }
 
             &__main{
                 height: 100%;
                 background-color: #FFF;
+
+                &__perfil{
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    border: none;
+                    background-color: transparent;
+                    position: absolute;
+                    bottom: 80px;
+                    left: 5px;
+
+                    p{
+                        color:#68655C;
+                        font-size: 17px;
+                    }
+                }
 
                 &__exit{
                     display: flex;
@@ -139,7 +209,7 @@
                     background-color: transparent;
                     position: absolute;
                     bottom: 25px;
-                    left: 10px;
+                    left: 5px;
 
                     p{
                         color:#970B0B;
@@ -215,7 +285,7 @@
     &__button_link {
         border: none;
         background-color: transparent;
-        margin-left: 9em;
+        margin-left: -2em;
 
     }
 
@@ -246,7 +316,7 @@
 
     @media (max-width: 361px) {
         &__button_link{
-            margin-left: 7em;
+            margin-left: -2em;
         }
     }
 
@@ -293,7 +363,17 @@
 @media all and (max-width: 475px) {
     .header {
         display: flex;
-        justify-content: space-between;
+        justify-content:center;
+
+        &__button_home{
+            position: fixed;
+            right: 1.3em;
+        }
+        &__voltar{
+            position: fixed;
+            left: 1.5em;
+        }
+
         &__usuarioLogado{
     
             &_h3{
