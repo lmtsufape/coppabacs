@@ -33,6 +33,8 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
     anoFundacao: '',
     historiaBanco: '',
     variedadesTrabalhadas: '',
+    responsavel: '',
+    contato: '',
     endereco: {
       logradouro: '',
       referencia: '',
@@ -62,7 +64,9 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
         historiaBanco: banco.historiaBanco || '',
         variedadesTrabalhadas: banco.variedadesTrabalhadas || '',
         endereco: banco.endereco || {},
-        objetos: banco.objetos || {}
+        objetos: banco.objetos || {},
+        responsavel: banco.responsavel || '',
+        contato: banco.contato || ''
       });
     }
   }, [banco]);

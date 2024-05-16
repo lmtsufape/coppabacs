@@ -58,6 +58,11 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
       outra: '',
       outraAtividade: '',
     },
+    estadoCivil: '',
+    conjuge: {
+      nome: '',
+      sexo: '',
+    },
     sementes: [],
     sementesAdicionadas: [],
     sementesRemovidas: [],  
@@ -75,8 +80,9 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
         sexo: usuario.sexo || '',
         endereco: usuario.endereco || {},
         bancoId: usuario.bancoSementeId || '',
-        atividadeRural: usuario.atividadeRural || {},
-        sementes: usuario.sementes || {}
+        sementes: usuario.sementes || {},
+        estadoCivil: usuario.estadoCivil || '',
+        conjuge: usuario.conjuge || {},
       });
     }
   }, [usuario]);
@@ -102,8 +108,8 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
     }
   }, {
     onSuccess: () => {
-   
-      router.push('/agricultores');
+     
+      window.location.reload();
     },
     onError: (error) => {
       console.error('Erro ao tentar atualizar os dados', error);
@@ -111,7 +117,7 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
   });
   const mutationUpdateCoordenador = useMutation(newData => patchCoordenador(newData, usuario.id), {
     onSuccess: () => {
-      router.push('/coordenadores');
+      window.location.reload();
     },
     onError: (error) => {
       console.error('Erro ao tentar atualizar os dados', error);
@@ -143,7 +149,7 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
           onSubmit={(values, { setSubmitting }) => {
             if (hrefAnterior === "/funcionários") {
               mutationUpdateFuncionario.mutate(values);
-            } else if (hrefAnterior === "/gerentes") {
+            } else if (hrefAnterior === "/coordenadores") {
               mutationUpdateCoordenador.mutate(values);
             } else if (hrefAnterior === "/agricultores") {
               mutationUpdateAgricultor.mutate(values);
@@ -162,7 +168,7 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
                     <Image src="/assets/agricultorteste.png" alt="Foto do usuário" width={72} height={72} />
                     <h1>{usuario?.nome}</h1>
                   </div>
-                  {hrefAnterior === "/agricultores" || hrefAnterior === "/funcionarios" ? (
+                  {hrefAnterior === "/agricultores" || hrefAnterior === "/funcionarios" ||hrefAnterior === "/coordenadores" ? (
                     <>
                       {editar === false ? (
                         <button
