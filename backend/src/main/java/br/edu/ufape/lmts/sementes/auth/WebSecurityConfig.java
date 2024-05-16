@@ -43,7 +43,7 @@ public class WebSecurityConfig {
 					.requestMatchers(HttpMethod.POST, "/api/v1/agricultor/usuario").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/banco-sementes/**").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/sementes/**").permitAll()
-					.requestMatchers(HttpMethod.GET, "/api/v1/posts/**").permitAll()
+					.requestMatchers(HttpMethod.GET, "/api/v1/post/public/**").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/arquivos/**").permitAll()
 					
 					// rotas de agricultor

@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return new AuthUser(usuario);
 	}
 	
-	public static AuthUser authenticated() {
+	public AuthUser authenticated() {
 		try {
 			return (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		} catch (Exception e) {

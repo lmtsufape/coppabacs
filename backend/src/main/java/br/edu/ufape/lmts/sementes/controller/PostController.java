@@ -27,12 +27,9 @@ import br.edu.ufape.lmts.sementes.controller.dto.response.PostResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Post;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
-import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 
-
-@CrossOrigin (origins = "http://localhost:8081/" )
-@Hidden
+@CrossOrigin(origins = "http://localhost:8081/")
 @RestController
 @RequestMapping("/api/v1/")
 public class PostController {
@@ -42,16 +39,19 @@ public class PostController {
 	private ModelMapper modelMapper;
 
 	@GetMapping("post")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('COPPABACS')")
 	public List<PostResponse> getAllPost() {
-		return facade.getAllPost()
-			.stream()
-			.map(PostResponse::new)
-			.toList();
+		return facade.getAllPost().stream().map(PostResponse::new).toList();
 	}
 	
+	@GetMapping("post/public")
+	public List<PostResponse> getVisiblePost() {
+		return facade.getVisiblePost().stream().map(PostResponse::new).toList();
+	}
+
 	@GetMapping(value = "post/page")
-	public Page<PostResponse> getPagePost(
-			@RequestParam(value = "page", defaultValue = "0") Integer page,
+	@PreAuthorize("hasRole('ADMIN') or hasRole('COPPABACS')")
+	public Page<PostResponse> getPagePost(@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
 			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
 			@RequestParam(value = "direction", defaultValue = "DESC") String direction) {
@@ -59,19 +59,36 @@ public class PostController {
 		Page<Post> list = facade.findPagePost(pageRequest);
 		return list.map(PostResponse::new);
 	}
+	
+	@GetMapping(value = "post/page/public")
+	public Page<PostResponse> getPageVisiblePost(@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
+			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
+			@RequestParam(value = "direction", defaultValue = "DESC") String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		Page<Post> list = facade.findPageVisiblePost(pageRequest);
+		return list.map(PostResponse::new);
+	}
 
-	@PostMapping("post/usuario/{usuarioId}")
-	@PreAuthorize("hasRole('GERENTE') or hasRole('COPPABACS')")
-	public PostResponse createPost(@Valid @PathVariable Long usuarioId, @RequestBody PostRequest newObj) {
-		return new PostResponse(facade.savePost(usuarioId, newObj.convertToEntity()));
+	@PostMapping("post")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('COPPABACS')")
+	public PostResponse createPost(@Valid @RequestBody PostRequest newObj) {
+		return new PostResponse(facade.savePost(newObj.convertToEntity()));
 	}
 
 	@GetMapping("post/{id}")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('COPPABACS')")
 	public PostResponse getPostById(@PathVariable Long id) {
 		return new PostResponse(facade.findPostById(id));
 	}
+	
+	@GetMapping("post/public/{id}")
+	public PostResponse getVisiblePostById(@PathVariable Long id) {
+		return new PostResponse(facade.findVisiblePostById(id));
+	}
 
 	@PatchMapping("post/{id}")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('COPPABACS')")
 	public PostResponse updatePost(@PathVariable Long id, @Valid @RequestBody PostRequest obj) {
 		try {
 			//Post o = obj.convertToEntity();
@@ -79,9 +96,9 @@ public class PostController {
 
 			TypeMap<PostRequest, Post> typeMapper = modelMapper
 													.typeMap(PostRequest.class, Post.class)
-													.addMappings(mapper -> mapper.skip(Post::setId));
-
-
+													.addMappings(mapper -> mapper.skip(Post::setId))
+													.addMappings(mapper -> mapper.skip(Post::setData))
+													.addMappings(mapper -> mapper.skip(Post::setAutor));
 			typeMapper.map(obj, oldObject);
 			return new PostResponse(facade.updatePost(oldObject));
 		} catch (RuntimeException e) {
@@ -94,6 +111,7 @@ public class PostController {
 	}
 
 	@DeleteMapping("post/{id}")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('COPPABACS')")
 	public String deletePost(@PathVariable Long id) {
 		try {
 			facade.deletePost(id);
@@ -106,6 +124,5 @@ public class PostController {
 		}
 
 	}
-
 
 }

@@ -1,17 +1,22 @@
 package br.edu.ufape.lmts.sementes.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.transaction.Transactional;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-@ToString
+@ToString(callSuper = true)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -28,17 +33,13 @@ public class Agricultor extends Usuario {
 	private List<Sementes> sementes = new ArrayList<>();
 
 	@Transactional
-	public void addSementes(Sementes semente){
+	public void addSementes(Sementes semente) {
 		this.sementes.add(semente);
 	}
 
 	@Transactional
-	public void removeSementes(Sementes semente){
+	public void removeSementes(Sementes semente) {
 		this.sementes.remove(semente);
 	}
-
-
-	
-
 
 }
