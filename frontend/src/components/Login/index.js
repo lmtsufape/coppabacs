@@ -40,7 +40,7 @@ const Login = () => {
     const userDetailsMutation = useMutation(getCurrentUser, {
       onSuccess: (res) => {
         const userRole = res.data.authorities[0].authority; // Assumindo que a resposta inclui um campo 'role'
-        setStorageItem("userRole", userRole); // Armazenar a role no localStorage
+        setStorageItem("userRole", userRole); 
         // Redirecionamento pode ser feito aqui, se necessário
         push("/");
       },

@@ -49,8 +49,6 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
   const filteredSementes = sementes.filter((sementes) =>
     sementes.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  console.log(bancoId)
-
   const handleSelectTabela = (tabela, nomeSemente, variedadeSemente) => {
     setSelectedTabelaBancoSemente(tabela);
     setNomeSemente(nomeSemente);
