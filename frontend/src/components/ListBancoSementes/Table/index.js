@@ -35,7 +35,7 @@ const Table = ({ usuario, listBancos, onSelectBanco, setBancos, table1, table2, 
           {listBancos.map((banco, index) => (
             <tr key={index} >
               <td>{banco.nome}</td>
-              <td>{banco?.gerentes[0]?.nome}</td>
+              <td>{banco.responsavel}</td>
               <td>
                 <Image src="/assets/iconOlho.svg" onClick={() => onSelectBanco(banco)} alt="Visualizar" width={27} height={26} className={style.content__table__body_click}/>
                 {usuario !== "public" ? (

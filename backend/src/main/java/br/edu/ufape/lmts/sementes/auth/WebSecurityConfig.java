@@ -40,14 +40,14 @@ public class WebSecurityConfig {
 			.authorizeHttpRequests(authz -> authz
 					// Rotas públicas
 					.requestMatchers(HttpMethod.POST,"/api/v1/login").permitAll()
-					.requestMatchers(HttpMethod.POST, "/api/v1/agricultor/usuario").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/banco-sementes/**").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/sementes/**").permitAll()
-					.requestMatchers(HttpMethod.GET, "/api/v1/posts/**").permitAll()
+					.requestMatchers(HttpMethod.GET, "/api/v1/post/public/**").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/arquivos/**").permitAll()
-					
 					// rotas de agricultor
+					.requestMatchers(HttpMethod.GET, "/api/v1/usuario/e/**").permitAll()
 					.requestMatchers("/api/v1/agricultor/**").hasAnyRole("AGRICULTOR", "GERENTE", "COPPABACS")
+					.requestMatchers(HttpMethod.GET, "/api/v1/agricultor/e/**").hasAnyRole("AGRICULTOR", "GERENTE", "COPPABACS")
 					.requestMatchers(HttpMethod.PATCH, "/api/v1/agricultor/**").hasAnyRole("GERENTE", "COPPABACS")
 					.requestMatchers(HttpMethod.PATCH, "/api/v1/agricultor/validar/**").hasAnyRole("GERENTE", "COPPABACS")
 					.requestMatchers(HttpMethod.GET, "/api/v1/agricultor/**").hasAnyRole("GERENTE", "COPPABACS")

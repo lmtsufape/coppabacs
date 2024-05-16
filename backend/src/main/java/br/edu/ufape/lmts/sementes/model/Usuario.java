@@ -7,8 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
@@ -27,11 +25,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @NoArgsConstructor
 @Entity
+@Getter
+@Setter
 @Inheritance(strategy = InheritanceType.JOINED)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
@@ -53,6 +55,7 @@ public abstract class Usuario implements Serializable {
 	@ToString.Exclude
 	private Endereco endereco;
 	@Column(unique = true)
+	@EqualsAndHashCode.Include
 	private String cpf;
 	private Date dataNascimento;
 	@Column(unique = true)
@@ -72,9 +75,10 @@ public abstract class Usuario implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role")
 	private Set<TipoUsuario> roles;
-	
+
 	public Usuario(Long id, String nome, String nomePopular, String email, String senha, Endereco endereco, String cpf,
-			Date dataNascimento, String contato, String imagem, String sexo,String estadoCivil, Conjuge conjuge, List<Post> posts) {
+			Date dataNascimento, String contato, String imagem, String sexo, String estadoCivil, Conjuge conjuge,
+			List<Post> posts) {
 		this.id = id;
 		this.nome = nome;
 		this.nomePopular = nomePopular;
@@ -117,6 +121,12 @@ public abstract class Usuario implements Serializable {
 		roles.add(role);
 	}
 
+	public void removePost(Post post) {
+		if (this.posts != null) {
+			this.posts.remove(post);
+		}
+	}
+
 	public void addPost(Post post) {
 		if (this.posts == null) {
 			this.posts = new ArrayList<>();
@@ -132,119 +142,11 @@ public abstract class Usuario implements Serializable {
 		return roles.stream().map(x -> x.getRole()).toList();
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getNomePopular() {
-		return nomePopular;
-	}
-
-	public void setNomePopular(String nomePopular) {
-		this.nomePopular = nomePopular;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
-	public String getContato() {
-		return contato;
-	}
-
-	public void setContato(String contato) {
-		this.contato = contato;
-	}
-
-	public String getImagem() {
-		return imagem;
-	}
-
-	public void setImagem(String imagem) {
-		this.imagem = imagem;
-	}
-
-	public String getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
-
-	public Conjuge getConjuge() {
-		return conjuge;
-	}
-
-	public void setConjuge(Conjuge conjuge) {
-		this.conjuge = conjuge;
-	}
-
-	public List<Post> getPost() {
-		return posts;
-	}
-
-	public void setPost(List<Post> posts) {
-		this.posts = posts;
-	}
-
 	public Set<TipoUsuario> getRoles() {
 		if (this.roles == null) {
 			roles = new HashSet<>();
 		}
 		return roles;
-	}
-
-	public void setRoles(Set<TipoUsuario> roles) {
-		this.roles = roles;
 	}
 
 	public static long getSerialversionuid() {
@@ -254,29 +156,5 @@ public abstract class Usuario implements Serializable {
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		return super.clone();
-	}
-
-	public boolean isAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
-
-	public List<Post> getPosts() {
-		return posts;
-	}
-
-	public void setPosts(List<Post> posts) {
-		this.posts = posts;
-	}
-
-	public String getEstadoCivil() {
-		return estadoCivil;
-	}
-
-	public void setEstadoCivil(String estadoCivil) {
-		this.estadoCivil = estadoCivil;
 	}
 }

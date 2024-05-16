@@ -20,6 +20,8 @@ const BancoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
     anoFundacao: "",
     historiaBanco: "",
     variedadesTrabalhadas: "",
+    responsavel: "",
+    contato: "",
     endereco: {
       logradouro: "",
       referencia: "",
@@ -46,6 +48,8 @@ const BancoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       .min(5, "O nome deve ter no mínimo 5 caracteres")
       .required('Obrigatório'),
     comunidade: Yup.string()
+      .required('Obrigatória'),
+    responsavel: Yup.string()
       .required('Obrigatória'),
     anoFundacao: Yup.string()
       .required('Obrigatório'),
