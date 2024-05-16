@@ -77,20 +77,20 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       .max(new Date(), "A data de nascimento não pode ser maior que a data atual")
       .min(new Date(1, 1, 1900), "A data de nascimento não pode ser menor que 01/01/1900")
       .required('Obrigatório'),
-    cep: Yup.string()
-      .required('Obrigatório'),
-    logradouro: Yup.string()
-      .required('Obrigatório'),
-    cidade: Yup.string()
-      .required('Obrigatório'),
-    estado: Yup.string()
-      .required('Obrigatório'),
-    numero: Yup.string()
-      .required('Obrigatório'),
-    bairro: Yup.string()
-      .required('Obrigatório'),
-    bancoId: Yup.string()
-      .required('Obrigatório'),
+    //cep: Yup.string()
+    //  .required('Obrigatório'),
+    //logradouro: Yup.string()
+    //  .required('Obrigatório'),
+    //cidade: Yup.string()
+    //  .required('Obrigatório'),
+    //estado: Yup.string()
+    // .required('Obrigatório'),
+    //numero: Yup.string()
+    // .required('Obrigatório'),
+    //bairro: Yup.string()
+    //  .required('Obrigatório'),
+    //bancoId: Yup.string()
+    //  .required('Obrigatório'),
   })
 
   
@@ -99,7 +99,7 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       return postSolicitacaoAgricultor(values);
     }, {
     onSuccess: (res) => {
-
+      window.location.href = "/InicioPage"
     },
     onError: (error) => {
       console.log("Erro ao cadastrar uma nova solicitação de cadastro de agricultor", error);
