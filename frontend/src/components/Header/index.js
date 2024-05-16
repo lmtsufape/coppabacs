@@ -4,7 +4,6 @@ import style from "./header.module.scss";
 import { usePathname, useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import useWindowDimensions from "use-window-dimensions";
 import { setStorageItem } from "@/utils/localStore";
 import { setUserLogin } from "@/redux/userLogin/userLoginSlice";
 import { useMutation } from 'react-query';
@@ -15,12 +14,12 @@ import Link from "next/link";
 
 
 const Header = () => {
+  
   const { push, back } = useRouter();
   const pathName = usePathname();
   const userLogin = useSelector((state) => state.userLogin);
   const [open, setOpen] = useState(false);
   const [dropdow, setDropdow] = useState(false);
-  const { width } = useWindowDimensions();
   const [usuario, setUsuario] = useState([]);
   const dispatch = useDispatch();
   const [role, setRole] = useState(getStorageItem("userRole"));
