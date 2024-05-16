@@ -3,7 +3,6 @@ import { telefoneMask } from "@/utils/Masks/telefoneMask";
 
 
 export default function DadosBanco({ formik, editar }) {
-  console.log(formik.values);
   return (
     <>
 
