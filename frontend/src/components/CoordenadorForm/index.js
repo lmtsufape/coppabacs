@@ -2,13 +2,10 @@
 
 import { useMutation } from "react-query";
 import { postAgricultor } from "@/api/usuarios/agricultor/postAgricultor";
-
 import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import * as Yup from 'yup';
-
 import style from "./agricultorForm.module.scss";
-
 import HeaderNavegacao from "../HeaderNavegacao";
 import DadosForm from "./DadosUsuario/index";
 import DadosEndereco from "./DadosEndereco";
@@ -31,6 +28,11 @@ const CoordenadorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
     cpf: "",
     dataNascimento: "",
     sexo: "",
+    estadoCivil: "",
+    conjuge: {
+      nome: "",
+      sexo: "",
+    },
     tipo: "",
     endereco: {
       logradouro: '',
@@ -43,40 +45,57 @@ const CoordenadorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
       bairro: ''
     },
     bancoId: "",
-    conjuge: {
-      nome: "",
-      sexo: "",
-    },
   }
-
 
   const validateSchema = Yup.object().shape({
     nome: Yup.string()
       .min(5, "O nome deve ter no mínimo 5 caracteres")
-      .required('Required'),
+      .required('Obrigatório'),
+    nomePopular: Yup.string()
+      .required('Obrigatório'),
+    cpf: Yup.string()
+      .required('Obrigatório'),
+    sexo: Yup.string()
+      .required('Obrigatório'),
     senha: Yup.string()
       .min(8, "A senha deve ter no mínimo 8 caracteres")
-      .required('Required'),
+      .required('Obrigatório'),
     confirmarSenha: Yup.string()
-      .min(8, "As senhas devem ser iguais")
-      .oneOf([Yup.ref('senha'), null], 'As senhas não são iguais'), // Utilize oneOf para comparar as senhas
+      .min(8, "A senha deve ter no mínimo 8 caracteres")
+      .oneOf([Yup.ref('senha'), null], 'As senhas não correspondem')
+      .required('Obrigatório'),
     contato: Yup.string()
       .min(11, "O contato deve ter no mínimo 11 caracteres")
-      .required('Required'),
+      .required('Obrigatório'),
     dataNascimento: Yup.date()
       .max(new Date(), "A data de nascimento não pode ser maior que a data atual")
       .min(new Date(1, 1, 1900), "A data de nascimento não pode ser menor que 01/01/1900")
-      .required('Required'),
+      .required('Obrigatório'),
+    cep: Yup.string()
+      .required('Obrigatório'),
+    logradouro: Yup.string()
+      .required('Obrigatório'),
+    cidade: Yup.string()
+      .required('Obrigatório'),
+    estado: Yup.string()
+      .required('Obrigatório'),
+    numero: Yup.string()
+      .required('Obrigatório'),
+    bairro: Yup.string()
+      .required('Obrigatório'),
+    bancoId: Yup.string()
+      .required('Obrigatório'),
   })
 
-  const  mutationCoordenador = useMutation( newCoordenador => postCoordenador(newCoordenador), {
+  const mutationCoordenador = useMutation(newCoordenador => postCoordenador(newCoordenador), {
     onSuccess: () => {
       router.push('/coordenadores')
 
     },
     onError: (error) => {
       console.log("Erro ao cadastrar novo coordenador", error);
-
+      let errorMessage = 'Ops! Houve um erro ao cadastrar o coordenador. Verifique os campos e tente novamente.';
+      setErrorMessage(errorMessage);
     }
   }
   );
@@ -103,9 +122,7 @@ const CoordenadorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
       <div className={style.container__ContainerForm}>
         <Formik
           initialValues={initialValues}
-
           validationSchema={validateSchema}
-
           onSubmit={(values, { setSubmitting }) => {
             mutationCoordenador.mutate(values)
             setSubmitting(false)
