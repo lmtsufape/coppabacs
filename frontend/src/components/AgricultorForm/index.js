@@ -71,10 +71,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
   const { status, mutate } = useMutation(
     async (values) => {
       const { sementes, ...rest } = values;
-      console.log("sementes: " + JSON.stringify(sementes));
-      console.log("rest: " + JSON.stringify(rest));
       const agricultor = await postAgricultor(rest);
-      console.log(agricultor);
       return addSementesAgricultor(agricultor.data.id, sementes);
     },
     {
@@ -121,7 +118,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => 
           initialValues={initialValues}
           validationSchema={validateSchema}
           onSubmit={(values, { setSubmitting }) => {
-            setErrorMessage("");
+          
             mutate(values);
             setSubmitting(false);
           }}

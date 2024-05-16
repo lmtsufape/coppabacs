@@ -34,6 +34,7 @@ public class UsuarioUpdateRequest {
 	private String sexo;
 	private ConjugeRequest conjuge;
 	private String imagem;
+	private String estadoCivil;
 
 	public Usuario convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

@@ -31,16 +31,27 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
   function bancoAtual(bancos, bancoId) {
     const targetId = String(bancoId);
     const banco = bancos.find(b => String(b.id) === targetId);
-  
+
     return banco ? banco.nome : 'Banco não encontrado';
   }
-  
+
+  const getEstadoCivil = (codigo) => {
+    const estadosCivis = {
+      0: 'Solteiro(a)',
+      1: 'Casado(a)',
+      2: 'Divorciado(a)',
+      3: 'Viúvo(a)'
+    };
+    return estadosCivis[codigo] || 'Não informado';
+  };
+
+
   const nomeBanco = bancoAtual(bancos, formik.values.bancoId);
-  
+
   return (
     <>
       <div className={style.container__header_title}>
-        <h1>Dados do Agricultor</h1>
+        <h1>Dados do Usuario</h1>
       </div>
 
       <div className={style.container__ContainerForm_form_threePartsContainer}>
@@ -122,6 +133,44 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 name="sexo"
                 placeholder="Não informado"
                 value={formik.values.sexo}
+                disabled
+              />
+            </div>
+
+            <div>
+              <label htmlFor="estadoCivil">Estado Civil</label>
+              <input
+                id="estadoCivil"
+                className={style.container__ContainerForm_form_input}
+                name="estadoCivil"
+                placeholder="Não informado"
+                value={getEstadoCivil(formik.values.estadoCivil)}
+                disabled
+              />
+            </div>
+
+
+
+            <div>
+              <label htmlFor="conjugeNome">Nome do Cônjuge</label>
+              <input
+                id="conjugeNome"
+                className={style.container__ContainerForm_form_input}
+                name="conjugeNome"
+                placeholder="Não informado"
+                value={formik.values.conjuge.nome}
+                disabled
+              />
+            </div>
+
+            <div>
+              <label htmlFor="sexoconjuge">Sexo do Cônjuge</label>
+              <input
+                id="sexoconjuge"
+                className={style.container__ContainerForm_form_input}
+                name="sexoconjuge"
+                placeholder="Não informado"
+                value={formik.values.conjuge.sexo}
                 disabled
               />
             </div>
@@ -253,6 +302,75 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 <span className={style.form__error}>{formik.errors.sexo}</span>
               ) : null}
             </div>
+
+            <div>
+              <label >Estado Civil</label>
+              <select
+                className={style.container__ContainerForm_form_halfContainer_input}
+                id="estadoCivil"
+                name="estadoCivil"
+                placeholder="Selecione..."
+                onChange={(e) => {
+                  formik.handleChange(e);
+                  formik.setFieldValue("estadoCivil", e.target.value);
+                }}
+                onBlur={formik.handleBlur}
+                value={formik.values.estadoCivil}
+                required
+              >
+                <option value="0">Solteiro(a)</option>
+                <option value="1">Casado(a)</option>
+                <option value="2">Divorciado(a)</option>
+                <option value="3">Viúvo(a)</option>
+              </select>
+              {formik.touched.estadoCivil && formik.errors.estadoCivil ? (
+                <span className={style.form__error}>{formik.errors.estadoCivil}</span>
+              ) : null}
+            </div>
+
+
+
+            <div>
+            <label >Nome do Cônjuge</label>
+          <input
+            className={style.container__ContainerForm_form_halfContainer_input}
+            id="conjugeNome"
+            name="conjuge.nome"
+            placeholder="Insira o nome do seu cônjuge"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.conjuge.nome}
+            required
+          />
+          {formik.touched['conjuge.nome'] && formik.errors['conjuge.nome'] ? (
+            <span className={style.form__error}>{formik.errors['conjuge.nome']}</span>
+          ) : null}
+            </div>
+
+
+
+            <div>
+              <label>Sexo do Cônjuge</label>
+              <select
+                className={style.container__ContainerForm_form_halfContainer_input}
+                id="conjugeSexo"
+                name="conjuge.sexo"
+                placeholder="Escolha o sexo do seu cônjuge"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.conjuge.sexo}
+                required
+              >
+                <option value="">Selecione...</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+              </select>
+              {formik.touched['conjuge.sexo'] && formik.errors['conjuge.sexo'] ? (
+                <span className={style.form__error}>{formik.errors['conjuge.sexo']}</span>
+              ) : null}
+            </div>
+
+
             {hrefAnterior !== "/funcionarios" && (
 
               <div>
@@ -281,9 +399,10 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
               </div>
             )}
           </>
-        )}
+        )
+        }
 
-      </div>
+      </div >
     </>
   )
 }

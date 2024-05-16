@@ -122,7 +122,7 @@ export default function DadosSementes({ formik, editar }) {
 
             </div>
             <div style={{ marginTop: '0' }} className={style.container__ContainerForm_form}>
-              <label htmlFor="Semente">Descricao</label>
+              <label htmlFor="Semente">Descrição</label>
               <textarea
                 className={style.container__ContainerForm_form_input}
                 placeholder="Não informado"
