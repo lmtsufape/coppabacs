@@ -30,9 +30,18 @@ public class PostService implements PostServiceInterface {
 		return repository.findById(id)
 				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist Post with id = " + id));
 	}
+	
+	public Post findVisiblePostById(long id) {
+		return repository.findByVisibilidadeTrueAndId(id)
+				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist visible Post with id = " + id));
+	}
 
 	public List<Post> getAllPost() {
 		return repository.findAll();
+	}
+	
+	public List<Post> getVisiblePost() {
+		return repository.findByVisibilidadeTrue();
 	}
 
 	public void deletePost(Post persistentObject) {
@@ -48,6 +57,10 @@ public class PostService implements PostServiceInterface {
 
 	public Page<Post> findPagePost(Pageable pageRequest) {
 		return repository.findAll(pageRequest);
+	}
+	
+	public Page<Post> findPageVisiblePost(Pageable pageRequest) {
+		return repository.findByVisibilidadeTrue(pageRequest);
 	}
 
 }

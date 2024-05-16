@@ -10,10 +10,13 @@ import br.edu.ufape.lmts.sementes.model.Post;
 public interface PostServiceInterface {
 	Post savePost(Post o);
 	Post findPostById(long id);
+	Post findVisiblePostById(long id);
 	Post updatePost(Post u);
 	void deletePost(Post u);
 	void deletePost(long id);
 	List<Post> getAllPost();
 	Page<Post> findPagePost(Pageable pageRequest);
+	List<Post> getVisiblePost();
+	Page<Post> findPageVisiblePost(Pageable pageRequest);
 
 }

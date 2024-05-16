@@ -13,8 +13,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper=false)
-@ToString
+@ToString(callSuper = true)
 public class Gerente extends Usuario {
 
 	@ManyToOne
@@ -23,10 +22,10 @@ public class Gerente extends Usuario {
 	private BancoSementes bancoSementes;
 
 	public Gerente(Long id, String nome, String nomePopular, String email, String senha, Endereco endereco, String cpf,
-			Date dataNascimento, String contato, String imagem, String sexo,
-			String estadoCivil,Conjuge conjuge, List<Post> posts) {
-		super(id, nome, nomePopular,email, senha, endereco, cpf, dataNascimento, contato, imagem, sexo,
-				estadoCivil,conjuge, posts);
+			Date dataNascimento, String contato, String imagem, String sexo, String estadoCivil, Conjuge conjuge,
+			List<Post> posts) {
+		super(id, nome, nomePopular, email, senha, endereco, cpf, dataNascimento, contato, imagem, sexo, estadoCivil,
+				conjuge, posts);
 		super.addRole(TipoUsuario.GERENTE);
 	}
 

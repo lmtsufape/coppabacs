@@ -2,11 +2,13 @@ package br.edu.ufape.lmts.sementes.facade;
 
 import java.io.File;
 import java.io.InputStream;
-import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.TabelaBancoSementesRequest;
+import br.edu.ufape.lmts.sementes.service.exception.AuthenticationException;
+import br.edu.ufape.lmts.sementes.service.exception.AuthorizationException;
 import br.edu.ufape.lmts.sementes.service.exception.CustomDatabaseException;
 import br.edu.ufape.lmts.sementes.service.exception.InvalidItemStateException;
 import jakarta.transaction.Transactional;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.auth.UserDetailsServiceImpl;
@@ -90,6 +93,9 @@ public class Facade {
 
 	@Autowired
 	private UserDetailsServiceImpl userDetailsServiceImpl;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	// sementeDoenca--------------------------------------------------------------
 	@Autowired
@@ -129,8 +135,8 @@ public class Facade {
 
 	public Usuario saveUsuario(Usuario newInstance) {
 		try {
+			newInstance.setSenha(passwordEncoder.encode(newInstance.getSenha()));
 			return usuarioService.saveUsuario(newInstance);
-
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao salvar o usuário", e);
 		}
@@ -138,6 +144,12 @@ public class Facade {
 	}
 
 	public Usuario updateUsuario(Usuario transientObject) {
+		if(transientObject.getSenha() != null) {
+			transientObject.setSenha(passwordEncoder.encode(transientObject.getSenha()));			
+		} else {
+			Usuario usuario = findUsuarioById(transientObject.getId());
+			transientObject.setSenha(usuario.getSenha());
+		}
 		return usuarioService.updateUsuario(transientObject);
 	}
 
@@ -163,6 +175,13 @@ public class Facade {
 
 	public void deleteUsuario(long id) {
 		usuarioService.deleteUsuario(id);
+	}
+	
+	public Usuario findLoggedUser() {
+		Usuario logged = findUsuarioByEmail(userDetailsServiceImpl.authenticated().getEmail());
+		if(logged == null)
+			throw new AuthenticationException("Usuário não autenticado");
+		return logged;
 	}
 
 	// Coppabacs--------------------------------------------------------------
@@ -402,15 +421,11 @@ public class Facade {
 			bancoSementes.addRetiradaUsuario(retiradaUsuario);
 			updateBancoSementes(bancoSementes);
 
-
 			return retiradaUsuario;
 		} catch (DataIntegrityViolationException e) {
 			throw new CustomDatabaseException("Erro ao salvar retirada de usuário", e);
 		}
 	}
-
-
-
 
 	public RetiradaUsuario updateRetiradaUsuario(RetiradaUsuario transientObject) {
 		return retiradaUsuarioService.updateRetiradaUsuario(transientObject);
@@ -750,13 +765,21 @@ public class Facade {
 	@Autowired
 	private PostServiceInterface postService;
 
-	public Post savePost(Long usuarioId, Post post) {
-		Usuario usuario = usuarioService.findUsuarioById(usuarioId);
-		post.setAutor(usuario);
-		return postService.savePost(post);
+	public Post savePost(Post post) {
+		post.setAutor(findLoggedUser());
+		if(!(post.getAutor().getRoles().contains(TipoUsuario.COPPABACS)
+				|| post.getAutor().getRoles().contains(TipoUsuario.ADMIN)))
+			throw new AuthorizationException("Usuário não autorizado.");
+		Post saved = postService.savePost(post);
+		post.getAutor().addPost(post);
+		usuarioService.updateUsuario(post.getAutor());
+		return saved;
 	}
 
 	public Post updatePost(Post transientObject) {
+		Usuario logged  = findLoggedUser();
+		if(!logged.equals(transientObject.getAutor()))
+			throw new AuthorizationException("Usuário não autorizado.");
 		return postService.updatePost(transientObject);
 	}
 
@@ -772,11 +795,34 @@ public class Facade {
 		return postService.findPagePost(pageRequest);
 	}
 
+	public Post findVisiblePostById(long id) {
+		return postService.findVisiblePostById(id);
+	}
+
+	public List<Post> getVisiblePost() {
+		return postService.getVisiblePost();
+	}
+
+	public Page<Post> findPageVisiblePost(Pageable pageRequest) {
+		return postService.findPageVisiblePost(pageRequest);
+	}
+	
 	public void deletePost(Post persistentObject) {
+		Usuario logged  = findLoggedUser();
+		if(!logged.equals(persistentObject.getAutor()))
+			throw new AuthorizationException("Usuário não autorizado.");
+		persistentObject.getAutor().removePost(persistentObject);
+		usuarioService.updateUsuario(persistentObject.getAutor());
 		postService.deletePost(persistentObject);
 	}
 
 	public void deletePost(long id) {
+		Post persistentObject = findPostById(id);
+		Usuario logged  = findLoggedUser();
+		if(!logged.equals(persistentObject.getAutor()))
+			throw new AuthorizationException("Usuário não autorizado.");
+		persistentObject.getAutor().removePost(persistentObject);
+		usuarioService.updateUsuario(persistentObject.getAutor());
 		postService.deletePost(id);
 	}
 
@@ -1364,7 +1410,7 @@ public class Facade {
 	}
 
 	public String storeFile(InputStream file, String fileName) {
-		Usuario logado = findUsuarioByEmail(userDetailsServiceImpl.authenticated().getEmail());
+		Usuario logado = findLoggedUser();
 		String fn = logado.getId() + "-" + System.currentTimeMillis() + "-" + fileName;
 		return fileService.storeFile(file, fn.replace(" ", ""));
 	}

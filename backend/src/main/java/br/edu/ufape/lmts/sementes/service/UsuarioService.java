@@ -20,26 +20,16 @@ public class UsuarioService implements UsuarioServiceInterface {
 	@Autowired
 	private UsuarioRepository repository;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-
 	@Transactional
 	public Usuario saveUsuario(Usuario usuario) throws EmailExistsException {
-
 		if(emailExists(usuario.getEmail())) {
 			throw new EmailExistsException( "Esse email já existe: " + usuario.getEmail());
 		}
-
-		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
-
 		return repository.save(usuario);
 	}
 
 	public Usuario updateUsuario(Usuario transientObject) {
 		findUsuarioById(transientObject.getId());
-		if(transientObject.getSenha() != null) {
-			transientObject.setSenha(passwordEncoder.encode(transientObject.getSenha()));			
-		}
 		return repository.save(transientObject);
 	}
 

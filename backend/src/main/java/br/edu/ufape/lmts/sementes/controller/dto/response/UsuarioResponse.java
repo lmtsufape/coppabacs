@@ -14,9 +14,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-
-@Getter @Setter @NoArgsConstructor @JsonPropertyOrder
+@Getter
+@Setter
+@NoArgsConstructor
+@JsonPropertyOrder
 public  class UsuarioResponse  {
 	private Long id;
 	private String nome;
