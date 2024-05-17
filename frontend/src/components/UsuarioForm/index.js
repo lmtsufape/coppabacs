@@ -127,8 +127,8 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
         {etapas === 1 && <h1 className={style.container__header_currentNav}>2. Dados do Endereço</h1>}
         {etapas != 1 && <h1 className={style.container__header_current}>2. Dados do Endereço</h1>}
 
-        {etapas === 2 && <h1 className={style.container__header_currentNav}>3. Atividades Rurais</h1>}
-        {etapas >= 0 && etapas < 2 && <h1 className={style.container__header_current}>3. Atividades Rurais</h1>}
+        {/* {etapas === 2 && <h1 className={style.container__header_currentNav}>3. Atividades Rurais</h1>}
+        {etapas >= 0 && etapas < 2 && <h1 className={style.container__header_current}>3. Atividades Rurais</h1>} */}
 
       </div>
 
@@ -156,7 +156,7 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
                 {etapas === 0 && <DadosForm formik={formik} />}
                 {etapas === 1 && <DadosEndereco formik={formik} />}
-                {etapas === 2 && <DadosAtividadesRurais formik={formik} />}
+                {/* {etapas === 2 && <DadosAtividadesRurais formik={formik} />} */}
                 {etapas === 0 && (
                   <div className={style.container__ContainerForm_buttons}>
                     <button type="button">
@@ -185,7 +185,7 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
                     </button>
                   </div>
                 )}
-                {etapas === 2 && (
+                {/* {etapas === 2 && (
                   <div className={style.container__ContainerForm_buttons}>
                     <button type="button" onClick={() => setEtapas(etapas - 1)}>
                       <Link href="#header" className={style.container__ContainerForm_buttons_link}>
@@ -196,7 +196,7 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
                         <h1>Finalizar</h1>
                     </button>
                   </div>
-                )}
+                )} */}
               </Form>
             )
           }
