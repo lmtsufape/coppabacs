@@ -6,11 +6,10 @@ const config: CapacitorConfig = {
   webDir: 'out',
   server: {
     androidScheme: "http",
-    hostname: '127.0.0.1',
-    url: "http://127.0.0.1:3000",
+    hostname: '192.168.0.121', // Atualize para o IP da sua máquina de desenvolvimento
+    url: "http://192.168.0.121:3000", // Certifique-se que o servidor está rodando e acessível nessa URL
+    allowNavigation: ["192.168.0.121"],
     cleartext: true,
-
-
   },
 };
 
