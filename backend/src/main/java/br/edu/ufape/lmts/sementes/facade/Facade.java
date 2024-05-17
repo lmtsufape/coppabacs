@@ -204,7 +204,9 @@ public class Facade {
 	public Coppabacs findCoppabacsById(long id) {
 		return coppabacsService.findCoppabacsById(id);
 	}
-	
+	public Coppabacs findCoppabacsByEmail(String email) {
+		return coppabacsService.findCoppabacsByEmail(email);
+	}
 	public Page<Coppabacs> findPageCoppabacs(Pageable pageRequest) {
 		return coppabacsService.findPageCoppabacs(pageRequest);
 	}
