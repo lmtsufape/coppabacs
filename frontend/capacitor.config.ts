@@ -6,9 +6,8 @@ const config: CapacitorConfig = {
   webDir: 'out',
   server: {
     androidScheme: "http",
-    hostname: '192.168.0.12',
-    url: "http://192.168.0.12:3000",
-    allowNavigation: ["192.168.0.12"],
+    hostname: '127.0.0.1',
+    url: "http://127.0.0.1:3000",
     cleartext: true,
 
 

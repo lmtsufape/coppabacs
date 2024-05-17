@@ -76,6 +76,15 @@ public class CoppabacsController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Coppabacs " + id + " not found.");
 		}
 	}
+
+	@GetMapping("coppabacs/e/{email}")
+	public CoppabacsResponse getCoopabacsByEmail(@PathVariable String email) {
+		try {
+			return new CoppabacsResponse(facade.findCoppabacsByEmail(email));
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Coppabacs " + email + " not found.");
+		}
+	}
 	
 	@PatchMapping("coppabacs/{id}")
 	public CoppabacsResponse updateCoppabacs(@PathVariable long id, @Valid @RequestBody CoppabacsUpdateRequest obj) {
