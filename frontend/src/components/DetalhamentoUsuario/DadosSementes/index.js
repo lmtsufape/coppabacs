@@ -78,7 +78,7 @@ export default function DadosSementes({ formik, editar }) {
   return (
     <>
       <div className={style.container__header_title}>
-        <h1>Produção sementes</h1>
+        <h1>Produção de Sementes</h1>
       </div>
       {editar === false ? (
 

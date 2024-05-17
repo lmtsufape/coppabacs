@@ -82,7 +82,7 @@ export default function ListCoordenadores({ diretorioAnterior, diretorioAtual, h
                   <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Novo Coordenador" width={27} height={24} />
                     <Link className={style.header__container_link} href="coordenadores/novoCoordenador">
                       <h1>
-                        Adicionar Novo(a) Coordenador(a)
+                        Adicionar Coordenador(a)
                       </h1>
                     </Link>
 

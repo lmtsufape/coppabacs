@@ -112,7 +112,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             </div>
 
             <div>
-              <label htmlFor="dataNascimento">Data de nascimento </label>
+              <label htmlFor="dataNascimento">Data de Nascimento </label>
               <input
                 id="dataNascimento"
                 className={style.container__ContainerForm_form_input}
@@ -176,7 +176,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             </div>
             {hrefAnterior !== "/funcionarios" && (
               <div>
-                <label htmlFor="bancoSementes">Banco sementes </label>
+                <label htmlFor="bancoSementes">Banco de Sementes</label>
                 <input
                   id="bancoSementes"
                   className={style.container__ContainerForm_form_input}
@@ -199,7 +199,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="nome"
                 name="nome"
-                placeholder="Insira seu nome"
+                placeholder="Insira o nome"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.nome}
@@ -213,7 +213,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="contato"
                 name="contato"
-                placeholder="Insira seu contato"
+                placeholder="Insira o contato"
                 onChange={(e) => {
                   formik.setFieldValue("contato", telefoneMask(e.target.value));
                 }}
@@ -232,7 +232,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="cpf"
                 name="cpf"
-                placeholder="Insira seu cpf"
+                placeholder="Insira o CPF"
                 onChange={(e) => {
                   formik.setFieldValue("cpf", cpfMask(e.target.value));
                 }}
@@ -252,7 +252,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="nomePopular"
                 name="nomePopular"
-                placeholder="Insira seu nome popular"
+                placeholder="Insira o nome popular"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.nomePopular}
@@ -288,7 +288,6 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
 
                 id="sexo"
                 name="sexo"
-                placeholder="Escolha seu sexo"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.sexo}
@@ -309,7 +308,6 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="estadoCivil"
                 name="estadoCivil"
-                placeholder="Selecione..."
                 onChange={(e) => {
                   formik.handleChange(e);
                   formik.setFieldValue("estadoCivil", e.target.value);
@@ -336,7 +334,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             className={style.container__ContainerForm_form_halfContainer_input}
             id="conjugeNome"
             name="conjuge.nome"
-            placeholder="Insira o nome do seu cônjuge"
+            placeholder="Insira o nome do cônjuge"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.conjuge.nome}
@@ -355,7 +353,6 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="conjugeSexo"
                 name="conjuge.sexo"
-                placeholder="Escolha o sexo do seu cônjuge"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.conjuge.sexo}
@@ -374,7 +371,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             {hrefAnterior !== "/funcionarios" && (
 
               <div>
-                <label htmlFor="bancoId">Banco sementes </label>
+                <label htmlFor="bancoId">Banco de Sementes</label>
                 <select
                   className={style.container__ContainerForm_form_halfContainer_select}
                   id="bancoId"

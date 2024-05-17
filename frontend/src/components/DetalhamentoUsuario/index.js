@@ -89,7 +89,8 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
 
   const mutationAprovacao = useMutation(() => validarAgricultor(usuario.id), {
     onSuccess: () => {
-      router.push(`${hrefAnterior}`);
+      window.location.href = '/agricultores/solicitacoes'
+      // router.push(`${hrefAnterior}`);
     },
     onError: (error) => {
       console.error('Erro ao aprovar usuário', error);
@@ -203,6 +204,7 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
                   hrefAnterior === "/agricultores/solicitacoes" ? (
                     <div className={style.container__profile}>
                       <button
+                      type="submit"
                         onClick={() => setEditar(true)}
                         className={style.container__profile_button}>
 
@@ -210,6 +212,7 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
                         <Image src="/assets/iconLapis.svg" alt="Recusar" width={25} height={25} />
                       </button >
                       <button
+                        type="submit"
                         onClick={() => mutationAprovacao.mutate(usuario.id)}
                         className={style.container__profile_button}>
 
