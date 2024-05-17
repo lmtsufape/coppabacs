@@ -29,6 +29,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
     email: '',
     nome: '',
     nomePopular: '',
+    funcao: '',
     contato: '',
     cpf: '',
     dataNascimento: '',
