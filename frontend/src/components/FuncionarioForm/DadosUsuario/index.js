@@ -5,7 +5,7 @@ import { useState } from "react";
 
 
 export default function DadosForm({ formik }) {
-  const [estadoCivil, setEstadoCivil] = useState(''); // Estado para controlar o estado civil
+  const [estadoCivil, setEstadoCivil] = useState(''); l
   return (
     <>
 
@@ -15,7 +15,7 @@ export default function DadosForm({ formik }) {
         id="email"
         name="email"
         type="email"
-        placeholder="Insira seu e-mail"
+        placeholder="Insira o e-mail"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.email}
@@ -30,7 +30,7 @@ export default function DadosForm({ formik }) {
         id="senha"
         name="senha"
         type="password"
-        placeholder="Insira sua senha"
+        placeholder="Insira a senha"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.senha}
@@ -39,13 +39,13 @@ export default function DadosForm({ formik }) {
         <span className={style.form__error}>{formik.errors.senha}</span>
       ) : null}
 
-      <label >Confirme sua senha <span>*</span></label>
+      <label >Confirme a senha <span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="confirmarSenha"
         name="confirmarSenha"
         type="password"
-        placeholder="Confirme sua senha"
+        placeholder="Confirme a senha"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.confirmarSenha}
@@ -59,7 +59,7 @@ export default function DadosForm({ formik }) {
         className={style.container__ContainerForm_form_input}
         id="nome"
         name="nome"
-        placeholder="Insira seu nome"
+        placeholder="Insira o nome"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.nome}
@@ -68,12 +68,12 @@ export default function DadosForm({ formik }) {
         <span className={style.form__error}>{formik.errors.nome}</span>
       ) : null}
 
-      <label >Apelido <span>*</span></label>
+      <label >Nome Popular<span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="nomePopular"
         name="nomePopular"
-        placeholder="Insira seu nome popular"
+        placeholder="Insira o nome popular"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.nomePopular}
@@ -82,12 +82,26 @@ export default function DadosForm({ formik }) {
         <span className={style.form__error}>{formik.errors.nomePopular}</span>
       ) : null}
 
+      <label >Função<span>*</span></label>
+      <input
+        className={style.container__ContainerForm_form_input}
+        id="funcao"
+        name="funcao"
+        placeholder="Insira a função do funcionário"
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.funcao}
+        required />
+      {formik.touched.funcao && formik.errors.funcao ? (
+        <span className={style.form__error}>{formik.errors.funcao}</span>
+      ) : null}
+
       <label >CPF <span>*</span></label>
       <input
         className={style.container__ContainerForm_form_halfContainer_input}
         id="cpf"
         name="cpf"
-        placeholder="Insira seu CPF"
+        placeholder="Insira o CPF"
         onChange={(e) => {
           formik.setFieldValue("cpf", cpfMask(e.target.value));
         }}
@@ -106,7 +120,7 @@ export default function DadosForm({ formik }) {
             className={style.container__ContainerForm_form_halfContainer_input}
             id="contato"
             name="contato"
-            placeholder="Insira seu contato"
+            placeholder="Insira o contato"
             onChange={(e) => {
               formik.setFieldValue("contato", telefoneMask(e.target.value));
             }}
@@ -126,7 +140,7 @@ export default function DadosForm({ formik }) {
             name="dataNascimento"
             type="date"
             format="dd/MM/yyyy"
-            placeholder="Insira sua data de nascimento"
+            placeholder="Insira a data de nascimento"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.dataNascimento}
@@ -146,7 +160,7 @@ export default function DadosForm({ formik }) {
             className={style.container__ContainerForm_form_halfContainer_input}
             id="sexo"
             name="sexo"
-            placeholder="Escolha seu sexo"
+            placeholder="Escolha o sexo"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.sexo}
@@ -195,7 +209,7 @@ export default function DadosForm({ formik }) {
             className={style.container__ContainerForm_form_halfContainer_input}
             id="conjugeNome"
             name="conjuge.nome"
-            placeholder="Insira o nome do seu cônjuge"
+            placeholder="Insira o nome do cônjuge"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.conjuge.nome}
@@ -210,7 +224,7 @@ export default function DadosForm({ formik }) {
             className={style.container__ContainerForm_form_halfContainer_input}
             id="conjugeSexo"
             name="conjuge.sexo"
-            placeholder="Escolha o sexo do seu cônjuge"
+            placeholder="Escolha o sexo do cônjuge"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.conjuge.sexo}
