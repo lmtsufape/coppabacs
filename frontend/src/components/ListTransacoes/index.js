@@ -442,33 +442,6 @@ const LayoutAdmin = ({ table1, table2, table3, table4, table5, diretorioAtual, d
         diretorioAtual={diretorioAtual}
         hrefAnterior={hrefAnterior}
       />
-      <div className={style.header}>
-        <div className={style.header__container}>
-
-          <button>
-            {diretorioAtual === "Doações" ? (
-              <Link className={style.header__container_link} href="doacoes/novaDoacao">
-                <h1>
-                  Adicionar Doação
-                </h1>
-              </Link>
-            ) : (
-              <Link className={style.header__container_link} href="retiradas/novaRetirada">
-                <h1>
-                  Adicionar Retirada
-                </h1>
-              </Link>
-            )}
-
-
-            <Image src="/assets/iconAddTransacao.svg" alt="Adicionar Agricultor" width={27} height={24} />
-          </button>
-          <div className={style.header__container_buttons}>
-
-          </div>
-
-        </div>
-      </div>
 
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       {listTransacoes && (
