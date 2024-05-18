@@ -129,7 +129,7 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
         table3="Semente"
         table4="Variedade"
         table5="Ações"
-        backDetalhamento={handleBackToBank}
+        transacaoBanco={handleBackToBank}
         bancoId={banco.id}
       />
     )
@@ -146,7 +146,7 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
         table3="Semente"
         table4="Variedade"
         table5="Ações"
-        backDetalhamento={handleBackToBank}
+        transacaoBanco={handleBackToBank}
         bancoId={banco.id}
       />
     )

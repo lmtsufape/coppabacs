@@ -49,10 +49,9 @@ export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, h
       }
     } else {
       return <LayoutPublic
-
-        diretorioAnterior={diretorioAnterior}
+        diretorioAnterior="Público  / "
         diretorioAtual={diretorioAtual}
-        hrefAnterior={hrefAnterior}
+        hrefAnterior="/public"
         table1={table1}
         table2={table2}
         table3={table3}

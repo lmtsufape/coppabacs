@@ -20,8 +20,9 @@ import { getAllDoacoes } from "@/api/transacoes/doacoes/getAllDoacoes";
 import { getAllRetiradas } from "@/api/transacoes/retiradas/getAllRetiradas";
 import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
 import DetalhamentoDoacao from "../DetalhamentoDoacao";
+import HeaderDetalhamento from "../HeaderDetalhamento";
 
-export default function ListTransacoes({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5, backDetalhamento, bancoId }) {
+export default function ListTransacoes({ diretorioAnterior, diretorioAtual, hrefAnterior, transacaoBanco, table1, table2, table3, table4, table5, backDetalhamento, bancoId }) {
 
   const [role, setRole] = useState(getStorageItem("userRole"));
   const [banco, setBanco] = useState(null);
@@ -37,7 +38,7 @@ export default function ListTransacoes({ diretorioAnterior, diretorioAtual, href
         diretorioAtual={diretorioAtual}
         diretorioAnterior={diretorioAnterior}
         hrefAnterior={hrefAnterior}
-        backDetalhamento={backDetalhamento}
+        transacaoBanco={transacaoBanco}
         bancoId={bancoId}
       />
     } else if (role == "ROLE_GERENTE") {
@@ -361,7 +362,7 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAt
   )
 }
 
-const LayoutAdmin = ({ table1, table2, table3, table4, table5, diretorioAtual, diretorioAnterior, hrefAnterior, backDetalhamento, bancoId }) => {
+const LayoutAdmin = ({ table1, table2, table3, table4, table5, transacaoBanco, diretorioAtual, diretorioAnterior, hrefAnterior, backDetalhamento, bancoId }) => {
 
   const [transacao, setTransacao] = useState([]);
 
@@ -431,16 +432,16 @@ const LayoutAdmin = ({ table1, table2, table3, table4, table5, diretorioAtual, d
       diretorioAtual={dirAtual}
       hrefAnterior="/doacoes"
       doacao={selectTransacao}
-      backDetalhamento={handleBackList}
+      backDetalhamento={transacaoBanco}
       hrefAtual={hrefAtual}
     />
   }
   return (
     <div>
-      <Header
+      <HeaderDetalhamento
         diretorioAnterior={diretorioAnterior}
         diretorioAtual={diretorioAtual}
-        hrefAnterior={hrefAnterior}
+        hrefAnterior={transacaoBanco}
       />
 
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
