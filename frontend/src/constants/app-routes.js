@@ -21,7 +21,8 @@ export const APP_ROUTES = {
     novoUsuario: '/novoUsuario',
     login: '/login',
     sementes: '/sementes',
-    bancoSementes: '/bancoSementes'
+    bancoSementes: '/bancoSementes',
+    public: '/public'
     
   },
 }
