@@ -51,7 +51,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
   return (
     <>
       <div className={style.container__header_title}>
-        <h1>Dados do Usuario</h1>
+        <h1>Dados do Usuário</h1>
       </div>
 
       <div className={style.container__ContainerForm_form_threePartsContainer}>

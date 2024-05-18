@@ -42,7 +42,7 @@ export default function DadosBanco({ formik }) {
             className={style.container__ContainerForm_form_halfContainer_input}
             id="contato"
             name="contato"
-            placeholder="Insira seu contato"
+            placeholder="Insira o contato"
             onChange={(e) => {
               formik.setFieldValue("contato", telefoneMask(e.target.value));
             }}

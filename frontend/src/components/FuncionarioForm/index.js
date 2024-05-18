@@ -1,13 +1,10 @@
 "use client"
 
 import { useMutation } from "react-query";
-
 import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import * as Yup from 'yup';
-
 import style from "./agricultorForm.module.scss";
-
 import HeaderNavegacao from "../HeaderNavegacao";
 import DadosForm from "./DadosUsuario/index";
 import DadosEndereco from "./DadosEndereco";
@@ -24,6 +21,7 @@ const FuncionarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
     confirmarSenha: "",
     nome: "",
     nomePopular: "",
+    funcao: "",
     contato: "",
     cpf: "",
     dataNascimento: "",

@@ -177,7 +177,9 @@ export default function DadosEndereco({ formik }) {
           ) : null}
         </div>
       </div>
-      <div>
+
+      {/* O funcionário é vinculado a coperativa, então ele não precisa estár vinculado a um banco - aguardando confirmação */}
+      {/* <div>
         <label htmlFor="bancoId">Banco de sementes <span>*</span></label>
         <select
           className={style.container__ContainerForm_form_halfContainer_input}
@@ -197,7 +199,7 @@ export default function DadosEndereco({ formik }) {
         {formik.touched.bancoId && formik.errors.bancoId ? (
           <span className={style.form__error}>{formik.errors.bancoId}</span>
         ) : null}
-      </div>
+      </div> */}
     </>
   );
 }

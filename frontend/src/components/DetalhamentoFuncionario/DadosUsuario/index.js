@@ -23,7 +23,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
       setBancos(res.data);
     },
     onError: (error) => {
-      console.log("Erro ao recuperar os bancos de sementes",error)
+      console.log("Erro ao recuperar os bancos de sementes", error)
     }
   }
   );
@@ -93,6 +93,18 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 className={style.container__ContainerForm_form_input}
                 name="nomePopular"
                 placeholder="Não informado"
+                value={formik.values.nomePopular}
+                disabled
+              />
+            </div>
+
+            <div>
+              <label htmlFor="funcao">Função</label>
+              <input
+                id="funcao"
+                className={style.container__ContainerForm_form_input}
+                name="funcao"
+                placeholder="Insira a função do funcionário"
                 value={formik.values.nomePopular}
                 disabled
               />
@@ -281,7 +293,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
           </>
         )}
 
-      </div>
+      </div >
     </>
   )
 }
