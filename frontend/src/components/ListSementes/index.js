@@ -69,9 +69,9 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
         table4={table4}
         table5={table5}
         table6={table6}
-        diretorioAnterior={diretorioAnterior}
+        diretorioAnterior="Público / "
         diretorioAtual={diretorioAtual}
-        hrefAnterior={hrefAnterior} />
+        hrefAnterior="/public" />
     }
 
   }
