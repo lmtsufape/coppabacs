@@ -1,0 +1,40 @@
+.list_header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+}
+
+.container{
+    margin-top: 2em;
+    margin-bottom: 1em;
+
+    &__cards{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            margin: auto;
+            padding: -10em;
+    }
+}
+
+@media all and (max-width: 700px) {
+    .list_header {
+        margin-bottom: 0;
+    }
+
+    .container {
+        // estilos para telas menores que 700px
+    }
+}
+
+@media all and (max-width: 500px) {
+    .list_header {
+        // estilos para telas menores que 500px
+    }
+
+    .container {
+        // estilos para telas menores que 500px
+    }
+}
