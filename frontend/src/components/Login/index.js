@@ -12,6 +12,7 @@ import { getCurrentUser } from "@/api/usuarios/getCurrentUser";
 import style from "./login.module.scss";
 import Link from "next/link";
 import api from "@/api/http-common";
+import Image from "next/image";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -58,13 +59,7 @@ const Login = () => {
     return (
       <div>
         <div className={style.login}>
-          <div className={style.login__content}>
-            <h1 className={style.login__content_title}>Sementes Crioulas</h1>
-            <p className={style.login__content_subtitle}>O Sementes Crioulas é uma plataforma desenvolvida pela Universidade Federal do Agreste de Pernambuco por meio do Laboratório
-            Multidisciplinar de Tecnologias Sociais (LMTS), em parceria com a Cooperativa de Pequenos Produtores
-            Agrícolas dos Bancos Comunitários de Sementes (COPPABACS), tendo como objetivo, auxiliar a eficiência da gestão da cooperativa. A ferramenta visa contribuir no processo de gestão
-            das sementes, dos agricultores e dos bancos de sementes.</p>
-          </div>
+
           <div className={style.login__login}>
           <form onSubmit={(e) => { e.preventDefault(); mutate(); }}>
               <h1 className={style.login__login_title}>Entrar</h1>
