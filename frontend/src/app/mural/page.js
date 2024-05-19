@@ -6,12 +6,11 @@ export default function muralPage() {
     return (
         <div>
             <Mural
-                diretorioAnterior="Home  "
-                diretorioAtual="/ Mural"
-                hrefAnterior="/ inicio" />
-                {
-            //<Footer />
-                }
+                diretorioAnterior="Home / "
+                diretorioAtual="Mural"
+                hrefAnterior="/public"
+            />
+
         </div>
     )
 }
