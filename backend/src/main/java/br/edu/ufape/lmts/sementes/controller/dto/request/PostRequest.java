@@ -1,6 +1,7 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
 import java.util.Date;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 
@@ -18,7 +19,7 @@ public class PostRequest {
 	private boolean visibilidade;
 	private String categoria;
 	private String titulo;
-	private String imagem;
+	private List<String> imagem;
 
 	public Post convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

@@ -7,13 +7,35 @@ import { useEffect, useState } from "react";
 import { getStorageItem } from "@/utils/localStore";
 import HeaderNavegacao from '../HeaderNavegacao';
 import { getAllPublicacoes } from '@/api/mural/getAllPublicacoes';
+import { getArquivo } from '@/api/arquivos/getArquivo';
 import { useMutation } from 'react-query';
+import { getCoordenadorEmail } from '@/api/usuarios/coordenador/getCoordenadorEmail';
+
+function parseDate(dateString) {
+    const [datePart, timePart] = dateString.split(' ');
+    const [day, month, year] = datePart.split('-').map(Number);
+    const [hours, minutes, seconds] = timePart.split(':').map(Number);
+    return new Date(year, month - 1, day, hours, minutes, seconds);
+}
 
 export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior }) {
     const [role, setRole] = useState(getStorageItem("userRole"));
     const [publicacoes, setPublicacoes] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [minhasPublicacoes, setMinhasPublicacoes] = useState(false);
+    const [filteredPublicacoes, setFilteredPublicacoes] = useState([]);
+    const [imageUrls, setImageUrls] = useState({});
+    const [usuario, setUsuario] = useState([]);
+
+    const mutationGetFuncionario = useMutation(funcionarioEmail => getCoordenadorEmail(funcionarioEmail), {
+        onSuccess: (res) => {
+            setUsuario(res.data);
+            console.log("Usuário:", res.data);
+        },
+        onError: (error) => {
+            console.error('Erro ao recuperar as informações do coordenador:', error);
+        }
+    });
 
     const { status, mutate } = useMutation(
         async () => {
@@ -28,14 +50,36 @@ export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior 
     });
 
     useEffect(() => {
+        if(role === "ROLE_COPPABACS") {
+            const funcionarioEmail = getStorageItem("userLogin");
+            mutationGetFuncionario.mutate(funcionarioEmail);
+        }
         mutate();
     }, []);
 
-    const filteredPublicacoes = minhasPublicacoes
-        ? publicacoes.filter(publicacao => publicacao.autor.id === funcionario.id)
-        : publicacoes;
+    useEffect(() => {
+        const filtered = (minhasPublicacoes && usuario && role === "ROLE_COPPABACS")
+            ? publicacoes.filter(publicacao => publicacao.autor.id === usuario.id)
+            : publicacoes;
 
-    const sortedPublicacoes = filteredPublicacoes.sort((a, b) => new Date(a.data) - new Date(b.data));
+        const sorted = filtered.sort((a, b) => parseDate(b.data) - parseDate(a.data));
+        setFilteredPublicacoes(sorted);
+
+        const dates = sorted.map(publicacao => parseDate(publicacao.data));
+        console.log("Datas das publicações filtradas:", dates);
+        console.log("Publicações ordenadas:", sorted);
+    }, [publicacoes, minhasPublicacoes, usuario]);
+
+    useEffect(() => {
+        filteredPublicacoes.forEach(publicacao => {
+            if (publicacao.imagem.length > 0) {
+                const img = publicacao.imagem[0];
+                getArquivo(img).then(url => {
+                    setImageUrls(prev => ({ ...prev, [img]: url }));
+                });
+            }
+        });
+    }, [filteredPublicacoes]);
 
     return (
         <div className={style.tela_mural}>
@@ -53,24 +97,38 @@ export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior 
                         </Link>
                         <Image src="/assets/iconPostagem.svg" alt="Visualizar" width={27} height={26} />
                     </button>
-                    <button className={style.botao__criarNovaPostagem} onClick={() => setMinhasPublicacoes(true)}>
-                        <div className={style.list_header__title_criar_link}>
+                    <button
+                        className={`${minhasPublicacoes ? style.botao__minhasPublicacoes : style.botao__criarNovaPostagem}`}
+                        onClick={() => setMinhasPublicacoes(!minhasPublicacoes)}
+                    >
+                        <div className={`${minhasPublicacoes ? style.list_header__title_criar_link_minhasPublicacoes : style.list_header__title_criar_link}`
+                            }>
                             <h1>Minhas publicações</h1>
                         </div>
-                        <Image src="/assets/IconMinhasPublicacoes.svg" alt="Visualizar" width={27} height={26} />
+                        <Image src={`${minhasPublicacoes ? "/assets/IconMinhasPublicacoesVerde.svg" : "/assets/IconMinhasPublicacoes.svg"}`} alt="Visualizar" width={27} height={26} />
                     </button>
+
                 </div>
             )}
 
-            {sortedPublicacoes.map((publicacao, index) => (
+            {filteredPublicacoes.map((publicacao, index) => (
                 <div key={index}>
                     <section className={style.card_publicacao}>
                         <div className={style.card_publicacao__descricao}>
                             <h2>{publicacao.titulo}</h2>
                             <p className={style.descricao}>{publicacao.texto}</p>
-                            <p className={style.date}>{new Date(publicacao.data).toLocaleDateString()}</p>
+                            <p className={style.date}>{parseDate(publicacao.data).toLocaleString()}</p>
                         </div>
-                        <Image className={style.card_publicacao__image} src="/assets/muralWalle.svg" alt="Visualizar" width={343} height={207} />
+                        <div className={style.card_publicacao__imagens}>
+                            {publicacao.imagem.length > 0 && (
+                                <Image
+                                    src={imageUrls[publicacao.imagem[0]] || '/assets/muralWalle.svg'}
+                                    alt={`Imagem 1`}
+                                    width={343}
+                                    height={207}
+                                />
+                            )}
+                        </div>
                     </section>
                 </div>
             ))}

@@ -768,15 +768,18 @@ public class Facade {
 	private PostServiceInterface postService;
 
 	public Post savePost(Post post) {
-		post.setAutor(findLoggedUser());
-		if(!(post.getAutor().getRoles().contains(TipoUsuario.COPPABACS)
-				|| post.getAutor().getRoles().contains(TipoUsuario.ADMIN)))
+		Usuario autor = findLoggedUser();
+		if(!(autor.getRoles().contains(TipoUsuario.COPPABACS)
+				|| autor.getRoles().contains(TipoUsuario.ADMIN))) {
 			throw new AuthorizationException("Usuário não autorizado.");
+		}
+		post.setAutor(autor);
 		Post saved = postService.savePost(post);
-		post.getAutor().addPost(post);
-		usuarioService.updateUsuario(post.getAutor());
+		autor.addPost(saved);
+		usuarioService.updateUsuario(autor);
 		return saved;
 	}
+
 
 	public Post updatePost(Post transientObject) {
 		Usuario logged  = findLoggedUser();

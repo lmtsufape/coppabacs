@@ -1,6 +1,8 @@
 package br.edu.ufape.lmts.sementes.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -33,6 +35,6 @@ public class Post {
 	private boolean visibilidade;
 	private String categoria;
 	private String titulo;
-	private String imagem;
+	private List<String> imagem  = new ArrayList<>();
 	private Date data;
 }

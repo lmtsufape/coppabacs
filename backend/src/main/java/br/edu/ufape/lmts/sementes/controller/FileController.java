@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StreamUtils;
@@ -24,7 +25,7 @@ import br.edu.ufape.lmts.sementes.facade.Facade;
 import io.swagger.v3.oas.annotations.Hidden;
 
 @CrossOrigin(origins = "http://localhost:8081/")
-@Hidden
+
 @RestController
 @RequestMapping("/api/v1/")
 public class FileController {
@@ -32,24 +33,40 @@ public class FileController {
 	private Facade facade;
 
 	@GetMapping(value = "arquivos/{filename}", produces = MediaType.ALL_VALUE)
-	public ResponseEntity<byte[]> getFile(@PathVariable String filename) throws IOException {
-		File file = facade.findFile(filename);
-		byte[] bytes = StreamUtils.copyToByteArray(new FileInputStream(file));
-		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(bytes);
-
+	public ResponseEntity<byte[]> getFile(@PathVariable String filename) {
+		File file;
+		try {
+			file = facade.findFile(filename);
+			try (FileInputStream fileInputStream = new FileInputStream(file)) {
+				byte[] bytes = StreamUtils.copyToByteArray(fileInputStream);
+				return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(bytes);
+			}
+		} catch (IOException e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 
 	@PostMapping("arquivos")
-	public List<String> storageFile(@RequestParam(name = "file") List<MultipartFile> files) throws IOException {
+	public ResponseEntity<List<String>> storageFile(@RequestParam(name = "file") List<MultipartFile> files) {
 		List<String> filenames = new ArrayList<>();
-		for (MultipartFile file : files) {
-			filenames.add(facade.storeFile(file.getInputStream(), file.getOriginalFilename()));
+		try {
+			for (MultipartFile file : files) {
+				String filename = facade.storeFile(file.getInputStream(), file.getOriginalFilename());
+				filenames.add(filename);
+			}
+			return ResponseEntity.ok(filenames);
+		} catch (IOException e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
-		return filenames;
 	}
 
 	@DeleteMapping("arquivos/{filename}")
-	public void deleteFile(@PathVariable String filename) {
-		facade.deleteFile(filename);
+	public ResponseEntity<Void> deleteFile(@PathVariable String filename) {
+		try {
+			facade.deleteFile(filename);
+			return ResponseEntity.noContent().build();
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 }

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,7 +40,7 @@ public class PostController {
 	private ModelMapper modelMapper;
 
 	@GetMapping("post")
-	@PreAuthorize("hasRole('ADMIN') or hasRole('COPPABACS')")
+	@PreAuthorize("permitAll()")
 	public List<PostResponse> getAllPost() {
 		return facade.getAllPost().stream().map(PostResponse::new).toList();
 	}
@@ -50,7 +51,7 @@ public class PostController {
 	}
 
 	@GetMapping(value = "post/page")
-	@PreAuthorize("hasRole('ADMIN') or hasRole('COPPABACS')")
+	@PreAuthorize("permitAll()")
 	public Page<PostResponse> getPagePost(@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
 			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
