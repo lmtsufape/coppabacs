@@ -98,7 +98,7 @@ export default function ListFuncionarios({ diretorioAnterior, diretorioAtual, hr
 
               <Link className={style.header__container_link} href="funcionarios/novoFuncionario">
                 <h1>
-                  Adicionar Funcionário(a)
+                  Adicionar Colaborador(a)
                 </h1>
               </Link>
 

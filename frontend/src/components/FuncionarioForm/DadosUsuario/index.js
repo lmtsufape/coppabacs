@@ -5,11 +5,11 @@ import { useState } from "react";
 
 
 export default function DadosForm({ formik }) {
-  const [estadoCivil, setEstadoCivil] = useState(''); l
+  const [estadoCivil, setEstadoCivil] = useState('');
   return (
     <>
 
-      <label >E-mail <span>*</span></label>
+      <label >E-mail<span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="email"
@@ -24,7 +24,7 @@ export default function DadosForm({ formik }) {
         <span className={style.form__error}>{formik.errors.email}</span>
       ) : null}
 
-      <label >Senha <span>*</span></label>
+      <label >Senha<span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="senha"
@@ -39,7 +39,7 @@ export default function DadosForm({ formik }) {
         <span className={style.form__error}>{formik.errors.senha}</span>
       ) : null}
 
-      <label >Confirme a senha <span>*</span></label>
+      <label >Confirme a Senha<span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="confirmarSenha"
@@ -54,7 +54,7 @@ export default function DadosForm({ formik }) {
         <span className={style.form__error}>{formik.errors.confirmarSenha}</span>
       ) : null}
 
-      <label >Nome <span>*</span></label>
+      <label >Nome<span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="nome"
@@ -87,7 +87,7 @@ export default function DadosForm({ formik }) {
         className={style.container__ContainerForm_form_input}
         id="funcao"
         name="funcao"
-        placeholder="Insira a função do funcionário"
+        placeholder="Insira a função do colaborador(a)"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.funcao}
@@ -96,7 +96,7 @@ export default function DadosForm({ formik }) {
         <span className={style.form__error}>{formik.errors.funcao}</span>
       ) : null}
 
-      <label >CPF <span>*</span></label>
+      <label >CPF<span>*</span></label>
       <input
         className={style.container__ContainerForm_form_halfContainer_input}
         id="cpf"
@@ -115,7 +115,7 @@ export default function DadosForm({ formik }) {
       <div className={style.container__ContainerForm_form_halfContainer}>
 
         <div>
-          <label >Telefone <span>*</span></label>
+          <label >Telefone<span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="contato"
@@ -133,7 +133,7 @@ export default function DadosForm({ formik }) {
         </div>
 
         <div>
-          <label >Data de Nascimento <span>*</span></label>
+          <label >Data de Nascimento<span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="dataNascimento"
@@ -155,7 +155,7 @@ export default function DadosForm({ formik }) {
       <div className={style.container__ContainerForm_form_halfContainer}>
 
         <div>
-          <label >Sexo <span>*</span></label>
+          <label >Sexo<span>*</span></label>
           <select
             className={style.container__ContainerForm_form_halfContainer_input}
             id="sexo"
@@ -176,7 +176,7 @@ export default function DadosForm({ formik }) {
         </div>
 
         <div>
-          <label >Estado Civil <span>*</span></label>
+          <label >Estado Civil<span>*</span></label>
           <select
             className={style.container__ContainerForm_form_halfContainer_input}
             id="estadoCivil"
@@ -204,7 +204,7 @@ export default function DadosForm({ formik }) {
 
       {estadoCivil === '1' && (
         <div>
-          <label >Nome do Cônjuge <span>*</span></label>
+          <label >Nome do Cônjuge<span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="conjugeNome"
@@ -219,7 +219,7 @@ export default function DadosForm({ formik }) {
             <span className={style.form__error}>{formik.errors['conjuge.nome']}</span>
           ) : null}
 
-          <label>Sexo do Cônjuge <span>*</span></label>
+          <label>Sexo do Cônjuge<span>*</span></label>
           <select
             className={style.container__ContainerForm_form_halfContainer_input}
             id="conjugeSexo"

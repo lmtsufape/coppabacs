@@ -67,7 +67,7 @@ export default function DadosSementesForm({ formik }) {
             <br />
             <div className={styles.sidedForm}>
                 <div>
-                    <label htmlFor="responsavelTecnico.nome">Responsável Técnico pelo Cadastro <span>*</span></label>
+                    <label htmlFor="responsavelTecnico.nome">Responsável Técnico pelo Cadastro<span>*</span></label>
                     <input
                         className={styles.sidedForm_input}
                         id="nome"
@@ -82,7 +82,7 @@ export default function DadosSementesForm({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="responsavelTecnico.cpf">CPF <span>*</span></label>
+                    <label htmlFor="responsavelTecnico.cpf">CPF<span>*</span></label>
                     <input
                         className={styles.sidedForm_input}
                         id="cpf"
@@ -135,7 +135,7 @@ export default function DadosSementesForm({ formik }) {
                 <br />
                 <div className={styles.sidedForm}>
                     <div>
-                        <label htmlFor="cultura.cultura">Cultura <span>*</span></label>
+                        <label htmlFor="cultura.cultura">Cultura<span>*</span></label>
                         <input
                             className={styles.sidedForm_input}
                             id="cultura"
@@ -150,7 +150,7 @@ export default function DadosSementesForm({ formik }) {
                         ) : null}
                     </div>
                     <div>
-                        <label htmlFor="cultura.genero">Gênero <span>*</span></label>
+                        <label htmlFor="cultura.genero">Gênero<span>*</span></label>
                         <input
                             className={styles.sidedForm_input}
                             id="genero"
@@ -167,7 +167,7 @@ export default function DadosSementesForm({ formik }) {
                         ) : null}
                     </div>
                     <div>
-                        <label htmlFor="nome">Nome da Cultivar <span>*</span></label>
+                        <label htmlFor="nome">Nome da Cultivar<span>*</span></label>
                         <input
                             className={styles.sidedForm_input}
                             id="nome"
@@ -184,7 +184,7 @@ export default function DadosSementesForm({ formik }) {
                     </div>
                 </div>
                 <div className={styles.checkbox}>
-                    <label htmlFor="finalidades" className={styles.checkbox__label}>Finalidade <span>*</span></label>
+                    <label htmlFor="finalidades" className={styles.checkbox__label}>Finalidade<span>*</span></label>
                     <div className={styles.checkbox__itens}>
                         {finalidades.map((finalidade) => (
                             <div key={finalidade.name}>
@@ -215,7 +215,7 @@ export default function DadosSementesForm({ formik }) {
             <div>
                 <div className={styles.sidedForm}>
                     <div className={styles.radio}>
-                        <label htmlFor="dominioPublico">Cultivar de Domínio Público <span>*</span></label>
+                        <label htmlFor="dominioPublico">Cultivar de Domínio Público<span>*</span></label>
                         <div className={styles.radio__itens}>
                             <input
                                 type="radio"
@@ -239,7 +239,7 @@ export default function DadosSementesForm({ formik }) {
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="polinizaacaoAbertaMelhorada">Cultivar de Polinização Aberta Melhorada <span>*</span></label>
+                        <label htmlFor="polinizaacaoAbertaMelhorada">Cultivar de Polinização Aberta Melhorada<span>*</span></label>
                         <div className={styles.radio__itens}>
                             <input
                                 type="radio"
@@ -265,7 +265,7 @@ export default function DadosSementesForm({ formik }) {
                 </div>
                 <div className={styles.sidedForm}>
                     <div>
-                        <label htmlFor="nomePopular">Nome Popular da Cultivar <span>*</span></label>
+                        <label htmlFor="nomePopular">Nome Popular da Cultivar<span>*</span></label>
                         <input
                             className={styles.sidedForm_input}
                             id="nomePopular"
@@ -281,7 +281,7 @@ export default function DadosSementesForm({ formik }) {
 
                     </div>
                     <div>
-                        <label htmlFor="regioesAdaptacaoCultivo">Região de Adaptação da Cultivar <span>*</span></label>
+                        <label htmlFor="regioesAdaptacaoCultivo">Região de Adaptação da Cultivar<span>*</span></label>
                         <input
                             className={styles.sidedForm_input}
                             id="regioesAdaptacaoCultivo"

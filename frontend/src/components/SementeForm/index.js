@@ -191,14 +191,14 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       />
 
       <div className={styles.container__header}>
-        {etapas === 0 && <h1 className={styles.container__header_currentNav}>1. Dados da semente</h1>}
+        {etapas === 0 && <h1 className={styles.container__header_currentNav}>1. Dados da Semente</h1>}
         {etapas >= 1 && etapas <= 2 && <h1 className={styles.container__header_current}>1. Dados da Semente</h1>}
 
-        {etapas === 1 && <h1 className={styles.container__header_currentNav}>2. Dados da semente</h1>}
-        {etapas != 1 && <h1 className={styles.container__header_current}>2. Dados da semente</h1>}
+        {etapas === 1 && <h1 className={styles.container__header_currentNav}>2. Dados da Semente</h1>}
+        {etapas != 1 && <h1 className={styles.container__header_current}>2. Dados da Semente</h1>}
 
-        {etapas === 2 && <h1 className={styles.container__header_currentNav}>3. Dados da semente</h1>}
-        {etapas >= 0 && etapas < 2 && <h1 className={styles.container__header_current}>3. Dados da semente</h1>}
+        {etapas === 2 && <h1 className={styles.container__header_currentNav}>3. Dados da Semente</h1>}
+        {etapas >= 0 && etapas < 2 && <h1 className={styles.container__header_current}>3. Dados da Semente</h1>}
 
       </div>
 

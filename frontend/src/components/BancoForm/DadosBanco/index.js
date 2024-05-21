@@ -6,7 +6,7 @@ import { cpfMask } from "@/utils/Masks/cpfMask";
 export default function DadosBanco({ formik }) {
   return (
     <>
-      <label htmlFor="nome">Nome do Banco <span>*</span></label>
+      <label htmlFor="nome">Nome do Banco<span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="nome"
@@ -21,7 +21,7 @@ export default function DadosBanco({ formik }) {
       ) : null}
       <div className={style.container__ContainerForm_form_halfContainer}>
         <div>
-          <label htmlFor="responsavel">Responsável <span>*</span></label>
+          <label htmlFor="responsavel">Responsável<span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="responsavel"
@@ -37,7 +37,7 @@ export default function DadosBanco({ formik }) {
 
         </div>
         <div>
-          <label htmlFor="contato">Telefone <span>*</span></label>
+          <label htmlFor="contato">Telefone<span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="contato"
@@ -55,7 +55,7 @@ export default function DadosBanco({ formik }) {
 
         </div>
         <div>
-          <label htmlFor="comunidade">Comunidade <span>*</span></label>
+          <label htmlFor="comunidade">Comunidade<span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="comunidade"
@@ -71,7 +71,7 @@ export default function DadosBanco({ formik }) {
 
         </div>
         <div>
-          <label htmlFor="anoFundacao">Data da Fundação <span>*</span></label>
+          <label htmlFor="anoFundacao">Data da Fundação<span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="anoFundacao"
@@ -89,7 +89,7 @@ export default function DadosBanco({ formik }) {
 
         </div>
       </div>
-      <label htmlFor="historiaBanco">História do Banco <span>*</span></label>
+      <label htmlFor="historiaBanco">História do Banco<span>*</span></label>
       <textarea
         className={style.container__ContainerForm_form_input}
         id="historiaBanco"
