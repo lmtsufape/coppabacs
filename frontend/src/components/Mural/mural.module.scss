@@ -70,6 +70,22 @@
     margin-bottom: 2%;
 }
 
+.botao__minhasPublicacoes {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 1em;
+    font-weight: bold;
+    color: #245501;
+    background-color: white;
+    border: 1px solid #245501;
+    border-radius: 1em;
+    transition: all 0.3s ease;
+    &:hover{
+        box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);
+      }
+}
+
 .botao__criarNovaPostagem{
     display: flex;
     align-items: center;
@@ -87,6 +103,8 @@
 
 }
 
+
+
 .botao__criarNovaPostagem:hover{
     background-color: #245501;
     border-color: #245501;
@@ -95,6 +113,14 @@
 .botao__criarNovaPostagem:active{
     transform: scale(0.95);
 
+}
+
+.list_header__title_criar_link_minhasPublicacoes{
+    color: #245501;    
+    border-bottom: none;
+    text-decoration: none;
+    padding: 1.5em 1.5em 1.5em 1.3em;
+    margin: -1.5em -1.5em -1.5em -1.3em;
 }
 
 .list_header__title_criar_link{
