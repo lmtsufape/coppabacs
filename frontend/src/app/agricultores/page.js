@@ -8,7 +8,7 @@ export default function agricultoresPage() {
       <div className={styles.table__bigScreen}>
         <ListAgricultores
           diretorioAnterior="Home /"
-          diretorioAtual="Agricultores"
+          diretorioAtual="Agricultores(as)"
           hrefAnterior="/"
           table1="Nome"
           table2="Nome Popular"
@@ -19,7 +19,7 @@ export default function agricultoresPage() {
       <div className={styles.table__smallScreen}>
         <ListAgricultores
           diretorioAnterior="Home /"
-          diretorioAtual="Agricultores"
+          diretorioAtual="Agricultores(as)"
           hrefAnterior="/"
           table1="Nome"
           table2="Nome Popular"

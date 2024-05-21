@@ -105,7 +105,7 @@ export default function DadosTransacao({ formik, hrefAtual }) {
 
                         </div>
                         <div>
-                            <label>Peso Kg</label>
+                            <label>Peso (Kg)</label>
                             <input
                                 type="number"
                                 name={`itens[${index}].peso`}

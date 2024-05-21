@@ -30,7 +30,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
             <h1 className={styles.title}>Tolerância à adversidades</h1>
             <div className={styles.sidedForm}>
                 <div>
-                    <label htmlFor="toleranciaAdversidades.altaTemperatura">Alta Temperatura <span>*</span></label>
+                    <label htmlFor="toleranciaAdversidades.altaTemperatura">Alta Temperatura<span>*</span></label>
                     <select
                         className={styles.sidedForm_select}
                         id="altaTemperatura"
@@ -52,7 +52,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="toleranciaAdversidades.baixaTemperatura">Baixa Temperatura <span>*</span></label>
+                    <label htmlFor="toleranciaAdversidades.baixaTemperatura">Baixa Temperatura<span>*</span></label>
                     <select
                         className={styles.sidedForm_select}
                         id="baixaTemperatura"
@@ -74,7 +74,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="toleranciaAdversidades.Geada">Geada <span>*</span></label>
+                    <label htmlFor="toleranciaAdversidades.Geada">Geada<span>*</span></label>
                     <select
                         className={styles.sidedForm_select}
                         id="geada"
@@ -96,7 +96,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="toleranciaAdversidades.chuvaExcessiva">Chuva Excessiva <span>*</span></label>
+                    <label htmlFor="toleranciaAdversidades.chuvaExcessiva">Chuva Excessiva<span>*</span></label>
                     <select
                         className={styles.sidedForm_select}
                         id="chuvaExcessiva"
@@ -118,7 +118,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="toleranciaAdversidades.seca">Seca <span>*</span></label>
+                    <label htmlFor="toleranciaAdversidades.seca">Seca<span>*</span></label>
                     <select
                         className={styles.sidedForm_select}
                         id="seca"
@@ -140,7 +140,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="toleranciaAdversidades.ventos">Ventos <span>*</span></label>
+                    <label htmlFor="toleranciaAdversidades.ventos">Ventos<span>*</span></label>
                     <select
                         className={styles.sidedForm_select}
                         id="ventos"
@@ -162,7 +162,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="toleranciaAdversidades.salinidade">Salinidade <span>*</span></label>
+                    <label htmlFor="toleranciaAdversidades.salinidade">Salinidade<span>*</span></label>
                     <select
                         className={styles.sidedForm_select}
                         id="salinidade"
@@ -184,7 +184,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="toleranciaAdversidades.toxidadeAluminio">Toxidade Alumínio <span>*</span></label>
+                    <label htmlFor="toleranciaAdversidades.toxidadeAluminio">Toxidade Alumínio<span>*</span></label>
                     <select
                         className={styles.sidedForm_select}
                         name="toleranciaAdversidades.toxidadeAluminio"
@@ -205,7 +205,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="toleranciaAdversidades.soloArgiloso">Solo Argiloso <span>*</span></label>
+                    <label htmlFor="toleranciaAdversidades.soloArgiloso">Solo Argiloso<span>*</span></label>
                     <select
                         className={styles.sidedForm_select}
                         id="soloArgiloso"
@@ -227,7 +227,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="toleranciaAdversidades.soloArenoso">Solo Arenoso <span>*</span></label>
+                    <label htmlFor="toleranciaAdversidades.soloArenoso">Solo Arenoso<span>*</span></label>
                     <select
                         className={styles.sidedForm_select}
                         id="soloArenoso"
@@ -249,7 +249,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="toleranciaAdversidades.soloAcido">Solo Ácido <span>*</span></label>
+                    <label htmlFor="toleranciaAdversidades.soloAcido">Solo Ácido<span>*</span></label>
                     <select
                         className={styles.sidedForm_select}
                         id="soloAcido"
@@ -271,7 +271,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div >
-                    <label htmlFor="toleranciaAdversidades.soloBaixaFertilidade">Solo Baixa Fertilidade <span>*</span></label>
+                    <label htmlFor="toleranciaAdversidades.soloBaixaFertilidade">Solo Baixa Fertilidade<span>*</span></label>
                     <select
                         className={styles.sidedForm_select}
                         id="soloBaixaFertilidade"
@@ -298,7 +298,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
             <br />
             <div className={styles.sidedForm}>
                 <div>
-                    <label htmlFor="regiaoColetaDados">Região de Coleta dos Dados <span>*</span></label>
+                    <label htmlFor="regiaoColetaDados">Região de Coleta dos Dados<span>*</span></label>
                     <input
                         className={styles.sidedForm_input}
                         id="regiaoColetaDados"
@@ -361,7 +361,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
 
                 </div>
                 <div >
-                    <label htmlFor="imagens">Imagens <span>*</span></label>
+                    <label htmlFor="imagens">Imagens<span>*</span></label>
                     <input
                         className={styles.buttonImagens}
                         type="file"

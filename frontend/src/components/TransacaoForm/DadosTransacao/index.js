@@ -80,7 +80,7 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
     return (
         <div>
             <div className={styles.container__ContainerForm_form}>
-                <label>Agricultor <span>*</span></label>
+                <label>Agricultor<span>*</span></label>
 
                 <input
                     type="text"
@@ -107,7 +107,7 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
             {formik.values.itens.map((item, index) => (
                 <div key={index} className={styles.container__ContainerForm_form_halfContainer}>
                     <div>
-                        <label>Semente <span>*</span></label>
+                        <label>Semente<span>*</span></label>
                         <select
                             name={`itens[${index}].sementesId`}
                             onChange={(e) => handleSelectSementeChange(index, e.target.value)}
@@ -123,7 +123,7 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
                         </select>
                     </div>
                     <div>
-                        <label>Peso <span>*</span> Kg</label>
+                        <label>Peso (Kg)<span>*</span></label>
                         <input
                             type="number"
                             name={`itens[${index}].peso`}
@@ -143,7 +143,7 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
             </div>
             {hrefAnterior === "/doacoes" ? (
                 <>
-                    <label>Data da doação <span>*</span> </label>
+                    <label>Data da Doação<span>*</span> </label>
                     <input
                         type="date"
                         name="dataDoacao"

@@ -5,7 +5,7 @@ export default function objetosBanco({ formik }) {
     <>
       <div className={style.container__ContainerForm_form_halfContainer}>
         <div>
-          <label htmlFor="bombona">Bombonas <span>*</span></label>
+          <label htmlFor="bombona">Bombonas<span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="bombona"
@@ -22,7 +22,7 @@ export default function objetosBanco({ formik }) {
 
         </div>
         <div>
-          <label htmlFor="peneiraSelecao">Peneiras de seleção <span>*</span></label>
+          <label htmlFor="peneiraSelecao">Peneiras de Seleção<span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="peneiraSelecao"
@@ -39,7 +39,7 @@ export default function objetosBanco({ formik }) {
 
         </div>
         <div>
-          <label htmlFor="balanca">Balanças <span>*</span></label>
+          <label htmlFor="balanca">Balanças<span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="balanca"
@@ -56,7 +56,7 @@ export default function objetosBanco({ formik }) {
 
         </div>
         <div>
-          <label htmlFor="armario">Armários <span>*</span></label>
+          <label htmlFor="armario">Armários<span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="armario"
@@ -73,7 +73,7 @@ export default function objetosBanco({ formik }) {
 
         </div>
         <div>
-          <label htmlFor="plantadeira">Plantadeiras <span>*</span></label>
+          <label htmlFor="plantadeira">Plantadeiras<span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="plantadeira"
@@ -90,7 +90,7 @@ export default function objetosBanco({ formik }) {
 
         </div>
         <div>
-          <label htmlFor="Lonas">Lona <span>*</span></label>
+          <label htmlFor="Lonas">Lona<span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="lona"
@@ -107,7 +107,7 @@ export default function objetosBanco({ formik }) {
 
         </div>
         <div>
-          <label htmlFor="batedeiraCereal">Batedeiras de cereais <span>*</span></label>
+          <label htmlFor="batedeiraCereal">Batedeiras de Cereais<span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="batedeiraCereal"

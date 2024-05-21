@@ -6,7 +6,7 @@ export default function solicitacoesPage() {
     <>
         <ListSolicitacoes
           className="content"
-          diretorioAnterior="Home / Agricultores /"
+          diretorioAnterior="Home / Agricultores(as) /"
           diretorioAtual="Solicitações"
           hrefAnterior="/agricultores"
           table1="Nome"

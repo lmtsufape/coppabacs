@@ -91,14 +91,14 @@ const BancoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       />
 
       <div className={style.container__header}>
-        {etapas === 0 && <h1 className={style.container__header_currentNav}>1. Dados do banco</h1>}
-        {etapas >= 1 && etapas <= 2 && <h1 className={style.container__header_current}>1. Dados do banco</h1>}
+        {etapas === 0 && <h1 className={style.container__header_currentNav}>1. Dados do Banco</h1>}
+        {etapas >= 1 && etapas <= 2 && <h1 className={style.container__header_current}>1. Dados do Banco</h1>}
 
-        {etapas === 1 && <h1 className={style.container__header_currentNav}>2. Endereço do banco</h1>}
-        {etapas !== 1 && <h1 className={style.container__header_current}>2. Endereço do banco</h1>}
+        {etapas === 1 && <h1 className={style.container__header_currentNav}>2. Endereço do Banco</h1>}
+        {etapas !== 1 && <h1 className={style.container__header_current}>2. Endereço do Banco</h1>}
 
-        {etapas === 2 && <h1 className={style.container__header_currentNav}>3. Objetos do banco</h1>}
-        {etapas >= 0 && etapas < 2 && <h1 className={style.container__header_current}>3. Objetos do banco</h1>}
+        {etapas === 2 && <h1 className={style.container__header_currentNav}>3. Objetos do Banco</h1>}
+        {etapas >= 0 && etapas < 2 && <h1 className={style.container__header_current}>3. Objetos do Banco</h1>}
       </div>
 
       <div className={style.container__ContainerForm}>
