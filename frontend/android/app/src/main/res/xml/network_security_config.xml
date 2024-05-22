@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">sementescrioulasback.ufape.edu.br</domain>
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="@raw/ufape_edu_br" />
+        </trust-anchors>
+    </domain-config>
+</network-security-config>
