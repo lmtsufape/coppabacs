@@ -6,7 +6,7 @@ export default function novoAgricultorPage() {
         <div className={styles.pageContainer}>
             <div className={styles.pageContainer__content}>
                 <AgricultorForm 
-                diretorioAnterior="Home / Agricultores /" 
+                diretorioAnterior="Home / Agricultores(as) /" 
                 diretorioAtual="Novo(a) Agricultor(a)" 
                 hrefAnterior="/agricultores" />
             </div>
