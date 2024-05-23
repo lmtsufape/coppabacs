@@ -7,8 +7,8 @@ export default function novoFuncionarioPage() {
         <div className={styles.pageContainer}>
             <div className={styles.pageContainer__content}>
                 <FuncionarioForm
-                    diretorioAnterior="Home / Funcionários /"
-                    diretorioAtual="Novo(a) Funcionário(a)"
+                    diretorioAnterior="Home / Colaboradores /"
+                    diretorioAtual="Novo(a) Colaborador(a)"
                     hrefAnterior="/funcionarios" />
             </div>
         </div>

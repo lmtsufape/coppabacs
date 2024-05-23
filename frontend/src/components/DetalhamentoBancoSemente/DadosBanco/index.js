@@ -11,7 +11,7 @@ export default function DadosBanco({ formik, editar }) {
           <div className={style.container__ContainerForm_form_threePartsContainer}>
 
             <div>
-              <label htmlFor="nome">Nome Banco</label>
+              <label htmlFor="nome">Nome do Banco</label>
               <input
                 className={style.container__ContainerForm_form_input}
                 placeholder="Não informado"

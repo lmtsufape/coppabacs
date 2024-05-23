@@ -36,7 +36,7 @@ export default function DadosEndereco({ formik }) {
 
   return (
     <>
-      <label htmlFor="cep">Cep <span>*</span></label>
+      <label htmlFor="cep">Cep<span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="cep"
@@ -50,7 +50,7 @@ export default function DadosEndereco({ formik }) {
       {formik.touched.cep && formik.errors.endereco.cep ? (
         <span className={style.form__error}>{formik.errors.endereco.cep}</span>
       ) : null}
-      <label htmlFor="estado">Estado <span>*</span></label>
+      <label htmlFor="estado">Estado<span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="estado"
@@ -64,7 +64,7 @@ export default function DadosEndereco({ formik }) {
       {formik.touched.estado && formik.errors.endereco.estado ? (
         <span className={style.form__error}>{formik.errors.endereco.estado}</span>
       ) : null}
-      <label htmlFor="cidade">Cidade <span>*</span></label>
+      <label htmlFor="cidade">Cidade<span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="cidade"
@@ -78,7 +78,7 @@ export default function DadosEndereco({ formik }) {
       {formik.touched.cidade && formik.errors.endereco.cidade ? (
         <span className={style.form__error}>{formik.errors.endereco.cidade}</span>
       ) : null}
-      <label htmlFor="bairro">Bairro <span>*</span></label>
+      <label htmlFor="bairro">Bairro<span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
         id="bairro"
@@ -95,7 +95,7 @@ export default function DadosEndereco({ formik }) {
 
       <div className={style.container__ContainerForm_form_halfContainer}>
         <div>
-          <label htmlFor="logradouro">Logradouro <span>*</span></label>
+          <label htmlFor="logradouro">Logradouro<span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             id="logradouro"
@@ -111,7 +111,7 @@ export default function DadosEndereco({ formik }) {
           ) : null}
         </div>
         <div>
-          <label htmlFor="numero">Número <span>*</span></label>
+          <label htmlFor="numero">Número<span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
             name="endereco.numero"

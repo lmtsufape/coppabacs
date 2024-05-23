@@ -101,7 +101,7 @@ export default function SelecionarSementesBanco({ formik }) {
                     </div>
                     <div className={styles.container__ContainerForm_form_halfContainer}>
                         <div>
-                            <label>Peso <span>*</span></label>
+                            <label>Peso (Kg)<span>*</span></label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
                                 type="text"

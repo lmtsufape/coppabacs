@@ -22,7 +22,7 @@ export const APP_ROUTES = {
     login: '/login',
     sementes: '/sementes',
     bancoSementes: '/bancoSementes',
-    public: '/public'
-    
+    public: '/public',
+    mural: '/mural',
   },
 }

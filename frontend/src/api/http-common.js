@@ -2,11 +2,13 @@ import { removeStorageItem } from "@/utils/localStore";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8081/api/v1",
+  baseURL: "https://sementescrioulasback.ufape.edu.br/api/v1",
   headers: {
     "Content-type": "application/json"
   }
 });
+
+
 api.interceptors.response.use(
   response => response,
   error => {
@@ -16,4 +18,5 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
 export default api;

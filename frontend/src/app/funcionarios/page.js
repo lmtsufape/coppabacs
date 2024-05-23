@@ -9,7 +9,7 @@ export default function funcionariosPage() {
       <div className={styles.table__bigScreen}>
         <ListFuncionarios
           diretorioAnterior="Home /"
-          diretorioAtual="Funcionários"
+          diretorioAtual="Colaboradores"
           hrefAnterior="/"
           table1="Nome"
           table2="Contato"
@@ -19,7 +19,7 @@ export default function funcionariosPage() {
       <div className={styles.table__smallScreen}>
         <ListFuncionarios
           diretorioAnterior="Home /"
-          diretorioAtual="Funcionários"
+          diretorioAtual="Colaboradores"
           hrefAnterior="/"
           table1="Nome"
           table2="Função"

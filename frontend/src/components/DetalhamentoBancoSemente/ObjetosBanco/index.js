@@ -20,7 +20,7 @@ export default function Dadosobjetos({ formik, editar }) {
 
             </div>
             <div>
-              <label htmlFor="peneirasSelecao">Poneiras de seleção </label>
+              <label htmlFor="peneirasSelecao">Peneiras de Seleção </label>
               <input
                 className={style.container__ContainerForm_form_input}
                 placeholder="Não informado"
@@ -74,7 +74,7 @@ export default function Dadosobjetos({ formik, editar }) {
 
             </div>
             <div>
-              <label htmlFor="batedeirasCereais">Batedeiras de cereais </label>
+              <label htmlFor="batedeirasCereais">Batedeiras de Cereais </label>
               <input
                 className={style.container__ContainerForm_form_input}
                 placeholder="Não informado"
@@ -86,7 +86,7 @@ export default function Dadosobjetos({ formik, editar }) {
             </div>
           </div>
           <div className={style.container__ContainerForm_form}>
-              <label htmlFor="historiaBanco">Historia Banco</label>
+              <label htmlFor="historiaBanco">História do Banco</label>
               <textarea
                 className={style.container__ContainerForm_form_input}
                 placeholder="Não informado"
@@ -202,7 +202,7 @@ export default function Dadosobjetos({ formik, editar }) {
 
             </div>
             <div>
-              <label htmlFor="batedeiraCereal">Batedeiras de cereais </label>
+              <label htmlFor="batedeiraCereal">Batedeiras de Cereais </label>
               <input
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="batedeiraCereal"
@@ -220,7 +220,7 @@ export default function Dadosobjetos({ formik, editar }) {
             </div>
           </div>
           <div >
-            <label htmlFor="historiaBanco" >Historia do Banco </label>
+            <label htmlFor="historiaBanco" >História do Banco </label>
             <textarea
               className={style.container__ContainerForm_form_halfContainer_input}
               id="historiaBanco"

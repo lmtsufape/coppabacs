@@ -1,6 +1,7 @@
 package br.edu.ufape.lmts.sementes.controller.dto.response;
 
 import java.util.Date;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 
@@ -18,7 +19,7 @@ public  class PostResponse  {
 	private boolean visibilidade;
 	private String categoria;
 	private String titulo;
-	private String imagem;
+	private List<String> imagem;
 	private Date data;
 
 	public PostResponse(Post obj) {

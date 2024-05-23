@@ -8,7 +8,7 @@ import { Form, Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useMutation } from 'react-query';
 import { postPublicacao } from '@/api/mural/postPublicacao';
-import api from '@/api/http-common';
+import { postArquivo } from '@/api/arquivos/postArquivo';
 
 export default function CriarPostagem({ hrefAnterior, diretorioAtual, diretorioAnterior }) {
     const [selectedImages, setSelectedImages] = useState([]);
@@ -17,9 +17,8 @@ export default function CriarPostagem({ hrefAnterior, diretorioAtual, diretorioA
 
     const initialValues = {
         texto: "",
-        categoria: "",
         titulo: "",
-        imagens: []
+        imagem: []
     }
 
     const validateSchema = Yup.object().shape({
@@ -28,17 +27,16 @@ export default function CriarPostagem({ hrefAnterior, diretorioAtual, diretorioA
             .required('Obrigatório'),
         texto: Yup.string()
             .required('Obrigatório'),
-        categoria: Yup.string()
-            .required('Obrigatório'),
+   
         imagens: Yup.array().of(Yup.mixed().required('Obrigatório')).min(1, 'Obrigatório')
     });
 
     const { status, mutate } = useMutation(
-        async () => {
+        async (newPost) => {
             return postPublicacao(newPost);
         }, {
         onSuccess: () => {
-            window.locale('/mural');
+            window.location.href= '/mural';
 
         },
         onError: (error) => {
@@ -73,37 +71,17 @@ export default function CriarPostagem({ hrefAnterior, diretorioAtual, diretorioA
         setFieldValue("imagens", newFileObjects);
     };
 
-    const handleFileUpload = async (files) => {
-        const formData = new FormData();
-        for (let i = 0; i < files.length; i++) {
-            formData.append('file', files[i]);
-        }
-
-        try {
-            const response = await api.post('arquivos', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-            return response.data; // Retorna os dados das imagens enviadas
-        } catch (error) {
-            console.error('Error uploading files:', error);
-            throw error;
-        }
-    };
-
     const handleSubmit = async (values, { setSubmitting }) => {
         setSubmitting(true);
         try {
             console.log("Uploading images...");
-            const imageUrls = await handleFileUpload(values.imagens);
+            const imageUrls = await postArquivo(values.imagens);
             console.log("Images uploaded, URLs:", imageUrls);
 
             const newPost = {
                 titulo: values.titulo,
                 texto: values.texto,
-                categoria: values.categoria,
-                imagens: imageUrls
+                imagem: imageUrls
             };
 
             console.log("Submitting post:", newPost);
