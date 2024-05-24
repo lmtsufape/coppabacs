@@ -96,30 +96,17 @@ export default function TableLayout({ table1, table2, table3, table4, listCoorde
       <div className={style.contentSmall}>
         <div className={style.content}>
           <table className={style.content__table}>
-            <thead className={style.content__table__header}>
-              <tr>
-                <th>{table1}</th>
-                <th>{table2}</th>
-                <th className={style.content__table__header_name3}>
-                  <div >
-                    {table3}
-                    <Image src="/assets/iconInformacao.svg" alt="Visualizar" width={27} height={26} />
-
-                  </div>
-
-                </th>
-              </tr>
-            </thead>
             <tbody className={style.content__table__body}>
-
               {listCoordenadores.map((coordenador, index) => {
                 return (
                   <tr key={index}>
-                    <td>{coordenador.nome}</td>
-                    <td>{bancoAtual(bancos, coordenador.bancoSementeId)}</td>
-                    <td>
-                      <div >
-                        <Image src="/assets/iconOlho.svg" onClick={() => onSelectCoordenador(coordenador)} alt="Visualizar" width={27} height={26} />
+                    <td data-label="Nome">{coordenador.nome}</td>
+                    <td data-label="Contato">{coordenador.contato}</td>
+                    <td data-label="Banco">{bancoAtual(bancos, coordenador.bancoSementeId)}</td>
+                    <td className={style.content__table__buttonTabela}>
+                      <div className={style.content__table__button}>
+                        <h1>Visualizar</h1>
+                        <Image className={style.content__table__button_img} src="/assets/iconOlhoBranco.png" onClick={() => onSelectCoordenador(coordenador)} alt="Visualizar" width={27} height={26} />
 
                         <ExcluirButton itemId={coordenador.id} onDelete={handleDeleteCoordenador} />
 

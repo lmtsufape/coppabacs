@@ -89,10 +89,10 @@
     &__side_menu{
         position: fixed;
         top: 0;
-        left: 131px;
+        right: 0;
+        left: auto;
         background-color: rgba(204, 204, 204, 0.6);
-        width: 100vw;
-        height: 100vh;
+        height: 98vh;
         z-index: 1;
         display: flex;
         box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);
@@ -334,7 +334,6 @@
         &__button_burguer {
             display: none;
         }        
-
         &__button_perfil {
             display: block;
             border: 0;
@@ -357,10 +356,23 @@
             }
 
         }
+
+        
     }
 
 }
 
+@media all and (max-width: 768px) {
+    .header{
+        &__usuarioLogado{
+    
+            &_h3{
+                display: none;  
+            }
+    
+        }
+    }
+}
 
 @media all and (max-width: 475px) {
     .header {
