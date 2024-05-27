@@ -72,13 +72,30 @@
       text-align: left;
   
       ul {
-        text-align: justify;
+        text-align: justify;        
       }
       
       li {
         padding: 0.2em;
       }
-  
+
+      p{
+        margin: 0;
+        padding: 0;
+      }
+
+      &_image{
+        margin-right: 0.5em;
+      }
+
+      &_principaisFuncionalidades{
+        display: flex;
+      }
+
+      &_texto{
+        margin-right: 5em;
+      }
+
       &_title {
         padding: 2em 0em 1em 0em;
         font-size: 1.5em;
@@ -101,11 +118,15 @@
         margin: -2.1em -1.5em -2.1em -1.5em;
       }
   
+      &_botao{
+        display: flex;
+        justify-content: center;
+      }
       &_button {
         width: 15em;
         height: 6em;
         border: none;
-        margin: 10em 0em 1.5em 3em;
+        margin-top: 3em;
         color: #fff;
         background: linear-gradient(to right, #245501, #4A8223);
         border-radius: 0.5em;
@@ -227,4 +248,3 @@
       }
     }
   }
-  
