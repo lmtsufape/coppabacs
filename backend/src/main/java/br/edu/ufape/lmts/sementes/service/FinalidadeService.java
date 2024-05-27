@@ -20,7 +20,6 @@ public class FinalidadeService implements FinalidadeServiceInterface {
 	public Finalidade saveFinalidade(Finalidade newInstance) {
 		Finalidade finalidade;
 		try {
-			
 			finalidade = findFinalidadeByNome(newInstance.getNome());
 		} catch (ObjectNotFoundException e) {
 			finalidade = repository.save(newInstance);

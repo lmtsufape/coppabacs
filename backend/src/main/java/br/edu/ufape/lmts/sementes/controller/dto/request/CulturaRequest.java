@@ -14,7 +14,6 @@ import lombok.Setter;
 public  class CulturaRequest  {
 	private String cultura;
 	private String genero;
-	private long id;
 
 	public Cultura convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

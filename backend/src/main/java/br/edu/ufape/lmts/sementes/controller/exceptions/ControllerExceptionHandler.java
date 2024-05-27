@@ -22,6 +22,11 @@ public class ControllerExceptionHandler {
 		int httpStatus = HttpStatus.INTERNAL_SERVER_ERROR.value();
 		StandardError err = new StandardError(httpStatus,
 				"Erro inesperado", e.getMessage(), request.getRequestURI());
+		System.out.println(e.getMessage());
+		System.out.println(e.getCause());
+		for (StackTraceElement ste : e.getStackTrace()) {
+		    System.out.println(ste);
+		}
 		return ResponseEntity.status(httpStatus).body(err);
 	}
 	

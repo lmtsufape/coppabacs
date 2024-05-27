@@ -57,18 +57,18 @@ public  class Sementes  {
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "sementes_id")
 	private List<TabelaBancoSementes> tabelaBancoSementes = new ArrayList<>();
-	@ManyToOne(targetEntity = ResponsavelTecnico.class)
+	@OneToOne(cascade = CascadeType.ALL, targetEntity = ResponsavelTecnico.class)
 	@JoinColumn(name = "responsavel_tecnico_id")
 	@ToString.Exclude
 	private ResponsavelTecnico responsavelTecnico;
-	@OneToOne(cascade=CascadeType.PERSIST, orphanRemoval = true)
+	@OneToOne(cascade=CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
 	private CaracteristicasAgronomicas caracteristicasAgronomicas;
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(cascade = CascadeType.DETACH)
 	@JoinTable(name = "sementes_finalidades", joinColumns = @JoinColumn(name = "sementes_id"), inverseJoinColumns = @JoinColumn(name = "finalidades_id"))
 	@ToString.Exclude
 	private List<Finalidade> finalidades = new ArrayList<>();
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "cultura_id")
 	@ToString.Exclude
 	private Cultura cultura;

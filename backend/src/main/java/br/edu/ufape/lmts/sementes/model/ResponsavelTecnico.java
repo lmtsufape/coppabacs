@@ -26,9 +26,9 @@ public class ResponsavelTecnico {
 	private long id;
 	@Column(nullable = false)
 	private String nome;
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private String cpf;
-	@Column(nullable = true, unique = true)
+	@Column(nullable = true)
 	private String numeroConselho;
 	@Column(nullable = false)
 	private String estadoConselho;

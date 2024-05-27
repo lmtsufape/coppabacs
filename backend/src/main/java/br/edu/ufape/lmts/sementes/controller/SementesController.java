@@ -1,5 +1,6 @@
 package br.edu.ufape.lmts.sementes.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -28,6 +29,7 @@ import org.springframework.web.server.ResponseStatusException;
 import br.edu.ufape.lmts.sementes.controller.dto.request.SementesRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.SementesResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
+import br.edu.ufape.lmts.sementes.model.Finalidade;
 import br.edu.ufape.lmts.sementes.model.Sementes;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
@@ -93,23 +95,25 @@ public class SementesController {
 	@PatchMapping("sementes/{id}")
 	public SementesResponse updateSementes(@PathVariable Long id, @Valid @RequestBody SementesRequest obj) {
 		try {
-			//Sementes o = obj.convertToEntity();
 			Sementes oldObject = facade.findSementesById(id);
 
 			TypeMap<SementesRequest, Sementes> typeMapper = modelMapper
 													.typeMap(SementesRequest.class, Sementes.class)
-													.addMappings(mapper -> mapper.skip(Sementes::setId));
-			oldObject.setResponsavelTecnico(null);
-			oldObject.setFinalidades(null);
-			//oldObject.setCultura(null);
-			typeMapper.map(obj, oldObject);	
-			//oldObject.setCultura(obj.getCultura().convertToEntity());
+													.addMappings(mapper -> mapper.skip(Sementes::setId))
+													.addMappings(mapper -> mapper.skip(Sementes::setFinalidades));
+			obj.convertToEntity().getFinalidades().forEach(x->System.out.println(x));
+			List<Finalidade> finalidades = new ArrayList<>();
+			obj.convertToEntity().getFinalidades().forEach(x -> {
+				finalidades.add(facade.saveFinalidade(x));
+			});
+			typeMapper.map(obj, oldObject);
+			oldObject.setFinalidades(finalidades);
 			oldObject.setResponsavelTecnico(obj.getResponsavelTecnico().convertToEntity());
 			return new SementesResponse(facade.updateSementes(oldObject));
 		} catch (RuntimeException e) {
 			
 			if (!(e instanceof ObjectNotFoundException))
-				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+				throw e;
 			else
 				throw e;
 		}
