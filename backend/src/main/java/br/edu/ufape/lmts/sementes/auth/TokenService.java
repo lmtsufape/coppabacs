@@ -10,20 +10,27 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 
+import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
+
 @Service
 public class TokenService {
 
 	@Value("${jwt.secret}")
 	private String secret;
 
-	@Value("${jwt.expiration}")
-	private Long expiration;
+	@Value("${jwt.expiration.user}")
+	private Long expirationUser;
+
+	@Value("${jwt.expiration.admin}")
+	private Long expirationAdmins;
 
 	public String generateToken(AuthUser usuario) {
 		try {
 			Algorithm algorithm = Algorithm.HMAC256(secret);
+			Long expirationTime;
+			expirationTime = (usuario.getRoles().contains(TipoUsuario.AGRICULTOR)) ? expirationUser : expirationAdmins;
 			String token = JWT.create().withIssuer("Projeto Sementes").withSubject(usuario.getEmail())
-					.withExpiresAt(new Date(System.currentTimeMillis() + expiration)).sign(algorithm);
+					.withExpiresAt(new Date(System.currentTimeMillis() + expirationTime)).sign(algorithm);
 			return token;
 
 		} catch (JWTCreationException exception) {
