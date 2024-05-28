@@ -108,52 +108,67 @@ const LayoutPublic = () => {
         </p>
         <h1 className={style.login__content_title}>Principais funcionalidades</h1>
         <ul className={style.features}>
-          <li>
-            <Image src="/assets/Vector.svg" alt="Sementes" width={13} height={13} /> Gerenciamento de agricultores
-            vinculados a associação.
+
+          <li className={style.login__content_principaisFuncionalidades}>
+            <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} /> 
+            <p className={style.login__content_texto}>Gerenciamento de agricultores vinculados a associação.</p>
           </li>
-          <li>
-            <Image src="/assets/Vector.svg" alt="Sementes" width={13} height={13} /> Gerenciamento de solicitações de
-            cadastros de novo agricultor.
+
+          <li className={style.login__content_principaisFuncionalidades}>
+            <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} /> 
+            <p className={style.login__content_texto}>Gerenciamento de solicitações de cadastros de novo agricultor.</p>
           </li>
-          <li>
-            <Image src="/assets/Vector.svg" alt="Sementes" width={13} height={13} /> Gerenciamento de coordenadores de
-            bancos vinculados a associação.
+
+          <li className={style.login__content_principaisFuncionalidades}>
+            <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} /> 
+            <p className={style.login__content_texto}>Gerenciamento de coordenadores de bancos vinculados a associação.</p>
           </li>
-          <li>
-            <Image src="/assets/Vector.svg" alt="Sementes" width={13} height={13} /> Gerenciamento de funcionários
-            vinculados a associação.
+
+          <li className={style.login__content_principaisFuncionalidades}>
+            <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} /> 
+            <p className={style.login__content_texto}>Gerenciamento de funcionários vinculados a associação.</p>
           </li>
-          <li>
-            <Image src="/assets/Vector.svg" alt="Sementes" width={13} height={13} /> Gerenciamento de sementes
-            trabalhadas na cooperativa.
+
+          <li className={style.login__content_principaisFuncionalidades}>
+            <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} /> 
+            <p className={style.login__content_texto}>Gerenciamento de sementes trabalhadas na cooperativa.</p>
           </li>
-          <li>
-            <Image src="/assets/Vector.svg" alt="Sementes" width={13} height={13} /> Gerenciamento de bancos de sementes
-            vinculados a cooperativa.
+
+          <li className={style.login__content_principaisFuncionalidades}>
+            <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} /> 
+            <p className={style.login__content_texto}>Gerenciamento de bancos de sementes vinculados a cooperativa.</p>
           </li>
-          <li>
-            <Image src="/assets/Vector.svg" alt="Sementes" width={13} height={13} /> Gerenciamento de Doações de
-            Sementes do Agricultor para o Banco.
+
+          <li className={style.login__content_principaisFuncionalidades}>
+            <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} /> 
+            <p className={style.login__content_texto}>Gerenciamento de Doações de Sementes do Agricultor para o Banco.</p>
           </li>
-          <li>
-            <Image src="/assets/Vector.svg" alt="Sementes" width={13} height={13} /> Gerenciamento de Retirada de
-            Sementes do Banco pelo Agricultor.
+
+          <li className={style.login__content_principaisFuncionalidades}>
+            <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} /> 
+            <p className={style.login__content_texto}>Gerenciamento de Retirada de Sementes do Banco pelo Agricultor.</p>
           </li>
-          <li>
-            <Image src="/assets/Vector.svg" alt="Sementes" width={13} height={13} /> Sistema de login direcionamento e
-            renderização por perfil de usuário.
+
+          <li className={style.login__content_principaisFuncionalidades}>
+            <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} /> 
+            <p className={style.login__content_texto}>Sistema de login direcionamento e renderização por perfil de usuário.</p>
           </li>
-          <li>
-            <Image src="/assets/Vector.svg" alt="Sementes" width={13} height={13} /> Agricultor pode fazer um cadastro
-            como solicitação de vínculo com a cooperativa.
+
+          <li className={style.login__content_principaisFuncionalidades}>
+            <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} /> 
+            <p className={style.login__content_texto}>Agricultor pode fazer um cadastro como solicitação de vínculo com a cooperativa.</p>
           </li>
         </ul>
-        <button className={style.login__content_button}>
-          <Link className={style.login__content_link} href="/public">
-            <h1>Acesse o sistema</h1>
-          </Link>
-        </button>
+
+        <div className={style.login__content_botao}>
+          <button className={style.login__content_button}>
+            <Link className={style.login__content_link} href="/public">
+              <h1>Acesse o sistema</h1>
+            </Link>
+          </button>
+        </div>
+
+
       </div>
     </div>
   </div>
