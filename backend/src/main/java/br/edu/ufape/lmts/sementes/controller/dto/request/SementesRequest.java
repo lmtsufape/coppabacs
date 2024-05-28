@@ -45,6 +45,8 @@ public class SementesRequest {
 	public Sementes convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		Sementes obj = modelMapper.map(this, Sementes.class);
+		obj.setFinalidades(finalidades.stream().map(x->x.convertToEntity()).toList());
+		obj.setCultura(cultura.convertToEntity());
 		obj.setImagens(new ArrayList<>());
 		return obj;
 	}

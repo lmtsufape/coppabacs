@@ -173,7 +173,7 @@ public class UserInitializer implements CommandLineRunner {
 				List.of(new FinalidadeRequest("Produção de café gourmet")),
 				Arrays.asList(new RegioesAdaptacaoCultivoRequest("Sul de Minas Gerais"),
 						new RegioesAdaptacaoCultivoRequest("Cerrado Mineiro")),
-				new CulturaRequest("Café", "Coffea",0),
+				new CulturaRequest("Café", "Coffea"),
 				new ResponsavelTecnicoRequest("João Silva", "123.456.789-00", "002134", "MG")));
 		sementes.add(new SementesRequest(0, "Glycine max", "Soja",
 				"Principal cultura de leguminosa para produção de óleo e proteína vegetal, com ampla adaptação climática.",
@@ -188,7 +188,7 @@ public class UserInitializer implements CommandLineRunner {
 				List.of(new FinalidadeRequest("Produção de óleo e proteína")),
 				Arrays.asList(new RegioesAdaptacaoCultivoRequest("Mato Grosso do Sul"),
 						new RegioesAdaptacaoCultivoRequest("Paraná")),
-				new CulturaRequest("Soja", "Glycine max",0),
+				new CulturaRequest("Soja", "Glycine max"),
 				new ResponsavelTecnicoRequest("Maria Pereira", "987.654.321-00", "001234", "PR")));
 		sementes.add(new SementesRequest(0, "Zea mays", "Milho",
 				"Cultura de grande importância econômica para cereais e produção de etanol.",
@@ -202,7 +202,7 @@ public class UserInitializer implements CommandLineRunner {
 				List.of(new FinalidadeRequest("Produção de grãos e etanol")),
 				Arrays.asList(new RegioesAdaptacaoCultivoRequest("Rio Grande do Sul"),
 						new RegioesAdaptacaoCultivoRequest("São Paulo")),
-				new CulturaRequest("Milho", "Zea mays",0),
+				new CulturaRequest("Milho", "Zea mays"),
 				new ResponsavelTecnicoRequest("Carlos Neto", "222.333.444-55", "005678", "SP")));
 
 		return sementes;
