@@ -1,4 +1,4 @@
-.footer{
+.footer {
   width: 100%;
   height: 5em;
 
@@ -11,28 +11,45 @@
   gap: 1em;
 
   background-color: #245501;
-  &__logo_sementes{
+
+  &__logo_sementes {
     align-items: center;
+    margin-left: -6em;
   }
-  
-  &__social{
+
+  &__social {
     gap: 1em;
     display: flex;
+    margin-right: 1em;
   }
+
+  &__logo_lmts {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
 
   @media screen and (max-width: 700px) {
     height: 10em;
 
 
-    &__logo_sementes{
-      padding-top: 1em;
+    &__logo_sementes {
       align-items: center;
+      padding-left: 1em;
     }
 
-    &__social{
+    &__logo_lmts {
+      display: flex;
+      align-items: center;
+      padding-right: 1em;
+    }
+
+    &__social {
       gap: 1em;
       display: flex;
-      padding-bottom: 1em;
+      align-items: center;
+
     }
   }
 }
