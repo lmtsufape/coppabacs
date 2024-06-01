@@ -13,6 +13,7 @@
   background-color: #245501;
   &__logo_sementes{
     align-items: center;
+    margin-left: -6em;
   }
   
   &__social{
@@ -26,14 +27,16 @@
 
 
     &__logo_sementes{
-      padding-top: 1em;
       align-items: center;
+      border: 1px solid;
     }
 
     &__social{
       gap: 1em;
       display: flex;
-      padding-bottom: 1em;
+      align-items: center;
+      
     }
   }
 }
+
