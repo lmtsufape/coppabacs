@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState, useEffect } from 'react';
 import style from './footer.module.scss'
 import Image from 'next/image'
