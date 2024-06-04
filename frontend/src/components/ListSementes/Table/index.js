@@ -365,7 +365,7 @@ const LayoutPublic = ({ table1, table2, table3, table4, onSelectSemente, listSem
                     <td>{semente.nome}</td>
                     <td>
                       <div>
-                        <Image src="/assets/iconOlho.svg" alt="Visualizar" onClick={() => onSelectSemente(semente)} width={27} height={26} />
+                        <Image src="/assets/iconInvisivel.png" alt="Visualizar" width={27} height={26} />
                       </div>
                     </td>
                   </tr>
@@ -388,7 +388,7 @@ const LayoutPublic = ({ table1, table2, table3, table4, onSelectSemente, listSem
                     <td className={styles.content__table__buttonTabela}>
                       <div className={styles.content__table__button}>
                         <h1>Visualizar</h1>
-                        <Image className={styles.content__table__button_img} src="/assets/iconOlhoBranco.png" alt="Visualizar" onClick={() => onSelectSemente(semente)} width={27} height={26} />
+                        <Image className={styles.content__table__button_img} src="/assets/iconInvisivelBranco.png" alt="Visualizar" width={27} height={26} />
                       </div>
                     </td>
                   </tr>
