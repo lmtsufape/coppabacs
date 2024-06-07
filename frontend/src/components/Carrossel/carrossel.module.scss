@@ -13,7 +13,7 @@
         object-fit: cover;
         object-position: center;
         width: 100%;
-        height: 19em;
+        height: 14em;
         filter: blur(1.5px);
         
     }
@@ -28,14 +28,14 @@
         height: 1.5em;
         border-radius: 1em;
         position: absolute;
-        bottom: 30%;
+        bottom: 32%;
         font-size: 0.8em;
         left: 4%;
         font-weight: bold;
     }
 
     &__titulo {
-        font-size: 1.5em;
+        font-size: 1.3em;
         align-items: center;
         justify-content: center;
         border: 1px;
@@ -75,11 +75,11 @@
 @media all and (max-width: 500px) {
     .cards {
         &__img {
-            height: 16em;
+            height: 14em;
         }
         &__noticias{
             font-size: 0.6em;
-            bottom: 25%;
+            bottom: 27.5%;
         }
         &__titulo{
             font-size: 1em;

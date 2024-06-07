@@ -171,8 +171,8 @@ export default function DadosSementes({ formik, editar }) {
                         </div>
                         <div>
                             <label htmlFor="doencas">Resistência à Doenças</label>
-                            <input
-                                className={styles.container__ContainerForm_form_input}
+                            <textarea
+                                className={styles.container__ContainerForm_form_textareaDetalhamento}
                                 name="doencas"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
@@ -182,8 +182,8 @@ export default function DadosSementes({ formik, editar }) {
                         </div>
                         <div>
                             <label htmlFor="pragas">Resistência à Pragas</label>
-                            <input
-                                className={styles.container__ContainerForm_form_input}
+                            <textarea
+                                className={styles.container__ContainerForm_form_textareaDetalhamento}
                                 name="pragas"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
@@ -193,8 +193,8 @@ export default function DadosSementes({ formik, editar }) {
                         </div>
                         <div>
                             <label htmlFor="finalidades">Finalidade </label>
-                            <input
-                                className={styles.container__ContainerForm_form_input}
+                            <textarea
+                                className={styles.container__ContainerForm_form_textareaDetalhamento}
                                 name="finalidades"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}

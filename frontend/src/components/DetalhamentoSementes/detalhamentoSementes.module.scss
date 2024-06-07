@@ -121,6 +121,40 @@
         
       }
 
+      &_textareaDetalhamento {
+        background-color: #fff;
+        width: 100%;
+        font-size: 1em;
+        font-weight: normal;
+        height: 3em;
+        border: none;
+        overflow: auto;
+        outline: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        resize: none;
+        font-family: 'Inter', sans-serif;
+        margin-top: 0.5em;
+        
+      }
+      &_textareaDetalhamentoDescrição {
+        background-color: #fff;
+        width: 100%;
+        font-size: 1em;
+        font-weight: normal;
+        height: 6em;
+        border: none;
+        overflow: auto;
+        outline: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        resize: none;
+        font-family: 'Inter', sans-serif;
+        margin-top: 0.5em;
+      }
+
 
       &_halfContainer{
         width: 100%;

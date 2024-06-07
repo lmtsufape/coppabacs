@@ -15,6 +15,26 @@ import styles from './carrossel.module.scss';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
 export default function App() {
+
+    const slides = [
+        {
+          imgSrc: "/assets/carrossel1.png",
+          altText: "carrossel1",
+          title: "Lorem ipsum dolor sit amet consectetur. Pretium lobortis sed lacus id tincidunt interdum rhoncus sed.Lorem ipsum dolor sit amet consectetur. Pretium lobortis sed lacus id tincidunt interdum rhoncus sed."
+        },
+        {
+          imgSrc: "/assets/carrossel2.png",
+          altText: "carrossel2",
+          title: "Lorem ipsum dolor sit amet consectetur. Pretium lobortis sed lacus id tincidunt interdum rhoncus sed.Lorem ipsum dolor sit amet consectetur. Pretium lobortis sed lacus id tincidunt interdum rhoncus sed."
+        },
+        {
+          imgSrc: "/assets/carrossel3.png",
+          altText: "carrossel3",
+          title: "Lorem ipsum dolor sit amet consectetur. Pretium lobortis sed lacus id tincidunt interdum rhoncus sed.Lorem ipsum dolor sit amet consectetur. Pretium lobortis sed lacus id tincidunt interdum rhoncus sed."
+        },
+        
+      ];
+
     return (
         <div className={styles.mySwiper}>
             <Swiper
@@ -31,23 +51,13 @@ export default function App() {
                 modules={[Autoplay, Pagination, Navigation]}
                 className="mySwiper"
             >
-                <SwiperSlide className={styles.cards}>
-                    <div >
-                        <img className={styles.cards__img} src="/assets/carrossel1.png" alt="carrossel1" width={900} height={900} />
-                        <h1 className={styles.cards__noticias}>Notícias</h1>
-                        <h1 className={styles.cards__titulo}>Lorem ipsum dolor sit amet consectetur. Pretium lobortis sed lacus id tincidunt interdum rhoncus sed.Lorem ipsum dolor sit amet consectetur. Pretium lobortis sed lacus id tincidunt interdum rhoncus sed. </h1>
-                    </div>
-                </SwiperSlide >
-                <SwiperSlide className={styles.cards}>
-                    <img className={styles.cards__img} src="/assets/carrossel2.png" alt="carrossel1" width={900} height={900} />
-                    <h1 className={styles.cards__noticias}>Notícias</h1>
-                    <h1 className={styles.cards__titulo}>Lorem ipsum dolor sit amet consectetur. Pretium lobortis sed lacus id tincidunt interdum rhoncus sed.Lorem ipsum dolor sit amet consectetur. Pretium lobortis sed lacus id tincidunt interdum rhoncus sed. </h1>
-                </SwiperSlide>
-                <SwiperSlide className={styles.cards}>
-                    <img className={styles.cards__img} src="/assets/carrossel3.png" alt="carrossel1" width={900} height={900} />
-                    <h1 className={styles.cards__noticias}>Notícias</h1>
-                    <h1 className={styles.cards__titulo}>Lorem ipsum dolor sit amet consectetur. Pretium lobortis sed lacus id tincidunt interdum rhoncus sed.Lorem ipsum dolor sit amet consectetur. Pretium lobortis sed lacus id tincidunt interdum rhoncus sed. </h1>
-                </SwiperSlide>
+                {slides.map((slide, index) => (
+      <SwiperSlide key={index} className={styles.cards}>
+        <img className={styles.cards__img} src={slide.imgSrc} alt={slide.altText} width={900} height={900} />
+        <h1 className={styles.cards__noticias}>Notícias</h1>
+        <h1 className={styles.cards__titulo}>{slide.title}</h1>
+      </SwiperSlide>
+    ))}
             </Swiper>
         </div>
     );
