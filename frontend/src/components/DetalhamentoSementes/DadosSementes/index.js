@@ -121,7 +121,7 @@ export default function DadosSementes({ formik, editar }) {
                                 name="dominioPublico"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.dominioPublico}
+                                value={formik.values.dominioPublico ? 'Sim' : 'Não'}
                                 disabled
                             />
                         </div>
@@ -132,7 +132,7 @@ export default function DadosSementes({ formik, editar }) {
                                 name="polinizaacaoAbertaMelhorada"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.polinizaacaoAbertaMelhorada}
+                                value={formik.values.polinizaacaoAbertaMelhorada ? 'Sim' : 'Não'}
                                 disabled
                             />
                         </div>

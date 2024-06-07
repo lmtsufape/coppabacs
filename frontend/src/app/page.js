@@ -7,6 +7,8 @@ import { getStorageItem } from "@/utils/localStore";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 
+import Carrossel from "@/components/Carrossel";
+
 import styless from "@/components/Login/login.module.scss";
 import Link from "next/link";
 
@@ -41,6 +43,11 @@ export default function InicioPage() {
          */
       }
       <div className={style.menu} style={!userLogin ? { paddingTop: '0px' } : {}}>
+      {role === "ROLE_AGRICULTOR" && (
+        <div className={style.list_header}>
+          <Carrossel />
+        </div>
+      )}
         <div className={style.conjuntoCards}>
           {whatIsTypeUser()}
         </div>
@@ -86,7 +93,6 @@ const LayoutAgricultor = () => {
       <Card title="Sementes" icon="/assets/iconSeedGreen.svg" description="Sementes" link="/sementes" />
       <Card title="Histórico de Doações" icon="/assets/iconMovimentacaoBancoSementes.svg" description="Doações Sementes" link="/doacoes" />
       <Card title="Histórico de Retirada" icon="/assets/iconMovimentacaoBancoSementes.svg" description="Doações Sementes" link="/retiradas" />
-      <Card title="Mural" icon="/assets/iconMural.svg" description="Mural" link="/mural" />
     </>
   )
 }
@@ -95,83 +101,83 @@ const LayoutAgricultor = () => {
 const LayoutPublic = () => {
   return (
     <div className={style.container}>
-    <Image src="/assets/LogosCoppa.svg" alt="Sementes" width={800} height={200} className={style.logo} />
-    <div className={style.login}>
-      <div className={style.login__content}>
-        <h1 className={style.login__content_title}>O sistema</h1>
-        <p className={style.login__content_subtitle}>
-          O App Sementes Crioulas é uma plataforma desenvolvida pela Universidade Federal do Agreste de Pernambuco por
-          meio do Laboratório Multidisciplinar de Tecnologias Sociais (LMTS), em parceria com a Cooperativa de Pequenos
-          Produtores Agrícolas dos Bancos Comunitários de Sementes (COPPABACS), tendo como objetivo, auxiliar a
-          eficiência da gestão da cooperativa. A ferramenta visa contribuir no processo de gestão das sementes, dos
-          agricultores e dos bancos de sementes.
-        </p>
-        <h1 className={style.login__content_title}>Principais funcionalidades</h1>
-        <ul className={style.features}>
+      <Image src="/assets/LogosCoppa.svg" alt="Sementes" width={800} height={200} className={style.logo} />
+      <div className={style.login}>
+        <div className={style.login__content}>
+          <h1 className={style.login__content_title}>O sistema</h1>
+          <p className={style.login__content_subtitle}>
+            O App Sementes Crioulas é uma plataforma desenvolvida pela Universidade Federal do Agreste de Pernambuco por
+            meio do Laboratório Multidisciplinar de Tecnologias Sociais (LMTS), em parceria com a Cooperativa de Pequenos
+            Produtores Agrícolas dos Bancos Comunitários de Sementes (COPPABACS), tendo como objetivo, auxiliar a
+            eficiência da gestão da cooperativa. A ferramenta visa contribuir no processo de gestão das sementes, dos
+            agricultores e dos bancos de sementes.
+          </p>
+          <h1 className={style.login__content_title}>Principais funcionalidades</h1>
+          <ul className={style.features}>
 
-          <li className={style.login__content_principaisFuncionalidades}>
-            <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} /> 
-            <p className={style.login__content_texto}>Gerenciamento de agricultores vinculados a associação.</p>
-          </li>
+            <li className={style.login__content_principaisFuncionalidades}>
+              <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} />
+              <p className={style.login__content_texto}>Gerenciamento de agricultores vinculados a associação.</p>
+            </li>
 
-          <li className={style.login__content_principaisFuncionalidades}>
-            <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} /> 
-            <p className={style.login__content_texto}>Gerenciamento de solicitações de cadastros de novo agricultor.</p>
-          </li>
+            <li className={style.login__content_principaisFuncionalidades}>
+              <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} />
+              <p className={style.login__content_texto}>Gerenciamento de solicitações de cadastros de novo agricultor.</p>
+            </li>
 
-          <li className={style.login__content_principaisFuncionalidades}>
-            <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} /> 
-            <p className={style.login__content_texto}>Gerenciamento de coordenadores de bancos vinculados a associação.</p>
-          </li>
+            <li className={style.login__content_principaisFuncionalidades}>
+              <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} />
+              <p className={style.login__content_texto}>Gerenciamento de coordenadores de bancos vinculados a associação.</p>
+            </li>
 
-          <li className={style.login__content_principaisFuncionalidades}>
-            <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} /> 
-            <p className={style.login__content_texto}>Gerenciamento de funcionários vinculados a associação.</p>
-          </li>
+            <li className={style.login__content_principaisFuncionalidades}>
+              <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} />
+              <p className={style.login__content_texto}>Gerenciamento de funcionários vinculados a associação.</p>
+            </li>
 
-          <li className={style.login__content_principaisFuncionalidades}>
-            <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} /> 
-            <p className={style.login__content_texto}>Gerenciamento de sementes trabalhadas na cooperativa.</p>
-          </li>
+            <li className={style.login__content_principaisFuncionalidades}>
+              <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} />
+              <p className={style.login__content_texto}>Gerenciamento de sementes trabalhadas na cooperativa.</p>
+            </li>
 
-          <li className={style.login__content_principaisFuncionalidades}>
-            <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} /> 
-            <p className={style.login__content_texto}>Gerenciamento de bancos de sementes vinculados a cooperativa.</p>
-          </li>
+            <li className={style.login__content_principaisFuncionalidades}>
+              <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} />
+              <p className={style.login__content_texto}>Gerenciamento de bancos de sementes vinculados a cooperativa.</p>
+            </li>
 
-          <li className={style.login__content_principaisFuncionalidades}>
-            <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} /> 
-            <p className={style.login__content_texto}>Gerenciamento de Doações de Sementes do Agricultor para o Banco.</p>
-          </li>
+            <li className={style.login__content_principaisFuncionalidades}>
+              <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} />
+              <p className={style.login__content_texto}>Gerenciamento de Doações de Sementes do Agricultor para o Banco.</p>
+            </li>
 
-          <li className={style.login__content_principaisFuncionalidades}>
-            <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} /> 
-            <p className={style.login__content_texto}>Gerenciamento de Retirada de Sementes do Banco pelo Agricultor.</p>
-          </li>
+            <li className={style.login__content_principaisFuncionalidades}>
+              <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} />
+              <p className={style.login__content_texto}>Gerenciamento de Retirada de Sementes do Banco pelo Agricultor.</p>
+            </li>
 
-          <li className={style.login__content_principaisFuncionalidades}>
-            <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} /> 
-            <p className={style.login__content_texto}>Sistema de login direcionamento e renderização por perfil de usuário.</p>
-          </li>
+            <li className={style.login__content_principaisFuncionalidades}>
+              <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} />
+              <p className={style.login__content_texto}>Sistema de login direcionamento e renderização por perfil de usuário.</p>
+            </li>
 
-          <li className={style.login__content_principaisFuncionalidades}>
-            <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} /> 
-            <p className={style.login__content_texto}>Agricultor pode fazer um cadastro como solicitação de vínculo com a cooperativa.</p>
-          </li>
-        </ul>
+            <li className={style.login__content_principaisFuncionalidades}>
+              <Image src="/assets/Vector.svg" className={style.login__content_image} alt="Sementes" width={13} height={13} />
+              <p className={style.login__content_texto}>Agricultor pode fazer um cadastro como solicitação de vínculo com a cooperativa.</p>
+            </li>
+          </ul>
 
-        <div className={style.login__content_botao}>
-          <button className={style.login__content_button}>
-            <Link className={style.login__content_link} href="/public">
-              <h1>Acesse o sistema</h1>
-            </Link>
-          </button>
+          <div className={style.login__content_botao}>
+            <button className={style.login__content_button}>
+              <Link className={style.login__content_link} href="/public">
+                <h1>Acesse o sistema</h1>
+              </Link>
+            </button>
+          </div>
+
+
         </div>
-
-
       </div>
     </div>
-  </div>
   )
 }
 
