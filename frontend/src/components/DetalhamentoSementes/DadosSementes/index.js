@@ -121,7 +121,7 @@ export default function DadosSementes({ formik, editar }) {
                                 name="dominioPublico"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.dominioPublico}
+                                value={formik.values.dominioPublico ? 'Sim' : 'Não'}
                                 disabled
                             />
                         </div>
@@ -132,7 +132,7 @@ export default function DadosSementes({ formik, editar }) {
                                 name="polinizaacaoAbertaMelhorada"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.polinizaacaoAbertaMelhorada}
+                                value={formik.values.polinizaacaoAbertaMelhorada ? 'Sim' : 'Não'}
                                 disabled
                             />
                         </div>
@@ -171,8 +171,8 @@ export default function DadosSementes({ formik, editar }) {
                         </div>
                         <div>
                             <label htmlFor="doencas">Resistência à Doenças</label>
-                            <input
-                                className={styles.container__ContainerForm_form_input}
+                            <textarea
+                                className={styles.container__ContainerForm_form_textareaDetalhamento}
                                 name="doencas"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
@@ -182,8 +182,8 @@ export default function DadosSementes({ formik, editar }) {
                         </div>
                         <div>
                             <label htmlFor="pragas">Resistência à Pragas</label>
-                            <input
-                                className={styles.container__ContainerForm_form_input}
+                            <textarea
+                                className={styles.container__ContainerForm_form_textareaDetalhamento}
                                 name="pragas"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
@@ -193,8 +193,8 @@ export default function DadosSementes({ formik, editar }) {
                         </div>
                         <div>
                             <label htmlFor="finalidades">Finalidade </label>
-                            <input
-                                className={styles.container__ContainerForm_form_input}
+                            <textarea
+                                className={styles.container__ContainerForm_form_textareaDetalhamento}
                                 name="finalidades"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}

@@ -64,7 +64,8 @@ function Footer() {
                 contentLabel="Informações da COPPABACS"
                 style={{
                     overlay: {
-                        backgroundColor: 'transparent'
+                        backgroundColor: 'transparent',
+                        zIndex: 1000,
                     },
                     content: {
                         width: '70%',
