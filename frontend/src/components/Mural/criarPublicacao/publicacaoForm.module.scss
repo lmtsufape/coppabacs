@@ -48,7 +48,7 @@
       label {
         margin: 0 0 0.5em 0;
         font-size: 1em;
-        font-weight: normal;
+        font-weight: bold;
 
         &span {
           color: red;
@@ -58,7 +58,7 @@
       &_input {
         width: 100%;
         padding: 0.5em;
-        margin: 0.1em 0 1em 0;
+        margin: 1em 0 1em 0;
         border: 1px solid #A7A7A7;
         border-radius: 5px;
         font-size: 1em;
@@ -223,6 +223,13 @@
       }
     }
   }
+}
+
+.error_message{
+  color: red;
+  font-size: 0.8em;
+  margin: -0.8em 0 1em 0;
+
 }
 
 @media only screen and (min-width: 414px) and (max-width: 700px) {

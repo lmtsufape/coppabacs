@@ -1,6 +1,6 @@
 
 import ListFuncionarios from "@/components/ListFuncionarios";
-import styles from "@/app/funcionarios/funcionarios.module.scss";
+import styles from "@/app/colaboradores/colaboradores.module.scss";
 
 export default function funcionariosPage() {
 

@@ -63,7 +63,7 @@ const LayoutAdmin = () => {
     <>
       <Card title="Agricultores(as)" icon="/assets/iconAgricultor.svg" description="Agricultores" link="/agricultores" />
       <Card title="Coordenadores" icon="/assets/IconCordenadores.svg" description="Coordenadores" link="/coordenadores" />
-      <Card title="Colaboradores" icon="/assets/iconAssociates.svg" description="Funcionários" link="/funcionarios" />
+      <Card title="Colaboradores" icon="/assets/iconAssociates.svg" description="Funcionários" link="/colaboradores" />
       <Card title="Bancos de Sementes" icon="/assets/iconBancoDeSementes.svg" description="Banco Sementes" link="/bancoSementes" />
       <Card title="Gestão de Sementes" icon="/assets/iconSeedGreen.svg" description="Sementes" link="/sementes" />
       <Card title="Mural" icon="/assets/iconMural.svg" description="Mural" link="/mural" />
