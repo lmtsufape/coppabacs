@@ -82,7 +82,7 @@ export default function ListFuncionarios({ diretorioAnterior, diretorioAtual, hr
                 <li>
                   <div className={style.botaoDropdown__button}>
                   <Image src="/assets/iconMaisAgricultor.svg" alt="Adicionar Novo Funcionario" width={27} height={24} />
-                    <Link className={style.header__container_link} href="funcionarios/novoFuncionario">
+                    <Link className={style.header__container_link} href="colaboradores/novoColaborador">
                       <h1>
                         Adicionar Funcionário(a)
                       </h1>
@@ -96,7 +96,7 @@ export default function ListFuncionarios({ diretorioAnterior, diretorioAtual, hr
           <div className={style.botoes}>
             <button>
 
-              <Link className={style.header__container_link} href="funcionarios/novoFuncionario">
+              <Link className={style.header__container_link} href="colaboradores/novoColaborador">
                 <h1>
                   Adicionar Colaborador(a)
                 </h1>

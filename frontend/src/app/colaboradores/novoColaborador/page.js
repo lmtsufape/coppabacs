@@ -9,7 +9,7 @@ export default function novoFuncionarioPage() {
                 <FuncionarioForm
                     diretorioAnterior="Home / Colaboradores /"
                     diretorioAtual="Novo(a) Colaborador(a)"
-                    hrefAnterior="/funcionarios" />
+                    hrefAnterior="/colaboradores" />
             </div>
         </div>
     );

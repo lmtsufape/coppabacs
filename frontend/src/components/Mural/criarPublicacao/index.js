@@ -119,7 +119,7 @@ export default function CriarPostagem({ hrefAnterior, diretorioAtual, diretorioA
                             </div>
 
                             <div className={style.form_group}>
-                                <label htmlFor="texto">Texto da postagem</label>
+                                <label htmlFor="texto">Texto da Postagem</label>
                                 <Field name="texto" as="textarea" rows="10" className={style.container__ContainerForm_form_input} />
                                 <ErrorMessage name="texto" component="div" className={style.error_message} />
                             </div>
