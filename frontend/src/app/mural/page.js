@@ -8,7 +8,7 @@ export default function muralPage() {
             <Mural
                 diretorioAnterior="Home / "
                 diretorioAtual="Mural"
-                hrefAnterior="/public"
+                hrefAnterior="/"
             />
 
         </div>

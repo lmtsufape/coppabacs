@@ -22,8 +22,8 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                         </div>
                         <div>
                             <label htmlFor="caracteristicasPositiva">Características Positivas</label>
-                            <input
-                                className={styles.container__ContainerForm_form_input}
+                            <textarea
+                                className={styles.container__ContainerForm_form_textareaDetalhamento}
                                 name="regiaoColetaDados"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
@@ -33,8 +33,8 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                         </div>
                         <div>
                             <label htmlFor="caracteristicasNegativas">Características Negativas</label>
-                            <input
-                                className={styles.container__ContainerForm_form_input}
+                            <textarea
+                                className={styles.container__ContainerForm_form_textareaDetalhamento}
                                 name="regiaoColetaDados"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
@@ -44,8 +44,8 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                         </div>
                         <div>
                             <label htmlFor="descricao">Breve Descrição</label>
-                            <input
-                                className={styles.container__ContainerForm_form_input}
+                            <textarea
+                                className={styles.container__ContainerForm_form_textareaDetalhamentoDescrição}
                                 name="regiaoColetaDados"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}

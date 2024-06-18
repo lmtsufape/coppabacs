@@ -304,10 +304,6 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
                           <Image src="/assets/iconLapis.svg" alt="editar perfil" width={15} height={15} />
                         </button>
 
-                        <button
-                          className={style.container__profile_buttonDesativar}>
-                          <span>Desativar Banco</span>
-                        </button>
                       </div>
                     )}
                   </div>
