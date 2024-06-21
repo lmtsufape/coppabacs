@@ -40,9 +40,11 @@ public class WebSecurityConfig {
 			.authorizeHttpRequests(authz -> authz
 					// Rotas públicas
 					.requestMatchers(HttpMethod.POST,"/api/v1/login").permitAll()
+                    .requestMatchers(HttpMethod.POST,"/api/v1/agricultor/usuario/**").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/banco-sementes/**").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/sementes/**").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/post/**").permitAll()
+					.requestMatchers(HttpMethod.POST, "/api/v1/arquivos/**").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/arquivos/**").permitAll()
 					// rotas de agricultor
 					.requestMatchers(HttpMethod.GET, "/api/v1/usuario/e/**").permitAll()
@@ -70,7 +72,7 @@ public class WebSecurityConfig {
 					.requestMatchers("/api/v1/coppabacs/**").hasRole("COPPABACS")
 					
 					// rotas de arquivos
-					.requestMatchers(HttpMethod.POST, "/api/v1/arquivos/**").hasAnyRole("AGRICULTOR", "GERENTE", "COPPABACS")
+
 					.requestMatchers(HttpMethod.DELETE, "/api/v1/arquivos/**").hasAnyRole("GERENTE", "COPPABACS")
 					.anyRequest().authenticated()
 			)

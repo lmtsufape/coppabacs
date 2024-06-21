@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import DetalhamentoBanco from "../DetalhamentoBancoSemente";
 import { getBanco } from "@/api/bancoSementes/getBanco";
 import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
-import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
+import { getAgricultorEmail } from "@/api/usuarios/agricultor/getAgricultorEmail";
 
 export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3 }) {
 
@@ -233,9 +233,10 @@ const LayoutAgricultor = () => {
       mutate();
     }
   }, [agricultor.bancoId]);
-  const mutationAgricultor = useMutation(agricultorEmail => getUsuarioEmail(agricultorEmail), {
+  const mutationAgricultor = useMutation(agricultorEmail => getAgricultorEmail(agricultorEmail), {
     onSuccess: (res) => {
       setAgricultor(res.data);
+      console.log(res.data);
     },
     onError: (error) => {
       console.error('Erro ao recuperar as informações do coordenador:', error);

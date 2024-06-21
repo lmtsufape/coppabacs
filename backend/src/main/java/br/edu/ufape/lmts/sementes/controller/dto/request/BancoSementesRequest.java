@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter @Setter @NoArgsConstructor  @AllArgsConstructor
 public  class BancoSementesRequest  {
 	private String nome;
@@ -21,6 +23,7 @@ public  class BancoSementesRequest  {
 	private long id;
 	private String responsavel;
 	private String contato;
+	private List<String> imagens;
 
 	public BancoSementes convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

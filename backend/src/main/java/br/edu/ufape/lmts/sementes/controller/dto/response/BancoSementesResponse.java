@@ -23,6 +23,7 @@ public  class BancoSementesResponse  {
 	private ObjetosBancoSementesResponse objetos;
 	private String responsavel;
 	private String contato;
+	private List<String> imagens;
 
 	public BancoSementesResponse(BancoSementes obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
