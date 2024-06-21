@@ -25,8 +25,6 @@ public class AgricultorRequest extends UsuarioRequest {
 	private List<String> atividadesRurais;
 	private List<AtividadeRuralRequest> atividadesRuralRequests;
 
-
-
 	public Agricultor convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		if (atividadesRurais != null) {

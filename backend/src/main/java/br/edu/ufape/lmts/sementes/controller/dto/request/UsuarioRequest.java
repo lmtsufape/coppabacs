@@ -4,22 +4,28 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import lombok.AllArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 import org.modelmapper.ModelMapper;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
+import br.edu.ufape.lmts.sementes.controller.validation.CPFExistsValidation;
+import br.edu.ufape.lmts.sementes.controller.validation.ContatoExistsValidation;
+import br.edu.ufape.lmts.sementes.controller.validation.EmailExistsValidation;
 import br.edu.ufape.lmts.sementes.model.Usuario;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Data
 @Getter
 @Setter
 @NoArgsConstructor
@@ -32,6 +38,7 @@ public class UsuarioRequest {
 	private String nome;
 	@Email(message = "Email inválido")
 	@NotEmpty(message = "Preenchimento obrigatório")
+	@EmailExistsValidation
 	private String email;
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String senha;
@@ -40,9 +47,12 @@ public class UsuarioRequest {
 	@NotNull(message = "Preenchimento obrigatório")
 	private EnderecoRequest endereco;
 	@NotEmpty(message = "Preenchimento obrigatório")
+	@CPF(message = "CPF inválido")
+	@CPFExistsValidation
 	private String cpf;
 	@JsonFormat(pattern = "dd-MM-yyyy")
 	private Date dataNascimento;
+	@ContatoExistsValidation
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String contato;
 	@NotEmpty(message = "Preenchimento obrigatório")

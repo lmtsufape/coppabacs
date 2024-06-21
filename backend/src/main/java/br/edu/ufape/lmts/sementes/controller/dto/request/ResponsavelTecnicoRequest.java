@@ -1,6 +1,8 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
 import lombok.AllArgsConstructor;
+
+import org.hibernate.validator.constraints.br.CPF;
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
@@ -15,6 +17,7 @@ public class ResponsavelTecnicoRequest {
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String nome;
 	@NotEmpty(message = "Preenchimento obrigatório")
+	@CPF(message = "CPF inválido")
 	private String cpf;
 	private String numeroConselho;
 	@NotEmpty(message = "Preenchimento obrigatório")

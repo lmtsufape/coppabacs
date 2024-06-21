@@ -158,6 +158,18 @@ public class Facade {
 	public Usuario findUsuarioByEmail(String email) {
 		return usuarioService.findUsuarioByEmail(email);
 	}
+	
+	public boolean UsuarioEmailExists(String email) {
+		return usuarioService.emailExists(email);
+	}
+	
+	public boolean UsuarioCpfExists(String cpf) {
+		return usuarioService.cpfExists(cpf);
+	}
+	
+	public boolean UsuarioContatoExists(String contato) {
+		return usuarioService.contatoExists(contato);
+	}
 
 	public List<Usuario> getAllUsuario() {
 		return usuarioService.getAllUsuario();

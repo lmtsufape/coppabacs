@@ -13,8 +13,12 @@ public interface UsuarioServiceInterface {
 	Usuario findUsuarioById(long id);
 	Usuario findUsuarioByEmail(String email);
 	Usuario updateUsuario(Usuario u);
+	boolean emailExists(String email);
+	boolean cpfExists(String cpf);
+	boolean contatoExists(String contato);
 	void deleteUsuario(Usuario u);
 	void deleteUsuario(long id);
 	List<Usuario> getAllUsuario();
 	Page<Usuario> findPageUsuario(Pageable pageRequest);
+	
 }
