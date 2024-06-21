@@ -15,7 +15,7 @@ import api from "@/api/http-common";
 import Image from "next/image";
 
 const Login = () => {
-    const [email, setEmail] = useState("");
+    const [cpf, setCpf] = useState("");
     const [senha, setSenha] = useState("");
     const { push } = useRouter();
   
@@ -24,13 +24,13 @@ const Login = () => {
   
     const { status, mutate } = useMutation(
       async () => {
-        return postLogin(email, senha);
+        return postLogin(cpf, senha);
       }, {
       onSuccess: (res) => {
         api.defaults.headers.authorization = `${res.headers.authorization}`;
         setStorageItem("token", res.headers.authorization)
-        dispatch(setUserLogin(email));
-        setStorageItem("userLogin", email);
+        dispatch(setUserLogin(cpf));
+        setStorageItem("userLogin", cpf);
         userDetailsMutation.mutate();
       },
       onError: (error) => {
@@ -63,9 +63,9 @@ const Login = () => {
           <div className={style.login__login}>
           <form onSubmit={(e) => { e.preventDefault(); mutate(); }}>
               <h1 className={style.login__login_title}>Entrar</h1>
-              <label htmlFor="email" className={style.login__login_label}>
-                <p>E-mail</p>
-                <input type="email" name="email" placeholder="Digite seu e-mail" value={email} onChange={(e) => setEmail(e.target.value)}  />
+              <label htmlFor="cpf" className={style.login__login_label}>
+                <p>CPF</p>
+                <input type="cpf" name="cpf" placeholder="Digite seu CPF" value={cpf} onChange={(e) => setCpf(e.target.value)}  />
               </label>
               <label htmlFor="senha" className={style.login__login_label}>
                 <p>Senha</p>
