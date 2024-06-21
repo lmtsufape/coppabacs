@@ -6,7 +6,6 @@ import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
-import br.edu.ufape.lmts.sementes.model.AtividadeRural;
 import br.edu.ufape.lmts.sementes.model.BancoSementes;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +15,7 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor 
 public  class AgricultorUpdateRequest extends UsuarioUpdateRequest {
 	private long bancoId;
-	private List<String> atividadesRurais; 
+	private String atividadesRurais; 
 	private List<String> sementes;
 
 	public Agricultor convertToEntity() {
@@ -25,7 +24,6 @@ public  class AgricultorUpdateRequest extends UsuarioUpdateRequest {
 		BancoSementes banco = new BancoSementes();
 		banco.setId(bancoId);
 		obj.setBancoSementes(banco);
-		obj.setAtividadeRural(atividadesRurais.stream().map(n -> new AtividadeRural(n)).toList());
 		return obj;
 	}
 }

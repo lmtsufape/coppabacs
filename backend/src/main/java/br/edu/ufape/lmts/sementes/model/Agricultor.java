@@ -9,7 +9,6 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,9 +24,7 @@ public class Agricultor extends Usuario {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@ToString.Exclude
 	private BancoSementes bancoSementes;
-	@ManyToMany
-	@ToString.Exclude
-	private List<AtividadeRural> atividadeRural = new ArrayList<>();
+	private String atividadesRurais;
 	@ManyToMany
 	@ToString.Exclude
 	private List<Sementes> sementes = new ArrayList<>();
