@@ -1102,7 +1102,7 @@ public class Facade {
 	
 	private Agricultor saveAgricultorA(Agricultor newInstance) throws EmailExistsException {
 		bancoSementesService.findBancoSementesById(newInstance.getBancoSementes().getId());
-		usuarioService.saveUsuario(newInstance);
+		this.saveUsuario(newInstance);
 		return agricultorService.saveAgricultor(newInstance);
 	}
 
@@ -1138,7 +1138,7 @@ public class Facade {
 	}
 
 	public Agricultor updateAgricultor(Agricultor transientObject) {
-		//bancoSementesService.findBancoSementesById(transientObject.getBancoSementes().getId());
+		this.updateUsuario(transientObject);
 		return agricultorService.updateAgricultor(transientObject);
 	}
 
