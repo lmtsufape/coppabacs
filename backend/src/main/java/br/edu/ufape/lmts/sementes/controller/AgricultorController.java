@@ -2,10 +2,6 @@ package br.edu.ufape.lmts.sementes.controller;
 
 import java.util.List;
 
-import br.edu.ufape.lmts.sementes.controller.dto.request.SementesRequest;
-import br.edu.ufape.lmts.sementes.controller.dto.response.SementesResponse;
-import br.edu.ufape.lmts.sementes.controller.dto.response.UsuarioResponse;
-
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
@@ -31,6 +27,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.AgricultorRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.request.AgricultorUpdateRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.SementesRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.AgricultorResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Agricultor;

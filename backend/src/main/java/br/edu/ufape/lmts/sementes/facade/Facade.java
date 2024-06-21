@@ -158,6 +158,22 @@ public class Facade {
 	public Usuario findUsuarioByEmail(String email) {
 		return usuarioService.findUsuarioByEmail(email);
 	}
+	
+	public Usuario findUsuarioByCpf(String cpf) {
+		return usuarioService.findUsuarioByCpf(cpf);
+	}
+	
+	public boolean UsuarioEmailExists(String email) {
+		return usuarioService.emailExists(email);
+	}
+	
+	public boolean UsuarioCpfExists(String cpf) {
+		return usuarioService.cpfExists(cpf);
+	}
+	
+	public boolean UsuarioContatoExists(String contato) {
+		return usuarioService.contatoExists(contato);
+	}
 
 	public List<Usuario> getAllUsuario() {
 		return usuarioService.getAllUsuario();
@@ -176,7 +192,7 @@ public class Facade {
 	}
 	
 	public Usuario findLoggedUser() {
-		Usuario logged = findUsuarioByEmail(userDetailsServiceImpl.authenticated().getEmail());
+		Usuario logged = findUsuarioByCpf(userDetailsServiceImpl.authenticated().getCpf());
 		if(logged == null)
 			throw new AuthenticationException("Usuário não autenticado");
 		return logged;
@@ -1085,7 +1101,6 @@ public class Facade {
 	private AgricultorService agricultorService;
 	
 	private Agricultor saveAgricultorA(Agricultor newInstance) throws EmailExistsException {
-		newInstance.setAtividadeRural(saveAtividadesRuraisFromAgricultor(newInstance.getAtividadeRural()));
 		bancoSementesService.findBancoSementesById(newInstance.getBancoSementes().getId());
 		usuarioService.saveUsuario(newInstance);
 		return agricultorService.saveAgricultor(newInstance);
@@ -1123,7 +1138,6 @@ public class Facade {
 	}
 
 	public Agricultor updateAgricultor(Agricultor transientObject) {
-		//transientObject.setAtividadeRural(saveAtividadesRuraisFromAgricultor(transientObject.getAtividadeRural()));
 		//bancoSementesService.findBancoSementesById(transientObject.getBancoSementes().getId());
 		return agricultorService.updateAgricultor(transientObject);
 	}

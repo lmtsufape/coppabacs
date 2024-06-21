@@ -40,6 +40,10 @@ public class UsuarioService implements UsuarioServiceInterface {
 	public Usuario findUsuarioByEmail(String email) {
 		return repository.findByAtivoTrueAndEmail(email).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Usuario with Email = " + email));
 	}
+	
+	public Usuario findUsuarioByCpf(String cpf) {
+		return repository.findByAtivoTrueAndCpf(cpf).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Usuario with CPF = " + cpf));
+	}
 
 	public List<Usuario> getAllUsuario(){
 		return repository.findByAtivoTrue();
@@ -59,6 +63,14 @@ public class UsuarioService implements UsuarioServiceInterface {
 
 	public boolean emailExists(String email) {
 		return repository.existsByEmail(email);
+	}
+	
+	public boolean cpfExists(String cpf) {
+		return repository.existsByCpf(cpf);
+	}
+	
+	public boolean contatoExists(String contato) {
+		return repository.existsByContato(contato);
 	}
 
 	public void addRoleToUser(Usuario usuario, TipoUsuario tipoUsuario) {

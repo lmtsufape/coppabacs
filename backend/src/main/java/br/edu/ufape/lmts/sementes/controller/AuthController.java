@@ -6,7 +6,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +17,7 @@ import br.edu.ufape.lmts.sementes.auth.TokenService;
 import br.edu.ufape.lmts.sementes.controller.dto.request.AuthRequest;
 
 @RestController
-@CrossOrigin (origins = "http://localhost:3000", allowCredentials = "true" )
+@CrossOrigin (origins = "http://localhost:8081", allowCredentials = "true" )
 @RequestMapping("/api/v1/")
 public class AuthController {
 
@@ -26,12 +25,10 @@ public class AuthController {
 	private AuthenticationManager authenticationManager;
 	@Autowired
 	private TokenService tokenService;
-	@Autowired
-	private PasswordEncoder passwordEncoder;
 
 	@PostMapping("login")
 	public ResponseEntity<Void> login(@RequestBody AuthRequest data) {
-		var userNamePassword = new UsernamePasswordAuthenticationToken(data.getEmail(), data.getSenha());
+		UsernamePasswordAuthenticationToken userNamePassword = new UsernamePasswordAuthenticationToken(data.getCpf(), data.getSenha());
 		Authentication auth = this.authenticationManager.authenticate(userNamePassword);
 		String token = tokenService.generateToken((AuthUser) auth.getPrincipal());
 		return ResponseEntity.ok().header("Authorization", "Bearer " + token).header("access-control-expose-headers", "Authorization").build();

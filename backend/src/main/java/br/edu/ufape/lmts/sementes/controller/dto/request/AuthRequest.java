@@ -1,28 +1,14 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
+import lombok.Getter;
+
+@Getter
 public class AuthRequest {
-	private String email;
+	private String cpf;
 	private String senha;
 	
-	public AuthRequest(String email, String senha) {
-		this.email = email;
+	public AuthRequest(String cpf, String senha) {
+		this.cpf = cpf;
 		this.senha = senha;
 	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-	
 }

@@ -29,7 +29,7 @@ public class TokenService {
 			Algorithm algorithm = Algorithm.HMAC256(secret);
 			Long expirationTime;
 			expirationTime = (usuario.getRoles().contains(TipoUsuario.AGRICULTOR)) ? expirationUser : expirationAdmins;
-			String token = JWT.create().withIssuer("Projeto Sementes").withSubject(usuario.getEmail())
+			String token = JWT.create().withIssuer("Projeto Sementes").withSubject(usuario.getCpf())
 					.withExpiresAt(new Date(System.currentTimeMillis() + expirationTime)).sign(algorithm);
 			return token;
 
