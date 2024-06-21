@@ -10,37 +10,26 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.model.Usuario;
+import lombok.Getter;
 
-public class AuthUser implements UserDetails{
-	
+@Getter
+public class AuthUser implements UserDetails {
+
 	private static final long serialVersionUID = 1L;
-	
-	private String email;
+
+	private String cpf;
 	private String senha;
 	private Set<TipoUsuario> roles;
-	
+
 	public AuthUser(Usuario usuario) {
-		this.email = usuario.getEmail();
+		this.cpf = usuario.getCpf();
 		this.senha = usuario.getSenha();
 		this.roles = usuario.getRoles();
-	}
-	
-	public String getEmail() {
-		return email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public Set<TipoUsuario> getRoles() {
-		return roles;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return this.roles.stream().map(role -> new SimpleGrantedAuthority(role.getRole()))
-				.collect(Collectors.toList());
+		return this.roles.stream().map(role -> new SimpleGrantedAuthority(role.getRole())).collect(Collectors.toList());
 	}
 
 	@Override
@@ -50,7 +39,7 @@ public class AuthUser implements UserDetails{
 
 	@Override
 	public String getUsername() {
-		return this.email;
+		return this.cpf;
 	}
 
 	@Override

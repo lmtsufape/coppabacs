@@ -159,6 +159,10 @@ public class Facade {
 		return usuarioService.findUsuarioByEmail(email);
 	}
 	
+	public Usuario findUsuarioByCpf(String cpf) {
+		return usuarioService.findUsuarioByCpf(cpf);
+	}
+	
 	public boolean UsuarioEmailExists(String email) {
 		return usuarioService.emailExists(email);
 	}
@@ -188,7 +192,7 @@ public class Facade {
 	}
 	
 	public Usuario findLoggedUser() {
-		Usuario logged = findUsuarioByEmail(userDetailsServiceImpl.authenticated().getEmail());
+		Usuario logged = findUsuarioByCpf(userDetailsServiceImpl.authenticated().getCpf());
 		if(logged == null)
 			throw new AuthenticationException("Usuário não autenticado");
 		return logged;

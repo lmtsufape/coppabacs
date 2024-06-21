@@ -12,6 +12,7 @@ public interface UsuarioServiceInterface {
 	Usuario saveUsuario(Usuario o) throws EmailExistsException;
 	Usuario findUsuarioById(long id);
 	Usuario findUsuarioByEmail(String email);
+	Usuario findUsuarioByCpf(String cpf);
 	Usuario updateUsuario(Usuario u);
 	boolean emailExists(String email);
 	boolean cpfExists(String cpf);

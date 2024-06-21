@@ -17,8 +17,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private UsuarioRepository repository;
 
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Usuario usuario = repository.findByAtivoTrueAndEmail(email).orElseThrow(() -> new UsernameNotFoundException(email));
+	public UserDetails loadUserByUsername(String cpf) throws UsernameNotFoundException {
+		Usuario usuario = repository.findByAtivoTrueAndCpf(cpf).orElseThrow(() -> new UsernameNotFoundException(cpf));
         return new AuthUser(usuario);
 	}
 	

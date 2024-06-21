@@ -72,9 +72,15 @@ public class UsuarioController {
 	}
 
 	@GetMapping("usuario/e/{email}")
-	public UsuarioResponse getUsuarioById(@PathVariable String email){
+	public UsuarioResponse getUsuarioByEmail(@PathVariable String email){
 		return new UsuarioResponse(facade.findUsuarioByEmail(email));
 	}
+	
+	@GetMapping("usuario/cpf/{cpf}")
+	public UsuarioResponse getUsuarioByCpf(@PathVariable String cpf){
+		return new UsuarioResponse(facade.findUsuarioByCpf(cpf));
+	}
+	
 	@PatchMapping("usuario/{id}")
 	public UsuarioResponse updateUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioUpdateRequest obj) {
 		try {
