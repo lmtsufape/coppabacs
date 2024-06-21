@@ -37,7 +37,6 @@ public class UsuarioRequest {
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String nome;
 	@Email(message = "Email inválido")
-	@NotEmpty(message = "Preenchimento obrigatório")
 	@EmailExistsValidation
 	private String email;
 	@NotEmpty(message = "Preenchimento obrigatório")
