@@ -47,7 +47,8 @@ public class WebSecurityConfig {
 					.requestMatchers(HttpMethod.POST, "/api/v1/arquivos/**").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/arquivos/**").permitAll()
 					// rotas de agricultor
-					.requestMatchers(HttpMethod.GET, "/api/v1/usuario/e/**").permitAll()
+					.requestMatchers(HttpMethod.GET, "/api/v1/usuario/e/**").hasAnyRole("AGRICULTOR", "GERENTE", "COPPABACS").
+					requestMatchers(HttpMethod.GET, "/api/v1/usuario/cpf/**").hasAnyRole("AGRICULTOR", "GERENTE", "COPPABACS")
 					.requestMatchers("/api/v1/agricultor/**").hasAnyRole("AGRICULTOR", "GERENTE", "COPPABACS")
 					.requestMatchers(HttpMethod.GET, "/api/v1/agricultor/e/**").hasAnyRole("AGRICULTOR", "GERENTE", "COPPABACS")
 					.requestMatchers(HttpMethod.PATCH, "/api/v1/agricultor/**").hasAnyRole("GERENTE", "COPPABACS")
