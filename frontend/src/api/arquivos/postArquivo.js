@@ -2,6 +2,10 @@
 
 import api from "@/api/http-common.js";
 
+import { getStorageItem } from "@/utils/localStore";
+const token = getStorageItem("token");
+
+
 export async function postArquivo(arquvios) {
     const formData = new FormData();
     for (let i = 0; i < arquvios.length; i++) {

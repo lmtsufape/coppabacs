@@ -18,6 +18,7 @@ import HeaderDetalhamento from '../HeaderDetalhamento';
 import ListAgricultoresBanco from '../ListAgricultoresBanco';
 import ListSementesBanco from "@/components/ListSementesBanco";
 import ListTransacoes from '../ListTransacoes';
+import { postArquivo } from '@/api/arquivos/postArquivo';
 
 const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, banco, usuario, backDetalhamento }) => {
   const [role, setRole] = useState(getStorageItem("userRole"));
@@ -27,6 +28,7 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
   const [retiradasBanco, setRetiradasBanco] = useState(null);
   const [editar, setEditar] = useState(false);
   const [open, setOpen] = useState(false);
+  const [imagensArquivos, setImagensArquivos] = useState([]);
   const [formData, setFormData] = useState({
     nome: '',
     comunidade: '',
@@ -53,7 +55,8 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
       plantadeira: '',
       lona: '',
       batedeiraCereal: ''
-    }
+    },
+    imagens: []
   });
   useEffect(() => {
     if (banco) {
@@ -66,7 +69,8 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
         endereco: banco.endereco || {},
         objetos: banco.objetos || {},
         responsavel: banco.responsavel || '',
-        contato: banco.contato || ''
+        contato: banco.contato || '',
+        imagens: banco.imagens || []
       });
     }
   }, [banco]);
@@ -81,12 +85,40 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
     onSuccess: () => {
       console.log('Dados atualizados com sucesso');
       setEditar(false)
+      window.location.reload();
       backDetalhamento();
     },
     onError: (error) => {
       console.error('Erro ao tentar atualizar os dados:', error);
     }
   });
+
+  const handleSubmit = async (values, { setSubmitting, setFieldValue }) => {
+    setSubmitting(true);
+    try {
+      console.log("Uploading images...");
+      console.log("Values:", values);
+      const imageUrls = await postArquivo(imagensArquivos);
+      console.log("Images uploaded, URLs:", imageUrls);
+
+    // Garantir que values.imagens é um array antes de concatenar
+    if (!Array.isArray(values.imagens)) {
+      values.imagens = [];
+  }
+
+  // Adicionar os novos URLs ao array existente de values.imagens
+  values.imagens = values.imagens.concat(imageUrls);
+
+      console.log("Submitting post:", values);
+      mutation.mutate(values);
+    } catch (error) {
+      console.error("Error uploading images or submitting post", error);
+      setErrorMessage("Error uploading images or submitting post");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   if (agricultoresBanco) {
     return (
       <ListAgricultoresBanco
@@ -189,10 +221,7 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
         <Formik
           initialValues={formData}
           enableReinitialize
-          onSubmit={(values, { setSubmitting }) => {
-            mutation.mutate(values);
-            setSubmitting(false);
-          }}
+          onSubmit={handleSubmit}
         >
 
           {formik => (
@@ -274,7 +303,7 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
               <DadosBanco formik={formik} editar={editar} />
               <DadosEndereco formik={formik} editar={editar} />
               <DadosObjetosBanco formik={formik} editar={editar} />
-              <ImagensBanco />
+              <ImagensBanco formik={formik} editar={editar} setImagensArquivos={setImagensArquivos} />
               {
                 (usuario === "coordenador" || usuario === "admin") && (
                   <div>

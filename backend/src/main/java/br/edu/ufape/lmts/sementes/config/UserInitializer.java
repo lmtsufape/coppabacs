@@ -84,7 +84,7 @@ public class UserInitializer implements CommandLineRunner {
 			admin.setContato("11 11111-1111");
 			admin.setEndereco(null);
 			admin.setSexo("admin");
-			admin.setSenha(passwordEncoder.encode("AdminSenha"));
+			admin.setSenha(passwordEncoder.encode("12345678"));
 			admin.setDataNascimento(new Date(18, 10, 2001));
 
 			userRepository.save(admin);
@@ -154,7 +154,7 @@ public class UserInitializer implements CommandLineRunner {
 
 		return new BancoSementesRequest("Banco de Sementes do Alto Sertão", "Comunidade Agrícola Sertaneja", "1997",
 				"Fundado com o objetivo de preservar variedades locais de sementes e promover a agricultura sustentável na região...",
-				"Milho Crioulo, Feijão Macassa, Mandioca Mansa, Sorgo Nativo, Abóbora Seridó", endereco, objetos,0, "Dono da porra toda","0800");
+				"Milho Crioulo, Feijão Macassa, Mandioca Mansa, Sorgo Nativo, Abóbora Seridó", endereco, objetos,0, "Dono","0800", new ArrayList<>());
 	}
 
 	private static List<SementesRequest> prepareAllSementes() {
