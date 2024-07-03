@@ -9,10 +9,12 @@ import style from "./agricultorForm.module.scss";
 import HeaderNavegacao from "../HeaderNavegacao";
 import DadosForm from "./DadosUsuario/index";
 import DadosEndereco from "./DadosEndereco";
-import DadosAtividadesRurais from "./DadosSementes";
+import DadosSementes from "./DadosSementes";
 import Link from "next/link";
 import Footer from "../Footer";
 import { postUsuario } from "@/api/usuarios/postUsuario";
+import { useRouter } from "next/navigation";
+import { addSementesAgricultor } from "@/api/usuarios/agricultor/addSementes";
 
 
 const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
@@ -43,12 +45,7 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       sexo: "",
     },
     bancoId: "",
-    producaoSementes: {
-      cultura: "",
-      variedade: "", 
-      previsaoVenda: "",
-      areaPlantada: ""
-    }
+    sementes: [],
   }
 
   const validateSchema = Yup.object().shape({
@@ -118,16 +115,15 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
       />
 
-      <div className={style.container__header}>
-        {etapas === 0 && <h1 className={style.container__header_currentNav}>1. Dados do Agricultor</h1>}
-        {etapas >= 1 && etapas <= 2 && <h1 className={style.container__header_current}>1. Dados do Agricultor</h1>}
+<div className={style.container__header}>
+        {etapas === 0 && <h1 className={style.container__header_currentNav}>1. Dados do(a) Agricultor(a)</h1>}
+        {etapas >= 1 && etapas <= 2 && <h1 className={style.container__header_current}>1. Dados do(a) Agricultor(a)</h1>}
 
         {etapas === 1 && <h1 className={style.container__header_currentNav}>2. Dados do Endereço</h1>}
         {etapas != 1 && <h1 className={style.container__header_current}>2. Dados do Endereço</h1>}
 
-        {etapas === 2 && <h1 className={style.container__header_currentNav}>3. Atividades Rurais</h1>}
-        {etapas >= 0 && etapas < 2 && <h1 className={style.container__header_current}>3. Atividades Rurais</h1>}
-
+        {etapas === 2 && <h1 className={style.container__header_currentNav}>3. Produção de Sementes</h1>}
+        {etapas >= 0 && etapas < 2 && <h1 className={style.container__header_current}>3. Produção de Sementes</h1>}
       </div>
 
       <div className={style.container__ContainerForm}>
@@ -154,7 +150,7 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
                 {etapas === 0 && <DadosForm formik={formik} />}
                 {etapas === 1 && <DadosEndereco formik={formik} />}
-                {etapas === 2 && <DadosAtividadesRurais formik={formik} />}
+                {etapas === 2 && <DadosSementes formik={formik} />}
                 {etapas === 0 && (
                   <div className={style.container__ContainerForm_buttons}>
                     <button type="button">
@@ -162,7 +158,9 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
                         <h1>Voltar</h1>
                       </Link>
                     </button>
-                    <button type="button" onClick={() => setEtapas(etapas + 1)}>
+                    <button
+                      type="button"
+                      onClick={() => setEtapas(etapas + 1)}>
                       <Link href="#header" className={style.container__ContainerForm_buttons_linkWhite}>
                         <h1>Continuar</h1>
                       </Link>
@@ -171,25 +169,35 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
                 )}
                 {etapas === 1 && (
                   <div className={style.container__ContainerForm_buttons}>
-                    <button type="button" onClick={() => setEtapas(etapas - 1)}>
+                    <button
+                      type="button"
+                      onClick={() => setEtapas(etapas - 1)}>
                       <Link href="#header" className={style.container__ContainerForm_buttons_link}>
                         <h1>Voltar</h1>
                       </Link>
                     </button>
-                    <button type="submit" className={style.container__ContainerForm_buttons_linkWhite}>
-                        <h1>Finalizar</h1>
+                    <button
+                      type="button"
+                      onClick={() => setEtapas(etapas + 1)}>
+                      <Link href="#header" className={style.container__ContainerForm_buttons_linkWhite}>
+                        <h1>Continuar</h1>
+                      </Link>
                     </button>
                   </div>
                 )}
                 {etapas === 2 && (
                   <div className={style.container__ContainerForm_buttons}>
-                    <button type="button" onClick={() => setEtapas(etapas - 1)}>
+                    <button
+                      type="button"
+                      onClick={() => setEtapas(etapas - 1)}>
                       <Link href="#header" className={style.container__ContainerForm_buttons_link}>
                         <h1>Voltar</h1>
                       </Link>
                     </button>
-                    <button type="submit" className={style.container__ContainerForm_buttons_linkWhite}>
-                        <h1>Finalizar</h1>
+                    <button
+                      type="submit"
+                      className={style.container__ContainerForm_buttons_linkWhite}>
+                      <h1>Finalizar</h1>
                     </button>
                   </div>
                 )}
