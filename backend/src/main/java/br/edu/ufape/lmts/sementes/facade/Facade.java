@@ -133,7 +133,9 @@ public class Facade {
 
 	public Usuario saveUsuario(Usuario newInstance) {
 		try {
+			System.out.println(newInstance.getSenha());
 			newInstance.setSenha(passwordEncoder.encode(newInstance.getSenha()));
+			System.out.println(newInstance.getSenha());
 			return usuarioService.saveUsuario(newInstance);
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao salvar o usuário", e);
@@ -207,11 +209,12 @@ public class Facade {
 	}
 
 	public Coppabacs saveCoppabacs(Coppabacs newInstance) throws EmailExistsException {
-		usuarioService.saveUsuario(newInstance);
+		this.saveUsuario(newInstance);
 		return coppabacsService.saveCoppabacs(newInstance);
 	}
 
 	public Coppabacs updateCoppabacs(Coppabacs transientObject) {
+		this.updateUsuario(transientObject);
 		return coppabacsService.updateCoppabacs(transientObject);
 	}
 
@@ -590,13 +593,13 @@ public class Facade {
 
 		bancoSementesService.findBancoSementesById(newInstance.getBancoSementes().getId());
 
-		usuarioService.saveUsuario(newInstance);
+		this.saveUsuario(newInstance);
 
 		return gerenteService.saveGerente(newInstance);
 	}
 
 	public Gerente updateGerente(Gerente transientObject) {
-		usuarioService.updateUsuario(transientObject);
+		this.updateUsuario(transientObject);
 		return gerenteService.updateGerente(transientObject);
 	}
 
@@ -1068,11 +1071,12 @@ public class Facade {
 	private AdminService adminService;
 
 	public Admin saveAdmin(Admin newInstance) throws EmailExistsException {
-		usuarioService.saveUsuario(newInstance);
+		this.saveUsuario(newInstance);
 		return adminService.saveAdmin(newInstance);
 	}
 
 	public Admin updateAdmin(Admin oldObject) {
+		this.updateUsuario(oldObject);
 		return adminService.updateAdmin(oldObject);
 	}
 

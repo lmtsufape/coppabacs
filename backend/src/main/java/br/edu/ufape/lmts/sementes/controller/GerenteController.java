@@ -81,6 +81,11 @@ public class GerenteController {
 	public GerenteResponse getGerenteByEmail(@PathVariable String email) {
 		return new GerenteResponse(facade.findGerenteByEmail(email));
 	}
+
+	@GetMapping("gerente/cpf/{cpf}")
+	public GerenteResponse getGerenteByCpf(@PathVariable String cpf) {
+		return new GerenteResponse((Gerente) facade.findUsuarioByCpf(cpf));
+	}
 	
 	@PatchMapping("gerente/{id}")
 	public GerenteResponse updateGerente(@PathVariable Long id, @RequestBody GerenteUpdateRequest obj) {
