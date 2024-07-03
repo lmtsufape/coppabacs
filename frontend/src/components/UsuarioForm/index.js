@@ -44,7 +44,6 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       sexo: "",
     },
     bancoId: "",
-    atividadesRurais: [],
     producaoSementes: {
       cultura: "",
       variedade: "", 

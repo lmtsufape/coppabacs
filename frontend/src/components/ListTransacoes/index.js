@@ -15,7 +15,7 @@ import { getAllAgricultores } from "@/api/usuarios/agricultor/getAllAgricultores
 import { getStorageItem } from "@/utils/localStore";
 import { getAllAgricultoresBanco } from "@/api/bancoSementes/getAgricultoresBanco";
 import { getCurrentUser } from "@/api/usuarios/getCurrentUser";
-import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
+import { getCoordenadorCpf } from "@/api/usuarios/coordenador/getCoordenadorCpf";
 import { getAllDoacoes } from "@/api/transacoes/doacoes/getAllDoacoes";
 import { getAllRetiradas } from "@/api/transacoes/retiradas/getAllRetiradas";
 import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
@@ -81,7 +81,7 @@ export default function ListTransacoes({ diretorioAnterior, diretorioAtual, href
 const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
 
-  const [agricultorEmail, setAgricultorEmail] = useState(getStorageItem("userLogin"));
+  const [agricultorCpf, setAgricultorCpf] = useState(getStorageItem("userLogin"));
   const [agricultor, setAgricultor] = useState([]);
   const [transacao, setTransacao] = useState([]);
 
@@ -94,7 +94,7 @@ const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAnt
   const [hrefAtual, setHrefAtual] = useState(null);
 
   useEffect(() => {
-    mutationAgricultor.mutate(agricultorEmail);
+    mutationAgricultor.mutate(agricultorCpf);
     if (agricultor.bancoId) {
       if (diretorioAtual === "Doações") {
         setDirAtual("Doação");
@@ -112,7 +112,7 @@ const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAnt
     }
   }, [agricultor.bancoId]);
 
-  const mutationAgricultor = useMutation(agricultorEmail => getUsuarioEmail(agricultorEmail), {
+  const mutationAgricultor = useMutation(agricultorCpf => getUsuarioEmail(agricultorCpf), {
     onSuccess: (res) => {
       setAgricultor(res.data);
     },
@@ -194,7 +194,7 @@ const LayoutAgricultor = ({ table1, table2, table3, table4, table5, diretorioAnt
 
 const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAtual, diretorioAnterior, hrefAnterior }) => {
 
-  const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
+  const [coordenadorCpf, setCoordenadorCpf] = useState(getStorageItem("userLogin"));
   const [open, setOpen] = useState(false);
   const [transacao, setTransacao] = useState([]);
 
@@ -207,7 +207,7 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAt
   const [hrefAtual, setHrefAtual] = useState(null);
 
   useEffect(() => {
-    mutationCoordenador.mutate(coordenadorEmail);
+    mutationCoordenador.mutate(coordenadorCpf);
     if (coordenador.bancoSementeId) {
       if (diretorioAtual === "Doações") {
         setDirAtual("Doação");
@@ -224,7 +224,7 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, table5, diretorioAt
     }
   }, [coordenador.bancoSementeId]);
 
-  const mutationCoordenador = useMutation(coordenadorEmail => getCoordenadorEmail(coordenadorEmail), {
+  const mutationCoordenador = useMutation(coordenadorCpf => getCoordenadorCpf(coordenadorCpf), {
     onSuccess: (res) => {
       setCoordenador(res.data);
     },

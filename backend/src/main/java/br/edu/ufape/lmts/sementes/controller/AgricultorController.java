@@ -29,6 +29,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.AgricultorRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.request.AgricultorUpdateRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.request.SementesRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.AgricultorResponse;
+import br.edu.ufape.lmts.sementes.controller.dto.response.UsuarioResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
@@ -106,8 +107,13 @@ public class AgricultorController {
 	}
 
 	@GetMapping("agricultor/e/{email}")
-	public AgricultorResponse getAgricultorById(@PathVariable String email) {
+	public AgricultorResponse getAgricultorByEmail(@PathVariable String email) {
 		return new AgricultorResponse(facade.findAgricultorByEmail(email));
+	}
+
+	@GetMapping("agricultor/cpf/{cpf}")
+	public AgricultorResponse getAgricultorByCpf(@PathVariable String cpf) {
+		return new AgricultorResponse((Agricultor) facade.findUsuarioByCpf(cpf));
 	}
 
 	@PutMapping("agricultor/{id}")

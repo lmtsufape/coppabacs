@@ -7,7 +7,7 @@ import { useMutation } from "react-query";
 import { getSementesBanco } from "@/api/sementes/getSementeBanco";
 import { getAllAgricultoresBanco } from "@/api/bancoSementes/getAgricultoresBanco";
 import { getStorageItem } from "@/utils/localStore";
-import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
+import { getCoordenadorCpf } from "@/api/usuarios/coordenador/getCoordenadorCpf";
 
 export default function DadosTabelaBanco({ formik }) {
     return (
