@@ -12,7 +12,7 @@ import { getAllAgricultores } from "@/api/usuarios/agricultor/getAllAgricultores
 import { getStorageItem } from "@/utils/localStore";
 import { getAllAgricultoresBanco } from "@/api/bancoSementes/getAgricultoresBanco";
 import { getCurrentUser } from "@/api/usuarios/getCurrentUser";
-import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
+import { getCoordenadorCpf } from "@/api/usuarios/coordenador/getCoordenadorCpf";
 import DetalhamentoUsuario from "../DetalhamentoUsuario";
 import HeaderDetalhamento from "../HeaderDetalhamento";
 
@@ -58,7 +58,7 @@ export default function ListAgricultoresBanco({ diretorioAnterior, diretorioAtua
 
 const LayoutCoordenador = ({ table1, table2, table3, table4, diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
-  const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
+  const [coordenadorCpf, setCoordenadorCpf] = useState(getStorageItem("userLogin"));
 
   const [Agricultores, setAgricultores] = useState([]);
 
@@ -68,13 +68,13 @@ const LayoutCoordenador = ({ table1, table2, table3, table4, diretorioAnterior, 
   const [selectedAgricultor, setSelectedAgricultor] = useState(null);
 
   useEffect(() => {
-    mutationCoordenador.mutate(coordenadorEmail);
+    mutationCoordenador.mutate(coordenadorCpf);
     if (coordenador.bancoSementeId) {
       mutate();
     }
   }, [coordenador.bancoSementeId]);
 
-  const mutationCoordenador = useMutation(coordenadorEmail => getCoordenadorEmail(coordenadorEmail), {
+  const mutationCoordenador = useMutation(coordenadorCpf => getCoordenadorCpf(coordenadorCpf), {
     onSuccess: (res) => {
       setCoordenador(res.data);
     },

@@ -5,17 +5,17 @@ import styles from "./sementes.module.scss";
 import { getAllSementes } from "@/api/sementes/getAllSementes";
 import { useMutation } from "react-query";
 import { getStorageItem } from "@/utils/localStore";
-import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
+import { getCoordenadorCpf } from "@/api/usuarios/coordenador/getCoordenadorCpf";
 
 export default function SelecionarSementesBanco({ formik }) {
-    const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
+    const [coordenadorCpf, setCoordenadorCpf] = useState(getStorageItem("userLogin"));
     const [coordenador, setCoordenador] = useState([]);
 
     const [sementes, setSementes] = useState([]);
     const [seletores, setSeletores] = useState([]);
     const [filtro, setFiltro] = useState('');
 
-    const mutationCoordenador = useMutation(coordenadorEmail => getCoordenadorEmail(coordenadorEmail), {
+    const mutationCoordenador = useMutation(coordenadorCpf => getCoordenadorCpf(coordenadorCpf), {
         onSuccess: (res) => {
             setCoordenador(res.data);
         },
@@ -24,7 +24,7 @@ export default function SelecionarSementesBanco({ formik }) {
         }
     });
     useEffect(() => {
-        mutationCoordenador.mutate(coordenadorEmail);
+        mutationCoordenador.mutate(coordenadorCpf);
         if(coordenador.bancoSementeId){
             mutate();
         }

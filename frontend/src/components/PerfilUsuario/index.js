@@ -20,14 +20,14 @@ import { addSementesAgricultor } from "@/api/usuarios/agricultor/addSementes";
 import { removeSementesAgricultor } from "@/api/usuarios/agricultor/removeSementes";
 import { getStorageItem } from "@/utils/localStore";
 import { getAgricultor } from "@/api/usuarios/agricultor/getAgricultor";
-import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
-import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
-import { getCoppabacsEmail } from "@/api/usuarios/coppabacs/getCoppabacsEmail";
+import { getCoordenadorCpf } from "@/api/usuarios/coordenador/getCoordenadorCpf";
+import { getUsuarioCpf } from "@/api/usuarios/getUsuarioCpf";
+import { getCoppabacsCpf } from "@/api/usuarios/coppabacs/getCoppabacsCpf";
 
 
 const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
 
-  const [usuarioEmail, setUsuarioEmail] = useState(getStorageItem("userLogin"));
+  const [usuarioCpf, setUsuarioCpf] = useState(getStorageItem("userLogin"));
   const [usuarioRole, setUsuarioRole] = useState(getStorageItem("userRole"));
   const [usuario, setUsuario] = useState([]);
   console.log(usuarioRole)
@@ -92,7 +92,7 @@ const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
 
     // Verificar a role do usuário e se o array usuario está vazio
     if (isUsuarioVazio(usuario) && roleMutateMap.hasOwnProperty(usuarioRole)) {
-      roleMutateMap[usuarioRole].mutate(usuarioEmail);
+      roleMutateMap[usuarioRole].mutate(usuarioCpf);
     }
 
     if (usuario) {
@@ -113,7 +113,7 @@ const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
     }
   }, [usuario]);
 
-  const mutationGetAgricultor = useMutation(agricultorEmail => getUsuarioEmail(agricultorEmail), {
+  const mutationGetAgricultor = useMutation(agricultorCpf => getUsuarioCpf(agricultorCpf), {
     onSuccess: (res) => {
       setUsuario(res.data);
     },
@@ -121,7 +121,7 @@ const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
       console.error('Erro ao recuperar as informações do coordenador:', error);
     }
   });
-  const mutationGetCoordenador = useMutation(coordenadorEmail => getCoordenadorEmail(coordenadorEmail), {
+  const mutationGetCoordenador = useMutation(coordenadorCpf => getCoordenadorCpf(coordenadorCpf), {
     onSuccess: (res) => {
       setUsuario(res.data);
     },
@@ -129,7 +129,7 @@ const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
       console.error('Erro ao recuperar as informações do coordenador:', error);
     }
   });
-  const mutationGetFuncionario = useMutation(funcionarioEmail => getCoordenadorEmail(funcionarioEmail), {
+  const mutationGetFuncionario = useMutation(coppabacsCpf => getCoppabacsCpf(coppabacsCpf), {
     onSuccess: (res) => {
       setUsuario(res.data);
     },
