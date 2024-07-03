@@ -9,6 +9,7 @@ import { setUserLogin } from "@/redux/userLogin/userLoginSlice";
 import { useMutation } from 'react-query';
 import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
 import Link from "next/link";
+import { getUsuarioCpf } from "@/api/usuarios/getUsuarioCpf";
 
 const Header = () => {
   const { push } = useRouter();
@@ -105,7 +106,7 @@ const LayoutAdmin = () => {
 
   const { status, mutate } = useMutation(
     async () => {
-      return getUsuarioEmail(userLogin);
+      return getUsuarioCpf(userLogin);
     }, {
     onSuccess: (res) => {
       setUsuario(res.data);
@@ -278,7 +279,7 @@ const LayoutCoordenador = () => {
 
   const { status, mutate } = useMutation(
     async () => {
-      return getUsuarioEmail(userLogin);
+      return getUsuarioCpf(userLogin);
     }, {
     onSuccess: (res) => {
       setUsuario(res.data);
@@ -451,7 +452,7 @@ const LayoutAgricultor = () => {
 
   const { status, mutate } = useMutation(
     async () => {
-      return getUsuarioEmail(userLogin);
+      return getUsuarioCpf(userLogin);
     }, {
     onSuccess: (res) => {
       setUsuario(res.data);
@@ -618,7 +619,7 @@ const LayoutPublic = () => {
 
   const { status, mutate } = useMutation(
     async () => {
-      return getUsuarioEmail(userLogin);
+      return getUsuarioCpf(userLogin);
     }, {
     onSuccess: (res) => {
       setUsuario(res.data);

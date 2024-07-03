@@ -7,10 +7,10 @@ import { useMutation } from "react-query";
 import { getSementesBanco } from "@/api/sementes/getSementeBanco";
 import { getAllAgricultoresBanco } from "@/api/bancoSementes/getAgricultoresBanco";
 import { getStorageItem } from "@/utils/localStore";
-import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
+import { getCoordenadorCpf } from "@/api/usuarios/coordenador/getCoordenadorCpf";
 
 export default function DadosTransacao({ formik, hrefAnterior }) {
-    const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
+    const [coordenadorCpf, setCoordenadorCpf] = useState(getStorageItem("userLogin"));
     const [coordenador, setCoordenador] = useState([]);
 
     const [sementes, setSementes] = useState([]);
@@ -18,7 +18,7 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
     const [filtroAgricultor, setFiltroAgricultor] = useState('');
 
     useEffect(() => {
-        mutationCoordenador.mutate(coordenadorEmail);
+        mutationCoordenador.mutate(coordenadorCpf);
         if (coordenador.bancoSementeId) {
             formik.setFieldValue("bancoSementesId", coordenador.bancoSementeId)
             mutateAgricultores()
@@ -26,7 +26,7 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
         }
     }, [coordenador.bancoSementeId]);
 
-    const mutationCoordenador = useMutation(coordenadorEmail => getCoordenadorEmail(coordenadorEmail), {
+    const mutationCoordenador = useMutation(coordenadorCpf => getCoordenadorCpf(coordenadorCpf), {
         onSuccess: (res) => {
             setCoordenador(res.data);
         },
