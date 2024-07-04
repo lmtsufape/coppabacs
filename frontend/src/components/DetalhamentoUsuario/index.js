@@ -184,7 +184,7 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
       <HeaderDetalhamento
         hrefAnterior={backDetalhamento}
         diretorioAnterior="Home / Agricultores / "
-        diretorioAtual="Detalhes do Agricultor"
+        diretorioAtual="Detalhamento do Usuário"
 
       />
 

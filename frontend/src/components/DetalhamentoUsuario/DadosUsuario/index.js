@@ -316,11 +316,12 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 value={formik.values.estadoCivil}
                 required
               >
-                <option value="0">Solteiro(a)</option>
-                <option value="1">Casado(a)</option>
-                <option value="2">Divorciado(a)</option>
-                <option value="3">Viúvo(a)</option>
-              </select>
+            <option value="">Selecione...</option>
+            <option value="Solteiro(a)">Solteiro(a)</option>
+            <option value="Casado(a)">Casado(a)</option>
+            <option value="Divorciado(a)">Divorciado(a)</option>
+            <option value="Viúvo(a)">Viúvo(a)</option>
+          </select>
               {formik.touched.estadoCivil && formik.errors.estadoCivil ? (
                 <span className={style.form__error}>{formik.errors.estadoCivil}</span>
               ) : null}

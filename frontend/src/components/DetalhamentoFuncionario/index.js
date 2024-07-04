@@ -34,6 +34,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
     cpf: '',
     dataNascimento: '',
     sexo: '',
+    estadoCivil: '',
     endereco: {
       estado: '',
       cidade: '',
@@ -78,6 +79,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
         sexo: usuario.sexo || '',
         endereco: usuario.endereco || {},
         bancoId: usuario.bancoId || '',
+        estadoCivil: usuario.estadoCivil || '',
         atividadeRural: usuario.atividadeRural || {},
         producaoSementes: usuario.producaoSementes || {}
       })
