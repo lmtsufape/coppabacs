@@ -144,7 +144,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 className={style.container__ContainerForm_form_input}
                 name="estadoCivil"
                 placeholder="Não informado"
-                value={getEstadoCivil(formik.values.estadoCivil)}
+                value={formik.values.estadoCivil}
                 disabled
               />
             </div>
