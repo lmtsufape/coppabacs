@@ -71,7 +71,7 @@ public class UserInitializer implements CommandLineRunner {
 			usuario.setCpf("333333333");
 			usuario.setContato("87 333333333");
 			usuario.setDataNascimento(new Date());
-			usuario.setSexo("Macho");
+			usuario.setSexo("Masculino");
 
 			facade.saveUsuario(usuario);
 
@@ -94,7 +94,7 @@ public class UserInitializer implements CommandLineRunner {
 
 			Gerente gerente = new Gerente();
 			gerente.setNome("Gerente");
-			gerente.setCpf("11111111111");
+			gerente.setCpf("111.111.111-11");
 			gerente.setContato("14 11111-1111");
 			gerente.setConjuge(null);
 			gerente.setContato("GerenteContato");
@@ -113,7 +113,7 @@ public class UserInitializer implements CommandLineRunner {
 			Agricultor agricultor = new Agricultor();
 			agricultor.setNome("Agricultor");
 			agricultor.setNomePopular("Seu Zé");
-			agricultor.setCpf("22222222222");
+			agricultor.setCpf("222.222.222-22");
 			agricultor.setContato("AgricultorContato");
 			agricultor.setConjuge(null);
 			agricultor.setContato("12 11111-1111");
@@ -129,7 +129,7 @@ public class UserInitializer implements CommandLineRunner {
 
 			Coppabacs coppabacs = new Coppabacs();
 			coppabacs.setNome("Coppabacs");
-			coppabacs.setCpf("33333333333");
+			coppabacs.setCpf("333.333.333-33");
 			coppabacs.setContato("13 11111-1111");
 			coppabacs.setConjuge(null);
 			coppabacs.setContato("CoppabacsContato");
