@@ -26,6 +26,7 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
     senha: "",
     confirmarSenha: "",
     nomePopular: "",
+    estadoCivil: "",
     endereco: {
       cep: "",
       cidade: "",
@@ -127,19 +128,13 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       </div>
 
       <div className={style.container__ContainerForm}>
-        <Formik
+      <Formik
           initialValues={initialValues}
-
           validationSchema={validateSchema}
-
           onSubmit={(values, { setSubmitting }) => {
-            mutate(values,{
-              onSuccess: (res) => {
-                window.location.href = '/';
-              }
-            
-            });
-
+          
+            mutate(values);
+            setSubmitting(false);
           }}
         >
           {(formik) => {

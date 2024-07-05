@@ -92,7 +92,7 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
         dataNascimento: usuario.dataNascimento || '',
         sexo: usuario.sexo || '',
         endereco: usuario.endereco || {},
-        bancoId: usuario.bancoSementeId || '',
+        bancoId: usuario.bancoId || '',
         sementes: usuario.sementes || {},
         estadoCivil: usuario.estadoCivil || '',
         conjuge: usuario.conjuge || {},
@@ -184,7 +184,7 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
       <HeaderDetalhamento
         hrefAnterior={backDetalhamento}
         diretorioAnterior="Home / Agricultores / "
-        diretorioAtual="Detalhes do Agricultor"
+        diretorioAtual="Detalhamento do Usuário"
 
       />
 
