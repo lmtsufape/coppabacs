@@ -105,7 +105,7 @@ const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
         dataNascimento: usuario.dataNascimento || '',
         sexo: usuario.sexo || '',
         endereco: usuario.endereco || {},
-        bancoId: usuario.bancoSementeId || '',
+        bancoId: usuario.bancoId || '',
         sementes: usuario.sementes || {},
         estadoCivil: usuario.estadoCivil || '',
         conjuge: usuario.conjuge || {},

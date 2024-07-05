@@ -6,6 +6,9 @@ export default function Dadosobjetos({ formik, editar }) {
     <>
       {editar === false ? (
         <>
+      <div className={style.container__header_title}>
+        <h1>Objetos do Banco</h1>
+      </div>
           <div className={style.container__ContainerForm_form_threePartsContainer}>
             <div>
               <label htmlFor="bombonas">Bombonas </label>

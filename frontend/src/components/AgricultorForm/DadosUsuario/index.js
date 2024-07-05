@@ -178,7 +178,7 @@ export default function DadosForm({ formik }) {
             value={formik.values.estadoCivil}
             required
           >
-            <option value="" >Selecione...</option>
+            <option value="">Selecione...</option>
             <option value="Solteiro(a)">Solteiro(a)</option>
             <option value="Casado(a)">Casado(a)</option>
             <option value="Divorciado(a)">Divorciado(a)</option>

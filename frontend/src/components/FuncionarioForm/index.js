@@ -21,6 +21,7 @@ const FuncionarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
     confirmarSenha: "",
     nome: "",
     nomePopular: "",
+    estadoCivil: "",
     funcao: "",
     contato: "",
     cpf: "",
