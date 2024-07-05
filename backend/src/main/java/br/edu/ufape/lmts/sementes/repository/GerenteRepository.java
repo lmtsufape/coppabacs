@@ -16,6 +16,9 @@ public interface GerenteRepository extends JpaRepository<Gerente, Long> {
 
 	@Transactional(readOnly = true)
 	Optional<Gerente> findByAtivoTrueAndEmail(String email);
+	
+	@Transactional(readOnly = true)
+	Optional<Gerente> findByAtivoTrueAndCpf(String cpf);
 
 	@Transactional(readOnly = true)
 	Optional<Gerente> findByAtivoTrueAndId(long id);

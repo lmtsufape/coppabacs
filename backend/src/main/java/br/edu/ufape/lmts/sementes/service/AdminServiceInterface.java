@@ -10,6 +10,7 @@ import br.edu.ufape.lmts.sementes.model.Admin;
 public interface AdminServiceInterface {
 	Admin saveAdmin(Admin o);
 	Admin findAdminById(long id);
+	Admin findAdminByCpf(String cpf);
 	Admin updateAdmin(Admin u);
 	void deleteAdmin(Admin u);
 	void deleteAdmin(long id);

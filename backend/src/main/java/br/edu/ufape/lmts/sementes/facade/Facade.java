@@ -224,6 +224,9 @@ public class Facade {
 	public Coppabacs findCoppabacsByEmail(String email) {
 		return coppabacsService.findCoppabacsByEmail(email);
 	}
+	public Coppabacs findCoppabacsByCpf(String cpf) {
+		return coppabacsService.findCoppabacsByCpf(cpf);
+	}
 	public Page<Coppabacs> findPageCoppabacs(Pageable pageRequest) {
 		return coppabacsService.findPageCoppabacs(pageRequest);
 	}
@@ -608,6 +611,9 @@ public class Facade {
 	}
 	public Gerente findGerenteByEmail(String email) {
 		return gerenteService.findGerenteByEmail(email);
+	}
+	public Gerente findGerenteByCpf(String cpf) {
+		return gerenteService.findGerenteByCpf(cpf);
 	}
 	public List<Gerente> getAllGerente() {
 		return gerenteService.getAllGerente();
@@ -1083,6 +1089,10 @@ public class Facade {
 	public Admin findAdminById(Long id) {
 		return adminService.findAdminById(id);
 	}
+	
+	public Usuario findAdminByCpf(String cpf) {
+		return adminService.findAdminByCpf(cpf);
+	}
 
 	public List<Admin> getAllAdmin() {
 		return adminService.getAllAdmin();
@@ -1151,6 +1161,9 @@ public class Facade {
 	}
 	public Agricultor findAgricultorByEmail(String email) {
 		return agricultorService.findAgricultorByEmail(email);
+	}
+	public Agricultor findAgricultorByCpf(String cpf) {
+		return agricultorService.findAgricultorByCpf(cpf);
 	}
 	public List<Agricultor> getAllAgricultor() {
 		return agricultorService.getAllByRole(TipoUsuario.AGRICULTOR);

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.ufape.lmts.sementes.model.Admin;
-import br.edu.ufape.lmts.sementes.model.Usuario;
 
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, Long> {
@@ -23,4 +22,7 @@ public interface AdminRepository extends JpaRepository<Admin, Long> {
 
 	@Transactional(readOnly = true)
 	Page<Admin> findByAtivoTrue(Pageable pageRequest);
+	
+	@Transactional(readOnly = true)
+	Optional<Admin> findByAtivoTrueAndCpf(String cpf);
 }

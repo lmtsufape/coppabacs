@@ -63,6 +63,11 @@ public class AdminController {
 	public AdminResponse getAdminById(@PathVariable Long id) {
 		return new AdminResponse(facade.findAdminById(id));
 	}
+	
+	@GetMapping("admin/cpf/{cpf}")
+	public AdminResponse getAdminByCpf(@PathVariable String cpf) {
+		return new AdminResponse(facade.findAdminByCpf(cpf));
+	}
 
 	@PatchMapping("admin/{id}")
 	public AdminResponse updateAdmin(@PathVariable Long id, @Valid @RequestBody AdminUpdateRequest obj) {

@@ -32,7 +32,7 @@ import br.edu.ufape.lmts.sementes.model.Coppabacs;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import jakarta.validation.Valid;
 
-@CrossOrigin (origins = "http://localhost:8081" )
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api/v1/")
 public class CoppabacsController {
@@ -40,21 +40,17 @@ public class CoppabacsController {
 	private Facade facade;
 	@Autowired
 	private ModelMapper modelMapper;
-	
-	
+
 	@GetMapping("coppabacs")
 	public List<CoppabacsResponse> getAllCoppabacs() {
 		System.out.println("oi");
-		return facade.getAllCoppabacs()
-				.stream()
-				.filter(coppabacs -> coppabacs.getRoles().contains(TipoUsuario.COPPABACS))
-				.map(CoppabacsResponse::new)
+		return facade.getAllCoppabacs().stream()
+				.filter(coppabacs -> coppabacs.getRoles().contains(TipoUsuario.COPPABACS)).map(CoppabacsResponse::new)
 				.collect(Collectors.toList());
 	}
-	
+
 	@GetMapping(value = "coppabacs/page")
-	public Page<CoppabacsResponse> getPageCoppabacs(
-			@RequestParam(value = "page", defaultValue = "0") Integer page,
+	public Page<CoppabacsResponse> getPageCoppabacs(@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
 			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
 			@RequestParam(value = "direction", defaultValue = "DESC") String direction) {
@@ -62,12 +58,12 @@ public class CoppabacsController {
 		Page<Coppabacs> list = facade.findPageCoppabacs(pageRequest);
 		return list.map(CoppabacsResponse::new);
 	}
-	
+
 	@PostMapping("coppabacs")
 	public CoppabacsResponse createCoppabacs(@Valid @RequestBody CoppabacsRequest newObj) throws EmailExistsException {
 		return new CoppabacsResponse(facade.saveCoppabacs(newObj.convertToEntity()));
 	}
-	
+
 	@GetMapping("coppabacs/{id}")
 	public CoppabacsResponse getCoppabacsById(@PathVariable long id) {
 		try {
@@ -88,28 +84,25 @@ public class CoppabacsController {
 
 	@GetMapping("coppabacs/cpf/{cpf}")
 	public CoppabacsResponse getCoopabacsByCpf(@PathVariable String cpf) {
-		try {
-			return new CoppabacsResponse((Coppabacs) facade.findUsuarioByCpf(cpf));
-		} catch (Exception e) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Coppabacs " + cpf + " not found.");
-		}
+		return new CoppabacsResponse(facade.findCoppabacsByCpf(cpf));
+
 	}
-	
+
 	@PatchMapping("coppabacs/{id}")
 	public CoppabacsResponse updateCoppabacs(@PathVariable long id, @Valid @RequestBody CoppabacsUpdateRequest obj) {
 		try {
 			Coppabacs oldObject = facade.findCoppabacsById(id);
 			modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
 			TypeMap<CoppabacsUpdateRequest, Coppabacs> typeMapper = modelMapper
-													.typeMap(CoppabacsUpdateRequest.class, Coppabacs.class)
-													.addMappings(mapper -> mapper.skip(Coppabacs::setId));
+					.typeMap(CoppabacsUpdateRequest.class, Coppabacs.class)
+					.addMappings(mapper -> mapper.skip(Coppabacs::setId));
 			typeMapper.map(obj, oldObject);
 			return new CoppabacsResponse(facade.updateCoppabacs(oldObject));
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
 		}
 	}
-	
+
 	@DeleteMapping("coppabacs/{id}")
 	public String deleteCoppabacs(@PathVariable long id) {
 		try {
@@ -119,5 +112,5 @@ public class CoppabacsController {
 			throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
 		}
 	}
-	
+
 }
