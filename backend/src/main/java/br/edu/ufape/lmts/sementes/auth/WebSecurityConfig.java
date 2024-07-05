@@ -3,6 +3,7 @@ package br.edu.ufape.lmts.sementes.auth;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -28,6 +29,9 @@ public class WebSecurityConfig {
 	
 	@Autowired
 	private SecurityFilter securityFilter;
+
+	@Value("${common.front-end}")
+	private String allowedOrigins;
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -85,10 +89,12 @@ public class WebSecurityConfig {
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 	    CorsConfiguration configuration = new CorsConfiguration();
-	    
-	    configuration.setAllowedOrigins(Arrays.asList("*"));
-	    configuration.setAllowedMethods(Arrays.asList("*"));
-	    configuration.setAllowedHeaders(Arrays.asList("*"));
+
+
+		configuration.setAllowedOrigins(Arrays.asList(allowedOrigins.split(",")));
+		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+		configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+		configuration.setAllowCredentials(true);
 	    
 	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 	    source.registerCorsConfiguration("/**", configuration);

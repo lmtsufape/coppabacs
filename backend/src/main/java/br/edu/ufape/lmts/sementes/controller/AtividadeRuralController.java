@@ -30,7 +30,6 @@ import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 
 
-@CrossOrigin (origins = "http://localhost:8081/" )
 @Hidden
 @RestController
 @RequestMapping("/api/v1/")
