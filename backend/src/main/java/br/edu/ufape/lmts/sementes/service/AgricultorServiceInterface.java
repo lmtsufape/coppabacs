@@ -12,6 +12,7 @@ public interface AgricultorServiceInterface {
 	Agricultor saveAgricultor(Agricultor o) throws EmailExistsException;
 	Agricultor findAgricultorById(long id);
 	Agricultor findAgricultorByEmail(String email);
+	Agricultor findAgricultorByCpf(String cpf);
 	Agricultor updateAgricultor(Agricultor u);
 	void deleteAgricultor(Agricultor u);
 	void deleteAgricultor(long id);

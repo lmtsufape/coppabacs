@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
-import br.edu.ufape.lmts.sementes.model.Usuario;
 import br.edu.ufape.lmts.sementes.repository.AgricultorRepository;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
@@ -55,7 +54,6 @@ public class AgricultorService implements AgricultorServiceInterface {
 	public void deleteAgricultor(long id) {
 		Agricultor obj = findAgricultorById(id);
 		obj.setAtivo(false);
-		System.out.println("Merda");
 		repository.save(obj);
 	}
 
@@ -68,5 +66,10 @@ public class AgricultorService implements AgricultorServiceInterface {
 
 	public Page<Agricultor> findPageAgricultor(Pageable pageRequest) {
 		return repository.findByAtivoTrue(pageRequest);
+	}
+
+	@Override
+	public Agricultor findAgricultorByCpf(String cpf) {
+		return repository.findByAtivoTrueAndCpf(cpf).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Usuario with cpf = " + cpf));
 	}
 }

@@ -84,7 +84,7 @@ public class GerenteController {
 
 	@GetMapping("gerente/cpf/{cpf}")
 	public GerenteResponse getGerenteByCpf(@PathVariable String cpf) {
-		return new GerenteResponse((Gerente) facade.findUsuarioByCpf(cpf));
+		return new GerenteResponse(facade.findGerenteByCpf(cpf));
 	}
 	
 	@PatchMapping("gerente/{id}")
