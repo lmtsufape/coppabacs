@@ -32,7 +32,6 @@ import br.edu.ufape.lmts.sementes.model.Coppabacs;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import jakarta.validation.Valid;
 
-@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api/v1/")
 public class CoppabacsController {

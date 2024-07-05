@@ -68,8 +68,8 @@ public class UserInitializer implements CommandLineRunner {
 			usuario.setSenha(passwordEncoder.encode("12345678"));
 			usuario.setEndereco(null);
 			usuario.setNomePopular("Junior");
-			usuario.setCpf("333333333");
-			usuario.setContato("87 333333333");
+			usuario.setCpf("444.444.444-44");
+			usuario.setContato("(87)33333-3333");
 			usuario.setDataNascimento(new Date());
 			usuario.setSexo("Masculino");
 
@@ -78,10 +78,9 @@ public class UserInitializer implements CommandLineRunner {
 			Admin admin = new Admin();
 			admin.setNome("Admin");
 			admin.setConjuge(null);
-			admin.setContato("AdminContato");
+			admin.setContato("(14)22222-2222");
 			admin.setEmail("admin@admin.com");
-			admin.setCpf("adminCpf");
-			admin.setContato("11 11111-1111");
+			admin.setCpf("555.555.555-55");
 			admin.setEndereco(null);
 			admin.setSexo("admin");
 			admin.setSenha(passwordEncoder.encode("12345678"));
@@ -95,9 +94,8 @@ public class UserInitializer implements CommandLineRunner {
 			Gerente gerente = new Gerente();
 			gerente.setNome("Gerente");
 			gerente.setCpf("111.111.111-11");
-			gerente.setContato("14 11111-1111");
+			gerente.setContato("(14)11111-1111");
 			gerente.setConjuge(null);
-			gerente.setContato("GerenteContato");
 			gerente.setEmail("gerente@gerente.com");
 			gerente.setEndereco(null);
 			gerente.setSexo("gerente");
@@ -114,9 +112,8 @@ public class UserInitializer implements CommandLineRunner {
 			agricultor.setNome("Agricultor");
 			agricultor.setNomePopular("Seu Zé");
 			agricultor.setCpf("222.222.222-22");
-			agricultor.setContato("AgricultorContato");
+			agricultor.setContato("(87)11111-1111");
 			agricultor.setConjuge(null);
-			agricultor.setContato("12 11111-1111");
 			agricultor.setEmail("agricultor@agricultor.com");
 			agricultor.setEndereco(null);
 			agricultor.setSexo("agricultor");
@@ -130,9 +127,8 @@ public class UserInitializer implements CommandLineRunner {
 			Coppabacs coppabacs = new Coppabacs();
 			coppabacs.setNome("Coppabacs");
 			coppabacs.setCpf("333.333.333-33");
-			coppabacs.setContato("13 11111-1111");
+			coppabacs.setContato("(13)11111-1111");
 			coppabacs.setConjuge(null);
-			coppabacs.setContato("CoppabacsContato");
 			coppabacs.setEmail("coppabacs@coppabacs.com");
 			coppabacs.setEndereco(null);
 			coppabacs.setSexo("coppabacs");

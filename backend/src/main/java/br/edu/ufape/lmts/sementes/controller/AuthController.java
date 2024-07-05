@@ -17,7 +17,6 @@ import br.edu.ufape.lmts.sementes.auth.TokenService;
 import br.edu.ufape.lmts.sementes.controller.dto.request.AuthRequest;
 
 @RestController
-@CrossOrigin (origins = "http://localhost:8081", allowCredentials = "true" )
 @RequestMapping("/api/v1/")
 public class AuthController {
 
