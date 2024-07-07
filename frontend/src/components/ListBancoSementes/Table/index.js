@@ -61,7 +61,7 @@ const Table = ({ usuario, listBancos, onSelectBanco, setBancos, table1, table2, 
                   <td className={style.content__table__buttonTabela}>
                     <div className={style.content__table__button}>
                       <h1>Visualizar</h1>
-                      <Image className={style.content__table__button_img} src="/assets/iconOlhoBranco.png" onClick={() => onSelectBanco(banco)} alt="Visualizar" width={27} height={26} className={style.content__table__body_click} />
+                      <Image className={style.content__table__button_img} src="/assets/iconOlhoBranco.png" onClick={() => onSelectBanco(banco)} alt="Visualizar" width={27} height={26}/>
                       {usuario !== "public" ? (
                         <ExcluirButton itemId={banco.id} onDelete={handleDeleteBanco} />
                       ) : ("")}

@@ -85,15 +85,15 @@ export default function DadosForm({ formik }) {
       <label >Função<span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
-        id="funcao"
-        name="funcao"
+        id="cargo"
+        name="cargo"
         placeholder="Insira a função do colaborador(a)"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
-        value={formik.values.funcao}
+        value={formik.values.cargo}
         required />
-      {formik.touched.funcao && formik.errors.funcao ? (
-        <span className={style.form__error}>{formik.errors.funcao}</span>
+      {formik.touched.cargo && formik.errors.cargo ? (
+        <span className={style.form__error}>{formik.errors.cargo}</span>
       ) : null}
 
       <label >CPF<span>*</span></label>

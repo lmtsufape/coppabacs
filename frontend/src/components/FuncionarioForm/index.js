@@ -22,7 +22,7 @@ const FuncionarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
     nome: "",
     nomePopular: "",
     estadoCivil: "",
-    funcao: "",
+    cargo: "",
     contato: "",
     cpf: "",
     dataNascimento: "",
