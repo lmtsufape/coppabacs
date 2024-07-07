@@ -35,7 +35,6 @@ import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
-@CrossOrigin(origins = "http://localhost:8081/", allowCredentials = "true")
 @RestController
 @RequestMapping("/api/v1/")
 public class AgricultorController {

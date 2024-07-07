@@ -35,8 +35,7 @@ import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 
-@CrossOrigin (origins = "http://localhost:8081/" )
-@RestController
+ @RestController
 @RequestMapping("/api/v1/")
 public class GerenteController {
 	@Autowired
