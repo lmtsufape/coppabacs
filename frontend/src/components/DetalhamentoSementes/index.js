@@ -146,6 +146,22 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
                                         <Image src="/assets/sementeteste.png" alt="Foto do usuário" width={72} height={72} />
                                         <h1>{sementes?.nome}</h1>
                                     </div>
+                                    {editar === false ? (
+                                        <button
+                                            onClick={() => setEditar(true)}
+                                            className={styles.container__profile_button}>
+                                            <span>Editar</span>
+                                            <Image src="/assets/iconLapis.svg" alt="editar perfil" width={25} height={25} />
+                                        </button >
+                                    ) : (
+                                        <button
+                                            onClick={() => setEditar(false)}
+                                            className={styles.container__profile_button}>
+
+                                            <span>Salvar</span>
+                                            <Image src="/assets/iconLapis.svg" alt="editar perfil" width={25} height={25} />
+                                        </button >
+                                    )}
                                 </div>
                                 <DadosTecnicos formik={formik} editar={editar} />
                                 <DadosSementes formik={formik} editar={editar} />

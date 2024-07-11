@@ -16,7 +16,8 @@ export default function tableLayout({ table1, table2, table3, table4, listAgricu
 
 
   return (
-
+<>
+<div className={style.contentBigger}>
     <div className={style.content}>
       <table className={style.content__table}>
         <thead className={style.content__table__header}>
@@ -59,6 +60,38 @@ export default function tableLayout({ table1, table2, table3, table4, listAgricu
         </tbody>
       </table>
     </div>
+    </div>
+    <div className={style.contentSmall}>
+        <div className={style.content}>
+          <table className={style.content__table}>
+            <tbody className={style.content__table__body}>
+              {listAgricultores.map((agricultor, index) => {
+                return (
+                  <tr key={index}>
+                    <td data-label="Nome">{agricultor.nome}</td>
+                    <td data-label="Apelido">{agricultor.nomePopular}</td>
+                    <td data-label="Telefone">{agricultor.contato}</td>
+                    <td className={style.content__table__buttonTabela}>
+                    <div className={style.content__table__button}>
+                      <h1>Visualizar</h1>
+                        <Image className={style.content__table__button_img} src="/assets/iconOlhoBranco.png" onClick={() => onSelectAgricultor(agricultor)} alt="Visualizar" width={24} height={26} />
+
+                        <ExcluirButton itemId={agricultor.id} onDelete={handleDeleteAgricultor} />
+
+                      </div>
+                    </td>
+                  </tr>
+                )
+              }
+              )
+              }
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </>
   );
 }
 
