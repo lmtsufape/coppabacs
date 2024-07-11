@@ -123,6 +123,18 @@
 
 @media all and (max-width: 460px) {
   .content {
+
+    button {
+
+      &:focus {
+        cursor: pointer;
+      }
+
+      &:last-child {
+        display: none;
+      }
+    }
+
     &__table {
 
       
