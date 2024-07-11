@@ -34,10 +34,12 @@ public  class UsuarioResponse  {
 	private ConjugeResponse conjuge;
 	private String estadoCivil;
 	private List<PostResponse> posts;
+	private TabelaPerguntaUsuarioResponse pergunta;
 
 	public UsuarioResponse(Usuario obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		modelMapper.map(obj, this);
+		pergunta.setPergunta(obj.getTabelaPerguntaUsuario().getPergunta());
 	}
 
 }
