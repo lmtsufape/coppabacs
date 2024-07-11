@@ -35,8 +35,7 @@ import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 
-@CrossOrigin (origins = "http://localhost:8081/" )
-@RestController
+ @RestController
 @RequestMapping("/api/v1/")
 public class SementesController {
 	@Autowired

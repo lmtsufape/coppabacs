@@ -40,7 +40,6 @@ import br.edu.ufape.lmts.sementes.model.RetiradaUsuario;
 import br.edu.ufape.lmts.sementes.model.SementePraga;
 import br.edu.ufape.lmts.sementes.model.Sementes;
 import br.edu.ufape.lmts.sementes.model.TabelaBancoSementes;
-import br.edu.ufape.lmts.sementes.model.TabelaPerguntaUsuario;
 import br.edu.ufape.lmts.sementes.model.ToleranciaAdversidades;
 import br.edu.ufape.lmts.sementes.model.TransacaoGenerica;
 import br.edu.ufape.lmts.sementes.model.UsoOcupacaoTerra;
@@ -74,8 +73,6 @@ import br.edu.ufape.lmts.sementes.service.RetiradaUsuarioService;
 import br.edu.ufape.lmts.sementes.service.SementePragaService;
 import br.edu.ufape.lmts.sementes.service.SementesService;
 import br.edu.ufape.lmts.sementes.service.TabelaBancoSementesService;
-import br.edu.ufape.lmts.sementes.service.TabelaPerguntaUsuarioService;
-import br.edu.ufape.lmts.sementes.service.TabelaPerguntaUsuarioServiceInterface;
 import br.edu.ufape.lmts.sementes.service.ToleranciaAdversidadesService;
 import br.edu.ufape.lmts.sementes.service.TransacaoGenericaService;
 import br.edu.ufape.lmts.sementes.service.UsoOcupacaoTerraService;
@@ -94,7 +91,7 @@ public class Facade {
 
 	@Autowired
 	private UserDetailsServiceImpl userDetailsServiceImpl;
-
+	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -136,7 +133,9 @@ public class Facade {
 
 	public Usuario saveUsuario(Usuario newInstance) {
 		try {
+			System.out.println(newInstance.getSenha());
 			newInstance.setSenha(passwordEncoder.encode(newInstance.getSenha()));
+			System.out.println(newInstance.getSenha());
 			return usuarioService.saveUsuario(newInstance);
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao salvar o usuário", e);
@@ -145,8 +144,8 @@ public class Facade {
 	}
 
 	public Usuario updateUsuario(Usuario transientObject) {
-		if (transientObject.getSenha() != null) {
-			transientObject.setSenha(passwordEncoder.encode(transientObject.getSenha()));
+		if(transientObject.getSenha() != null) {
+			transientObject.setSenha(passwordEncoder.encode(transientObject.getSenha()));			
 		} else {
 			Usuario usuario = findUsuarioById(transientObject.getId());
 			transientObject.setSenha(usuario.getSenha());
@@ -157,23 +156,23 @@ public class Facade {
 	public Usuario findUsuarioById(long id) {
 		return usuarioService.findUsuarioById(id);
 	}
-
+	
 	public Usuario findUsuarioByEmail(String email) {
 		return usuarioService.findUsuarioByEmail(email);
 	}
-
+	
 	public Usuario findUsuarioByCpf(String cpf) {
 		return usuarioService.findUsuarioByCpf(cpf);
 	}
-
+	
 	public boolean UsuarioEmailExists(String email) {
 		return usuarioService.emailExists(email);
 	}
-
+	
 	public boolean UsuarioCpfExists(String cpf) {
 		return usuarioService.cpfExists(cpf);
 	}
-
+	
 	public boolean UsuarioContatoExists(String contato) {
 		return usuarioService.contatoExists(contato);
 	}
@@ -193,10 +192,10 @@ public class Facade {
 	public void deleteUsuario(long id) {
 		usuarioService.deleteUsuario(id);
 	}
-
+	
 	public Usuario findLoggedUser() {
 		Usuario logged = findUsuarioByCpf(userDetailsServiceImpl.authenticated().getCpf());
-		if (logged == null)
+		if(logged == null)
 			throw new AuthenticationException("Usuário não autenticado");
 		return logged;
 	}
@@ -210,22 +209,24 @@ public class Facade {
 	}
 
 	public Coppabacs saveCoppabacs(Coppabacs newInstance) throws EmailExistsException {
-		usuarioService.saveUsuario(newInstance);
+		this.saveUsuario(newInstance);
 		return coppabacsService.saveCoppabacs(newInstance);
 	}
 
 	public Coppabacs updateCoppabacs(Coppabacs transientObject) {
+		this.updateUsuario(transientObject);
 		return coppabacsService.updateCoppabacs(transientObject);
 	}
 
 	public Coppabacs findCoppabacsById(long id) {
 		return coppabacsService.findCoppabacsById(id);
 	}
-
 	public Coppabacs findCoppabacsByEmail(String email) {
 		return coppabacsService.findCoppabacsByEmail(email);
 	}
-
+	public Coppabacs findCoppabacsByCpf(String cpf) {
+		return coppabacsService.findCoppabacsByCpf(cpf);
+	}
 	public Page<Coppabacs> findPageCoppabacs(Pageable pageRequest) {
 		return coppabacsService.findPageCoppabacs(pageRequest);
 	}
@@ -486,11 +487,13 @@ public class Facade {
 
 	@Transactional
 	public List<TabelaBancoSementes> saveAllTabelaBancoSementes(List<TabelaBancoSementesRequest> requests) {
-		return requests.stream().map(request -> {
-			TabelaBancoSementes tabelaBancoSementes = request.convertToEntity();
-			long sementeId = request.getSementeId();
-			return saveTabelaBancoSementes(tabelaBancoSementes, sementeId);
-		}).collect(Collectors.toList());
+		return requests.stream()
+				.map(request -> {
+					TabelaBancoSementes tabelaBancoSementes = request.convertToEntity();
+					long sementeId = request.getSementeId();
+					return saveTabelaBancoSementes(tabelaBancoSementes, sementeId);
+				})
+				.collect(Collectors.toList());
 	}
 
 	public TabelaBancoSementes updateTabelaBancoSementes(TabelaBancoSementes transientObject) {
@@ -521,9 +524,10 @@ public class Facade {
 	@Autowired
 	private ItemService itemService;
 
-	private void validateAndProcessItens(List<Item> itens, boolean isDoacao, Agricultor agricultor) {
+	private void validateAndProcessItens(List<Item> itens, boolean isDoacao, Agricultor agricultor ) {
 		List<Item> itensComErro = itens.stream()
-				.filter(item -> !updateItemAndTabelaBancoSementes(item, isDoacao, agricultor)).toList();
+				.filter(item -> !updateItemAndTabelaBancoSementes(item, isDoacao, agricultor))
+				.toList();
 
 		if (!itensComErro.isEmpty()) {
 			throw new InvalidItemStateException("Itens com erro: " + itensComErro);
@@ -534,17 +538,16 @@ public class Facade {
 		TabelaBancoSementes tabelaBancoSementes = findTabelaBancoSementesById(item.getTabelaBancoSementes().getId());
 		Sementes sementes = findSementesById(item.getSementes().getId());
 		if (tabelaBancoSementes != null) {
-			double newPeso = isDoacao ? tabelaBancoSementes.getPeso() + item.getPeso()
-					: tabelaBancoSementes.getPeso() - item.getPeso();
+			double newPeso = isDoacao ? tabelaBancoSementes.getPeso() + item.getPeso() : tabelaBancoSementes.getPeso() - item.getPeso();
 			if (newPeso < 0) {
 				return false;
 			}
 			try {
-				if (!isDoacao) {
-					if (!agricultor.getSementes().contains(sementes)) {
-						agricultor.addSementes(sementes);
+				if(!isDoacao){
+					if(!agricultor.getSementes().contains(sementes)) {
+                        agricultor.addSementes(sementes);
 						updateAgricultor(agricultor);
-					}
+                    }
 				}
 				tabelaBancoSementes.setPeso(newPeso);
 				tabelaBancoSementesService.saveTabelaBancoSementes(tabelaBancoSementes);
@@ -593,24 +596,25 @@ public class Facade {
 
 		bancoSementesService.findBancoSementesById(newInstance.getBancoSementes().getId());
 
-		usuarioService.saveUsuario(newInstance);
+		this.saveUsuario(newInstance);
 
 		return gerenteService.saveGerente(newInstance);
 	}
 
 	public Gerente updateGerente(Gerente transientObject) {
-		usuarioService.updateUsuario(transientObject);
+		this.updateUsuario(transientObject);
 		return gerenteService.updateGerente(transientObject);
 	}
 
 	public Gerente findGerenteById(long id) {
 		return gerenteService.findGerenteById(id);
 	}
-
 	public Gerente findGerenteByEmail(String email) {
 		return gerenteService.findGerenteByEmail(email);
 	}
-
+	public Gerente findGerenteByCpf(String cpf) {
+		return gerenteService.findGerenteByCpf(cpf);
+	}
 	public List<Gerente> getAllGerente() {
 		return gerenteService.getAllGerente();
 	}
@@ -733,7 +737,7 @@ public class Facade {
 		}
 
 		transacao.getItens().forEach(item -> {
-			TabelaBancoSementes origem = findTabelaBancoSementesById(item.getTabelaBancoSementes().getId());
+			TabelaBancoSementes origem = findTabelaBancoSementesById(item.getTabelaBancoSementes().getId()) ;
 			TabelaBancoSementes destino = findTabelaBancoSementesById(transacao.getTabelaBancoSementes().getId());
 			if (!origem.equals(destino)) {
 				double peso = item.getPeso();
@@ -741,8 +745,7 @@ public class Facade {
 				destino.setPeso(destino.getPeso() + peso);
 
 				if (origem.getPeso() < peso) {
-					throw new IllegalArgumentException(
-							"Peso insuficiente na tabela de origem para transferir " + peso + " unidades.");
+					throw new IllegalArgumentException("Peso insuficiente na tabela de origem para transferir " + peso + " unidades.");
 				}
 
 				tabelaBancoSementesService.saveTabelaBancoSementes(origem);
@@ -789,7 +792,8 @@ public class Facade {
 
 	public Post savePost(Post post) {
 		Usuario autor = findLoggedUser();
-		if (!(autor.getRoles().contains(TipoUsuario.COPPABACS) || autor.getRoles().contains(TipoUsuario.ADMIN))) {
+		if(!(autor.getRoles().contains(TipoUsuario.COPPABACS)
+				|| autor.getRoles().contains(TipoUsuario.ADMIN))) {
 			throw new AuthorizationException("Usuário não autorizado.");
 		}
 		post.setAutor(autor);
@@ -799,9 +803,10 @@ public class Facade {
 		return saved;
 	}
 
+
 	public Post updatePost(Post transientObject) {
-		Usuario logged = findLoggedUser();
-		if (!logged.equals(transientObject.getAutor()))
+		Usuario logged  = findLoggedUser();
+		if(!logged.equals(transientObject.getAutor()))
 			throw new AuthorizationException("Usuário não autorizado.");
 		return postService.updatePost(transientObject);
 	}
@@ -829,10 +834,10 @@ public class Facade {
 	public Page<Post> findPageVisiblePost(Pageable pageRequest) {
 		return postService.findPageVisiblePost(pageRequest);
 	}
-
+	
 	public void deletePost(Post persistentObject) {
-		Usuario logged = findLoggedUser();
-		if (!logged.equals(persistentObject.getAutor()))
+		Usuario logged  = findLoggedUser();
+		if(!logged.equals(persistentObject.getAutor()))
 			throw new AuthorizationException("Usuário não autorizado.");
 		persistentObject.getAutor().removePost(persistentObject);
 		usuarioService.updateUsuario(persistentObject.getAutor());
@@ -841,8 +846,8 @@ public class Facade {
 
 	public void deletePost(long id) {
 		Post persistentObject = findPostById(id);
-		Usuario logged = findLoggedUser();
-		if (!logged.equals(persistentObject.getAutor()))
+		Usuario logged  = findLoggedUser();
+		if(!logged.equals(persistentObject.getAutor()))
 			throw new AuthorizationException("Usuário não autorizado.");
 		persistentObject.getAutor().removePost(persistentObject);
 		usuarioService.updateUsuario(persistentObject.getAutor());
@@ -1072,16 +1077,21 @@ public class Facade {
 	private AdminService adminService;
 
 	public Admin saveAdmin(Admin newInstance) throws EmailExistsException {
-		usuarioService.saveUsuario(newInstance);
+		this.saveUsuario(newInstance);
 		return adminService.saveAdmin(newInstance);
 	}
 
 	public Admin updateAdmin(Admin oldObject) {
+		this.updateUsuario(oldObject);
 		return adminService.updateAdmin(oldObject);
 	}
 
 	public Admin findAdminById(Long id) {
 		return adminService.findAdminById(id);
+	}
+	
+	public Usuario findAdminByCpf(String cpf) {
+		return adminService.findAdminByCpf(cpf);
 	}
 
 	public List<Admin> getAllAdmin() {
@@ -1103,63 +1113,66 @@ public class Facade {
 	// Agricultor--------------------------------------------------------------
 	@Autowired
 	private AgricultorService agricultorService;
-
+	
 	private Agricultor saveAgricultorA(Agricultor newInstance) throws EmailExistsException {
 		bancoSementesService.findBancoSementesById(newInstance.getBancoSementes().getId());
-		usuarioService.saveUsuario(newInstance);
+		this.saveUsuario(newInstance);
 		return agricultorService.saveAgricultor(newInstance);
 	}
 
-	public Agricultor addSementeAgricultor(List<Sementes> sementes, long agricultorId) {
+	public Agricultor addSementeAgricultor(List<Sementes> sementes, long agricultorId){
 		Agricultor agricultor = findAgricultorById(agricultorId);
-		sementes.forEach(semente -> {
+		sementes.forEach(semente-> {
 			Sementes sementeSalvo = findSementesById(semente.getId());
-			if (!agricultor.getSementes().contains(sementeSalvo)) {
-				agricultor.addSementes(sementeSalvo);
+				if (!agricultor.getSementes().contains(sementeSalvo)) {
+					agricultor.addSementes(sementeSalvo);
+				}
 			}
-		});
+		);
 		return updateAgricultor(agricultor);
 	}
 
-	public Agricultor removeSementeAgricultor(List<Sementes> sementes, long agricultorId) {
+	public Agricultor removeSementeAgricultor(List<Sementes> sementes, long agricultorId){
 		Agricultor agricultor = findAgricultorById(agricultorId);
-		sementes.forEach(semente -> {
-			agricultor.getSementes().remove(semente);
-		});
+		sementes.forEach(semente-> {
+            agricultor.getSementes().remove(semente);
+		}
+		);
 		return updateAgricultor(agricultor);
 	}
-
+	
 	public Agricultor saveAgricultor(Agricultor newInstance) throws EmailExistsException {
 		newInstance.addRole(TipoUsuario.AGRICULTOR);
 		return saveAgricultorA(newInstance);
 	}
-
+	
 	public Agricultor saveAgricultorUsuario(Agricultor newInstance) throws EmailExistsException {
 		newInstance.addRole(TipoUsuario.USUARIO);
 		return saveAgricultorA(newInstance);
 	}
 
 	public Agricultor updateAgricultor(Agricultor transientObject) {
-		// bancoSementesService.findBancoSementesById(transientObject.getBancoSementes().getId());
+		this.updateUsuario(transientObject);
 		return agricultorService.updateAgricultor(transientObject);
 	}
 
 	public Agricultor findAgricultorById(long id) {
 		return agricultorService.findAgricultorById(id);
 	}
-
 	public Agricultor findAgricultorByEmail(String email) {
 		return agricultorService.findAgricultorByEmail(email);
 	}
-
+	public Agricultor findAgricultorByCpf(String cpf) {
+		return agricultorService.findAgricultorByCpf(cpf);
+	}
 	public List<Agricultor> getAllAgricultor() {
 		return agricultorService.getAllByRole(TipoUsuario.AGRICULTOR);
 	}
-
+	
 	public Page<Agricultor> findPageAgricultor(Pageable pageRequest) {
 		return agricultorService.findPageAgricultor(pageRequest);
 	}
-
+	
 	public List<Agricultor> getAllAgricultorUsuario() {
 		return agricultorService.getAllByRole(TipoUsuario.USUARIO);
 	}
@@ -1249,7 +1262,7 @@ public class Facade {
 	public DoacaoUsuario saveDoacaoUsuario(DoacaoUsuario newInstance) {
 		try {
 			validateAndProcessItens(newInstance.getItens(), true, null);
-			DoacaoUsuario doacaoUsuario = doacaoUsuarioService.saveDoacaoUsuario(newInstance);
+			DoacaoUsuario doacaoUsuario =doacaoUsuarioService.saveDoacaoUsuario(newInstance);
 			BancoSementes bancoSementes = findBancoSementesById(doacaoUsuario.getId());
 			bancoSementes.addDoacaoUsuario(doacaoUsuario);
 			updateBancoSementes(bancoSementes);
@@ -1401,38 +1414,6 @@ public class Facade {
 
 	public void deleteFinalidade(long id) {
 		finalidadeService.deleteFinalidade(id);
-	}
-
-	// TabelaPerguntaUsuario--------------------------------------------------------------
-	@Autowired
-	private TabelaPerguntaUsuarioServiceInterface tabelaPerguntaUsuario;
-
-	public TabelaPerguntaUsuario saveTabelaPerguntaUsuario(TabelaPerguntaUsuario newInstance) {
-		return tabelaPerguntaUsuario.saveTabelaPerguntaUsuario(newInstance);
-	}
-
-	public TabelaPerguntaUsuario updateTabelaPerguntaUsuario(TabelaPerguntaUsuario transientObject) {
-		return tabelaPerguntaUsuario.updateTabelaPerguntaUsuario(transientObject);
-	}
-
-	public TabelaPerguntaUsuario findTabelaPerguntaUsuarioById(long id) {
-		return tabelaPerguntaUsuario.findTabelaPerguntaUsuarioById(id);
-	}
-
-	public List<TabelaPerguntaUsuario> getAllTabelaPerguntaUsuario() {
-		return tabelaPerguntaUsuario.getAllTabelaPerguntaUsuario();
-	}
-
-	public Page<TabelaPerguntaUsuario> findPageTabelaPerguntaUsuario(Pageable pageRequest) {
-		return tabelaPerguntaUsuario.findPageTabelaPerguntaUsuario(pageRequest);
-	}
-
-	public void deleteTabelaPerguntaUsuario(TabelaPerguntaUsuario persistentObject) {
-		tabelaPerguntaUsuario.deleteTabelaPerguntaUsuario(persistentObject);
-	}
-
-	public void deleteTabelaPerguntaUsuario(long id) {
-		tabelaPerguntaUsuario.deleteTabelaPerguntaUsuario(id);
 	}
 
 	// Arquivos

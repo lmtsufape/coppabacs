@@ -23,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.edu.ufape.lmts.sementes.facade.Facade;
 
-@CrossOrigin(origins = "http://localhost:8081/")
 
 @RestController
 @RequestMapping("/api/v1/")

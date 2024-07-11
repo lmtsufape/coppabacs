@@ -12,6 +12,7 @@ public interface GerenteServiceInterface {
 	Gerente saveGerente(Gerente o) throws EmailExistsException;
 	Gerente findGerenteById(long id);
 	Gerente findGerenteByEmail(String email);
+	Gerente findGerenteByCpf(String cpf);
 	Gerente updateGerente(Gerente u);
 	void deleteGerente(Gerente u);
 	void deleteGerente(long id);

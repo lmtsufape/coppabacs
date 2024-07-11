@@ -21,7 +21,8 @@ const FuncionarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
     confirmarSenha: "",
     nome: "",
     nomePopular: "",
-    funcao: "",
+    estadoCivil: "",
+    cargo: "",
     contato: "",
     cpf: "",
     dataNascimento: "",
@@ -80,22 +81,27 @@ const FuncionarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
     //   .required('Obrigatório'),
     // bairro: Yup.string()
     //   .required('Obrigatório'),
-    bancoId: Yup.string()
-      .required('Obrigatório'),
+    //bancoId: Yup.string()
+      //.required('Obrigatório'),
   })
 
   const { status, mutate } = useMutation(
     async (values) => {
       return postCoppabacs(values);
     }, {
-    onSuccess: (res) => {
-      window.location.href = '/funcionarios';
+    onSuccess: () => {
+      window.location.href = '/colaboradores';
 
     },
     onError: (error) => {
-      console.log("Erro ao cadastrar funcionário", error);
-
-    }
+      let message = 'Ops! Ocorreu um problema ao processar sua solicitação. Por favor, tente novamente mais tarde.';
+      if (error.response) {
+        message = 'Ops! Houve um erro no servidor. Verifique se todos os campos estão preenchidos corretamente e tente novamente.';
+      } else {
+        message = 'Ops! Houve um problema na sua conexão com a internet. Por favor, verifique e tente novamente.';
+      }
+      setErrorMessage(message);
+    }      
   }
   );
   const [etapas, setEtapas] = useState(0);
@@ -126,6 +132,7 @@ const FuncionarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
 
           onSubmit={(values, { setSubmitting }) => {
             mutate(values)
+            setSubmitting(false);
           }}
         >
           {(formik) => {
@@ -139,7 +146,7 @@ const FuncionarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
                 {etapas === 0 && (
                   <div className={style.container__ContainerForm_buttons}>
                     <button type="button">
-                      <Link className={style.container__ContainerForm_buttons_link} href="/funcionarios">
+                      <Link className={style.container__ContainerForm_buttons_link} href="/colaboradores">
                         <h1>Voltar</h1>
                       </Link>
                     </button>

@@ -59,4 +59,10 @@ public class GerenteService implements GerenteServiceInterface {
 		return repository.findByAtivoTrue(pageRequest);
 	}
 
+	@Override
+	public Gerente findGerenteByCpf(String cpf) {
+		return repository.findByAtivoTrueAndCpf(cpf)
+				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist Gerente with cpf = " + cpf));
+	}
+
 }

@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.model.Coppabacs;
 import br.edu.ufape.lmts.sementes.repository.CoppabacsRepository;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
@@ -40,6 +39,9 @@ public class CoppabacsService implements CoppabacsServiceInterface {
 	}
 	public Coppabacs findCoppabacsByEmail(String email) {
 		return repository.findByAtivoTrueAndEmail(email).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Cooppabacs with Email = " + email));
+	}
+	public Coppabacs findCoppabacsByCpf(String cpf) {
+		return repository.findByAtivoTrueAndCpf(cpf).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Cooppabacs with cpf = " + cpf));
 	}
 	@Transactional
 	public void deleteCoppabacs(Coppabacs coppabacs) {

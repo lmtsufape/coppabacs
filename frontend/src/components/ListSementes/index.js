@@ -12,7 +12,7 @@ import { Search } from "../searchSemente";
 import { getStorageItem } from "@/utils/localStore";
 import { useSelector } from "react-redux";
 import { getSementesBanco } from "@/api/sementes/getSementeBanco";
-import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
+import { getCoordenadorCpf } from "@/api/usuarios/coordenador/getCoordenadorCpf";
 import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
 import DetalhamentoSementes from "../DetalhamentoSementes";
 import DetalhamentoBanco from "../DetalhamentoBancoSemente";
@@ -192,7 +192,7 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
 
 
 const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) => {
-  const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
+  const [coordenadorCpf, setCoordenadorCpf] = useState(getStorageItem("userLogin"));
   const [coordenador, setCoordenador] = useState([]);
   const [open, setOpen] = useState(false);
   const [sementes, setSementes] = useState([]);
@@ -204,13 +204,13 @@ const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ta
   const [variedadeSemente, setVariedadeSemente] = useState(null);
 
   useEffect(() => {
-    mutationCoordenador.mutate(coordenadorEmail);
+    mutationCoordenador.mutate(coordenadorCpf);
     if (coordenador.bancoSementeId) {
       mutate();
     }
   }, [coordenador.bancoSementeId]);
 
-  const mutationCoordenador = useMutation(coordenadorEmail => getCoordenadorEmail(coordenadorEmail), {
+  const mutationCoordenador = useMutation(coordenadorCpf => getCoordenadorCpf(coordenadorCpf), {
     onSuccess: (res) => {
       setCoordenador(res.data);
     },
@@ -318,19 +318,19 @@ const LayoutAgricultor = ({ diretorioAnterior, diretorioAtual, hrefAnterior, tab
   const [sementes, setSementes] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [role, setRole] = useState(getStorageItem("userRole"));
-  const [agricultorEmail, setAgricultorEmail] = useState(getStorageItem("userLogin"));
+  const [agricultorCpf, setAgricultorCpf] = useState(getStorageItem("userLogin"));
   const [agricultor, setAgricultor] = useState([]);
   const [selectedTabelaBancoSemente, setSelectedTabelaBancoSemente] = useState(null);
   const [nomeSemente, setNomeSemente] = useState(null);
   const [variedadeSemente, setVariedadeSemente] = useState(null);
 
   useEffect(() => {
-    mutationAgricultor.mutate(agricultorEmail);
+    mutationAgricultor.mutate(agricultorCpf);
     if (agricultor.bancoId) {
       mutate();
     }
   }, [agricultor.bancoId]);
-  const mutationAgricultor = useMutation(agricultorEmail => getUsuarioEmail(agricultorEmail), {
+  const mutationAgricultor = useMutation(agricultorCpf => getUsuarioEmail(agricultorCpf), {
     onSuccess: (res) => {
       setAgricultor(res.data);
     },

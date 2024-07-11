@@ -1,119 +1,119 @@
 
     
 .no_border{
-  border: none;
-  background: none;
-}
-
-.excluir_button:hover {
-    background-color: #c94157;
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-}
-
-.modal {
-    position: relative; /* Mudar de absolute para relative */
-    width: 420px;
-    height: 181px;
-    border-radius: 20px;
-    border: 2px solid #ECECEC;
-    box-shadow: 4px 5px 15px 0px #00000014;
-    background-color: #FFFFFF;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    justify-content: center;
-    align-items: center;
-}
-
-.box1 {
-    width: 350px;
-    height:45px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.box2 {
-    width: 300px;
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    gap: 32px;
-}
-
-.box1 div {
-    font-family: 'Poppins', sans-serif;
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 30px;
-    letter-spacing: 0em;
-    color: #272727;
-}
-
-.button_close_modal {
-    text-decoration: none;
-    width: 24.12px;
-    height: 24.12px;
-    border-radius: 4.69px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ECECEC;
     border: none;
-    color: #909090;
-}
-
-.cancelar_button {
-    width: 95px;
-    height: 48px;
-    border-radius: 10px;
-    border: 1px solid #606060;
-    background-color: white;
-    
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 24px;
-    letter-spacing: 0em;
-    color: #606060;
-}
-
-.cancelar_button:hover {
-    background-color: #f3f3f37b;
-}
-
-.excluir_button2 {
-    width: 95px;
-    height: 48px;
-    border-radius: 10px;
-    font-weight: bold;
-    color: #ffffff;
-    background-color: #cf2121;
-    border: none;
-    border-radius: 0.8em;
-    &:hover{
-      box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);
-    }
-    line-height: 24px;
-    letter-spacing: 0em;
-    
-}
-
-.excluir_button2:hover {
-    background-color: #c94157;
-}
-
-
+    background: none;
+  }
   
+  .excluir_button:hover {
+      background-color: #c94157;
+  }
+  
+  .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+  }
+  
+  .modal {
+      position: relative; /* Mudar de absolute para relative */
+      width: 420px;
+      height: 181px;
+      border-radius: 20px;
+      border: 2px solid #ECECEC;
+      box-shadow: 4px 5px 15px 0px #00000014;
+      background-color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  .box1 {
+      width: 350px;
+      height:45px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+  
+  .box2 {
+      width: 300px;
+      display: flex;
+      justify-content: right;
+      align-items: center;
+      gap: 32px;
+  }
+  
+  .box1 div {
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 30px;
+      letter-spacing: 0em;
+      color: #272727;
+  }
+  
+  .button_close_modal {
+      text-decoration: none;
+      width: 24.12px;
+      height: 24.12px;
+      border-radius: 4.69px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #ECECEC;
+      border: none;
+      color: #909090;
+  }
+  
+  .cancelar_button {
+      width: 95px;
+      height: 48px;
+      border-radius: 10px;
+      border: 1px solid #606060;
+      background-color: white;
+      
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+      letter-spacing: 0em;
+      color: #606060;
+  }
+  
+  .cancelar_button:hover {
+      background-color: #f3f3f37b;
+  }
+  
+  .excluir_button2 {
+      width: 95px;
+      height: 48px;
+      border-radius: 10px;
+      font-weight: bold;
+      color: #ffffff;
+      background-color: #cf2121;
+      border: none;
+      border-radius: 0.8em;
+      &:hover{
+        box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);
+      }
+      line-height: 24px;
+      letter-spacing: 0em;
+      
+  }
+  
+  .excluir_button2:hover {
+      background-color: #c94157;
+  }
+  
+  
+    

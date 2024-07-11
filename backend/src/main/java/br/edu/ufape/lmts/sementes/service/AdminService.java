@@ -48,4 +48,10 @@ public class AdminService implements AdminServiceInterface {
 		return repository.findByAtivoTrue(pageRequest);
 	}
 
+	@Override
+	public Admin findAdminByCpf(String cpf) {
+		return repository.findByAtivoTrueAndCpf(cpf)
+				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist Admin with cpf = " + cpf));
+	}
+
 }

@@ -30,7 +30,6 @@ import br.edu.ufape.lmts.sementes.model.Post;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
-@CrossOrigin(origins = "http://localhost:8081/")
 @RestController
 @RequestMapping("/api/v1/")
 public class PostController {

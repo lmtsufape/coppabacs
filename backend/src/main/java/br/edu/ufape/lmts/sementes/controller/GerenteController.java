@@ -35,8 +35,7 @@ import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 
-@CrossOrigin (origins = "http://localhost:8081/" )
-@RestController
+ @RestController
 @RequestMapping("/api/v1/")
 public class GerenteController {
 	@Autowired
@@ -80,6 +79,11 @@ public class GerenteController {
 	@GetMapping("gerente/e/{email}")
 	public GerenteResponse getGerenteByEmail(@PathVariable String email) {
 		return new GerenteResponse(facade.findGerenteByEmail(email));
+	}
+
+	@GetMapping("gerente/cpf/{cpf}")
+	public GerenteResponse getGerenteByCpf(@PathVariable String cpf) {
+		return new GerenteResponse(facade.findGerenteByCpf(cpf));
 	}
 	
 	@PatchMapping("gerente/{id}")

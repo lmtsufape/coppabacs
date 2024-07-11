@@ -18,6 +18,8 @@ import { patchCoordenador } from "@/api/usuarios/coordenador/patchCoordenador";
 import HeaderDetalhamento from "../HeaderDetalhamento";
 import { addSementesAgricultor } from "@/api/usuarios/agricultor/addSementes";
 import { removeSementesAgricultor } from "@/api/usuarios/agricultor/removeSementes";
+import { postArquivo } from "@/api/arquivos/postArquivo";
+import { getArquivo } from "@/api/arquivos/getArquivo";
 
 
 const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuario, backDetalhamento }) => {
@@ -25,6 +27,16 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
   const router = useRouter();
   const [etapas, setEtapas] = useState(0);
   const [editar, setEditar] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImageFile, setSelectedImageFile] = useState([]);
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedImage(URL.createObjectURL(file));
+      setSelectedImageFile(file);
+    }
+  };
 
   const [formData, setFormData] = useState({
     email: '',
@@ -65,7 +77,8 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
     },
     sementes: [],
     sementesAdicionadas: [],
-    sementesRemovidas: [],  
+    sementesRemovidas: [],
+    imagem: '',
   });
 
   useEffect(() => {
@@ -79,10 +92,11 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
         dataNascimento: usuario.dataNascimento || '',
         sexo: usuario.sexo || '',
         endereco: usuario.endereco || {},
-        bancoId: usuario.bancoSementeId || '',
+        bancoId: usuario.bancoId || '',
         sementes: usuario.sementes || {},
         estadoCivil: usuario.estadoCivil || '',
         conjuge: usuario.conjuge || {},
+        imagem: usuario.imagem || '',
       });
     }
   }, [usuario]);
@@ -96,20 +110,20 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
       console.error('Erro ao aprovar usuário', error);
     }
   });
-  const mutationUpdateAgricultor = useMutation(async newData =>{ 
-    
-    const {sementesAdicionadas,sementesRemovidas, sementes,...resto} = newData;
-   
+  const mutationUpdateAgricultor = useMutation(async newData => {
+
+    const { sementesAdicionadas, sementesRemovidas, sementes, ...resto } = newData;
+
     patchAgricultor(resto, usuario.id)
-    if(sementesAdicionadas&& sementesAdicionadas.length > 0){
-      await addSementesAgricultor(usuario.id,sementesAdicionadas);
+    if (sementesAdicionadas && sementesAdicionadas.length > 0) {
+      await addSementesAgricultor(usuario.id, sementesAdicionadas);
     }
-    if(sementesRemovidas && sementesRemovidas.length > 0){
-      await removeSementesAgricultor(usuario.id,sementesRemovidas);
+    if (sementesRemovidas && sementesRemovidas.length > 0) {
+      await removeSementesAgricultor(usuario.id, sementesRemovidas);
     }
   }, {
     onSuccess: () => {
-     
+
       window.location.reload();
     },
     onError: (error) => {
@@ -131,13 +145,46 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
     onError: (error) => {
       console.error('Erro ao tentar atualizar os dados', error);
     }
+
+
   });
+
+  const handleSubmit = async (values) => {
+    if (selectedImageFile) {
+      const url = await postArquivo(selectedImageFile);
+      values.imagem = url;
+    }
+
+    if (hrefAnterior === "/funcionários") {
+      mutationUpdateFuncionario.mutate(values);
+    } else if (hrefAnterior === "/coordenadores") {
+      mutationUpdateCoordenador.mutate(values);
+    } else if (hrefAnterior === "/agricultores") {
+      mutationUpdateAgricultor.mutate(values);
+    }
+
+  }
+
+
+  const handleGetImagem = async () => {
+    const url = await getArquivo(usuario.imagem);
+    setFormData({ ...formData, imagem: url });
+  }
+
+  useEffect(() => {
+    if (usuario?.imagem) {
+      handleGetImagem();
+    }
+  }
+    , [usuario]);
+
+
   return (
     <div id="header" className={style.container}>
       <HeaderDetalhamento
         hrefAnterior={backDetalhamento}
         diretorioAnterior="Home / Agricultores / "
-        diretorioAtual="Detalhes do Agricultor"
+        diretorioAtual="Detalhamento do Usuário"
 
       />
 
@@ -148,13 +195,7 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
           initialValues={formData}
           enableReinitialize
           onSubmit={(values, { setSubmitting }) => {
-            if (hrefAnterior === "/funcionários") {
-              mutationUpdateFuncionario.mutate(values);
-            } else if (hrefAnterior === "/coordenadores") {
-              mutationUpdateCoordenador.mutate(values);
-            } else if (hrefAnterior === "/agricultores") {
-              mutationUpdateAgricultor.mutate(values);
-            }
+           handleSubmit(values);
 
           }}
         >
@@ -165,11 +206,45 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
                 className={style.container__ContainerForm_form}
               >
                 <div className={style.container__profile}>
-                  <div className={style.container__profile_img}>
-                    <Image src="/assets/agricultorteste.png" alt="Foto do usuário" width={72} height={72} />
-                    <h1>{usuario?.nome}</h1>
-                  </div>
-                  {hrefAnterior === "/agricultores" || hrefAnterior === "/funcionarios" ||hrefAnterior === "/coordenadores" ? (
+
+                  {editar ? (
+                     <div className={style.container__profile_img}>
+                     <input
+                       type="file"
+                       accept="image/*"
+                       onChange={handleImageChange}
+                       style={{ display: 'none' }}
+                       id="upload-button"
+                     />
+                     <label htmlFor="upload-button">
+                       <Image
+                         src={selectedImage || usuario?.imagem || "/assets/agricultorteste.png"}
+                         alt="Foto do usuário"
+                         width={72}
+                         height={72}
+                         style={{ cursor: 'pointer' }}
+                       />
+                     </label>
+                     <h1>{usuario?.nome}</h1>
+                   </div>
+                  ) : (
+                    <div className={style.container__profile_img}>
+                      <Image
+                        src={usuario?.imagem ? usuario.imagem : "/assets/agricultorteste.png"}
+                        alt="Foto do usuário"
+                        width={72}
+                        height={72}
+                      />
+                      <h1>{usuario?.nome}</h1>
+                    </div>
+                  )
+                  }
+
+
+
+
+
+                  {hrefAnterior === "/agricultores" || hrefAnterior === "/funcionarios" || hrefAnterior === "/coordenadores" ? (
                     <>
                       {editar === false ? (
                         <button
@@ -189,7 +264,7 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
                         </button >
                       )}
                     </>
-                  ):("")}
+                  ) : ("")}
 
                 </div>
 
@@ -204,7 +279,7 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
                   hrefAnterior === "/agricultores/solicitacoes" ? (
                     <div className={style.container__profile}>
                       <button
-                      type="submit"
+                        type="submit"
                         onClick={() => setEditar(true)}
                         className={style.container__profile_button}>
 
@@ -221,7 +296,7 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
                       </button >
 
                     </div>
-                  ):("")
+                  ) : ("")
                 }
               </Form >
             )

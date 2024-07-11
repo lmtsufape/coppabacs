@@ -44,7 +44,6 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       sexo: "",
     },
     bancoId: "",
-    atividadesRurais: [],
     producaoSementes: {
       cultura: "",
       variedade: "", 
@@ -178,10 +177,8 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
                         <h1>Voltar</h1>
                       </Link>
                     </button>
-                    <button type="button" onClick={() => setEtapas(etapas + 1)}>
-                      <Link href="#header" className={style.container__ContainerForm_buttons_linkWhite}>
-                        <h1>Continuar</h1>
-                      </Link>
+                    <button type="submit" className={style.container__ContainerForm_buttons_linkWhite}>
+                        <h1>Finalizar</h1>
                     </button>
                   </div>
                 )}

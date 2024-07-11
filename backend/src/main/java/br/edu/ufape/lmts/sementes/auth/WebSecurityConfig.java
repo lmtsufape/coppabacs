@@ -3,6 +3,7 @@ package br.edu.ufape.lmts.sementes.auth;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -28,6 +29,9 @@ public class WebSecurityConfig {
 	
 	@Autowired
 	private SecurityFilter securityFilter;
+
+	@Value("${common.front-end}")
+	private String allowedOrigins;
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -40,10 +44,11 @@ public class WebSecurityConfig {
 			.authorizeHttpRequests(authz -> authz
 					// Rotas públicas
 					.requestMatchers(HttpMethod.POST,"/api/v1/login").permitAll()
-					.requestMatchers(HttpMethod.POST,"/api/v1/agricultor/usuario").permitAll()
+                    .requestMatchers(HttpMethod.POST,"/api/v1/agricultor/usuario/**").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/banco-sementes/**").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/sementes/**").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/post/**").permitAll()
+					.requestMatchers(HttpMethod.POST, "/api/v1/arquivos/**").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/arquivos/**").permitAll()
 					// rotas de agricultor
 					.requestMatchers(HttpMethod.GET, "/api/v1/usuario/e/**").hasAnyRole("AGRICULTOR", "GERENTE", "COPPABACS").
@@ -72,7 +77,7 @@ public class WebSecurityConfig {
 					.requestMatchers("/api/v1/coppabacs/**").hasRole("COPPABACS")
 					
 					// rotas de arquivos
-					.requestMatchers(HttpMethod.POST, "/api/v1/arquivos/**").hasAnyRole("AGRICULTOR", "GERENTE", "COPPABACS")
+
 					.requestMatchers(HttpMethod.DELETE, "/api/v1/arquivos/**").hasAnyRole("GERENTE", "COPPABACS")
 					.anyRequest().authenticated()
 			)
@@ -84,10 +89,12 @@ public class WebSecurityConfig {
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 	    CorsConfiguration configuration = new CorsConfiguration();
-	    
-	    configuration.setAllowedOrigins(Arrays.asList("*"));
-	    configuration.setAllowedMethods(Arrays.asList("*"));
-	    configuration.setAllowedHeaders(Arrays.asList("*"));
+
+
+		configuration.setAllowedOrigins(Arrays.asList(allowedOrigins.split(",")));
+		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+		configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+		configuration.setAllowCredentials(true);
 	    
 	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 	    source.registerCorsConfiguration("/**", configuration);

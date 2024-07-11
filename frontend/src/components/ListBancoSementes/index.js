@@ -13,8 +13,8 @@ import { getStorageItem } from "@/utils/localStore";
 import { useRouter } from "next/navigation";
 import DetalhamentoBanco from "../DetalhamentoBancoSemente";
 import { getBanco } from "@/api/bancoSementes/getBanco";
-import { getCoordenadorEmail } from "@/api/usuarios/coordenador/getCoordenadorEmail";
-import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
+import { getCoordenadorCpf } from "@/api/usuarios/coordenador/getCoordenadorCpf";
+import { getAgricultorCpf } from "@/api/usuarios/agricultor/getAgricultorCpf";
 
 export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3 }) {
 
@@ -171,7 +171,7 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
 
 const LayoutCoordenador = () => {
 
-  const [coordenadorEmail, setCoordenadorEmail] = useState(getStorageItem("userLogin"));
+  const [coordenadorCpf, setCoordenadorCpf] = useState(getStorageItem("userLogin"));
   const [coordenador, setCoordenador] = useState([]);
 
   const [banco, setBanco] = useState([]);
@@ -179,13 +179,13 @@ const LayoutCoordenador = () => {
 
 
   useEffect(() => {
-    mutationCoordenador.mutate(coordenadorEmail);
+    mutationCoordenador.mutate(coordenadorCpf);
     if (coordenador.bancoSementeId) {
       mutate();
     }
   }, [coordenador.bancoSementeId]);
 
-  const mutationCoordenador = useMutation(coordenadorEmail => getCoordenadorEmail(coordenadorEmail), {
+  const mutationCoordenador = useMutation(coordenadorCpf => getCoordenadorCpf(coordenadorCpf), {
     onSuccess: (res) => {
       setCoordenador(res.data);
     },
@@ -223,19 +223,20 @@ const LayoutCoordenador = () => {
 }
 
 const LayoutAgricultor = () => {
-  const [agricultorEmail, setAgricultorEmail] = useState(getStorageItem("userLogin"));
+  const [agricultorCpf, setAgricultorCpf] = useState(getStorageItem("userLogin"));
   const [agricultor, setAgricultor] = useState([]);
 
   const [banco, setBanco] = useState([]);
   useEffect(() => {
-    mutationAgricultor.mutate(agricultorEmail);
+    mutationAgricultor.mutate(agricultorCpf);
     if (agricultor.bancoId) {
       mutate();
     }
   }, [agricultor.bancoId]);
-  const mutationAgricultor = useMutation(agricultorEmail => getUsuarioEmail(agricultorEmail), {
+  const mutationAgricultor = useMutation(agricultorCpf => getAgricultorCpf(agricultorCpf), {
     onSuccess: (res) => {
       setAgricultor(res.data);
+      console.log(res.data);
     },
     onError: (error) => {
       console.error('Erro ao recuperar as informações do coordenador:', error);
