@@ -42,11 +42,12 @@ export default function DadosBanco({ formik, editar }) {
                 value={formik.values.contato}
                 disabled
               />
-            </div> 
+            </div>
             <div>
               <label htmlFor="anoFundacao">Ano de Fundação </label>
               <input
                 className={style.container__ContainerForm_form_input}
+                type="date"
                 placeholder="Não informado"
                 onBlur={formik.handleBlur}
                 value={formik.values.anoFundacao}
@@ -112,7 +113,7 @@ export default function DadosBanco({ formik, editar }) {
                 <span className={style.form__error}>{formik.errors.contato}</span>
               ) : null}
             </div>
-             <div>
+            <div>
 
               <label htmlFor="contato">Telefone</label>
               <input
