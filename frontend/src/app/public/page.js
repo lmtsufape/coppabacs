@@ -21,8 +21,8 @@ export default function publicPage() {
           <Carrossel />
         </div>
         <div className={styles.container__cards}>
-          <Card title="Bancos de Sementes" icon="/assets/iconBancoDeSementes.svg" description="Banco Sementes" link="/bancoSementes" />
-          <Card title="Sementes" icon="/assets/iconSeedGreen.svg" description="Sementes" link="/sementes" />
+          <Card title="Bancos de Sementes" icon="/assets/iconBancoDeSementes2.png" description="Banco Sementes" link="/bancoSementes" />
+          <Card title="Sementes" icon="/assets/iconSeedGreen2.png" description="Sementes" link="/sementes" />
           <Card title="Mural" icon="/assets/iconMural.svg" description="Mural" link="/mural" />
 
         </div>
