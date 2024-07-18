@@ -2,10 +2,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  
 
   .login__content {
     width: 34em;
     text-align: left;
+    
     ul {
       text-align: justify;
     }
@@ -58,8 +60,8 @@
     width: 30em;
     border-radius: 1em;
 
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    box-shadow: inset;
+    border: 0.5px solid #B1B1B1;
+    box-shadow: -4px 5px 12px 0px #00000026;
 
     &_title {
       text-align: center;

@@ -101,12 +101,17 @@ const LayoutAgricultor = () => {
 const LayoutPublic = () => {
   return (
     <div className={style.container}>
-      <Image src="/assets/LogosCoppa.svg" alt="Sementes" width={800} height={200} className={style.logo} />
+      <div className={style.conjuntoLogos}>
+      {/*<Image src="/assets/LogosCoppa.svg" alt="Sementes" width={800} height={200} className={style.logo} />*/}
+      <Image src="/assets/logoCoppabacs.svg" alt="Sementes" width={20} height={20} className={style.conjuntoLogos_logosCoppabacs} />
+      <Image src="/assets/logoLMTSColorido.jpg" alt="Sementes" width={800} height={200} className={style.conjuntoLogos_logosLMTS} />
+      <Image src="/assets/logoUfapeColorido2.png" alt="Sementes" width={800} height={200} className={style.conjuntoLogos_logosUfape} />
+    </div>
       <div className={style.login}>
         <div className={style.login__content}>
           <h1 className={style.login__content_title}>O sistema</h1>
           <p className={style.login__content_subtitle}>
-            O App Sementes Crioulas é uma plataforma desenvolvida pela Universidade Federal do Agreste de Pernambuco por
+            O Sistema de Gestão de Bancos de Sementes da COPPABACS (SIGEBACS) é uma plataforma desenvolvida pela Universidade Federal do Agreste de Pernambuco por
             meio do Laboratório Multidisciplinar de Tecnologias Sociais (LMTS), em parceria com a Cooperativa de Pequenos
             Produtores Agrícolas dos Bancos Comunitários de Sementes (COPPABACS), tendo como objetivo, auxiliar a
             eficiência da gestão da cooperativa. A ferramenta visa contribuir no processo de gestão das sementes, dos
