@@ -347,11 +347,7 @@ const LayoutPublic = ({ table1, table2, table3, table4, onSelectSemente, listSem
                 <th>{table3}</th>
 
                 <th className={styles.content__table__header_name3}>
-                  <div >
-                    {table4}
-                    <Image src="/assets/iconInformacao.svg" alt="Visualizar" width={27} height={26} />
 
-                  </div>
 
                 </th>
               </tr>
@@ -363,11 +359,6 @@ const LayoutPublic = ({ table1, table2, table3, table4, onSelectSemente, listSem
                     <td><Image src="/assets/sementeteste.png" alt="Foto do usuário" width={72} height={72} /></td>
                     <td>{semente.cultura.cultura}</td>
                     <td>{semente.nome}</td>
-                    <td>
-                      <div>
-                        <Image src="/assets/iconInvisivel.png" alt="Visualizar" width={27} height={26} />
-                      </div>
-                    </td>
                   </tr>
                 );
               })}
@@ -385,12 +376,6 @@ const LayoutPublic = ({ table1, table2, table3, table4, onSelectSemente, listSem
                     <td data-label="Imagem"><Image src="/assets/sementeteste.png" alt="Foto do usuário" width={50} height={50} /></td>
                     <td data-label="Nome">{semente.cultura.cultura}</td>
                     <td data-label="Cultivar">{semente.nome}</td>
-                    <td className={styles.content__table__buttonTabela}>
-                      <div className={styles.content__table__button}>
-                        <h1>Visualizar</h1>
-                        <Image className={styles.content__table__button_img} src="/assets/iconInvisivelBranco.png" alt="Visualizar" width={27} height={26} />
-                      </div>
-                    </td>
                   </tr>
                 );
               })}

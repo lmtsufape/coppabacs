@@ -64,8 +64,8 @@ const LayoutAdmin = () => {
       <Card title="Agricultores(as)" icon="/assets/iconAgricultor.svg" description="Agricultores" link="/agricultores" />
       <Card title="Coordenadores" icon="/assets/IconCordenadores.svg" description="Coordenadores" link="/coordenadores" />
       <Card title="Colaboradores" icon="/assets/iconAssociates.svg" description="Funcionários" link="/colaboradores" />
-      <Card title="Bancos de Sementes" icon="/assets/iconBancoDeSementes.svg" description="Banco Sementes" link="/bancoSementes" />
-      <Card title="Gestão de Sementes" icon="/assets/iconSeedGreen.svg" description="Sementes" link="/sementes" />
+      <Card title="Bancos de Sementes" icon="/assets/iconBancoDeSementes2.png" description="Banco Sementes" link="/bancoSementes" />
+      <Card title="Gestão de Sementes" icon="/assets/iconSeedGreen2.png" description="Sementes" link="/sementes" />
       <Card title="Mural" icon="/assets/iconMural.svg" description="Mural" link="/mural" />
     </>
   )
@@ -76,10 +76,10 @@ const LayoutCoordenador = () => {
   return (
     <>
       <Card title="Agricultores(as)" icon="/assets/iconAgricultor.svg" description="Agricultores" link="/agricultores" />
-      <Card title="Bancos de Sementes" icon="/assets/iconBancoDeSementes.svg" description="Banco Sementes" link="/bancoSementes" />
+      <Card title="Bancos de Sementes" icon="/assets/iconBancoDeSementes2.png" description="Banco Sementes" link="/bancoSementes" />
       <Card title="Doações de Sementes" icon="/assets/iconDoacaoDeSementes.svg" description="Doações Sementes" link="/doacoes" />
       <Card title="Retirada de Sementes" icon="/assets/iconRetiradaDeSementes.svg" description="Doações Sementes" link="/retiradas" />
-      <Card title="Gestão de Sementes" icon="/assets/iconSeedGreen.svg" description="Sementes" link="/sementes" />
+      <Card title="Gestão de Sementes" icon="/assets/iconSeedGreen2.png" description="Sementes" link="/sementes" />
       <Card title="Mural" icon="/assets/iconMural.svg" description="Mural" link="/mural" />
     </>
   )
@@ -89,10 +89,10 @@ const LayoutAgricultor = () => {
 
   return (
     <>
-      <Card title="Bancos de Sementes" icon="/assets/iconBancoDeSementes.svg" description="Banco Sementes" link="/bancoSementes" />
-      <Card title="Sementes" icon="/assets/iconSeedGreen.svg" description="Sementes" link="/sementes" />
+      <Card title="Bancos de Sementes" icon="/assets/iconBancoDeSementes2.png" description="Banco Sementes" link="/bancoSementes" />
+      <Card title="Sementes" icon="/assets/iconSeedGreen2.png" description="Sementes" link="/sementes" />
       <Card title="Histórico de Doações" icon="/assets/iconMovimentacaoBancoSementes.svg" description="Doações Sementes" link="/doacoes" />
-      <Card title="Histórico de Retirada" icon="/assets/iconMovimentacaoBancoSementes.svg" description="Doações Sementes" link="/retiradas" />
+      <Card title="Histórico de Retirada" icon="/assets/iconRetiradaDeSementes.svg" description="Doações Sementes" link="/retiradas" />
     </>
   )
 }

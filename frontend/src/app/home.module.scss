@@ -124,8 +124,8 @@
         text-decoration: none;
         color: #fff;
         font-size: larger;
-        padding: 2.1em 1.5em 2.1em 1.5em;
-        margin: -2.1em -1.5em -2.1em -1.5em;
+        padding: 1em 3.2em 1em 3.2em;
+        margin: -1em -3.2em -1em -3.2em;
       }
   
       &_botao{
@@ -133,10 +133,12 @@
         justify-content: center;
       }
       &_button {
-        width: 15em;
-        height: 6em;
+        display: flex;
+        align-items: center;
+        padding: 1em 3.5em 1em 3.8em;
+        font-weight: bold;
         border: none;
-        margin-top: 3em;
+        margin-top: 2em;
         color: #fff;
         background: linear-gradient(to right, #245501, #4A8223);
         border-radius: 0.5em;
