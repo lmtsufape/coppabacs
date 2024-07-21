@@ -34,18 +34,16 @@ public class SementesRequest {
 	private ToleranciaAdversidadesRequest toleranciaAdversidades;
 	private CaracteristicasAgronomicasRequest caracteristicasAgronomicas;
 	private List<FinalidadeRequest> finalidades;
-	private List<RegioesAdaptacaoCultivoRequest> regioesAdaptacaoCultivo;
+	private String regiaoAdaptacaoCultivo;
 	private CulturaRequest cultura;
-	
+
 	@Valid
 	private ResponsavelTecnicoRequest responsavelTecnico;
-
-
 
 	public Sementes convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		Sementes obj = modelMapper.map(this, Sementes.class);
-		obj.setFinalidades(finalidades.stream().map(x->x.convertToEntity()).toList());
+		obj.setFinalidades(finalidades.stream().map(x -> x.convertToEntity()).toList());
 		obj.setCultura(cultura.convertToEntity());
 		obj.setImagens(new ArrayList<>());
 		return obj;

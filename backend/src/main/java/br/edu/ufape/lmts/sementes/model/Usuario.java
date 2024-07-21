@@ -75,7 +75,7 @@ public abstract class Usuario implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role")
 	private Set<TipoUsuario> roles;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "usuario_id")
 	private TabelaPerguntaUsuario tabelaPerguntaUsuario;
 
@@ -150,10 +150,6 @@ public abstract class Usuario implements Serializable {
 			roles = new HashSet<>();
 		}
 		return roles;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 	@Override

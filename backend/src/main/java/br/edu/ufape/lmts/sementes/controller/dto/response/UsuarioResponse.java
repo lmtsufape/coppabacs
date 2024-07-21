@@ -17,7 +17,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@JsonPropertyOrder
 public  class UsuarioResponse  {
 	private Long id;
 	private String nome;
@@ -26,7 +25,6 @@ public  class UsuarioResponse  {
 	
 	private EnderecoResponse endereco;
 	private String cpf;
-	@JsonFormat(pattern = "dd-MM-yyyy")
 	private Date dataNascimento;
 	private String contato;
 	private String imagem;

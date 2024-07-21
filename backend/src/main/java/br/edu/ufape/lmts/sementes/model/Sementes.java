@@ -50,6 +50,7 @@ public  class Sementes  {
 	private float altitudeMinima;
 	private String caracteristicasPositiva;
 	private String caracteristicasNegativas;
+	private String regiaoAdaptacaoCultivo;
 	private boolean ativo = true;
 	@OneToOne(cascade=CascadeType.PERSIST, orphanRemoval = true)
 	@ToString.Exclude
@@ -72,11 +73,7 @@ public  class Sementes  {
 	@JoinColumn(name = "cultura_id")
 	@ToString.Exclude
 	private Cultura cultura;
-	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.PERSIST)
-	@JoinColumn(name = "sementes_id")
-	@ToString.Exclude
-	private List<RegioesAdaptacaoCultivo> regioesAdaptacaoCultivo;
-
+	
 	@Transactional
 	public void addTabelaSementes(TabelaBancoSementes tabelaBancoSementes){
 		this.tabelaBancoSementes.add(tabelaBancoSementes);

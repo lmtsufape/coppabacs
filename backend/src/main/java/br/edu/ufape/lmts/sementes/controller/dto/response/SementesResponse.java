@@ -33,7 +33,7 @@ public class SementesResponse {
 	private ResponsavelTecnicoResponse responsavelTecnico;
 	private CaracteristicasAgronomicasResponse caracteristicasAgronomicas;
 	private List<FinalidadeResponse> finalidades;
-	private List<RegioesAdaptacaoCultivoResponse> regioesAdaptacaoCultivo;
+	private String regiaoAdaptacaoCultivo;
 	private CulturaResponse cultura;
 
 	public SementesResponse(Sementes obj) {

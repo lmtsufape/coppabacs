@@ -1,12 +1,12 @@
 package br.edu.ufape.lmts.sementes.enums;
 
 public enum TipoPergunta {
-	PERGUNTA1("Onde está o dinheiro?"),
-	PERGUNTA2("Por que a gente é assim?"),
-	PERGUNTA3("Can't we be friends?"),
-	PERGUNTA4("Life on Mars?"),
-	PERGUNTA5("Am i blue?"),
-	PERGUNTA6("Answers? Questions! Questions?");
+	PERGUNTA1("PERGUNTA 1"),
+	PERGUNTA2("PERGUNTA 2"),
+	PERGUNTA3("PERGUNTA 3"),
+	PERGUNTA4("PERGUNTA 4"),
+	PERGUNTA5("PERGUNTA 5"),
+	PERGUNTA6("PERGUNTA 6");
 
 	private String pergunta;
 

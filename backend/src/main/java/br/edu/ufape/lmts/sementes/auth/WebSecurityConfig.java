@@ -44,8 +44,11 @@ public class WebSecurityConfig {
 			.authorizeHttpRequests(authz -> authz
 					// Rotas públicas
 					.requestMatchers(HttpMethod.POST,"/api/v1/login").permitAll()
+					.requestMatchers(HttpMethod.POST,"/api/v1/forgot/**").permitAll()
+					.requestMatchers(HttpMethod.POST,"/api/v1/recoverpassword/**").permitAll()
                     .requestMatchers(HttpMethod.POST,"/api/v1/agricultor/usuario/**").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/banco-sementes/**").permitAll()
+					.requestMatchers(HttpMethod.GET, "/api/v1/perguntas").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/sementes/**").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/v1/post/**").permitAll()
 					.requestMatchers(HttpMethod.POST, "/api/v1/arquivos/**").permitAll()
