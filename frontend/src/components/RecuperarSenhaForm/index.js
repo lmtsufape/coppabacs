@@ -8,31 +8,31 @@ import HeaderNavegacao from "../HeaderNavegacao";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import styles from "@/components/RecuperarSenhaForm/recuperarSenha.module.scss";
+import { cpfMask } from "@/utils/Masks/cpfMask";
 
 const RecuperarSenhaForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
     const router = useRouter();
 
     const initialValues = {
-        email: "",
+        cpf: "",
     }
 
     const validateSchema = Yup.object().shape({
-        email: Yup.string()
-            .email("Insira um e-mail válido")
-            .required('Required'),
+        cpf: Yup.string()
+            .required('Obrigatório'),
     });
 
-    const {status, mutate} = useMutation(
+    const { status, mutate } = useMutation(
         async (values) => {
             return postAgricultor(values);
-        },{
-            onSucess: () => {
-                window.location.href= '/login'
-            },
-            onError: (error) => {
-                console.log('Erro ao recuperar senha: ', error);
-            }
+        }, {
+        onSucess: () => {
+            window.location.href = '/login'
+        },
+        onError: (error) => {
+            console.log('Erro ao recuperar cpf: ', error);
         }
+    }
     );
 
 
@@ -45,47 +45,88 @@ const RecuperarSenhaForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior })
             />
 
             <div className={styles.containerForm}>
-            <div className={styles.esqueciSenha}>
-                <h1 className={styles.esqueciSenha__titleGreen}>Esqueci minha senha </h1>
-                <h2 className={styles.esqueciSenha__textoEsqueci}>Para redefinir a sua senha, informe o e-mail cadastrado na sua conta e lhe enviaremos um link com as instruções.</h2>
+                <div className={styles.esqueciSenha}>
+                    <h1 className={styles.esqueciSenha__titleGreen}>Esqueci minha senha </h1>
+                    <h2 className={styles.esqueciSenha__textoEsqueci}>Para redefinir a sua senha, informe o CPF cadastrado na sua conta e responda a pergunta corretamente.</h2>
 
-            </div>
+                </div>
                 <Formik
                     initialValues={initialValues}
 
                     validationSchema={validateSchema}
 
-                    onSubmit={(values, {setSubmitting}) => {
+                    onSubmit={(values, { setSubmitting }) => {
                         mutate(values);
                         setSubmitting(false);
                     }}
                 >
-                    
+
                     {(formik) => {
                         return (
-                            
+
                             <Form className={styles.container__ContainerForm_form}>
-                                <label>E-mail <span>*</span></label>
+                                <label>CPF <span>*</span></label>
                                 <input
                                     className={styles.sidedForm_input}
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    placeholder="Insira seu e-mail"
-                                    onChange={formik.handleChange}
+                                    id="cpf"
+                                    name="cpf"
+                                    placeholder="Insira seu cpf"
+                                    onChange={(e) => {
+                                        formik.setFieldValue("cpf", cpfMask(e.target.value));
+                                    }}
                                     onBlur={formik.handleBlur}
-                                    value={formik.values.email}
+                                    value={formik.values.cpf}
                                     required
                                 />
-                                {formik.touched.email && formik.errors.email ? (
-                                    <span className={styles.form__error}>{formik.errors.email}</span>
+                                {formik.touched.cpf && formik.errors.cpf ? (
+                                    <span className={styles.form__error}>{formik.errors.cpf}</span>
+                                ) : null}
+
+                                <label htmlFor="pergunta">Perguntas<span>*</span></label>
+                                <select
+                                    className={styles.sidedForm_select}
+                                    id="pergunta"
+                                    name="pergunta"
+                                    placeholder=""
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    value={formik.values.pergunta}
+                                    required
+                                >
+                                    
+                                    <option value="">Selecione...</option>
+                                    <option value="pergunta1">Pergunta 1</option>
+                                    <option value="pergunta2">Pergunta 2</option>
+                                    <option value="pergunta3">Pergunta 3</option>
+                                    <option value="pergunta4">Pergunta 4</option>
+                                    {/*{bancos.map((banco, index) => (
+            <option key={index} value={banco.id}>{banco.nome}</option>
+          ))} */}
+                                </select>
+                                {formik.touched.pergunta && formik.errors.pergunta ? (
+                                    <span className={styles.form__error}>{formik.errors.pergunta}</span>
+                                ) : null}
+
+                                <label>Resposta <span>*</span></label>
+                                <input
+                                    className={styles.sidedForm_input}
+                                    id="resposta"
+                                    name="resposta"
+                                    placeholder="Insira sua resposta"
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    value={formik.values.resposta}
+                                    required
+                                />
+                                {formik.touched.resposta && formik.errors.resposta ? (
+                                    <span className={styles.form__error}>{formik.errors.resposta}</span>
                                 ) : null}
                                 <div className={styles.buttons}>
-                                <button
-                                    type="submit"
+                                    <button
+                                        type="submit"
                                     >
-                                    Confirmar
-                                </button>
+                                        Confirmar
+                                    </button>
                                 </div>
                             </Form>
                         );
