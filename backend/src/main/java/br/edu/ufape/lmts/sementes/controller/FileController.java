@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.edu.ufape.lmts.sementes.facade.Facade;
-import io.swagger.v3.oas.annotations.Hidden;
 
 
 @RestController

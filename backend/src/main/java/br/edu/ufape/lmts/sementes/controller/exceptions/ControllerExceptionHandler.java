@@ -1,7 +1,5 @@
 package br.edu.ufape.lmts.sementes.controller.exceptions;
 
-import br.edu.ufape.lmts.sementes.service.exception.CustomDatabaseException;
-import br.edu.ufape.lmts.sementes.service.exception.InvalidItemStateException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -9,7 +7,11 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import br.edu.ufape.lmts.sementes.service.exception.AuthenticationException;
+import br.edu.ufape.lmts.sementes.service.exception.AuthorizationException;
+import br.edu.ufape.lmts.sementes.service.exception.CustomDatabaseException;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
+import br.edu.ufape.lmts.sementes.service.exception.InvalidItemStateException;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -70,6 +72,22 @@ public class ControllerExceptionHandler {
 	public ResponseEntity<StandardError> handleInvalidItemStateException(InvalidItemStateException e, HttpServletRequest request) {
 		int httpStatus = HttpStatus.BAD_REQUEST.value();
 		StandardError err = new StandardError(httpStatus, "Erro nos Itens", e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(httpStatus).body(err);
+	}
+	
+	@ExceptionHandler(AuthorizationException.class)
+	public ResponseEntity<StandardError> authorizationException(AuthorizationException e, HttpServletRequest request) {
+		int httpStatus = HttpStatus.FORBIDDEN.value();
+		StandardError err = new StandardError(httpStatus,
+				"Não autorizado", e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(httpStatus).body(err);
+	}
+	
+	@ExceptionHandler(AuthenticationException.class)
+	public ResponseEntity<StandardError> authenticationException(AuthenticationException e, HttpServletRequest request) {
+		int httpStatus = HttpStatus.UNAUTHORIZED.value();
+		StandardError err = new StandardError(httpStatus,
+				"Não autorizado", e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(httpStatus).body(err);
 	}
 }

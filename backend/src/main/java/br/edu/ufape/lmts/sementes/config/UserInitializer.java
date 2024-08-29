@@ -4,6 +4,7 @@ import java.util.*;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.*;
 import br.edu.ufape.lmts.sementes.enums.Resistencia;
+import br.edu.ufape.lmts.sementes.enums.TipoPergunta;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +73,8 @@ public class UserInitializer implements CommandLineRunner {
 			usuario.setContato("(87)33333-3333");
 			usuario.setDataNascimento(new Date());
 			usuario.setSexo("Masculino");
-
+			usuario.setTabelaPerguntaUsuario(
+					new TabelaPerguntaUsuario(0, TipoPergunta.PERGUNTA1, passwordEncoder.encode("RESPOSTA 1")));
 			facade.saveUsuario(usuario);
 
 			Admin admin = new Admin();
@@ -85,7 +87,8 @@ public class UserInitializer implements CommandLineRunner {
 			admin.setSexo("admin");
 			admin.setSenha(passwordEncoder.encode("12345678"));
 			admin.setDataNascimento(new Date(18, 10, 2001));
-
+			admin.setTabelaPerguntaUsuario(
+					new TabelaPerguntaUsuario(0, TipoPergunta.PERGUNTA2, passwordEncoder.encode("RESPOSTA 2")));
 			userRepository.save(admin);
 			adminRepository.save(admin);
 
@@ -103,7 +106,8 @@ public class UserInitializer implements CommandLineRunner {
 			gerente.setDataNascimento(new Date(18, 10, 2001));
 			gerente.setBancoSementes(banco);
 			gerente.setNomePopular("Seu João");
-
+			gerente.setTabelaPerguntaUsuario(
+					new TabelaPerguntaUsuario(0, TipoPergunta.PERGUNTA1, passwordEncoder.encode("RESPOSTA 1")));
 			userRepository.save(gerente);
 			gerente = gerenteRepository.save(gerente);
 			banco.setGerentes(Collections.singletonList(gerente));
@@ -119,7 +123,8 @@ public class UserInitializer implements CommandLineRunner {
 			agricultor.setSexo("agricultor");
 			agricultor.setSenha(passwordEncoder.encode("12345678"));
 			agricultor.setDataNascimento(new Date(18, 10, 2001));
-
+			agricultor.setTabelaPerguntaUsuario(
+					new TabelaPerguntaUsuario(0, TipoPergunta.PERGUNTA1, passwordEncoder.encode("RESPOSTA 1")));
 			userRepository.save(agricultor);
 			agricultor.addRole(TipoUsuario.AGRICULTOR);
 			agricultorRepository.save(agricultor);
@@ -136,7 +141,8 @@ public class UserInitializer implements CommandLineRunner {
 			coppabacs.setDataNascimento(new Date(18, 10, 2001));
 			coppabacs.setCargo("Funcionário");
 			coppabacs.setNomePopular("Seu Marcos");
-
+			coppabacs.setTabelaPerguntaUsuario(
+					new TabelaPerguntaUsuario(0, TipoPergunta.PERGUNTA1, passwordEncoder.encode("RESPOSTA 1")));
 			userRepository.save(coppabacs);
 			coppabacsRepository.save(coppabacs);
 		}
@@ -150,7 +156,8 @@ public class UserInitializer implements CommandLineRunner {
 
 		return new BancoSementesRequest("Banco de Sementes do Alto Sertão", "Comunidade Agrícola Sertaneja", "1997",
 				"Fundado com o objetivo de preservar variedades locais de sementes e promover a agricultura sustentável na região...",
-				"Milho Crioulo, Feijão Macassa, Mandioca Mansa, Sorgo Nativo, Abóbora Seridó", endereco, objetos,0, "Dono","0800", new ArrayList<>());
+				"Milho Crioulo, Feijão Macassa, Mandioca Mansa, Sorgo Nativo, Abóbora Seridó", endereco, objetos, 0,
+				"Dono", "0800", new ArrayList<>());
 	}
 
 	private static List<SementesRequest> prepareAllSementes() {
@@ -166,9 +173,7 @@ public class UserInitializer implements CommandLineRunner {
 						Resistencia.MEDIA, Resistencia.BAIXA, Resistencia.ALTA, Resistencia.MEDIA),
 				new CaracteristicasAgronomicasRequest(210, 5000, 1500, 120.0, 150.0, 800.0, "Oblongo", "Verde",
 						"Marrom Escuro", "Verde Claro", "Branca", "Erecto", new EmpalhamentoRequest("Parcial")),
-				List.of(new FinalidadeRequest("Produção de café gourmet")),
-				Arrays.asList(new RegioesAdaptacaoCultivoRequest("Sul de Minas Gerais"),
-						new RegioesAdaptacaoCultivoRequest("Cerrado Mineiro")),
+				List.of(new FinalidadeRequest("Produção de café gourmet")), "Sul de Minas Gerais",
 				new CulturaRequest("Café", "Coffea"),
 				new ResponsavelTecnicoRequest("João Silva", "123.456.789-00", "002134", "MG")));
 		sementes.add(new SementesRequest(0, "Glycine max", "Soja",
@@ -181,9 +186,7 @@ public class UserInitializer implements CommandLineRunner {
 						Resistencia.ALTA, Resistencia.ALTA, Resistencia.BAIXA, Resistencia.MEDIA),
 				new CaracteristicasAgronomicasRequest(100, 4000, 3000, 300.0, 200.0, 750.0, "Esferico", "Amarelo",
 						"Verde Escuro", "Verde", "Amarela", "Prostrado", new EmpalhamentoRequest("Total")),
-				List.of(new FinalidadeRequest("Produção de óleo e proteína")),
-				Arrays.asList(new RegioesAdaptacaoCultivoRequest("Mato Grosso do Sul"),
-						new RegioesAdaptacaoCultivoRequest("Paraná")),
+				List.of(new FinalidadeRequest("Produção de óleo e proteína")), "Paraná",
 				new CulturaRequest("Soja", "Glycine max"),
 				new ResponsavelTecnicoRequest("Maria Pereira", "987.654.321-00", "001234", "PR")));
 		sementes.add(new SementesRequest(0, "Zea mays", "Milho",
@@ -195,9 +198,7 @@ public class UserInitializer implements CommandLineRunner {
 						Resistencia.ALTA, Resistencia.MEDIA, Resistencia.MEDIA, Resistencia.ALTA),
 				new CaracteristicasAgronomicasRequest(150, 6000, 5000, 250.0, 300.0, 850.0, "Cilíndrico", "Amarelo",
 						"Marrom Claro", "Amarelo Claro", "Laranja", "Vertical", new EmpalhamentoRequest("Moderado")),
-				List.of(new FinalidadeRequest("Produção de grãos e etanol")),
-				Arrays.asList(new RegioesAdaptacaoCultivoRequest("Rio Grande do Sul"),
-						new RegioesAdaptacaoCultivoRequest("São Paulo")),
+				List.of(new FinalidadeRequest("Produção de grãos e etanol")), "São Paulo",
 				new CulturaRequest("Milho", "Zea mays"),
 				new ResponsavelTecnicoRequest("Carlos Neto", "222.333.444-55", "005678", "SP")));
 

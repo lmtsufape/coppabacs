@@ -17,7 +17,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@JsonPropertyOrder
 public  class UsuarioResponse  {
 	private Long id;
 	private String nome;
@@ -26,7 +25,6 @@ public  class UsuarioResponse  {
 	
 	private EnderecoResponse endereco;
 	private String cpf;
-	@JsonFormat(pattern = "dd-MM-yyyy")
 	private Date dataNascimento;
 	private String contato;
 	private String imagem;
@@ -34,10 +32,12 @@ public  class UsuarioResponse  {
 	private ConjugeResponse conjuge;
 	private String estadoCivil;
 	private List<PostResponse> posts;
+	private TabelaPerguntaUsuarioResponse pergunta;
 
 	public UsuarioResponse(Usuario obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		modelMapper.map(obj, this);
+		pergunta.setPergunta(obj.getTabelaPerguntaUsuario().getPergunta());
 	}
 
 }

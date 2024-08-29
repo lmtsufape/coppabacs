@@ -7,9 +7,6 @@ import java.util.List;
 import org.hibernate.validator.constraints.br.CPF;
 import org.modelmapper.ModelMapper;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
 import br.edu.ufape.lmts.sementes.controller.validation.CPFExistsValidation;
 import br.edu.ufape.lmts.sementes.controller.validation.ContatoExistsValidation;
@@ -30,7 +27,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonPropertyOrder
 public class UsuarioRequest {
 	private long id;
 
@@ -49,7 +45,6 @@ public class UsuarioRequest {
 	@CPF(message = "CPF inválido")
 	@CPFExistsValidation
 	private String cpf;
-	@JsonFormat(pattern = "dd-MM-yyyy")
 	private Date dataNascimento;
 	@ContatoExistsValidation
 	@NotEmpty(message = "Preenchimento obrigatório")
@@ -60,12 +55,14 @@ public class UsuarioRequest {
 	private ConjugeRequest conjuge;
 	private String imagem;
 	private List<SementesRequest> sementes = new ArrayList<>();
+	@Valid
+	@NotNull(message = "Preenchimento obrigatório")
+	private TabelaPerguntaUsuarioRequest pergunta;
 
 	public Usuario convertToEntity() {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
-
 		Usuario obj = modelMapper.map(this, Usuario.class);
-
+		obj.setTabelaPerguntaUsuario(pergunta.convertToEntity());
 		return obj;
 	}
 
