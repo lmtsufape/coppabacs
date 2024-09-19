@@ -19,7 +19,6 @@ import lombok.Setter;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class TabelaPerguntaUsuarioRequest {
 	@EqualsAndHashCode.Include
-	@NotEmpty(message = "Preenchimento obrigatório")
 	private TipoPergunta pergunta;
 	@EqualsAndHashCode.Include
 	@NotEmpty(message = "Preenchimento obrigatório")
