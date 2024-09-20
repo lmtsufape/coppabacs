@@ -28,6 +28,10 @@ const FuncionarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
     dataNascimento: "",
     sexo: "",
     tipo: "",
+    pergunta: {
+      pergunta: "",
+      resposta: ""
+    },
     endereco: {
       logradouro: '',
       referencia: '',
