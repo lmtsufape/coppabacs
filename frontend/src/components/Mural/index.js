@@ -12,6 +12,10 @@ import { useMutation } from 'react-query';
 import { getCoordenadorCpf } from '@/api/usuarios/coordenador/getCoordenadorCpf';
 
 function parseDate(dateString) {
+    if (!dateString || !dateString.includes(' ')) {
+        console.error('Formato de data inválido:', dateString);
+        return new Date(); // Retorna a data atual como fallback
+    }
     const [datePart, timePart] = dateString.split(' ');
     const [day, month, year] = datePart.split('-').map(Number);
     const [hours, minutes, seconds] = timePart.split(':').map(Number);
