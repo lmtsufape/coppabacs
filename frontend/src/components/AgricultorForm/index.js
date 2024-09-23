@@ -27,6 +27,10 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
     confirmarSenha: "",
     nomePopular: "",
     estadoCivil: "",
+    pergunta: {
+      pergunta: "",
+      resposta: ""
+    },
     endereco: {
       cep: "",
       cidade: "",
@@ -57,6 +61,12 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       .required('Obrigatório'),
     cpf: Yup.string()
       .required('Obrigatório'),
+      pergunta: Yup.object().shape({
+        pergunta: Yup.string()
+          .required('Obrigatório'),
+        resposta: Yup.string()
+          .required('Obrigatório'),
+      }),
     sexo: Yup.string()
       .required('Obrigatório'),
     senha: Yup.string()

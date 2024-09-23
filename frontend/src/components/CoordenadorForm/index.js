@@ -29,6 +29,10 @@ const CoordenadorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) =>
     dataNascimento: "",
     sexo: "",
     estadoCivil: "",
+    pergunta: {
+      pergunta: "",
+      resposta: ""
+    },
     conjuge: {
       nome: "",
       sexo: "",
