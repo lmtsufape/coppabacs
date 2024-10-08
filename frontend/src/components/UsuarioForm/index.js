@@ -39,6 +39,10 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
     dataNascimento: "",
     contato: "",
     sexo: "",
+    pergunta: {
+      pergunta: "",
+      resposta: ""
+    },
     conjuge: {
       nome: "",
       sexo: "",

@@ -55,6 +55,44 @@ export default function DadosForm({ formik }) {
         <span className={style.form__error}>{formik.errors.confirmarSenha}</span>
       ) : null}
 
+      <div>
+          <label htmlFor="pergunta">Pergunta<span>*</span></label>
+          <select
+            className={style.container__ContainerForm_form_halfContainer_input}
+            id="pergunta"
+            name="pergunta.pergunta"
+            placeholder="Selecione..."
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.pergunta.pergunta}
+            required
+          >
+            <option value="">Selecione...</option>
+            <option value="PERGUNTA1">PERGUNTA 1</option>
+            <option value="PERGUNTA2">PERGUNTA 2</option>
+            <option value="PERGUNTA3">PERGUNTA 3</option>
+            <option value="PERGUNTA4">PERGUNTA 4</option>
+            <option value="PERGUNTA5">PERGUNTA 5</option>
+            <option value="PERGUNTA6">PERGUNTA 6</option>
+          </select>
+          {formik.touched.pergunta && formik.errors.pergunta?.pergunta ? (
+            <span className={style.form__error}>{formik.errors.pergunta.pergunta}</span>
+          ) : null}
+        </div>
+      <label >Resposta<span>*</span></label>
+      <input
+        className={style.container__ContainerForm_form_input}
+        id="resposta"
+        name="pergunta.resposta"
+        placeholder="Insira sua resposta"
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.pergunta.resposta}
+        required />
+      {formik.touched.pergunta?.resposta && formik.errors.pergunta?.resposta ? (
+        <span className={style.form__error}>{formik.errors.pergunta.resposta}</span>
+      ) : null}
+
       <label >Nome <span>*</span></label>
       <input
         className={style.container__ContainerForm_form_input}
