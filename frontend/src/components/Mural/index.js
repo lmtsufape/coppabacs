@@ -44,9 +44,21 @@ export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior,
         }
     });
 
-    const handleDeletePublicacao = async (publicacaoId) => {
-        await deletePublicacao(publicacaoId);
-        setPublicacao(listPublicacao.filter(publicacaoi => publicacaoi.id !== publicacaoId))
+    const handleDeletePublicacao = async (publicacao) => {
+        const publicacaoId = publicacao.id;
+    
+        if (typeof publicacaoId !== 'string' && typeof publicacaoId !== 'number') {
+            console.error('publicacaoId deve ser uma string ou número');
+            return;
+        }
+    
+        try {
+            await deletePublicacao(publicacaoId);
+            setPublicacao(listPublicacao.filter(publicacaoi => publicacaoi.id !== publicacaoId));
+            window.location.href = window.location.href;
+        } catch (error) {
+            window.location.href = window.location.href;
+        }
     }
 
     const { status, mutate } = useMutation(
@@ -127,7 +139,11 @@ export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior,
                     <section className={style.card_publicacao}>
                         <div className={style.card_publicacao__descricao}>
                             <h2>{publicacao.titulo}</h2>
-                            <ExcluirButton itemId={publicacao.id} onDelete={handleDeletePublicacao(publicacao)} alt="delete" width={27} height={26}/>
+                            <ExcluirButton 
+                                itemId={publicacao.id} 
+                                onDelete={() => handleDeletePublicacao(publicacao)}  
+                                alt="delete" width={27} 
+                                height={26}/>
                             <p className={style.descricao}>{publicacao.texto}</p>
                             <p className={style.date}>{parseDate(publicacao.data).toLocaleString()}</p>
                         </div>
