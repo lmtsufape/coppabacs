@@ -10,6 +10,8 @@ import { getAllPublicacoes } from '@/api/mural/getAllPublicacoes';
 import { getArquivo } from '@/api/arquivos/getArquivo';
 import { useMutation } from 'react-query';
 import { getCoordenadorCpf } from '@/api/usuarios/coordenador/getCoordenadorCpf';
+import ExcluirButton from "@/components/ExcluirButton";
+import { deletePublicacao } from '@/api/mural/deletePublicacao';
 
 function parseDate(dateString) {
     if (!dateString || !dateString.includes(' ')) {
@@ -22,7 +24,7 @@ function parseDate(dateString) {
     return new Date(year, month - 1, day, hours, minutes, seconds);
 }
 
-export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior }) {
+export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior, listPublicacao, setPublicacao }) {
     const [role, setRole] = useState(getStorageItem("userRole"));
     const [publicacoes, setPublicacoes] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -30,6 +32,7 @@ export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior 
     const [filteredPublicacoes, setFilteredPublicacoes] = useState([]);
     const [imageUrls, setImageUrls] = useState({});
     const [usuario, setUsuario] = useState([]);
+    const [selectedImage, setSelectedImage] = useState(null); // Estado para a imagem selecionada
 
     const mutationGetFuncionario = useMutation(coppabacsCpf => getCoordenadorCpf(coppabacsCpf), {
         onSuccess: (res) => {
@@ -40,6 +43,23 @@ export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior 
             console.error('Erro ao recuperar as informações do coordenador:', error);
         }
     });
+
+    const handleDeletePublicacao = async (publicacao) => {
+        const publicacaoId = publicacao.id;
+    
+        if (typeof publicacaoId !== 'string' && typeof publicacaoId !== 'number') {
+            console.error('publicacaoId deve ser uma string ou número');
+            return;
+        }
+    
+        try {
+            await deletePublicacao(publicacaoId);
+            setPublicacao(listPublicacao.filter(publicacaoi => publicacaoi.id !== publicacaoId));
+            window.location.href = window.location.href;
+        } catch (error) {
+            window.location.href = window.location.href;
+        }
+    }
 
     const { status, mutate } = useMutation(
         async () => {
@@ -76,12 +96,11 @@ export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior 
 
     useEffect(() => {
         filteredPublicacoes.forEach(publicacao => {
-            if (publicacao.imagem.length > 0) {
-                const img = publicacao.imagem[0];
+            publicacao.imagem.forEach(img => {
                 getArquivo(img).then(url => {
                     setImageUrls(prev => ({ ...prev, [img]: url }));
                 });
-            }
+            });
         });
     }, [filteredPublicacoes]);
 
@@ -120,22 +139,37 @@ export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior 
                     <section className={style.card_publicacao}>
                         <div className={style.card_publicacao__descricao}>
                             <h2>{publicacao.titulo}</h2>
+                            <ExcluirButton 
+                                itemId={publicacao.id} 
+                                onDelete={() => handleDeletePublicacao(publicacao)}  
+                                alt="delete" width={27} 
+                                height={26}/>
                             <p className={style.descricao}>{publicacao.texto}</p>
                             <p className={style.date}>{parseDate(publicacao.data).toLocaleString()}</p>
                         </div>
                         <div className={style.card_publicacao__imagens}>
-                            {publicacao.imagem.length > 0 && (
+                            {publicacao.imagem.map((img, imgIndex) => (
                                 <Image
-                                    src={imageUrls[publicacao.imagem[0]] || '/assets/muralWalle.svg'}
-                                    alt={`Imagem 1`}
+                                    key={imgIndex}
+                                    src={imageUrls[img] || '/assets/muralWalle.svg'}
+                                    alt={`Imagem ${imgIndex + 1}`}
                                     width={343}
                                     height={207}
+                                    onClick={() => setSelectedImage(imageUrls[img])} // Evento de clique para expandir a imagem
                                 />
-                            )}
+                            ))}
                         </div>
                     </section>
                 </div>
             ))}
+
+            {selectedImage && (
+                <div className={style.modal} onClick={() => setSelectedImage(null)}>
+                    <div className={style.modal_content}>
+                        <Image src={selectedImage} alt="Imagem expandida" layout="fill" objectFit="contain" />
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
