@@ -137,14 +137,17 @@ export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior,
             {filteredPublicacoes.map((publicacao, index) => (
                 <div key={index}>
                     <section className={style.card_publicacao}>
-                        <div className={style.card_publicacao__descricao}>
-                            <h2>{publicacao.titulo}</h2>
-                            <ExcluirButton 
+                    {(role == "ROLE_COPPABACS" || role == "ROLE_ADMIN") && (
+                    <ExcluirButton 
                                 itemId={publicacao.id} 
                                 onDelete={() => handleDeletePublicacao(publicacao)}  
                                 alt="delete" width={27} 
-                                height={26}/>
-                            <p className={style.descricao}>{publicacao.texto}</p>
+                                height={26}/>)}
+                        <div className={style.card_publicacao__descricao}>
+                            <h2>{publicacao.titulo}</h2>
+                                {publicacao.texto.split('\n').map((paragrafo, i) => (
+                                <p key={i} className={style.descricao}>{paragrafo}</p>
+                            ))}
                             <p className={style.date}>{parseDate(publicacao.data).toLocaleString()}</p>
                         </div>
                         <div className={style.card_publicacao__imagens}>
