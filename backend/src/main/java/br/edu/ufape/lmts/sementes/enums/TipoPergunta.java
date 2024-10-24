@@ -1,12 +1,17 @@
 package br.edu.ufape.lmts.sementes.enums;
 
 public enum TipoPergunta {
-	PERGUNTA1("PERGUNTA 1"),
-	PERGUNTA2("PERGUNTA 2"),
-	PERGUNTA3("PERGUNTA 3"),
-	PERGUNTA4("PERGUNTA 4"),
-	PERGUNTA5("PERGUNTA 5"),
-	PERGUNTA6("PERGUNTA 6");
+	PERGUNTA1("Qual era o nome do seu primeiro animal de estimação?"),
+	PERGUNTA2("Em que cidade você nasceu?"),
+	PERGUNTA3("Qual é o nome do seu melhor amigo de infância?"),
+	PERGUNTA4("Qual foi o seu primeiro emprego?"),
+	PERGUNTA5("Qual é o nome do colégio onde você estudou no ensino fundamental?"),
+	PERGUNTA6("Qual é o nome do meio da sua mãe?"),
+	PERGUNTA7("Em que rua você morava quando criança?"),
+	PERGUNTA8("Qual é o nome do hospital onde você nasceu?"),
+	PERGUNTA9("Qual era o apelido que você tinha na escola?"),
+	PERGUNTA10("Qual foi o nome do brinquedo ou boneco favorito da sua infância?"),
+	PERGUNTA11("Qual o desenho favorito da sua infância?");
 
 	private String pergunta;
 

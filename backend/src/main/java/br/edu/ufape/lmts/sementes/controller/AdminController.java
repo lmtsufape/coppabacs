@@ -29,7 +29,7 @@ import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("${prefix.url}")
 public class AdminController {
 	@Autowired
 	private Facade facade;

@@ -11,7 +11,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.response.PerguntaResponse;
 import br.edu.ufape.lmts.sementes.enums.TipoPergunta;
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("${prefix.url}")
 public class PerguntaController {
 
 	@GetMapping("perguntas")

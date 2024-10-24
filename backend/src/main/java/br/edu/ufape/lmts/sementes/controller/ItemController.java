@@ -32,7 +32,7 @@ import jakarta.validation.Valid;
 
  @Hidden
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("${prefix.url}")
 public class ItemController {
 	@Autowired
 	private Facade facade;

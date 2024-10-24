@@ -33,7 +33,7 @@ import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("${prefix.url}")
 public class CoppabacsController {
 	@Autowired
 	private Facade facade;
