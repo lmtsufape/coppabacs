@@ -37,7 +37,7 @@ import jakarta.validation.Valid;
 
 @Hidden
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("${prefix.url}")
 public class UsuarioController {
 	@Autowired
 	private Facade facade;

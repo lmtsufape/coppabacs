@@ -36,7 +36,7 @@ import jakarta.validation.Valid;
 
 
  @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("${prefix.url}")
 public class SementesController {
 	@Autowired
 	private Facade facade;

@@ -25,7 +25,7 @@ import br.edu.ufape.lmts.sementes.facade.Facade;
 
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("${prefix.url}")
 public class FileController {
 	@Autowired
 	private Facade facade;
