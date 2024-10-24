@@ -42,7 +42,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
+                        <option value="DESCONHECIDA">Sem informação</option>
                         <option value="BAIXA">Baixa</option>
                         <option value="MEDIA">Média</option>
                         <option value="ALTA">Alta</option>
@@ -64,7 +64,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
+                        <option value="DESCONHECIDA">Sem informação</option>
                         <option value="BAIXA">Baixa</option>
                         <option value="MEDIA">Média</option>
                         <option value="ALTA">Alta</option>
@@ -86,7 +86,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
+                        <option value="DESCONHECIDA">Sem informação</option>
                         <option value="BAIXA">Baixa</option>
                         <option value="MEDIA">Média</option>
                         <option value="ALTA">Alta</option>
@@ -108,7 +108,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
+                        <option value="DESCONHECIDA">Sem informação</option>
                         <option value="BAIXA">Baixa</option>
                         <option value="MEDIA">Média</option>
                         <option value="ALTA">Alta</option>
@@ -130,7 +130,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
+                        <option value="DESCONHECIDA">Sem informação</option>
                         <option value="BAIXA">Baixa</option>
                         <option value="MEDIA">Média</option>
                         <option value="ALTA">Alta</option>
@@ -152,7 +152,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
+                        <option value="DESCONHECIDA">Sem informação</option>
                         <option value="BAIXA">Baixa</option>
                         <option value="MEDIA">Média</option>
                         <option value="ALTA">Alta</option>
@@ -174,7 +174,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
+                        <option value="DESCONHECIDA">Sem informação</option>
                         <option value="BAIXA">Baixa</option>
                         <option value="MEDIA">Média</option>
                         <option value="ALTA">Alta</option>
@@ -195,7 +195,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
+                        <option value="DESCONHECIDA">Sem informação</option>
                         <option value="BAIXA">Baixa</option>
                         <option value="MEDIA">Média</option>
                         <option value="ALTA">Alta</option>
@@ -217,7 +217,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
+                        <option value="DESCONHECIDA">Sem informação</option>
                         <option value="BAIXA">Baixa</option>
                         <option value="MEDIA">Média</option>
                         <option value="ALTA">Alta</option>
@@ -239,7 +239,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
+                        <option value="DESCONHECIDA">Sem informação</option>
                         <option value="BAIXA">Baixa</option>
                         <option value="MEDIA">Média</option>
                         <option value="ALTA">Alta</option>
@@ -261,7 +261,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
+                        <option value="DESCONHECIDA">Sem informação</option>
                         <option value="BAIXA">Baixa</option>
                         <option value="MEDIA">Média</option>
                         <option value="ALTA">Alta</option>
@@ -283,7 +283,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                         required
                     >
                         <option value="" >Selecione...</option>
-                        <option value="semInformacao">Sem informação</option>
+                        <option value="DESCONHECIDA">Sem informação</option>
                         <option value="BAIXA">Baixa</option>
                         <option value="MEDIA">Média</option>
                         <option value="ALTA">Alta</option>
