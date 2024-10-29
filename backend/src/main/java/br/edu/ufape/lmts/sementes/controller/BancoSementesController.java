@@ -34,7 +34,7 @@ import jakarta.validation.Valid;
 
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("${prefix.url}")
 public class BancoSementesController {
 	@Autowired
 	private Facade facade;

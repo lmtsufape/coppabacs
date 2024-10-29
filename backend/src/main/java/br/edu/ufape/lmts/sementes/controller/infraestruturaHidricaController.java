@@ -32,7 +32,7 @@ import jakarta.validation.Valid;
 
  @Hidden
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("${prefix.url}")
 public class infraestruturaHidricaController {
 	@Autowired
 	private Facade facade;

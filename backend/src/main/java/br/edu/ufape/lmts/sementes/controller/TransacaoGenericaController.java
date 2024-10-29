@@ -31,7 +31,7 @@ import jakarta.validation.Valid;
 
 
  @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("${prefix.url}")
 public class TransacaoGenericaController {
 	@Autowired
 	private Facade facade;
