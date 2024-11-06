@@ -14,14 +14,27 @@ import ExcluirButton from "@/components/ExcluirButton";
 import { deletePublicacao } from '@/api/mural/deletePublicacao';
 
 function parseDate(dateString) {
-    if (!dateString || !dateString.includes(' ')) {
+    console.log('Data recebida:', dateString);
+    if (!dateString) {
         console.error('Formato de data inválido:', dateString);
-        return new Date(); // Retorna a data atual como fallback
+        return new Date();
     }
-    const [datePart, timePart] = dateString.split(' ');
+
+    let datePart, timePart;
+    if (dateString.includes(' ')) {
+        [datePart, timePart] = dateString.split(' ');
+    } else {
+        datePart = dateString;
+        timePart = '00:00:00'; // Horário padrão
+    }
+
     const [day, month, year] = datePart.split('-').map(Number);
     const [hours, minutes, seconds] = timePart.split(':').map(Number);
     return new Date(year, month - 1, day, hours, minutes, seconds);
+}
+
+function sortPublicacoesById(publicacoes) {
+    return publicacoes.sort((a, b) => b.id - a.id);
 }
 
 export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior, listPublicacao, setPublicacao }) {
@@ -86,7 +99,7 @@ export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior,
             ? publicacoes.filter(publicacao => publicacao.autor.id === usuario.id)
             : publicacoes;
 
-        const sorted = filtered.sort((a, b) => parseDate(b.data) - parseDate(a.data));
+        const sorted = sortPublicacoesById(filtered);
         setFilteredPublicacoes(sorted);
 
         const dates = sorted.map(publicacao => parseDate(publicacao.data));
@@ -148,7 +161,7 @@ export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior,
                                 {publicacao.texto.split('\n').map((paragrafo, i) => (
                                 <p key={i} className={style.descricao}>{paragrafo}</p>
                             ))}
-                            <p className={style.date}>{parseDate(publicacao.data).toLocaleString()}</p>
+                            <p className={style.date}>{parseDate(publicacao.data).toLocaleDateString()}</p>
                         </div>
                         <div className={style.card_publicacao__imagens}>
                             {publicacao.imagem.map((img, imgIndex) => (
