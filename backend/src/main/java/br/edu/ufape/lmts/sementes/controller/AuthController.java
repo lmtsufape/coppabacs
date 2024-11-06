@@ -19,7 +19,7 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.TabelaPerguntaUsuarioRe
 import br.edu.ufape.lmts.sementes.facade.Facade;
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("${prefix.url}")
 public class AuthController {
 
 	@Autowired

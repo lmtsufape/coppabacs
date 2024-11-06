@@ -36,7 +36,7 @@ import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 
 
  @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("${prefix.url}")
 public class GerenteController {
 	@Autowired
 	private Facade facade;

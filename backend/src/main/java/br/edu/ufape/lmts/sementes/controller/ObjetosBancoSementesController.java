@@ -29,7 +29,7 @@
 //@CrossOrigin (origins = "http://localhost:8081/" )
 //@Hidden
 //@RestController
-//@RequestMapping("/api/v1/")
+//@RequestMapping("${prefix.url}")
 //public class ObjetosBancoSementesController {
 //	@Autowired
 //	private Facade facade;

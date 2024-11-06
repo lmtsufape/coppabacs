@@ -30,7 +30,7 @@ import jakarta.validation.Valid;
 
 
  @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("${prefix.url}")
 public class ResponsavelTecnicoController {
 	@Autowired
 	private Facade facade;
