@@ -18,7 +18,8 @@ export default function CriarPostagem({ hrefAnterior, diretorioAtual, diretorioA
     const initialValues = {
         texto: "",
         titulo: "",
-        imagem: []
+        imagem: [],
+        data:""
     }
 
     const validateSchema = Yup.object().shape({
@@ -81,7 +82,8 @@ export default function CriarPostagem({ hrefAnterior, diretorioAtual, diretorioA
             const newPost = {
                 titulo: values.titulo,
                 texto: values.texto,
-                imagem: imageUrls
+                imagem: imageUrls,
+                data: new Date().toISOString() 
             };
 
             console.log("Submitting post:", newPost);
@@ -151,7 +153,7 @@ export default function CriarPostagem({ hrefAnterior, diretorioAtual, diretorioA
                                     ))}
                                 </div>
                             )}
-
+<Field type="hidden" name="data" />
                             <div className={style.container__ContainerForm_buttons}>
                                 <button type="submit" className={`${style.container__ContainerForm_buttons_linkWhite} ${style.button}`}>
                                     <h1>Finalizar</h1>
