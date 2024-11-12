@@ -98,7 +98,7 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
     finalidades: [],
 
-    regioesAdaptacaoCultivo: "",
+    regiaoAdaptacaoCultivo: "",
 
     caracteristicasAgronomicas: {
       cicloFenologico: "",
@@ -106,8 +106,8 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       produtividade: "",
       altitudePlanta: "",
 
-      PesoMilgraos: "",
-      PesoHectolitro: "",
+      pesoMilgraos: "",
+      pesoHectolitro: "",
       tipoGrão: "",
       corGrao: "",
 
@@ -127,7 +127,7 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   const validateSchema = Yup.object().shape({
     nome: Yup.string().required('O nome da cultivar é obrigatório'),
     responsavelTecnico: Yup.object().shape({
-      nome: Yup.string().required('O nome do responsável técnico é obrigatório'),
+      tecnome: Yup.string().required('O nome do responsável técnico é obrigatório'),
       cpf: Yup.string().required('O cpf do responsável técnico é obrigatório'),
     }),
     cultura: Yup.object().shape({

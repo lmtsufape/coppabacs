@@ -77,16 +77,16 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     <label htmlFor="caracteristicasAgronomicas.pesoMilGraos">Peso de Mil Grãos (Grama)</label>
                     <input
                        className={styles.sidedForm_input}
-                        id="PesoMilgraos"
-                        name="caracteristicasAgronomicas.PesoMilgraos"
+                        id="pesoMilgraos"
+                        name="caracteristicasAgronomicas.pesoMilgraos"
                         placeholder="Insira o peso de mil grãos (Grama)"
                         type = "number"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.caracteristicasAgronomicas.PesoMilgraos}
+                        value={formik.values.caracteristicasAgronomicas.pesoMilgraos}
                         required />
-                    {formik.touched.pesoMilGraos && formik.errors.pesoMilGraos ? (
-                        <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.pesoMilGraos}</span>
+                    {formik.touched.pesoMilgraos && formik.errors.pesoMilgraos ? (
+                        <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.pesoMilgraos}</span>
                     ) : null}
                 </div>
                 <div>
