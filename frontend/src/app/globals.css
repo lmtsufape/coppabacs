@@ -4,8 +4,7 @@
 	font-family: 'Inter', sans-serif;
 	font-family: 'Roboto', sans-serif;
 	
-  width: 100vw;
-  height: 100vh;
+
 
 }
 
@@ -28,7 +27,7 @@ dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+figure, figcaption, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -64,4 +63,13 @@ table {
 
 button{
   cursor: pointer;
+}
+
+footer {
+	position: relative;
+	bottom: 0;
+  }
+
+#content {
+	min-height: calc(100vh - 12em + 13px);
 }

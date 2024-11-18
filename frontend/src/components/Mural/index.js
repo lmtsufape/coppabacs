@@ -20,17 +20,13 @@ function parseDate(dateString) {
         return new Date();
     }
 
-    let datePart, timePart;
-    if (dateString.includes(' ')) {
-        [datePart, timePart] = dateString.split(' ');
-    } else {
-        datePart = dateString;
-        timePart = '00:00:00'; // Horário padrão
+    const date = new Date(dateString);
+    if (isNaN(date)) {
+        console.error('Formato de data inválido:', dateString);
+        return new Date();
     }
 
-    const [day, month, year] = datePart.split('-').map(Number);
-    const [hours, minutes, seconds] = timePart.split(':').map(Number);
-    return new Date(year, month - 1, day, hours, minutes, seconds);
+    return date;
 }
 
 function sortPublicacoesById(publicacoes) {
@@ -161,7 +157,7 @@ export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior,
                                 {publicacao.texto.split('\n').map((paragrafo, i) => (
                                 <p key={i} className={style.descricao}>{paragrafo}</p>
                             ))}
-                            <p className={style.date}>{parseDate(publicacao.data).toLocaleDateString()}</p>
+                            <p className={style.date}>{parseDate(publicacao.data).toLocaleString()}</p>
                         </div>
                         <div className={style.card_publicacao__imagens}>
                             {publicacao.imagem.map((img, imgIndex) => (

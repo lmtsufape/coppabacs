@@ -11,6 +11,7 @@ import DadosEndereco from "./DadosEndereco";
 import DadosSementes from "./DadosSementes";
 import Image from "next/image";
 import { validarAgricultor } from "@/api/usuarios/agricultor/validarAgricultor";
+import { deleteAgricultor } from "@/api/usuarios/agricultor/deleteAgricultor";
 import { useRouter } from "next/navigation";
 import { patchAgricultor } from "@/api/usuarios/agricultor/patchAgricultor";
 import { patchCoppabacs } from "@/api/usuarios/coppabacs/patchCoppabacs";
@@ -21,9 +22,9 @@ import { removeSementesAgricultor } from "@/api/usuarios/agricultor/removeSement
 import { postArquivo } from "@/api/arquivos/postArquivo";
 import { getArquivo } from "@/api/arquivos/getArquivo";
 import { baseURL } from "@/api/http-common.js";
+import RecusarButton from "@/components/RecusarButton";
 
-
-const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuario, backDetalhamento }) => {
+const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, listUsuarios, hrefAnterior, usuario, backDetalhamento, setUsuarios }) => {
 
   const router = useRouter();
   const [etapas, setEtapas] = useState(0);
@@ -39,6 +40,12 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
       setSelectedImageFile(file);
     }
   };
+
+  const handleDeleteAgricultor = async (usuarioId) => {
+    await deleteAgricultor(usuarioId);
+    setUsuarios(listUsuarios.filter(usuarioi => usuarioi.id !== usuarioId))
+
+  }
 
   const [formData, setFormData] = useState({
     email: '',
@@ -270,14 +277,12 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, hrefAnterior, 
                 )}
                 {hrefAnterior === "/agricultores/solicitacoes" ? (
                   <div className={style.container__profile}>
-                    <button
-                      type="submit"
-                      onClick={() => setEditar(true)}
+                    <div
                       className={style.container__profile_button}
                     >
                       <span>Recusar Solicitação</span>
-                      <Image src="/assets/iconLapis.svg" alt="Recusar" width={25} height={25} />
-                    </button>
+                      <RecusarButton  itemId={usuario.id} onDelete={handleDeleteAgricultor}/>
+                    </div>
                     <button
                       type="submit"
                       onClick={() => mutationAprovacao.mutate(usuario.id)}

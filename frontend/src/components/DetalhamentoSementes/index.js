@@ -21,6 +21,25 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
 
     const [role, setRole] = useState(getStorageItem("userRole"));
 
+    const finalidades = {
+        etilica: false,
+        naoEtilica: false,
+        inNatura: false,
+        forragem: false,
+        processamento: false,
+        outra: false,
+        outraFinalidade: 'Outra Finalidade',
+    };
+    
+    sementes?.finalidades?.forEach(finalidade => {
+        if (finalidade.nome === 'etilica') finalidades.etilica = true;
+        if (finalidade.nome === 'naoEtilica') finalidades.naoEtilica = true;
+        if (finalidade.nome === 'inNatura') finalidades.inNatura = true;
+        if (finalidade.nome === 'forragem') finalidades.forragem = true;
+        if (finalidade.nome === 'processamento') finalidades.processamento = true;
+        if (finalidade.nome === 'outra') finalidades.outra = true;
+    });
+
     const initialValues = {
         responsavelTecnico: {
             nome: sementes?.responsavelTecnico?.nome,
@@ -43,47 +62,26 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
         altitudeMinima: sementes?.altitudeMinima,
         caracteristicasPositiva: sementes?.caracteristicasPositiva,
         caracteristicasNegativas: sementes?.caracteristicasNegativas,
-
         doencas: sementes?.doencas,
-
-        regioesAdaptacaoCultivo: sementes?.regioesAdaptacaoCultivo,
-
-
-        finalidades: {
-            etilica: false,
-            naoEtilica: false,
-            inNatura: false,
-            forragem: false,
-            processamento: false,
-            outra: false,
-            outraFinalidade: 'Outra Finalidade',
-        },
-
+        regiaoAdaptacaoCultivo: sementes?.regiaoAdaptacaoCultivo,
+        finalidades: sementes?.finalidades?.map(f => f.nome) || [],
         caracteristicasAgronomicas: {
             cicloFenologico: sementes?.caracteristicasAgronomicas?.cicloFenologico,
             standRecomendado: sementes?.caracteristicasAgronomicas?.standRecomendado,
             produtividade: sementes?.caracteristicasAgronomicas?.produtividade,
-
             altitudePlanta: sementes?.caracteristicasAgronomicas?.altitudePlanta,
-
-            pesoMilGraos: sementes?.caracteristicasAgronomicas?.pesoMilGraos,
-
+            pesoMilgraos: sementes?.caracteristicasAgronomicas?.pesoMilgraos,
             pesoHectolitro: sementes?.caracteristicasAgronomicas?.pesoHectolitro,
-
-            tipoGrao: sementes?.caracteristicasAgronomicas?.tipoGrao,
-
+            tipoGrão: sementes?.caracteristicasAgronomicas?.tipoGrão,
             corGrao: sementes?.caracteristicasAgronomicas?.corGrao,
-
             corCaule: sementes?.caracteristicasAgronomicas?.corCaule,
             corFolha: sementes?.caracteristicasAgronomicas?.corFolha,
-            corFlor: sementes?.caracteristicasAgronomicas?.corFlor,
+            corFLor: sementes?.caracteristicasAgronomicas?.corFLor,
             habitoCrescimento: sementes?.caracteristicasAgronomicas?.habitoCrescimento,
+            empalhamento: {
+                tipo: sementes?.caracteristicasAgronomicas?.empalhamento?.tipo,
+            },
         },
-
-        empalhamento: {
-            tipo: sementes?.empalhamento?.tipo,
-        },
-
         toleranciaAdversidades: {
             altaTemperatura: sementes?.toleranciaAdversidades?.altaTemperatura,
             baixaTemperatura: sementes?.toleranciaAdversidades?.baixaTemperatura,
@@ -98,7 +96,7 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
             soloAcido: sementes?.toleranciaAdversidades?.soloAcido,
             soloBaixaFertilidade: sementes?.toleranciaAdversidades?.soloBaixaFertilidade,
         },
-    }
+    };
 
     const [etapas, setEtapas] = useState(0);
     const [editar, setEditar] = useState(false);

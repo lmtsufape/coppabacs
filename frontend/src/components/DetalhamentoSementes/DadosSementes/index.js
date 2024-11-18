@@ -7,7 +7,7 @@ export default function DadosSementes({ formik, editar }) {
     const [outraFinalidade, setOutraFinalidade] = useState("");
     const [isOutraFinalidadeSelecionada, setIsOutraFinalidadeSelecionada] = useState(false);
 
-    const getObjetosRegiao= (objetos) => {
+    const getObjetosRegiao = (objetos) => {
         return Array.isArray(objetos) ? objetos.map(objeto => objeto.regiao).join(', ') : '';
     };
 
@@ -60,8 +60,8 @@ export default function DadosSementes({ formik, editar }) {
 
     const getFinalidadesString = () => {
         return finalidades
-            .filter(finalidade => values[finalidade.name] || (finalidade.name === 'outra' && values.outraFinalidade))
-            .map(finalidade => finalidade.name === 'outra' ? values.outraFinalidade : finalidade.label)
+            .filter(finalidade => values.finalidades.includes(finalidade.name) || (finalidade.name === 'outra' && values.finalidades.includes(outraFinalidade)))
+            .map(finalidade => finalidade.name === 'outra' ? outraFinalidade : finalidade.label)
             .join(', ');
     };
 
@@ -146,7 +146,7 @@ export default function DadosSementes({ formik, editar }) {
                                 name="regioesAdaptacaoCultivo"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={getObjetosRegiao(formik.values.regioesAdaptacaoCultivo)}
+                                value={formik.values.regiaoAdaptacaoCultivo}
                                 disabled
                             />
                         </div>
@@ -205,7 +205,6 @@ export default function DadosSementes({ formik, editar }) {
                                 disabled
                             />
                         </div>
-
                     </>
                 ) : (
                     <>
@@ -254,24 +253,22 @@ export default function DadosSementes({ formik, editar }) {
                             {formik.touched.nome && formik.errors.nome ? (
                                 <span className={styles.form__error}>{formik.errors.nome}</span>
                             ) : null}
-
                         </div>
                         <div>
-                        <label htmlFor="nomePopular">Nome Popular da Cultivar <span>*</span></label>
-                        <input
-                            className={styles.container__ContainerForm_form_halfContainer_input}
-                            id="nomePopular"
-                            name="nomePopular"
-                            placeholder="Insira o nome popular da cultivar"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.nomePopular}
-                            required />
-                        {formik.touched.nomePopular && formik.errors.nomePopular ? (
-                            <span className={styles.form__error}>{formik.errors.nomePopular}</span>
-                        ) : null}
-
-                    </div>
+                            <label htmlFor="nomePopular">Nome Popular da Cultivar <span>*</span></label>
+                            <input
+                                className={styles.container__ContainerForm_form_halfContainer_input}
+                                id="nomePopular"
+                                name="nomePopular"
+                                placeholder="Insira o nome popular da cultivar"
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.nomePopular}
+                                required />
+                            {formik.touched.nomePopular && formik.errors.nomePopular ? (
+                                <span className={styles.form__error}>{formik.errors.nomePopular}</span>
+                            ) : null}
+                        </div>
                         <div >
                             <label htmlFor="dominioPublico">Cultivar de Domínio Público </label>
                             <div className={styles.radio__itens}>
@@ -429,7 +426,6 @@ export default function DadosSementes({ formik, editar }) {
                     </>
                 )}
             </div>
-
         </>
     )
 }
