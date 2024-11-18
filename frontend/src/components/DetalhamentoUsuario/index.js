@@ -22,7 +22,7 @@ import { removeSementesAgricultor } from "@/api/usuarios/agricultor/removeSement
 import { postArquivo } from "@/api/arquivos/postArquivo";
 import { getArquivo } from "@/api/arquivos/getArquivo";
 import { baseURL } from "@/api/http-common.js";
-import ExcluirButton from "@/components/ExcluirButton";
+import RecusarButton from "@/components/RecusarButton";
 
 const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, listUsuarios, hrefAnterior, usuario, backDetalhamento, setUsuarios }) => {
 
@@ -281,7 +281,7 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, listUsuarios, 
                       className={style.container__profile_button}
                     >
                       <span>Recusar Solicitação</span>
-                      <ExcluirButton  itemId={usuario.id} onDelete={handleDeleteAgricultor} className={style.container__profile_buttonRecusar} />
+                      <RecusarButton  itemId={usuario.id} onDelete={handleDeleteAgricultor}/>
                     </div>
                     <button
                       type="submit"
