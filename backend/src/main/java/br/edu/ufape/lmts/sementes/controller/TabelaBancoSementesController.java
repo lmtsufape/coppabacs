@@ -9,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -26,7 +25,6 @@ import br.edu.ufape.lmts.sementes.controller.dto.response.TabelaBancoSementesRes
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.TabelaBancoSementes;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
-import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 
 
@@ -46,12 +44,21 @@ public class TabelaBancoSementesController {
 			.toList();
 	}
 	
-	@GetMapping(value = "tabelaBancoSementes/page")
+	@GetMapping("tabelaBancoSementes/banco/{bancoId}")
+	public List<TabelaBancoSementesResponse> getTabelaBancoSementesByBancoSementes(@PathVariable long bancoId) {
+		System.out.println(bancoId);
+		return facade.findTabelaBancoSementesByBancoSementes(bancoId)
+			.stream()
+			.map(TabelaBancoSementesResponse::new)
+			.toList();
+	}
+	
+	@GetMapping("tabelaBancoSementes/page")
 	public Page<TabelaBancoSementesResponse> getPageTabelaBancoSementes(
-			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
-			@RequestParam(value = "direction", defaultValue = "DESC") String direction) {
+			@RequestParam(defaultValue = "0") Integer page,
+			@RequestParam(defaultValue = "24") Integer linesPerPage,
+			@RequestParam(defaultValue = "id") String orderBy,
+			@RequestParam(defaultValue = "DESC") String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		Page<TabelaBancoSementes> list = facade.findPageTabelaBancoSementes(pageRequest);
 		return list.map(TabelaBancoSementesResponse::new);
