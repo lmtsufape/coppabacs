@@ -45,6 +45,10 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
     return estadosCivis[codigo] || 'Não informado';
   };
 
+  const formatarData = (data) => {
+    const dataObj = new Date(data);
+    return dataObj.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+  };
 
   const nomeBanco = bancoAtual(bancos, formik.values.bancoId);
 
@@ -120,7 +124,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 placeholder="Não informado"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.dataNascimento}
+                value={formatarData(formik.values.dataNascimento)}
                 disabled
               />
             </div>
@@ -316,12 +320,12 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 value={formik.values.estadoCivil}
                 required
               >
-            <option value="">Selecione...</option>
-            <option value="Solteiro(a)">Solteiro(a)</option>
-            <option value="Casado(a)">Casado(a)</option>
-            <option value="Divorciado(a)">Divorciado(a)</option>
-            <option value="Viúvo(a)">Viúvo(a)</option>
-          </select>
+                <option value="">Selecione...</option>
+                <option value="Solteiro(a)">Solteiro(a)</option>
+                <option value="Casado(a)">Casado(a)</option>
+                <option value="Divorciado(a)">Divorciado(a)</option>
+                <option value="Viúvo(a)">Viúvo(a)</option>
+              </select>
               {formik.touched.estadoCivil && formik.errors.estadoCivil ? (
                 <span className={style.form__error}>{formik.errors.estadoCivil}</span>
               ) : null}
@@ -330,20 +334,20 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
 
 
             <div>
-            <label >Nome do Cônjuge</label>
-          <input
-            className={style.container__ContainerForm_form_halfContainer_input}
-            id="conjugeNome"
-            name="conjuge.nome"
-            placeholder="Insira o nome do cônjuge"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.conjuge.nome}
-            required
-          />
-          {formik.touched['conjuge.nome'] && formik.errors['conjuge.nome'] ? (
-            <span className={style.form__error}>{formik.errors['conjuge.nome']}</span>
-          ) : null}
+              <label >Nome do Cônjuge</label>
+              <input
+                className={style.container__ContainerForm_form_halfContainer_input}
+                id="conjugeNome"
+                name="conjuge.nome"
+                placeholder="Insira o nome do cônjuge"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.conjuge.nome}
+                required
+              />
+              {formik.touched['conjuge.nome'] && formik.errors['conjuge.nome'] ? (
+                <span className={style.form__error}>{formik.errors['conjuge.nome']}</span>
+              ) : null}
             </div>
 
 
