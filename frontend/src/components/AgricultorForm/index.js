@@ -100,7 +100,7 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       .required("Obrigatório"),
     endereco: Yup.object().shape({
       cep: Yup.string()
-        .matches(/^\d{5}-\d{3}$/, "O CEP deve estar no formato 12345-678")
+      .min(8, "O CEP deve conter no mínimo 8 caracteres")
         .required("Obrigatório"),
       estado: Yup.string().required("Obrigatório"),
       cidade: Yup.string().required("Obrigatório"),
