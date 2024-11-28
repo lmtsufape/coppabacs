@@ -65,15 +65,15 @@ export default function DadosEndereco({ formik }) {
     <>
       <label htmlFor="cep">Cep<span>*</span></label>
       <input
-  className={style.container__ContainerForm_form_input}
-  id="cep"
-  name="endereco.cep"
-  placeholder="Insira seu CEP"
-  onChange={handleCepChange}
-  onBlur={formik.handleBlur}
-  value={formik.values.endereco.cep ? formatCep(formik.values.endereco.cep) : ''}
-  required
-/>
+        className={style.container__ContainerForm_form_input}
+        id="cep"
+        name="endereco.cep"
+        placeholder="Insira seu CEP"
+        onChange={handleCepChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.endereco.cep ? formatCep(formik.values.endereco.cep) : ''}
+        required
+      />
       {formik.touched.cep && formik.errors.endereco.cep ? (
         <span className={style.form__error}>{formik.errors.endereco.cep}</span>
       ) : null}
