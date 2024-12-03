@@ -12,6 +12,11 @@ import { useMutation } from 'react-query';
 import { getCoordenadorCpf } from '@/api/usuarios/coordenador/getCoordenadorCpf';
 import ExcluirButton from "@/components/ExcluirButton";
 import { deletePublicacao } from '@/api/mural/deletePublicacao';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
 function parseDate(dateString) {
     console.log('Data recebida:', dateString);
@@ -144,36 +149,55 @@ export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior,
             )}
 
             {filteredPublicacoes.map((publicacao, index) => (
-                <div key={index}>
-                    <section className={style.card_publicacao}>
-                    {(role == "ROLE_COPPABACS" || role == "ROLE_ADMIN") && (
-                    <ExcluirButton 
-                                itemId={publicacao.id} 
-                                onDelete={() => handleDeletePublicacao(publicacao)}  
-                                alt="delete" width={27} 
-                                height={26}/>)}
-                        <div className={style.card_publicacao__descricao}>
-                            <h2>{publicacao.titulo}</h2>
-                                {publicacao.texto.split('\n').map((paragrafo, i) => (
-                                <p key={i} className={style.descricao}>{paragrafo}</p>
-                            ))}
-                            <p className={style.date}>{parseDate(publicacao.data).toLocaleString()}</p>
-                        </div>
-                        <div className={style.card_publicacao__imagens}>
-                            {publicacao.imagem.map((img, imgIndex) => (
+    <div key={index}>
+        <section className={style.card_publicacao}>
+            {(role == "ROLE_COPPABACS" || role == "ROLE_ADMIN") && (
+                <ExcluirButton
+                    itemId={publicacao.id}
+                    onDelete={() => handleDeletePublicacao(publicacao)}
+                    alt="delete" width={27}
+                    height={26} />)}
+            <div className={style.card_publicacao__descricao}>
+                <h2>{publicacao.titulo}</h2>
+                {publicacao.texto.split('\n').map((paragrafo, i) => (
+                    <p key={i} className={style.descricao}>{paragrafo}</p>
+                ))}
+                <p className={style.date}>{parseDate(publicacao.data).toLocaleString()}</p>
+            </div>
+            <div className={style.card_publicacao__imagens}>
+                <div>
+                    <Swiper
+                        spaceBetween={20}
+                        centeredSlides={true}
+                        autoplay={{
+                            delay: 2500,
+                            disableOnInteraction: false,
+                        }}
+                        pagination={{
+                            clickable: true,
+                        }}
+                        navigation={true}
+                        modules={[Autoplay, Pagination, Navigation]}
+                        className="mySwiper"
+                    >
+                        {publicacao.imagem.map((img, imgIndex) => (
+                            <SwiperSlide key={imgIndex} className={style.cards}>
                                 <Image
-                                    key={imgIndex}
+                                    className={style.cards__img}
                                     src={imageUrls[img] || '/assets/muralWalle.svg'}
                                     alt={`Imagem ${imgIndex + 1}`}
-                                    width={343}
-                                    height={207}
-                                    onClick={() => setSelectedImage(imageUrls[img])} // Evento de clique para expandir a imagem
+                                    width={900}
+                                    height={900}
+                                    onClick={() => setSelectedImage(imageUrls[img])}
                                 />
-                            ))}
-                        </div>
-                    </section>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
                 </div>
-            ))}
+            </div>
+        </section>
+    </div>
+))}
 
             {selectedImage && (
                 <div className={style.modal} onClick={() => setSelectedImage(null)}>
