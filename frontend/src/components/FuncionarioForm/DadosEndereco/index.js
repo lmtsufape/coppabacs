@@ -55,6 +55,12 @@ export default function DadosEndereco({ formik }) {
     }
   };
 
+  const formatCep = (cep) => {
+    return cep
+      .replace(/\D/g, '')
+      .replace(/^(\d{5})(\d{3})$/, '$1-$2');
+  };
+
   return (
     <>
       <label htmlFor="cep">Cep <span>*</span></label>
@@ -65,7 +71,7 @@ export default function DadosEndereco({ formik }) {
         placeholder="Insira seu CEP"
         onChange={handleCepChange}
         onBlur={formik.handleBlur}
-        value={formik.values.endereco.cep}
+        value={formik.values.endereco.cep ? formatCep(formik.values.endereco.cep) : ''}
         required
       />
       {formik.touched.cep && formik.errors.endereco.cep ? (
