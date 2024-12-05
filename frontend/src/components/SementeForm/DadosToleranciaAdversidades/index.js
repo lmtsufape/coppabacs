@@ -298,7 +298,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
             <br />
             <div className={styles.sidedForm}>
                 <div>
-                    <label htmlFor="regiaoColetaDados">Região de Coleta dos Dados<span>*</span></label>
+                    <label htmlFor="regiaoColetaDados">Região de Coleta dos Dados<span>*</span><span>*</span></label>
                     <input
                         className={styles.sidedForm_input}
                         id="regiaoColetaDados"
@@ -314,7 +314,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
 
                 </div>
                 <div>
-                    <label htmlFor="caracteristicasPositiva">Características Positivas</label>
+                    <label htmlFor="caracteristicasPositiva">Características Positivas<span>*</span></label>
                     <input
                         className={styles.sidedForm_input}
                         id="caracteristicasPositiva"
@@ -330,7 +330,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
 
                 </div>
                 <div>
-                    <label htmlFor="caracteristicasNegativas">Características Negativas</label>
+                    <label htmlFor="caracteristicasNegativas">Características Negativas<span>*</span></label>
                     <input
                         className={styles.sidedForm_input}
                         id="caracteristicasNegativas"
@@ -345,7 +345,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="descricao">Descrição</label>
+                    <label htmlFor="descricao">Descrição<span>*</span></label>
                     <input
                         className={styles.sidedForm_input}
                         id="descricao"
@@ -360,7 +360,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
 
                 </div>
-                <div >
+                {/*<div >
                     <label htmlFor="imagens">Imagens<span>*</span></label>
                     <input
                         className={styles.buttonImagens}
@@ -377,7 +377,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     <div>
                         {imagePreviewUrls.map((url, index) => <img key={index} src={url} alt="Preview" className={styles.previewImg} />)}
                     </div>
-                </div>
+                </div>*/}
             </div>
         </>
     )
