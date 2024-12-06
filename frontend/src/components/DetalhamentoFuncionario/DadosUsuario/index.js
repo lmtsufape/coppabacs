@@ -28,6 +28,11 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
   }
   );
 
+  const formatarData = (data) => {
+    const dataObj = new Date(data);
+    return dataObj.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+  };
+
   function bancoAtual(bancos, bancoId) {
     // Encontra o banco com base no ID fornecido
     const banco = bancos.find(b => b.bancoId === bancoId);
@@ -111,7 +116,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             </div>
 
             <div>
-              <label htmlFor="dataNascimento">Data de nascimento </label>
+              <label htmlFor="dataNascimento">Data de Nascimento </label>
               <input
                 id="dataNascimento"
                 className={style.container__ContainerForm_form_input}
@@ -119,7 +124,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 placeholder="Não informado"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.dataNascimento}
+                value={formatarData(formik.values.dataNascimento)}
                 disabled
               />
             </div>

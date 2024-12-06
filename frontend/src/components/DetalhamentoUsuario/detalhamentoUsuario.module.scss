@@ -73,6 +73,16 @@
       border: #050504 1px solid;
       border-radius: 0.8em;
     }
+    &_buttonRecusar{
+      display: flex;
+      align-items:flex-end;
+      padding: 0.8em 4em;
+      margin: -0.8em -4em;
+      color: #68655C;
+      background-color: #fff;
+      border: red 1px solid;
+      border-radius: 0.8em;
+    }
     
   }
   &__ContainerForm{

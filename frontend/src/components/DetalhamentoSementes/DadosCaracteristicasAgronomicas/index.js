@@ -60,7 +60,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 name="caracteristicasAgronomicas.PesoMilgraos"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.PesoMilgraos}
+                                value={formik.values.caracteristicasAgronomicas.pesoMilgraos}
                                 disabled
                             />
                         </div>
@@ -71,7 +71,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 name="caracteristicasAgronomicas.PesoHectolitro"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.PesoHectolitro}
+                                value={formik.values.caracteristicasAgronomicas.pesoHectolitro}
                                 disabled
                             />
                         </div>
@@ -134,10 +134,10 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             <label htmlFor="empalhamento.tipo">Empalhamento</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
-                                name="empalhamento.tipo"
+                                name="caracteristicasAgronomicas.empalhamento.tipo"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.empalhamento.tipo}
+                                value={formik.values.caracteristicasAgronomicas.empalhamento.tipo}
                                 disabled
                             />
                         </div>

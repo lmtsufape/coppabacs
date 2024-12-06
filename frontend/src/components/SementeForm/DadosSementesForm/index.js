@@ -77,8 +77,8 @@ export default function DadosSementesForm({ formik }) {
                         onBlur={formik.handleBlur}
                         value={formik.values.responsavelTecnico.nome}
                         required />
-                    {formik.touched.nome && formik.errors.nome ? (
-                        <span className={styles.form__error}>{formik.errors.responsavelTecnico.nome}</span>
+                    {formik.touched.tecnome && formik.errors.tecnome ? (
+                        <span className={styles.form__error}>{formik.errors.responsavelTecnico.tecnome}</span>
                     ) : null}
                 </div>
                 <div>
@@ -284,15 +284,15 @@ export default function DadosSementesForm({ formik }) {
                         <label htmlFor="regioesAdaptacaoCultivo">Região de Adaptação da Cultivar<span>*</span></label>
                         <input
                             className={styles.sidedForm_input}
-                            id="regioesAdaptacaoCultivo"
-                            name="regioesAdaptacaoCultivo"
+                            id="regiaoAdaptacaoCultivo"
+                            name="regiaoAdaptacaoCultivo"
                             placeholder="Insira a região de adaptação"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
-                            value={formik.values.regioesAdaptacaoCultivo.regiao}
+                            value={formik.values.regiaoAdaptacaoCultivo                            }
                             required />
-                        {formik.touched.regioesAdaptacaoCultivo && formik.errors.regioesAdaptacaoCultivo ? (
-                            <span className={styles.form__error}>{formik.errors.regioesAdaptacaoCultivo}</span>
+                        {formik.touched.regiaoAdaptacaoCultivo && formik.errors.regiaoAdaptacaoCultivo ? (
+                            <span className={styles.form__error}>{formik.errors.regiaoAdaptacaoCultivo}</span>
                         ) : null}
                     </div>
                     <div>

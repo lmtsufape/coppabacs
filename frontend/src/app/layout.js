@@ -29,12 +29,14 @@ export default function RootLayout({ children}) {
         <ProviderQuery>
           <ProviderRedux>
             <Header/>
+            <div id='content'>
             {isPublicPage && children}
             {!isPublicPage && (
               <PrivateRoute>
                 {children}
               </PrivateRoute>
             )}
+            </div>
             <Footer />
           </ProviderRedux>
         </ProviderQuery>

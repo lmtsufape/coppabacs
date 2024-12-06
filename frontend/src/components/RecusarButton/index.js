@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styles from "./index.module.scss";
 import Image from "next/image";
 
-function ExcluirButton({ itemId, onDelete }) {
+function RecusarButton({ itemId, onDelete }) {
     const [showModal, setShowModal] = useState(false);
     const modalRef = useRef(null);
 
@@ -52,4 +52,4 @@ function ExcluirButton({ itemId, onDelete }) {
     );
 }
 
-export default ExcluirButton;
+export default RecusarButton;

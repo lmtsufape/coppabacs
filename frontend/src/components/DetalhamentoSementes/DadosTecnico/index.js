@@ -38,7 +38,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 name="responsavelTecnico.conselho"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.responsavelTecnico.conselho}
+                                value={formik.values.responsavelTecnico.estadoConselho}
                                 disabled
                             />
                         </div>
@@ -85,7 +85,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 placeholder="Insira o Conselho/UF"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.responsavelTecnico.conselho}
+                                value={formik.values.responsavelTecnico.estadoConselho}
                             />
                             {formik.touched.estadoConselho && formik.errors.responsavelTecnico.estadoConselho ? (
                                 <span className={styles.form__error}>{formik.errors.responsavelTecnico.estadoConselho}</span>

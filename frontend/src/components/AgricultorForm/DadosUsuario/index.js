@@ -69,12 +69,13 @@ export default function DadosForm({ formik }) {
             required
           >
             <option value="">Selecione...</option>
-            <option value="PERGUNTA1">PERGUNTA 1</option>
-            <option value="PERGUNTA2">PERGUNTA 2</option>
-            <option value="PERGUNTA3">PERGUNTA 3</option>
-            <option value="PERGUNTA4">PERGUNTA 4</option>
-            <option value="PERGUNTA5">PERGUNTA 5</option>
-            <option value="PERGUNTA6">PERGUNTA 6</option>
+            <option value="PERGUNTA1">Qual era o nome do seu primeiro animal de estimação?</option>
+            <option value="PERGUNTA2">Em que cidade você nasceu?</option>
+            <option value="PERGUNTA3">Qual é o nome do seu melhor amigo de infância?</option>
+            <option value="PERGUNTA4">Qual foi o seu primeiro emprego?</option>
+            <option value="PERGUNTA5">Qual é o nome do colégio onde você estudou no ensino fundamental?</option>
+            <option value="PERGUNTA6">Qual é o nome do meio da sua mãe?</option>
+
           </select>
           {formik.touched.pergunta && formik.errors.pergunta?.pergunta ? (
             <span className={style.form__error}>{formik.errors.pergunta.pergunta}</span>
