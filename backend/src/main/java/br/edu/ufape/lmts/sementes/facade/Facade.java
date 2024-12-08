@@ -1194,6 +1194,10 @@ public class Facade {
 		return updateAgricultor(agricultor);
 	}
 	
+	public void refuseAgricultor(long id) {
+		agricultorService.refuseAgricultor(id);
+	}
+	
 	public Agricultor saveAgricultor(Agricultor newInstance) throws EmailExistsException {
 		newInstance.addRole(TipoUsuario.AGRICULTOR);
 		return saveAgricultorA(newInstance);

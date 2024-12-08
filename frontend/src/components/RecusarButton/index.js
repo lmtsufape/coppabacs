@@ -7,10 +7,15 @@ function RecusarButton({ itemId, onDelete }) {
     const [showModal, setShowModal] = useState(false);
     const modalRef = useRef(null);
 
-    const handleExcluirClick = () => {
-        onDelete(itemId); // Aqui está corretamente passando o itemId para a função onDelete
-        window.location.reload();
+    const handleExcluirClick = (event) => {
+        event.preventDefault();
+        onDelete(itemId);
         setShowModal(false);
+    };
+
+    const handleButtonClick = (event) => {
+        event.preventDefault();
+        setShowModal(true)
     };
 
     const handleClickOutsideModal = (event) => {
@@ -28,7 +33,7 @@ function RecusarButton({ itemId, onDelete }) {
 
     return (
         <>
-        <button className={styles.no_border} onClick={() => setShowModal(true)}>
+        <button className={styles.no_border} onClick={handleButtonClick}>
             <span>
                 <Image src="/assets/iconLixeira.svg" alt="Desativar" width={27} height={26} />
             </span>
@@ -43,7 +48,7 @@ function RecusarButton({ itemId, onDelete }) {
                     </div>
                     <div className={styles.box2}>
                         <button className={styles.cancelar_button} onClick={() => setShowModal(false)}>Cancelar</button>
-                        <button className={styles.excluir_button2} onClick={handleExcluirClick}>Excluir</button>
+                        <button className={styles.excluir_button2} onClick={(e) => {handleExcluirClick(e)}}>Excluir</button>
                     </div>
                 </div>
             </div>
