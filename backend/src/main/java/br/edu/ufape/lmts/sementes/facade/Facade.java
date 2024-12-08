@@ -550,6 +550,12 @@ public class Facade {
 	public TabelaBancoSementes findTabelaBancoSementesById(long id) {
 		return tabelaBancoSementesService.findTabelaBancoSementesById(id);
 	}
+	
+	public List<TabelaBancoSementes> findTabelaBancoSementesByBancoSementes(long bancoId) {
+		BancoSementes banco = new BancoSementes();
+		banco.setId(bancoId);
+		return tabelaBancoSementesService.findTabelaBancoSementesByBancoSementes(banco);
+	}
 
 	public List<TabelaBancoSementes> getAllTabelaBancoSementes() {
 		return tabelaBancoSementesService.getAllTabelaBancoSementes();
@@ -1186,6 +1192,10 @@ public class Facade {
 		}
 		);
 		return updateAgricultor(agricultor);
+	}
+	
+	public void refuseAgricultor(long id) {
+		agricultorService.refuseAgricultor(id);
 	}
 	
 	public Agricultor saveAgricultor(Agricultor newInstance) throws EmailExistsException {

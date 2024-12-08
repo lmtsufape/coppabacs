@@ -11,6 +11,7 @@ import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.repository.AgricultorRepository;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
+import br.edu.ufape.lmts.sementes.service.exception.InvalidRefusalException;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.transaction.Transactional;
 
@@ -33,8 +34,10 @@ public class AgricultorService implements AgricultorServiceInterface {
 		return repository.findByAtivoTrueAndId(id)
 				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist Agricultor with id = " + id));
 	}
+
 	public Agricultor findAgricultorByEmail(String email) {
-		return repository.findByAtivoTrueAndEmail(email).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Usuario with Email = " + email));
+		return repository.findByAtivoTrueAndEmail(email)
+				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist Usuario with Email = " + email));
 	}
 
 	public List<Agricultor> getAllAgricultor() {
@@ -57,6 +60,15 @@ public class AgricultorService implements AgricultorServiceInterface {
 		repository.save(obj);
 	}
 
+	public void refuseAgricultor(long id) {
+		Agricultor obj = findAgricultorById(id);
+		boolean cond = obj.getRoles().contains(TipoUsuario.AGRICULTOR);
+		cond &= !obj.getRoles().contains(TipoUsuario.USUARIO);
+		if (cond)
+			throw new InvalidRefusalException("Recusa de solicitação inválida");
+		repository.delete(obj);
+	}
+
 	public void validateAgricultor(long id) {
 		Agricultor obj = findAgricultorById(id);
 		obj.addRole(TipoUsuario.AGRICULTOR);
@@ -70,6 +82,7 @@ public class AgricultorService implements AgricultorServiceInterface {
 
 	@Override
 	public Agricultor findAgricultorByCpf(String cpf) {
-		return repository.findByAtivoTrueAndCpf(cpf).orElseThrow( () -> new ObjectNotFoundException("It doesn't exist Usuario with cpf = " + cpf));
+		return repository.findByAtivoTrueAndCpf(cpf)
+				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist Usuario with cpf = " + cpf));
 	}
 }

@@ -3,15 +3,13 @@
 import { useMutation } from "react-query";
 import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
-import * as Yup from 'yup';
 import style from "./detalhamentoUsuario.module.scss";
-import HeaderNavegacao from "../HeaderNavegacao";
 import DadosForm from "./DadosUsuario";
 import DadosEndereco from "./DadosEndereco";
 import DadosSementes from "./DadosSementes";
 import Image from "next/image";
 import { validarAgricultor } from "@/api/usuarios/agricultor/validarAgricultor";
-import { deleteAgricultor } from "@/api/usuarios/agricultor/deleteAgricultor";
+import { refuseAgricultor } from "@/api/usuarios/agricultor/refuseAgricultor";
 import { useRouter } from "next/navigation";
 import { patchAgricultor } from "@/api/usuarios/agricultor/patchAgricultor";
 import { patchCoppabacs } from "@/api/usuarios/coppabacs/patchCoppabacs";
@@ -21,7 +19,6 @@ import { addSementesAgricultor } from "@/api/usuarios/agricultor/addSementes";
 import { removeSementesAgricultor } from "@/api/usuarios/agricultor/removeSementes";
 import { postArquivo } from "@/api/arquivos/postArquivo";
 import { getArquivo } from "@/api/arquivos/getArquivo";
-import { baseURL } from "@/api/http-common.js";
 import RecusarButton from "@/components/RecusarButton";
 
 const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, listUsuarios, hrefAnterior, usuario, backDetalhamento, setUsuarios }) => {
@@ -39,13 +36,7 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, listUsuarios, 
       setSelectedImage(URL.createObjectURL(file));
       setSelectedImageFile(file);
     }
-  };
-
-  const handleDeleteAgricultor = async (usuarioId) => {
-    await deleteAgricultor(usuarioId);
-    setUsuarios(listUsuarios.filter(usuarioi => usuarioi.id !== usuarioId))
-
-  }
+  };  
 
   const [formData, setFormData] = useState({
     email: '',
@@ -115,15 +106,29 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, listUsuarios, 
     
   }, [usuario]);
 
+  const handleApproveButtonClick = (event) => {
+    event.preventDefault();
+    mutationAprovacao.mutate(usuario.id)
+  }
+
   const mutationAprovacao = useMutation(() => validarAgricultor(usuario.id), {
     onSuccess: () => {
       window.location.href = '/agricultores/solicitacoes'
-      // router.push(`${hrefAnterior}`);
     },
     onError: (error) => {
       console.error('Erro ao aprovar usuário', error);
     }
   });
+
+  const mutationRecusa = useMutation(() => refuseAgricultor(usuario.id), {
+    onSuccess: () => {
+      window.location.href = '/agricultores/solicitacoes'
+    },
+    onError: (error) => {
+      console.error('Erro ao aprovar usuário', error);
+    }
+  });
+
   const mutationUpdateAgricultor = useMutation(async newData => {
 
     const { sementesAdicionadas, sementesRemovidas, sementes, ...resto } = newData;
@@ -281,11 +286,11 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, listUsuarios, 
                       className={style.container__profile_button}
                     >
                       <span>Recusar Solicitação</span>
-                      <RecusarButton  itemId={usuario.id} onDelete={handleDeleteAgricultor}/>
+                      <RecusarButton  itemId={usuario.id} onDelete={() => mutationRecusa.mutate(usuario.id)}/>
                     </div>
                     <button
                       type="submit"
-                      onClick={() => mutationAprovacao.mutate(usuario.id)}
+                      onClick={handleApproveButtonClick}
                       className={style.container__profile_button}
                     >
                       <span>Aprovar Solicitação</span>
@@ -301,6 +306,5 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, listUsuarios, 
     </div>
   );
 };
-
 
 export default DetalhamentoUsuario;

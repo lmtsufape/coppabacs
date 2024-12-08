@@ -30,7 +30,7 @@ public  class TabelaBancoSementes  {
 	private long id;
 	private double peso;
 	private String safra;
-    	@ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "banco_sementes_id")
 	@ToString.Exclude
 	private BancoSementes bancoSementes; 

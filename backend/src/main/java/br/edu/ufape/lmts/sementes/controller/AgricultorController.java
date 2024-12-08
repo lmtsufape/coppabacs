@@ -12,7 +12,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -45,27 +44,19 @@ public class AgricultorController {
 
 	@GetMapping("agricultor")
 	public List<AgricultorResponse> getAllAgricultor() {
-		return facade.getAllAgricultor()
-				.stream()
-				.map(AgricultorResponse::new)
-				.toList();
+		return facade.getAllAgricultor().stream().map(AgricultorResponse::new).toList();
 
 	}
 
 	@GetMapping("agricultor/usuarios")
 	public List<AgricultorResponse> getAllAgricultorUsuario() {
-		return facade.getAllAgricultorUsuario()
-				.stream()
-				.map(AgricultorResponse::new)
-				.toList();
+		return facade.getAllAgricultorUsuario().stream().map(AgricultorResponse::new).toList();
 	}
 
 	@GetMapping(value = "agricultor/page")
-	public Page<AgricultorResponse> getPageAgricultor(
-			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
-			@RequestParam(value = "direction", defaultValue = "DESC") String direction) {
+	public Page<AgricultorResponse> getPageAgricultor(@RequestParam(defaultValue = "0") Integer page,
+			@RequestParam(defaultValue = "24") Integer linesPerPage, @RequestParam(defaultValue = "id") String orderBy,
+			@RequestParam(defaultValue = "DESC") String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		Page<Agricultor> list = facade.findPageAgricultor(pageRequest);
 		return list.map(AgricultorResponse::new);
@@ -152,6 +143,13 @@ public class AgricultorController {
 	@PatchMapping("agricultor/validar/{id}")
 	public ResponseEntity<Void> validateAgricultor(@PathVariable long id) {
 		facade.validateAgricultor(id);
+		return ResponseEntity.ok().build();
+	}
+
+	@PreAuthorize("hasRole('COPPABACS') || hasRole('GERENTE')")
+	@DeleteMapping("agricultor/recusar/{id}")
+	public ResponseEntity<Void> refuseAgricultor(@PathVariable long id) {
+		facade.refuseAgricultor(id);
 		return ResponseEntity.ok().build();
 	}
 }
