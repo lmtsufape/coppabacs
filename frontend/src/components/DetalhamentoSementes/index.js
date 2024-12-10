@@ -16,6 +16,7 @@ import DadosCaracteristicasAgronomicas from "./DadosCaracteristicasAgronomicas";
 import ImagensSementes from "./ImagensSementes";
 import { getStorageItem } from "@/utils/localStore";
 import HeaderDetalhamento from "../HeaderDetalhamento";
+import { patchSemente } from "@/api/sementes/patchSemente";
 
 const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior, sementes, backDetalhamento }) => {
 
@@ -30,7 +31,7 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
         outra: false,
         outraFinalidade: 'Outra Finalidade',
     };
-    
+
     sementes?.finalidades?.forEach(finalidade => {
         if (finalidade.nome === 'etilica') finalidades.etilica = true;
         if (finalidade.nome === 'naoEtilica') finalidades.naoEtilica = true;
@@ -105,6 +106,14 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
         // Aqui você coloca a lógica de envio dos dados para o servidor ou outra operação de mutação
     });
 
+    const mutationUpdateSemente = useMutation(async (values) => {
+        if (!sementes?.id) {
+            throw new Error("ID da semente não encontrado");
+        }
+        return patchSemente(values, sementes.id);
+    });
+    
+
     return (
         <div id="header" className={styles.container}>
             {role === "ROLE_GERENTE" || role === "ROLE_AGRICULTOR" ? (
@@ -130,10 +139,17 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
             <div className={styles.container__ContainerForm}>
                 <Formik
                     initialValues={initialValues}
-
-
                     onSubmit={(values, { setSubmitting }) => {
-                        mutate(values);
+                        mutationUpdateSemente.mutate(values, {
+                            onSuccess: () => {
+                                console.log("Dados enviados com sucesso");
+                                setSubmitting(false);
+                            },
+                            onError: (error) => {
+                                console.error("Erro ao enviar dados", error);
+                                setSubmitting(false);
+                            },
+                        });
                     }}
                 >
                     {(formik) => {

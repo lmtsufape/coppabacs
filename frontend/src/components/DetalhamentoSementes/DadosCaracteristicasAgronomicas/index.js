@@ -330,7 +330,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 placeholder="Insira o empalhamento"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.empalhamento.tipo}
+                                value={formik.values.caracteristicasAgronomicas.empalhamento.tipo}
                                 required />
                             {formik.touched.empalhamento && formik.errors.empalhamento.tipo ? (
                                 <span className={styles.form__error}>{formik.errors.empalhamento.tipo}</span>

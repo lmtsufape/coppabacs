@@ -96,7 +96,7 @@ const Login = () => {
               <h2 className={style.login__login_subtitle}>Esqueceu a senha?</h2>
               </Link>
               
-              {status === "error" ? <p className={style.senhaErrada}>E-mail ou senha incorretos</p> : null}
+              {status === "error" ? <p className={style.senhaErrada}>CPF ou senha incorretos</p> : null}
               <button className={`${style.login__login_button} ${status === "loading" || status === "success" ? style.active : ""}`}>Entrar</button>
               <h2 className={style.login__login_subtitle1}>Não possui conta? &nbsp;
                 <Link href="/novoUsuario">
