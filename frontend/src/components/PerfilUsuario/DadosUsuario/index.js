@@ -45,6 +45,10 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
     return estadosCivis[codigo] || 'Não informado';
   };
 
+  const formatarData = (data) => {
+    const dataObj = new Date(data);
+    return dataObj.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+  };
 
   const nomeBanco = bancoAtual(bancos, formik.values.bancoId);
 
@@ -85,8 +89,6 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             </div>
             <div>
               <label htmlFor="cpf">CPF </label>
-
-
               <input
                 id="cpf"
                 className={style.container__ContainerForm_form_input}
@@ -120,7 +122,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 placeholder="Não informado"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.dataNascimento}
+                value={formatarData(formik.values.dataNascimento)}
                 disabled
               />
             </div>
@@ -316,12 +318,12 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 value={formik.values.estadoCivil}
                 required
               >
-            <option value="">Selecione...</option>
-            <option value="Solteiro(a)">Solteiro(a)</option>
-            <option value="Casado(a)">Casado(a)</option>
-            <option value="Divorciado(a)">Divorciado(a)</option>
-            <option value="Viúvo(a)">Viúvo(a)</option>
-          </select>
+                <option value="">Selecione...</option>
+                <option value="Solteiro(a)">Solteiro(a)</option>
+                <option value="Casado(a)">Casado(a)</option>
+                <option value="Divorciado(a)">Divorciado(a)</option>
+                <option value="Viúvo(a)">Viúvo(a)</option>
+              </select>
               {formik.touched.estadoCivil && formik.errors.estadoCivil ? (
                 <span className={style.form__error}>{formik.errors.estadoCivil}</span>
               ) : null}
@@ -330,20 +332,20 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
 
 
             <div>
-            <label >Nome do Cônjuge</label>
-          <input
-            className={style.container__ContainerForm_form_halfContainer_input}
-            id="conjugeNome"
-            name="conjuge.nome"
-            placeholder="Insira o nome do cônjuge"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.conjuge.nome}
-            required
-          />
-          {formik.touched['conjuge.nome'] && formik.errors['conjuge.nome'] ? (
-            <span className={style.form__error}>{formik.errors['conjuge.nome']}</span>
-          ) : null}
+              <label >Nome do Cônjuge</label>
+              <input
+                className={style.container__ContainerForm_form_halfContainer_input}
+                id="conjugeNome"
+                name="conjuge.nome"
+                placeholder="Insira o nome do cônjuge"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.conjuge.nome}
+                required
+              />
+              {formik.touched['conjuge.nome'] && formik.errors['conjuge.nome'] ? (
+                <span className={style.form__error}>{formik.errors['conjuge.nome']}</span>
+              ) : null}
             </div>
 
 
@@ -367,35 +369,37 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 <span className={style.form__error}>{formik.errors['conjuge.sexo']}</span>
               ) : null}
             </div>
+            <div>
+              <label >Senha<span>*</span></label>
+              <input
+                className={style.container__ContainerForm_form_halfContainer_input}
+                id="senha"
+                name="senha"
+                type="password"
+                placeholder="Insira sua senha"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.senha}
+                required />
+              {formik.touched.senha && formik.errors.senha ? (
+                <span className={style.form__error}>{formik.errors.senha}</span>
+              ) : null}
 
-
-            {hrefAnterior !== "/funcionarios" && (
-
-              <div>
-                <label htmlFor="bancoId">Banco de Sementes</label>
-                <select
-                  className={style.container__ContainerForm_form_halfContainer_select}
-                  id="bancoId"
-                  name="bancoId"
-                  placeholder="Insira o banco de sementes"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.bancoId}
-                  required
-                >
-                  <option value="" >Selecione...</option>
-                  {bancos.map((bancos, index) => {
-                    return (
-                      <option key={index} value={bancos.id}>{bancos.nome}</option>
-
-                    )
-                  })}
-                </select>
-                {formik.touched.bancoId && formik.errors.bancoId ? (
-                  <span className={style.form__error}>{formik.errors.bancoId}</span>
-                ) : null}
-              </div>
-            )}
+              <label >Confirme sua Senha<span>*</span></label>
+              <input
+                className={style.container__ContainerForm_form_halfContainer_input}
+                id="confirmarSenha"
+                name="confirmarSenha"
+                type="password"
+                placeholder="Confirme sua senha"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.confirmarSenha}
+                required />
+              {formik.touched.confirmarSenha && formik.errors.confirmarSenha ? (
+                <span className={style.form__error}>{formik.errors.confirmarSenha}</span>
+              ) : null}
+            </div>
           </>
         )
         }

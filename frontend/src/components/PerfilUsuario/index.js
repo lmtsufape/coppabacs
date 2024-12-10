@@ -24,7 +24,6 @@ import { getCoordenadorCpf } from "@/api/usuarios/coordenador/getCoordenadorCpf"
 import { getUsuarioCpf } from "@/api/usuarios/getUsuarioCpf";
 import { getCoppabacsCpf } from "@/api/usuarios/coppabacs/getCoppabacsCpf";
 
-
 const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
 
   const [usuarioCpf, setUsuarioCpf] = useState(getStorageItem("userLogin"));
@@ -174,50 +173,45 @@ const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
     }
   });
 
+  console.log("hrefAnterior:", hrefAnterior);
+  console.log("usuarioRole:", usuarioRole);
+
   return (
     <div id="header" className={style.container}>
       <HeaderNavegacao
         hrefAnterior="/"
         diretorioAnterior="Home / "
         diretorioAtual="Perfil"
-
       />
-
-
 
       <div className={style.container__ContainerForm}>
         <Formik
           initialValues={formData}
           enableReinitialize
           onSubmit={(values, { setSubmitting }) => {
-            if (usuarioRole === "ROLE_COOPABACS") {
+            if (usuarioRole === "ROLE_COPPABACS") {
               mutationUpdateFuncionario.mutate(values);
             } else if (usuarioRole === "ROLE_GERENTE") {
               mutationUpdateCoordenador.mutate(values);
-            } else if (hrefAnterior === "ROLE_AGRICULTOR") {
+            } else if (usuarioRole === "ROLE_AGRICULTOR") {
               mutationUpdateAgricultor.mutate(values);
             }
-
           }}
         >
           {(formik) => {
             return (
-
-              <Form
-                className={style.container__ContainerForm_form}
-              >
+              <Form className={style.container__ContainerForm_form}>
                 <div className={style.container__profile}>
                   <div className={style.container__profile_img}>
                     <Image src="/assets/agricultorteste.png" alt="Foto do usuário" width={72} height={72} />
                     <h1>{usuario?.nome}</h1>
                   </div>
-                  {hrefAnterior === "/agricultores" || hrefAnterior === "/funcionarios" || hrefAnterior === "/coordenadores" ? (
+                  {hrefAnterior === "/" || hrefAnterior === "/agricultores" || hrefAnterior === "/funcionarios" || hrefAnterior === "/coordenadores" ? (
                     <>
                       {editar === false ? (
                         <button
                           onClick={() => setEditar(true)}
                           className={style.container__profile_button}>
-
                           <span>Editar</span>
                           <Image src="/assets/iconLapis.svg" alt="editar perfil" width={20} height={20} />
                         </button >
@@ -225,14 +219,12 @@ const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
                         <button
                           onClick={() => setEditar(false)}
                           className={style.container__profile_button}>
-
                           <span>Salvar</span>
                           <Image src="/assets/iconLapis.svg" alt="editar perfil" width={20} height={20} />
                         </button >
                       )}
                     </>
                   ) : ("")}
-
                 </div>
 
                 <DadosForm formik={formik} editar={editar} hrefAnterior={hrefAnterior} />
@@ -249,7 +241,6 @@ const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
                         type="submit"
                         onClick={() => setEditar(true)}
                         className={style.container__profile_button}>
-
                         <span>Recusar Solicitação</span>
                         <Image src="/assets/iconLapis.svg" alt="Recusar" width={25} height={25} />
                       </button >
@@ -257,24 +248,19 @@ const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
                         type="submit"
                         onClick={() => mutationAprovacao.mutate(usuario.id)}
                         className={style.container__profile_button}>
-
                         <span>Aprovar Solicitação</span>
                         <Image src="/assets/iconLapis.svg" alt="Aprovar" width={25} height={25} />
                       </button >
-
                     </div>
                   ) : ("")
                 }
               </Form >
             )
-          }
-          }
+          }}
         </Formik >
       </div >
-
     </div >
   );
 };
-
 
 export default PerfilUsuario;
