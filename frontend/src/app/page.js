@@ -79,7 +79,7 @@ const LayoutCoordenador = () => {
       <Card title="Bancos de Sementes" icon="/assets/iconBancoDeSementes2.png" description="Banco Sementes" link="/bancoSementes" />
       <Card title="Doações de Sementes" icon="/assets/iconDoacaoDeSementes.svg" description="Doações Sementes" link="/doacoes" />
       <Card title="Retirada de Sementes" icon="/assets/iconRetiradaDeSementes.svg" description="Doações Sementes" link="/retiradas" />
-      <Card title="Gestão de Sementes" icon="/assets/iconSeedGreen2.png" description="Sementes" link="/sementesBanco" />
+      <Card title="Gestão de Sementes" icon="/assets/iconSeedGreen2.png" description="Sementes" link="/sementes" />
       <Card title="Mural" icon="/assets/iconMural.svg" description="Mural" link="/mural" />
     </>
   )
