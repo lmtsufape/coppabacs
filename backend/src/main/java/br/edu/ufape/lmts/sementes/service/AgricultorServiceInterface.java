@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
+import br.edu.ufape.lmts.sementes.service.exception.InvalidRefusalException;
 
 public interface AgricultorServiceInterface {
 	Agricultor saveAgricultor(Agricultor o) throws EmailExistsException;
@@ -18,4 +19,5 @@ public interface AgricultorServiceInterface {
 	void deleteAgricultor(long id);
 	List<Agricultor> getAllAgricultor();
 	Page<Agricultor> findPageAgricultor(Pageable pageRequest);
+	void refuseAgricultor(long id);
 }

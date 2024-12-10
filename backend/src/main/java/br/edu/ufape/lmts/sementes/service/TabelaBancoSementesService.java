@@ -1,5 +1,6 @@
 package br.edu.ufape.lmts.sementes.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.lmts.sementes.model.BancoSementes;
 import br.edu.ufape.lmts.sementes.model.TabelaBancoSementes;
 import br.edu.ufape.lmts.sementes.repository.TabelaBancoSementesRepository;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
@@ -46,4 +48,8 @@ public class TabelaBancoSementesService implements TabelaBancoSementesServiceInt
 	public Page<TabelaBancoSementes> findPageTabelaBancoSementes(Pageable pageRequest) {
 		return repository.findAll(pageRequest);
 	}
-}
+	
+	public List<TabelaBancoSementes> findTabelaBancoSementesByBancoSementes(BancoSementes bancoSementes) {
+		return repository.findByBancoSementes(bancoSementes);
+	}
+ }
