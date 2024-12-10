@@ -33,6 +33,7 @@ import br.edu.ufape.lmts.sementes.model.BancoSementes;
 import br.edu.ufape.lmts.sementes.model.Gerente;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
+import jakarta.validation.Valid;
 
 
  @RestController
@@ -64,7 +65,7 @@ public class GerenteController {
 	}
 	
 	@PostMapping("gerente")
-	public GerenteResponse createGerente(@RequestBody GerenteRequest newObj) throws EmailExistsException {
+	public GerenteResponse createGerente(@Valid @RequestBody GerenteRequest newObj) throws EmailExistsException {
 		Gerente g = newObj.convertToEntity();
 		BancoSementes banco = new BancoSementes();
 		banco.setId(newObj.getBancoId());
@@ -87,7 +88,7 @@ public class GerenteController {
 	}
 	
 	@PatchMapping("gerente/{id}")
-	public GerenteResponse updateGerente(@PathVariable Long id, @RequestBody GerenteUpdateRequest obj) {
+	public GerenteResponse updateGerente(@PathVariable Long id, @Valid @RequestBody GerenteUpdateRequest obj) {
 		try {
 			Gerente oldObject = facade.findGerenteById(id);
 			modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
