@@ -23,11 +23,12 @@ export default function CarrosselMural() {
 
                 // Carregar URLs das imagens
                 sortedPublicacoes.forEach(publicacao => {
-                    publicacao.imagem.forEach(img => {
+                    if (publicacao.imagem.length > 0) {
+                        const img = publicacao.imagem[0]; // Pega apenas a primeira imagem
                         getArquivo(img).then(url => {
                             setImageUrls(prev => ({ ...prev, [img]: url }));
                         });
-                    });
+                    }
                 });
             } catch (error) {
                 console.error('Erro ao buscar publicações:', error);
@@ -37,7 +38,6 @@ export default function CarrosselMural() {
         fetchPublicacoes();
     }, []);
 
-    // Limitar as publicações a 5
     const publicacoesLimitadas = publicacoes.slice(0, 5);
 
     return (
@@ -58,18 +58,15 @@ export default function CarrosselMural() {
             >
                 {publicacoesLimitadas.map((publicacao, index) => (
                     <SwiperSlide key={index} className={styles.cards}>
-                        {/* Exibir a imagem da publicação */}
-                        {publicacao.imagem.map((img, imgIndex) => (
+                        {publicacao.imagem.length > 0 && (
                             <Image
-                                key={imgIndex}
                                 className={styles.cards__img}
-                                src={imageUrls[img] || '/assets/muralWalle.svg'}
-                                alt={`Imagem ${imgIndex + 1}`}
+                                src={imageUrls[publicacao.imagem[0]] || '/assets/muralWalle.svg'}
+                                alt={`Imagem 1`}
                                 width={900}
                                 height={900}
                             />
-                        ))}
-                        {/* Exibir o título e o texto da publicação */}
+                        )}
                         <h1 className={styles.cards__noticias}>Notícias</h1>
                         <p className={styles.cards__titulo}>{publicacao.titulo}</p>
                     </SwiperSlide>
