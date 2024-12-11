@@ -1,93 +1,66 @@
 "use client"
 
-import Image from "next/image";
-import styles from "./list.module.scss";
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
-import Link from "next/link";
-import Header from "../HeaderNavegacao";
-import Table from "./Table";
-import { getAllSementes } from "@/api/sementes/getAllSementes";
 import { Search } from "../searchSemente";
-import { getStorageItem } from "@/utils/localStore";
-import { useSelector } from "react-redux";
-import { getSementesBanco } from "@/api/sementes/getSementeBanco";
-import { getCoordenadorCpf } from "@/api/usuarios/coordenador/getCoordenadorCpf";
-import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
-import DetalhamentoSementes from "../DetalhamentoSementes";
-import DetalhamentoBanco from "../DetalhamentoBancoSemente";
 import DetalhamentoTabelaBancoSemente from "../DetalhamentoTabelaBancoSemente";
-import HeaderDetalhamento from "../HeaderDetalhamento";
+import TableBancoSemente from "../ListSementes/TableBancoSemente";
+import { getTabelaBancoSementeByBanco } from "@/api/sementes/tabelaBancoSementes/getTabelaBancoSementeByBanco";
 
-export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5, table6, sementesBanco, bancoId }) {
+export default function ListSementesBanco({diretorioAnterior, diretorioAtual, hrefAnterior, bancoId }) {
 
-  const [sementes, setSementes] = useState([]);
+  const [tabelas, setTabelas] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-
   const [selectedTabelaBancoSemente, setSelectedTabelaBancoSemente] = useState(null);
-  const [nomeSemente, setNomeSemente] = useState(null);
-  const [variedadeSemente, setVariedadeSemente] = useState(null);
 
   useEffect(() => {
-    mutate();
-
-  }, []);
-
+    if (bancoId) {
+      mutate();
+    }
+  }, [bancoId]);
 
   const { state, mutate } = useMutation(
     async () => {
-      return getSementesBanco(Number(bancoId));
+      return getTabelaBancoSementeByBanco(Number(bancoId));
     }, {
-    onSuccess: (res) => {
-      setSementes(res.data);
-    },
-    onError: (error) => {
-      console.log("Erro ao recuperar as infomações das sementes do banco", error)
+      onSuccess: (res) => {
+        setTabelas(res.data);
+      },
+      onError: (error) => {
+        console.log("Erro ao recuperar as infomações das sementes do banco", error)
+      }
     }
-  }
   );
-  const filteredSementes = sementes.filter((sementes) =>
-    sementes.nome.toLowerCase().includes(searchTerm.toLowerCase())
+
+  const filteredTabelas = tabelas.filter((tabela) =>
+    tabela.semente.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  const handleSelectTabela = (tabela, nomeSemente, variedadeSemente) => {
+
+  const handleSelectTabela = (tabela) => {
     setSelectedTabelaBancoSemente(tabela);
-    setNomeSemente(nomeSemente);
-    setVariedadeSemente(variedadeSemente);
   }
   const handleBackToList = () => {
     setSelectedTabelaBancoSemente(null)
   }
   if (selectedTabelaBancoSemente) {
     return (
-      <DetalhamentoTabelaBancoSemente
-        tabelaBanco={selectedTabelaBancoSemente}
-        nomeSemente={nomeSemente}
-        variedadeSemente={variedadeSemente}
-        backDetalhamento={handleBackToList}
-      />
+      <>
+        <DetalhamentoTabelaBancoSemente
+          tabelaBanco={selectedTabelaBancoSemente}
+          backDetalhamento={handleBackToList}
+        />
+      </>
     );
   }
+
   return (
     <>
-      <div>
-        <HeaderDetalhamento
-          diretorioAnterior={diretorioAnterior}
-          diretorioAtual={diretorioAtual}
-          hrefAnterior={sementesBanco}
-        />
-        <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <Table
-          table1={table1}
-          table2={table2}
-          table3={table3}
-          table4={table4}
-          table5={table5}
-          listSementes={filteredSementes}
-          setSementes={setSementes}
-          onSelectTabela={handleSelectTabela}
-
-        />
-      </div>
+      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <TableBancoSemente
+        listTabelas={filteredTabelas}
+        setTabelas={setTabelas}
+        onSelectTabela={handleSelectTabela}
+      />
     </>
   )
 }
