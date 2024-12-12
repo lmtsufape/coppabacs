@@ -28,7 +28,7 @@
         height: 1.5em;
         border-radius: 1em;
         position: absolute;
-        bottom: 32%;
+        bottom: 28%;
         font-size: 0.8em;
         left: 4%;
         font-weight: bold;
@@ -44,7 +44,7 @@
         width: 90%;
         height: 2em;
         position: absolute;
-        bottom: 10%;
+        bottom: 5%;
         left: 4%;
         color: white;
         font-weight: bold;
@@ -64,6 +64,7 @@
         }
         &__noticias{
             font-size: 0.7em;
+            bottom: 24.5%;
         }
         &__titulo{
             font-size: 1.3em;
@@ -79,7 +80,7 @@
         }
         &__noticias{
             font-size: 0.6em;
-            bottom: 27.5%;
+            bottom: 23.5%;
         }
         &__titulo{
             font-size: 1em;
