@@ -125,7 +125,7 @@ export default function DadosForm({ formik }) {
 
       <label >CPF<span>*</span></label>
       <input
-        className={style.container__ContainerForm_form_halfContainer_input}
+        className={style.container__ContainerForm_form_input}
         id="cpf"
         name="cpf"
         placeholder="Insira seu CPF"
