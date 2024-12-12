@@ -15,10 +15,9 @@ public  class TabelaBancoSementesResponse  {
 	private Long id;
 	private double peso;
 	private String safra;
-	private BancoSementesResponse bancoSementes; 
-
-
-
+	private BancoSementesResponse bancoSementes;
+	private SementesResponse semente;
+	
 	public TabelaBancoSementesResponse(TabelaBancoSementes obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		modelMapper.map(obj, this);	

@@ -3,8 +3,6 @@ package br.edu.ufape.lmts.sementes.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -16,10 +14,7 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -55,9 +50,6 @@ public  class Sementes  {
 	@OneToOne(cascade=CascadeType.PERSIST, orphanRemoval = true)
 	@ToString.Exclude
 	private ToleranciaAdversidades toleranciaAdversidades;
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "sementes_id")
-	private List<TabelaBancoSementes> tabelaBancoSementes = new ArrayList<>();
 	@OneToOne(cascade = CascadeType.ALL, targetEntity = ResponsavelTecnico.class)
 	@JoinColumn(name = "responsavel_tecnico_id")
 	@ToString.Exclude
@@ -74,8 +66,4 @@ public  class Sementes  {
 	@ToString.Exclude
 	private Cultura cultura;
 	
-	@Transactional
-	public void addTabelaSementes(TabelaBancoSementes tabelaBancoSementes){
-		this.tabelaBancoSementes.add(tabelaBancoSementes);
-	}
 }
