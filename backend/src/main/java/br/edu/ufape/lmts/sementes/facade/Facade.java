@@ -525,22 +525,14 @@ public class Facade {
 	private TabelaBancoSementesService tabelaBancoSementesService;
 
 	@Transactional
-	public TabelaBancoSementes saveTabelaBancoSementes(TabelaBancoSementes newInstance, long sementeId) {
+	public TabelaBancoSementes saveTabelaBancoSementes(TabelaBancoSementes newInstance) {
 		TabelaBancoSementes tabelaBancoSementes = tabelaBancoSementesService.saveTabelaBancoSementes(newInstance);
-		Sementes sementes = findSementesById(sementeId);
-		sementes.addTabelaSementes(tabelaBancoSementes);
 		return tabelaBancoSementes;
 	}
 
 	@Transactional
-	public List<TabelaBancoSementes> saveAllTabelaBancoSementes(List<TabelaBancoSementesRequest> requests) {
-		return requests.stream()
-				.map(request -> {
-					TabelaBancoSementes tabelaBancoSementes = request.convertToEntity();
-					long sementeId = request.getSementeId();
-					return saveTabelaBancoSementes(tabelaBancoSementes, sementeId);
-				})
-				.collect(Collectors.toList());
+	public List<TabelaBancoSementes> saveAllTabelaBancoSementes(List<TabelaBancoSementes> tabelaBancoSementes) {
+		return tabelaBancoSementesService.saveAllTabelaBancoSementes(tabelaBancoSementes);
 	}
 
 	public TabelaBancoSementes updateTabelaBancoSementes(TabelaBancoSementes transientObject) {
@@ -933,8 +925,8 @@ public class Facade {
 	}
 
 	public List<Sementes> getAllSementesByBanco(long id) {
-		BancoSementes banco = findBancoSementesById(id);
-		return sementesService.getAllSementesByBanco(banco);
+		List<TabelaBancoSementes> tbs = findTabelaBancoSementesByBancoSementes(id);
+		return tbs.stream().map(x-> x.getSemente()).toList();
 	}
 
 	public Page<Sementes> findPageSementes(Pageable pageRequest) {

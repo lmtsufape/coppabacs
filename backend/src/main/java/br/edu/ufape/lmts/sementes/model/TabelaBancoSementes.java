@@ -33,6 +33,8 @@ public  class TabelaBancoSementes  {
     @ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "banco_sementes_id")
 	@ToString.Exclude
-	private BancoSementes bancoSementes; 
-
+	private BancoSementes bancoSementes;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sementes_id")
+    private Sementes semente;
 }

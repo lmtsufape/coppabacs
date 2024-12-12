@@ -2,6 +2,7 @@ package br.edu.ufape.lmts.sementes.controller.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -85,6 +86,14 @@ public class ControllerExceptionHandler {
 	
 	@ExceptionHandler(AuthenticationException.class)
 	public ResponseEntity<StandardError> authenticationException(AuthenticationException e, HttpServletRequest request) {
+		int httpStatus = HttpStatus.UNAUTHORIZED.value();
+		StandardError err = new StandardError(httpStatus,
+				"Não autorizado", e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(httpStatus).body(err);
+	}
+	
+	@ExceptionHandler(UsernameNotFoundException.class)
+	public ResponseEntity<StandardError> UsernameNotFoundException(UsernameNotFoundException e, HttpServletRequest request) {
 		int httpStatus = HttpStatus.UNAUTHORIZED.value();
 		StandardError err = new StandardError(httpStatus,
 				"Não autorizado", e.getMessage(), request.getRequestURI());

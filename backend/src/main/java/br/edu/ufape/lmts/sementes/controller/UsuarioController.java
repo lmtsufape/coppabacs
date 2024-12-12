@@ -11,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -25,7 +24,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ufape.lmts.sementes.controller.dto.request.UsuarioRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.request.UsuarioUpdateRequest;
-import br.edu.ufape.lmts.sementes.controller.dto.response.SementesResponse;
 import br.edu.ufape.lmts.sementes.controller.dto.response.UsuarioResponse;
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.facade.Facade;
@@ -87,8 +85,8 @@ public class UsuarioController {
 			modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
 			TypeMap<UsuarioUpdateRequest, Usuario> typeMapper = modelMapper
 					.typeMap(UsuarioUpdateRequest.class, Usuario.class)
-					.addMappings(mapper -> mapper.skip(Usuario::setId));
-
+					.addMappings(mapper -> mapper.skip(Usuario::setId))
+					.addMappings(mapper -> mapper.skip(Usuario::setSenha));
 			typeMapper.map(obj, oldObject);
 			return new UsuarioResponse(facade.updateUsuario(oldObject));
 		} catch (RuntimeException e) {

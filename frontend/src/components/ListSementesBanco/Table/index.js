@@ -23,11 +23,6 @@ export default function TableLayout({ table1, table2, table3, table4, table5, ta
           <tr>
             <th>{table1}</th>
             <th>{table3}</th>
-            {/**
-            <th>{table4}</th>
-            <th>{table2}</th>
-             * 
-          */}
           <th>{table5}</th>
 
             <th className={styles.content__table__header_name3}>

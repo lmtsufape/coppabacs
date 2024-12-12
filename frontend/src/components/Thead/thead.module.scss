@@ -1,0 +1,34 @@
+.header {
+  display: table-header-group;
+  color: #EAEAEA;
+  background-color: #245501;
+  height: 3em;
+  text-align: center;
+
+  th {
+    display: table-cell;
+    vertical-align: middle;
+    align-items: center;
+    padding: 10px;
+
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5em;
+    }
+
+    span {
+      position: absolute;
+      margin: -0.3em 0 0 0.5em;
+    }
+  }
+
+  th:first-child {
+    border-radius: 1em 0 0 0;
+  }
+
+  th:last-child {
+    border-radius: 0 1em 0 0;
+  }
+}

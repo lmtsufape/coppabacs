@@ -174,7 +174,6 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
     },
     onError: (error) => {
       console.log("Erro ao cadastrar nova sementes", error);
-
     }
   }
   );
@@ -305,7 +304,7 @@ const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) 
         <Formik
           initialValues={initialValues}
           onSubmit={(values, { setSubmitting }) => {
-            mutate(values);
+            mutate(values.sementes);
           }}
         >
           {(formik) => {
@@ -318,9 +317,7 @@ const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) 
                       <h1>Cancelar</h1>
                     </Link>
                   </button>
-                  <button onClick={() => {
-                    mutate(formik.values);
-                  }}
+                  <button
                     type="submit"
                     className={styles.buttons_linkWhite}>
                     <h1>Finalizar</h1>

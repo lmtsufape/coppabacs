@@ -29,7 +29,6 @@ public class SementesResponse {
 	private String caracteristicasPositiva;
 	private String caracteristicasNegativas;
 	private ToleranciaAdversidadesResponse toleranciaAdversidades;
-	private List<TabelaBancoSementesResponse> tabelaBancoSementes;
 	private ResponsavelTecnicoResponse responsavelTecnico;
 	private CaracteristicasAgronomicasResponse caracteristicasAgronomicas;
 	private List<FinalidadeResponse> finalidades;

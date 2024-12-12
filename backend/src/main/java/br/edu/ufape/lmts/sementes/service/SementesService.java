@@ -36,10 +36,6 @@ public class SementesService implements SementesServiceInterface {
 		return repository.findByAtivoTrue();
 	}
 
-	public List<Sementes> getAllSementesByBanco(BancoSementes banco) {
-		return repository.findAllByAtivoTrueAndTabelaBancoSementesBancoSementes(banco);
-	}
-
 	public void deleteSementes(Sementes persistentObject) {
 		this.deleteSementes(persistentObject.getId());
 	}

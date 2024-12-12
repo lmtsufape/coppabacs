@@ -18,11 +18,11 @@ import HeaderDetalhamento from "../HeaderDetalhamento";
 import { getStorageItem } from "@/utils/localStore";
 
 
-const DetalhamentoTabelaBancoSemente = ({ diretorioAnterior, diretorioAtual, hrefAnterior, tabelaBanco, nomeSemente, variedadeSemente, backDetalhamento }) => {
+const DetalhamentoTabelaBancoSemente = ({ diretorioAnterior, diretorioAtual, hrefAnterior, tabelaBanco, backDetalhamento }) => {
 
   const formData = {
-    nomeSemente: nomeSemente || "",
-    variedade: variedadeSemente || "",
+    nomeSemente: tabelaBanco.semente.nome || "",
+    variedade: tabelaBanco.semente.cultura.genero || "",
     quantidade: tabelaBanco.peso || "",
     safra: tabelaBanco.safra || "",
 

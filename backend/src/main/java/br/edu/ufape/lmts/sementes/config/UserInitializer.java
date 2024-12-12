@@ -1,20 +1,45 @@
 package br.edu.ufape.lmts.sementes.config;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
-import br.edu.ufape.lmts.sementes.controller.dto.request.*;
-import br.edu.ufape.lmts.sementes.enums.Resistencia;
-import br.edu.ufape.lmts.sementes.enums.TipoPergunta;
-import br.edu.ufape.lmts.sementes.facade.Facade;
-import br.edu.ufape.lmts.sementes.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import br.edu.ufape.lmts.sementes.controller.dto.request.BancoSementesRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.CaracteristicasAgronomicasRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.CulturaRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.EmpalhamentoRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.EnderecoRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.FinalidadeRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.ObjetosBancoSementesRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.ResponsavelTecnicoRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.SementesRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.TabelaBancoSementesRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.ToleranciaAdversidadesRequest;
+import br.edu.ufape.lmts.sementes.enums.Resistencia;
+import br.edu.ufape.lmts.sementes.enums.TipoPergunta;
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
-import br.edu.ufape.lmts.sementes.model.*;
+import br.edu.ufape.lmts.sementes.facade.Facade;
+import br.edu.ufape.lmts.sementes.model.Admin;
+import br.edu.ufape.lmts.sementes.model.Agricultor;
+import br.edu.ufape.lmts.sementes.model.BancoSementes;
+import br.edu.ufape.lmts.sementes.model.Coppabacs;
+import br.edu.ufape.lmts.sementes.model.Gerente;
+import br.edu.ufape.lmts.sementes.model.Sementes;
+import br.edu.ufape.lmts.sementes.model.TabelaPerguntaUsuario;
+import br.edu.ufape.lmts.sementes.repository.AdminRepository;
+import br.edu.ufape.lmts.sementes.repository.AgricultorRepository;
+import br.edu.ufape.lmts.sementes.repository.BancoSementesRepository;
+import br.edu.ufape.lmts.sementes.repository.CoppabacsRepository;
+import br.edu.ufape.lmts.sementes.repository.GerenteRepository;
+import br.edu.ufape.lmts.sementes.repository.SementesRepository;
+import br.edu.ufape.lmts.sementes.repository.UsuarioRepository;
 
 @Configuration
 @Component
@@ -56,7 +81,8 @@ public class UserInitializer implements CommandLineRunner {
 			});
 			TabelaBancoSementesRequest tabelaBancoSementesRequest = new TabelaBancoSementesRequest(0, 200, "05/2024", 1,
 					1);
-			facade.saveTabelaBancoSementes(tabelaBancoSementesRequest.convertToEntity(), 1);
+			
+			facade.saveTabelaBancoSementes(tabelaBancoSementesRequest.convertToEntity());
 
 		}
 

@@ -5,9 +5,9 @@ export default function novaSementePage() {
     return (
         <div>
             <SementeForm 
-            diretorioAnterior="Home / Gestão de Sementes /" 
-            diretorioAtual="Nova Semente" 
-            hrefAnterior="/sementes"
+                diretorioAnterior="Home / Gestão de Sementes /" 
+                diretorioAtual="Nova Semente" 
+                hrefAnterior="/sementes"
             />
         </div>
     );
