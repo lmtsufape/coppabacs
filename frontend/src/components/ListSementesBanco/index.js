@@ -6,6 +6,7 @@ import { Search } from "../searchSemente";
 import DetalhamentoTabelaBancoSemente from "../DetalhamentoTabelaBancoSemente";
 import TableBancoSemente from "../ListSementes/TableBancoSemente";
 import { getTabelaBancoSementeByBanco } from "@/api/sementes/tabelaBancoSementes/getTabelaBancoSementeByBanco";
+import HeaderDetalhamento from "../HeaderDetalhamento";
 
 export default function ListSementesBanco({diretorioAnterior, diretorioAtual, hrefAnterior, bancoId }) {
 
@@ -55,6 +56,11 @@ export default function ListSementesBanco({diretorioAnterior, diretorioAtual, hr
 
   return (
     <>
+      <HeaderDetalhamento
+          diretorioAnterior={diretorioAnterior}
+          diretorioAtual={diretorioAtual}
+          hrefAnterior={hrefAnterior}
+      />
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <TableBancoSemente
         listTabelas={filteredTabelas}

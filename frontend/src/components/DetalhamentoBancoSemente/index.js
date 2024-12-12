@@ -138,8 +138,7 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
       <ListSementesBanco
         diretorioAnterior={`Home / Bancos Sementes / `}
         diretorioAtual="Sementes"
-        hrefAnterior={`/bancoSementes`}
-        sementesBanco={handleBackToBank}
+        hrefAnterior={handleBackToBank}
         bancoId={banco.id}
       />
     )
