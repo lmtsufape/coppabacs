@@ -6,28 +6,26 @@ import { useState } from "react";
 
 import style from "./agricultorForm.module.scss";
 
-import HeaderNavegacao from "../HeaderNavegacao";
-import Link from "next/link";
 import DadosTransacao from "./DadosTransacao/index";
 import HeaderDetalhamento from "../HeaderDetalhamento";
 
 
-const DetalhamentoDoacao = ({ hrefAnterior, dirAtual, dirAnt, hrefAtual, backDetalhamento, doacao }) => {
+const DetalhamentoTransacao = ({ hrefAnterior, diretorioAtual, diretorioAnterior, transacao }) => {
   const formData = {
-    data: hrefAtual === "/doacoes" ? doacao.dataDoacao : doacao.dataRetirada || "",
-    descricao: doacao.descricao || "" ,
-    agricultorId: doacao.agricultor || "",
-    itens: doacao.itens || {},
-    bancoSementesId: doacao.bancoSementesId || "",
+    data: transacao.data,
+    descricao: transacao.descricao || "" ,
+    agricultorId: transacao.agricultor || "",
+    itens: transacao.itens || {},
+    bancoSementesId: transacao.bancoSementesId || "",
   }
     
   const [etapas, setEtapas] = useState(0);
   return (
     <div id="header" className={style.container}>
       <HeaderDetalhamento
-        diretorioAnterior={dirAnt}
-        diretorioAtual={dirAtual}
-        hrefAnterior={backDetalhamento}
+        diretorioAnterior={diretorioAnterior}
+        diretorioAtual={diretorioAtual}
+        hrefAnterior={hrefAnterior}
         etapas={etapas}
 
       />
@@ -40,12 +38,12 @@ const DetalhamentoDoacao = ({ hrefAnterior, dirAtual, dirAnt, hrefAtual, backDet
               <Form
                 className={style.container__ContainerForm_form}
               >
-                <DadosTransacao formik={formik} hrefAtual={hrefAtual} />
+                <DadosTransacao formik={formik} hrefAtual={diretorioAtual} />
                 <div className={style.container__ContainerForm_buttons}>
                   <button className={style.container__ContainerForm_buttons_link} onClick={() => setEtapas(etapas - 1)}>
                   </button>
                   <button
-                    className={style.container__ContainerForm_buttons_linkWhite} onClick={() => backDetalhamento()}>
+                    className={style.container__ContainerForm_buttons_linkWhite} onClick={hrefAnterior}>
                       <h1>Voltar</h1>
                   </button>
                 </div>
@@ -60,4 +58,4 @@ const DetalhamentoDoacao = ({ hrefAnterior, dirAtual, dirAnt, hrefAtual, backDet
 }
 
 
-export default DetalhamentoDoacao;
+export default DetalhamentoTransacao;

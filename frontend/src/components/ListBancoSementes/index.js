@@ -15,6 +15,8 @@ import DetalhamentoBanco from "../DetalhamentoBancoSemente";
 import { getBanco } from "@/api/bancoSementes/getBanco";
 import { getCoordenadorCpf } from "@/api/usuarios/coordenador/getCoordenadorCpf";
 import { getAgricultorCpf } from "@/api/usuarios/agricultor/getAgricultorCpf";
+import ButtonsHeader from "../ButtonsHeader";
+import HeaderButton from "../ButtonsHeader/HeaderButton";
 
 export default function ListBancoSementes({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3 }) {
 
@@ -119,42 +121,9 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
         diretorioAtual={diretorioAtual}
         hrefAnterior={hrefAnterior}
       />
-      <div className={style.header}>
-        <div className={style.header__container}>
-          <div className={style.dropdown}>
-            <div className={style.botaoDropdown}>
-              <Image onClick={() => setOpen(!open)}
-                src="/assets/dropdown.svg" alt="Dropdown" width={27} height={24} />
-            </div>
-            {open && (<div className={style.dropdown}>
-              <ul className={style.botaoDropdown__lista}>
-                <li>
-                  <div className={style.botaoDropdown__button}>
-                  <Image src="/assets/iconDatabasePlus.svg" alt="Adicionar Agricultor" width={27} height={24} />
-                    <Link className={style.header__container_link} href="bancoSementes/novoBanco">
-                      <h1>
-                        Adicionar Banco
-                      </h1>
-                    </Link>
-                  </div>
-                </li>
-              </ul>
-            </div>)}
-          </div>
-          <div className={style.botoes}>
-            <button>
-              <Link className={style.header__container_link} href="bancoSementes/novoBanco">
-                <h1>
-                  Adicionar Banco
-                </h1>
-              </Link>
-              <Image src="/assets/iconDatabasePlus.svg" alt="Adicionar Agricultor" width={27} height={24} />
-            </button>
-            <div className={style.header__container_buttons}>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ButtonsHeader>
+        <HeaderButton hrefLink="/bancoSementes/novoBanco" imageSrc="/assets/iconDatabasePlus.svg" text="Adicionar Banco" onClick={() => {}}/>
+      </ButtonsHeader>
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <Table
         listBancos={filteredBancos}
