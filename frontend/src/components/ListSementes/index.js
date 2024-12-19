@@ -13,7 +13,7 @@ import { getStorageItem } from "@/utils/localStore";
 import { useSelector } from "react-redux";
 import { getSementesBanco } from "@/api/sementes/getSementeBanco";
 import { getCoordenadorCpf } from "@/api/usuarios/coordenador/getCoordenadorCpf";
-import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
+import { getAgricultorCpf } from "@/api/usuarios/agricultor/getAgricultorCpf";
 import DetalhamentoSementes from "../DetalhamentoSementes";
 import DetalhamentoBanco from "../DetalhamentoBancoSemente";
 import DetalhamentoTabelaBancoSemente from "../DetalhamentoTabelaBancoSemente";
@@ -330,7 +330,7 @@ const LayoutAgricultor = ({ diretorioAnterior, diretorioAtual, hrefAnterior, tab
       mutate();
     }
   }, [agricultor.bancoId]);
-  const mutationAgricultor = useMutation(agricultorCpf => getUsuarioEmail(agricultorCpf), {
+  const mutationAgricultor = useMutation(agricultorCpf => getAgricultorCpf(agricultorCpf), {
     onSuccess: (res) => {
       setAgricultor(res.data);
     },
