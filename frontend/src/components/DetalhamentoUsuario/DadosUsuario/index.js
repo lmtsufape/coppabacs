@@ -309,7 +309,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             <div>
               <label >Estado Civil</label>
               <select
-                className={style.container__ContainerForm_form_halfContainer_input}
+                className={style.container__ContainerForm_form_halfContainer_select}
                 id="estadoCivil"
                 name="estadoCivil"
                 onChange={(e) => {
@@ -355,7 +355,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             <div>
               <label>Sexo do Cônjuge</label>
               <select
-                className={style.container__ContainerForm_form_halfContainer_input}
+                className={style.container__ContainerForm_form_halfContainer_select}
                 id="conjugeSexo"
                 name="conjuge.sexo"
                 onChange={formik.handleChange}

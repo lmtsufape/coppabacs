@@ -93,7 +93,7 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
                     name="agricultorId"
                     onChange={formik.handleChange}
                     value={formik.values.agricultorId}
-                    className={styles.container__ContainerForm_form_input}
+                    className={styles.container__ContainerForm_form_select}
                 >
                     <option value="">Selecione um Agricultor</option>
                     {filteredAgricultores.map((agricultor) => (
@@ -149,7 +149,7 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
                         name="dataDoacao"
                         onChange={formik.handleChange}
                         value={formik.values.dataDoacao}
-                        className={styles.container__ContainerForm_form_input}
+                        className={styles.container__ContainerForm_form_date}
                     />
                 </>
             ) : (
@@ -160,7 +160,7 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
                         name="dataRetirada"
                         onChange={formik.handleChange}
                         value={formik.values.dataRetirada}
-                        className={styles.container__ContainerForm_form_input}
+                        className={styles.container__ContainerForm_form_date}
                     />
                 </>
             )}
