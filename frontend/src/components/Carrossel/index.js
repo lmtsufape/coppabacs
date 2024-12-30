@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useRouter } from "next/navigation";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
@@ -13,7 +14,12 @@ export default function CarrosselMural() {
     const [publicacoes, setPublicacoes] = useState([]);
     const [imageUrls, setImageUrls] = useState({});
 
-    // Função para carregar as publicações
+    const router = useRouter();
+
+    const handleSlideClick = () => {
+        router.push('/mural');
+    };
+
     useEffect(() => {
         const fetchPublicacoes = async () => {
             try {
@@ -57,7 +63,7 @@ export default function CarrosselMural() {
                 className="mySwiper"
             >
                 {publicacoesLimitadas.map((publicacao, index) => (
-                    <SwiperSlide key={index} className={styles.cards}>
+                    <SwiperSlide key={index} className={styles.cards} onClick={handleSlideClick}>
                         {publicacao.imagem.length > 0 && (
                             <Image
                                 className={styles.cards__img}
