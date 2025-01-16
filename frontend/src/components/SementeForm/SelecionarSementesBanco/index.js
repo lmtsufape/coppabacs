@@ -23,6 +23,7 @@ export default function SelecionarSementesBanco({ formik }) {
             console.error('Erro ao recuperar as informações do coordenador:', error);
         }
     });
+
     useEffect(() => {
         mutationCoordenador.mutate(coordenadorCpf);
         if(coordenador.bancoSementeId){
@@ -40,12 +41,17 @@ export default function SelecionarSementesBanco({ formik }) {
             console.log("Erro ao recuperar as informações das sementes", error);
         }
     });
+    
     useEffect(() => {
         formik.setFieldValue("sementes", seletores.filter(Boolean));
     }, [seletores]);
 
     const addSelector = () => {
         setSeletores([...seletores, { sementeId: '', peso: '', safra: '', bancoSementesId: `${coordenador.bancoSementeId}`}]);
+    };
+
+    const removeSelector = (index) => {
+        setSeletores(seletores.filter((_, i) => i !== index));
     };
 
     const handleSelectChange = (index, field, value) => {
@@ -61,67 +67,71 @@ export default function SelecionarSementesBanco({ formik }) {
     const filteredSementes = sementes.filter(semente =>
         semente.nomePopular.toLowerCase().includes(filtro)
     );
+
     return (
         <div>
             {seletores.map((seletor, index) => (
-                <div key={index}>
-                    <div className={styles.container__ContainerForm_form}>
+                <>
+                    <div key={index}>
                         <div className={styles.container__ContainerForm_form}>
-                            {index === seletores.length - 1 && (
-                                <>
-                                    <label>Filtro Sementes</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Filtrar sementes por nome"
-                                        onChange={handleFilterChange}
-                                        value={filtro}
-                                        className={styles.container__ContainerForm_form_inputFiltro}
-                                    />
-                                </>
-                            )}
+                            <div className={styles.container__ContainerForm_form}>
+                                {index === seletores.length - 1 && (
+                                    <>
+                                        <label>Filtro Sementes</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Filtrar sementes por nome"
+                                            onChange={handleFilterChange}
+                                            value={filtro}
+                                            className={styles.container__ContainerForm_form_inputFiltro}
+                                        />
+                                    </>
+                                )}
+                            </div>
+                            <div>
+                                <label>Semente <span>*</span></label>
+                                <select
+                                    className={styles.container__ContainerForm_form_input}
+                                    id={`sementes-${index}`}
+                                    name={`sementes[${index}].id`}
+                                    onChange={(e) => handleSelectChange(index, 'sementeId', e.target.value)}
+                                    value={seletor.sementeId || ''}
+                                    required
+                                >
+                                    <option value="">Selecione...</option>
+                                    {filteredSementes.map((semente) => (
+                                        <option key={semente.id} value={semente.id}>
+                                            {semente.nomePopular}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
                         </div>
-                        <div>
-                            <label>Semente <span>*</span></label>
-                            <select
-                                className={styles.container__ContainerForm_form_input}
-                                id={`sementes-${index}`}
-                                name={`sementes[${index}].id`}
-                                onChange={(e) => handleSelectChange(index, 'sementeId', e.target.value)}
-                                value={seletor.sementeId || ''}
-                                required
-                            >
-                                <option value="">Selecione...</option>
-                                {filteredSementes.map((semente) => (
-                                    <option key={semente.id} value={semente.id}>
-                                        {semente.nomePopular}
-                                    </option>
-                                ))}
-                            </select>
+                        <div className={styles.container__ContainerForm_form_halfContainer}>
+                            <div>
+                                <label>Peso (Kg)<span>*</span></label>
+                                <input
+                                    className={styles.container__ContainerForm_form_halfContainer_input}
+                                    type="text"
+                                    placeholder="Peso"
+                                    onChange={(e) => handleSelectChange(index, 'peso', e.target.value)}
+                                    value={seletor.peso || ''}
+                                />
+                            </div>
+                            <div>
+                                <label>Safra<span>*</span></label>
+                                <input
+                                    type="text"
+                                    placeholder="Safra"
+                                    className={styles.container__ContainerForm_form_halfContainer_input}
+                                    onChange={(e) => handleSelectChange(index, 'safra', e.target.value)}
+                                    value={seletor.safra || ''}
+                                />
+                            </div>
                         </div>
                     </div>
-                    <div className={styles.container__ContainerForm_form_halfContainer}>
-                        <div>
-                            <label>Peso (Kg)<span>*</span></label>
-                            <input
-                                className={styles.container__ContainerForm_form_halfContainer_input}
-                                type="text"
-                                placeholder="Peso"
-                                onChange={(e) => handleSelectChange(index, 'peso', e.target.value)}
-                                value={seletor.peso || ''}
-                            />
-                        </div>
-                        <div>
-                            <label>Safra<span>*</span></label>
-                            <input
-                                type="text"
-                                placeholder="Safra"
-                                className={styles.container__ContainerForm_form_halfContainer_input}
-                                onChange={(e) => handleSelectChange(index, 'safra', e.target.value)}
-                                value={seletor.safra || ''}
-                            />
-                        </div>
-                    </div>
-                </div>
+                    <button type="button" onClick={() => removeSelector(index)} className={`${styles.container_button} ${styles.container_button_remove}`}>Remover semente</button>
+                </>
             ))}
             <button type="button" onClick={addSelector} className={styles.container_button}>Adicionar mais sementes</button>
             {formik.errors.sementes && <span className={styles.form__error}>{formik.errors.sementes}</span>}

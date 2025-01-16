@@ -66,12 +66,12 @@ public class TabelaBancoSementesController {
 	
 	@PostMapping("tabelaBancoSementes")
 	public TabelaBancoSementesResponse createTabelaBancoSementes(@Valid @RequestBody TabelaBancoSementesRequest newObj) {
-		return new TabelaBancoSementesResponse(facade.saveTabelaBancoSementes(newObj.convertToEntity(), newObj.getSementeId()));
+		return new TabelaBancoSementesResponse(facade.saveTabelaBancoSementes(newObj.convertToEntity()));
 	}
 
 	@PostMapping("tabelaBancoSementes/all")
-	public List<TabelaBancoSementesResponse> createAllTabelaBancoSementes(@Valid @RequestBody List<TabelaBancoSementesRequest> newObj) {
-		return facade.saveAllTabelaBancoSementes(newObj).stream()
+	public List<TabelaBancoSementesResponse> createAllTabelaBancoSementes(@Valid @RequestBody List<TabelaBancoSementesRequest> newObjs) {
+		return facade.saveAllTabelaBancoSementes(newObjs.stream().map(x -> x.convertToEntity()).toList()).stream()
 				.map(TabelaBancoSementesResponse::new)
 				.toList();
 	}

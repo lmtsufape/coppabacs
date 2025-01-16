@@ -27,9 +27,6 @@ public interface SementesRepository extends JpaRepository<Sementes, Long> {
 	List<Sementes> findByAtivoTrueAndNomeContainingOrAtivoTrueAndDescricaoContaining(String nome, String descricao);
 
 	@Transactional(readOnly = true)
-	public List<Sementes> findAllByAtivoTrueAndTabelaBancoSementesBancoSementes(BancoSementes bancoSementes);
-
-	@Transactional(readOnly = true)
 	Optional<Sementes> findByAtivoTrueAndId(long id);
 
 	@Transactional(readOnly = true)
