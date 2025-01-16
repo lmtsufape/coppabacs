@@ -15,8 +15,8 @@
   border-radius: 16px;
   box-shadow: -4px 5px 12px 0px #00000026;
   border: 0.5px solid #B1B1B1;
-  margin-top: 2em;
-  margin-bottom: 5em;
+  margin-top: 1em;
+  margin-bottom: 2em;
 
 
   
@@ -96,7 +96,8 @@
     color: #FFF;
   }
   button{
-    width: 8em;
+    width: 9.5em;
+    height: 3em;
 
     padding: 0.5em 1em;
     margin: 1em 0 -1em 0;
@@ -120,6 +121,13 @@
   
 }
 
+.error {
+  display: block;
+  color: red;
+  margin-top: 10px;
+}
+
+
 .sidedForm{
   width: 100%;
   display: grid;
@@ -138,7 +146,7 @@
     border-radius: 5px;
     font-size: 1em;
     margin-top: 0.8em;
-    margin-bottom: 0.8em;
+    margin-bottom: 1.3em;
     
   }
   
@@ -161,7 +169,7 @@
     border-radius: 5px;
     font-size: 1em;
     margin-top: 0.8em;
-    margin-bottom: 0.8em;
+    margin-bottom: 1.3em;
     background-color: white;
   }
 }

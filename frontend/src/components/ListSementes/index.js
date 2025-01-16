@@ -11,7 +11,7 @@ import { Search } from "../searchSemente";
 import { getStorageItem } from "@/utils/localStore";
 import { useSelector } from "react-redux";
 import { getCoordenadorCpf } from "@/api/usuarios/coordenador/getCoordenadorCpf";
-import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
+import { getAgricultorCpf } from "@/api/usuarios/agricultor/getAgricultorCpf";
 import DetalhamentoSementes from "../DetalhamentoSementes";
 import DetalhamentoTabelaBancoSemente from "../DetalhamentoTabelaBancoSemente";
 import { getTabelaBancoSementeByBanco } from "@/api/sementes/tabelaBancoSementes/getTabelaBancoSementeByBanco";
