@@ -26,10 +26,7 @@ api.interceptors.request.use((request) => {
   if (token == null) 
     return request;
   if(typeof token === "string") {
-    console.log("token:" + token.replace(/["]/g, ''));
     token = token.replace(/["]/g, '');
-    console.log("token:" + token);
-    console.log("size token:" + token.length );
     if(token.length != 0)
       request.headers.Authorization = token;
     else

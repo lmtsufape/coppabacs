@@ -1,21 +1,17 @@
+import DetalhamentoTabelaBancoSemente from "@/components/DetalhamentoTabelaBancoSemente";
+import HeaderDetalhamento from "@/components/HeaderDetalhamento";
 
-import ListSementesBanco from "@/components/ListSementesBanco";
-
-export default function sementesPage() {
+export default function sementesBancoPage({tabela, origin}) {
   return (
     <div>
-      <ListSementesBanco
-        diretorioAnterior= "Home /" 
-        diretorioAtual="Gestão de Sementes" 
-        hrefAnterior="/" 
-        table1="Imagem"
-        table2="Cultura" 
-        table3="Cultivar" 
-        table4="Quantidade"
-        table5="Safra"
-        table6="Ação"
+      <HeaderDetalhamento
+          hrefAnterior={origin}
+          diretorioAnterior="Home / Gestão de Sementes / "
+          diretorioAtual="Detalhamento semente"
         />
-
+        <DetalhamentoTabelaBancoSemente
+          tabelaBanco={tabela}
+        />
     </div>
   )
 }
