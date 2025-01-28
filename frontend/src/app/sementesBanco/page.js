@@ -1,4 +1,3 @@
-
 import DetalhamentoTabelaBancoSemente from "@/components/DetalhamentoTabelaBancoSemente";
 import HeaderDetalhamento from "@/components/HeaderDetalhamento";
 
