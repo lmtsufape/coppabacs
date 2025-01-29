@@ -36,6 +36,7 @@ public class SementesRequest {
 	private List<FinalidadeRequest> finalidades;
 	private String regiaoAdaptacaoCultivo;
 	private CulturaRequest cultura;
+	private List<String> imagens;
 
 	@Valid
 	private ResponsavelTecnicoRequest responsavelTecnico;
