@@ -11,8 +11,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
-
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor 
@@ -23,12 +21,13 @@ public  class DoacaoUsuario  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
 	private long id;
-	private LocalDate dataDoacao;
+	private LocalDate data;
 	private String descricao;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@ToString.Exclude
 	private Agricultor agricultor;
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "banco_sementes_id")
 	@ToString.Exclude
 	private BancoSementes bancoSementes;
 	@OneToMany(cascade = CascadeType.ALL,

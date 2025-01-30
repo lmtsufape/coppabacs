@@ -11,14 +11,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
-
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public  class TransacaoGenerica  {
+public class TransacaoGenerica {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
@@ -35,9 +36,7 @@ public  class TransacaoGenerica  {
 	@ToString.Exclude
 	private TabelaBancoSementes tabelaBancoSementes;
 
-
-	@OneToMany(cascade = CascadeType.ALL,
-			orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
 	private List<Item> itens;
 

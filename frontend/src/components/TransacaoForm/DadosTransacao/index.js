@@ -2,12 +2,11 @@
 
 import { useEffect, useState } from "react";
 import styles from "./sementes.module.scss";
-import { getAllSementes, getAllAgricultores } from "@/api/sementes/getAllSementes";
 import { useMutation } from "react-query";
-import { getSementesBanco } from "@/api/sementes/getSementeBanco";
 import { getAllAgricultoresBanco } from "@/api/bancoSementes/getAgricultoresBanco";
 import { getStorageItem } from "@/utils/localStore";
 import { getCoordenadorCpf } from "@/api/usuarios/coordenador/getCoordenadorCpf";
+import { getTabelaBancoSementeByBanco } from "@/api/sementes/tabelaBancoSementes/getTabelaBancoSementeByBanco";
 
 export default function DadosTransacao({ formik, hrefAnterior }) {
     const [coordenadorCpf, setCoordenadorCpf] = useState(getStorageItem("userLogin"));
@@ -37,10 +36,10 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
 
     const { mutate: mutateSementes } = useMutation(
         async () => {
-            return getSementesBanco(Number(coordenador.bancoSementeId));
+            return getTabelaBancoSementeByBanco(Number(coordenador.bancoSementeId)) ;
         }, {
         onSuccess: (res) => {
-            setSementes(res.data);
+            setSementes(res.data.sort());
         },
         onError: (error) => {
             console.log("Erro ao recuperar as informações das sementes do banco", error);
@@ -69,12 +68,10 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
 
     const handleSelectSementeChange = (index, value) => {
         const sementeSelecionada = sementes.find(s => s.id === Number(value));
-        formik.setFieldValue(`itens[${index}].sementesId`, Number(value));
-        // Suponha que cada semente tenha um campo 'tabelaBancoSementesId' que precisa ser definido
+        formik.setFieldValue(`itens[${index}].tabelaBancoSementesId`, Number(value));
         if (sementeSelecionada) {
             formik.setFieldValue(`itens[${index}].tabelaBancoSementesId`, sementeSelecionada.tabelaBancoSementes[0].id);
         }
-
     };
 
     return (
@@ -109,15 +106,15 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
                     <div>
                         <label>Semente<span>*</span></label>
                         <select
-                            name={`itens[${index}].sementesId`}
+                            name={`itens[${index}].tabelaBancoSementesId`}
                             onChange={(e) => handleSelectSementeChange(index, e.target.value)}
-                            value={item.sementesId}
+                            value={item.tabelaBancoSementesId}
                             className={styles.container__ContainerForm_form_input}
                         >
                             <option value="">Selecione uma semente</option>
                             {sementes.map((semente) => (
                                 <option key={semente.id} value={semente.id}>
-                                    {semente.nome}
+                                    {semente.semente.nome} - {semente.safra} - {semente.peso}Kg
                                 </option>
                             ))}
                         </select>
@@ -141,29 +138,14 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
                     Adicionar mais sementes
                 </button>
             </div>
-            {hrefAnterior === "/doacoes" ? (
-                <>
-                    <label>Data da Doação<span>*</span> </label>
-                    <input
-                        type="date"
-                        name="dataDoacao"
-                        onChange={formik.handleChange}
-                        value={formik.values.dataDoacao}
-                        className={styles.container__ContainerForm_form_input}
-                    />
-                </>
-            ) : (
-                <>
-                    <label>Data da retirada <span>*</span> </label>
-                    <input
-                        type="date"
-                        name="dataRetirada"
-                        onChange={formik.handleChange}
-                        value={formik.values.dataRetirada}
-                        className={styles.container__ContainerForm_form_input}
-                    />
-                </>
-            )}
+            <label>Data da {hrefAnterior === "/doacoes" ? "Doção": "Retirada"} <span>*</span> </label>
+            <input
+                type="date"
+                name="data"
+                onChange={formik.handleChange}
+                value={formik.values.data}
+                className={styles.container__ContainerForm_form_input}
+            />
 
             <label>Descrição <span>*</span> </label>
             <textarea

@@ -11,13 +11,11 @@ import { Search } from "../searchSemente";
 import { getStorageItem } from "@/utils/localStore";
 import { useSelector } from "react-redux";
 import { getCoordenadorCpf } from "@/api/usuarios/coordenador/getCoordenadorCpf";
-import { getAgricultorCpf } from "@/api/usuarios/agricultor/getAgricultorCpf";
 import DetalhamentoSementes from "../DetalhamentoSementes";
 import DetalhamentoTabelaBancoSemente from "../DetalhamentoTabelaBancoSemente";
 import { getTabelaBancoSementeByBanco } from "@/api/sementes/tabelaBancoSementes/getTabelaBancoSementeByBanco";
 import TableBancoSemente from "./TableBancoSemente";
 import TableSementes from "./TableSementes";
-import { getUsuarioCpf } from "@/api/usuarios/getUsuarioCpf";
 import { getAgricultorCpf } from "@/api/usuarios/agricultor/getAgricultorCpf";
 
 export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior }) {
@@ -62,7 +60,6 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior }
   )
 
 }
-
 
 const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   const [sementes, setSementes] = useState([]);
@@ -160,8 +157,6 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
     </>
   )
 }
-
-
 
 const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior}) => {
   const [coordenadorCpf, setCoordenadorCpf] = useState(getStorageItem("userLogin"));
