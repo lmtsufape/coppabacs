@@ -1,18 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "./sementes.module.scss";
-import { getAllSementes, getAllAgricultores } from "@/api/sementes/getAllSementes";
+import styles from "./dadosTransacao.module.scss";
 import { useMutation } from "react-query";
-import { getSementesBanco } from "@/api/sementes/getSementeBanco";
 import { getAllAgricultoresBanco } from "@/api/bancoSementes/getAgricultoresBanco";
 import { getStorageItem } from "@/utils/localStore";
 import { getCoordenadorCpf } from "@/api/usuarios/coordenador/getCoordenadorCpf";
+import { getTabelaBancoSementeByBanco } from "@/api/sementes/tabelaBancoSementes/getTabelaBancoSementeByBanco";
 
-export default function DadosTransacao({ formik, hrefAtual }) {
+export default function DadosTransacao({ formik, hrefAtual, transacao }) {
     const [coordenadorCpf, setCoordenadorCpf] = useState(getStorageItem("userLogin"));
     const [coordenador, setCoordenador] = useState([]);
-
     const [sementes, setSementes] = useState([]);
     const [agricultores, setAgricultores] = useState([]);
     const [filtroAgricultor, setFiltroAgricultor] = useState('');
@@ -37,7 +35,7 @@ export default function DadosTransacao({ formik, hrefAtual }) {
 
     const { mutate: mutateSementes } = useMutation(
         async () => {
-            return getSementesBanco(Number(coordenador.bancoSementeId));
+            return getTabelaBancoSementeByBanco(Number(coordenador.bancoSementeId));
         }, {
         onSuccess: (res) => {
             setSementes(res.data);
@@ -59,23 +57,6 @@ export default function DadosTransacao({ formik, hrefAtual }) {
         }
     });
 
-    const handleAgricultorFilterChange = (e) => {
-        setFiltroAgricultor(e.target.value.toLowerCase());
-    };
-
-    const filteredAgricultores = agricultores.filter(agricultor =>
-        agricultor.nome.toLowerCase().includes(filtroAgricultor)
-    );
-
-    const handleSelectSementeChange = (index, value) => {
-        const sementeSelecionada = sementes.find(s => s.id === Number(value));
-        formik.setFieldValue(`itens[${index}].sementesId`, Number(value));
-        // Suponha que cada semente tenha um campo 'tabelaBancoSementesId' que precisa ser definido
-        if (sementeSelecionada) {
-            formik.setFieldValue(`itens[${index}].tabelaBancoSementesId`, sementeSelecionada.tabelaBancoSementes[0].id);
-        }
-
-    };
     return (
         <div>
             <div className={styles.container__ContainerForm_form}>
@@ -84,7 +65,7 @@ export default function DadosTransacao({ formik, hrefAtual }) {
                     <input
                         name="agricultorId"
                         onChange={formik.handleChange}
-                        placeholder={formik.values.agricultorId.nome}
+                        placeholder={transacao? transacao.agricultor.nome: formik.values.agricultorId.nome}
                         className={styles.container__ContainerForm_form_input}
                         disabled
                     />
@@ -96,13 +77,10 @@ export default function DadosTransacao({ formik, hrefAtual }) {
                             <label>Semente</label>
                             <input
                                 name={`itens[${index}].sementesId`}
-                                onChange={(e) => handleSelectSementeChange(index, e.target.value)}
-                                placeholder={item.sementes.nome}
+                                placeholder={item.tabelaBancoSementes.semente.nome + " - " + item.tabelaBancoSementes.safra}
                                 className={styles.container__ContainerForm_form_input}
                                 disabled
                             />
-
-
                         </div>
                         <div>
                             <label>Peso (Kg)</label>
@@ -118,10 +96,8 @@ export default function DadosTransacao({ formik, hrefAtual }) {
 
                     </div>
                 ))}
-
-
                 <div>
-                    {hrefAtual === "/doacoes" ? <label>Data Doação</label>:<label>Data Retirada</label>}
+                    <label>Data da {hrefAtual === "Doações" ? "Doação" : "Retirada"}</label>
                     <input
                         name="dataRetirada"
                         onChange={formik.handleChange}
@@ -131,6 +107,7 @@ export default function DadosTransacao({ formik, hrefAtual }) {
                     />
                 </div>
                 <div>
+                    <br/>
                     <label>Descrição</label>
                     <textarea
                         type="text"

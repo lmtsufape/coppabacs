@@ -53,24 +53,7 @@ const TransacaoForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
 
 
 
-  const validateSchema = Yup.object().shape({
-    nome: Yup.string()
-      .min(5, "O nome deve ter no mínimo 5 caracteres")
-      .required('Required'),
-    senha: Yup.string()
-      .min(8, "A senha deve ter no mínimo 8 caracteres")
-      .required('Required'),
-    confirmarSenha: Yup.string()
-      .min(8, "As senhas devem ser iguais")
-      .oneOf([Yup.ref('senha'), null], 'As senhas não são iguais'), // Utilize oneOf para comparar as senhas
-    contato: Yup.string()
-      .min(11, "O contato deve ter no mínimo 11 caracteres")
-      .required('Required'),
-    dataNascimento: Yup.date()
-      .max(new Date(), "A data de nascimento não pode ser maior que a data atual")
-      .min(new Date(1, 1, 1900), "A data de nascimento não pode ser menor que 01/01/1900")
-      .required('Required'),
-  })
+  const validateSchema = Yup.object().shape({})
 
   const mutationDoacao = useMutation(newDoacao => postDoacao(newDoacao), {
     onSuccess: () => {

@@ -16,7 +16,9 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @Entity
@@ -25,6 +27,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
+@Getter
+@Setter
 public class BancoSementes {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,14 +55,6 @@ public class BancoSementes {
 	@OneToMany
 	@JoinColumn(name = "banco_sementes_id")
 	@ToString.Exclude
-	private List<DoacaoUsuario> doacaoUsuario;
-	@OneToMany
-	@JoinColumn(name = "banco_sementes_id")
-	@ToString.Exclude
-	private List<RetiradaUsuario> retiradaUsuario;
-	@OneToMany
-	@JoinColumn(name = "banco_sementes_id")
-	@ToString.Exclude
 	private List<TransacaoGenerica> transacaoGenerica;
 
 	public void adicionarGerente(Gerente gerente) {
@@ -68,157 +64,7 @@ public class BancoSementes {
 		this.gerentes.add(gerente);
 	}
 
-
-
-
-
-
-	public void addDoacaoUsuario(DoacaoUsuario doacaoUsuario){
-		this.doacaoUsuario.add(doacaoUsuario);
-	}
-
-	public void addRetiradaUsuario(RetiradaUsuario retiradaUsuario){
-		this.retiradaUsuario.add(retiradaUsuario);
-	}
-
-	public void addTransacaoGenerica(TransacaoGenerica transacaoGenerica){
+	public void addTransacaoGenerica(TransacaoGenerica transacaoGenerica) {
 		this.transacaoGenerica.add(transacaoGenerica);
-	}
-
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getComunidade() {
-		return comunidade;
-	}
-
-	public void setComunidade(String comunidade) {
-		this.comunidade = comunidade;
-	}
-
-	public String getAnoFundacao() {
-		return anoFundacao;
-	}
-
-	public void setAnoFundacao(String anoFundacao) {
-		this.anoFundacao = anoFundacao;
-	}
-
-	public String getHistoriaBanco() {
-		return historiaBanco;
-	}
-
-	public void setHistoriaBanco(String historiaBanco) {
-		this.historiaBanco = historiaBanco;
-	}
-
-	public String getVariedadesTrabalhadas() {
-		return variedadesTrabalhadas;
-	}
-
-	public void setVariedadesTrabalhadas(String variedadesTrabalhadas) {
-		this.variedadesTrabalhadas = variedadesTrabalhadas;
-	}
-
-	public List<Gerente> getGerentes() {
-		return gerentes;
-	}
-
-	public void setGerentes(List<Gerente> gerentes) {
-		this.gerentes = gerentes;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
-	public ObjetosBancoSementes getObjetosBancoSementes() {
-		return objetosBancoSementes;
-	}
-
-	public void setObjetosBancoSementes(ObjetosBancoSementes objetosBancoSementes) {
-		this.objetosBancoSementes = objetosBancoSementes;
-	}
-
-	public List<DoacaoUsuario> getDoacaoUsuario() {
-		return doacaoUsuario;
-	}
-
-	public void setDoacaoUsuario(List<DoacaoUsuario> doacaoUsuario) {
-		this.doacaoUsuario = doacaoUsuario;
-	}
-
-	public List<RetiradaUsuario> getRetiradaUsuario() {
-		return retiradaUsuario;
-	}
-
-	public void setRetiradaUsuario(List<RetiradaUsuario> retiradaUsuario) {
-		this.retiradaUsuario = retiradaUsuario;
-	}
-
-	public List<TransacaoGenerica> getTransacaoGenerica() {
-		return transacaoGenerica;
-	}
-
-	public void setTransacaoGenerica(List<TransacaoGenerica> transacaoGenerica) {
-		this.transacaoGenerica = transacaoGenerica;
-	}
-
-	public List<Agricultor> getAgricultores() {
-		return agricultores;
-	}
-
-	public void setAgricultores(List<Agricultor> agricultores) {
-		this.agricultores = agricultores;
-	}
-
-	public List<String> getImagens() {
-		return imagens;
-	}
-
-	public void setImagens(List<String> imagens) {
-		this.imagens = imagens;
-	}
-
-	public boolean isAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
-
-	public String getResponsavel() {
-		return responsavel;
-	}
-
-	public void setResponsavel(String responsavel) {
-		this.responsavel = responsavel;
-	}
-
-	public String getContato() {
-		return contato;
-	}
-
-	public void setContato(String contato) {
-		this.contato = contato;
 	}
 }

@@ -8,6 +8,7 @@ export default function doacoesPage() {
         diretorioAnterior="Home /"
         diretorioAtual="Doações"
         hrefAnterior="/"
+        tipoTransacao={"Doacao"}
       />
     </div>
   )
