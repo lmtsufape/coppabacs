@@ -18,7 +18,6 @@ import { getTabelaBancoSementeByBanco } from "@/api/sementes/tabelaBancoSementes
 import TableBancoSemente from "./TableBancoSemente";
 import TableSementes from "./TableSementes";
 import { getUsuarioCpf } from "@/api/usuarios/getUsuarioCpf";
-import { getAgricultorCpf } from "@/api/usuarios/agricultor/getAgricultorCpf";
 
 export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior }) {
   const [role, setRole] = useState(getStorageItem("userRole"));

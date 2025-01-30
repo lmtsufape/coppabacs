@@ -182,8 +182,8 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
                                 <DadosCaracteristicasAgronomicas formik={formik} editar={editar} />
                                 <DadosToleranciaAdversidades formik={formik} editar={editar} />
                                 <InformacoesColeta formik={formik} editar={editar} />
-                                {//<ImagensSementes/>
-                                }
+                                <ImagensSementes formik={formik} editar={editar} />
+                                
 
                             </Form>
                         )
