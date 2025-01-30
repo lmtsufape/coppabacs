@@ -2,11 +2,8 @@
 
 import Image from "next/image";
 import style from "./table.module.scss";
-import Link from "next/link";
 import { deleteBanco } from "@/api/bancoSementes/deleteBanco";
 import ExcluirButton from "@/components/ExcluirButton";
-import { useState } from "react";
-import DetalhamentoBanco from "@/components/DetalhamentoBancoSemente";
 
 const Table = ({ usuario, listBancos, onSelectBanco, setBancos, table1, table2, table3 }) => {
 

@@ -9,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -26,11 +25,10 @@ import br.edu.ufape.lmts.sementes.controller.dto.response.DoacaoUsuarioResponse;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.DoacaoUsuario;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
-import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 
 
- @RestController
+@RestController
 @RequestMapping("${prefix.url}")
 public class DoacaoUsuarioController {
 	@Autowired
@@ -46,12 +44,20 @@ public class DoacaoUsuarioController {
 			.toList();
 	}
 	
+	@GetMapping("doacaoUsuario/banco/{bancoId}")
+	public List<DoacaoUsuarioResponse> getDoacaoUsuarioByBancoSementesId(@PathVariable Long bancoId) {
+		return facade.findDoacaoUsuarioByBancoSementesId(bancoId)
+			.stream()
+			.map(DoacaoUsuarioResponse::new)
+			.toList();
+	}
+	
 	@GetMapping(value = "doacaoUsuario/page")
 	public Page<DoacaoUsuarioResponse> getPageDoacaoUsuario(
-			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
-			@RequestParam(value = "direction", defaultValue = "DESC") String direction) {
+			@RequestParam(defaultValue = "0") Integer page,
+			@RequestParam(defaultValue = "24") Integer linesPerPage,
+			@RequestParam(defaultValue = "id") String orderBy,
+			@RequestParam(defaultValue = "DESC") String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		Page<DoacaoUsuario> list = facade.findPageDoacaoUsuario(pageRequest);
 		return list.map(DoacaoUsuarioResponse::new);
@@ -59,7 +65,9 @@ public class DoacaoUsuarioController {
 	
 	@PostMapping("doacaoUsuario")
 	public DoacaoUsuarioResponse createDoacaoUsuario(@Valid @RequestBody DoacaoUsuarioRequest newObj) throws Exception {
-		return new DoacaoUsuarioResponse(facade.saveDoacaoUsuario(newObj.convertToEntity()));
+		DoacaoUsuario newInstance = newObj.convertToEntity();
+		newInstance.setId(0);
+		return new DoacaoUsuarioResponse(facade.saveDoacaoUsuario(newInstance));
 	}
 	
 	@GetMapping("doacaoUsuario/{id}")

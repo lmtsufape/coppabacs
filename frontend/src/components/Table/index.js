@@ -1,7 +1,7 @@
 "use client"
 
 import styles from "./table.module.scss";
-import Thead from "@/components/Thead";
+import Thead from "@/components/Table/Thead";
 
 export default function Table({ headers, contentBigger, smallContent, haveActions }) {
   return (

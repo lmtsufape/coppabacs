@@ -1,6 +1,5 @@
 package br.edu.ufape.lmts.sementes.controller.dto.response;
 
-import br.edu.ufape.lmts.sementes.controller.dto.request.TabelaBancoSementesRequest;
 import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
@@ -15,10 +14,7 @@ import lombok.Setter;
 public  class ItemResponse  {
 	private Long id;
 	private Double peso;
-	private SementesResponse sementes;
 	private TabelaBancoSementesResponse tabelaBancoSementes;
-
-
 
 	public ItemResponse(Item obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");

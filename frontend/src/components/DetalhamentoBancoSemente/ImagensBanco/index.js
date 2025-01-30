@@ -56,7 +56,6 @@ export default function ImagensBanco({ formik, editar, setImagensArquivos }) {
   ];
 
   useEffect(() => {
-    console.log(formik.values)
     const fetchImages = async () => {
       if (formik.values?.imagens && formik.values.imagens.length > 0) {
         const urls = await Promise.all(formik.values.imagens.map(async (imagem) => {
