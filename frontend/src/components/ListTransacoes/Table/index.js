@@ -3,7 +3,6 @@ import Table from "@/components/Table";
 
 
 export default function tableLayout({ listTrasacoes, onSelectTransacao }) {
-  console.log(listTrasacoes)
   const formatDate = (date) => {
     date = new Date(date);
     return `${date.getUTCDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;

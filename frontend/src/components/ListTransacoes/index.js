@@ -22,16 +22,23 @@ export default function ListTransacoes({ diretorioAnterior, diretorioAtual, href
   const [transacoes, setTransacoes] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTransacao, setSelectedTransacao] = useState(null);
-  const[idBanco, setIdBanco] = useState(bancoId);
+  const[idBanco, setIdBanco] = useState("");
 
   let userRole = getStorageItem("userRole");
   userRole = userRole ? userRole.replace("ROLE_", "") : null;
   const [role, setRole] = useState(userRole);
   
+
+  const filteredTransacoes = transacoes.filter((transacao) =>
+    transacao?.agricultor?.nome?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   const mutationCoordenadorBancoId = useMutation(userCpf => getCoordenadorCpf(userCpf), {
     onSuccess: (res) => {
       setIdBanco(res.data.bancoSementeId);
-      mutateTrasacoes.mutate();
+      if (!(idBanco == "0" || idBanco == 0 || idBanco == null)) {
+        mutateTrasacoes.mutate();
+      }
     },
     onError: (error) => {
       console.error('Erro ao recuperar as informações do coordenador:', error);
@@ -43,9 +50,10 @@ export default function ListTransacoes({ diretorioAnterior, diretorioAtual, href
       if(role == "GERENTE"){
         mutationCoordenadorBancoId.mutate(userCpf);}
       else {
-        if (idBanco == 0 || idBanco == null) {
+        setIdBanco(bancoId);
+        if (bancoId == "0" || bancoId == 0 || bancoId == null) {
           alert("Banco de sementes não identificado!")
-          redirect(hrefAnterior);
+          hrefAnterior();
         } else
           mutateTrasacoes.mutate();
       }
@@ -113,10 +121,10 @@ export default function ListTransacoes({ diretorioAnterior, diretorioAtual, href
       }
       
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      {transacoes && (
+      {filteredTransacoes && (
         <Table
           diretorioAtual={diretorioAtual}
-          listTrasacoes={transacoes}
+          listTrasacoes={filteredTransacoes}
           onSelectTransacao={handleSelectTransacao}
         />
       )}
