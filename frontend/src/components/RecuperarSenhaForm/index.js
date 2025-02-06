@@ -17,7 +17,7 @@ const RecuperarSenhaForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior })
 
     const initialValues = token
         ? { senha: "", confirmarSenha: "" }
-        : { cpf: "", pergunta: "", resposta: "" };
+        : { cpf: "", pergunta:{pergunta: "", resposta: "" }};
 
     const validateSchema = token
         ? Yup.object().shape({
@@ -138,7 +138,7 @@ const RecuperarSenhaForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior })
                                         name="pergunta"
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        value={formik.values.pergunta}
+                                        value={formik.values.pergunta.pergunta}
                                         required
                                     >
                                         <option value="">Selecione...</option>
@@ -161,7 +161,7 @@ const RecuperarSenhaForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior })
                                         placeholder="Digite sua resposta"
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        value={formik.values.resposta}
+                                        value={formik.values.pergunta.resposta}
                                         required
                                     />
                                     {formik.touched.resposta && formik.errors.resposta ? (

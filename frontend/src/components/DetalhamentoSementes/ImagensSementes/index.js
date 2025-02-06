@@ -15,8 +15,7 @@ export default function ImagensSementes({ formik, editar }) {
     const fetchImages = async () => {
       try {
         let imageNames = formik.values.imagens || [];
-        
-        // Verifica se formik.values.imagens é uma string e converte para lista
+      
         if (typeof imageNames === 'string') {
           imageNames = imageNames.replace(/[{}]/g, '').split(',');
         }

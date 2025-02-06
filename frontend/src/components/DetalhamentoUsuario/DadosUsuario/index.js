@@ -277,7 +277,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 placeholder={formik.values.dataNascimento}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.dataNascimento}
+                value={formik.values.dataNascimento} 
                 required
               />
               {formik.touched.dataNascimento && formik.errors.dataNascimento ? (

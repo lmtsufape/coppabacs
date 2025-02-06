@@ -114,22 +114,22 @@ export default function DadosBanco({ formik, editar }) {
               ) : null}
             </div>
             <div>
-
-              <label htmlFor="contato">Telefone</label>
+              <label htmlFor="anoFundacao">Data da Fundação<span>*</span></label>
               <input
                 className={style.container__ContainerForm_form_halfContainer_input}
-                id="contato"
-                name="contato"
-                placeholder="Insira seu contato"
-                onChange={(e) => {
-                  formik.setFieldValue("contato", telefoneMask(e.target.value));
-                }}
+                id="anoFundacao"
+                name="anoFundacao"
+                type="date"
+                format="dd/MM/yyyy"
+                placeholder="Insira a data de fundação"
+                onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.contato}
-              />
-              {formik.touched.contato && formik.errors.contato ? (
-                <span className={style.form__error}>{formik.errors.contato}</span>
+                value={formik.values.anoFundacao}
+                required />
+              {formik.touched.anoFundacao && formik.errors.anoFundacao ? (
+                <span className={style.form__error}>{formik.errors.anoFundacao}</span>
               ) : null}
+
             </div>
           </div>
 

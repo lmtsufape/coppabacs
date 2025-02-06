@@ -33,13 +33,13 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
     return dataObj.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
   };
 
-  function bancoAtual(bancos, bancoId) {
+  function bancoAtual(bancos, bancoSementeId) {
     // Encontra o banco com base no ID fornecido
-    const banco = bancos.find(b => b.bancoId === bancoId);
+    const banco = bancos.find(b => b.bancoSementeId === bancoSementeId);
     // Retorna o nome do banco se encontrado, caso contrário, retorna undefined ou uma string vazia
     return banco ? banco.name : 'Banco não encontrado';
   }
-  const nomeDoBanco = bancoAtual(bancos, formik.values.bancoId);
+  const nomeDoBanco = bancoAtual(bancos, formik.values.bancoSementeId);
   return (
     <>
       <div className={style.container__header_title}>
@@ -259,15 +259,15 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             {hrefAnterior !== "/funcionarios" && (
 
               <div>
-                <label htmlFor="bancoId">Banco sementes </label>
+                <label htmlFor="bancoSementeId">Banco sementes </label>
                 <select
                   className={style.container__ContainerForm_form_halfContainer_select}
-                  id="bancoId"
-                  name="bancoId"
+                  id="bancoSementeId"
+                  name="bancoSementeId"
                   placeholder="Insira o banco de sementes"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.bancoId}
+                  value={formik.values.bancoSementeId}
                   required
                 >
                   <option value="" >Selecione...</option>
@@ -278,8 +278,8 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                     )
                   })}
                 </select>
-                {formik.touched.bancoId && formik.errors.bancoId ? (
-                  <span className={style.form__error}>{formik.errors.bancoId}</span>
+                {formik.touched.bancoSementeId && formik.errors.bancoSementeId ? (
+                  <span className={style.form__error}>{formik.errors.bancoSementeId}</span>
                 ) : null}
               </div>
             )}
