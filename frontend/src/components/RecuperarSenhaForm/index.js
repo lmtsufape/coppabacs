@@ -17,7 +17,7 @@ const RecuperarSenhaForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior })
 
     const initialValues = token
         ? { senha: "", confirmarSenha: "" }
-        : { cpf: "", pergunta:{pergunta: "", resposta: "" }};
+        : { cpf: "", pergunta: { pergunta: "", resposta: "" } };
 
     const validateSchema = token
         ? Yup.object().shape({
