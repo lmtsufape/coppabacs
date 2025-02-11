@@ -51,6 +51,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
   };
 
   const nomeBanco = bancoAtual(bancos, formik.values.bancoId);
+  const nomeBancoCoordenador = bancoAtual(bancos, formik.values.bancoSementeId);
 
   return (
     <>
@@ -178,7 +179,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 disabled
               />
             </div>
-            {hrefAnterior !== "/funcionarios" && (
+            {hrefAnterior !== "/coordenadores" && (
               <div>
                 <label htmlFor="bancoSementes">Banco de Sementes</label>
                 <input
@@ -189,6 +190,21 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={nomeBanco}
+                  disabled
+                />
+              </div>
+            )}
+            {hrefAnterior == "/coordenadores" && (
+              <div>
+                <label htmlFor="bancoSementes">Banco de Sementes</label>
+                <input
+                  id="bancoSementes"
+                  className={style.container__ContainerForm_form_input}
+                  name="BancoSementes"
+                  placeholder="Não informado"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={nomeBancoCoordenador}
                   disabled
                 />
               </div>
