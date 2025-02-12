@@ -90,7 +90,7 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
                     name="agricultorId"
                     onChange={formik.handleChange}
                     value={formik.values.agricultorId}
-                    className={styles.container__ContainerForm_form_input}
+                    className={styles.container__ContainerForm_form_select}
                 >
                     <option value="">Selecione um Agricultor</option>
                     {filteredAgricultores.map((agricultor) => (
@@ -125,7 +125,12 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
                             type="number"
                             name={`itens[${index}].peso`}
                             placeholder="Peso"
-                            onChange={formik.handleChange}
+                            onChange={(e) => {
+                                const value = e.target.value;
+                                if (value >= 0 || value === '') {
+                                    formik.handleChange(e);
+                                }
+                            }}
                             value={item.peso}
                             className={styles.container__ContainerForm_form_input}
                         />
@@ -146,7 +151,6 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
                 value={formik.values.data}
                 className={styles.container__ContainerForm_form_input}
             />
-
             <label>Descrição <span>*</span> </label>
             <textarea
                 type="text"

@@ -201,6 +201,7 @@ public class UserInitializer implements CommandLineRunner {
 						"Marrom Escuro", "Verde Claro", "Branca", "Erecto", new EmpalhamentoRequest("Parcial")),
 				List.of(new FinalidadeRequest("Produção de café gourmet")), "Sul de Minas Gerais",
 				new CulturaRequest("Café", "Coffea"),
+				null,
 				new ResponsavelTecnicoRequest("João Silva", "123.456.789-00", "002134", "MG")));
 		sementes.add(new SementesRequest(0, "Glycine max", "Soja",
 				"Principal cultura de leguminosa para produção de óleo e proteína vegetal, com ampla adaptação climática.",
@@ -214,6 +215,7 @@ public class UserInitializer implements CommandLineRunner {
 						"Verde Escuro", "Verde", "Amarela", "Prostrado", new EmpalhamentoRequest("Total")),
 				List.of(new FinalidadeRequest("Produção de óleo e proteína")), "Paraná",
 				new CulturaRequest("Soja", "Glycine max"),
+				null,
 				new ResponsavelTecnicoRequest("Maria Pereira", "987.654.321-00", "001234", "PR")));
 		sementes.add(new SementesRequest(0, "Zea mays", "Milho",
 				"Cultura de grande importância econômica para cereais e produção de etanol.",
@@ -226,6 +228,7 @@ public class UserInitializer implements CommandLineRunner {
 						"Marrom Claro", "Amarelo Claro", "Laranja", "Vertical", new EmpalhamentoRequest("Moderado")),
 				List.of(new FinalidadeRequest("Produção de grãos e etanol")), "São Paulo",
 				new CulturaRequest("Milho", "Zea mays"),
+				null,
 				new ResponsavelTecnicoRequest("Carlos Neto", "222.333.444-55", "005678", "SP")));
 
 		return sementes;

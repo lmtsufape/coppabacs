@@ -1,0 +1,168 @@
+.container {
+  display: flex;
+
+  &_imagensSementes {
+    display: flex;
+    gap: 0.5em;
+    flex-wrap: wrap;
+
+    &_image {
+      position: relative;
+      display: flex;
+      cursor: pointer;
+
+      img {
+        max-width: 200px;
+        height: auto;
+        border-radius: 5px;
+      }
+    }
+
+    &_modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &_content {
+        position: relative;
+        width: 80%;
+        height: 80%;
+      }
+    }
+  }
+
+
+
+  &_header {
+    &_title {
+      color: #245501;
+      font-size: 1em;
+      font-weight: bolder;
+      margin: 1em 1em 1em 0;
+    }
+  }
+
+  &_upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: stretch;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #F5F5F5;
+    padding: 1em;
+    gap: 1em;
+    border-radius: 2em;
+    border: 2px solid #DADADA;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1em;
+    color: #A7A7A7;
+
+    &:hover {
+      background-color: #E0E0E0;
+    }
+
+    span {
+      color: #245501;
+      font-weight: bold;
+    }
+
+    input {
+      display: none;
+    }
+
+    img {
+      margin-bottom: 0.5em;
+    }
+
+    &_button {
+      width: 10em;
+
+      padding: 0.7em 1em;
+      margin: 1em 0 -1em 0;
+      font-size: 1em;
+      font-weight: normal;
+      color: #FFF;
+      background-color: #245501;
+
+      border: 1px solid rgba(0, 0, 0, 0.10);
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    &_preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1em;
+      margin-top: 1em;
+
+      &_image_container {
+        position: relative;
+
+        img {
+          max-width: 200px;
+          height: auto;
+          border-radius: 5px;
+        }
+
+        &_remove_button {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          background: rgba(255, 0, 0, 0.7);
+          border: none;
+          border-radius: 50%;
+          color: white;
+          width: 24px;
+          height: 24px;
+          cursor: pointer;
+          font-size: 1em;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          &:hover {
+            background: rgba(255, 0, 0, 0.9);
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+.deletarImg {
+  position: absolute;
+  top: 0.3em;
+  right: 0.3em;
+  font-size: 1.3em;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    padding: 0.5em 0.8em;
+    text-decoration: none;
+    border: #DE8074 1px solid;
+    border-radius: 1em;
+    background-color: #FFF1EF;
+  }
+}
