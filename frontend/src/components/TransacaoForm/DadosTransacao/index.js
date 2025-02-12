@@ -125,7 +125,12 @@ export default function DadosTransacao({ formik, hrefAnterior }) {
                             type="number"
                             name={`itens[${index}].peso`}
                             placeholder="Peso"
-                            onChange={formik.handleChange}
+                            onChange={(e) => {
+                                const value = e.target.value;
+                                if (value >= 0 || value === '') {
+                                    formik.handleChange(e);
+                                }
+                            }}
                             value={item.peso}
                             className={styles.container__ContainerForm_form_input}
                         />

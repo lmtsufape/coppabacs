@@ -112,9 +112,14 @@ export default function SelecionarSementesBanco({ formik }) {
                                 <label>Peso (Kg)<span>*</span></label>
                                 <input
                                     className={styles.container__ContainerForm_form_halfContainer_input}
-                                    type="text"
+                                    type="number"
                                     placeholder="Peso"
-                                    onChange={(e) => handleSelectChange(index, 'peso', e.target.value)}
+                                    onChange={(e) => {
+                                        const value = e.target.value;
+                                        if (value >= 0 || value === '') {
+                                            handleSelectChange(index, 'peso', value);
+                                        }
+                                    }}
                                     value={seletor.peso || ''}
                                 />
                             </div>
