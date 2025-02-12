@@ -231,7 +231,7 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
               <DadosObjetosBanco formik={formik} editar={editar} />
               <ImagensBanco formik={formik} editar={editar} setImagensArquivos={setImagensArquivos} />
               {
-                (usuario === "coordenador" || usuario === "admin") && (
+                (usuario === "coppabacs" || usuario === "admin") && (
                   <div>
                     {editar ? (
                       // Bloco quando 'editar' é true
