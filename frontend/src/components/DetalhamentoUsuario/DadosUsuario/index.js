@@ -179,7 +179,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 disabled
               />
             </div>
-            {hrefAnterior !== "/coordenadores" && (
+            {hrefAnterior == "/agricultores" &&(
               <div>
                 <label htmlFor="bancoSementes">Banco de Sementes</label>
                 <input
