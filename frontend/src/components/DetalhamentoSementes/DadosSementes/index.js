@@ -219,7 +219,7 @@ export default function DadosSementes({ formik, editar }) {
                                 onBlur={formik.handleBlur}
                                 value={formik.values.cultura.cultura}
                                 required />
-                            {formik.touched.cultura && formik.errors.cultura.cultura ? (
+                            {formik.touched.cultura && formik.errors.cultura?.cultura ? (
                                 <span className={styles.form__error}>{formik.errors.cultura.cultura}</span>
                             ) : null}
                         </div>
@@ -406,7 +406,7 @@ export default function DadosSementes({ formik, editar }) {
                                             name={finalidade.name}
                                             checked={(Array.isArray(values.finalidades) && values.finalidades.includes(finalidade.name)) || (finalidade.name === 'outra' && isOutraFinalidadeSelecionada)}
                                             onChange={(e) => handleCheckboxChange(finalidade.name, e.target.checked)}
-                                            required
+                                            
                                         />
                                         {finalidade.name !== 'outra' || !isOutraFinalidadeSelecionada ? (
                                             <label htmlFor={finalidade.name}>{finalidade.label}</label>

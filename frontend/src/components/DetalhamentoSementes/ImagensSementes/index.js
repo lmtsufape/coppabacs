@@ -1,15 +1,41 @@
-"use client"
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import styles from '@/components/DetalhamentoSementes/detalhamentoSementes.module.scss';
+import styles from '@/components/DetalhamentoSementes/ImagensSementes/imagensSementes.module.scss';
 import { useMutation } from 'react-query';
 import { postArquivo } from '@/api/arquivos/postArquivo';
+import { getArquivo } from '@/api/arquivos/getArquivo';
 
 export default function ImagensSementes({ formik, editar }) {
   const [selectedImages, setSelectedImages] = useState([]);
   const [fileObjects, setFileObjects] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
+  const [storedImages, setStoredImages] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        let imageNames = formik.values.imagens || [];
+
+        if (typeof imageNames === 'string') {
+          imageNames = imageNames.replace(/[{}]/g, '').split(',');
+        }
+        if (Array.isArray(imageNames)) {
+          const imageUrls = await Promise.all(imageNames.map(async (name) => {
+            const url = await getArquivo(name.trim());
+            return url;
+          }));
+          setStoredImages(imageUrls);
+        } else {
+          console.error("formik.values.imagens não é uma lista");
+        }
+      } catch (error) {
+        console.error("Erro ao buscar imagens", error);
+      }
+    };
+
+    fetchImages();
+  }, [formik.values.imagens]);
 
   const { status, mutate } = useMutation(
     async (newImages) => {
@@ -26,19 +52,26 @@ export default function ImagensSementes({ formik, editar }) {
 
   const handleImageChange = (event) => {
     const files = event.target.files;
-    let newFileObjects = [...formik.values.imagens || []]; // Adiciona ao formik
-  
+    let newFileObjects = [];
+
     for (let i = 0; i < files.length; i++) {
-      newFileObjects.push(files[i]); 
+      newFileObjects.push(files[i]);
     }
-  
-    setSelectedImages([...selectedImages, ...Array.from(files).map(file => URL.createObjectURL(file))]);
-    setFileObjects([...fileObjects, ...newFileObjects]);
-  
-    // Armazena os arquivos no Formik
-    formik.setFieldValue("imagens", newFileObjects);
+
+    setSelectedImages(prevImages => [
+      ...prevImages,
+      ...Array.from(files).map(file => URL.createObjectURL(file))
+    ]);
+    setFileObjects(prevFileObjects => [
+      ...prevFileObjects,
+      ...newFileObjects
+    ]);
+
+    formik.setFieldValue("imagens", [
+      ...fileObjects,
+      ...newFileObjects
+    ]);
   };
-  
 
   const handleRemoveImage = (index, setFieldValue) => {
     const newSelectedImages = [...selectedImages];
@@ -57,8 +90,8 @@ export default function ImagensSementes({ formik, editar }) {
       console.log("Nenhuma imagem selecionada.");
       return;
     }
-  
-    console.log("Enviando imagens..."); // Verifica se está sendo chamado indevidamente
+
+    console.log("Enviando imagens...");
     try {
       mutate(fileObjects);
     } catch (error) {
@@ -66,48 +99,67 @@ export default function ImagensSementes({ formik, editar }) {
       setErrorMessage("Error uploading images");
     }
   };
-  
+
+  const handleImageClick = (image) => {
+    setSelectedImage(image);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedImage(null);
+  };
 
   return (
     <>
-      <div className={styles.container__header_title}>
+      <div className={styles.container_header_title}>
         <h1>Imagens da Semente</h1>
       </div>
       <div>
         {editar === false ? (
           <>
-            <div>
-<h1>Imagens da Semente</h1>
+            <div className={styles.container_imagensSementes}>
+              {storedImages.map((image, index) => (
+                <div key={index} className={styles.container_imagensSementes_image} onClick={() => handleImageClick(image)}>
+                  <Image src={image} alt={`Imagem cadastrada ${index + 1}`} width={200} height={200} />
+                </div>
+              ))}
             </div>
+            {selectedImage && (
+              <div className={styles.container_imagensSementes_modal} onClick={handleCloseModal}>
+                <div className={styles.container_imagensSementes_modal_content}>
+                  <Image src={selectedImage} alt="Imagem selecionada" layout="fill" objectFit="contain" />
+                </div>
+              </div>
+            )}
           </>
         ) : (
           <div>
-              <label className={styles.container__ContainerForm_upload_label}>
-                <Image src="/assets/IconUpload.svg" alt="Upload" width={60} height={60} />
-                <span>Envio de imagens</span>
-                <h6 className={styles.formatos_suportados}>PNG, JPG</h6>
-                <input
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  onChange={handleImageChange}
-                />
-              </label>
-              {selectedImages.length > 0 && (
-                <div className={styles.container__ContainerForm_upload_preview}>
-                  {selectedImages.map((image, index) => (
-                    <div key={index} className={styles.image_container}>
-                      <Image src={image} alt={`Pré-visualização da imagem ${index + 1}`} width={200} height={200} />
-                      <button type="button" className={styles.remove_button} onClick={() => handleRemoveImage(index, formik.setFieldValue)}>
-                        <Image src="/assets/iconLixeiraBranca.png" alt="Remover" width={24} height={24} />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
-              <button type="button" onClick={handleSubmit}>Enviar Imagens</button>
-              {errorMessage && <div className={styles.error_message}>{errorMessage}</div>}
-            </div>
+            <label className={styles.container_upload}>
+              <Image src="/assets/IconUpload.svg" alt="Upload" width={60} height={60} />
+              <span>Envio de imagens</span>
+              <h6 className={styles.formatos_suportados}>PNG, JPG</h6>
+              <input
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={handleImageChange}
+
+              />
+            </label>
+            {selectedImages.length > 0 && (
+              <div className={styles.container_upload_preview}>
+                {selectedImages.map((image, index) => (
+                  <div key={index} className={styles.container_upload_preview_image_container}>
+                    <Image src={image} alt={`Pré-visualização da imagem ${index + 1}`} width={200} height={200} />
+                    <button type="button" className={styles.container_upload_preview_image_container_remove_button} onClick={() => handleRemoveImage(index, formik.setFieldValue)}>
+                      <Image src="/assets/iconLixeiraBranca.png" alt="Remover" width={24} height={24} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+            <button className={styles.container_upload_button} type="button" onClick={handleSubmit}>Enviar imagens</button>
+            {errorMessage && <div className={styles.error_message}>{errorMessage}</div>}
+          </div>
         )}
       </div>
     </>

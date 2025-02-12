@@ -46,7 +46,7 @@ export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior,
     const [filteredPublicacoes, setFilteredPublicacoes] = useState([]);
     const [imageUrls, setImageUrls] = useState({});
     const [usuario, setUsuario] = useState([]);
-    const [selectedImage, setSelectedImage] = useState(null); // Estado para a imagem selecionada
+    const [selectedImage, setSelectedImage] = useState(null);
 
     const mutationGetFuncionario = useMutation(coppabacsCpf => getCoordenadorCpf(coppabacsCpf), {
         onSuccess: (res) => {
