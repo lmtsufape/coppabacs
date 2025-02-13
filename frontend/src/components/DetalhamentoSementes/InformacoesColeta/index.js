@@ -67,7 +67,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.regiaoColetaDados}
-                                required />
+                                 />
                             {formik.touched.regiaoColetaDados && formik.errors.regiaoColetaDados ? (
                                 <span className={styles.form__error}>{formik.errors.regiaoColetaDados}</span>
                             ) : null}
@@ -83,7 +83,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.caracteristicasPositiva}
-                        required />
+                         />
                     {formik.touched.caracteristicasPositiva && formik.errors.caracteristicasPositiva ? (
                         <span className={styles.form__error}>{formik.errors.caracteristicasPositiva}</span>
                     ) : null}
@@ -99,7 +99,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.caracteristicasNegativas}
-                        required />
+                         />
                     {formik.touched.caracteristicasNegativas && formik.errors.caracteristicasNegativas ? (
                         <span className={styles.form__error}>{formik.errors.caracteristicasNegativas}</span>
                     ) : null}
@@ -114,7 +114,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.descricao}
-                        required />
+                         />
                     {formik.touched.descricao && formik.errors.descricao ? (
                         <span className={styles.form__error}>{formik.errors.descricao}</span>
                     ) : null}

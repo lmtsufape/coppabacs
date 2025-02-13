@@ -56,7 +56,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.responsavelTecnico.nome}
-                                required />
+                                 />
                             {formik.touched.tecnico && formik.errors.responsavelTecnico.nome ? (
                                 <span className={styles.form__error}>{formik.errors.responsavelTecnico.nome}</span>
                             ) : null}

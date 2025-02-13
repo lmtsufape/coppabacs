@@ -72,7 +72,7 @@ export default function DadosBanco({ formik, editar }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.nome}
-                required
+                
               />
               {formik.touched.nome && formik.errors.nome ? (
                 <span className={style.form__error}>{formik.errors.nome}</span>
@@ -125,7 +125,7 @@ export default function DadosBanco({ formik, editar }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.anoFundacao}
-                required />
+                 />
               {formik.touched.anoFundacao && formik.errors.anoFundacao ? (
                 <span className={style.form__error}>{formik.errors.anoFundacao}</span>
               ) : null}
