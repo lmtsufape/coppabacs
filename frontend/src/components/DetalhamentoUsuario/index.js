@@ -267,6 +267,7 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, listUsuarios, 
                       ) : (
                         <button
                           onClick={() => setEditar(false)}
+                          type="button"
                           className={style.container__profile_button}
                         >
                           <span>Salvar</span>
