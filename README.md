@@ -10,7 +10,7 @@
 <h2>Visão Geral</h2>
 
 <p>O objetivo principal do projeto é o de enriquecer o conhecimento dos discentes envolvidos no projeto, 
-  além de contribuir com o processo de gestão da Cooperativa dos Pequenos Produtores Agrícolas Bancos Comunitários de Sementes (COPPABACS).</p>
+  além de contribuir com o processo de gestão da Cooperativa de Pequenos Produtores Agrícolas dos Bancos Comunitários de Sementes (COPPABACS).</p>
 
 <p>O projeto visa facilitar a gestão da cooperativa em questão dentro do cenário da agricultura familiar, enriquecendo a cultura das sementes crioulas.</p>
 
