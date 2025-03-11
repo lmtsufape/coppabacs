@@ -1,8 +1,6 @@
 package br.edu.ufape.lmts.sementes.controller.dto.request;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.hibernate.validator.constraints.br.CPF;
 import org.modelmapper.ModelMapper;

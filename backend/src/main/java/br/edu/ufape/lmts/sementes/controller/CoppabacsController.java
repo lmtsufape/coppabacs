@@ -26,6 +26,9 @@ import org.springframework.web.server.ResponseStatusException;
 import br.edu.ufape.lmts.sementes.controller.dto.request.CoppabacsRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.request.CoppabacsUpdateRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.CoppabacsResponse;
+import br.edu.ufape.lmts.sementes.controller.exceptions.ConflictingFieldsException;
+import br.edu.ufape.lmts.sementes.controller.exceptions.FieldMessage;
+import br.edu.ufape.lmts.sementes.controller.validation.ValidateUsuario;
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Coppabacs;
@@ -39,6 +42,8 @@ public class CoppabacsController {
 	private Facade facade;
 	@Autowired
 	private ModelMapper modelMapper;
+	@Autowired
+	private ValidateUsuario validateUsuario;
 
 	@GetMapping("coppabacs")
 	public List<CoppabacsResponse> getAllCoppabacs() {
@@ -89,6 +94,9 @@ public class CoppabacsController {
 
 	@PatchMapping("coppabacs/{id}")
 	public CoppabacsResponse updateCoppabacs(@PathVariable long id, @Valid @RequestBody CoppabacsUpdateRequest obj) {
+		List<FieldMessage> listErrors = validateUsuario.validateUsuarioUpdate(obj, id);
+		if (!listErrors.isEmpty())
+			throw new ConflictingFieldsException(listErrors);
 		try {
 			Coppabacs oldObject = facade.findCoppabacsById(id);
 			modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());

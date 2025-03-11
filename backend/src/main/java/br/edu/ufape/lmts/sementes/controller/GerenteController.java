@@ -27,6 +27,9 @@ import org.springframework.web.server.ResponseStatusException;
 import br.edu.ufape.lmts.sementes.controller.dto.request.GerenteRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.request.GerenteUpdateRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.GerenteResponse;
+import br.edu.ufape.lmts.sementes.controller.exceptions.ConflictingFieldsException;
+import br.edu.ufape.lmts.sementes.controller.exceptions.FieldMessage;
+import br.edu.ufape.lmts.sementes.controller.validation.ValidateUsuario;
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.BancoSementes;
@@ -43,6 +46,8 @@ public class GerenteController {
 	private Facade facade;
 	@Autowired
 	private ModelMapper modelMapper;
+	@Autowired
+	private ValidateUsuario validateUsuario;
 	
 	@GetMapping("gerente")
 	public List<GerenteResponse> getAllGerente() {
@@ -89,6 +94,9 @@ public class GerenteController {
 	
 	@PatchMapping("gerente/{id}")
 	public GerenteResponse updateGerente(@PathVariable Long id, @Valid @RequestBody GerenteUpdateRequest obj) {
+		List<FieldMessage> listErrors = validateUsuario.validateUsuarioUpdate(obj, id);
+		if (!listErrors.isEmpty())
+			throw new ConflictingFieldsException(listErrors);
 		try {
 			Gerente oldObject = facade.findGerenteById(id);
 			modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());

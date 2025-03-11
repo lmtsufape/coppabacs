@@ -25,11 +25,7 @@ public class ControllerExceptionHandler {
 		int httpStatus = HttpStatus.INTERNAL_SERVER_ERROR.value();
 		StandardError err = new StandardError(httpStatus,
 				"Erro inesperado", e.getMessage(), request.getRequestURI());
-		System.out.println(e.getMessage());
-		System.out.println(e.getCause());
-		for (StackTraceElement ste : e.getStackTrace()) {
-		    System.out.println(ste);
-		}
+		e.printStackTrace();
 		return ResponseEntity.status(httpStatus).body(err);
 	}
 	
@@ -45,7 +41,7 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(EmailExistsException.class)
 	public ResponseEntity<StandardError> EmailExistsException(EmailExistsException e,
 			HttpServletRequest request) {
-		int httpStatus = HttpStatus.BAD_REQUEST.value();
+		int httpStatus = HttpStatus.UNPROCESSABLE_ENTITY.value();
 		StandardError err = new StandardError(httpStatus,
 				"Email já cadastrado", e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(httpStatus).body(err);
@@ -56,6 +52,7 @@ public class ControllerExceptionHandler {
 		int httpStatus = HttpStatus.UNPROCESSABLE_ENTITY.value();
 		ValidationError err = new ValidationError(httpStatus,
 				"Erro de validação", "Campos não preenchidos corretamente", request.getRequestURI());
+		System.out.println(e.getBindingResult().getFieldErrors());
 		for (FieldError x : e.getBindingResult().getFieldErrors()) {
 			err.addError(x.getField(), x.getDefaultMessage());
 		}
@@ -97,6 +94,14 @@ public class ControllerExceptionHandler {
 		int httpStatus = HttpStatus.UNAUTHORIZED.value();
 		StandardError err = new StandardError(httpStatus,
 				"Não autorizado", e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(httpStatus).body(err);
+	}
+	
+	@ExceptionHandler(ConflictingFieldsException.class)
+	public ResponseEntity<StandardError> conflictingFieldsException(ConflictingFieldsException e, HttpServletRequest request) {
+		int httpStatus = HttpStatus.CONFLICT.value();
+		ValidationError err = new ValidationError(httpStatus,
+				"Erro de validação", "Campos não preenchidos corretamente", request.getRequestURI(), e.getErrors());
 		return ResponseEntity.status(httpStatus).body(err);
 	}
 }

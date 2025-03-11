@@ -19,7 +19,7 @@ public class ContatoExistsValidator implements ConstraintValidator<ContatoExists
 	public boolean isValid(String contato, ConstraintValidatorContext context) {
 		List<FieldMessage> list = new ArrayList<>();
 		
-		if (contato != null && facade.UsuarioContatoExists(contato)) {
+		if (contato != null && facade.UsuarioAtivoWithContatoExists(contato)) {
 			list.add(new FieldMessage("Contato", "Contato já cadastrado"));
 		}
 

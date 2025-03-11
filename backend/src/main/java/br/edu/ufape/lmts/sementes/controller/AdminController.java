@@ -22,6 +22,9 @@ import org.springframework.web.server.ResponseStatusException;
 import br.edu.ufape.lmts.sementes.controller.dto.request.AdminRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.request.AdminUpdateRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.AdminResponse;
+import br.edu.ufape.lmts.sementes.controller.exceptions.ConflictingFieldsException;
+import br.edu.ufape.lmts.sementes.controller.exceptions.FieldMessage;
+import br.edu.ufape.lmts.sementes.controller.validation.ValidateUsuario;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Admin;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
@@ -35,6 +38,8 @@ public class AdminController {
 	private Facade facade;
 	@Autowired
 	private ModelMapper modelMapper;
+	@Autowired
+	private ValidateUsuario validateUsuario;
 
 	@GetMapping("admin")
 	public List<AdminResponse> getAllAdmin() {
@@ -69,6 +74,9 @@ public class AdminController {
 
 	@PatchMapping("admin/{id}")
 	public AdminResponse updateAdmin(@PathVariable Long id, @Valid @RequestBody AdminUpdateRequest obj) {
+		List<FieldMessage> listErrors = validateUsuario.validateUsuarioUpdate(obj, id);
+		if (!listErrors.isEmpty())
+			throw new ConflictingFieldsException(listErrors);
 		Admin existingAdmin = facade.findAdminById(id);
 
 		// O mapeamento direto evita a necessidade de configurar manualmente cada campo
