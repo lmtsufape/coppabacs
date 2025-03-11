@@ -34,14 +34,21 @@ public class UsuarioService implements UsuarioServiceInterface {
 	}
 
 	public Usuario updateUsuario(Usuario transientObject) throws EmailExistsException, ContatoExistsException, CpfExistsException {
-		findUsuarioById(transientObject.getId());
+		Usuario u = findUsuarioById(transientObject.getId());
 		if (emailExistsInAtivo(transientObject.getId(), transientObject.getEmail()))
 			throw new EmailExistsException("It does exist Usuario with email: " + transientObject.getEmail());
 		if (contatoExistsInAtivo(transientObject.getId(), transientObject.getContato()))
 			throw new ContatoExistsException("It doesn't exist Usuario with contato:" + transientObject.getContato());
 		if (cpfExistsInAtivo(transientObject.getId(), transientObject.getCpf()))
 			throw new CpfExistsException("It doesn't exist Usuario with CPF:" + transientObject.getCpf());
+		transientObject.setSenha(u.getSenha());
 		return repository.save(transientObject);
+	}
+	
+	public void updateUsuarioSenha(String cpf, String newSenha) {
+		Usuario usuario = findUsuarioByCpf(cpf);
+		usuario.setSenha(newSenha);
+		repository.save(usuario);
 	}
 
 	public Usuario findUsuarioById(long id) {

@@ -146,13 +146,6 @@ public class Facade {
 
 	public Usuario updateUsuario(Usuario transientObject)
 			throws EmailExistsException, ContatoExistsException, CpfExistsException {
-		if (transientObject.getSenha() != null) {
-			transientObject.setSenha(passwordEncoder.encode(transientObject.getSenha()));
-		} else {
-			Usuario usuario = findUsuarioById(transientObject.getId());
-			transientObject.setSenha(usuario.getSenha());
-		}
-
 		if (transientObject.getTabelaPerguntaUsuario().getResposta() != null) {
 			TabelaPerguntaUsuario pergunta = transientObject.getTabelaPerguntaUsuario();
 			pergunta.setResposta(passwordEncoder.encode(pergunta.getResposta()));
@@ -251,11 +244,16 @@ public class Facade {
 		return tokenService.recoverCpfByToken(token);
 	}
 
-	public void saveRecoveredPassword(String senha, String cpf)
-			throws EmailExistsException, ContatoExistsException, CpfExistsException {
-		Usuario usuario = usuarioService.findUsuarioByCpf(cpf);
-		usuario.setSenha(passwordEncoder.encode(senha));
-		usuarioService.updateUsuario(usuario);
+	public void saveNewPasswordByCpf(String password, String cpf) {
+		usuarioService.updateUsuarioSenha(cpf, passwordEncoder.encode(password));
+	}
+	
+	public void updatePassword(String password, String newPassword) {
+		Usuario logged = findLoggedUser();
+		if (!passwordEncoder.matches(password, logged.getSenha()))
+			throw new AuthorizationException("Senha incorreta");
+		usuarioService.updateUsuarioSenha(logged.getCpf(), passwordEncoder.encode(newPassword));
+		
 	}
 
 	// Coppabacs--------------------------------------------------------------

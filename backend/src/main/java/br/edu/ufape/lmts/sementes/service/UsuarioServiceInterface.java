@@ -16,6 +16,7 @@ public interface UsuarioServiceInterface {
 	Usuario findUsuarioByEmail(String email);
 	Usuario findUsuarioByCpf(String cpf);
 	Usuario updateUsuario(Usuario u) throws EmailExistsException, ContatoExistsException, CpfExistsException;
+	void updateUsuarioSenha(String cpf, String newSenha);
 	boolean emailExistsInAtivo(String email);
 	boolean cpfExistsInAtivo(String cpf);
 	boolean contatoExistsInAtivo(String contato);

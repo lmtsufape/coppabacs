@@ -2,6 +2,7 @@ package br.edu.ufape.lmts.sementes.controller.dto.request;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 import org.modelmapper.ModelMapper;
 
@@ -27,13 +28,13 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UsuarioRequest {
 	private long id;
-
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String nome;
 	@Email(message = "Email inválido")
 	@EmailExistsValidation
 	private String email;
 	@NotEmpty(message = "Preenchimento obrigatório")
+	@Length(min = 8, message = "A senha deve conter no mínimo 8 caracteres")
 	private String senha;
 	private String nomePopular;
 	@Valid

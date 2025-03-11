@@ -53,10 +53,10 @@ public class BancoSementesController {
 	
 	@GetMapping(value = "banco-sementes/page")
 	public Page<BancoSementesResponse> getPageBancoSementes(
-			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
-			@RequestParam(value = "direction", defaultValue = "DESC") String direction) {
+			@RequestParam(defaultValue = "0") Integer page,
+			@RequestParam(defaultValue = "24") Integer linesPerPage,
+			@RequestParam(defaultValue = "id") String orderBy,
+			@RequestParam(defaultValue = "DESC") String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		Page<BancoSementes> list = facade.findPageBancoSementes(pageRequest);
 		return list.map(BancoSementesResponse::new);

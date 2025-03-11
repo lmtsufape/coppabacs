@@ -12,8 +12,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PasswordRequest {
+public class PasswordUpdateRequest {
 	@NotEmpty(message = "Preenchimento obrigatório")
 	@Length(min = 8, message = "A senha deve conter no mínimo 8 caracteres")
 	public String senha;
+	@NotEmpty(message = "Preenchimento obrigatório")
+	@Length(min = 8, message = "A senha deve conter no mínimo 8 caracteres")
+	public String novaSenha;
 }

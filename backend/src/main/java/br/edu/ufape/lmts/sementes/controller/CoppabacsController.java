@@ -11,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -54,10 +53,9 @@ public class CoppabacsController {
 	}
 
 	@GetMapping(value = "coppabacs/page")
-	public Page<CoppabacsResponse> getPageCoppabacs(@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
-			@RequestParam(value = "direction", defaultValue = "DESC") String direction) {
+	public Page<CoppabacsResponse> getPageCoppabacs(@RequestParam(defaultValue = "0") Integer page,
+			@RequestParam(defaultValue = "24") Integer linesPerPage, @RequestParam(defaultValue = "id") String orderBy,
+			@RequestParam(defaultValue = "DESC") String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		Page<Coppabacs> list = facade.findPageCoppabacs(pageRequest);
 		return list.map(CoppabacsResponse::new);

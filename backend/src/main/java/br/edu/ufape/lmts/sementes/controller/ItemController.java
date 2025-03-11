@@ -49,10 +49,10 @@ public class ItemController {
 	
 	@GetMapping(value = "item/page")
 	public Page<ItemResponse> getPageItem(
-			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
-			@RequestParam(value = "direction", defaultValue = "DESC") String direction) {
+			@RequestParam(defaultValue = "0") Integer page,
+			@RequestParam(defaultValue = "24") Integer linesPerPage,
+			@RequestParam(defaultValue = "id") String orderBy,
+			@RequestParam(defaultValue = "DESC") String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		Page<Item> list = facade.findPageItem(pageRequest);
 		return list.map(ItemResponse::new);
