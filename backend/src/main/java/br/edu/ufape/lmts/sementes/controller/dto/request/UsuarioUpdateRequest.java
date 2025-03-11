@@ -21,7 +21,6 @@ public class UsuarioUpdateRequest {
 	private String nome;
 	@Email(message = "Email inválido")
 	private String email;
-	private String senha;
 	private String nomePopular;
 	private EnderecoUpdateRequest endereco;
 	private Date dataNascimento;
