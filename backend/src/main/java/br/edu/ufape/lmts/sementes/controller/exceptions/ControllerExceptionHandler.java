@@ -2,6 +2,7 @@ package br.edu.ufape.lmts.sementes.controller.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -25,11 +26,7 @@ public class ControllerExceptionHandler {
 		int httpStatus = HttpStatus.INTERNAL_SERVER_ERROR.value();
 		StandardError err = new StandardError(httpStatus,
 				"Erro inesperado", e.getMessage(), request.getRequestURI());
-		System.out.println(e.getMessage());
-		System.out.println(e.getCause());
-		for (StackTraceElement ste : e.getStackTrace()) {
-		    System.out.println(ste);
-		}
+		e.printStackTrace();
 		return ResponseEntity.status(httpStatus).body(err);
 	}
 	
@@ -45,7 +42,7 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(EmailExistsException.class)
 	public ResponseEntity<StandardError> EmailExistsException(EmailExistsException e,
 			HttpServletRequest request) {
-		int httpStatus = HttpStatus.BAD_REQUEST.value();
+		int httpStatus = HttpStatus.UNPROCESSABLE_ENTITY.value();
 		StandardError err = new StandardError(httpStatus,
 				"Email já cadastrado", e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(httpStatus).body(err);
@@ -56,6 +53,7 @@ public class ControllerExceptionHandler {
 		int httpStatus = HttpStatus.UNPROCESSABLE_ENTITY.value();
 		ValidationError err = new ValidationError(httpStatus,
 				"Erro de validação", "Campos não preenchidos corretamente", request.getRequestURI());
+		System.out.println(e.getBindingResult().getFieldErrors());
 		for (FieldError x : e.getBindingResult().getFieldErrors()) {
 			err.addError(x.getField(), x.getDefaultMessage());
 		}
@@ -84,6 +82,14 @@ public class ControllerExceptionHandler {
 		return ResponseEntity.status(httpStatus).body(err);
 	}
 	
+	@ExceptionHandler(BadCredentialsException.class)
+	public ResponseEntity<StandardError> badCredentialsException(BadCredentialsException e, HttpServletRequest request) {
+		int httpStatus = HttpStatus.UNAUTHORIZED.value();
+		StandardError err = new StandardError(httpStatus,
+				"Não autorizado", "CPF e/ou senha incorreto/s ", request.getRequestURI());
+		return ResponseEntity.status(httpStatus).body(err);
+	}
+	
 	@ExceptionHandler(AuthenticationException.class)
 	public ResponseEntity<StandardError> authenticationException(AuthenticationException e, HttpServletRequest request) {
 		int httpStatus = HttpStatus.UNAUTHORIZED.value();
@@ -97,6 +103,14 @@ public class ControllerExceptionHandler {
 		int httpStatus = HttpStatus.UNAUTHORIZED.value();
 		StandardError err = new StandardError(httpStatus,
 				"Não autorizado", e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(httpStatus).body(err);
+	}
+	
+	@ExceptionHandler(ConflictingFieldsException.class)
+	public ResponseEntity<StandardError> conflictingFieldsException(ConflictingFieldsException e, HttpServletRequest request) {
+		int httpStatus = HttpStatus.CONFLICT.value();
+		ValidationError err = new ValidationError(httpStatus,
+				"Erro de validação", "Campos não preenchidos corretamente", request.getRequestURI(), e.getErrors());
 		return ResponseEntity.status(httpStatus).body(err);
 	}
 }

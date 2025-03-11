@@ -10,6 +10,11 @@ public class ValidationError extends StandardError {
 		super(status, error, message, path);
 	}
 
+	public ValidationError(Integer status, String error, String message, String path, List<FieldMessage> errors) {
+		super(status, error, message, path);
+		this.errors = errors;
+	}
+	
 	public List<FieldMessage> getErrors() {
 		return errors;
 	}

@@ -19,7 +19,7 @@ public class EmailExistsValidator implements ConstraintValidator<EmailExistsVali
 	public boolean isValid(String email, ConstraintValidatorContext context) {
 		List<FieldMessage> list = new ArrayList<>();
 
-		if (email != null && facade.UsuarioEmailExists(email)) {
+		if (email != null && facade.UsuarioAtivoWithEmailExists(email)) {
 			list.add(new FieldMessage("Email", "Email já cadastrado"));
 		}
 

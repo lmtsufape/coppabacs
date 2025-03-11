@@ -12,7 +12,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -27,6 +26,9 @@ import org.springframework.web.server.ResponseStatusException;
 import br.edu.ufape.lmts.sementes.controller.dto.request.GerenteRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.request.GerenteUpdateRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.GerenteResponse;
+import br.edu.ufape.lmts.sementes.controller.exceptions.ConflictingFieldsException;
+import br.edu.ufape.lmts.sementes.controller.exceptions.FieldMessage;
+import br.edu.ufape.lmts.sementes.controller.validation.ValidateUsuario;
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.BancoSementes;
@@ -43,6 +45,8 @@ public class GerenteController {
 	private Facade facade;
 	@Autowired
 	private ModelMapper modelMapper;
+	@Autowired
+	private ValidateUsuario validateUsuario;
 	
 	@GetMapping("gerente")
 	public List<GerenteResponse> getAllGerente() {
@@ -55,10 +59,10 @@ public class GerenteController {
 	
 	@GetMapping(value = "gerente/page")
 	public Page<GerenteResponse> getPageGerente(
-			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
-			@RequestParam(value = "direction", defaultValue = "DESC") String direction) {
+			@RequestParam(defaultValue = "0") Integer page,
+			@RequestParam(defaultValue = "24") Integer linesPerPage,
+			@RequestParam(defaultValue = "id") String orderBy,
+			@RequestParam(defaultValue = "DESC") String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		Page<Gerente> list = facade.findPageGerente(pageRequest);
 		return list.map(GerenteResponse::new);
@@ -89,6 +93,9 @@ public class GerenteController {
 	
 	@PatchMapping("gerente/{id}")
 	public GerenteResponse updateGerente(@PathVariable Long id, @Valid @RequestBody GerenteUpdateRequest obj) {
+		List<FieldMessage> listErrors = validateUsuario.validateUsuarioUpdate(obj, id);
+		if (!listErrors.isEmpty())
+			throw new ConflictingFieldsException(listErrors);
 		try {
 			Gerente oldObject = facade.findGerenteById(id);
 			modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());

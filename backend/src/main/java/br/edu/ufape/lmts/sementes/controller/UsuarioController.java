@@ -48,11 +48,10 @@ public class UsuarioController {
 	}
 
 	@GetMapping(value = "usuario/page")
-	public Page<UsuarioResponse> getPage(
-			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
-			@RequestParam(value = "direction", defaultValue = "DESC") String direction) {
+	public Page<UsuarioResponse> getPage(@RequestParam(defaultValue = "0") Integer page,
+			@RequestParam(defaultValue = "24") Integer linesPerPage,
+			@RequestParam(defaultValue = "id") String orderBy,
+			@RequestParam(defaultValue = "DESC") String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		Page<Usuario> list = facade.findPageUsuario(pageRequest);
 		return list.map(UsuarioResponse::new);
@@ -69,15 +68,15 @@ public class UsuarioController {
 	}
 
 	@GetMapping("usuario/e/{email}")
-	public UsuarioResponse getUsuarioByEmail(@PathVariable String email){
+	public UsuarioResponse getUsuarioByEmail(@PathVariable String email) {
 		return new UsuarioResponse(facade.findUsuarioByEmail(email));
 	}
-	
+
 	@GetMapping("usuario/cpf/{cpf}")
-	public UsuarioResponse getUsuarioByCpf(@PathVariable String cpf){
+	public UsuarioResponse getUsuarioByCpf(@PathVariable String cpf) {
 		return new UsuarioResponse(facade.findUsuarioByCpf(cpf));
 	}
-	
+
 	@PatchMapping("usuario/{id}")
 	public UsuarioResponse updateUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioUpdateRequest obj) {
 		try {
