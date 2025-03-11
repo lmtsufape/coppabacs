@@ -6,19 +6,19 @@ import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import Link from "next/link";
 import Header from "../HeaderNavegacao";
-import Table from "./Table";
 import { getAllSementes } from "@/api/sementes/getAllSementes";
 import { Search } from "../searchSemente";
 import { getStorageItem } from "@/utils/localStore";
 import { useSelector } from "react-redux";
-import { getSementesBanco } from "@/api/sementes/getSementeBanco";
 import { getCoordenadorCpf } from "@/api/usuarios/coordenador/getCoordenadorCpf";
-import { getUsuarioEmail } from "@/api/usuarios/getUsuarioEmail";
 import DetalhamentoSementes from "../DetalhamentoSementes";
-import DetalhamentoBanco from "../DetalhamentoBancoSemente";
 import DetalhamentoTabelaBancoSemente from "../DetalhamentoTabelaBancoSemente";
+import { getTabelaBancoSementeByBanco } from "@/api/sementes/tabelaBancoSementes/getTabelaBancoSementeByBanco";
+import TableBancoSemente from "./TableBancoSemente";
+import TableSementes from "./TableSementes";
+import { getAgricultorCpf } from "@/api/usuarios/agricultor/getAgricultorCpf";
 
-export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5, table6 }) {
+export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior }) {
   const [role, setRole] = useState(getStorageItem("userRole"));
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -27,48 +27,23 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
     if (role) {
       if (role == "ROLE_ADMIN" || role == "ROLE_COPPABACS") {
         return <LayoutAdmin
-          table1={table1}
-          table2={table2}
-          table3={table3}
-          table4={table4}
-          table5={table5}
-          table6={table6}
           diretorioAnterior={diretorioAnterior}
           diretorioAtual={diretorioAtual}
           hrefAnterior={hrefAnterior}
         />
       } else if (role == "ROLE_GERENTE") {
         return <LayoutCoordenador
-          table1={table1}
-          table2={table2}
-          table3={table3}
-          table4={table4}
-          table5={table5}
-          table6={table6}
-
           diretorioAnterior={diretorioAnterior}
           diretorioAtual={diretorioAtual}
           hrefAnterior={hrefAnterior} />
       } else if (role == "ROLE_AGRICULTOR") {
         return <LayoutAgricultor
-          table1={table1}
-          table2={table2}
-          table3={table3}
-          table4={table4}
-          table5={table5}
-          table6={table6}
           diretorioAnterior={diretorioAnterior}
           diretorioAtual={diretorioAtual}
           hrefAnterior={hrefAnterior} />
       }
     } else {
       return <LayoutPublic
-        table1={table1}
-        table2={table2}
-        table3={table3}
-        table4={table4}
-        table5={table5}
-        table6={table6}
         diretorioAnterior="Público / "
         diretorioAtual={diretorioAtual}
         hrefAnterior="/public" />
@@ -86,8 +61,7 @@ export default function List({ diretorioAnterior, diretorioAtual, hrefAnterior, 
 
 }
 
-
-const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) => {
+const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   const [sementes, setSementes] = useState([]);
   const [selectedSemente, setSelectedSemente] = useState(null)
   const [searchTerm, setSearchTerm] = useState('');
@@ -175,32 +149,24 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, 
           </div>
         </div>
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <Table
+        <TableSementes
           listSementes={filteredSementes}
           onSelectSemente={handleSelectSemente}
-          table1={table1}
-          table2={table2}
-          table3={table3}
-          table4={table4}
-          table5={table5}
         />
       </div>
     </>
   )
 }
 
-
-
-const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) => {
+const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior}) => {
   const [coordenadorCpf, setCoordenadorCpf] = useState(getStorageItem("userLogin"));
   const [coordenador, setCoordenador] = useState([]);
   const [open, setOpen] = useState(false);
-  const [sementes, setSementes] = useState([]);
+  const [tabelas, setTabelas] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [role, setRole] = useState(getStorageItem("userRole"));
 
   const [selectedTabelaBancoSemente, setSelectedTabelaBancoSemente] = useState(null);
-  const [nomeSemente, setNomeSemente] = useState(null);
   const [variedadeSemente, setVariedadeSemente] = useState(null);
 
   useEffect(() => {
@@ -220,24 +186,22 @@ const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ta
   });
   const { state, mutate } = useMutation(
     async () => {
-      return getSementesBanco(Number(coordenador.bancoSementeId));
+      return getTabelaBancoSementeByBanco(Number(coordenador.bancoSementeId));
     }, {
     onSuccess: (res) => {
-      setSementes(res.data);
+      setTabelas(res.data);
     },
     onError: (error) => {
       console.log("Erro ao recuperar as infomações das sementes do banco", error)
     }
   }
   );
-  const filteredSementes = sementes.filter((sementes) =>
-    sementes.nome.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredTabelas = tabelas.filter((tabela) =>
+    tabela.semente.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleSelectTabela = (tabela, nomeSemente, variedadeSemente) => {
+  const handleSelectTabela = (tabela) => {
     setSelectedTabelaBancoSemente(tabela);
-    setNomeSemente(nomeSemente);
-    setVariedadeSemente(variedadeSemente);
   }
   const handleBackToList = () => {
     setSelectedTabelaBancoSemente(null)
@@ -246,8 +210,6 @@ const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ta
     return (
       <DetalhamentoTabelaBancoSemente
         tabelaBanco={selectedTabelaBancoSemente}
-        nomeSemente={nomeSemente}
-        variedadeSemente={variedadeSemente}
         backDetalhamento={handleBackToList}
       />
     );
@@ -298,31 +260,23 @@ const LayoutCoordenador = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ta
           </div>
         </div>
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <Table
-          table1={table1}
-          table2={table2}
-          table3={table3}
-          table4={table4}
-          table5={table5}
-          listSementes={filteredSementes}
-          setSementes={setSementes}
+        <TableBancoSemente
+          listTabelas={filteredTabelas}
+          setTabelas={setTabelas}
           onSelectTabela={handleSelectTabela}
-
         />
       </div>
     </>
   )
 }
 
-const LayoutAgricultor = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) => {
-  const [sementes, setSementes] = useState([]);
+const LayoutAgricultor = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
+  const [tabelas, setTabelas] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [role, setRole] = useState(getStorageItem("userRole"));
   const [agricultorCpf, setAgricultorCpf] = useState(getStorageItem("userLogin"));
   const [agricultor, setAgricultor] = useState([]);
   const [selectedTabelaBancoSemente, setSelectedTabelaBancoSemente] = useState(null);
-  const [nomeSemente, setNomeSemente] = useState(null);
-  const [variedadeSemente, setVariedadeSemente] = useState(null);
 
   useEffect(() => {
     mutationAgricultor.mutate(agricultorCpf);
@@ -330,7 +284,7 @@ const LayoutAgricultor = ({ diretorioAnterior, diretorioAtual, hrefAnterior, tab
       mutate();
     }
   }, [agricultor.bancoId]);
-  const mutationAgricultor = useMutation(agricultorCpf => getUsuarioEmail(agricultorCpf), {
+  const mutationAgricultor = useMutation(agricultorCpf => getAgricultorCpf(agricultorCpf), {
     onSuccess: (res) => {
       setAgricultor(res.data);
     },
@@ -340,23 +294,21 @@ const LayoutAgricultor = ({ diretorioAnterior, diretorioAtual, hrefAnterior, tab
   });
   const { state, mutate } = useMutation(
     async () => {
-      return getSementesBanco(Number(agricultor.bancoId));
+      return getTabelaBancoSementeByBanco(Number(agricultor.bancoId));
     }, {
     onSuccess: (res) => {
-      setSementes(res.data);
+      setTabelas(res.data);
     },
     onError: (error) => {
       console.log("Erro ao recuperar as infomações das sementes do banco", error)
     }
   }
   );
-  const filteredSementes = sementes.filter((sementes) =>
-    sementes.nome.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredTabelas = tabelas.filter((tabela) =>
+    tabela.semente.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
   const handleSelectTabela = (tabela, nomeSemente, variedadeSemente) => {
     setSelectedTabelaBancoSemente(tabela);
-    setNomeSemente(nomeSemente);
-    setVariedadeSemente(variedadeSemente);
   }
   const handleBackToList = () => {
     setSelectedTabelaBancoSemente(null)
@@ -365,8 +317,6 @@ const LayoutAgricultor = ({ diretorioAnterior, diretorioAtual, hrefAnterior, tab
     return (
       <DetalhamentoTabelaBancoSemente
         tabelaBanco={selectedTabelaBancoSemente}
-        nomeSemente={nomeSemente}
-        variedadeSemente={variedadeSemente}
         backDetalhamento={handleBackToList}
       />
     );
@@ -381,15 +331,9 @@ const LayoutAgricultor = ({ diretorioAnterior, diretorioAtual, hrefAnterior, tab
             hrefAnterior={hrefAnterior}
           />
           <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-          <Table
-            table1={table1}
-            table2={table2}
-            table3={table3}
-            table4={table4}
-            table5={table5}
-            listSementes={filteredSementes}
+          <TableBancoSemente
+            listTabelas={filteredTabelas}
             onSelectTabela={handleSelectTabela}
-
           />
         </div>
       </>
@@ -398,7 +342,7 @@ const LayoutAgricultor = ({ diretorioAnterior, diretorioAtual, hrefAnterior, tab
 }
 
 
-const LayoutPublic = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1, table2, table3, table4, table5 }) => {
+const LayoutPublic = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   const [sementes, setSementes] = useState([]);
   const [selectedSemente, setSelectedSemente] = useState(null)
   const [searchTerm, setSearchTerm] = useState('');
@@ -451,14 +395,9 @@ const LayoutPublic = ({ diretorioAnterior, diretorioAtual, hrefAnterior, table1,
         />
 
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <Table
+        <TableSementes
           listSementes={filteredSementes}
           onSelectSemente={handleSelectSemente}
-          table1={table1}
-          table2={table2}
-          table3={table3}
-          table4={table4}
-          table5={table5}
         />
       </div>
     </>

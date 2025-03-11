@@ -93,7 +93,6 @@ const LayoutAgricultor = () => {
       <Card title="Sementes" icon="/assets/iconSeedGreen2.png" description="Sementes" link="/sementes" />
       <Card title="Histórico de Doações" icon="/assets/iconMovimentacaoBancoSementes.svg" description="Doações Sementes" link="/doacoes" />
       <Card title="Histórico de Retirada" icon="/assets/iconRetiradaDeSementes.svg" description="Doações Sementes" link="/retiradas" />
-      <Card title="Mural" icon="/assets/iconMural.svg" description="Mural" link="/mural" />
     </>
   )
 }

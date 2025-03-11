@@ -51,6 +51,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
   };
 
   const nomeBanco = bancoAtual(bancos, formik.values.bancoId);
+  const nomeBancoCoordenador = bancoAtual(bancos, formik.values.bancoSementeId);
 
   return (
     <>
@@ -178,7 +179,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 disabled
               />
             </div>
-            {hrefAnterior !== "/funcionarios" && (
+            {hrefAnterior == "/agricultores" &&(
               <div>
                 <label htmlFor="bancoSementes">Banco de Sementes</label>
                 <input
@@ -189,6 +190,21 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={nomeBanco}
+                  disabled
+                />
+              </div>
+            )}
+            {hrefAnterior == "/coordenadores" && (
+              <div>
+                <label htmlFor="bancoSementes">Banco de Sementes</label>
+                <input
+                  id="bancoSementes"
+                  className={style.container__ContainerForm_form_input}
+                  name="BancoSementes"
+                  placeholder="Não informado"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={nomeBancoCoordenador}
                   disabled
                 />
               </div>
@@ -277,7 +293,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 placeholder={formik.values.dataNascimento}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.dataNascimento}
+                value={formik.values.dataNascimento} 
                 required
               />
               {formik.touched.dataNascimento && formik.errors.dataNascimento ? (
@@ -309,7 +325,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             <div>
               <label >Estado Civil</label>
               <select
-                className={style.container__ContainerForm_form_halfContainer_input}
+                className={style.container__ContainerForm_form_halfContainer_select}
                 id="estadoCivil"
                 name="estadoCivil"
                 onChange={(e) => {
@@ -355,7 +371,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             <div>
               <label>Sexo do Cônjuge</label>
               <select
-                className={style.container__ContainerForm_form_halfContainer_input}
+                className={style.container__ContainerForm_form_halfContainer_select}
                 id="conjugeSexo"
                 name="conjuge.sexo"
                 onChange={formik.handleChange}

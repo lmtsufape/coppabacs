@@ -41,7 +41,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
       numero: '',
       referencia: '',
     },
-    bancoId: '',
+    bancoSementeId: '',
     atividadeRural: {
       caprino: '',
       fruticultura: '',
@@ -76,7 +76,7 @@ const AgricultorForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior, usuar
         dataNascimento: usuario.dataNascimento || '',
         sexo: usuario.sexo || '',
         endereco: usuario.endereco || {},
-        bancoId: usuario.bancoId || '',
+        bancoSementeId: usuario.bancoSementeId || '',
         atividadeRural: usuario.atividadeRural || {},
         producaoSementes: usuario.producaoSementes || {}
       })

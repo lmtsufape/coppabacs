@@ -61,6 +61,7 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
         regiaoColetaDados: sementes?.regiaoColetaDados,
         altitudeMaxima: sementes?.altitudeMaxima,
         altitudeMinima: sementes?.altitudeMinima,
+        imagens: sementes?.imagens,
         caracteristicasPositiva: sementes?.caracteristicasPositiva,
         caracteristicasNegativas: sementes?.caracteristicasNegativas,
         doencas: sementes?.doencas,
@@ -182,8 +183,8 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
                                 <DadosCaracteristicasAgronomicas formik={formik} editar={editar} />
                                 <DadosToleranciaAdversidades formik={formik} editar={editar} />
                                 <InformacoesColeta formik={formik} editar={editar} />
-                                {//<ImagensSementes/>
-                                }
+                                <ImagensSementes formik={formik} editar={editar} />
+                                
 
                             </Form>
                         )

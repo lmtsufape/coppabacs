@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.lmts.sementes.model.BancoSementes;
 import br.edu.ufape.lmts.sementes.model.DoacaoUsuario;
 import br.edu.ufape.lmts.sementes.repository.DoacaoUsuarioRepository;
 import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
@@ -27,6 +28,10 @@ public class DoacaoUsuarioService implements DoacaoUsuarioServiceInterface {
 	public DoacaoUsuario findDoacaoUsuarioById(long id) {
 		return repository.findById(id)
 				.orElseThrow(() -> new ObjectNotFoundException("It doesn't exist DoacaoUsuario with id = " + id));
+	}
+	
+	public List<DoacaoUsuario> findDoacaoUsuarioByBancoSementes(BancoSementes bancoSementes) {
+		return repository.findByBancoSementes(bancoSementes);
 	}
 
 	public List<DoacaoUsuario> getAllDoacaoUsuario() {

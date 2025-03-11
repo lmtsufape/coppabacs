@@ -1,20 +1,45 @@
 package br.edu.ufape.lmts.sementes.config;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
-import br.edu.ufape.lmts.sementes.controller.dto.request.*;
-import br.edu.ufape.lmts.sementes.enums.Resistencia;
-import br.edu.ufape.lmts.sementes.enums.TipoPergunta;
-import br.edu.ufape.lmts.sementes.facade.Facade;
-import br.edu.ufape.lmts.sementes.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import br.edu.ufape.lmts.sementes.controller.dto.request.BancoSementesRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.CaracteristicasAgronomicasRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.CulturaRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.EmpalhamentoRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.EnderecoRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.FinalidadeRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.ObjetosBancoSementesRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.ResponsavelTecnicoRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.SementesRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.TabelaBancoSementesRequest;
+import br.edu.ufape.lmts.sementes.controller.dto.request.ToleranciaAdversidadesRequest;
+import br.edu.ufape.lmts.sementes.enums.Resistencia;
+import br.edu.ufape.lmts.sementes.enums.TipoPergunta;
 import br.edu.ufape.lmts.sementes.enums.TipoUsuario;
-import br.edu.ufape.lmts.sementes.model.*;
+import br.edu.ufape.lmts.sementes.facade.Facade;
+import br.edu.ufape.lmts.sementes.model.Admin;
+import br.edu.ufape.lmts.sementes.model.Agricultor;
+import br.edu.ufape.lmts.sementes.model.BancoSementes;
+import br.edu.ufape.lmts.sementes.model.Coppabacs;
+import br.edu.ufape.lmts.sementes.model.Gerente;
+import br.edu.ufape.lmts.sementes.model.Sementes;
+import br.edu.ufape.lmts.sementes.model.TabelaPerguntaUsuario;
+import br.edu.ufape.lmts.sementes.repository.AdminRepository;
+import br.edu.ufape.lmts.sementes.repository.AgricultorRepository;
+import br.edu.ufape.lmts.sementes.repository.BancoSementesRepository;
+import br.edu.ufape.lmts.sementes.repository.CoppabacsRepository;
+import br.edu.ufape.lmts.sementes.repository.GerenteRepository;
+import br.edu.ufape.lmts.sementes.repository.SementesRepository;
+import br.edu.ufape.lmts.sementes.repository.UsuarioRepository;
 
 @Configuration
 @Component
@@ -56,7 +81,8 @@ public class UserInitializer implements CommandLineRunner {
 			});
 			TabelaBancoSementesRequest tabelaBancoSementesRequest = new TabelaBancoSementesRequest(0, 200, "05/2024", 1,
 					1);
-			facade.saveTabelaBancoSementes(tabelaBancoSementesRequest.convertToEntity(), 1);
+			
+			facade.saveTabelaBancoSementes(tabelaBancoSementesRequest.convertToEntity());
 
 		}
 
@@ -175,6 +201,7 @@ public class UserInitializer implements CommandLineRunner {
 						"Marrom Escuro", "Verde Claro", "Branca", "Erecto", new EmpalhamentoRequest("Parcial")),
 				List.of(new FinalidadeRequest("Produção de café gourmet")), "Sul de Minas Gerais",
 				new CulturaRequest("Café", "Coffea"),
+				null,
 				new ResponsavelTecnicoRequest("João Silva", "123.456.789-00", "002134", "MG")));
 		sementes.add(new SementesRequest(0, "Glycine max", "Soja",
 				"Principal cultura de leguminosa para produção de óleo e proteína vegetal, com ampla adaptação climática.",
@@ -188,6 +215,7 @@ public class UserInitializer implements CommandLineRunner {
 						"Verde Escuro", "Verde", "Amarela", "Prostrado", new EmpalhamentoRequest("Total")),
 				List.of(new FinalidadeRequest("Produção de óleo e proteína")), "Paraná",
 				new CulturaRequest("Soja", "Glycine max"),
+				null,
 				new ResponsavelTecnicoRequest("Maria Pereira", "987.654.321-00", "001234", "PR")));
 		sementes.add(new SementesRequest(0, "Zea mays", "Milho",
 				"Cultura de grande importância econômica para cereais e produção de etanol.",
@@ -200,6 +228,7 @@ public class UserInitializer implements CommandLineRunner {
 						"Marrom Claro", "Amarelo Claro", "Laranja", "Vertical", new EmpalhamentoRequest("Moderado")),
 				List.of(new FinalidadeRequest("Produção de grãos e etanol")), "São Paulo",
 				new CulturaRequest("Milho", "Zea mays"),
+				null,
 				new ResponsavelTecnicoRequest("Carlos Neto", "222.333.444-55", "005678", "SP")));
 
 		return sementes;

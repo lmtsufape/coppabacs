@@ -19,6 +19,8 @@ import ListAgricultoresBanco from '../ListAgricultoresBanco';
 import ListSementesBanco from "@/components/ListSementesBanco";
 import ListTransacoes from '../ListTransacoes';
 import { postArquivo } from '@/api/arquivos/postArquivo';
+import ButtonsHeader from '../ButtonsHeader';
+import HeaderButton from '../ButtonsHeader/HeaderButton';
 
 const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, banco, usuario, backDetalhamento }) => {
   const [role, setRole] = useState(getStorageItem("userRole"));
@@ -138,13 +140,7 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
       <ListSementesBanco
         diretorioAnterior={`Home / Bancos Sementes / `}
         diretorioAtual="Sementes"
-        hrefAnterior={`/bancoSementes`}
-        table1="Imagem"
-        table2="Cultura"
-        table3="Nome da Cultivar"
-        table4="Ação"
-        table5="Safra"
-        sementesBanco={handleBackToBank}
+        hrefAnterior={handleBackToBank}
         bancoId={banco.id}
       />
     )
@@ -152,16 +148,10 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
   if (doacoesBanco) {
     return (
       <ListTransacoes
-        diretorioAnterior="Home /"
+        diretorioAnterior="Home / Bancos de Sementes /"
         diretorioAtual="Doações"
-        hrefAnterior="/"
-        hrefAtual="/doacoes"
-        table1="Data"
-        table2="Agricultor"
-        table3="Semente"
-        table4="Variedade"
-        table5="Ações"
-        transacaoBanco={handleBackToBank}
+        hrefAnterior={handleBackToBank}
+        tipoTransacao={"Doacao"}
         bancoId={banco.id}
       />
     )
@@ -169,16 +159,10 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
   if (retiradasBanco) {
     return (
       <ListTransacoes
-        diretorioAnterior="Home /"
+        diretorioAnterior="Home / Bancos de Sementes /"
         diretorioAtual="Retiradas"
-        hrefAnterior="/"
-        hrefAtual="/retiradas"
-        table1="Data"
-        table2="Agricultor"
-        table3="Semente"
-        table4="Variedade"
-        table5="Ações"
-        transacaoBanco={handleBackToBank}
+        hrefAnterior={handleBackToBank}
+        tipoTransacao={"Retirada"}
         bancoId={banco.id}
       />
     )
@@ -231,81 +215,23 @@ const DetalhamentoBanco = ({ diretorioAnterior, diretorioAtual, hrefAnterior, ba
                   <Image src="/assets/bancoteste.png" alt="Foto do usuário" width={72} height={72} />
                   <h1>{banco?.nome}</h1>
                 </div>
-                <div className={style.botoes}>
-                  <div className={style.container__header_containerButton}>
-                    {role === "ROLE_COPPABACS" && (
-                      <>
-                        <button className={style.container__header_containerButton_button} onClick={() => setAgricultoresBanco(true)}>
-                          <Image src="/assets/iconAssociates.svg" alt="Agricultores" width={27} height={26} />
-                          <span className={style.container__header_containerButton_button_text}>Agricultores</span>
-                          <span className={style.container__header_containerButton_button_shorttext}>Agric.</span>
-                        </button>
-                        <button className={style.container__header_containerButton_button} onClick={() => { setSementesBanco(true) }}>
-                          <Image src="/assets/iconSeedGreen.svg" alt="Seed" width={27} height={26} />
-                          <span className={style.container__header_containerButton_button_text}>Sementes</span>
-                          <span className={style.container__header_containerButton_button_shorttext}>Sem.</span>
-                        </button>
-                        <button className={style.container__header_containerButton_button} onClick={() => { setDoacoesBanco(true) }}>
-                          <Image src="/assets/iconDoacaoDeSementes.svg" alt="Agricultores" width={27} height={26} />
-                          <span className={style.container__header_containerButton_button_text}>Doações</span>
-                          <span className={style.container__header_containerButton_button_shorttext}>Doa..</span>
-                        </button>
-                        <button className={style.container__header_containerButton_button} onClick={() => { setRetiradasBanco(true) }}>
-                          <Image src="/assets/iconRetiradaDeSementes.svg" alt="Agricultores" width={27} height={26} />
-                          <span className={style.container__header_containerButton_button_text}>Retiradas</span>
-                          <span className={style.container__header_containerButton_button_shorttext}>Ret.</span>
-                        </button>
-                      </>
-                    )}
-                  </div>
-                </div>
-                <div className={style.dropdown}>
-                  {role === "ROLE_COPPABACS" && (
-                    <>
-                      <div className={style.botaoDropdown}>
-                        <Image onClick={() => setOpen(!open)}
-                          src="/assets/dropdown.svg" alt="Dropdown" width={27} height={24} />
-                      </div>
-                      {open && (
-                        <div className={style.dropdown}>
-                          <ul className={style.botaoDropdown__lista}>
-                            <li>
-                              <div className={style.botaoDropdown__button} onClick={() => { setAgricultoresBanco(true); setOpen(false); }}>
-                                <Image src="/assets/iconAssociates.svg" alt="Agricultores" width={27} height={26} />
-                                <span className={style.botaoDropdown__button_text}>Agricultores</span>
-                              </div>
-                            </li>
-                            <li>
-                              <div className={style.botaoDropdown__button} onClick={() => { setSementesBanco(true); setOpen(false); }}>
-                                <Image src="/assets/iconSeedGreen.svg" alt="Seed" width={27} height={26} />
-                                <span className={style.botaoDropdown__button_text}>Sementes</span>
-                              </div>
-                            </li>
-                            <li>
-                              <div className={style.botaoDropdown__button} onClick={() => { setDoacoesBanco(true); setOpen(false); }}>
-                                <Image src="/assets/iconDoacaoDeSementes.svg" alt="Agricultores" width={27} height={26} />
-                                <span className={style.botaoDropdown__button_text}>Doações</span>
-                              </div>
-                            </li>
-                            <li>
-                              <div className={style.botaoDropdown__button} onClick={() => { setRetiradasBanco(true); setOpen(false); }}>
-                                <Image src="/assets/iconRetiradaDeSementes.svg" alt="Agricultores" width={27} height={26} />
-                                <span className={style.botaoDropdown__button_text}>Retiradas</span>
-                              </div>
-                            </li>
-                          </ul>
-                        </div>
-                      )}
-                    </>
-                  )}
-                </div>
+                {role === "ROLE_COPPABACS" && (
+                  <>
+                    <ButtonsHeader bcStyle={style}>
+                      <HeaderButton hrefLink="#" imageSrc="/assets/iconAssociates.svg" text="Agricultores" onClick={() => setAgricultoresBanco(true)} />
+                      <HeaderButton hrefLink="#" imageSrc="/assets/iconSeedGreen.svg" text="Sementes" onClick={() => setSementesBanco(true)} />
+                      <HeaderButton hrefLink="#" imageSrc="/assets/iconDoacaoDeSementes.svg" text="Doações" onClick={() => setDoacoesBanco(true)} />
+                      <HeaderButton hrefLink="#" imageSrc="/assets/iconRetiradaDeSementes.svg" text="Retiradas" onClick={() => setRetiradasBanco(true)} />
+                    </ButtonsHeader>
+                  </>
+                )}
               </div>
               <DadosBanco formik={formik} editar={editar} />
               <DadosEndereco formik={formik} editar={editar} />
               <DadosObjetosBanco formik={formik} editar={editar} />
               <ImagensBanco formik={formik} editar={editar} setImagensArquivos={setImagensArquivos} />
               {
-                (usuario === "coordenador" || usuario === "admin") && (
+                (usuario === "coppabacs" || usuario === "admin") && (
                   <div>
                     {editar ? (
                       // Bloco quando 'editar' é true

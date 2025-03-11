@@ -7,7 +7,6 @@ import org.modelmapper.ModelMapper;
 
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
 import br.edu.ufape.lmts.sementes.model.DoacaoUsuario;
-import br.edu.ufape.lmts.sementes.model.Usuario;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,7 +16,7 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor
 public  class DoacaoUsuarioResponse  {
 	private Long id;
-	private LocalDate dataDoacao;
+	private LocalDate data;
 	private String descricao;
 	private AgricultorResponse agricultor;
 	private List<ItemResponse> itens;

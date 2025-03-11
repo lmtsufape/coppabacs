@@ -1,6 +1,5 @@
 package br.edu.ufape.lmts.sementes.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,10 @@ public class TabelaBancoSementesService implements TabelaBancoSementesServiceInt
 
 	public TabelaBancoSementes saveTabelaBancoSementes(TabelaBancoSementes newInstance) {
 		return repository.save(newInstance);
+	}
+	
+	public List<TabelaBancoSementes> saveAllTabelaBancoSementes(List<TabelaBancoSementes> newInstances) {
+		return repository.saveAll(newInstances);
 	}
 
 	public TabelaBancoSementes updateTabelaBancoSementes(TabelaBancoSementes transientObject) {

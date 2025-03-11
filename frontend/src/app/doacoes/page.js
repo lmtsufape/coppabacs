@@ -8,12 +8,7 @@ export default function doacoesPage() {
         diretorioAnterior="Home /"
         diretorioAtual="Doações"
         hrefAnterior="/"
-        table1="Data"
-        table2="Agricultor"
-        table3="Semente"
-        table4="Variedade"
-        table5="Ações"
-
+        tipoTransacao={"Doacao"}
       />
     </div>
   )

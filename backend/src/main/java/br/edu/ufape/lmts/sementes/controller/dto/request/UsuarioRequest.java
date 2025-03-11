@@ -54,7 +54,6 @@ public class UsuarioRequest {
 	private String estadoCivil;
 	private ConjugeRequest conjuge;
 	private String imagem;
-	private List<SementesRequest> sementes = new ArrayList<>();
 	@Valid
 	@NotNull(message = "Preenchimento obrigatório")
 	private TabelaPerguntaUsuarioRequest pergunta;
