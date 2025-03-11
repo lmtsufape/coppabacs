@@ -19,7 +19,7 @@ public class CPFExistsValidator implements ConstraintValidator<CPFExistsValidati
 	public boolean isValid(String cpf, ConstraintValidatorContext context) {
 		List<FieldMessage> list = new ArrayList<>();
 
-		if (cpf != null && facade.UsuarioCpfExists(cpf)) {
+		if (cpf != null && facade.UsuarioAtivoWithCpfExists(cpf)) {
 			list.add(new FieldMessage("CPF", "CPF já cadastrado"));
 		}
 

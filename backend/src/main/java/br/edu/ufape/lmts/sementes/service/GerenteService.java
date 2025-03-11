@@ -24,7 +24,8 @@ public class GerenteService implements GerenteServiceInterface {
 	}
 
 	public Gerente updateGerente(Gerente transientObject) {
-		findGerenteById(transientObject.getId());
+		Gerente g = findGerenteById(transientObject.getId());
+		transientObject.setSenha(g.getSenha());
 		return repository.save(transientObject);
 	}
 

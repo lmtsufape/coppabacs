@@ -21,14 +21,23 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	Optional<Usuario> findByAtivoTrueAndCpf(String cpf);
 
 	@Transactional(readOnly = true)
-	boolean existsByEmail(String email);
+	boolean existsByAtivoTrueAndEmail(String email);
 	
 	@Transactional(readOnly = true)
-	boolean existsByCpf(String cpf);
+	boolean existsByAtivoTrueAndCpf(String cpf);
 	
 	@Transactional(readOnly = true)
-	boolean existsByContato(String contato);
+	boolean existsByAtivoTrueAndContato(String contato);
 
+	@Transactional(readOnly = true)
+	boolean existsByAtivoTrueAndIdNotAndEmail(long id, String email);
+	
+	@Transactional(readOnly = true)
+	boolean existsByAtivoTrueAndIdNotAndContato(long id, String contato);
+	
+	@Transactional(readOnly = true)
+	boolean existsByAtivoTrueAndIdNotAndCpf(long id, String cpf);
+	
 	@Transactional(readOnly = true)
 	Optional<Usuario> findByAtivoTrueAndId(long id);
 
