@@ -26,7 +26,8 @@ public class AgricultorService implements AgricultorServiceInterface {
 	}
 
 	public Agricultor updateAgricultor(Agricultor transientObject) {
-		findAgricultorById(transientObject.getId());
+		Agricultor a = findAgricultorById(transientObject.getId());
+		transientObject.setSenha(a.getSenha());
 		return repository.save(transientObject);
 	}
 

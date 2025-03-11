@@ -25,7 +25,8 @@ public class CoppabacsService implements CoppabacsServiceInterface {
 	}
 
 	public Coppabacs updateCoppabacs(Coppabacs coppabacs) {
-		findCoppabacsById(coppabacs.getId());
+		Coppabacs c = findCoppabacsById(coppabacs.getId());
+		coppabacs.setSenha(c.getSenha());
 		return repository.save(coppabacs);
 	}
 

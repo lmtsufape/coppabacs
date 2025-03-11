@@ -46,7 +46,6 @@ public abstract class Usuario implements Serializable {
 	@EqualsAndHashCode.Include
 	private long id;
 	private String nome;
-	@Column(unique = true)
 	private String email;
 	private String senha;
 	private String nomePopular;
@@ -54,11 +53,9 @@ public abstract class Usuario implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
 	private Endereco endereco;
-	@Column(unique = true)
 	@EqualsAndHashCode.Include
 	private String cpf;
 	private Date dataNascimento;
-	@Column(unique = true)
 	private String contato;
 	private String imagem;
 	private String sexo;

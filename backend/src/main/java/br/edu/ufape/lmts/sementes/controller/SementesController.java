@@ -54,7 +54,7 @@ public class SementesController {
 
 	@PreAuthorize("permitAll()")
 	@GetMapping("sementes/banco/{bancoId}")
-	public List<SementesResponse> getAllSementesByBanco(@PathVariable("bancoId") long bancoId) {
+	public List<SementesResponse> getAllSementesByBanco(@PathVariable long bancoId) {
 		return facade.getAllSementesByBanco(bancoId)
 				.stream()
 				.map(SementesResponse::new)
@@ -63,10 +63,10 @@ public class SementesController {
 	
 	@GetMapping(value = "sementes/page")
 	public Page<SementesResponse> getPageSementePraga(
-			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
-			@RequestParam(value = "direction", defaultValue = "DESC") String direction) {
+			@RequestParam(defaultValue = "0") Integer page,
+			@RequestParam(defaultValue = "24") Integer linesPerPage,
+			@RequestParam(defaultValue = "id") String orderBy,
+			@RequestParam(defaultValue = "DESC") String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		Page<Sementes> list = facade.findPageSementes(pageRequest);
 		return list.map(SementesResponse::new);
@@ -135,11 +135,11 @@ public class SementesController {
 	
 	@GetMapping(value = "sementes/search")
 	public Page<SementesResponse> searchPageSementesByNomeAndDescricao(
-			@RequestParam(value = "value", defaultValue = "") String value,
-			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
-			@RequestParam(value = "direction", defaultValue = "DESC") String direction) {
+			@RequestParam(defaultValue = "") String value,
+			@RequestParam(defaultValue = "0") Integer page,
+			@RequestParam(defaultValue = "24") Integer linesPerPage,
+			@RequestParam(defaultValue = "id") String orderBy,
+			@RequestParam(defaultValue = "DESC") String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		Page<Sementes> list = facade.searchPageSementes(value, pageRequest);
 		return list.map(SementesResponse::new);

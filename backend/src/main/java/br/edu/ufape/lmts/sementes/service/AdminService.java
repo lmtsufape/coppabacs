@@ -21,7 +21,8 @@ public class AdminService implements AdminServiceInterface {
 	}
 
 	public Admin updateAdmin(Admin transientObject) {
-		findAdminById(transientObject.getId());
+		Admin a = findAdminById(transientObject.getId());
+		transientObject.setSenha(a.getSenha());
 		return repository.save(transientObject);
 	}
 

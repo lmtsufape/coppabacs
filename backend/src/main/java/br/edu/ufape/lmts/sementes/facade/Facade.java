@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Order;
-import org.springframework.data.util.Streamable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -82,6 +80,8 @@ import br.edu.ufape.lmts.sementes.service.infraestruturaHidricaService;
 import br.edu.ufape.lmts.sementes.service.sementeDoencaService;
 import br.edu.ufape.lmts.sementes.service.exception.AuthenticationException;
 import br.edu.ufape.lmts.sementes.service.exception.AuthorizationException;
+import br.edu.ufape.lmts.sementes.service.exception.ContatoExistsException;
+import br.edu.ufape.lmts.sementes.service.exception.CpfExistsException;
 import br.edu.ufape.lmts.sementes.service.exception.CustomDatabaseException;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
 import br.edu.ufape.lmts.sementes.service.exception.InvalidItemStateException;
@@ -92,7 +92,7 @@ public class Facade {
 
 	@Autowired
 	private UserDetailsServiceImpl userDetailsServiceImpl;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -144,15 +144,9 @@ public class Facade {
 
 	}
 
-	public Usuario updateUsuario(Usuario transientObject) {
-		if(transientObject.getSenha() != null) {
-			transientObject.setSenha(passwordEncoder.encode(transientObject.getSenha()));			
-		} else {
-			Usuario usuario = findUsuarioById(transientObject.getId());
-			transientObject.setSenha(usuario.getSenha());
-		}
-		
-		if(transientObject.getTabelaPerguntaUsuario().getResposta() != null) {
+	public Usuario updateUsuario(Usuario transientObject)
+			throws EmailExistsException, ContatoExistsException, CpfExistsException {
+		if (transientObject.getTabelaPerguntaUsuario().getResposta() != null) {
 			TabelaPerguntaUsuario pergunta = transientObject.getTabelaPerguntaUsuario();
 			pergunta.setResposta(passwordEncoder.encode(pergunta.getResposta()));
 		} else {
@@ -165,25 +159,37 @@ public class Facade {
 	public Usuario findUsuarioById(long id) {
 		return usuarioService.findUsuarioById(id);
 	}
-	
+
 	public Usuario findUsuarioByEmail(String email) {
 		return usuarioService.findUsuarioByEmail(email);
 	}
-	
+
 	public Usuario findUsuarioByCpf(String cpf) {
 		return usuarioService.findUsuarioByCpf(cpf);
 	}
-	
-	public boolean UsuarioEmailExists(String email) {
-		return usuarioService.emailExists(email);
+
+	public boolean UsuarioAtivoWithEmailExists(String email) {
+		return usuarioService.emailExistsInAtivo(email);
+	}
+
+	public boolean UsuarioAtivoWithEmailExists(long id, String email) {
+		return usuarioService.emailExistsInAtivo(id, email);
 	}
 	
-	public boolean UsuarioCpfExists(String cpf) {
-		return usuarioService.cpfExists(cpf);
+	public boolean UsuarioAtivoWithCpfExists(String cpf) {
+		return usuarioService.cpfExistsInAtivo(cpf);
 	}
 	
-	public boolean UsuarioContatoExists(String contato) {
-		return usuarioService.contatoExists(contato);
+	public boolean UsuarioAtivoWithCpfExists(long id, String cpf) {
+		return usuarioService.cpfExistsInAtivo(id, cpf);
+	}
+
+	public boolean UsuarioAtivoWithContatoExists(String contato) {
+		return usuarioService.contatoExistsInAtivo(contato);
+	}
+	
+	public boolean UsuarioAtivoWithContatoExists(long id, String contato) {
+		return usuarioService.contatoExistsInAtivo(id, contato);
 	}
 
 	public List<Usuario> getAllUsuario() {
@@ -201,50 +207,55 @@ public class Facade {
 	public void deleteUsuario(long id) {
 		usuarioService.deleteUsuario(id);
 	}
-	
+
 	public Usuario findLoggedUser() {
 		Usuario logged = findUsuarioByCpf(userDetailsServiceImpl.authenticated().getCpf());
-		if(logged == null)
+		if (logged == null)
 			throw new AuthenticationException("Usuário não autenticado");
 		return logged;
 	}
-	
-	
-	
-	//Auth--------------------------------------------------------------
+
+	// Auth--------------------------------------------------------------
 	@Autowired
 	private TokenService tokenService;
-	
+
 	public String generateRecoveryPasswordToken(TabelaPerguntaUsuario perguntaUsuario, String cpf) {
 		Usuario usuario = findUsuarioByCpf(cpf);
-		if(validateResposta(usuario.getTabelaPerguntaUsuario(), perguntaUsuario)) {
-			return tokenService.generateRecoveryPasswordToken(usuario.getCpf(), usuario.getTabelaPerguntaUsuario().getPergunta().getPergunta());
+		if (validateResposta(usuario.getTabelaPerguntaUsuario(), perguntaUsuario)) {
+			return tokenService.generateRecoveryPasswordToken(usuario.getCpf(),
+					usuario.getTabelaPerguntaUsuario().getPergunta().getPergunta());
 		} else {
 			throw new AuthenticationException("Resposta e/ou pergunta incorreta/s");
 		}
 	}
-	
+
 	private boolean validateResposta(TabelaPerguntaUsuario respostaEncriptada, TabelaPerguntaUsuario resposta) {
 		boolean validate;
 		validate = resposta.getPergunta().equals(respostaEncriptada.getPergunta());
 		validate &= passwordEncoder.matches(resposta.getResposta(), respostaEncriptada.getResposta());
 		return validate;
 	}
-	
+
 	public String generateLoginToken(AuthUser usuario) {
 		return tokenService.generateLoginToken(usuario);
 	}
-	
+
 	public String recoverCpfByToken(String token) {
 		return tokenService.recoverCpfByToken(token);
 	}
 
-	public void saveRecoveredPassword(String senha, String cpf) {
-		Usuario usuario = usuarioService.findUsuarioByCpf(cpf);
-		usuario.setSenha(passwordEncoder.encode(senha));
-		usuarioService.updateUsuario(usuario);
+	public void saveNewPasswordByCpf(String password, String cpf) {
+		usuarioService.updateUsuarioSenha(cpf, passwordEncoder.encode(password));
 	}
 	
+	public void updatePassword(String password, String newPassword) {
+		Usuario logged = findLoggedUser();
+		if (!passwordEncoder.matches(password, logged.getSenha()))
+			throw new AuthorizationException("Senha incorreta");
+		usuarioService.updateUsuarioSenha(logged.getCpf(), passwordEncoder.encode(newPassword));
+		
+	}
+
 	// Coppabacs--------------------------------------------------------------
 	@Autowired
 	private CoppabacsService coppabacsService;
@@ -258,7 +269,8 @@ public class Facade {
 		return coppabacsService.saveCoppabacs(newInstance);
 	}
 
-	public Coppabacs updateCoppabacs(Coppabacs transientObject) {
+	public Coppabacs updateCoppabacs(Coppabacs transientObject)
+			throws EmailExistsException, ContatoExistsException, CpfExistsException {
 		this.updateUsuario(transientObject);
 		return coppabacsService.updateCoppabacs(transientObject);
 	}
@@ -266,12 +278,15 @@ public class Facade {
 	public Coppabacs findCoppabacsById(long id) {
 		return coppabacsService.findCoppabacsById(id);
 	}
+
 	public Coppabacs findCoppabacsByEmail(String email) {
 		return coppabacsService.findCoppabacsByEmail(email);
 	}
+
 	public Coppabacs findCoppabacsByCpf(String cpf) {
 		return coppabacsService.findCoppabacsByCpf(cpf);
 	}
+
 	public Page<Coppabacs> findPageCoppabacs(Pageable pageRequest) {
 		return coppabacsService.findPageCoppabacs(pageRequest);
 	}
@@ -484,8 +499,8 @@ public class Facade {
 			findBancoSementesById(newInstance.getBancoSementes().getId());
 			Agricultor agricultor = findAgricultorById(newInstance.getAgricultor().getId());
 			validateAndProcessItens(newInstance.getItens(), false, agricultor);
-			RetiradaUsuario retiradaUsuario = retiradaUsuarioService.saveRetiradaUsuario(newInstance);			
-			
+			RetiradaUsuario retiradaUsuario = retiradaUsuarioService.saveRetiradaUsuario(newInstance);
+
 			return retiradaUsuario;
 		} catch (DataIntegrityViolationException e) {
 			throw new CustomDatabaseException("Erro ao salvar retirada de usuário", e);
@@ -499,7 +514,7 @@ public class Facade {
 	public RetiradaUsuario findRetiradaUsuarioById(long id) {
 		return retiradaUsuarioService.findRetiradaUsuarioById(id);
 	}
-	
+
 	public List<RetiradaUsuario> findRetiradaUsuarioByBancoSementesId(Long bancoId) {
 		return retiradaUsuarioService.getAllRetiradaUsuario();
 	}
@@ -542,7 +557,7 @@ public class Facade {
 	public TabelaBancoSementes findTabelaBancoSementesById(long id) {
 		return tabelaBancoSementesService.findTabelaBancoSementesById(id);
 	}
-	
+
 	public List<TabelaBancoSementes> findTabelaBancoSementesByBancoSementes(long bancoId) {
 		BancoSementes banco = new BancoSementes();
 		banco.setId(bancoId);
@@ -569,10 +584,9 @@ public class Facade {
 	@Autowired
 	private ItemService itemService;
 
-	private void validateAndProcessItens(List<Item> itens, boolean isDoacao, Agricultor agricultor ) {
+	private void validateAndProcessItens(List<Item> itens, boolean isDoacao, Agricultor agricultor) {
 		List<Item> itensComErro = itens.stream()
-				.filter(item -> !updateItemAndTabelaBancoSementes(item, isDoacao, agricultor))
-				.toList();
+				.filter(item -> !updateItemAndTabelaBancoSementes(item, isDoacao, agricultor)).toList();
 
 		if (!itensComErro.isEmpty()) {
 			throw new InvalidItemStateException("Itens com erro: " + itensComErro);
@@ -583,17 +597,18 @@ public class Facade {
 		TabelaBancoSementes tabelaBancoSementes = findTabelaBancoSementesById(item.getTabelaBancoSementes().getId());
 		agricultor = findAgricultorById(agricultor.getId());
 		if (tabelaBancoSementes != null) {
-			double newPeso = isDoacao ? tabelaBancoSementes.getPeso() + item.getPeso() : tabelaBancoSementes.getPeso() - item.getPeso();
+			double newPeso = isDoacao ? tabelaBancoSementes.getPeso() + item.getPeso()
+					: tabelaBancoSementes.getPeso() - item.getPeso();
 			if (newPeso < 0) {
 				return false;
 			}
 			try {
-				if(!isDoacao){
+				if (!isDoacao) {
 					Sementes semente = item.getTabelaBancoSementes().getSemente();
-					if(!agricultor.getSementes().contains(semente)) {
-                        agricultor.addSementes(semente);
+					if (!agricultor.getSementes().contains(semente)) {
+						agricultor.addSementes(semente);
 						updateAgricultor(agricultor);
-                    }
+					}
 				}
 				tabelaBancoSementes.setPeso(newPeso);
 				tabelaBancoSementesService.saveTabelaBancoSementes(tabelaBancoSementes);
@@ -647,7 +662,8 @@ public class Facade {
 		return gerenteService.saveGerente(newInstance);
 	}
 
-	public Gerente updateGerente(Gerente transientObject) {
+	public Gerente updateGerente(Gerente transientObject)
+			throws EmailExistsException, ContatoExistsException, CpfExistsException {
 		this.updateUsuario(transientObject);
 		return gerenteService.updateGerente(transientObject);
 	}
@@ -655,12 +671,15 @@ public class Facade {
 	public Gerente findGerenteById(long id) {
 		return gerenteService.findGerenteById(id);
 	}
+
 	public Gerente findGerenteByEmail(String email) {
 		return gerenteService.findGerenteByEmail(email);
 	}
+
 	public Gerente findGerenteByCpf(String cpf) {
 		return gerenteService.findGerenteByCpf(cpf);
 	}
+
 	public List<Gerente> getAllGerente() {
 		return gerenteService.getAllGerente();
 	}
@@ -783,7 +802,7 @@ public class Facade {
 		}
 
 		transacao.getItens().forEach(item -> {
-			TabelaBancoSementes origem = findTabelaBancoSementesById(item.getTabelaBancoSementes().getId()) ;
+			TabelaBancoSementes origem = findTabelaBancoSementesById(item.getTabelaBancoSementes().getId());
 			TabelaBancoSementes destino = findTabelaBancoSementesById(transacao.getTabelaBancoSementes().getId());
 			if (!origem.equals(destino)) {
 				double peso = item.getPeso();
@@ -791,7 +810,8 @@ public class Facade {
 				destino.setPeso(destino.getPeso() + peso);
 
 				if (origem.getPeso() < peso) {
-					throw new IllegalArgumentException("Peso insuficiente na tabela de origem para transferir " + peso + " unidades.");
+					throw new IllegalArgumentException(
+							"Peso insuficiente na tabela de origem para transferir " + peso + " unidades.");
 				}
 
 				tabelaBancoSementesService.saveTabelaBancoSementes(origem);
@@ -836,10 +856,9 @@ public class Facade {
 	@Autowired
 	private PostServiceInterface postService;
 
-	public Post savePost(Post post) {
+	public Post savePost(Post post) throws EmailExistsException, ContatoExistsException, CpfExistsException {
 		Usuario autor = findLoggedUser();
-		if(!(autor.getRoles().contains(TipoUsuario.COPPABACS)
-				|| autor.getRoles().contains(TipoUsuario.ADMIN))) {
+		if (!(autor.getRoles().contains(TipoUsuario.COPPABACS) || autor.getRoles().contains(TipoUsuario.ADMIN))) {
 			throw new AuthorizationException("Usuário não autorizado.");
 		}
 		post.setAutor(autor);
@@ -849,10 +868,9 @@ public class Facade {
 		return saved;
 	}
 
-
 	public Post updatePost(Post transientObject) {
-		Usuario logged  = findLoggedUser();
-		if(!logged.equals(transientObject.getAutor()))
+		Usuario logged = findLoggedUser();
+		if (!logged.equals(transientObject.getAutor()))
 			throw new AuthorizationException("Usuário não autorizado.");
 		return postService.updatePost(transientObject);
 	}
@@ -880,20 +898,21 @@ public class Facade {
 	public Page<Post> findPageVisiblePost(Pageable pageRequest) {
 		return postService.findPageVisiblePost(pageRequest);
 	}
-	
-	public void deletePost(Post persistentObject) {
-		Usuario logged  = findLoggedUser();
-		if(!logged.equals(persistentObject.getAutor()))
+
+	public void deletePost(Post persistentObject)
+			throws EmailExistsException, ContatoExistsException, CpfExistsException {
+		Usuario logged = findLoggedUser();
+		if (!logged.equals(persistentObject.getAutor()))
 			throw new AuthorizationException("Usuário não autorizado.");
 		persistentObject.getAutor().removePost(persistentObject);
 		usuarioService.updateUsuario(persistentObject.getAutor());
 		postService.deletePost(persistentObject);
 	}
 
-	public void deletePost(long id) {
+	public void deletePost(long id) throws EmailExistsException, ContatoExistsException, CpfExistsException {
 		Post persistentObject = findPostById(id);
-		Usuario logged  = findLoggedUser();
-		if(!logged.equals(persistentObject.getAutor()))
+		Usuario logged = findLoggedUser();
+		if (!logged.equals(persistentObject.getAutor()))
 			throw new AuthorizationException("Usuário não autorizado.");
 		persistentObject.getAutor().removePost(persistentObject);
 		usuarioService.updateUsuario(persistentObject.getAutor());
@@ -927,7 +946,7 @@ public class Facade {
 
 	public List<Sementes> getAllSementesByBanco(long id) {
 		List<TabelaBancoSementes> tbs = findTabelaBancoSementesByBancoSementes(id);
-		return tbs.stream().map(x-> x.getSemente()).toList();
+		return tbs.stream().map(x -> x.getSemente()).toList();
 	}
 
 	public Page<Sementes> findPageSementes(Pageable pageRequest) {
@@ -1127,7 +1146,7 @@ public class Facade {
 		return adminService.saveAdmin(newInstance);
 	}
 
-	public Admin updateAdmin(Admin oldObject) {
+	public Admin updateAdmin(Admin oldObject) throws EmailExistsException, ContatoExistsException, CpfExistsException {
 		this.updateUsuario(oldObject);
 		return adminService.updateAdmin(oldObject);
 	}
@@ -1135,7 +1154,7 @@ public class Facade {
 	public Admin findAdminById(Long id) {
 		return adminService.findAdminById(id);
 	}
-	
+
 	public Usuario findAdminByCpf(String cpf) {
 		return adminService.findAdminByCpf(cpf);
 	}
@@ -1159,49 +1178,50 @@ public class Facade {
 	// Agricultor--------------------------------------------------------------
 	@Autowired
 	private AgricultorService agricultorService;
-	
+
 	private Agricultor saveAgricultorA(Agricultor newInstance) throws EmailExistsException {
 		bancoSementesService.findBancoSementesById(newInstance.getBancoSementes().getId());
 		this.saveUsuario(newInstance);
 		return agricultorService.saveAgricultor(newInstance);
 	}
 
-	public Agricultor addSementeAgricultor(List<Sementes> sementes, long agricultorId){
+	public Agricultor addSementeAgricultor(List<Sementes> sementes, long agricultorId)
+			throws EmailExistsException, ContatoExistsException, CpfExistsException {
 		Agricultor agricultor = findAgricultorById(agricultorId);
-		sementes.forEach(semente-> {
+		sementes.forEach(semente -> {
 			Sementes sementeSalvo = findSementesById(semente.getId());
-				if (!agricultor.getSementes().contains(sementeSalvo)) {
-					agricultor.addSementes(sementeSalvo);
-				}
+			if (!agricultor.getSementes().contains(sementeSalvo)) {
+				agricultor.addSementes(sementeSalvo);
 			}
-		);
+		});
 		return updateAgricultor(agricultor);
 	}
 
-	public Agricultor removeSementeAgricultor(List<Sementes> sementes, long agricultorId){
+	public Agricultor removeSementeAgricultor(List<Sementes> sementes, long agricultorId)
+			throws EmailExistsException, ContatoExistsException, CpfExistsException {
 		Agricultor agricultor = findAgricultorById(agricultorId);
-		sementes.forEach(semente-> {
-            agricultor.getSementes().remove(semente);
-		}
-		);
+		sementes.forEach(semente -> {
+			agricultor.getSementes().remove(semente);
+		});
 		return updateAgricultor(agricultor);
 	}
-	
+
 	public void refuseAgricultor(long id) {
 		agricultorService.refuseAgricultor(id);
 	}
-	
+
 	public Agricultor saveAgricultor(Agricultor newInstance) throws EmailExistsException {
 		newInstance.addRole(TipoUsuario.AGRICULTOR);
 		return saveAgricultorA(newInstance);
 	}
-	
+
 	public Agricultor saveAgricultorUsuario(Agricultor newInstance) throws EmailExistsException {
 		newInstance.addRole(TipoUsuario.USUARIO);
 		return saveAgricultorA(newInstance);
 	}
 
-	public Agricultor updateAgricultor(Agricultor transientObject) {
+	public Agricultor updateAgricultor(Agricultor transientObject)
+			throws EmailExistsException, ContatoExistsException, CpfExistsException {
 		this.updateUsuario(transientObject);
 		return agricultorService.updateAgricultor(transientObject);
 	}
@@ -1209,20 +1229,23 @@ public class Facade {
 	public Agricultor findAgricultorById(long id) {
 		return agricultorService.findAgricultorById(id);
 	}
+
 	public Agricultor findAgricultorByEmail(String email) {
 		return agricultorService.findAgricultorByEmail(email);
 	}
+
 	public Agricultor findAgricultorByCpf(String cpf) {
 		return agricultorService.findAgricultorByCpf(cpf);
 	}
+
 	public List<Agricultor> getAllAgricultor() {
 		return agricultorService.getAllByRole(TipoUsuario.AGRICULTOR);
 	}
-	
+
 	public Page<Agricultor> findPageAgricultor(Pageable pageRequest) {
 		return agricultorService.findPageAgricultor(pageRequest);
 	}
-	
+
 	public List<Agricultor> getAllAgricultorUsuario() {
 		return agricultorService.getAllByRole(TipoUsuario.USUARIO);
 	}
@@ -1328,7 +1351,7 @@ public class Facade {
 	public DoacaoUsuario findDoacaoUsuarioById(long id) {
 		return doacaoUsuarioService.findDoacaoUsuarioById(id);
 	}
-	
+
 	public List<DoacaoUsuario> findDoacaoUsuarioByBancoSementesId(long bancoSementesId) {
 		BancoSementes banco = findBancoSementesById(bancoSementesId);
 		return doacaoUsuarioService.findDoacaoUsuarioByBancoSementes(banco);

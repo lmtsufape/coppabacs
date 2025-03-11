@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -28,6 +29,9 @@ import br.edu.ufape.lmts.sementes.controller.dto.request.AgricultorRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.request.AgricultorUpdateRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.request.SementesRequest;
 import br.edu.ufape.lmts.sementes.controller.dto.response.AgricultorResponse;
+import br.edu.ufape.lmts.sementes.controller.exceptions.ConflictingFieldsException;
+import br.edu.ufape.lmts.sementes.controller.exceptions.FieldMessage;
+import br.edu.ufape.lmts.sementes.controller.validation.ValidateUsuario;
 import br.edu.ufape.lmts.sementes.facade.Facade;
 import br.edu.ufape.lmts.sementes.model.Agricultor;
 import br.edu.ufape.lmts.sementes.service.exception.EmailExistsException;
@@ -35,12 +39,15 @@ import br.edu.ufape.lmts.sementes.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
 
 @RestController
+@Validated
 @RequestMapping("${prefix.url}")
 public class AgricultorController {
 	@Autowired
 	private Facade facade;
 	@Autowired
 	private ModelMapper modelMapper;
+	@Autowired
+	private ValidateUsuario validateUsuario;
 
 	@GetMapping("agricultor")
 	public List<AgricultorResponse> getAllAgricultor() {
@@ -107,6 +114,10 @@ public class AgricultorController {
 
 	@PutMapping("agricultor/{id}")
 	public AgricultorResponse updateAgricultor(@PathVariable Long id, @Valid @RequestBody AgricultorUpdateRequest obj) {
+		List<FieldMessage> listErrors = validateUsuario.validateUsuarioUpdate(obj, id);
+		if (!listErrors.isEmpty())
+			throw new ConflictingFieldsException(listErrors);
+		
 		try {
 			Agricultor oldObject = facade.findAgricultorById(id);
 			modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
@@ -117,13 +128,14 @@ public class AgricultorController {
 			typeMapper.map(obj, oldObject);
 			return new AgricultorResponse(facade.updateAgricultor(oldObject));
 		} catch (RuntimeException e) {
-			if (!(e instanceof ObjectNotFoundException))
-				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
-			else
+			if (!(e instanceof ObjectNotFoundException)) {
+				e.printStackTrace();
+				throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());				
+			} else
 				throw e;
 		}
 
-	}
+	}	
 
 	@DeleteMapping("agricultor/{id}")
 	public String deleteAgricultor(@PathVariable Long id) {
