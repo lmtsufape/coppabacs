@@ -5,9 +5,6 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 import br.edu.ufape.lmts.sementes.config.SpringApplicationContext;
 import br.edu.ufape.lmts.sementes.model.Usuario;
 import lombok.Getter;
@@ -33,11 +30,14 @@ public  class UsuarioResponse  {
 	private String estadoCivil;
 	private List<PostResponse> posts;
 	private TabelaPerguntaUsuarioResponse pergunta;
+	private long bancoId;
 
 	public UsuarioResponse(Usuario obj) {
 		ModelMapper modelMapper = (ModelMapper) SpringApplicationContext.getBean("modelMapper");
 		modelMapper.map(obj, this);
-		pergunta.setPergunta(obj.getTabelaPerguntaUsuario().getPergunta());
+		if (obj.getTabelaPerguntaUsuario() != null) {
+			pergunta.setPergunta(obj.getTabelaPerguntaUsuario().getPergunta());
+		}
 	}
 
 }
