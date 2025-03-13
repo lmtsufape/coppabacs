@@ -113,7 +113,7 @@ export default function Dadosobjetos({ formik, editar }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values?.objetos?.bombona}
-                required />
+                 />
               {formik.touched.bombona && formik.errors.objetos.bombona ? (
                 <span className={style.form__error}>{formik.errors.objetos.bombona}</span>
               ) : null}
@@ -130,7 +130,7 @@ export default function Dadosobjetos({ formik, editar }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values?.objetos?.peneiraSelecao}
-                required />
+                 />
               {formik.touched.peneiraSelecao && formik.errors.objetos.peneiraSelecao ? (
                 <span className={style.form__error}>{formik.errors.objetos.peneiraSelecao}</span>
               ) : null}
@@ -147,7 +147,7 @@ export default function Dadosobjetos({ formik, editar }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values?.objetos?.balanca}
-                required />
+                 />
               {formik.touched.balanca && formik.errors.objetos.balanca ? (
                 <span className={style.form__error}>{formik.errors.objetos.balanca}</span>
               ) : null}
@@ -164,7 +164,7 @@ export default function Dadosobjetos({ formik, editar }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values?.objetos?.armario}
-                required />
+                 />
               {formik.touched.armario && formik.errors.objetos.armario ? (
                 <span className={style.form__error}>{formik.errors.objetos.armario}</span>
               ) : null}
@@ -181,7 +181,7 @@ export default function Dadosobjetos({ formik, editar }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values?.objetos?.plantadeira}
-                required />
+                 />
               {formik.touched.plantadeira && formik.errors.objetos.plantadeira ? (
                 <span className={style.form__error}>{formik.errors.objetos.plantadeira}</span>
               ) : null}
@@ -198,7 +198,7 @@ export default function Dadosobjetos({ formik, editar }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values?.objetos?.lona}
-                required />
+                 />
               {formik.touched.lona && formik.errors.objetos.lona ? (
                 <span className={style.form__error}>{formik.errors.objetos.lona}</span>
               ) : null}
@@ -215,7 +215,7 @@ export default function Dadosobjetos({ formik, editar }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values?.objetos?.batedeiraCereal}
-                required />
+                 />
               {formik.touched.batedeiraCereal && formik.errors.objetos.batedeiraCereal ? (
                 <span className={style.form__error}>{formik.errors.objetos.batedeiraCereal}</span>
               ) : null}
@@ -232,7 +232,7 @@ export default function Dadosobjetos({ formik, editar }) {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.historiaBanco}
-              required
+              
               style={{ height: '10em', resize: 'none' }}
             />
             {formik.touched.historiaBanco && formik.errors.historiaBanco ? (

@@ -218,7 +218,7 @@ export default function DadosSementes({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.cultura.cultura}
-                                required />
+                                 />
                             {formik.touched.cultura && formik.errors.cultura?.cultura ? (
                                 <span className={styles.form__error}>{formik.errors.cultura.cultura}</span>
                             ) : null}
@@ -233,7 +233,7 @@ export default function DadosSementes({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.cultura.genero}
-                                required />
+                                 />
                             {formik.touched.genero && formik.errors.cultura?.genero ? (
                                 <span className={styles.form__error}>{formik.errors.cultura.genero}</span>
                             ) : null}
@@ -249,7 +249,7 @@ export default function DadosSementes({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.nome}
-                                required />
+                                 />
                             {formik.touched.nome && formik.errors.nome ? (
                                 <span className={styles.form__error}>{formik.errors.nome}</span>
                             ) : null}
@@ -264,7 +264,7 @@ export default function DadosSementes({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.nomePopular}
-                                required />
+                                 />
                             {formik.touched.nomePopular && formik.errors.nomePopular ? (
                                 <span className={styles.form__error}>{formik.errors.nomePopular}</span>
                             ) : null}
@@ -327,7 +327,7 @@ export default function DadosSementes({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.regioesAdaptacaoCultivo}
-                                required />
+                                 />
                             {formik.touched.regioesAdaptacaoCultivo && formik.errors.regioesAdaptacaoCultivo ? (
                                 <span className={styles.form__error}>{formik.errors.regioesAdaptacaoCultivo}</span>
                             ) : null}
@@ -343,7 +343,7 @@ export default function DadosSementes({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.altitudeMinima}
-                                required />
+                                 />
                             {formik.touched.altitudeMinima && formik.errors.altitudeMinima ? (
                                 <span className={styles.form__error}>{formik.errors.altitudeMinima}</span>
                             ) : null}
@@ -359,7 +359,7 @@ export default function DadosSementes({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.altitudeMaxima}
-                                required />
+                                 />
                             {formik.touched.altitudeMaxima && formik.errors.altitudeMaxima ? (
                                 <span className={styles.form__error}>{formik.errors.altitudeMaxima}</span>
                             ) : null}
@@ -374,7 +374,7 @@ export default function DadosSementes({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.doencas}
-                                required />
+                                 />
                             {formik.touched.doencas && formik.errors.doencas ? (
                                 <span className={styles.form__error}>{formik.errors.doencas}</span>
                             ) : null}
@@ -390,7 +390,7 @@ export default function DadosSementes({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.pragas}
-                                required />
+                                 />
                             {formik.touched.pragas && formik.errors.pragas ? (
                                 <span className={styles.form__error}>{formik.errors.pragas}</span>
                             ) : null}

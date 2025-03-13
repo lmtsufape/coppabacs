@@ -169,7 +169,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.nome}
-                required
+                
               />
             </div>
             <div>
@@ -185,7 +185,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 }}
                 onBlur={formik.handleBlur}
                 value={formik.values.contato}
-                required
+                
               />
               {formik.touched.contato && formik.errors.contato ? (
                 <span className={style.form__error}>{formik.errors.contato}</span>
@@ -204,7 +204,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 }}
                 onBlur={formik.handleBlur}
                 value={formik.values.cpf}
-                required
+                
               />
               {formik.touched.cpf && formik.errors.cpf ? (
                 <span className={style.form__error}>{formik.errors.cpf}</span>
@@ -222,7 +222,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.nomePopular}
-                required
+                
               />
               {formik.touched.nomePopular && formik.errors.nomePopular ? (
                 <span className={style.form__error}>{formik.errors.nomePopular}</span>
@@ -240,7 +240,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.dataNascimento}
-                required
+                
               />
               {formik.touched.dataNascimento && formik.errors.dataNascimento ? (
                 <span className={style.form__error}>{formik.errors.dataNascimento}</span>
@@ -258,7 +258,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.sexo}
-                required
+                
               >
                 <option value="" >Escolha ...</option>
                 <option value="Masculino">Masculino</option>
@@ -280,7 +280,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.bancoId}
-                  required
+                  
                 >
                   <option value="" >Selecione...</option>
                   {bancos.map((bancos, index) => {

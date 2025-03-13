@@ -94,7 +94,7 @@ export default function DadosEndereco({ formik, editar }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.endereco.estado}
-                required
+                
               />
               {formik.touched.estado && formik.errors.estado ? (
                 <span className={style.form__error}>{formik.errors.endereco.estado}</span>
@@ -112,7 +112,7 @@ export default function DadosEndereco({ formik, editar }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.endereco.cidade}
-                required
+                
               />
               {formik.touched.cidade && formik.errors.cidade ? (
                 <span className={style.form__error}>{formik.errors.endereco.cidade}</span>
@@ -130,7 +130,7 @@ export default function DadosEndereco({ formik, editar }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.endereco.bairro}
-                required
+                
               />
               {formik.touched.bairro && formik.errors.bairro ? (
                 <span className={style.form__error}>{formik.errors.endereco.bairro}</span>
@@ -147,7 +147,7 @@ export default function DadosEndereco({ formik, editar }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.endereco.logradouro}
-                required
+                
               />
               {formik.touched.logradouro && formik.errors.endereco.logradouro ? (
                 <span className={style.form__error}>{formik.errors.endereco.logradouro}</span>
@@ -162,7 +162,7 @@ export default function DadosEndereco({ formik, editar }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.endereco.numero}
-                required
+                
               />
               {formik.touched.numero && formik.errors.endereco.numero ? (
                 <span className={style.form__error}>{formik.errors.endereco.numero}</span>

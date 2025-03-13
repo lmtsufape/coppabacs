@@ -166,7 +166,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.caracteristicasAgronomicas.cicloFenologico}
-                                required />
+                                 />
                             {formik.touched.cicloFenologico && formik.errors.cicloFenologico ? (
                                 <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.cicloFenologico}</span>
                             ) : null}
@@ -181,7 +181,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.caracteristicasAgronomicas.standRecomendado}
-                                required />
+                                 />
                             {formik.touched.stand && formik.errors.stand ? (
                                 <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.stand}</span>
                             ) : null}
@@ -196,7 +196,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.caracteristicasAgronomicas.produtividade}
-                                required />
+                                 />
                             {formik.touched.produtividade && formik.errors.produtividade ? (
                                 <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.produtividade}</span>
                             ) : null}
@@ -211,7 +211,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.caracteristicasAgronomicas.altitudePlanta}
-                                required />
+                                 />
                             {formik.touched.altitudePlanta && formik.errors.caracteristicasAgronomicas.altitudePlanta ? (
                                 <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.caracteristicasAgronomicas.altitudePlanta}</span>
                             ) : null}
@@ -226,7 +226,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.caracteristicasAgronomicas.PesoMilgraos}
-                                required />
+                                 />
                             {formik.touched.PesoMilgraos && formik.errors.PesoMilgraos ? (
                                 <span className={style.form__error}>{formik.errors.caracteristicasAgronomicas.PesoMilgraos}</span>
                             ) : null}
@@ -241,7 +241,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.caracteristicasAgronomicas.PesoHectolitro}
-                                required />
+                                 />
                             {formik.touched.PesoHectolitro && formik.errors.PesoHectolitro ? (
                                 <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.PesoHectolitro}</span>
                             ) : null}
@@ -256,7 +256,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.caracteristicasAgronomicas.tipoGrao}
-                                required />
+                                 />
                             {formik.touched.tipoGrao && formik.errors.caracteristicasAgronomicas.tipoGrao ? (
                                 <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.tipoGrao}</span>
                             ) : null}
@@ -271,7 +271,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.caracteristicasAgronomicas.corGrao}
-                                required />
+                                 />
                             {formik.touched.corGrao && formik.errors.corGrao ? (
                                 <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.corGrao}</span>
                             ) : null}
@@ -286,7 +286,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.caracteristicasAgronomicas.corCaule}
-                                required />
+                                 />
                             {formik.touched.corCaule && formik.errors.corCaule ? (
                                 <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.corCaule}</span>
                             ) : null}
@@ -301,7 +301,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.caracteristicasAgronomicas.corFolha}
-                                required />
+                                 />
                             {formik.touched.corFolha && formik.errors.corFolha ? (
                                 <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.corFolha}</span>
                             ) : null}
@@ -316,7 +316,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.caracteristicasAgronomicas.corFLor}
-                                required />
+                                 />
                             {formik.touched.corFLor && formik.errors.corFLor ? (
                                 <span className={style.form__error}>{formik.errors.caracteristicasAgronomicas.corFLor}</span>
                             ) : null}
@@ -331,7 +331,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.caracteristicasAgronomicas.empalhamento.tipo}
-                                required />
+                                 />
                             {formik.touched.empalhamento && formik.errors.empalhamento.tipo ? (
                                 <span className={styles.form__error}>{formik.errors.empalhamento.tipo}</span>
                             ) : null}
@@ -346,7 +346,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.caracteristicasAgronomicas.habitoCrescimento}
-                                required />
+                                 />
                             {formik.touched.habitoCrescimento && formik.errors.habitoCrescimento ? (
                                 <span className={styles.form__error}>{formik.errors.caracteristicasAgronomicas.habitoCrescimento}</span>
                             ) : null}
