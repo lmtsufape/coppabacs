@@ -5,10 +5,17 @@ import styles from "./table.module.scss";
 import { useState } from "react";
 import { getStorageItem } from "@/utils/localStore";
 import Table from "@/components/Table";
+import { deleteSemente } from "@/api/sementes/deleteSemente";
+import ExcluirButton from "@/components/ExcluirButton";
 
 export default function TableSementes({listSementes, onSelectSemente}) {
 
   const [role, setRole] = useState(getStorageItem("userRole"));
+
+  const handleDeleteSementes = async (sementesId) => {
+    await deleteSemente(sementesId);
+    setSementes(listSementes.filter(sementes => sementes.id !== sementesId))
+  }
   
   const biggerContent = (isPublic) => { 
     return listSementes.map((semente, index) => {
@@ -21,6 +28,9 @@ export default function TableSementes({listSementes, onSelectSemente}) {
             <td>
               <div>
                 <Image src="/assets/iconOlho.svg" alt="Visualizar" onClick={ () => onSelectSemente(semente)} width={27} height={26} />
+                {role === "ROLE_COPPABACS" && (
+                  <ExcluirButton itemId={semente.id} onDelete={handleDeleteSementes} />
+                )}
               </div>
             </td>
           }

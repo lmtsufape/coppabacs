@@ -142,7 +142,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.toleranciaAdversidades.altaTemperatura}
-                                required
+                                
                             >
 
                                 <option value="" >Selecione...</option>
@@ -167,7 +167,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.toleranciaAdversidades.baixaTemperatura}
-                                required
+                                
                             >
                                 <option value="" >Selecione...</option>
                                 <option value="SEMINFORMACAO">Sem informação</option>
@@ -189,7 +189,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.toleranciaAdversidades.geada}
-                                required
+                                
                             >
                                 <option value="" >Selecione...</option>
                                 <option value="SEMINFORMACAO">Sem informação</option>
@@ -211,7 +211,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.toleranciaAdversidades.chuvaExcessiva}
-                                required
+                                
                             >
                                 <option value="" >Selecione...</option>
                                 <option value="SEMINFORMACAO">Sem informação</option>
@@ -233,7 +233,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.toleranciaAdversidades.seca}
-                                required
+                                
                             >
                                 <option value="" >Selecione...</option>
                                 <option value="SEMINFORMACAO">Sem informação</option>
@@ -255,7 +255,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.toleranciaAdversidades.ventos}
-                                required
+                                
                             >
                                 <option value="" >Selecione...</option>
                                 <option value="SEMINFORMACAO">Sem informação</option>
@@ -277,7 +277,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.toleranciaAdversidades.salinidade}
-                                required
+                                
                             >
                                 <option value="" >Selecione...</option>
                                 <option value="SEMINFORMACAO">Sem informação</option>
@@ -298,7 +298,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.toleranciaAdversidades.toxidadeAluminio}
-                                required
+                                
                             >
                                 <option value="" >Selecione...</option>
                                 <option value="SEMINFORMACAO">Sem informação</option>
@@ -320,7 +320,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.toleranciaAdversidades.soloArgiloso}
-                                required
+                                
                             >
                                 <option value="" >Selecione...</option>
                                 <option value="SEMINFORMACAO">Sem informação</option>
@@ -342,7 +342,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.toleranciaAdversidades.soloArenoso}
-                                required
+                                
                             >
                                 <option value="" >Selecione...</option>
                                 <option value="SEMINFORMACAO">Sem informação</option>
@@ -364,7 +364,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.toleranciaAdversidades.soloAcido}
-                                required
+                                
                             >
                                 <option value="" >Selecione...</option>
                                 <option value="SEMINFORMACAO">Sem informação</option>
@@ -386,7 +386,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.toleranciaAdversidades.soloBaixaFertilidade}
-                                required
+                                
                             >
                                 <option value="" >Selecione...</option>
                                 <option value="SEMINFORMACAO">Sem informação</option>
