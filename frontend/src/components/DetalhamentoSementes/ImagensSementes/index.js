@@ -92,6 +92,8 @@ export default function ImagensSementes({ formik, editar }) {
       return;
     }
 
+    alert("Imagem enviada com sucesso! Agora clique em Salvar para finalizar o cadastro da semente.");
+
     console.log("Enviando imagens...");
     try {
       mutate(fileObjects);
