@@ -48,6 +48,7 @@ export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior,
     const [imageUrls, setImageUrls] = useState({});
     const [usuario, setUsuario] = useState([]);
     const [selectedImage, setSelectedImage] = useState(null);
+    const [sortOption, setSortOption] = useState('recentes');
 
     const mutationGetFuncionario = useMutation(coppabacsCpf => getCoordenadorCpf(coppabacsCpf), {
         onSuccess: (res) => {
@@ -76,6 +77,25 @@ export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior,
         }
     }
 
+    const handleSortChange = (event) => {
+        setSortOption(event.target.value);
+    };
+
+    const sortPublicacoes = (publicacoes, option) => {
+        switch (option) {
+            case 'recentes':
+                return publicacoes.sort((a, b) => new Date(b.data) - new Date(a.data));
+            case 'antigos':
+                return publicacoes.sort((a, b) => new Date(a.data) - new Date(b.data));
+            case 'crescente':
+                return publicacoes.sort((a, b) => a.titulo.localeCompare(b.titulo));
+            case 'decrescente':
+                return publicacoes.sort((a, b) => b.titulo.localeCompare(a.titulo));
+            default:
+                return publicacoes;
+        }
+    };
+
     const { status, mutate } = useMutation(
         async () => {
             return getAllPublicacoes();
@@ -101,7 +121,7 @@ export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior,
             ? publicacoes.filter(publicacao => publicacao.autor.id === usuario.id)
             : publicacoes;
 
-        const sorted = sortPublicacoesById(filtered);
+        const sorted = sortPublicacoes(filtered, sortOption);
         const searched = sorted.filter(publicacao =>
             publicacao.titulo.toLowerCase().includes(searchTerm.toLowerCase()) ||
             publicacao.texto.toLowerCase().includes(searchTerm.toLowerCase())
@@ -111,7 +131,7 @@ export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior,
         const dates = searched.map(publicacao => parseDate(publicacao.data));
         console.log("Datas das publicações filtradas:", dates);
         console.log("Publicações ordenadas:", searched);
-    }, [publicacoes, minhasPublicacoes, usuario, searchTerm]);
+    }, [publicacoes, minhasPublicacoes, usuario, searchTerm, sortOption]);
 
     useEffect(() => {
         filteredPublicacoes.forEach(publicacao => {
@@ -154,6 +174,14 @@ export default function Mural({ diretorioAnterior, diretorioAtual, hrefAnterior,
             )}
             <div>
                 <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+            </div>
+            <div className={style.filtro}>
+                <select value={sortOption} onChange={handleSortChange} className={`${style.filtroPostagens} ${style.filtroImagem} `}>
+                    <option value="recentes">Mais recentes</option>
+                    <option value="antigos">Mais antigos</option>
+                    <option value="crescente">A - Z: Crescente</option>
+                    <option value="decrescente">A - Z: Decrescente</option>
+                </select>
             </div>
 
             {filteredPublicacoes.map((publicacao, index) => (
