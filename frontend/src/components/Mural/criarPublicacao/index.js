@@ -19,7 +19,7 @@ export default function CriarPostagem({ hrefAnterior, diretorioAtual, diretorioA
         texto: "",
         titulo: "",
         imagem: [],
-        data:""
+        data: ""
     }
 
     const validateSchema = Yup.object().shape({
@@ -28,7 +28,7 @@ export default function CriarPostagem({ hrefAnterior, diretorioAtual, diretorioA
             .required('Obrigatório'),
         texto: Yup.string()
             .required('Obrigatório'),
-   
+
         imagens: Yup.array().of(Yup.mixed().required('Obrigatório')).min(1, 'Obrigatório')
     });
 
@@ -37,7 +37,7 @@ export default function CriarPostagem({ hrefAnterior, diretorioAtual, diretorioA
             return postPublicacao(newPost);
         }, {
         onSuccess: () => {
-            window.location.href= '/mural';
+            window.location.href = '/mural';
 
         },
         onError: (error) => {
@@ -83,7 +83,7 @@ export default function CriarPostagem({ hrefAnterior, diretorioAtual, diretorioA
                 titulo: values.titulo,
                 texto: values.texto,
                 imagem: imageUrls,
-                data: new Date().toISOString() 
+                data: new Date().toISOString()
             };
 
             console.log("Submitting post:", newPost);
@@ -153,7 +153,7 @@ export default function CriarPostagem({ hrefAnterior, diretorioAtual, diretorioA
                                     ))}
                                 </div>
                             )}
-<Field type="hidden" name="data" />
+                            <Field type="hidden" name="data" />
                             <div className={style.container__ContainerForm_buttons}>
                                 <button type="submit" className={`${style.container__ContainerForm_buttons_linkWhite} ${style.button}`}>
                                     <h1>Finalizar</h1>

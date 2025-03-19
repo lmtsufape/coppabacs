@@ -4,6 +4,7 @@ import styles from '@/components/DetalhamentoSementes/ImagensSementes/imagensSem
 import { useMutation } from 'react-query';
 import { postArquivo } from '@/api/arquivos/postArquivo';
 import { getArquivo } from '@/api/arquivos/getArquivo';
+import { deleteArquivo } from '@/api/arquivos/deleteArquivo';
 
 export default function ImagensSementes({ formik, editar }) {
   const [selectedImages, setSelectedImages] = useState([]);
@@ -23,7 +24,7 @@ export default function ImagensSementes({ formik, editar }) {
         if (Array.isArray(imageNames)) {
           const imageUrls = await Promise.all(imageNames.map(async (name) => {
             const url = await getArquivo(name.trim());
-            return url;
+            return { name, url };
           }));
           setStoredImages(imageUrls);
         } else {
@@ -108,6 +109,26 @@ export default function ImagensSementes({ formik, editar }) {
     setSelectedImage(null);
   };
 
+  const { mutate: deleteImage } = useMutation(
+    async (filename) => {
+      return deleteArquivo(filename);
+    },
+    {
+      onSuccess: (data, variables) => {
+        setStoredImages((prevImages) => prevImages.filter((image) => image.name !== variables));
+        formik.setFieldValue('imagens', formik.values.imagens.filter((name) => name !== variables));
+      },
+      onError: (error) => {
+        console.error("Erro ao deletar imagem", error);
+        setErrorMessage('Ops! Houve um erro ao deletar a imagem. Tente novamente.');
+      },
+    }
+  );
+
+  const handleDeleteImage = (name) => {
+    deleteImage(name);
+  };
+
   return (
     <>
       <div className={styles.container_header_title}>
@@ -119,14 +140,17 @@ export default function ImagensSementes({ formik, editar }) {
             <div className={styles.container_imagensSementes}>
               {storedImages.map((image, index) => (
                 <div key={index} className={styles.container_imagensSementes_image} onClick={() => handleImageClick(image)}>
-                  <Image src={image} alt={`Imagem cadastrada ${index + 1}`} width={200} height={200} />
+                  <Image src={image.url} alt={`Imagem cadastrada ${index + 1}`} width={200} height={200} />
+                  <button type="button" onClick={(event) => { event.stopPropagation(); handleDeleteImage(image.name); }} className={styles.container_upload_preview_image_container_remove_button}>
+                   <Image src="/assets/iconLixeiraBranca.png" alt="Remover" width={24} height={24} />
+                  </button>
                 </div>
               ))}
             </div>
             {selectedImage && (
               <div className={styles.container_imagensSementes_modal} onClick={handleCloseModal}>
                 <div className={styles.container_imagensSementes_modal_content}>
-                  <Image src={selectedImage} alt="Imagem selecionada" layout="fill" objectFit="contain" />
+                  <Image src={selectedImage.url} alt="Imagem selecionada" layout="fill" objectFit="contain" />
                 </div>
               </div>
             )}

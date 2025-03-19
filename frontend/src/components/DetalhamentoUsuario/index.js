@@ -161,7 +161,7 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, listUsuarios, 
   });
   const mutationUpdateFuncionario = useMutation(newData => patchCoppabacs(newData, usuario.id), {
     onSuccess: () => {
-      router.push('/funcionários');
+      window.location.reload();
     },
     onError: (error) => {
       console.error('Erro ao tentar atualizar os dados', error);
@@ -178,7 +178,7 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, listUsuarios, 
       setSelectedImage(url); // Atualiza o estado da imagem selecionada
     }
   
-    if (hrefAnterior === "/funcionários") {
+    if (hrefAnterior === "/funcionarios") {
       mutationUpdateFuncionario.mutate(values);
     } else if (hrefAnterior === "/coordenadores") {
       mutationUpdateCoordenador.mutate(values);
@@ -267,6 +267,7 @@ const DetalhamentoUsuario = ({ diretorioAnterior, diretorioAtual, listUsuarios, 
                       ) : (
                         <button
                           onClick={() => setEditar(false)}
+                          type="button"
                           className={style.container__profile_button}
                         >
                           <span>Salvar</span>
