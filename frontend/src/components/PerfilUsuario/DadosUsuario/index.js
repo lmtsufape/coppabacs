@@ -45,8 +45,13 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
     return estadosCivis[codigo] || 'Não informado';
   };
 
+  const formatarData = (data) => {
+    const dataObj = new Date(data);
+    return dataObj.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+  };
 
   const nomeBanco = bancoAtual(bancos, formik.values.bancoId);
+  const nomeBancoCoordenador = bancoAtual(bancos, formik.values.bancoSementeId);
 
   return (
     <>
@@ -120,7 +125,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 placeholder="Não informado"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.dataNascimento}
+                value={formatarData(formik.values.dataNascimento)}
                 disabled
               />
             </div>
@@ -174,7 +179,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 disabled
               />
             </div>
-            {hrefAnterior !== "/funcionarios" && (
+            {hrefAnterior == "/agricultores" &&(
               <div>
                 <label htmlFor="bancoSementes">Banco de Sementes</label>
                 <input
@@ -185,6 +190,21 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={nomeBanco}
+                  disabled
+                />
+              </div>
+            )}
+            {hrefAnterior == "/coordenadores" && (
+              <div>
+                <label htmlFor="bancoSementes">Banco de Sementes</label>
+                <input
+                  id="bancoSementes"
+                  className={style.container__ContainerForm_form_input}
+                  name="BancoSementes"
+                  placeholder="Não informado"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={nomeBancoCoordenador}
                   disabled
                 />
               </div>
@@ -203,7 +223,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.nome}
-                required
+                
               />
             </div>
             <div>
@@ -219,7 +239,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 }}
                 onBlur={formik.handleBlur}
                 value={formik.values.contato}
-                required
+                
               />
               {formik.touched.contato && formik.errors.contato ? (
                 <span className={style.form__error}>{formik.errors.contato}</span>
@@ -238,7 +258,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 }}
                 onBlur={formik.handleBlur}
                 value={formik.values.cpf}
-                required
+                
               />
               {formik.touched.cpf && formik.errors.cpf ? (
                 <span className={style.form__error}>{formik.errors.cpf}</span>
@@ -256,7 +276,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.nomePopular}
-                required
+                
               />
               {formik.touched.nomePopular && formik.errors.nomePopular ? (
                 <span className={style.form__error}>{formik.errors.nomePopular}</span>
@@ -273,8 +293,8 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 placeholder={formik.values.dataNascimento}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.dataNascimento}
-                required
+                value={formik.values.dataNascimento} 
+                
               />
               {formik.touched.dataNascimento && formik.errors.dataNascimento ? (
                 <span className={style.form__error}>{formik.errors.dataNascimento}</span>
@@ -291,7 +311,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.sexo}
-                required
+                
               >
                 <option value="" >Escolha ...</option>
                 <option value="Masculino">Masculino</option>
@@ -305,7 +325,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             <div>
               <label >Estado Civil</label>
               <select
-                className={style.container__ContainerForm_form_halfContainer_input}
+                className={style.container__ContainerForm_form_halfContainer_select}
                 id="estadoCivil"
                 name="estadoCivil"
                 onChange={(e) => {
@@ -314,14 +334,14 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 }}
                 onBlur={formik.handleBlur}
                 value={formik.values.estadoCivil}
-                required
+                
               >
-            <option value="">Selecione...</option>
-            <option value="Solteiro(a)">Solteiro(a)</option>
-            <option value="Casado(a)">Casado(a)</option>
-            <option value="Divorciado(a)">Divorciado(a)</option>
-            <option value="Viúvo(a)">Viúvo(a)</option>
-          </select>
+                <option value="">Selecione...</option>
+                <option value="Solteiro(a)">Solteiro(a)</option>
+                <option value="Casado(a)">Casado(a)</option>
+                <option value="Divorciado(a)">Divorciado(a)</option>
+                <option value="Viúvo(a)">Viúvo(a)</option>
+              </select>
               {formik.touched.estadoCivil && formik.errors.estadoCivil ? (
                 <span className={style.form__error}>{formik.errors.estadoCivil}</span>
               ) : null}
@@ -330,20 +350,20 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
 
 
             <div>
-            <label >Nome do Cônjuge</label>
-          <input
-            className={style.container__ContainerForm_form_halfContainer_input}
-            id="conjugeNome"
-            name="conjuge.nome"
-            placeholder="Insira o nome do cônjuge"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.conjuge.nome}
-            required
-          />
-          {formik.touched['conjuge.nome'] && formik.errors['conjuge.nome'] ? (
-            <span className={style.form__error}>{formik.errors['conjuge.nome']}</span>
-          ) : null}
+              <label >Nome do Cônjuge</label>
+              <input
+                className={style.container__ContainerForm_form_halfContainer_input}
+                id="conjugeNome"
+                name="conjuge.nome"
+                placeholder="Insira o nome do cônjuge"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.conjuge.nome}
+                
+              />
+              {formik.touched['conjuge.nome'] && formik.errors['conjuge.nome'] ? (
+                <span className={style.form__error}>{formik.errors['conjuge.nome']}</span>
+              ) : null}
             </div>
 
 
@@ -351,13 +371,13 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             <div>
               <label>Sexo do Cônjuge</label>
               <select
-                className={style.container__ContainerForm_form_halfContainer_input}
+                className={style.container__ContainerForm_form_halfContainer_select}
                 id="conjugeSexo"
                 name="conjuge.sexo"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.conjuge.sexo}
-                required
+                
               >
                 <option value="">Selecione...</option>
                 <option value="Masculino">Masculino</option>
@@ -381,7 +401,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.bancoId}
-                  required
+                  
                 >
                   <option value="" >Selecione...</option>
                   {bancos.map((bancos, index) => {

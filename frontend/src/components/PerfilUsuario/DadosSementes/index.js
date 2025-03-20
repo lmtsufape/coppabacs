@@ -215,7 +215,7 @@ export default function DadosSementes({ formik, editar }) {
               name={`sementes[${index}].id`}
               onChange={(e) => handleSelectChange(index, 'id', e.target.value)}
               value={seletor.id || ''}
-              required
+              
             >
               <option value="">Selecione...</option>
               {filteredSementes.map((semente) => (

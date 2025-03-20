@@ -23,14 +23,13 @@ import { getAgricultor } from "@/api/usuarios/agricultor/getAgricultor";
 import { getCoordenadorCpf } from "@/api/usuarios/coordenador/getCoordenadorCpf";
 import { getUsuarioCpf } from "@/api/usuarios/getUsuarioCpf";
 import { getCoppabacsCpf } from "@/api/usuarios/coppabacs/getCoppabacsCpf";
-
+import ImagemUsuario from "./ImagemUsuario";
 
 const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
 
   const [usuarioCpf, setUsuarioCpf] = useState(getStorageItem("userLogin"));
   const [usuarioRole, setUsuarioRole] = useState(getStorageItem("userRole"));
   const [usuario, setUsuario] = useState([]);
-  console.log(usuarioRole)
   const router = useRouter();
   const [etapas, setEtapas] = useState(0);
   const [editar, setEditar] = useState(false);
@@ -43,6 +42,7 @@ const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
     cpf: '',
     dataNascimento: '',
     sexo: '',
+    imagem: '',
     endereco: {
       estado: '',
       cidade: '',
@@ -78,19 +78,16 @@ const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
   });
 
   useEffect(() => {
-    // Função auxiliar para verificar se o array está vazio
     function isUsuarioVazio(usuario) {
       return Array.isArray(usuario) && usuario.length === 0;
     }
 
-    // Objeto de mapeamento para associar roles às funções de mutação
     const roleMutateMap = {
       "ROLE_COPPABACS": mutationGetFuncionario,
       "ROLE_GERENTE": mutationGetCoordenador,
       "ROLE_AGRICULTOR": mutationGetAgricultor
     };
 
-    // Verificar a role do usuário e se o array usuario está vazio
     if (isUsuarioVazio(usuario) && roleMutateMap.hasOwnProperty(usuarioRole)) {
       roleMutateMap[usuarioRole].mutate(usuarioCpf);
     }
@@ -109,6 +106,7 @@ const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
         sementes: usuario.sementes || {},
         estadoCivil: usuario.estadoCivil || '',
         conjuge: usuario.conjuge || {},
+        imagem: usuario.imagem || '',
       });
     }
   }, [usuario]);
@@ -138,7 +136,6 @@ const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
     }
   });
   const mutationUpdateAgricultor = useMutation(async newData => {
-
     const { sementesAdicionadas, sementesRemovidas, sementes, ...resto } = newData;
 
     patchAgricultor(resto, usuario.id)
@@ -150,7 +147,6 @@ const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
     }
   }, {
     onSuccess: () => {
-
       window.location.reload();
     },
     onError: (error) => {
@@ -174,65 +170,60 @@ const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
     }
   });
 
+  const handleSubmit = (values) => {
+    if (usuarioRole === "ROLE_COPPABACS") {
+      mutationUpdateFuncionario.mutate(values);
+    } else if (usuarioRole === "ROLE_GERENTE") {
+      mutationUpdateCoordenador.mutate(values);
+    } else if (usuarioRole === "ROLE_AGRICULTOR") {
+      mutationUpdateAgricultor.mutate(values);
+    }
+  };
+
   return (
     <div id="header" className={style.container}>
       <HeaderNavegacao
         hrefAnterior="/"
         diretorioAnterior="Home / "
         diretorioAtual="Perfil"
-
       />
-
-
 
       <div className={style.container__ContainerForm}>
         <Formik
           initialValues={formData}
           enableReinitialize
           onSubmit={(values, { setSubmitting }) => {
-            if (usuarioRole === "ROLE_COOPABACS") {
-              mutationUpdateFuncionario.mutate(values);
-            } else if (usuarioRole === "ROLE_GERENTE") {
-              mutationUpdateCoordenador.mutate(values);
-            } else if (hrefAnterior === "ROLE_AGRICULTOR") {
-              mutationUpdateAgricultor.mutate(values);
-            }
-
+            handleSubmit(values);
           }}
         >
           {(formik) => {
             return (
-
-              <Form
-                className={style.container__ContainerForm_form}
-              >
+              <Form className={style.container__ContainerForm_form}>
                 <div className={style.container__profile}>
                   <div className={style.container__profile_img}>
                     <Image src="/assets/agricultorteste.png" alt="Foto do usuário" width={72} height={72} />
                     <h1>{usuario?.nome}</h1>
                   </div>
-                  {hrefAnterior === "/agricultores" || hrefAnterior === "/funcionarios" || hrefAnterior === "/coordenadores" ? (
+                  
                     <>
                       {editar === false ? (
                         <button
-                          onClick={() => setEditar(true)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setEditar(true)}}
                           className={style.container__profile_button}>
-
                           <span>Editar</span>
                           <Image src="/assets/iconLapis.svg" alt="editar perfil" width={20} height={20} />
                         </button >
                       ) : (
                         <button
-                          onClick={() => setEditar(false)}
+                          type="submit"
                           className={style.container__profile_button}>
-
                           <span>Salvar</span>
                           <Image src="/assets/iconLapis.svg" alt="editar perfil" width={20} height={20} />
                         </button >
                       )}
                     </>
-                  ) : ("")}
-
                 </div>
 
                 <DadosForm formik={formik} editar={editar} hrefAnterior={hrefAnterior} />
@@ -249,7 +240,6 @@ const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
                         type="submit"
                         onClick={() => setEditar(true)}
                         className={style.container__profile_button}>
-
                         <span>Recusar Solicitação</span>
                         <Image src="/assets/iconLapis.svg" alt="Recusar" width={25} height={25} />
                       </button >
@@ -257,24 +247,20 @@ const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
                         type="submit"
                         onClick={() => mutationAprovacao.mutate(usuario.id)}
                         className={style.container__profile_button}>
-
                         <span>Aprovar Solicitação</span>
                         <Image src="/assets/iconLapis.svg" alt="Aprovar" width={25} height={25} />
                       </button >
-
                     </div>
                   ) : ("")
                 }
+                <ImagemUsuario formik={formik} editar={editar} />
               </Form >
             )
-          }
-          }
+          }}
         </Formik >
       </div >
-
     </div >
   );
 };
-
 
 export default PerfilUsuario;
