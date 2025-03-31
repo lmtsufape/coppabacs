@@ -193,6 +193,21 @@
                     border: none;
                     background-color: transparent;
                     position: absolute;
+                    bottom: 135px;
+                    left: 5px;
+
+                    p{
+                        color:#68655C;
+                        font-size: 17px;
+                    }
+                }
+                &__senha{
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    border: none;
+                    background-color: transparent;
+                    position: absolute;
                     bottom: 80px;
                     left: 5px;
 

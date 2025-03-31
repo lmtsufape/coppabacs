@@ -189,6 +189,10 @@ const LayoutAdmin = () => {
                 <Image src="/assets/iconLogadoGray.svg" alt="Meu perfil" width={27} height={24} />
                 <p>Meu Perfil</p>
               </button>
+              <button className={style.header__side_menu__content__main__senha} onClick={() => {push("/alterarSenha"); setOpen(false);}}>
+                <Image src="/assets/passwordgrey.png" alt="Meu perfil" width={27} height={24} />
+                <p>Alterar Senha</p>
+              </button>
               <button className={style.header__side_menu__content__main__exit} onClick={() => {exitUser(); setOpen(false);}}>
                 <Image src="/assets/download.svg" alt="Sair" width={27} height={24} />
                 <p>Sair</p>
@@ -218,6 +222,10 @@ const LayoutAdmin = () => {
             <button className={style.header__dropdown__perfil} onClick={() => {push("/perfil"); setDropdow(false); setOpen(false);}}>
               <Image src="/assets/iconLogadoGray.svg" alt="Meu perfil" width={27} height={24} />
               <p>Meu perfil</p>
+            </button>
+            <button className={style.header__dropdown__perfil} onClick={() => {push("/alterarSenha"); setDropdow(false); setOpen(false);}}>
+              <Image src="/assets/passwordgrey.png" alt="Meu perfil" width={27} height={24} />
+              <p>Alterar senha</p>
             </button>
             <button className={style.header__dropdown__exit} onClick={() => {exitUser(); setDropdow(false); setOpen(false);}}>
               <Image src="/assets/download.svg" alt="Sair" width={27} height={24} />
@@ -361,6 +369,10 @@ const LayoutCoordenador = () => {
               <button className={style.header__side_menu__content__main__perfil} onClick={() => {push("/perfil"); setOpen(false);}}>
                 <Image src="/assets/iconLogadoGray.svg" alt="Meu perfil" width={27} height={24} />
                 <p>Meu Perfil</p>
+              </button>
+              <button className={style.header__side_menu__content__main__senha} onClick={() => {push("/alterarSenha"); setOpen(false);}}>
+                <Image src="/assets/passwordgrey.png" alt="Meu perfil" width={27} height={24} />
+                <p>Alterar Senha</p>
               </button>
               <button className={style.header__side_menu__content__main__exit} onClick={() => {exitUser(); setOpen(false);}}>
                 <Image src="/assets/download.svg" alt="Sair" width={27} height={24} />
@@ -532,6 +544,10 @@ const LayoutAgricultor = () => {
               <button className={style.header__side_menu__content__main__perfil} onClick={() => {push("/perfil"); setOpen(false);}}>
                 <Image src="/assets/iconLogadoGray.svg" alt="Meu perfil" width={27} height={24} />
                 <p>Meu Perfil</p>
+              </button>
+              <button className={style.header__side_menu__content__main__senha} onClick={() => {push("/alterarSenha"); setOpen(false);}}>
+                <Image src="/assets/passwordgrey.png" alt="Meu perfil" width={27} height={24} />
+                <p>Alterar Senha</p>
               </button>
               <button className={style.header__side_menu__content__main__exit} onClick={() => {exitUser(); setOpen(false);}}>
                 <Image src="/assets/download.svg" alt="Sair" width={27} height={24} />
