@@ -265,11 +265,14 @@
             align-items: center;
             gap: 7px;
             width: 11em;
+            transition: transform 0.3s ease, background-color 0.3s ease;
 
             &:hover{
                 background-color: #f0f0f0d7;
+                border-radius: 0.5em;
                 width: 11em;
                 height: auto;
+                transform: scale(1.1);
               }
 
             p{
@@ -284,15 +287,20 @@
             border: none;
             background-color: transparent;
             width: 11em;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            backface-visibility: hidden;
             &:hover{
                 background-color: #f0f0f0d7;
+                border-radius: 0.5em;
                 width: 11em;
                 height: auto;
+                transform: scale(1.1);
               }
 
             p{
                 color:#970B0B;
                 font-size: 14px;
+                transform: none;
             }
         }
 

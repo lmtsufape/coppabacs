@@ -99,6 +99,7 @@
     transition: all 0.3s ease;
     &:hover{
         box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);
+        transform: scale(1.1);
       }
 
 }
@@ -154,8 +155,10 @@
     background-position: calc(100% - 16px) center;
     background-size: 20px;
     margin-bottom: 1em;
+    transition: transform 0.3s ease;
     &:hover{
         box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);
+        transform: scale(1.1);
       }
     option{
         background-color: white;

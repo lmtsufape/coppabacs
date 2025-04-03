@@ -166,9 +166,11 @@
         border: 1px solid rgba(0,0,0, 0.10);
         border-radius: 5px;
         cursor: pointer;
+        transition: transform 0.3s ease;
 
         &:hover {
           box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);
+          transform: scale(1.1);
         }
       }
       button:last-child{
