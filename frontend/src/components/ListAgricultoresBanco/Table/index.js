@@ -47,7 +47,7 @@ export default function tableLayout({ table1, table2, table3, table4, listAgricu
                   <div >
                     <Image src="/assets/iconOlho.svg" onClick={() => onSelectAgricultor(agricultor)}alt="Visualizar" width={27} height={26} />
 
-                    <ExcluirButton itemId={agricultor.id} onDelete={handleDeleteAgricultor} />
+                    {/*<ExcluirButton itemId={agricultor.id} onDelete={handleDeleteAgricultor} />*/}
 
                   </div>
                 </td>

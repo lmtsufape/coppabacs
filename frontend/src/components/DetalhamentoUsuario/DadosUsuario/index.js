@@ -179,7 +179,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 disabled
               />
             </div>
-            {hrefAnterior == "/agricultores" &&(
+            {hrefAnterior == "/agricultores" && (
               <div>
                 <label htmlFor="bancoSementes">Banco de Sementes</label>
                 <input
@@ -196,11 +196,11 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             )}
             {hrefAnterior == "/coordenadores" && (
               <div>
-                <label htmlFor="bancoSementes">Banco de Sementes</label>
+                <label htmlFor="bancoSementeId">Banco de Sementes</label>
                 <input
-                  id="bancoSementes"
+                  id="bancoSementeId"
                   className={style.container__ContainerForm_form_input}
-                  name="BancoSementes"
+                  name="bancoSementeId"
                   placeholder="Não informado"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -223,7 +223,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.nome}
-                
+
               />
             </div>
             <div>
@@ -239,7 +239,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 }}
                 onBlur={formik.handleBlur}
                 value={formik.values.contato}
-                
+
               />
               {formik.touched.contato && formik.errors.contato ? (
                 <span className={style.form__error}>{formik.errors.contato}</span>
@@ -258,7 +258,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 }}
                 onBlur={formik.handleBlur}
                 value={formik.values.cpf}
-                
+
               />
               {formik.touched.cpf && formik.errors.cpf ? (
                 <span className={style.form__error}>{formik.errors.cpf}</span>
@@ -276,7 +276,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.nomePopular}
-                
+
               />
               {formik.touched.nomePopular && formik.errors.nomePopular ? (
                 <span className={style.form__error}>{formik.errors.nomePopular}</span>
@@ -293,8 +293,8 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 placeholder={formik.values.dataNascimento}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.dataNascimento} 
-                
+                value={formik.values.dataNascimento}
+
               />
               {formik.touched.dataNascimento && formik.errors.dataNascimento ? (
                 <span className={style.form__error}>{formik.errors.dataNascimento}</span>
@@ -311,7 +311,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.sexo}
-                
+
               >
                 <option value="" >Escolha ...</option>
                 <option value="Masculino">Masculino</option>
@@ -334,7 +334,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 }}
                 onBlur={formik.handleBlur}
                 value={formik.values.estadoCivil}
-                
+
               >
                 <option value="">Selecione...</option>
                 <option value="Solteiro(a)">Solteiro(a)</option>
@@ -359,7 +359,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.conjuge.nome}
-                
+
               />
               {formik.touched['conjuge.nome'] && formik.errors['conjuge.nome'] ? (
                 <span className={style.form__error}>{formik.errors['conjuge.nome']}</span>
@@ -377,7 +377,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.conjuge.sexo}
-                
+
               >
                 <option value="">Selecione...</option>
                 <option value="Masculino">Masculino</option>
@@ -389,7 +389,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             </div>
 
 
-            {hrefAnterior !== "/funcionarios" && (
+            {hrefAnterior == "/agricultores" && (
 
               <div>
                 <label htmlFor="bancoId">Banco de Sementes</label>
@@ -401,7 +401,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.bancoId}
-                  
+
                 >
                   <option value="" >Selecione...</option>
                   {bancos.map((bancos, index) => {
@@ -413,6 +413,33 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 </select>
                 {formik.touched.bancoId && formik.errors.bancoId ? (
                   <span className={style.form__error}>{formik.errors.bancoId}</span>
+                ) : null}
+              </div>
+            )}
+            {hrefAnterior == "/coordenadores" && (
+
+              <div>
+                <label htmlFor="bancoSementeId">Banco de Sementes</label>
+                <select
+                  className={style.container__ContainerForm_form_halfContainer_select}
+                  id="bancoSementeId"
+                  name="bancoSementeId"
+                  placeholder="Insira o banco de sementes"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.bancoSementeId}
+
+                >
+                  <option value="" >Selecione...</option>
+                  {bancos.map((bancos, index) => {
+                    return (
+                      <option key={index} value={bancos.id}>{bancos.nome}</option>
+
+                    )
+                  })}
+                </select>
+                {formik.touched.bancoSementeId && formik.errors.bancoSementeId ? (
+                  <span className={style.form__error}>{formik.errors.bancoSementeId}</span>
                 ) : null}
               </div>
             )}
