@@ -163,9 +163,11 @@
         color: #fff;
         background: linear-gradient(to right, #245501, #4A8223);
         border-radius: 0.5em;
+        transition: transform 0.3s ease;
   
         &:hover {
           box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);
+          transform: scale(1.1);
         }
       }
     }

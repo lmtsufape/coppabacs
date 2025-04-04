@@ -51,6 +51,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
   };
 
   const nomeBanco = bancoAtual(bancos, formik.values.bancoId);
+  const nomeBancoCoordenador = bancoAtual(bancos, formik.values.bancoSementeId);
 
   return (
     <>
@@ -176,7 +177,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 disabled
               />
             </div>
-            {hrefAnterior !== "/funcionarios" && (
+            {hrefAnterior == "/agricultores" &&(
               <div>
                 <label htmlFor="bancoSementes">Banco de Sementes</label>
                 <input
@@ -187,6 +188,21 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={nomeBanco}
+                  disabled
+                />
+              </div>
+            )}
+            {hrefAnterior == "/coordenadores" && (
+              <div>
+                <label htmlFor="bancoSementes">Banco de Sementes</label>
+                <input
+                  id="bancoSementes"
+                  className={style.container__ContainerForm_form_input}
+                  name="BancoSementes"
+                  placeholder="Não informado"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={nomeBancoCoordenador}
                   disabled
                 />
               </div>
@@ -205,7 +221,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.nome}
-                required
+                
               />
             </div>
             <div>
@@ -221,7 +237,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 }}
                 onBlur={formik.handleBlur}
                 value={formik.values.contato}
-                required
+                
               />
               {formik.touched.contato && formik.errors.contato ? (
                 <span className={style.form__error}>{formik.errors.contato}</span>
@@ -240,7 +256,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 }}
                 onBlur={formik.handleBlur}
                 value={formik.values.cpf}
-                required
+                
               />
               {formik.touched.cpf && formik.errors.cpf ? (
                 <span className={style.form__error}>{formik.errors.cpf}</span>
@@ -258,7 +274,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.nomePopular}
-                required
+                
               />
               {formik.touched.nomePopular && formik.errors.nomePopular ? (
                 <span className={style.form__error}>{formik.errors.nomePopular}</span>
@@ -275,8 +291,8 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 placeholder={formik.values.dataNascimento}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.dataNascimento}
-                required
+                value={formik.values.dataNascimento} 
+                
               />
               {formik.touched.dataNascimento && formik.errors.dataNascimento ? (
                 <span className={style.form__error}>{formik.errors.dataNascimento}</span>
@@ -293,7 +309,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.sexo}
-                required
+                
               >
                 <option value="" >Escolha ...</option>
                 <option value="Masculino">Masculino</option>
@@ -307,7 +323,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             <div>
               <label >Estado Civil</label>
               <select
-                className={style.container__ContainerForm_form_halfContainer_input}
+                className={style.container__ContainerForm_form_halfContainer_select}
                 id="estadoCivil"
                 name="estadoCivil"
                 onChange={(e) => {
@@ -316,7 +332,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 }}
                 onBlur={formik.handleBlur}
                 value={formik.values.estadoCivil}
-                required
+                
               >
                 <option value="">Selecione...</option>
                 <option value="Solteiro(a)">Solteiro(a)</option>
@@ -341,7 +357,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.conjuge.nome}
-                required
+               
               />
               {formik.touched['conjuge.nome'] && formik.errors['conjuge.nome'] ? (
                 <span className={style.form__error}>{formik.errors['conjuge.nome']}</span>
@@ -353,13 +369,13 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             <div>
               <label>Sexo do Cônjuge</label>
               <select
-                className={style.container__ContainerForm_form_halfContainer_input}
+                className={style.container__ContainerForm_form_halfContainer_select}
                 id="conjugeSexo"
                 name="conjuge.sexo"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.conjuge.sexo}
-                required
+                
               >
                 <option value="">Selecione...</option>
                 <option value="Masculino">Masculino</option>
@@ -385,21 +401,34 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 <span className={style.form__error}>{formik.errors.senha}</span>
               ) : null}
 
-              <label >Confirme sua Senha<span>*</span></label>
-              <input
-                className={style.container__ContainerForm_form_halfContainer_input}
-                id="confirmarSenha"
-                name="confirmarSenha"
-                type="password"
-                placeholder="Confirme sua senha"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.confirmarSenha}
-                required />
-              {formik.touched.confirmarSenha && formik.errors.confirmarSenha ? (
-                <span className={style.form__error}>{formik.errors.confirmarSenha}</span>
-              ) : null}
-            </div>
+
+            {hrefAnterior !== "/funcionarios" && (
+
+              <div>
+                <label htmlFor="bancoId">Banco de Sementes</label>
+                <select
+                  className={style.container__ContainerForm_form_halfContainer_select}
+                  id="bancoId"
+                  name="bancoId"
+                  placeholder="Insira o banco de sementes"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.bancoId}
+                  
+                >
+                  <option value="" >Selecione...</option>
+                  {bancos.map((bancos, index) => {
+                    return (
+                      <option key={index} value={bancos.id}>{bancos.nome}</option>
+
+                    )
+                  })}
+                </select>
+                {formik.touched.bancoId && formik.errors.bancoId ? (
+                  <span className={style.form__error}>{formik.errors.bancoId}</span>
+                ) : null}
+              </div>
+            )}
           </>
         )
         }

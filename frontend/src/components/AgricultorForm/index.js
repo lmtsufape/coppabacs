@@ -127,12 +127,11 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
       onError: (error) => {
         console.error("Erro ao cadastrar agricultor:", error);
         if (error.response?.data?.errors) {
-          // Processa os erros retornados pela API
           const errors = error.response.data.errors.reduce((acc, curr) => {
-            acc[curr.fieldName] = curr.message; // Associa o campo à mensagem de erro
+            acc[curr.fieldName] = curr.message;
             return acc;
           }, {});
-          setApiErrors(errors); // Salva os erros no estado
+          setApiErrors(errors);
         }
       },
     }
@@ -144,14 +143,13 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   const formatErrors = (errors, prefix = "") =>
     Object.entries(errors).flatMap(([key, value]) => {
       const fullKey = `${prefix}${key}`;
-      const readableKey = fieldNames[fullKey] || fullKey; // Usar nome legível ou original
+      const readableKey = fieldNames[fullKey] || fullKey;
       return typeof value === "string"
         ? [`${readableKey}: ${value}`]
         : formatErrors(value, `${fullKey}.`);
     });
 
   const combineErrors = (formikErrors, apiErrors) => {
-    // Prioriza os erros do `Formik` e adiciona os da API
     const combined = { ...apiErrors, ...formikErrors };
     return formatErrors(combined);
   };
@@ -183,14 +181,11 @@ const UsuarioForm = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
           onSubmit={(values, { setSubmitting }) => {
             mutate(values, {
               onError: (error) => {
-                // Exibe no console todos os detalhes do erro
                 console.error("Erro ao cadastrar agricultor:", error);
                 const apiErrors = error.response?.data?.errors || [];
                 const formattedApiErrors = apiErrors.map(
                   (err) => `${fieldNames[err.fieldName] || err.fieldName}: ${err.message}`
                 );
-
-                // Exibe erros no alerta, se houver
                 if (formattedApiErrors.length > 0) {
                   alert("Erros nos seguintes campos\n\n" + formattedApiErrors.join("\n"));
                 }

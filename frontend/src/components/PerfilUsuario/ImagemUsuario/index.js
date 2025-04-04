@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import styles from '@/components/DetalhamentoSementes/ImagensSementes/imagensSementes.module.scss';
+import styles from '@/components/PerfilUsuario/ImagemUsuario/imagemUsuario.module.scss';
 import { useMutation } from 'react-query';
 import { postArquivo } from '@/api/arquivos/postArquivo';
 import { getArquivo } from '@/api/arquivos/getArquivo';
 import { deleteArquivo } from '@/api/arquivos/deleteArquivo';
 
-export default function ImagensSementes({ formik, editar }) {
+export default function ImagemUsuario({ formik, editar }) {
   const [selectedImages, setSelectedImages] = useState([]);
   const [fileObjects, setFileObjects] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
@@ -16,7 +16,7 @@ export default function ImagensSementes({ formik, editar }) {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        let imageNames = formik.values.imagens || [];
+        let imageNames = formik.values.imagem || [];
 
         if (typeof imageNames === 'string') {
           imageNames = imageNames.replace(/[{}]/g, '').split(',');
@@ -28,26 +28,26 @@ export default function ImagensSementes({ formik, editar }) {
           }));
           setStoredImages(imageUrls);
         } else {
-          console.error("formik.values.imagens não é uma lista");
+          console.error("formik.values.imagem não é uma lista");
         }
       } catch (error) {
-        console.error("Erro ao buscar imagens", error);
+        console.error("Erro ao buscar imagem", error);
       }
     };
 
     fetchImages();
-  }, [formik.values.imagens]);
+  }, [formik.values.imagem]);
 
   const { status, mutate } = useMutation(
     async (newImages) => {
       return postArquivo(newImages);
     }, {
     onSuccess: (data) => {
-      formik.setFieldValue('imagens', data);
+      formik.setFieldValue('imagem', data);
     },
     onError: (error) => {
-      console.log("Erro ao enviar imagens", error);
-      setErrorMessage('Ops! Houve um erro ao enviar as imagens. Tente novamente.');
+      console.log("Erro ao enviar imagem", error);
+      setErrorMessage('Ops! Houve um erro ao enviar as imagem. Tente novamente.');
     },
   });
 
@@ -68,7 +68,7 @@ export default function ImagensSementes({ formik, editar }) {
       ...newFileObjects
     ]);
 
-    formik.setFieldValue("imagens", [
+    formik.setFieldValue("imagem", [
       ...fileObjects,
       ...newFileObjects
     ]);
@@ -83,7 +83,7 @@ export default function ImagensSementes({ formik, editar }) {
 
     setSelectedImages(newSelectedImages);
     setFileObjects(newFileObjects);
-    setFieldValue("imagens", newFileObjects);
+    setFieldValue("imagem", newFileObjects);
   };
 
   const handleSubmit = async () => {
@@ -94,7 +94,7 @@ export default function ImagensSementes({ formik, editar }) {
 
     alert("Imagem enviada com sucesso! Agora clique em Salvar para finalizar o cadastro da semente.");
 
-    console.log("Enviando imagens...");
+    console.log("Enviando imagem...");
     try {
       mutate(fileObjects);
     } catch (error) {
@@ -118,7 +118,7 @@ export default function ImagensSementes({ formik, editar }) {
     {
       onSuccess: (data, variables) => {
         setStoredImages((prevImages) => prevImages.filter((image) => image.name !== variables));
-        formik.setFieldValue('imagens', formik.values.imagens.filter((name) => name !== variables));
+        formik.setFieldValue('imagem', formik.values.imagem.filter((name) => name !== variables));
       },
       onError: (error) => {
         console.error("Erro ao deletar imagem", error);
@@ -134,7 +134,7 @@ export default function ImagensSementes({ formik, editar }) {
   return (
     <>
       <div className={styles.container_header_title}>
-        <h1>Imagens da Semente</h1>
+        <h1>Imagem do Usuário</h1>
       </div>
       <div>
         {editar === false ? (
@@ -161,7 +161,7 @@ export default function ImagensSementes({ formik, editar }) {
           <div>
             <label className={styles.container_upload}>
               <Image src="/assets/IconUpload.svg" alt="Upload" width={60} height={60} />
-              <span>Envio de imagens</span>
+              <span>Envio de imagem</span>
               <h6 className={styles.formatos_suportados}>PNG, JPG</h6>
               <input
                 type="file"
@@ -183,7 +183,7 @@ export default function ImagensSementes({ formik, editar }) {
                 ))}
               </div>
             )}
-            <button className={styles.container_upload_button} type="button" onClick={handleSubmit}>Enviar imagens</button>
+            <button className={styles.container_upload_button} type="button" onClick={handleSubmit}>Enviar imagem</button>
             {errorMessage && <div className={styles.error_message}>{errorMessage}</div>}
           </div>
         )}
