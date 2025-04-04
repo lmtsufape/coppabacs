@@ -90,8 +90,6 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             </div>
             <div>
               <label htmlFor="cpf">CPF </label>
-
-
               <input
                 id="cpf"
                 className={style.container__ContainerForm_form_input}
@@ -359,7 +357,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.conjuge.nome}
-                
+               
               />
               {formik.touched['conjuge.nome'] && formik.errors['conjuge.nome'] ? (
                 <span className={style.form__error}>{formik.errors['conjuge.nome']}</span>
@@ -387,6 +385,21 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
                 <span className={style.form__error}>{formik.errors['conjuge.sexo']}</span>
               ) : null}
             </div>
+            <div>
+              <label >Senha<span>*</span></label>
+              <input
+                className={style.container__ContainerForm_form_halfContainer_input}
+                id="senha"
+                name="senha"
+                type="password"
+                placeholder="Insira sua senha"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.senha}
+                required />
+              {formik.touched.senha && formik.errors.senha ? (
+                <span className={style.form__error}>{formik.errors.senha}</span>
+              ) : null}
 
 
             {hrefAnterior !== "/funcionarios" && (
