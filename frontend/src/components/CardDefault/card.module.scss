@@ -15,8 +15,10 @@
   border: 1px solid rgba(0, 0, 0, 0.10);
   border-radius: 1em;
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, background-color 0.3s ease;
   &:hover{
     box-shadow: 0 5px 9px rgba(0, 0, 0, 0.5);
+    transform: scale(1.1);
   }
   &_link{
     width: 95%;

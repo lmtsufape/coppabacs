@@ -92,12 +92,13 @@
         right: 0;
         left: auto;
         background-color: rgba(204, 204, 204, 0.6);
-        height: 98vh;
+        height: 100vh;
         z-index: 1;
         display: flex;
         box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);
         z-index: 1000;
-
+        border-radius: 20px 0 0 20px;
+        overflow: hidden;
 
         &__conj{
             padding: 0em 1.2em;
@@ -122,8 +123,6 @@
                 width: 20em;
                 height: 3.5em;
                 padding-left: 0.3em;
-
-                
               }
               &__link{
                 color: #68655C;
@@ -193,6 +192,21 @@
                     border: none;
                     background-color: transparent;
                     position: absolute;
+                    bottom: 135px;
+                    left: 5px;
+
+                    p{
+                        color:#68655C;
+                        font-size: 17px;
+                    }
+                }
+                &__senha{
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    border: none;
+                    background-color: transparent;
+                    position: absolute;
                     bottom: 80px;
                     left: 5px;
 
@@ -231,7 +245,7 @@
     &__dropdown{
         background-color: #FFF;
         width: 150.65px;
-        height: 90.01px;
+        height: 130.01px;
         position:absolute;
         top: 79px;
         right: 50px;
@@ -251,11 +265,14 @@
             align-items: center;
             gap: 7px;
             width: 11em;
+            transition: transform 0.3s ease, background-color 0.3s ease;
 
             &:hover{
                 background-color: #f0f0f0d7;
+                border-radius: 0.5em;
                 width: 11em;
                 height: auto;
+                transform: scale(1.1);
               }
 
             p{
@@ -270,15 +287,20 @@
             border: none;
             background-color: transparent;
             width: 11em;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            backface-visibility: hidden;
             &:hover{
                 background-color: #f0f0f0d7;
+                border-radius: 0.5em;
                 width: 11em;
                 height: auto;
+                transform: scale(1.1);
               }
 
             p{
                 color:#970B0B;
                 font-size: 14px;
+                transform: none;
             }
         }
 
@@ -400,6 +422,34 @@
             width: 120px;
             margin-left: 2em;
     
+        }
+    }
+}
+@media all and (max-height: 710px) {
+    .header {
+        &__side_menu{
+            &__conjBotoes{
+                &__botoesNav{
+                    height: 3em;
+                }
+                &__link{
+                    padding: 1em 14em 1em 2.8em;
+                    margin: -1em -14em -1em -2.4em;
+                }
+            }
+            &__content{
+                &__main{
+                    &__perfil{
+                        bottom: 95px;
+                    }
+                    &__senha{
+                        bottom: 55px;
+                    }
+                    &__exit{
+                        bottom: 15px;
+                    }
+                }
+            }
         }
     }
 }

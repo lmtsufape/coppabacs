@@ -99,6 +99,7 @@
     transition: all 0.3s ease;
     &:hover{
         box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);
+        transform: scale(1.1);
       }
 
 }
@@ -129,6 +130,44 @@
     text-decoration: none;
     padding: 1.5em 1.5em 1.5em 1.3em;
     margin: -1.5em -1.5em -1.5em -1.3em;
+}
+
+.filtro{
+    display: flex;
+    justify-content: left;
+}
+
+.filtroPostagens{
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 1.5em 3em 1.5em 1em;
+    font-weight: bold;
+    color: white;
+    background-color: #245501;
+    border: none;
+    border-radius: 1em;
+    transition: all 0.3s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: #245501 url('/assets/filtroMural.png') no-repeat;
+    background-position: calc(100% - 16px) center;
+    background-size: 20px;
+    margin-bottom: 1em;
+    transition: transform 0.3s ease;
+    &:hover{
+        box-shadow: -3.5px 3.5px 8px rgba(0, 0, 0, 0.2);
+        transform: scale(1.1);
+      }
+    option{
+        background-color: white;
+        color: black;
+    }
+}
+
+.filtroImagem{
+    
 }
 
 // Publicação

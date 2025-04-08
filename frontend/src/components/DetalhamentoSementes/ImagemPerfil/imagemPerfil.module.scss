@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+
+  &_imagensSementes {
+    &_image {
+      position: relative;
+      display: flex;
+
+      img {
+        max-width: 72px;
+        max-height: 72px;
+        border-radius: 5em;
+      }
+
+    }
+
+  }
+}

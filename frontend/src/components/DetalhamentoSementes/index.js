@@ -14,6 +14,7 @@ import styles from "@/components/DetalhamentoSementes/detalhamentoSementes.modul
 import Image from "next/image";
 import DadosCaracteristicasAgronomicas from "./DadosCaracteristicasAgronomicas";
 import ImagensSementes from "./ImagensSementes";
+import ImagemPerfil from "./ImagemPerfil";
 import { getStorageItem } from "@/utils/localStore";
 import HeaderDetalhamento from "../HeaderDetalhamento";
 import { patchSemente } from "@/api/sementes/patchSemente";
@@ -158,7 +159,11 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
                             <Form className={styles.container__ContainerForm_form}>
                                 <div className={styles.container__profile}>
                                     <div className={styles.container__profile_img}>
-                                        <Image src="/assets/sementeteste.png" alt="Foto do usuário" width={72} height={72} />
+                                    {formik.values.imagens && formik.values.imagens.length > 0 ? (
+                                            <ImagemPerfil formik={formik} />
+                                        ) : (
+                                            <Image src="/assets/sementeteste.png" alt="Foto do usuário" width={72} height={72} />
+                                        )}
                                         <h1>{sementes?.nome}</h1>
                                     </div>
                                     {editar === false ? (
