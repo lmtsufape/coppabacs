@@ -179,12 +179,12 @@ export default function DadosForm({ formik }) {
       <div className={style.container__ContainerForm_form_halfContainer}>
 
         <div>
-          <label >Sexo<span>*</span></label>
+          <label >Gênero<span>*</span></label>
           <select
             className={style.container__ContainerForm_form_halfContainer_input}
             id="sexo"
             name="sexo"
-            placeholder="Escolha seu sexo"
+            placeholder="Escolha seu gênero"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.sexo}
@@ -244,12 +244,12 @@ export default function DadosForm({ formik }) {
             <span className={style.form__error}>{formik.errors['conjuge.nome']}</span>
           ) : null}
 
-          <label>Sexo do Cônjuge<span>*</span></label>
+          <label>Gênero do Cônjuge<span>*</span></label>
           <select
             className={style.container__ContainerForm_form_halfContainer_input}
             id="conjugeSexo"
             name="conjuge.sexo"
-            placeholder="Escolha o sexo do seu cônjuge"
+            placeholder="Escolha o gênero do seu cônjuge"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.conjuge.sexo}

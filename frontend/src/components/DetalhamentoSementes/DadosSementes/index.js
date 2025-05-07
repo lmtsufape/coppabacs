@@ -107,7 +107,7 @@ export default function DadosSementes({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="nomePopular">Nome Popular da Cultivar</label>
+                            <label htmlFor="nomePopular">Variedade</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
                                 name="nomePopular"
@@ -255,12 +255,12 @@ export default function DadosSementes({ formik, editar }) {
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="nomePopular">Nome Popular da Cultivar <span>*</span></label>
+                            <label htmlFor="nomePopular">Variedade <span>*</span></label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
                                 id="nomePopular"
                                 name="nomePopular"
-                                placeholder="Insira o nome popular da cultivar"
+                                placeholder="Insira a variedade da cultivar"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.nomePopular}
