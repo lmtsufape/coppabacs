@@ -204,7 +204,7 @@ const PerfilUsuario = ({ hrefAnterior, backDetalhamento }) => {
                     <Image src="/assets/agricultorteste.png" alt="Foto do usuário" width={72} height={72} />
                     <h1>{usuario?.nome}</h1>
                   </div>
-                  
+                 
                     <>
                       {editar === false ? (
                         <button
