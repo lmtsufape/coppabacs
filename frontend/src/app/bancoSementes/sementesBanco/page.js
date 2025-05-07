@@ -9,7 +9,7 @@ export default function sementesBancoPage() {
         hrefAnterior={`/bancoSementes`}
         table1="Imagem"
         table2="Cultura" 
-        table3="Nome da Cultivar" 
+        table3="Espécie" 
         table4="Ação" 
         />
 
