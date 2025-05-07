@@ -298,7 +298,7 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
             <br />
             <div className={styles.sidedForm}>
                 <div>
-                    <label htmlFor="regiaoColetaDados">Região de Coleta dos Dados<span>*</span><span>*</span></label>
+                    <label htmlFor="regiaoColetaDados">Região de Coleta dos Dados<span>*</span></label>
                     <input
                         className={styles.sidedForm_input}
                         id="regiaoColetaDados"
@@ -360,24 +360,6 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
 
                 </div>
-                {/*<div >
-                    <label htmlFor="imagens">Imagens<span>*</span></label>
-                    <input
-                        className={styles.buttonImagens}
-                        type="file"
-                        id="imagens"
-                        name="imagens"
-                        multiple
-                        onChange={handleImageChange}
-                        
-                    />
-                    {formik.touched.imagens && formik.errors.imagens ? (
-                        <span className={styles.form__error}>{formik.errors.imagens}</span>
-                    ) : null}
-                    <div>
-                        {imagePreviewUrls.map((url, index) => <img key={index} src={url} alt="Preview" className={styles.previewImg} />)}
-                    </div>
-                </div>*/}
             </div>
         </>
     )

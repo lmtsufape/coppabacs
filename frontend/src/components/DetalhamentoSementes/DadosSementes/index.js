@@ -151,7 +151,7 @@ export default function DadosSementes({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="altitudeMinima">Altitude Mínima</label>
+                            <label htmlFor="altitudeMinima">Altitude Mínima (Cm)</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
                                 name="altitudeMinima"
@@ -162,7 +162,7 @@ export default function DadosSementes({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="altitudeMaxima">Altitude Máxima</label>
+                            <label htmlFor="altitudeMaxima">Altitude Máxima (Cm)</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
                                 name="altitudeMaxima"
@@ -333,7 +333,7 @@ export default function DadosSementes({ formik, editar }) {
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="altitudeMinima">Altitude mínima </label>
+                            <label htmlFor="altitudeMinima">Altitude mínima (Cm)</label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
                                 type="number"
@@ -349,7 +349,7 @@ export default function DadosSementes({ formik, editar }) {
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="altitudeMaxima">Altitude máxima</label>
+                            <label htmlFor="altitudeMaxima">Altitude máxima (Cm)</label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
                                 type="number"

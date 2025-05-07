@@ -10,7 +10,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                 {editar === false ? (
                     <>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.cicloFenologico">Ciclo Fenológico</label>
+                            <label htmlFor="caracteristicasAgronomicas.cicloFenologico">Ciclo Fenológico (Dias)</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
                                 name="caracteristicasAgronomicas.cicloFenologico"
@@ -21,7 +21,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.standRecomendado">Stand Recomendado</label>
+                            <label htmlFor="caracteristicasAgronomicas.standRecomendado">Stand Recomendado (Plantas/ha)</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
                                 name="caracteristicasAgronomicas.standRecomendado"
@@ -32,7 +32,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.produtividade">Produtividade</label>
+                            <label htmlFor="caracteristicasAgronomicas.produtividade">Produtividade (Kg/ha)</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
                                 name="caracteristicasAgronomicas.produtividade"
@@ -43,7 +43,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.altitudePlanta">Altura da Planta</label>
+                            <label htmlFor="caracteristicasAgronomicas.altitudePlanta">Altura da Planta (Cm)</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
                                 name="caracteristicasAgronomicas.altitudePlanta"
@@ -54,7 +54,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.PesoMilgraos">Peso de Mil Grãos</label>
+                            <label htmlFor="caracteristicasAgronomicas.PesoMilgraos">Peso de Mil Grãos (Grama)</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
                                 name="caracteristicasAgronomicas.PesoMilgraos"
@@ -65,7 +65,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.PesoHectolitro">Peso Hectolitro</label>
+                            <label htmlFor="caracteristicasAgronomicas.PesoHectolitro">Peso Hectolitro (Hl)*</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
                                 name="caracteristicasAgronomicas.PesoHectolitro"
@@ -157,7 +157,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                 ) : (
                     <>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.cicloFenologico">Ciclo Fenológico </label>
+                            <label htmlFor="caracteristicasAgronomicas.cicloFenologico">Ciclo Fenológico (Dias)</label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
                                 id="cicloFenologico"
@@ -172,7 +172,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.standRecomendado"> Stand Recomendado</label>
+                            <label htmlFor="caracteristicasAgronomicas.standRecomendado"> Stand Recomendado (Plantas/ha)</label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
                                 id="stand"
@@ -187,7 +187,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.produtividade">Produtividade </label>
+                            <label htmlFor="caracteristicasAgronomicas.produtividade">Produtividade (Kg/ha)</label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
                                 id="produtividade"
@@ -202,7 +202,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.altitudePlanta">Altura da Planta </label>
+                            <label htmlFor="caracteristicasAgronomicas.altitudePlanta">Altura da Planta (Cm)</label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
                                 id="alturaPlanta"
@@ -217,7 +217,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.PesoMilgraos">Peso de Mil Grãos </label>
+                            <label htmlFor="caracteristicasAgronomicas.PesoMilgraos">Peso de Mil Grãos (Grama)</label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
                                 id="PesoMilgraos"
@@ -232,7 +232,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="caracteristicasAgronomicas.PesoHectolitro">Peso Hectolitro </label>
+                            <label htmlFor="caracteristicasAgronomicas.PesoHectolitro">Peso Hectolitro (Hl)*</label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
                                 id="PesoHectolitro"
