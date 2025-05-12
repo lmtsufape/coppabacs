@@ -196,6 +196,7 @@ export default function DadosForm({ formik }) {
             <option value="" >Selecione...</option>
             <option value="Masculino">Masculino</option>
             <option value="Feminino">Feminino</option>
+            <option value="Outro">Outro</option>
           </select>
           {formik.touched.sexo && formik.errors.sexo ? (
             <span className={style.form__error}>{formik.errors.sexo}</span>
@@ -261,6 +262,7 @@ export default function DadosForm({ formik }) {
             <option value="">Selecione...</option>
             <option value="Masculino">Masculino</option>
             <option value="Feminino">Feminino</option>
+            <option value="Outro">Outro</option>
           </select>
           {formik.touched['conjuge.sexo'] && formik.errors['conjuge.sexo'] ? (
             <span className={style.form__error}>{formik.errors['conjuge.sexo']}</span>

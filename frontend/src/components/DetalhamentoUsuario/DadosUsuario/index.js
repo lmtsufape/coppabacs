@@ -169,7 +169,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             </div>
 
             <div>
-              <label htmlFor="sexoconjuge">Sexo do Cônjuge</label>
+              <label htmlFor="sexoconjuge">Gênero do Cônjuge</label>
               <input
                 id="sexoconjuge"
                 className={style.container__ContainerForm_form_input}
