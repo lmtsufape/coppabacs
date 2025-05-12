@@ -167,12 +167,12 @@ export default function DadosSementesForm({ formik }) {
                         ) : null}
                     </div>
                     <div>
-                        <label htmlFor="nome">Nome da Cultivar<span>*</span></label>
+                        <label htmlFor="nome">Espécie<span>*</span></label>
                         <input
                             className={styles.sidedForm_input}
                             id="nome"
                             name="nome"
-                            placeholder="Insira o nome da cultivar"
+                            placeholder="Insira a espécie"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.nome}
@@ -265,12 +265,12 @@ export default function DadosSementesForm({ formik }) {
                 </div>
                 <div className={styles.sidedForm}>
                     <div>
-                        <label htmlFor="nomePopular">Nome Popular da Cultivar<span>*</span></label>
+                        <label htmlFor="nomePopular">Variedade<span>*</span></label>
                         <input
                             className={styles.sidedForm_input}
                             id="nomePopular"
                             name="nomePopular"
-                            placeholder="Insira o nome popular da cultivar"
+                            placeholder="Insira a variedade da cultivar"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.nomePopular}
@@ -297,7 +297,7 @@ export default function DadosSementesForm({ formik }) {
                     </div>
                     <div>
                         <div>
-                            <label htmlFor="altitudeMaxima">Altitude Máxima (cm)</label>
+                            <label htmlFor="altitudeMaxima">Altitude Máxima (Cm)</label>
                             <input
                                 className={styles.sidedForm_input}
                                 id="altitudeMaxima"
@@ -314,7 +314,7 @@ export default function DadosSementesForm({ formik }) {
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="altitudeMinima">Altitude Mínima (cm) </label>
+                        <label htmlFor="altitudeMinima">Altitude Mínima (Cm) </label>
                         <input
                             className={styles.sidedForm_input}
                             id="altitudeMinima"

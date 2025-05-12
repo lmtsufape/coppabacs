@@ -44,7 +44,7 @@ export default function TableSementes({listSementes, onSelectSemente}) {
     return (
       <tr key={index}>
         <td data-label="Imagem"><Image src="/assets/sementeteste.png" alt="Foto do usuário" width={50} height={50} /></td>
-        <td data-label="Nome">{semente.cultura.cultura}</td>
+        <td data-label="Cultura">{semente.cultura.cultura}</td>
         <td data-label="Cultivar">{semente.nome}</td>
 
         {!isPublic && (

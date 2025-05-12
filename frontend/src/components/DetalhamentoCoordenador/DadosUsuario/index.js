@@ -118,7 +118,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             </div>
 
             <div>
-              <label htmlFor="sexo">Sexo </label>
+              <label htmlFor="sexo">Gênero </label>
               <input
                 id="sexo"
                 className={style.container__ContainerForm_form_input}
@@ -236,13 +236,13 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             </div>
             <div>
 
-              <label htmlFor="sexo">Sexo </label>
+              <label htmlFor="sexo">Gênero </label>
               <select
                 className={style.container__ContainerForm_form_halfContainer_select}
 
                 id="sexo"
                 name="sexo"
-                placeholder="Escolha seu sexo"
+                placeholder="Escolha seu gênero"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.sexo}

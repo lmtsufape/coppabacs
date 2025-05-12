@@ -58,12 +58,12 @@ export default function DadosCaracteristicasAgronomicas({ formik }) {
                     ) : null}
                 </div>
                 <div>
-                    <label htmlFor="caracteristicasAgronomicas.altitudePlanta">Altura da Planta (Metro)<span>*</span></label>
+                    <label htmlFor="caracteristicasAgronomicas.altitudePlanta">Altura da Planta (Cm)<span>*</span></label>
                     <input
                         className={styles.sidedForm_input}
                         id="altitudePlanta"
                         name="caracteristicasAgronomicas.altitudePlanta"
-                        placeholder="Insira a altura da planta (Metro)"
+                        placeholder="Insira a altura da planta (Cm)"
                         type = "number"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
