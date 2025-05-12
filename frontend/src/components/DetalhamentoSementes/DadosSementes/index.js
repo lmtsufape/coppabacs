@@ -157,7 +157,7 @@ export default function DadosSementes({ formik, editar }) {
                                 name="altitudeMinima"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.altitudeMinima}
+                                value={formik.values.altitudeMinima || "Não informado"}
                                 disabled
                             />
                         </div>
@@ -168,7 +168,7 @@ export default function DadosSementes({ formik, editar }) {
                                 name="altitudeMaxima"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.altitudeMaxima}
+                                value={formik.values.altitudeMaxima || "Não informado"}
                                 disabled
                             />
                         </div>

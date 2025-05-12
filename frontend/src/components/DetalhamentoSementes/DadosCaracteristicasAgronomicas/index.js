@@ -16,7 +16,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 name="caracteristicasAgronomicas.cicloFenologico"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.cicloFenologico}
+                                value={formik.values.caracteristicasAgronomicas.cicloFenologico || "Não informado"}
                                 disabled
                             />
                         </div>
@@ -27,7 +27,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 name="caracteristicasAgronomicas.standRecomendado"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.standRecomendado}
+                                value={formik.values.caracteristicasAgronomicas.standRecomendado || "Não informado"}
                                 disabled
                             />
                         </div>
@@ -38,7 +38,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 name="caracteristicasAgronomicas.produtividade"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.produtividade}
+                                value={formik.values.caracteristicasAgronomicas.produtividade || "Não informado"}
                                 disabled
                             />
                         </div>
@@ -49,7 +49,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 name="caracteristicasAgronomicas.altitudePlanta"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.altitudePlanta}
+                                value={formik.values.caracteristicasAgronomicas.altitudePlanta || "Não informado"}
                                 disabled
                             />
                         </div>
@@ -60,7 +60,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 name="caracteristicasAgronomicas.PesoMilgraos"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.pesoMilgraos}
+                                value={formik.values.caracteristicasAgronomicas.pesoMilgraos || "Não informado"}
                                 disabled
                             />
                         </div>
@@ -71,7 +71,7 @@ export default function DadosCaracteristicasAgronomicas({ formik, editar }) {
                                 name="caracteristicasAgronomicas.PesoHectolitro"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.caracteristicasAgronomicas.pesoHectolitro}
+                                value={formik.values.caracteristicasAgronomicas.pesoHectolitro || "Não informado"}
                                 disabled
                             />
                         </div>
