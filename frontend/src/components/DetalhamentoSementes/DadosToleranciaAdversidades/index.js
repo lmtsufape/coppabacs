@@ -15,7 +15,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 className={styles.container__ContainerForm_form_input}
                                 name="toleranciaAdversidades.altaTemperatura"
                                 placeholder="Não informado"
-                                value={formik.values.toleranciaAdversidades.altaTemperatura}
+                                value={formik.values.toleranciaAdversidades.altaTemperatura === "DESCONHECIDA" ? "Sem informação" : formik.values.toleranciaAdversidades.altaTemperatura}
                                 disabled
                             />
                         </div>
@@ -25,7 +25,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 className={styles.container__ContainerForm_form_input}
                                 name="toleranciaAdversidades.baixaTemperatura"
                                 placeholder="Não informado"
-                                value={formik.values.toleranciaAdversidades.baixaTemperatura}
+                                value={formik.values.toleranciaAdversidades.baixaTemperatura === "DESCONHECIDA" ? "Sem informação" : formik.values.toleranciaAdversidades.baixaTemperatura}
                                 disabled
                             />
                         </div>
@@ -35,7 +35,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 className={styles.container__ContainerForm_form_input}
                                 name="toleranciaAdversidades.geada"
                                 placeholder="Não informado"
-                                value={formik.values.toleranciaAdversidades.geada}
+                                value={formik.values.toleranciaAdversidades.geada === "DESCONHECIDA" ? "Sem informação" : formik.values.toleranciaAdversidades.geada}
                                 disabled
                             />
                         </div>
@@ -45,7 +45,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 className={styles.container__ContainerForm_form_input}
                                 name="toleranciaAdversidades.chuvaExcessiva"
                                 placeholder="Não informado"
-                                value={formik.values.toleranciaAdversidades.chuvaExcessiva}
+                                value={formik.values.toleranciaAdversidades.chuvaExcessiva === "DESCONHECIDA" ? "Sem informação" : formik.values.toleranciaAdversidades.chuvaExcessiva}
                                 disabled
                             />
                         </div>
@@ -55,7 +55,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 className={styles.container__ContainerForm_form_input}
                                 name="toleranciaAdversidades.seca"
                                 placeholder="Não informado"
-                                value={formik.values.toleranciaAdversidades.seca}
+                                value={formik.values.toleranciaAdversidades.seca === "DESCONHECIDA" ? "Sem informação" : formik.values.toleranciaAdversidades.seca}
                                 disabled
                             />
                         </div>
@@ -65,7 +65,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 className={styles.container__ContainerForm_form_input}
                                 name="toleranciaAdversidades.ventos"
                                 placeholder="Não informado"
-                                value={formik.values.toleranciaAdversidades.ventos}
+                                value={formik.values.toleranciaAdversidades.ventos === "DESCONHECIDA" ? "Sem informação" : formik.values.toleranciaAdversidades.ventos}
                                 disabled
                             />
                         </div>
@@ -75,7 +75,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 className={styles.container__ContainerForm_form_input}
                                 name="toleranciaAdversidades.salinidade"
                                 placeholder="Não informado"
-                                value={formik.values.toleranciaAdversidades.salinidade}
+                                value={formik.values.toleranciaAdversidades.salinidade === "DESCONHECIDA" ? "Sem informação" : formik.values.toleranciaAdversidades.salinidade}
                                 disabled
                             />
                         </div>
@@ -85,7 +85,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 className={styles.container__ContainerForm_form_input}
                                 name="toleranciaAdversidades.toxidadeAluminio"
                                 placeholder="Não informado"
-                                value={formik.values.toleranciaAdversidades.toxidadeAluminio}
+                                value={formik.values.toleranciaAdversidades.toxidadeAluminio === "DESCONHECIDA" ? "Sem informação" : formik.values.toleranciaAdversidades.toxidadeAluminio}
                                 disabled
                             />
                         </div>
@@ -95,7 +95,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 className={styles.container__ContainerForm_form_input}
                                 name="toleranciaAdversidades.soloArgiloso"
                                 placeholder="Não informado"
-                                value={formik.values.toleranciaAdversidades.soloArgiloso}
+                                value={formik.values.toleranciaAdversidades.soloArgiloso === "DESCONHECIDA" ? "Sem informação" : formik.values.toleranciaAdversidades.soloArgiloso}
                                 disabled
                             />
                         </div>
@@ -105,7 +105,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 className={styles.container__ContainerForm_form_input}
                                 name="toleranciaAdversidades.soloArenoso"
                                 placeholder="Não informado"
-                                value={formik.values.toleranciaAdversidades.soloArenoso}
+                                value={formik.values.toleranciaAdversidades.soloArenoso === "DESCONHECIDA" ? "Sem informação" : formik.values.toleranciaAdversidades.soloArenoso}
                                 disabled
                             />
                         </div>
@@ -115,7 +115,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 className={styles.container__ContainerForm_form_input}
                                 name="toleranciaAdversidades.soloAcido"
                                 placeholder="Não informado"
-                                value={formik.values.toleranciaAdversidades.soloAcido}
+                                value={formik.values.toleranciaAdversidades.soloAcido === "DESCONHECIDA" ? "Sem informação" : formik.values.toleranciaAdversidades.soloAcido}
                                 disabled
                             />
                         </div>
@@ -125,7 +125,7 @@ export default function DadosToleranciaAdversidades({ formik, editar }) {
                                 className={styles.container__ContainerForm_form_input}
                                 name="toleranciaAdversidades.soloBaixaFertilidade"
                                 placeholder="Não informado"
-                                value={formik.values.toleranciaAdversidades.soloBaixaFertilidade}
+                                value={formik.values.toleranciaAdversidades.soloBaixaFertilidade === "DESCONHECIDA" ? "Sem informação" : formik.values.toleranciaAdversidades.soloBaixaFertilidade}
                                 disabled
                             />
                         </div>

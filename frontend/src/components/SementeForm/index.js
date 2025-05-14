@@ -125,7 +125,7 @@ const LayoutAdmin = ({ diretorioAnterior, diretorioAtual, hrefAnterior }) => {
   }
 
   const validateSchema = Yup.object().shape({
-    nome: Yup.string().required('O nome da cultivar é obrigatório'),
+    nome: Yup.string().required('O nome da espécie é obrigatório'),
     responsavelTecnico: Yup.object().shape({
       tecnome: Yup.string().required('O nome do responsável técnico é obrigatório'),
       cpf: Yup.string().required('O cpf do responsável técnico é obrigatório'),

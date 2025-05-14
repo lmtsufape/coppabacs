@@ -159,11 +159,17 @@ const DetalhamentoSementes = ({ diretorioAnterior, diretorioAtual, hrefAnterior,
                             <Form className={styles.container__ContainerForm_form}>
                                 <div className={styles.container__profile}>
                                     <div className={styles.container__profile_img}>
+
+
+                                    <Image src="/assets/sementeteste.png" alt="Foto do usuário" width={72} height={72} />
+                                    {/* O código abaixo está comentado, pois a imagem de perfil está com problema atualmente no back, porém está funcionando normalmente, é só descomentar.
                                     {formik.values.imagens && formik.values.imagens.length > 0 ? (
                                             <ImagemPerfil formik={formik} />
                                         ) : (
                                             <Image src="/assets/sementeteste.png" alt="Foto do usuário" width={72} height={72} />
                                         )}
+                                        */}
+
                                         <h1>{sementes?.nome}</h1>
                                     </div>
                                     {editar === false ? (

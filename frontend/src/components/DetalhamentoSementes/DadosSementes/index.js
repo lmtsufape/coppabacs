@@ -96,7 +96,7 @@ export default function DadosSementes({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="nome">Nome da Cultivar</label>
+                            <label htmlFor="nome">Espécie</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
                                 name="nome"
@@ -107,7 +107,7 @@ export default function DadosSementes({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="nomePopular">Nome Popular da Cultivar</label>
+                            <label htmlFor="nomePopular">Variedade</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
                                 name="nomePopular"
@@ -151,24 +151,24 @@ export default function DadosSementes({ formik, editar }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="altitudeMinima">Altitude Mínima</label>
+                            <label htmlFor="altitudeMinima">Altitude Mínima (Cm)</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
                                 name="altitudeMinima"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.altitudeMinima}
+                                value={formik.values.altitudeMinima || "Não informado"}
                                 disabled
                             />
                         </div>
                         <div>
-                            <label htmlFor="altitudeMaxima">Altitude Máxima</label>
+                            <label htmlFor="altitudeMaxima">Altitude Máxima (Cm)</label>
                             <input
                                 className={styles.container__ContainerForm_form_input}
                                 name="altitudeMaxima"
                                 placeholder="Não informado"
                                 onBlur={formik.handleBlur}
-                                value={formik.values.altitudeMaxima}
+                                value={formik.values.altitudeMaxima || "Não informado"}
                                 disabled
                             />
                         </div>
@@ -239,13 +239,13 @@ export default function DadosSementes({ formik, editar }) {
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="nome">Nome da Cultivar </label>
+                            <label htmlFor="nome">Espécie </label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
                                 type="text"
                                 id="nome"
                                 name="nome"
-                                placeholder="Insira o nome da cultivar"
+                                placeholder="Insira o nome da espécie"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.nome}
@@ -255,12 +255,12 @@ export default function DadosSementes({ formik, editar }) {
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="nomePopular">Nome Popular da Cultivar <span>*</span></label>
+                            <label htmlFor="nomePopular">Variedade <span>*</span></label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
                                 id="nomePopular"
                                 name="nomePopular"
-                                placeholder="Insira o nome popular da cultivar"
+                                placeholder="Insira a variedade da cultivar"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.nomePopular}
@@ -333,7 +333,7 @@ export default function DadosSementes({ formik, editar }) {
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="altitudeMinima">Altitude mínima </label>
+                            <label htmlFor="altitudeMinima">Altitude mínima (Cm)</label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
                                 type="number"
@@ -349,7 +349,7 @@ export default function DadosSementes({ formik, editar }) {
                             ) : null}
                         </div>
                         <div>
-                            <label htmlFor="altitudeMaxima">Altitude máxima</label>
+                            <label htmlFor="altitudeMaxima">Altitude máxima (Cm)</label>
                             <input
                                 className={styles.container__ContainerForm_form_halfContainer_input}
                                 type="number"

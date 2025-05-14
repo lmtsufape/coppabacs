@@ -92,7 +92,7 @@ export default function DadosSementes({ formik }) {
                                 <option value="">Selecione...</option>
                                 {filteredSementes.map((semente) => (
                                     <option key={semente.id} value={semente.id}>
-                                        {semente.nomePopular}
+                                        {semente.nomePopular}  -  {semente.nome}
                                     </option>
                                 ))}
                             </select>

@@ -129,7 +129,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             </div>
 
             <div>
-              <label htmlFor="sexo">Sexo </label>
+              <label htmlFor="sexo">Gênero </label>
               <input
                 id="sexo"
                 className={style.container__ContainerForm_form_input}
@@ -167,7 +167,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             </div>
 
             <div>
-              <label htmlFor="sexoconjuge">Sexo do Cônjuge</label>
+              <label htmlFor="sexoconjuge">Gênero do Cônjuge</label>
               <input
                 id="sexoconjuge"
                 className={style.container__ContainerForm_form_input}
@@ -300,7 +300,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
             </div>
             <div>
 
-              <label htmlFor="sexo">Sexo </label>
+              <label htmlFor="sexo">Gênero </label>
               <select
                 className={style.container__ContainerForm_form_halfContainer_select}
 
@@ -367,7 +367,7 @@ export default function DadosForm({ formik, editar, hrefAnterior }) {
 
 
             <div>
-              <label>Sexo do Cônjuge</label>
+              <label>Gênero do Cônjuge</label>
               <select
                 className={style.container__ContainerForm_form_halfContainer_select}
                 id="conjugeSexo"

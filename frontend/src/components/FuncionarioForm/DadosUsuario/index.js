@@ -193,12 +193,12 @@ export default function DadosForm({ formik }) {
       <div className={style.container__ContainerForm_form_halfContainer}>
 
         <div>
-          <label >Sexo<span>*</span></label>
+          <label >Gênero<span>*</span></label>
           <select
             className={style.container__ContainerForm_form_halfContainer_input}
             id="sexo"
             name="sexo"
-            placeholder="Escolha o sexo"
+            placeholder="Escolha o gênero"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.sexo}
@@ -207,6 +207,7 @@ export default function DadosForm({ formik }) {
             <option value="" >Selecione...</option>
             <option value="Masculino">Masculino</option>
             <option value="Feminino">Feminino</option>
+            <option value="Outro">Outro</option>
           </select>
           {formik.touched.sexo && formik.errors.sexo ? (
             <span className={style.form__error}>{formik.errors.sexo}</span>
@@ -258,12 +259,12 @@ export default function DadosForm({ formik }) {
             <span className={style.form__error}>{formik.errors['conjuge.nome']}</span>
           ) : null}
 
-          <label>Sexo do Cônjuge<span>*</span></label>
+          <label>Gênero do Cônjuge<span>*</span></label>
           <select
             className={style.container__ContainerForm_form_halfContainer_input}
             id="conjugeSexo"
             name="conjuge.sexo"
-            placeholder="Escolha o sexo do cônjuge"
+            placeholder="Escolha o gênero do cônjuge"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.conjuge.sexo}
@@ -272,6 +273,7 @@ export default function DadosForm({ formik }) {
             <option value="">Selecione...</option>
             <option value="Masculino">Masculino</option>
             <option value="Feminino">Feminino</option>
+            <option value="Outro">Outro</option>
           </select>
           {formik.touched['conjuge.sexo'] && formik.errors['conjuge.sexo'] ? (
             <span className={style.form__error}>{formik.errors['conjuge.sexo']}</span>
